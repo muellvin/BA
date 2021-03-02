@@ -40,11 +40,7 @@ class line():
 
 #p1 should be closer to a and p2 closer to b
     def sanitycheck(self):
-        ap1dis =
-        ap2dis =
-        bp1dis =
-        bp2dis =
-        length =
+        tbd
 
 #methods to calculate line propreties for non-reduced
     def get_length_tot(self):
@@ -74,12 +70,13 @@ class line():
     def get_iperpen_red(self):
         iperpen_red1 = cal_perpen(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
         iperpen_red2 = cal_perpen(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-
-        iperpen_red1_withsteiner = cal_iperpen(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t) + cal_area(ay, az, by, bz, t) * cal_center_along(ay, az, by, bz, t)^2
+        iperpen_red1_withsteiner = cal_iperpen(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) * cal_center_along(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)^2
+        iperpen_red2_withsteiner = cal_iperpen(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t) + cal_area(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t) * cal_center_along(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)^2
+        return iperpen_red1_withsteiner + iperpen_red2_withsteiner
     def get_iy_red(self):
-        return cal_iy(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+        tbd
     def get_iz_red(self):
-        return cal_iz(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+        tbd
 
 
 
@@ -93,13 +90,10 @@ class line():
         return 1/2 * cal_length(ay, az, by, bz, t)
     def cal_length(ay, az, by, bz, t):
         return math.sqrt((ay - by)^2 + (az - bz)^2)
-
     def cal_area(ay, az, by, bz, t):
         return cal_length(ay, az, by, bz) * t
-
     def cal_ialong(ay, az, by, bz, t):
         return t^3 * cal_length(ay, az, by, bz, t) / 12
-
     def cal_iperpen(ay, az, by, bz, t):
         return cal_length(ay, az, by, bz, t)^3 * t / 12
 #moments of inertia along y and z are created with a tensor rotation of ialong
