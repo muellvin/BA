@@ -1,4 +1,4 @@
-#classes
+#geometry classes
 
 import math
 

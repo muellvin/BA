@@ -1,3 +1,5 @@
+import geometry_classes
+
 class crosssection():
 #a crosssection is defined as a list of lines
     def __init__(self):
