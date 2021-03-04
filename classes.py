@@ -90,7 +90,7 @@ class line():
         angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
         assert angle >= 0, "getiy and getiz function are faulty"
         assert angle <= math.pi, "getiy and getiz function are faulty"
-        complangle = math.pi - angle
+        complangle = math.pi/2 - angle
         return math.cos(complangle)**2 * self.get_ialong_red() + math.sin(complangle)**2 * self.cal_iperpen_red()
 
 #general calculation methods so that they can be used for both reduced and non-reduced
@@ -124,7 +124,7 @@ class line():
         angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
         assert angle >= 0, "getiy and getiz function are faulty"
         assert angle <= math.pi, "getiy and getiz function are faulty"
-        complangle = math.pi - angle
+        complangle = math.pi/2 - angle
         return math.cos(complangle)**2 * self.cal_ialong(ay, az, by, bz, t) + math.sin(complangle)**2 * self.cal_iperpen(ay, az, by, bz, t)
 
 
