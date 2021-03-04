@@ -1,4 +1,4 @@
-#input: b_sup, b_inf, h
+#input from user prompt
 def userprompt():
     print('Value of b_sup? [mm]')
     b_sup = input()
@@ -12,5 +12,6 @@ def userprompt():
     V_Ed = input()
     print('Value of T_Ed? [kNm]')
     T_Ed = input()
-    input_data = [b_sup, b_inf, h, M_Ed, V_Ed, T_Ed]
-    return input_data
+    geometry_data = [b_sup, b_inf, h]
+    load_data = [M_Ed, V_Ed, T_Ed]
+    return geometry_data, load_data
