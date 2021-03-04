@@ -40,6 +40,10 @@ class line():
 #methods to calculate line propreties for non-reduced
     def get_length_tot(self):
         return self.cal_length(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    def get_y_center_tot(self):
+        return cal_centery(self.a.y, self.b.y)
+    def get_z_center_tot(self):
+        return cal_centerz(self.a.z, self.b.z)
     def get_area_tot(self):
         return self.cal_area(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
     def get_ialong_tot(self):
@@ -94,10 +98,12 @@ class line():
         return math.cos(complangle)**2 * self.get_ialong_red() + math.sin(complangle)**2 * self.cal_iperpen_red()
 
 #general calculation methods so that they can be used for both reduced and non-reduced
-    def cal_centeryz(self, ay, az, by, bz, t):
+    def cal_centery(self, ay, by):
         yc = 1/2 * (ay + by)
+        return yc
+    def cal_centerz(self, az, bz):
         zc = 1/2 * (az + bz)
-        return yc, zc
+        return zc
     def cal_center_along(self, ay, az, by, bz, t):
         return 1/2 * self.cal_length(ay, az, by, bz, t)
     def cal_length(self, ay, az, by, bz, t):
@@ -129,10 +135,43 @@ class line():
 
 
 
-class cs():
+class crosssection():
 #a crosssection is defined as a list of lines
     def __init__(self):
         self.lines = []
 
     def addline(self, line):
         self.lines.append(line)
+# methods to calculate properties of total crossection
+    def get_area_tot(self):
+        a=0
+        for i in self.lines:
+            a = a + i.get_area_tot()
+        return a
+
+    def get_z_center_tot(self):
+        weighted_a = 0
+        for i in self.lines:
+            weighted_a = weighted_a + i.get_area_tot()*i.get_z_center_tot()
+        return weighted_a/self.get_area_tot()
+
+    def get_y_center_tot(self):
+        weighted_a = 0
+        for i in self.lines:
+            weighted_a = weighted_a + i.get_area_tot()*i.get_y_center_tot()
+        return weighted_a/self.get_area_tot()
+
+    def get_iy_tot(self):
+        z_s = self.get_z_center_tot()
+        iy_tot = 0
+        for i in self.lines:
+            iy_tot = iy_tot + i.get_iy_tot() + (z_s-i.get_z_center_tot())**2 * i.get_area_tot()
+        return iy_tot
+
+    def get_iz_tot(self):
+        y_s = self.get_y_center_tot()
+        iz_tot = 0
+        for i in self.lines:
+            iz_tot = iz_tot + i.get_iz_tot() + (y_s-i.get_y_center_tot())**2 * i.get_area_tot()
+        return iz_tot
+#methods to calculate properties of reduced crossection

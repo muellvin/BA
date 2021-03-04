@@ -1,6 +1,8 @@
 #imports
 import input
 
+#select input mode
+print(Do you want to use )
 #option 1: input from user prompt
 geometry_data, load_data = input.userprompt()
 print(geometry_data)
