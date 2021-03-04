@@ -78,7 +78,7 @@ class line():
         ydis = abs(by - ay)
         angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
         assert angle >= 0, "getiy and getiz function are faulty"
-        assert angle <= math.pi, "getiy and getiz function are faulty"
+        assert angle <= math.pi/2, "getiy and getiz function are faulty"
         return math.cos(angle)**2 * self.get_i_along_red() + math.sin(angle)**2 * self.get_iperpen_red()
     def get_iz_red(self):
         bz = self.b.z
@@ -89,7 +89,7 @@ class line():
         ydis = abs(by - ay)
         angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
         assert angle >= 0, "getiy and getiz function are faulty"
-        assert angle <= math.pi, "getiy and getiz function are faulty"
+        assert angle <= math.pi/2, "getiy and getiz function are faulty"
         complangle = math.pi/2 - angle
         return math.cos(complangle)**2 * self.get_ialong_red() + math.sin(complangle)**2 * self.cal_iperpen_red()
 
@@ -116,16 +116,34 @@ class line():
         ydis = abs(by - ay)
         angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
         assert angle >= 0, "getiy and getiz function are faulty"
-        assert angle <= math.pi, "getiy and getiz function are faulty"
+        assert angle <= math.pi/2, "getiy and getiz function are faulty"
         return math.cos(angle)**2 * self.cal_ialong(ay, az, by, bz, t) + math.sin(angle)**2 * self.cal_iperpen(ay, az, by, bz, t)
     def cal_iz(self, ay, az, by, bz, t):
         zdis = abs(bz - az)
         ydis = abs(by - ay)
         angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
         assert angle >= 0, "getiy and getiz function are faulty"
-        assert angle <= math.pi, "getiy and getiz function are faulty"
+        assert angle <= math.pi/2, "getiy and getiz function are faulty"
         complangle = math.pi/2 - angle
         return math.cos(complangle)**2 * self.cal_ialong(ay, az, by, bz, t) + math.sin(complangle)**2 * self.cal_iperpen(ay, az, by, bz, t)
+
+    def get_angle_y(self):
+        zdis = abs(self.b.z - self.a.z)
+        ydis = abs(self.b.y - self.a.y)
+        angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
+        assert angle >= 0, "getiy and getiz function are faulty"
+        assert angle <= math.pi/2, "getiy and getiz function are faulty"
+        return angle
+
+    def get_angle_z(self):
+        zdis = abs(self.b.z - self.a.z)
+        ydis = abs(self.b.y - self.a.y)
+        angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
+        assert angle >= 0, "getiy and getiz function are faulty"
+        assert angle <= math.pi/2, "getiy and getiz function are faulty"
+        complangle = math.pi/2 - angle
+        return complangle
+
 
 
 
