@@ -42,6 +42,10 @@ class line():
         return self.cal_length(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
     def get_area_tot(self):
         return self.cal_area(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    def get_y_center_tot(self):
+        return self.cal_centery(self.a.y, self.b.y)
+    def get_z_center_tot(self):
+        return self.cal_centerz(self.a.z, self.b.z)
     def get_ialong_tot(self):
         return self.cal_ialong(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
     def get_iperpen_tot(self):
@@ -94,10 +98,12 @@ class line():
         return math.cos(complangle)**2 * self.get_ialong_red() + math.sin(complangle)**2 * self.cal_iperpen_red()
 
 #general calculation methods so that they can be used for both reduced and non-reduced
-    def cal_centeryz(self, ay, az, by, bz, t):
+    def cal_centery(self, ay, by):
         yc = 1/2 * (ay + by)
+        return yc
+    def cal_centerz(self, az, bz):
         zc = 1/2 * (az + bz)
-        return yc, zc
+        return zc
     def cal_center_along(self, ay, az, by, bz, t):
         return 1/2 * self.cal_length(ay, az, by, bz, t)
     def cal_length(self, ay, az, by, bz, t):
