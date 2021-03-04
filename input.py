@@ -1,4 +1,4 @@
-#input
+#input from user prompt
 def userprompt():
     print('Value of b_sup? [mm]')
     b_sup = input()
