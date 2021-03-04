@@ -41,9 +41,9 @@ class line():
     def get_length_tot(self):
         return self.cal_length(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
     def get_y_center_tot(self):
-        return cal_centery(self.a.y, self.b.y)
+        return self.cal_centery(self.a.y, self.b.y)
     def get_z_center_tot(self):
-        return cal_centerz(self.a.z, self.b.z)
+        return self.cal_centerz(self.a.z, self.b.z)
     def get_area_tot(self):
         return self.cal_area(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
     def get_ialong_tot(self):
