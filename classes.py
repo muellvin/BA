@@ -161,6 +161,7 @@ class crosssection():
             weighted_a = weighted_a + i.get_area_tot()*i.get_y_center_tot()
         return weighted_a/self.get_area_tot()
 
+#area moment of inertia functions have not been tested yet, because functionality in line for this purpose is missing up to present.
     def get_iy_tot(self):
         z_s = self.get_z_center_tot()
         iy_tot = 0
