@@ -24,8 +24,8 @@ class line():
         self.code = code
         self.a = a
         self.b = b
-        self.p1 = p1 if p1 is not None else point(a.y + (a.y-b.y), a.z + (a.z-b.z))
-        self.p2 = p2 if p1 is not None else point(a.y + (a.y-b.y), a.z + (a.z-b.z))
+        self.p1 = p1 if p1 is not None else point(a.y + 1/2*(b.y-a.y), a.z + 1/2*(b.z-a.z))
+        self.p2 = p2 if p1 is not None else point(a.y + 1/2*(b.y-a.y), a.z + 1/2*(b.z-a.z))
         self.t = float(t)
 
 #p1 should be closer to a and p2 closer to b
@@ -65,22 +65,54 @@ class line():
     def get_iperpen_red(self):
         iperpen_red1 = self.cal_perpen(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
         iperpen_red2 = self.cal_perpen(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-        iperpen_red1_withsteiner = self.cal_iperpen(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) * (self.cal_center_along(self.a.y, self.a.z, self.b.y, self.b.z, self.t) - self.cal_center_along(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t))**2
-        iperpen_red2_withsteiner = self.cal_iperpen(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t) + self.cal_area(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t) * (self.cal_center_along(self.a.y, self.a.z, self.b.y, self.b.z, self.t) - self.cal_center_along(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t))**2
+        iperpen_red1_withsteiner = self.cal_iperpen(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) * (self.cal_center_red() - self.cal_center_along(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t))**2
+        iperpen_red2_withsteiner = self.cal_iperpen(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t) + self.cal_area(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t) * (self.cal_center_red() - self.cal_center_along(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t))**2
         return iperpen_red1_withsteiner + iperpen_red2_withsteiner
     #the iy and iz functions do not work with the general ones, as the
     def get_iy_red(self):
-        bz = self.b.z
-        az = self.a.z
-        by = self.b.y
-        ay = self.a.y
-        zdis = abs(bz - az)
-        ydis = abs(by - ay)
-        angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
-        assert angle >= 0, "getiy and getiz function are faulty"
-        assert angle <= math.pi, "getiy and getiz function are faulty"
+        self.cal_angle_y()
         return math.cos(angle)**2 * self.get_i_along_red() + math.sin(angle)**2 * self.get_iperpen_red()
     def get_iz_red(self):
+        complangle = self.cal_angle_z()
+        return math.cos(complangle)**2 * self.get_ialong_red() + math.sin(complangle)**2 * self.cal_iperpen_red()
+
+    def cal_angle_y(self):
+        bz = self.b.z
+        az = self.a.z
+        by = self.b.y
+        ay = self.a.y
+        zdis = abs(bz - az)
+        ydis = abs(by - ay)
+        if ydis == 0:
+            angle = math.pi/2
+        else:
+            angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
+        assert angle >= 0, "getiy and getiz function are faulty"
+        assert angle <= math.pi/2, "getiy and getiz function are faulty"
+        return angle
+    def cal_angle_z(self):
+        return math.pi/2 - self.cal_angle_y()
+    def cal_centerxy(self, ay, az, by, bz, t):
+        yc = 1/2 * (ay + by)
+        zc = 1/2 * (az + bz)
+        return yc, zc
+    def cal_center_tot(self):
+        yc = 1/2 * (self.a.y + self.b.y)
+        zc = 1/2 * (self.a.z + self.b.z)
+        return yc, zc
+    def cal_center_red(self):
+        center1y, center1z = self.cal_centerxy(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+        center2y, center2z = self.cal_centerxy(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
+        length1 = cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+        length2 = cal_length(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
+        lengthtot = length1 + length2
+        discenter = math.sqrt((center1y-center2y)^2 + (center1z - center2z)^2)
+        weight1 = discenter * length2 / lengthtot
+        centery = center1y + (center2y - center1y) * weight1
+        centerz = center1z + (center2z - center1z) * weight1
+
+#general
+    def cal_angle_y(self):
         bz = self.b.z
         az = self.a.z
         by = self.b.y
@@ -89,12 +121,11 @@ class line():
         ydis = abs(by - ay)
         angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
         assert angle >= 0, "getiy and getiz function are faulty"
-        assert angle <= math.pi, "getiy and getiz function are faulty"
-        complangle = math.pi - angle
-        return math.cos(complangle)**2 * self.get_ialong_red() + math.sin(complangle)**2 * self.cal_iperpen_red()
-
-#general calculation methods so that they can be used for both reduced and non-reduced
-    def cal_centeryz(self, ay, az, by, bz, t):
+        assert angle <= math.pi/2, "getiy and getiz function are faulty"
+        return angle
+    def cal_angle_z(self):
+        return math.pi/2 - self.cal_angle_y()
+    def cal_centerxy(self, ay, az, by, bz, t):
         yc = 1/2 * (ay + by)
         zc = 1/2 * (az + bz)
         return yc, zc
@@ -112,19 +143,10 @@ class line():
 #it uses the fact that the line is symmetric in two axis and it does not matter weather we rotate in positive or negative angle direction
 #thus it calculates with absolute length and minimal angle
     def cal_iy(self, ay, az, by, bz, t):
-        zdis = abs(bz - az)
-        ydis = abs(by - ay)
-        angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
-        assert angle >= 0, "getiy and getiz function are faulty"
-        assert angle <= math.pi, "getiy and getiz function are faulty"
+        angle = self.cal_angle_y()
         return math.cos(angle)**2 * self.cal_ialong(ay, az, by, bz, t) + math.sin(angle)**2 * self.cal_iperpen(ay, az, by, bz, t)
     def cal_iz(self, ay, az, by, bz, t):
-        zdis = abs(bz - az)
-        ydis = abs(by - ay)
-        angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi
-        assert angle >= 0, "getiy and getiz function are faulty"
-        assert angle <= math.pi, "getiy and getiz function are faulty"
-        complangle = math.pi - angle
+        complangle = self.cal_angle_z()
         return math.cos(complangle)**2 * self.cal_ialong(ay, az, by, bz, t) + math.sin(complangle)**2 * self.cal_iperpen(ay, az, by, bz, t)
 
 
