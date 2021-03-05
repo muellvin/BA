@@ -68,7 +68,10 @@ class line():
     def get_angle_y(self):
         zdis = abs(self.b.z - self.a.z)
         ydis = abs(self.b.y - self.a.y)
-        angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi/2
+        if ydis > 0:
+            angle = math.atan(zdis / ydis) #smaller angle between y axis and line, thus should be between 0 and pi/2
+        else:
+            angle = math.pi/2
         return angle
     def get_angle_z(self):
         complangle = math.pi/2 - self.cal_angle_y()
