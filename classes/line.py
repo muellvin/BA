@@ -67,7 +67,7 @@ class line():
 
 
 #GENERAL
-    def get_angle_y(self):
+    def cal_angle_y(self):
         zdis = abs(self.b.z - self.a.z)
         ydis = abs(self.b.y - self.a.y)
         if ydis > 0:
@@ -75,7 +75,7 @@ class line():
         else:
             angle = math.pi/2
         return angle
-    def get_angle_z(self):
+    def cal_angle_z(self):
         complangle = math.pi/2 - self.cal_angle_y()
         return complangle
 
@@ -144,7 +144,7 @@ class line():
         return i_perpen_red1_withsteiner + i_perpen_red2_withsteiner
     def cal_i_y_red(self):
         angle = self.cal_angle_y()
-        return math.cos(angle)**2 * self.get_i_along_red() + math.sin(angle)**2 * self.get_i_perpen_red()
+        return math.cos(angle)**2 * self.cal_i_along_red() + math.sin(angle)**2 * self.cal_i_perpen_red()
     def cal_i_z_red(self):
         complangle = self.cal_angle_z()
         return math.cos(complangle)**2 * self.get_i_along_red() + math.sin(complangle)**2 * self.cal_i_perpen_red()
