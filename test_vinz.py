@@ -15,8 +15,8 @@ iz1 = line1.get_i_z_tot()
 iy2 = line2.get_i_y_tot()
 iz2 = line2.get_i_z_tot()
 
-iyrotred201 = line1.get_i_y_rot_red(20)
-iyrottot201 = line1.get_i_y_rot_tot(20)
+iyrotred201 = line1.get_i_rot_red(20)
+iyrottot201 = line1.get_i_rot_tot(20)
 
 print(iy1)
 print(iz1)
