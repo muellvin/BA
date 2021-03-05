@@ -4,6 +4,7 @@ from classes import point
 from classes import line
 from classes import crosssection
 
+
 a = point.point(0,0)
 b = point.point(0,2)
 e = point.point(2,0)
