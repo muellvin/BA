@@ -10,10 +10,10 @@ d = p.point(20,-100)
 line1 = l.line(0,a,b,1)
 line2 = l.line(0,c,d,1)
 
-iy1 = line1.get_iy_tot()
-iz1 = line1.get_iz_tot()
-iy2 = line2.get_iy_tot()
-iz2 = line2.get_iz_tot()
+iy1 = line1.get_i_y_tot()
+iz1 = line1.get_i_z_tot()
+iy2 = line2.get_i_y_tot()
+iz2 = line2.get_i_z_tot()
 
 
 print(iy1)
