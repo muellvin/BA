@@ -14,11 +14,11 @@ test_cs = cs.crosssection()
 test_cs.addline(line1)
 test_cs.addline(line2)
 
-y = test_cs.get_y_center_tot()
-z = test_cs.get_z_center_tot()
+y = test_cs.get_center_y_tot()
+z = test_cs.get_center_z_tot()
 a = test_cs.get_area_tot()
 print(a)
 print(y)
 print(z)
 
-#test 
+#test
