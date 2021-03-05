@@ -1,7 +1,7 @@
 #This is a test script
-
-import geometry_classes as gc
-import crosssection as cs
+from classes import crosssection
+from classes import line
+from classes import point
 
 a = gc.point(0,0)
 b = gc.point(0,2)
@@ -21,4 +21,4 @@ print(a)
 print(y)
 print(z)
 
-#test 
+#test
