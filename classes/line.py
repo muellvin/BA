@@ -1,3 +1,5 @@
+import point
+
 class line():
 #a and b are of starting end ending points of the line
 #p1 and p2 are the borders of "active" crosssection regarding effective width
@@ -8,8 +10,8 @@ class line():
         self.code = code
         self.a = a
         self.b = b
-        self.p1 = p1 if p1 is not None else point(a.y + 1/2*(b.y - a.y), a.z + 1/2*(b.z-a.z))
-        self.p2 = p2 if p1 is not None else point(a.y + 1/2*(b.y - a.y), a.z + 1/2*(b.z-a.z))
+        self.p1 = p1 if p1 is not None else point.point(a.y + 1/2*(b.y - a.y), a.z + 1/2*(b.z-a.z))
+        self.p2 = p2 if p1 is not None else point.point(a.y + 1/2*(b.y - a.y), a.z + 1/2*(b.z-a.z))
         self.t = float(t)
 
 #p1 should be closer to a and p2 closer to b
