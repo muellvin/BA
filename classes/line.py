@@ -1,5 +1,4 @@
 class line():
-#code for identification: position, type, number, pos in profile
 #a and b are of starting end ending points of the line
 #p1 and p2 are the borders of "active" crosssection regarding effective width
 #p1 is closer to A and p2 is closer to B
