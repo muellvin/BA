@@ -1,3 +1,5 @@
+from classes import line
+
 #crosssection calculation
 class crosssection():
 #a crosssection is defined as a list of lines
