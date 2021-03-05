@@ -1,4 +1,4 @@
-import point
+from classes import point
 
 class line():
 #a and b are of starting end ending points of the line
