@@ -133,7 +133,7 @@ class line():
         return self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.cal_area(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
     def cal_i_along_red(self):
         return self.cal_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.cal_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-    def get_i_perpen_red(self):
+    def cal_i_perpen_red(self):
         i_perpen_red1 = self.cal_i_perpen(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
         i_perpen_red2 = self.cal_i_perpen(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
         dis1 = math.sqrt((abs(self.cal_center_y_red()) - abs(self.cal_center_y(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)))**2 + (abs(self.cal_center_z_red())-abs(cal_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)))**2)
