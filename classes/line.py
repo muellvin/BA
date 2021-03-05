@@ -1,4 +1,5 @@
 from classes import point
+import math
 
 class line():
 #a and b are of starting end ending points of the line
