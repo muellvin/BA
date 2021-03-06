@@ -1,4 +1,5 @@
 from classes import line
+import math
 
 #crosssection calculation
 class crosssection():
@@ -72,3 +73,15 @@ class crosssection():
         for i in self.lines:
             iz_tot = iz_tot + i.get_i_z_red() + (y_s-i.get_center_y_red())**2 * i.get_area_red()
         return iz_tot
+
+    def get_azero(self):
+        azero = 0
+        for l in lines:
+            if l.code.pl_type = 0: #crosssection plate
+                height = abs(abs(l.a.z) - abs(l.b.z))
+                width = 1/2 * (abs(l.a.y) + abs(l.b.y))
+                a_line = height * width
+                azero += a_line
+            else:
+                azero +=a_line
+        return azero
