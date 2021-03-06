@@ -39,3 +39,10 @@ def get_sigma_inf_red(cs, line):
     return sigma_inf_red
 
 def get_tau_int_t(cs, line):
+    azero = cs.get_azero()
+    tor = datenbank.t
+    t = line.t
+    l = line.get_length_tot()
+    tau = tor / (2*azero*t)
+    tau_int = tau * l
+    return tau_int
