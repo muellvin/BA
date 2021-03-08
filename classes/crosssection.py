@@ -82,6 +82,4 @@ class crosssection():
                 width = 1/2 * (abs(l.a.y) + abs(l.b.y))
                 a_line = height * width
                 azero += a_line
-            else:
-                azero +=a_line
         return azero
