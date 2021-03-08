@@ -1,5 +1,4 @@
-def get_sigma_sup(cs, line):
-    m_y = datenbank.m_y
+def get_sigma_sup(cs, line, my):
     i_y = cs.get_i_y()
     if line.a.z <= line.b.z:
         z_sup = line.a.z
@@ -8,8 +7,7 @@ def get_sigma_sup(cs, line):
     sigma_sup = m_y / i_y * z_sup
     return sigma_sup
 
-def get_sigma_inf(cs, line):
-    m_y = datenbank.m_y
+def get_sigma_inf(cs, line, my):
     i_y = cs.get_i_y()
     if line.a.z >= line.b.z:
         z_inf = line.a.z
@@ -18,8 +16,7 @@ def get_sigma_inf(cs, line):
     sigma_inf = m_y / i_y * z_inf
     return sigma_inf
 
-def get_sigma_sup_red(cs, line):
-    m_y = datenbank.m_y
+def get_sigma_sup_red(cs, line, my):
     i_y = cs.get_i_y()
     if line.p1.z <= line.p2.z:
         z_sup = line.p1.z
@@ -28,8 +25,7 @@ def get_sigma_sup_red(cs, line):
     sigma_sup_red = m_y / i_y * z_sup
     return sigma_sup_red
 
-def get_sigma_inf_red(cs, line):
-    m_y = datenbank.m_y
+def get_sigma_inf_red(cs, line, my):
     i_y = cs.get_i_y()
     if line.p1.z >= line.p2.z:
         z_inf = line.p1.z
@@ -43,9 +39,8 @@ def get_tau_int(cs, line):
     return abs(get_tau_int_t() + get_tau_int_qy())
 
 #shear stresses positive in counterclockwise direction
-def get_tau_int_qy(cs, line):
+def get_tau_int_qy(cs, line, v_ed):
     tau_int = 0
-    v_ed = databank.vz
     y_center = line.get_center_y_tot()
     sideplate_slope = (line.a.y - line.b.y)/(line.a.z - line.b.z)
     code = line.code.pl_position
@@ -55,26 +50,24 @@ def get_tau_int_qy(cs, line):
             #assumption should be reconsidered
             tau_int = 0
         elif y_center > 0:
-            tau_int = get_v_horizontal_plates()
+            tau_int = get_v_horizontal_plates(cs, line, v_ed)
         else:
-            tau_int = -1*get_v_horizontal_plates()
+            tau_int = -1*get_v_horizontal_plates(cs, line, v_ed)
     elif code == 2:
         tau_int = - v_ed / 2* math.cos(math.atan(sideplate_slope))
     elif code == 4
         tau_int = v_ed / 2* math.cos(math.atan(sideplate_slope))
 
 #shear stresses positive in counterclokwise direction
-def get_tau_int_t(cs, line):
+def get_tau_int_t(cs, line, tor):
     azero = cs.get_azero()
-    tor = datenbank.t
     t = line.t
     l = line.get_length_tot()
     tau = tor / (2*azero*t)
     tau_int = tau * l
     return tau_int
 
-def get_v_horizontal_plates(cs, line):
-    v_ed = databank.vz
+def get_v_horizontal_plates(cs, line, v_ed):
     sy_max = math.max(abs(line.a.y), abs(line.b.y))*line.t*abs(line.b.z - cs.get_center_z_tot())
     sy_min = math.min(abs(line.a.y), abs(line.b.y))*line.t*abs(line.b.z - cs.get_center_z_tot())
     v_max = 0.5*math.max(abs(line.a.y), abs(line.b.y))*v_ed*sy_max*cs.get_i_y()
