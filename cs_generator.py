@@ -3,7 +3,7 @@ from classes import point as pt
 from classes import crosssection as cs
 from classes import plate_code as plcd
 
-def create_initial_cs(b_sup, b_inf, h, t_sup, t_inf, t_side):
+def create_initial_cs(b_sup, b_inf, h):
     #create four corner points
     a = pt.point(0.5*b_sup, 0)
     b = pt.point(-0.5*b_sup, 0)
