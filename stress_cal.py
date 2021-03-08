@@ -38,6 +38,32 @@ def get_sigma_inf_red(cs, line):
     sigma_inf_red = m_y / i_y * z_inf
     return sigma_inf_red
 
+#returns the absolute value of the resulting shear force in a plate of the crosssection
+def get_tau_int(cs, line):
+    return abs(get_tau_int_t() + get_tau_int_qy())
+
+#shear stresses positive in counterclockwise direction
+def get_tau_int_qy(cs, line):
+    tau_int = 0
+    v_ed = databank.vz
+    y_center = line.get_center_y_tot()
+    sideplate_slope = (line.a.y - line.b.y)/(line.a.z - line.b.z)
+    code = line.code.pl_position
+    assert code > 0 and code < 5, "Invalid plate code"
+    if code == 1,3:
+        if y_center == 0:
+            #assumption should be reconsidered
+            tau_int = 0
+        elif y_center > 0:
+            tau_int = get_v_horizontal_plates()
+        else:
+            tau_int = -1*get_v_horizontal_plates()
+    elif code == 2:
+        tau_int = - v_ed / 2* math.cos(math.atan(sideplate_slope))
+    elif code == 4
+        tau_int = v_ed / 2* math.cos(math.atan(sideplate_slope))
+        
+#shear stresses positive in counterclokwise direction
 def get_tau_int_t(cs, line):
     azero = cs.get_azero()
     tor = datenbank.t
@@ -45,4 +71,13 @@ def get_tau_int_t(cs, line):
     l = line.get_length_tot()
     tau = tor / (2*azero*t)
     tau_int = tau * l
+    return tau_int
+
+def get_v_horizontal_plates(cs, line):
+    v_ed = databank.vz
+    sy_max = math.max(abs(line.a.y), abs(line.b.y))*line.t*abs(line.b.z - cs.get_center_z_tot())
+    sy_min = math.min(abs(line.a.y), abs(line.b.y))*line.t*abs(line.b.z - cs.get_center_z_tot())
+    v_max = 0.5*math.max(abs(line.a.y), abs(line.b.y))*v_ed*sy_max*cs.get_i_y()
+    v_min = 0.5*math.min(abs(line.a.y), abs(line.b.y))*v_ed*sy_min*cs.get_i_y()
+    tau_int = abs(v_max - v_min)
     return tau_int
