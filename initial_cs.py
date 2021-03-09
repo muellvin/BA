@@ -29,3 +29,6 @@ def create_initial_cs(b_sup, b_inf, h):
     x_section.addline(line_4)
 
     return x_section
+
+#nino: track-plate
+#initialer cs erstellen; fahrbahnplatte mit normierten dicken

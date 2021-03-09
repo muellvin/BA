@@ -83,3 +83,6 @@ class crosssection():
                 a_line = height * width
                 azero += a_line
         return azero
+
+
+#add stiffenerer mit allem drum und dran
