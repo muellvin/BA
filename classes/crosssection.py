@@ -4,10 +4,8 @@ import math
 #crosssection calculation
 class crosssection():
 #a crosssection is defined as a list of lines
-    def __init__(self, c_sup = None, c_inf = None):
+    def __init__(self):
         self.lines = []
-        self.c_sup = c_sup if c_sup is not None else point.point(0, 0)
-        self.c_inf = c_inf if c_inf is not None else point.point(0, 0)
 
     def addline(self, line):
         self.lines.append(line)

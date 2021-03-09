@@ -3,14 +3,17 @@ class cs_collection():
     """This is a collection of crossections."""
 
     #constructor creates four empty crosssection lists
-    def __init__(self, initial_cs, current_cs, last_cs, best_cs):
-        self.initial_cs = crosssection()
-        self.current_cs = crosssection()
-        self.last_cs = crosssection()
-        self.best_cs = crosssection()
+    def __init__(self, initial_cs, current_cs = None, last_cs = None, best_cs = None):
+        self.initial_cs = initial_cs
+        self.current_cs = current_cs if current_cs is not None else initial_cs
+        self.last_cs = last_cs if last_cs is not None else initial_cs
+        self.best_cs = best_cs if best_cs is not None else initial_cs
 
-    def create_initial(b_sup, b_inf, h, t_sup, t_inf, t_side):
+    def in_from_optimizer(self, new_cs):
         pass
 
-    def add_stiffener(line, norm_position, stiffener):
+    def compare(self, new_cs):
+        pass
+
+    def update(self, new_cs, worsebetterbest):
         pass

@@ -1,27 +1,17 @@
-#imports
-import input_data as id
-import cs_generator as cs_gen
-import stress_cal as str_cal
+#eine Idee:
+#   alle ins main direkt importierte files sind skripte, so bestehen werte global
+#   alternativ könnte man eine datenbank aus yaml file erstellen
 
-#initialize input container
-data = id.input_data()
-data.initialize_constants()
+import math
 
-#option 1: input from user prompt
-data.userprompt()
+E = 210000
+f_y = 235
+G = 81000
+t_y = f_y / math.sqrt(3)
 
-#option 2: input from standard test cases
 
-#create inital crossection using information from user input
-x = cs_gen.create_initial_cs(data.data["b_sup"], data.data["b_inf"], data.data["h"])
+from input import input
 
-#perform example stress calculations (to be deleted afterwards)
-sigma_test = str_cal.get_sigma_inf(x, x.lines[0], data.data["M_Ed"])
-print(sigma_test)
-#perform buckling proof for initial crossection
+import initial_cs
 
-#check if initial crosssection passes buckling proof
-    # if it passes --> output
-    # else (should be the case for each reasonable crosssection) --> start optimizer
-
-#return best crossection
+import optimizer
