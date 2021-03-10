@@ -98,6 +98,7 @@ import math
             pass
         elif pl_position is 4:
             pass
+
         dist_2corner = None
         dist_2ntr = None
         dist_2ntrst = None
