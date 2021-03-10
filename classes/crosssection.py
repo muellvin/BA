@@ -128,3 +128,9 @@ class crosssection():
             #for top/ bottom it is the distance to the symmetry axis as a ratio to the max (width/2)
             #for the sides it is the ratio of z value to the height of the cross-section
         #i_along is the moment of inertia along the plate to which it is added
+        """code der im file stiffener mit der Methode get_i_along_stiffener, viele ausprobiert und mittels geometrischen beschränkungen entscheidet welche"""
+        pass
+
+
+    def check_geometry(self, stiffener):
+        pass

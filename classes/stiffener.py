@@ -61,7 +61,7 @@ import math
         stiffener_local.lines.addline(line3)
         stiffener_local.lines.addline(line4)
 
-        
+
     def get_i_along_stiffener(width_top, width_bottom, height, t):
         stiffener_local = create_stiffener_local(width_top, width_bottom, height, t)
         i_along = stiffener_local.get_i_y_tot()
