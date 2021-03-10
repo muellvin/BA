@@ -6,3 +6,6 @@ E = 210000
 f_y = 235
 G = 81000
 t_y = f_y / math.sqrt(3)
+
+
+input_data = {}
