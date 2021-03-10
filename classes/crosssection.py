@@ -83,4 +83,54 @@ class crosssection():
         return azero
 
 
-#add stiffenerer mit allem drum und dran
+""" important convention: the point b of a line is always in clockwise direction of point a"""
+
+    def remove_stiffener(self, st_number):
+        to_remove = []
+
+        #going to the plates of this stiffener (all lines have this number)
+        for line1 in self.lines():
+            if line1.code.st_number is st_number:
+
+                #if the line is a trapezoid line, it has to be removed and the adjecent ones fused
+                if line1.code.pl_type is 0: #trapezoid plate of the stiffener
+                    left_tr_pl = None
+                    right_tr_pl = None
+                    for line_tr in self.lines():
+                        if line_tr.code.pl_type is 0 and line_tr.code.tpl_number is line1.code.tpl_number - 1:
+                            left_tr_pl = line_tr
+                        elif line_tr.code.p1_type is 0 and line_tr.code.tpl_number is line1.tpl_number + 1:
+                            right_tr_pl = line_tr
+                    #creating a new line that spans over the length of all 3
+                    new_code = plate_code.plate_code(line1.code.pl_position, 0, line1.code.tpl_number-1, 0, 0)
+                    new_tr_pl = line.line(new_code, left_tr_pl.a, right_tr_pl.b, line1.t)
+                    self.lines.append(new_tr_pl)
+                    to_remove.append(rigth_tr_pl)
+                    to_remove.append(left_tr_pl)
+                    to_remove.append(line1)
+
+                #if the line is a stiffener line (not trapezoid) it can be removed directly
+                elif line.code.pl_type is 1:
+                    to_remove.append(line)
+
+        #after the trapezoid line is added and all the ones to go are added to to_remove, all in to_removed can be removed
+        for pl in to_remove:
+            self.lines.remove(pl)
+        """die platten müssen noch neu nachnummeriert werden"""
+
+
+    #method that will be called by the optimizer
+    def add_stiffener(self, pl_position, location, i_along):
+        #important for the creation of the stiffener is the position and the moment of inertia along the plate where it is placed
+        #assumptions: symmetric distribution of stiffeners along z axis
+        #pl_position, same as plate_code
+        #location: between 0 and 1:
+            #for top/ bottom it is the distance to the symmetry axis as a ratio to the max (width/2)
+            #for the sides it is the ratio of z value to the height of the cross-section
+        #i_along is the moment of inertia along the plate to which it is added
+        """code der im file stiffener mit der Methode get_i_along_stiffener, viele ausprobiert und mittels geometrischen beschränkungen entscheidet welche"""
+        pass
+
+
+    def check_geometry(self, stiffener):
+        pass
