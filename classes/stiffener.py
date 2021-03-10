@@ -70,6 +70,7 @@ import math
         stiffener_local.lines.addline(line2)
         stiffener_local.lines.addline(line3)
         stiffener_local.lines.addline(line4)
+        return stiffener_local
 
 
     def get_i_along_stiffener(width_top, width_bottom, height, t):
@@ -80,22 +81,39 @@ import math
 
     #this function should check weather the proposed stiffener is feasable in the proposed crosssection with all other proposed stiffeners
     #as an argument it takes the crosssection to which a list of stiffeners need to be added
-    #the list of stiffeners includes all the stiffeners of one side of the bridge cross-section
+    #the list of stiffeners includes all the stiffener lines of one side of the bridge cross-section
     def check_geometry(crosssection, stiffeners):
         #4 important distances for each side of stiffener 2 and 4:
             #distance from point a of stiffener plate 2 to end of trapezoid plate               -> dist_2corner
             #distance from point b of stiffener plate 2 to neighbouring trapezoid plate         -> dist_2ntr
             #distance from point b of stiffener plate 2 to stiffener of other trapezoid plate   -> dist_2ntrst
             #distacne from point a of stiffener plate 2 to stiffener of same trapezoid plates   -> dist_2nst
-        pl_position = random.choice(stiffeners).pl_position
 
+        #check on which side we are (all stiffeners should be on the same side)
+        random_stiffener = random.choice(stiffeners)
+        random_plate = random.choice(random_stiffener)
+        pl_position = random_plate.code.pl_position
+
+        #track_plate
         if pl_position is 1:
-            print("invalid list of stiffeners was given to check_geometry")
+            print("invalid list of stiffeners was given to check_geometry. no stiffeners should be added to track_plate")
 
+        #right side
         elif pl_position is 2:
-            pass
+
+            #find the top one
+            most_up = None
+            st_number_min = random.choice(stiffener).code.st_number
+            for stiffener in stiffeners:
+                if plate.code.st_number >= st_number_max:
+
+            #find the bottom one
+
+        #bottom side
         elif pl_position is 3:
             pass
+
+        #left side
         elif pl_position is 4:
             pass
 
