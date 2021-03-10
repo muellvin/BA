@@ -4,7 +4,7 @@
 import math
 
 
-    """not finished!!! needs correction for center"""
+    """not finished!!! needs correction for center. now center is at point a of plate 2 in stiffener"""
     def create_stiffener_globalcoordinates(center, angle, width_top, width_bottom, height, t):
         assert width_top >= width_bottom: "width out of bound or wrong way around"
         half_width_diff = width_top - width_bottom
