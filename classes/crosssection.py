@@ -116,7 +116,12 @@ class crosssection():
         #after the trapezoid line is added and all the ones to go are added to to_remove, all in to_removed can be removed
         for pl in to_remove:
             self.lines.remove(pl)
-        """die platten müssen noch neu nachnummeriert werden"""
+
+
+    #method that renumbers all the lines again correctly
+    def renumber(self):
+        #tpl_number, st_number need to be adjusted
+
 
 
     #method that will be called by the optimizer
@@ -129,8 +134,4 @@ class crosssection():
             #for the sides it is the ratio of z value to the height of the cross-section
         #i_along is the moment of inertia along the plate to which it is added
         """code der im file stiffener mit der Methode get_i_along_stiffener, viele ausprobiert und mittels geometrischen beschränkungen entscheidet welche"""
-        pass
-
-
-    def check_geometry(self, stiffener):
         pass
