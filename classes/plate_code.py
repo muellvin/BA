@@ -17,6 +17,7 @@ class plate_code():
 #tpl_number: trapezoid plate number
     #the lines of the trapezoid are numbered themselves also starting at top left and going in clockwise direction
     #they do not match to the st_number
+    #stiffener have a tpl_number of 0
 #st_number:
     #clockwise starting with top left hand corner with number 1 and ending again at top left corner
     #this number is unique for every stiffener
