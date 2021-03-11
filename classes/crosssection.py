@@ -11,6 +11,12 @@ class crosssection():
         self.lines.append(line)
 
 
+    def get_line(self, pl_position, pl_type, st_pl_position):
+        for i in self:
+            if i.code.pl_position is pl_position and i.code.pl_type is pl_type and i.code.st_pl_position is st_pl_position:
+                return i
+
+
 # methods to calculate properties of total crossection
     def get_center_z_tot(self):
         weighted_a = 0

@@ -101,13 +101,23 @@ import math
         #right side
         elif pl_position is 2:
 
-            #find the top one
+            #find the top and bottom one
             most_up = None
-            st_number_min = random.choice(stiffener).code.st_number
+            most_down = None
+            st_number_min = random.choice(stiffeners)[0].code.st_number
+            st_number_max = random.choice(stiffeners)[0].code.st_number
             for stiffener in stiffeners:
-                if plate.code.st_number >= st_number_max:
+                if stiffener[0].code.st_number <= st_number_min:
+                    most_up = stiffener
+                elif stiffener[0].code.st_number >= st_number_max:
+                    most_down = stiffener
 
-            #find the bottom one
+            #calculate the relevant distances
+            top_4_b = most_up.get_line(2,1,4).b
+            top_4_a = most_up.get_line(2,1,4).a
+            bottom_2_a = most_down.get_line(2,1,4).a
+            bottom_2_b = most_down.get_line(2,1,4).b
+
 
         #bottom side
         elif pl_position is 3:
