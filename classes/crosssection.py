@@ -75,7 +75,7 @@ class crosssection():
     def get_azero(self):
         azero = 0
         for l in lines:
-            if l.code.pl_type = 0: #crosssection plate
+            if l.code.pl_type == 0: #crosssection plate
                 height = abs(abs(l.a.z) - abs(l.b.z))
                 width = 1/2 * (abs(l.a.y) + abs(l.b.y))
                 a_line = height * width
@@ -83,7 +83,7 @@ class crosssection():
         return azero
 
 
-""" important convention: the point b of a line is always in clockwise direction of point a"""
+    """ important convention: the point b of a line is always in clockwise direction of point a"""
 
     def remove_stiffener(self, st_number):
         to_remove = []
@@ -120,6 +120,7 @@ class crosssection():
 
     #method that renumbers all the lines again correctly
     def renumber(self):
+        pass
         #tpl_number, st_number need to be adjusted
 
 
