@@ -51,3 +51,20 @@ print("sigma_sup = " + str(sigma_sup_test_cs))
 
 v_web_r = str_cal.get_tau_int(test_cs, code, vz, tx)
 print("V_web_r =" + str(v_web_r))
+
+#modifying top plate
+test_line = test_cs.get_line(code)
+test_line.p1.y = 1000
+test_line.p2.y = -1000
+
+#testing of the reduced cross section functions
+y = test_cs.get_center_y_red()
+print("y_center_red = " + str(y))
+z = test_cs.get_center_z_red()
+print("z_center_red = " + str(z))
+a_red = test_cs.get_area_red()
+print("A_red = " + str(a_red))
+iy_red = test_cs.get_i_y_red()
+print("iy_red = " + str(iy_red))
+iz_red = test_cs.get_i_z_red()
+print("iz_red = " + str(iz_red))
