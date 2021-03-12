@@ -108,25 +108,21 @@ class line():
     def cal_center_y_red(self):
         length_red1 = self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
         length_red2 = self.cal_length(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-        weight = length_red2 /(length_red1+length_red2)
+        weight_1 = length_red1/(length_red1+length_red2)
+        weight_2 = length_red2 /(length_red1+length_red2)
         center_y_red1 = self.cal_center_y(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
         center_y_red2 = self.cal_center_y(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-        dis_y = abs(abs(center_y_red1) - abs(center_y_red2))
-        if center_y_red2 > center_y_red1:
-            return center_y_red1 + dis_y
-        else:
-            return center_y_red2 + dis_y
+        center = center_y_red1 * weight_1 + center_y_red2 * weight_2
+        return center
     def cal_center_z_red(self):
         length_red1 = self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
         length_red2 = self.cal_length(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-        weight = length_red2 /(length_red1+length_red2)
+        weight1 = length_red1 /(length_red1+length_red2)
+        weight2 = length_red2 /(length_red1+length_red2)
         center_z_red1 = self.cal_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
         center_z_red2 = self.cal_center_z(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-        dis_z = abs(abs(center_z_red1) - abs(center_z_red2))
-        if center_z_red2 > center_z_red1:
-            return center_z_red1 + dis_z
-        else:
-            return center_z_red2 + dis_z
+        center = center_z_red1 * weight1 + center_z_red2 * weight2
+        return center 
     def cal_length_red(self):
         return self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.cal_length(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
     def cal_area_red(self):
