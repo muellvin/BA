@@ -10,6 +10,15 @@ class crosssection():
     def addline(self, line):
         self.lines.append(line)
 
+    def get_line(self, code):
+        success = 0
+        for line in self.lines:
+            if line.code == code:
+                success = 1
+                return line
+            else:
+                pass
+        assert success != 0, "Line could not be found."
 
 # methods to calculate properties of total crossection
     def get_center_z_tot(self):
