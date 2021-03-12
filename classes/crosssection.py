@@ -74,7 +74,7 @@ class crosssection():
 
     def get_azero(self):
         azero = 0
-        for l in lines:
+        for l in self.lines:
             if l.code.pl_type == 0: #crosssection plate
                 height = abs(abs(l.a.z) - abs(l.b.z))
                 width = 1/2 * (abs(l.a.y) + abs(l.b.y))
