@@ -8,17 +8,17 @@ import sys
 sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
 
 #imports
-import input.input
+#import input.input
 import data
 import initial_cs as ics
 from classes import crosssection as cs
-from classes import line as ln
+from classes import plate_code as plcd
 from proofs import stress_cal as str_cal
 
 #assign input to variables
-b_sup = data.input_data["b_sup"]
-b_inf = data.input_data["b_inf"]
-h = data.input_data["h"]
+b_sup = 4000 #data.input_data["b_sup"]
+b_inf = 2000 #data.input_data["b_inf"]
+h = 1500 #data.input_data["h"]
 
 #create initial cross section
 test_cs = ics.create_initial_cs(b_sup, b_inf, h)
@@ -40,14 +40,14 @@ A_0 = test_cs.get_azero()
 print("A_0 = " + str(A_0))
 
 #assign load input to variables
-my = data.input_data["M_Ed"]
+my = 2500 * 10**6 #data.input_data["M_Ed"]
+vz = 500 * 10**3 #data.input_data["V_Ed"]
+tx = 300 * 10**6 #data.input_data["T_Ed"]
 
 #testing of stresscal
-test_line = 0
-for line in test_cs.lines:
-    if line.code.pl_position == 1:
-        test_line = line
-    else:
-        pass
-sigma_sup_test_cs = str_cal.get_sigma_sup(test_cs, test_line, my)
+code = plcd.plate_code(1,0,0,0,0)
+sigma_sup_test_cs = str_cal.get_sigma_sup(test_cs, code, my)
 print("sigma_sup = " + str(sigma_sup_test_cs))
+
+v_web_r = str_cal.get_tau_int(test_cs, code, vz, tx)
+print("V_web_r =" + str(v_web_r))
