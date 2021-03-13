@@ -22,7 +22,7 @@ class crosssection():
 
     def get_line(self, pl_position, pl_type, st_pl_position):
         for i in self:
-            if i.code.pl_position is pl_position and i.code.pl_type is pl_type and i.code.st_pl_position is st_pl_position:
+            if i.code.pl_position == pl_position and i.code.pl_type == pl_type and i.code.st_pl_position == st_pl_position:
                 return i
 
 
@@ -141,7 +141,7 @@ class crosssection():
 
 
     #method that will be called by the optimizer
-    def add_stiffener(self, pl_position, location, i_along):
+    def add_stiffener(self, stiffeners_proposition):
         #important for the creation of the stiffener is the position and the moment of inertia along the plate where it is placed
         #assumptions: symmetric distribution of stiffeners along z axis
         #pl_position, same as plate_code
