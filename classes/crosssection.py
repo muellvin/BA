@@ -10,6 +10,15 @@ class crosssection():
     def addline(self, line):
         self.lines.append(line)
 
+    def get_line(self, code):
+        success = 0
+        for line in self.lines:
+            if line.code == code:
+                success = 1
+                return line
+            else:
+                pass
+        assert success != 0, "Line could not be found."
 
     def get_line(self, pl_position, pl_type, st_pl_position):
         for i in self:
@@ -80,8 +89,8 @@ class crosssection():
 
     def get_azero(self):
         azero = 0
-        for l in lines:
-            if l.code.pl_type = 0: #crosssection plate
+        for l in self.lines:
+            if l.code.pl_type == 0: #crosssection plate
                 height = abs(abs(l.a.z) - abs(l.b.z))
                 width = 1/2 * (abs(l.a.y) + abs(l.b.y))
                 a_line = height * width
@@ -89,7 +98,7 @@ class crosssection():
         return azero
 
 
-""" important convention: the point b of a line is always in clockwise direction of point a"""
+    """ important convention: the point b of a line is always in clockwise direction of point a"""
 
     def remove_stiffener(self, st_number):
         to_remove = []
@@ -126,6 +135,7 @@ class crosssection():
 
     #method that renumbers all the lines again correctly
     def renumber(self):
+        pass
         #tpl_number, st_number need to be adjusted
 
 
