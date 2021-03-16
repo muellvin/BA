@@ -4,6 +4,19 @@
 import math
 
 
+    #method that will be called by the optimizer
+    def add_stiffener(crosssection, stiffeners_proposition):
+        #important for the creation of the stiffener is the position and the moment of inertia along the plate where it is placed
+        #assumptions: symmetric distribution of stiffeners along z axis
+        #pl_position, same as plate_code
+        #location: between 0 and 1:
+            #for top/ bottom it is the distance to the symmetry axis as a ratio to the max (width/2)
+            #for the sides it is the ratio of z value to the height of the cross-section
+        #i_along is the moment of inertia along the plate to which it is added
+        """code der im file stiffener mit der Methode get_i_along_stiffener, viele ausprobiert und mittels geometrischen beschränkungen entscheidet welche"""
+        pass
+
+
 
     #function creating a crosssection, which is the three lines of a stiffener at the place desired
     def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, width_top, width_bottom, height, t):
@@ -79,9 +92,12 @@ import math
         return i_along
 
 
+    def substantiate(stiffeners_proposition):
+        pass
+
     #this function should check weather the proposed stiffeners are feasable in the initial crosssection with the track_plate
     #as an argument it takes the initial crosssection and a list of all proposed stiffeners of type crosssection in the global coordinate system
-    def check_geometry(crosssection, stiffeners):
+    def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
         #reorganize the stiffeners into own lists
         stiffeners1 = []
@@ -110,8 +126,10 @@ import math
         for stiffener in stiffeners1:
             if stiffener[0].code.st_number <= min:
                 top_left = stiffener
+                min = stiffener[0].code.st_number
             elif stiffener[0].code.st_number >= max:
                 top_right = stiffener
+                max =
         min = random.choice(stiffeners2)[0].code.st_number
         max = random.choice(stiffeners2)[0].code.st_number
         right_top = None
@@ -164,11 +182,6 @@ import math
         left_top_2b = left_top.get_line(4,1,2).b
         left_top_2a = left_top.get_line(4,1,2).a
 
-        #calculate the relevant distances
-        top_4_b = most_up.get_line(2,1,4).b
-        top_4_a = most_up.get_line(2,1,4).a
-        bottom_2_a = most_down.get_line(2,1,4).a
-        bottom_2_b = most_down.get_line(2,1,4).b
 
         #corners of the crosssection
         corner_top_right = None

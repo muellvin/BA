@@ -137,17 +137,3 @@ class crosssection():
     def renumber(self):
         pass
         #tpl_number, st_number need to be adjusted
-
-
-
-    #method that will be called by the optimizer
-    def add_stiffener(self, stiffeners_proposition):
-        #important for the creation of the stiffener is the position and the moment of inertia along the plate where it is placed
-        #assumptions: symmetric distribution of stiffeners along z axis
-        #pl_position, same as plate_code
-        #location: between 0 and 1:
-            #for top/ bottom it is the distance to the symmetry axis as a ratio to the max (width/2)
-            #for the sides it is the ratio of z value to the height of the cross-section
-        #i_along is the moment of inertia along the plate to which it is added
-        """code der im file stiffener mit der Methode get_i_along_stiffener, viele ausprobiert und mittels geometrischen beschränkungen entscheidet welche"""
-        pass
