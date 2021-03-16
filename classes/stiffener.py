@@ -4,7 +4,7 @@
 import math
 
 
-    #method that will be called by the optimizer
+    #function that will be called by the optimizer
     def add_stiffener(crosssection, stiffeners_proposition):
         #important for the creation of the stiffener is the position and the moment of inertia along the plate where it is placed
         #assumptions: symmetric distribution of stiffeners along z axis
