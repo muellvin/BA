@@ -350,10 +350,11 @@ from shapely.geometry import LineString, Point
         elif dis_point_line(lines_left_top, lines_top_left) > max_dis:
             max_dis = dis_point_line(points_left_top, lines_top_left)
 
-        if cut(lines_left_top, lines_top_left):
+        if cut(lines_left_top, lines_top_left) == True:
             pass
         elif max_dis < mindis:
             pass
+
 
 
 
