@@ -52,9 +52,9 @@ def find_dimensions_2(stiffener):
 
     #still make restriction for angle in for-loop and possibly other restrictions...
     best = [0,0,0,0,0]
-    for b_sup in range(0, b_sup_max, b_sup_step):
-        for h in range(0, h_max, h_step):
-            for b_inf in range(0, b_inf_max, b_inf_step):
+    for b_sup in range(10, b_sup_max, b_sup_step):
+        for h in range(10, h_max, h_step):
+            for b_inf in range(10, b_inf_max, b_inf_step):
                 for t in t_range:
                     I_a = st.get_i_along_stiffener(b_sup, b_inf, h, t)
                     if I_a > stiffener.i_along:

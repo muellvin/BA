@@ -1,7 +1,7 @@
 
 class proposed_stiffener():
 
-    __init__(self, pl_position, st_number, location, i_along, b_sup = None, b_inf = None, height = None, t = None):
+    def __init__(self, pl_position, st_number, location, i_along, b_sup = None, b_inf = None, height = None, t = None):
         self.pl_position = pl_position
         self.st_number = st_number
         self.location = location
