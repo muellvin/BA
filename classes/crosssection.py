@@ -20,9 +20,16 @@ class crosssection():
                 pass
         assert success != 0, "Line could not be found."
 
-    def get_line(self, pl_position, pl_type, st_pl_position):
+    #to get certain line of stiffener
+    def get_line(self, pl_position, st_pl_position):
         for i in self:
-            if i.code.pl_position == pl_position and i.code.pl_type == pl_type and i.code.st_pl_position == st_pl_position:
+            if i.code.pl_position == pl_position and i.code.st_pl_position == st_pl_position:
+                return i
+
+    #
+    def get_stiffener_line(self, pl_position, st_number, st_pl_position):
+        for i in self:
+            if i.code.pl_position == pl_position and i.st_number == st_number:
                 return i
 
 

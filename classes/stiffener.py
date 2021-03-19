@@ -2,6 +2,8 @@
 #has methods for creating stiffeners of the type crosssection
 
 import math
+import shapely
+from shapely.geometry import LineString, Point
 
 
     #function that will be called by the optimizer
@@ -95,17 +97,22 @@ import math
     def substantiate(stiffeners_proposition):
         pass
 
+
+
     #this function should check weather the proposed stiffeners are feasable in the initial crosssection with the track_plate
     #as an argument it takes the initial crosssection and a list of all proposed stiffeners of type crosssection in the global coordinate system
     def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
         #reorganize the stiffeners into own lists
-        stiffeners1 = []
+        stiffeners1lines = []
         stiffeners2 = []
         stiffeners3 = []
         stiffeners4 = []
 
-        """a loop to create stiffeners1 is missing, as they are not included in stiffeners"""
+
+        for line in crosssection:
+            if line.pl_type == 1:
+                stiffeners1lines.append(line)
 
         for stiffener in stiffeners:
             if stiffener[0].code.pl_number == 2:
@@ -119,17 +126,17 @@ import math
 
 
         #find for each side the most left and the most right one
-        min = random.choice(stiffeners1)[0].code.st_number
-        max = random.choice(stiffeners1)[0].code.st_number
+        min = random.choice(stiffeners1lines).code.st_number
+        max = random.choice(stiffeners1lines).code.st_number
         top_right = None
         top_left = None
-        for stiffener in stiffeners1:
-            if stiffener[0].code.st_number <= min:
-                top_left = stiffener
-                min = stiffener[0].code.st_number
-            elif stiffener[0].code.st_number >= max:
-                top_right = stiffener
-                max =
+        for line in stiffeners1lines:
+            if line.code.st_number <= min:
+                top_left = line
+                min = line.code.st_number
+            elif line.code.st_number >= max:
+                top_right = line
+                max = line.code.st_number
         min = random.choice(stiffeners2)[0].code.st_number
         max = random.choice(stiffeners2)[0].code.st_number
         right_top = None
@@ -137,8 +144,10 @@ import math
         for stiffener in stiffeners2:
             if stiffener[0].code.st_number <= min:
                 right_top = stiffener
+                min = stiffener[0].code.st_number
             elif stiffener[0].code.st_number >= max:
                 right_bottom = stiffener
+                max = stiffener[0].code.st_number
         min = random.choice(stiffeners3)[0].code.st_number
         max = random.choice(stiffeners3)[0].code.st_number
         bottom_left = None
@@ -146,8 +155,10 @@ import math
         for stiffener in stiffeners2:
             if stiffener[0].code.st_number <= min:
                 bottom_right = stiffener
+                min = stiffener[0].code.st_number
             elif stiffener[0].code.st_number >= max:
                 bottom_left = stiffener
+                max = stiffener[0].code.st_number
         min = random.choice(stiffeners4)[0].code.st_number
         max = random.choice(stiffeners4)[0].code.st_number
         left_top = None
@@ -155,32 +166,42 @@ import math
         for stiffener in stiffeners4:
             if stiffener[0].code.st_number <= min:
                 left_bottom = stiffener
+                min = stiffener[0].code.st_number
             elif stiffener[0].code.st_number >= max:
                 left_top = stiffener
+                max = stiffener[0].code.st_number
 
         #points from track plate stiffeners
-        top_left_4b = top_left.get_line(1,1,4).b
-        top_left_4a = top_left.get_line(1,1,4).a
-        top_right_2b = top_right.get_line(1,1,2).b
-        top_right_2a = top_right.get_line(1,1,2).a
+        top_left_4b = top_left.get_line(1,4).b
+        top_left_4a = top_left.get_line(1,4).a
+        st_num_top_left = top_left.get_line(1,4).code.st_number
+        top_right_2b = top_right.get_line(1,2).b
+        top_right_2a = top_right.get_line(1,2).a
+        st_num_top_right = top_right.get_line(1,2).code.st_number
 
         #points from right side stiffeners
-        right_top_4b = right_top.get_line(2,1,4).b
-        right_top_4a = right_top.get_line(2,1,4).a
-        right_bottom_2b = right_bottom.get_line(2,1,2).b
-        right_bottom_2a = right_bottom.get_line(2,1,2).a
+        right_top_4b = right_top.get_line(2,4).b
+        right_top_4a = right_top.get_line(2,4).a
+        st_num_right_top = right_top.get_line(2,4).code.st_number
+        right_bottom_2b = right_bottom.get_line(2,2).b
+        right_bottom_2a = right_bottom.get_line(2,2).a
+        st_num_right_bottom = right_bottom.get_line(2,2).code.st_number
 
         #points from bottom side stiffeners
-        bottom_right_4b = bottom_right.get_line(3,1,4).b
-        bottom_right_4a = bottom_right.get_line(3,1,4).a
-        bottom_left_2b = bottom_left.get_line(3,1,2).b
-        bottom_left_2a = bottom_left.get_line(3,1,2).a
+        bottom_right_4b = bottom_right.get_line(3,4).b
+        bottom_right_4a = bottom_right.get_line(3,4).a
+        st_num_bottom_right = bottom_right.get_line(3,4).code.st_number
+        bottom_left_2b = bottom_left.get_line(3,2).b
+        bottom_left_2a = bottom_left.get_line(3,2).a
+        st_num_bottom_left = bottom_left.get_line(3,2).code.st_number
 
         #points from left side stiffeners
-        left_bottom_4b = left_bottom.get_line(4,1,4).b
-        left_bottom_4a = left_bottom.get_line(4,1,4).a
-        left_top_2b = left_top.get_line(4,1,2).b
-        left_top_2a = left_top.get_line(4,1,2).a
+        left_bottom_4b = left_bottom.get_line(4,4).b
+        left_bottom_4a = left_bottom.get_line(4,4).a
+        st_num_left_bottom = left_bottom.get_line(4,4).code.st_number
+        left_top_2b = left_top.get_line(4,2).b
+        left_top_2a = left_top.get_line(4,2).a
+        st_num_left_top = left_top.get_line(4,2).code.st_number
 
 
         #corners of the crosssection
@@ -211,30 +232,176 @@ import math
                     y_bottom_min = point.y
                     z_bottom_max = point.z
 
-        """minimal distances need to be defined"""
+
+
+
+        #check distances to corners of crosssection
         mindis_top_corner = 30
         mindis_side_top_corner = 30
         mindis_side_bottom_corner = 30
         mindis_bottom_corner = 30
 
-        #check distances to corners of crosssection
-        if corner_top_left.y - top_left_4b.y < mindis_top_corner:
-            print("top left stiffener too close to the corner")
-        if corner_top_right.y - top_right_2a.y > mindis_top_corner:
-            print("top right stiffener too close to the corner")
+        dis_top_left_corner = corner_top_left.y - top_left_4b.y
+        if  dis < mindis_top_corner:
+            print("track_plate stiffeners do not fit!!!")
+
+        dis_top_right_corner = corner_top_right.y - top_right_2a.y
+        if dis_top_right_corner > mindis_top_corner:
+            print("track_plate stiffeners do not fit!!!")
+
         if right_top_4b.z < mindis_side_top_corner.z:
-            print("right top stiffener too close to the corner")
+            corr = mindis_side_top_corner.z - right_top_4b.z
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr
+
         if left_top_2a.z < mindis_side_top_corner.z:
-            print("left top stiffener too close to the corner")
-        if corner_bottom_right.z - right_bottom_2a.z < mindis_side_bottom_corner:
-            print("right bottom stiffener too close to the corner")
-        if corner_bottom_left.z - left_bottom_4b.z <mindis_side_bottom_corner:
-            print("left bottom stiffener too close to the corner")
+            corr = mindis_side_top_corner.z - left_top_2a.z
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr
+
+        dis_right_bottom_corner = corner_bottom_right.z - right_bottom_2a.z
+        if dis_bottom_right_corner < mindis_side_bottom_corner:
+            corr = mindis_side_bottom_corner - dis_bottom_right_corner
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup -= corr
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_inf -= corr
+
+        dis_left_bottom_corner = corner_bottom_left.z - left_bottom_4b.z
+        if  dis_bottom_left_corner < mindis_side_bottom_corner:
+            corr = mindis_side_bottom_corner - dis_bottom_left_corner
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup -= corr
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_inf -= corr
+
+        dis_bottom_left_corner = corner_bottom_left.y - bottom_right_4b.y
         if corner_bottom_left.y - bottom_right_4b.y > mindis_bottom_corner:
-            print("bottom right stiffener too close to the corner")
-        if corner_bottom_right.y - bottom_left_2a.y < mindis_bottom_corner:
-            print("bottom left stiffener too close to the corner")
+            corr = mindis_bottom_corner - dis_bottom_left_corner
+            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup -= corr
+            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_inf -= corr
+
+        dis_bottom_right_corner = corner_bottom_right.y - bottom_left_2a.y
+        if dis_bottom_right_corner < mindis_bottom_corner:
+            corr = mindis_bottom_corner - dis_bottom_right_corner
+            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup -= corr
+            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_inf -= corr
+
+
 
         #check distances between stiffeners
+        mindis_between = 30
+
+        st_number_min = right_top[0].code.st_number
+        i = st_number_min
+        st_number_max = right_bottom[0].code.st_number
+        while i < st_number_max:
+            upper = stiffener2.get_stiffener_line(2,i,2).a
+            lower = stiffener2.get_stiffener_line(2,i+1,4).b
+            distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
+            if distance < mindis_between:
+                corr = (mindis-distance)/2
+                stiffeners_proposition.get_proposed_stiffener(2,i).b_sup -= corr
+                stiffeners_proposition.get_proposed_stiffener(2,i+1).b_sup -= corr
+                stiffeners_proposition.get_proposed_stiffener(2,i).b_inf -= corr
+                stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf -= corr
+
+        st_number_min = bottom_right[0].code.st_number
+        i = st_number_min
+        st_number_max = bottom_left[0].code.st_number
+        while i < st_number_max:
+            right = stiffener3.get_stiffener_line(2,i,2).a
+            left = stiffener3.get_stiffener_line(2,i+1,4).b
+            distance = math.sqrt((abs(right.y) - abs(left.y))**2 + (abs(right.z) - abs(left.z))**2)
+            if distance < mindis_between:
+                corr = (mindis-distance)/2
+                stiffeners_proposition.get_proposed_stiffener(3,i).b_sup -= corr
+                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_sup -= corr
+                stiffeners_proposition.get_proposed_stiffener(3,i).b_inf -= corr
+                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf -= corr
+
+        st_number_min = left_bottom[0].code.st_number
+        i = st_number_min
+        st_number_max = left_top[0].code.st_number
+
+        while i < st_number_max:
+            lower = stiffener4.get_stiffener_line(2,i,2).a
+            upper = stiffener4.get_stiffener_line(2,i+1,4).b
+            distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
+            if distance < mindis_between:
+                corr = (mindis-distance)/2
+                stiffeners_proposition.get_proposed_stiffener(4,i).b_sup -= corr
+                stiffeners_proposition.get_proposed_stiffener(4,i+1).b_sup -= corr
+                stiffeners_proposition.get_proposed_stiffener(4,i).b_inf -= corr
+                stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf -= corr
+
+
+
 
         #check distances in corners between stiffeners
+        mindis = 30
+        #the two edges are each defined by two lines
+        lines_left_top = []
+        lines_left_top.append(left_top.get_line(4,2))
+        lines_left_top.append(left_top.get_line(4,3))
+        lines_top_left = []
+        lines_top_left.append(top_left.get_line(1,4))
+        lines_top_left.append(top_left.get_line(1,3))
+
+        max_dis = 0
+        if dis_point_line(lines_top_left, lines_left_top) > max_dis:
+            max_dis = dis_point_line(lines_top_left, lines_left_top)
+        elif dis_point_line(lines_left_top, lines_top_left) > max_dis:
+            max_dis = dis_point_line(points_left_top, lines_top_left)
+
+        if cut(lines_left_top, lines_top_left) == True:
+            pass
+        elif max_dis < mindis:
+            pass
+
+
+
+
+
+
+    def cut(lines1, lines2):
+        a11 = (lines1[0].a.y, lines1[0].a.z)
+        b11 = (lines1[0].b.y, lines1[0].b.z)
+        a12 = (lines1[1].a.y, lines1[1].a.z)
+        b12 = (lines1[1].b.y, lines1[1].b.z)
+        a21 = (lines2[0].a.y, lines2[0].a.z)
+        b21 = (lines2[0].b.y, lines2[0].b.z)
+        a22 = (lines2[1].a.y, lines2[1].a.z)
+        b22 = (lines2[1].b.y, lines2[1].b.z)
+        line11 = LineString([a11, b11])
+        line12 = LineString([a12, b12])
+        line21 = LineString([a21, b21])
+        line22 = LineString([a22, b22])
+        int1 = line11.intersection(line21)
+        int2 = line11.intersection(line22)
+        int3 = line12.intersection(line21)
+        int4 = line12.intersection(line22)
+
+        if int1 == None and int2 == None and int3 == None and int4 == None:
+            return False
+        else:
+            return True
+
+
+
+
+
+    def dis_point_line(lines1, lines):
+        #calculates the minimal width of a bar that fits between two corners created each by two lines
+        points = []
+        for line in lines1:
+            points.append(line.a)
+            points.append(line.b)
+
+        dis = 1000
+        for line in lines:
+            for point in points:
+                #dot product
+                l_y = line.b.y - line.a.y
+                l_z = line.b.z - line.a.z
+                norm = math.sqrt(l_y**2 + l_z**2)
+                dis_new = abs(1/norm *(l_y * point.y + l_z * point.z))
+                if dis_new < dis:
+                    dis = dis_new
+        return dis
