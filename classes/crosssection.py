@@ -10,7 +10,7 @@ class crosssection():
     def addline(self, line):
         self.lines.append(line)
 
-    def get_line(self, code):
+    def get_line_code(self, code):
         success = 0
         for line in self.lines:
             if line.code == code:
@@ -27,18 +27,20 @@ class crosssection():
                 return i
 
     def get_angle(self, code):
-        line = self.get_line(self, code)
+        line = self.get_line_code(self, code)
         return line.cal_angle_y()
 
     #This function returns the coordinates of the position where the stiffener should be placed
     def get_coordinates(self, location, code):
-        line = self.get_line(self, code)
+        line = self.get_line_code(code)
         #bottom or top plate
         if line.a.z == line.b.z:
             if line.a.y > 0:
                 y = location * line.a.y
+                z = line.a.z
             else:
                 y = location * line.b.y
+                z = line.a.z
         #side plates
         else:
             if line.a.z > line.b.z:
@@ -47,6 +49,7 @@ class crosssection():
             else:
                 y = line.b.y + location * (line.a.y-line.b.y)
                 z = line.b.z + location * (line.a.z-line.b.z)
+        return y,z
     #
     def get_stiffener_line(self, pl_position, st_number, st_pl_position):
         for i in self:
