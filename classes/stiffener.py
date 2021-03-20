@@ -3,6 +3,10 @@
 
 import math
 import shapely
+from classes import point
+from classes import line
+from classes import crosssection
+from classes import plate_code
 from shapely.geometry import LineString, Point
 
 
@@ -57,7 +61,7 @@ def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, w
 
 #function creating a crosssection, which is the three lines of a stiffener. it is in its own coordinate system -> for calculation of i_along
 def create_stiffener_local(width_top, width_bottom, height, t):
-    assert width_top >= width_bottom, "width out of bound or wrong way around"
+    #assert width_top >= width_bottom, "width out of bound or wrong way around"
     half_width_diff = width_top - width_bottom
     length_side = math.sqrt(half_width_diff**2 + height**2)
     own_angle = math.atan(half_width_diff / height)
@@ -65,26 +69,26 @@ def create_stiffener_local(width_top, width_bottom, height, t):
     #create plate 2
     a2 = point.point(-width_top/2,0)
     b2 = point.point(a2.y + math.sin(own_angle)*length_side, math.cos(own_angle)*length_side)
-    code2 = plate_code.code(0, 1, 0, 0, 2)
+    code2 = plate_code.plate_code(0, 1, 0, 0, 2)
     line2 = line.line(code2, a2, b2, t)
 
     #create plate 3
     a3 = b2
     b3 = point.point(a3.y + width_bottom, a3.z)
-    code3 = plate_code.code(0, 1, 0, 0, 3)
+    code3 = plate_code.plate_code(0, 1, 0, 0, 3)
     line3 = line.line(code3, a3, b3, t)
 
     #create plate 4
     a4 = b3
     b4 = point.point(width_top/2, 0)
-    code4 = plate_code.code(0, 1, 0, 0, 4)
+    code4 = plate_code.plate_code(0, 1, 0, 0, 4)
     line4 = line.line(code4, a4, b4, t)
 
     stiffener_local = crosssection.crosssection()
     #add the lines to itself
-    stiffener_local.lines.addline(line2)
-    stiffener_local.lines.addline(line3)
-    stiffener_local.lines.addline(line4)
+    stiffener_local.addline(line2)
+    stiffener_local.addline(line3)
+    stiffener_local.addline(line4)
     return stiffener_local
 
 
@@ -95,7 +99,7 @@ def get_i_along_stiffener(width_top, width_bottom, height, t):
 
 def get_area_stiffener(b_sup, b_inf, h, t):
     stiffener_local = create_stiffener_local(b_sup, b_inf, h, t)
-    area = stiffener_local.get_area()
+    area = stiffener_local.get_area_tot()
     return area
 
 def substantiate(stiffeners_proposition):
@@ -126,7 +130,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             stiffeners3.append(stiffener)
         elif stiffener[0].code.pl_number == 4:
             stiffeners4.append(stiffener)
-        else
+        else:
             print("the lines of the stiffeners that were given to check_geometry do not contain codes")
 
 
@@ -360,7 +364,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         max_dis = (-1) * max_dis
         cut = True
 
-"""this code is not totally correct, dunno how well it will work"""
+    """this code is not totally correct, dunno how well it will work"""
     if max_dis < mindis:
         disdiff = mindis - max_dis
         #angle defined by the two corners, only the fourth quadrant is negative (if 4a is to the bottom right of 2b)
@@ -410,7 +414,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         max_dis = (-1) * max_dis
         cut = True
 
-"""this code is not totally correct, dunno how well it will work"""
+    """this code is not totally correct, dunno how well it will work"""
     if max_dis < mindis:
         disdiff = mindis - max_dis
         #angle defined by the two corners, only the fourth quadrant is negative (if 4a is to the bottom right of 2b)
