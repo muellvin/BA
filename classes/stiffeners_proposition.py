@@ -1,12 +1,13 @@
 
 class stiffeners_proposition():
 
-    __init__(self):
+    def __init__(self):
         self.stiffeners = []
 
 
-    def add_proposed_stiffener(self, pl_position, st_number, location, i_along):
-        proposed_stiffener = new proposed_stiffener(pl_position, st_number, location, i_along)
+    def add(self, proposed_stiffener):
+        self.stiffeners.append(proposed_stiffener)
+        return
 
     def get_proposed_stiffener(self, pl_position, st_number):
         for prop_stiffener in self.stiffeners:

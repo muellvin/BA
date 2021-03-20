@@ -36,27 +36,27 @@ def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, w
     #create plate 2
     a2 = point.point(y_corr,z_corr)
     b2 = point.point(y_corr + math.sin(own_angle-angle)*length_side, z_corr + math.cos(own_angle-angle)*length_side)
-    code2 = plate_code.code(pl_position, 1, 0, st_number, 2)
+    code2 = plate_code.plate_code(pl_position, 1, 0, st_number, 2)
     line2 = line.line(code2, a2, b2, t)
 
 
     #create plate 3
     a3 = b2
     b3 = point.point(a3.y + math.cos(angle)*width_bottom, a3.z + math.sin(angle)*width_bottom)
-    code3 = plate_code.code(pl_position, 1, 0, st_number, 3)
+    code3 = plate_code.plate_code(pl_position, 1, 0, st_number, 3)
     line3 = line.line(code3, a3, b3, t)
 
     #create plate 4
     a4 = b3
     b4 = point.point(y_corr + math.cos(angle)*width_top, z_corr + math.sin(angle)*width_top)
-    code4 = plate_code.code(pl_position, 1, 0, st_number, 4)
+    code4 = plate_code.plate_code(pl_position, 1, 0, st_number, 4)
     line4 = line.line(code4, a4, b4, t)
 
     stiffener_global = crosssection.crosssection()
     #add the lines to itself
-    stiffener_global.lines.addline(line2)
-    stiffener_global.lines.addline(line3)
-    stiffener_global.lines.addline(line4)
+    stiffener_global.addline(line2)
+    stiffener_global.addline(line3)
+    stiffener_global.addline(line4)
     return stiffener_global
 
 #function creating a crosssection, which is the three lines of a stiffener. it is in its own coordinate system -> for calculation of i_along

@@ -4,12 +4,12 @@ from classes import plate_code as plcd
 from classes import line as ln
 import math
 
-def substantiate(crosssection, proposition):
+def substantiate(crosssection, propositions):
     #initialize list for stiffeners
     stiffener_list =[]
 
     #switch clause for plates
-    for stiffener in propositions:
+    for stiffener in propositions.stiffeners:
         if stiffener.pl_position == 1:
             pass
             #trackplate, this should be implemented differently, not here, just put here as a reminder
@@ -31,7 +31,7 @@ def substantiate(crosssection, proposition):
             angle = math.pi + crosssection.get_angle(code)
             #make us of symmetry tbd
         y,z = crosssection.get_coordinates(stiffener.location, code)
-        global_st = create_stiffener_global(stiffener.pl_position, stiffener.st_number, \
+        global_st = st.create_stiffener_global(stiffener.pl_position, stiffener.st_number, \
         y, z, angle, b_sup, b_inf, h, t)
         stiffener_list.append(global_st)
 
