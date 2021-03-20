@@ -5,6 +5,7 @@ sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
 from optimizer import substantiate as ss
 from classes import proposed_stiffener as ps
 
-proposition = ps.proposed_stiffener(2,1,0, 5*10**6)
+proposition = ps.proposed_stiffener(2,1,0,20*10**6)
 
-ss.find_dimensions_2(proposition)
+b_sup, b_inf, h, t = ss.find_dimensions(proposition)
+print(b_sup, b_inf, h, t)
