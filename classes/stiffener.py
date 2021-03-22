@@ -98,8 +98,7 @@ def get_area_stiffener(b_sup, b_inf, h, t):
     area = stiffener_local.get_area()
     return area
 
-def substantiate(stiffeners_proposition):
-    pass
+
 
 
 
