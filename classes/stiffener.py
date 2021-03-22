@@ -63,7 +63,7 @@ def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, w
     y_corr = center_y - math.cos(angle)*width_top
     z_corr = center_z - math.sin(angle)*width_top
     assert width_top >= width_bottom, "width out of bound or wrong way around"
-    half_width_diff = width_top - width_bottom
+    half_width_diff = (width_top - width_bottom)/2
     length_side = math.sqrt(half_width_diff**2 + height**2)
     own_angle = math.atan(half_width_diff / height)
 

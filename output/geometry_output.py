@@ -1,0 +1,41 @@
+#first version of geometry output using matplotlib
+
+#imports
+import matplotlib.pyplot as plt
+import numpy as np
+
+def print_cs(crosssection, stiffeners = None):
+
+    #print primary cross section
+    y_p = []
+    z_p = []
+
+    for i in range(0,4,1):
+        line = crosssection.lines[i]
+        y_p.append(line.a.y)
+        y_p.append(line.b.y)
+        z_p.append(-line.a.z)
+        z_p.append(-line.b.z)
+
+    y_points = np.array(y_p)
+    z_points = np.array(z_p)
+    plt.plot(y_points, z_points)
+
+    #print stiffeners
+    y_list = []
+    z_list = []
+
+    for i in range(len(stiffeners)):
+        y = []
+        z = []
+        for j in range(3):
+            line = stiffeners[i].lines[j]
+            y.append(line.a.y)
+            y.append(line.b.y)
+            z.append(-line.a.z)
+            z.append(-line.b.z)
+        y_list = np.array(y)
+        z_list = np.array(z)
+        plt.plot(y_list, z_list)
+
+    plt.show()
