@@ -401,9 +401,9 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         angle = 0
         cut = False
         if dis_point_line(lines_top_left, lines_left_top) > max_dis:
-            max_dis, angle = dis_point_line(lines_top_left, lines_left_top)
+            max_dis, angle = dis_lines_lines(lines_top_left, lines_left_top)
         elif dis_point_line(lines_left_top, lines_top_left) > max_dis:
-            max_dis, angle = dis_point_line(points_left_top, lines_top_left)
+            max_dis, angle = dis_lines_lines(points_left_top, lines_top_left)
         elif cut(lines_left_top, lines_top_left) == True:
             max_dis = (-1) * max_dis
             cut = True
@@ -442,9 +442,9 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         max_dis = 0
         cut = False
         if dis_point_line(lines_left_bottom, lines_bottom_left) > max_dis:
-            max_dis, angle = dis_point_line(lines_left_bottom, lines_bottom_left)
+            max_dis, angle = dis_lines_lines(lines_left_bottom, lines_bottom_left)
         elif dis_point_line(lines_bottom_left, lines_left_bottom) > max_dis:
-            max_dis, angle = dis_point_line(lines_bottom_left, lines_left_bottom)
+            max_dis, angle = dis_lines_lines(lines_bottom_left, lines_left_bottom)
         elif cut(lines_bottom_left, lines_left_bottom) == True:
             max_dis = (-1) * max_dis
             cut = True
@@ -507,7 +507,7 @@ def cut(lines1, lines2):
 
 
 
-def dis_point_line(lines1, lines):
+def dis_lines_lines(lines1, lines):
     #calculates the minimal width of a bar that fits between two corners created each by two lines
     points = []
     for line in lines1:
