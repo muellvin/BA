@@ -10,7 +10,7 @@ class crosssection():
     def addline(self, line):
         self.lines.append(line)
 
-    def get_line(self, code):
+    def get_line_code(self, code):
         success = 0
         for line in self.lines:
             if line.code == code:
@@ -22,10 +22,34 @@ class crosssection():
 
     #to get certain line of stiffener
     def get_line(self, pl_position, st_pl_position):
-        for i in self:
+        for i in self.lines:
             if i.code.pl_position == pl_position and i.code.st_pl_position == st_pl_position:
                 return i
 
+    def get_angle(self, code):
+        line = self.get_line_code(self, code)
+        return line.cal_angle_y()
+
+    #This function returns the coordinates of the position where the stiffener should be placed
+    def get_coordinates(self, location, code):
+        line = self.get_line_code(code)
+        #bottom or top plate
+        if line.a.z == line.b.z:
+            if line.a.y > 0:
+                y = location * line.a.y
+                z = line.a.z
+            else:
+                y = location * line.b.y
+                z = line.a.z
+        #side plates
+        else:
+            if line.a.z > line.b.z:
+                y = line.a.y + location * (line.b.y-line.a.y)
+                z = line.a.z + location * (line.b.z-line.a.z)
+            else:
+                y = line.b.y + location * (line.a.y-line.b.y)
+                z = line.b.z + location * (line.a.z-line.b.z)
+        return y,z
     #
     def get_stiffener_line(self, pl_position, st_number, st_pl_position):
         for i in self:
@@ -115,13 +139,13 @@ class crosssection():
             if line1.code.st_number is st_number:
 
                 #if the line is a trapezoid line, it has to be removed and the adjecent ones fused
-                if line1.code.pl_type is 0: #trapezoid plate of the stiffener
+                if line1.code.pl_type == 0: #trapezoid plate of the stiffener
                     left_tr_pl = None
                     right_tr_pl = None
                     for line_tr in self.lines():
-                        if line_tr.code.pl_type is 0 and line_tr.code.tpl_number is line1.code.tpl_number - 1:
+                        if line_tr.code.pl_type == 0 and line_tr.code.tpl_number == line1.code.tpl_number - 1:
                             left_tr_pl = line_tr
-                        elif line_tr.code.p1_type is 0 and line_tr.code.tpl_number is line1.tpl_number + 1:
+                        elif line_tr.code.p1_type == 0 and line_tr.code.tpl_number == line1.tpl_number + 1:
                             right_tr_pl = line_tr
                     #creating a new line that spans over the length of all 3
                     new_code = plate_code.plate_code(line1.code.pl_position, 0, line1.code.tpl_number-1, 0, 0)
@@ -132,12 +156,28 @@ class crosssection():
                     to_remove.append(line1)
 
                 #if the line is a stiffener line (not trapezoid) it can be removed directly
-                elif line.code.pl_type is 1:
+            elif line.code.pl_type == 1:
                     to_remove.append(line)
 
         #after the trapezoid line is added and all the ones to go are added to to_remove, all in to_removed can be removed
         for pl in to_remove:
             self.lines.remove(pl)
+
+    def add_stiffener_set(self, proposition):
+        while geometry_ok == False:
+            pass
+            stiffener_list = substantiate (self, proposition)
+            #check_geometry(crosssection, stiffener_list, proposition)
+            #set geometry_ok flag
+            if geometry_ok == True:
+                pass
+                #merge(stiffener_list, corsssection)
+            #abortion criterium for #iterations?
+        #merge stiffeners and crosssection
+
+    #This functions merges a cross section and a list of stiffeners
+    def merge(self, stiffener_list):
+        pass
 
 
     #method that renumbers all the lines again correctly
