@@ -152,6 +152,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     stiffeners3 = []
     stiffeners4 = []
 
+    geometry_ok = True
 
     for line in crosssection:
         if line.pl_type == 1:
@@ -286,44 +287,52 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     dis_top_left_corner = corner_top_left.y - top_left_4b.y
     if  dis < mindis_top_corner:
         print("track_plate stiffeners do not fit!!!")
+        geometry_ok = False
 
     dis_top_right_corner = corner_top_right.y - top_right_2a.y
     if dis_top_right_corner > mindis_top_corner:
         print("track_plate stiffeners do not fit!!!")
+        geometry_ok = False
 
     if right_top_4b.z < mindis_side_top_corner.z:
         corr = mindis_side_top_corner.z - right_top_4b.z
         stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr
         stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr
+        geometry_ok = False
 
     if left_top_2a.z < mindis_side_top_corner.z:
         corr = mindis_side_top_corner.z - left_top_2a.z
         stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr
         stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr
+        geometry_ok = False
 
     dis_right_bottom_corner = corner_bottom_right.z - right_bottom_2a.z
     if dis_bottom_right_corner < mindis_side_bottom_corner:
         corr = mindis_side_bottom_corner - dis_bottom_right_corner
         stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup -= corr
         stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_inf -= corr
+        geometry_ok = False
 
     dis_left_bottom_corner = corner_bottom_left.z - left_bottom_4b.z
     if  dis_bottom_left_corner < mindis_side_bottom_corner:
         corr = mindis_side_bottom_corner - dis_bottom_left_corner
         stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup -= corr
-    stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_inf -= corr
+        stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_inf -= corr
+        geometry_ok = False
 
     dis_bottom_left_corner = corner_bottom_left.y - bottom_right_4b.y
     if corner_bottom_left.y - bottom_right_4b.y > mindis_bottom_corner:
         corr = mindis_bottom_corner - dis_bottom_left_corner
         stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup -= corr
         stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_inf -= corr
+        geometry_ok = False
 
     dis_bottom_right_corner = corner_bottom_right.y - bottom_left_2a.y
     if dis_bottom_right_corner < mindis_bottom_corner:
         corr = mindis_bottom_corner - dis_bottom_right_corner
         stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup -= corr
         stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_inf -= corr
+        geometry_ok = False
 
 
 
@@ -343,6 +352,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             stiffeners_proposition.get_proposed_stiffener(2,i+1).b_sup -= corr
             stiffeners_proposition.get_proposed_stiffener(2,i).b_inf -= corr
             stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf -= corr
+            geometry_ok = False
 
     st_number_min = bottom_right[0].code.st_number
     i = st_number_min
@@ -357,6 +367,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             stiffeners_proposition.get_proposed_stiffener(3,i+1).b_sup -= corr
             stiffeners_proposition.get_proposed_stiffener(3,i).b_inf -= corr
             stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf -= corr
+            geometry_ok = False
 
     st_number_min = left_bottom[0].code.st_number
     i = st_number_min
@@ -372,6 +383,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             stiffeners_proposition.get_proposed_stiffener(4,i+1).b_sup -= corr
             stiffeners_proposition.get_proposed_stiffener(4,i).b_inf -= corr
             stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf -= corr
+            geometry_ok = False
 
 
 
@@ -399,6 +411,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
     """this code is not totally correct, dunno how well it will work"""
     if max_dis < mindis:
+        geometry_ok = False
         disdiff = mindis - max_dis
         #angle defined by the two corners, only the fourth quadrant is negative (if 4a is to the bottom right of 2b)
         dy = left_top_2b.y - top_left_4a.y
@@ -449,6 +462,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
     """this code is not totally correct, dunno how well it will work"""
     if max_dis < mindis:
+        geometry_ok = False
         disdiff = mindis - max_dis
         #angle defined by the two corners, only the fourth quadrant is negative (if 4a is to the bottom right of 2b)
         dy = left_bottom_4a.y - bottom_left_2b.y
@@ -476,6 +490,8 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr_b_sup
         stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr_b_inf
         stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).height -= corr_height
+
+    return geometry_ok
 
 
 
