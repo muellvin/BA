@@ -60,19 +60,22 @@ def merge(initial_cs, stiffener_list):
 
 #function creating a crosssection, which is the three lines of a stiffener at the place desired
 def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, width_top, width_bottom, height, t):
-    y_corr = center_y - math.cos(angle)*width_top
-    z_corr = center_z - math.sin(angle)*width_top
+    y_corr = center_y - math.cos(angle)*width_top*0.5
+    z_corr = center_z - math.sin(angle)*width_top*0.5
     assert width_top >= width_bottom, "width out of bound or wrong way around"
     half_width_diff = (width_top - width_bottom)/2
     length_side = math.sqrt(half_width_diff**2 + height**2)
-    own_angle = math.atan(half_width_diff / height)
+    own_angle = math.atan(height/half_width_diff)
+    print("own_angle = " + str(own_angle))
+    print("angle = " + str(angle))
 
     #create plate 2
     a2 = point.point(y_corr,z_corr)
-    b2 = point.point(y_corr + math.sin(own_angle-angle)*length_side, z_corr + math.cos(own_angle-angle)*length_side)
+    b2 = point.point(y_corr + math.cos(own_angle+angle)*length_side, z_corr + math.sin(own_angle+angle)*length_side)
+    print(b2.y,b2.z)
     code2 = plate_code.plate_code(pl_position, 1, 0, st_number, 2)
     line2 = line.line(code2, a2, b2, t)
-
+    
 
     #create plate 3
     a3 = b2

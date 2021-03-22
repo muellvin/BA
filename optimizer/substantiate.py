@@ -19,7 +19,8 @@ def substantiate(crosssection, propositions):
         elif stiffener.pl_position == 2:
             b_sup, b_inf, h, t = find_dimensions(stiffener)
             code = plcd.plate_code(2,0,0,0,0)
-            angle = 2*math.pi - crosssection.get_angle(code)
+            angle = math.pi + crosssection.get_angle(code)
+            print("Rotation Angle = " + str(angle))
             #sidplate right side
         elif stiffener.pl_position == 3:
             b_sup, b_inf, h, t = find_dimensions(stiffener)
@@ -31,9 +32,10 @@ def substantiate(crosssection, propositions):
             assert stiffener.pl_position == 4, "Plate not found."
             b_sup, b_inf, h, t = find_dimensions(stiffener)
             code = plcd.plate_code(4,0,0,0,0)
-            angle = math.pi + crosssection.get_angle(code)
+            angle = math.pi - crosssection.get_angle(code)
             #make us of symmetry tbd
         y,z = crosssection.get_coordinates(stiffener.location, code)
+        print(y,z)
         print(b_sup, b_inf, h, t)
         global_st = st.create_stiffener_global(stiffener.pl_position, stiffener.st_number, \
         y, z, angle, b_sup, b_inf, h, t)

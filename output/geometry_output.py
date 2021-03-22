@@ -12,8 +12,8 @@ def print_cs(crosssection, stiffeners = None):
 
     for i in range(0,4,1):
         line = crosssection.lines[i]
-        y_p.append(line.a.y)
-        y_p.append(line.b.y)
+        y_p.append(-line.a.y)
+        y_p.append(-line.b.y)
         z_p.append(-line.a.z)
         z_p.append(-line.b.z)
 
@@ -30,12 +30,13 @@ def print_cs(crosssection, stiffeners = None):
         z = []
         for j in range(3):
             line = stiffeners[i].lines[j]
-            y.append(line.a.y)
-            y.append(line.b.y)
+            y.append(-line.a.y)
+            y.append(-line.b.y)
             z.append(-line.a.z)
             z.append(-line.b.z)
         y_list = np.array(y)
         z_list = np.array(z)
         plt.plot(y_list, z_list)
 
+    plt.axis('scaled')
     plt.show()

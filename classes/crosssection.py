@@ -33,7 +33,7 @@ class crosssection():
                 return i
 
     def get_angle(self, code):
-        line = self.get_line_code(self, code)
+        line = self.get_line_code(code)
         return line.cal_angle_y()
 
     #This function returns the coordinates of the position where the stiffener should be placed
