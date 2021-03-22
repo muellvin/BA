@@ -416,6 +416,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             corr_b_inf = 0
             corr_height = 0
 
+            angle -= (math.pi/2 - left_top.get_line(4, 3),get_angle())
             corr_b_sup -= disdiff*math.cos(angle)
             corr_b_inf -= disdiff*math.cos(angle)
             corr_height -= disdiff*math.sin(angle)
@@ -457,6 +458,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             corr_b_inf = 0
             corr_height = 0
 
+            angle += (math.pi/2 - left_bottom.get_line(4,3).get_angle())
             corr_b_sup -= disdiff*math.cos(angle)
             corr_b_inf -= disdiff*math.cos(angle)
             corr_height -= disdiff*math.sin(angle)
