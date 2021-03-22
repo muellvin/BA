@@ -10,17 +10,51 @@ from classes import plate_code
 from shapely.geometry import LineString, Point
 
 
-#function that will be called by the optimizer
-def add_stiffeners(crosssection, stiffeners_proposition):
-    #important for the creation of the stiffener is the position and the moment of inertia along the plate where it is placed
-    #assumptions: symmetric distribution of stiffeners along z axis
-    #pl_position, same as plate_code
-    #location: between 0 and 1:
-        #for top/ bottom it is the distance to the symmetry axis as a ratio to the max (width/2)
-        #for the sides it is the ratio of z value to the height of the cross-section
-    #i_along is the moment of inertia along the plate to which it is added
-    """code der im file stiffener mit der Methode get_i_along_stiffener, viele ausprobiert und mittels geometrischen beschränkungen entscheidet welche"""
-    pass
+def add_stiffener_set(initial_cs, proposition):
+    iterations = 0
+
+    while geometry_ok == False:
+        iterations += 1
+        stiffener_list = substantiate(self, proposition)
+        geometry_ok = check_geometry(cs_collector.initial_cs, stiffener_list, proposition)
+
+        if iterations > 5:
+            geometry_ok == True
+
+    next_cs = merge(initial_cs, stiffener_list)
+    return next_cs
+
+
+#This functions merges a cross section and a list of stiffeners
+"""we need initial_cs to always have the updated thickness of the trapezoid plates!!!!"""
+def merge(initial_cs, stiffener_list):
+    remove = []
+    for stiffener in stiffener_list:
+        side = stiffener[0].code.pl_number
+        old_plate = initial_cs.get_pl_line(side)
+        tpl_number = old_plate.code.tpl_number
+        new_plate_1_a = old_plate.a
+        new_plate_1_b = stiffener.get_line(side, 1).a
+        new_plate_2_a = new_plate_1b
+        new_plate_2_b = stiffener.get_line(side, 1).b
+        new_plate_3_a = new_plate_2_a
+        new_plate_3_b = old_plate.b
+        code_1 = [side, 0, tpl_number, 0, 0]
+        code_2 = [side, 0, tpl_number+1, 0, 0]
+        code_3 = [side, 0, tpl_number+2, 0, 0]
+        t = old_plate.t
+        new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t)
+        new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t)
+        new_plate_3 = line.line(code_3, new_plate_3_a, new_plate_3_b, t)
+        initial_cs.append(new_plate_1)
+        initial_cs.append(new_plate_2)
+        initial_cs.append(new_plate_3)
+        remove.append(old_plate)
+
+    for i in remove:
+        initial_cs.remove(i)
+
+    return initial_cs
 
 
 
@@ -102,8 +136,7 @@ def get_area_stiffener(b_sup, b_inf, h, t):
     area = stiffener_local.get_area_tot()
     return area
 
-def substantiate(stiffeners_proposition):
-    pass
+
 
 
 
