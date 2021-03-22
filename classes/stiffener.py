@@ -398,44 +398,35 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         lines_top_left.append(top_left.get_line(1,3))
 
         max_dis = 0
+        angle = 0
         cut = False
         if dis_point_line(lines_top_left, lines_left_top) > max_dis:
-            max_dis = dis_point_line(lines_top_left, lines_left_top)
+            max_dis, angle = dis_point_line(lines_top_left, lines_left_top)
         elif dis_point_line(lines_left_top, lines_top_left) > max_dis:
-            max_dis = dis_point_line(points_left_top, lines_top_left)
+            max_dis, angle = dis_point_line(points_left_top, lines_top_left)
         elif cut(lines_left_top, lines_top_left) == True:
             max_dis = (-1) * max_dis
             cut = True
 
-            if max_dis < mindis:
-                geometry_ok = False
-                disdiff = mindis - max_dis
-                #angle defined by the two corners, only the fourth quadrant is negative (if 4a is to the bottom right of 2b)
-                dy = left_top_2b.y - top_left_4a.y
-                dz = left_top_2b.z - top_left_4a.z
-                corr_b_sup = 0
-                corr_b_inf = 0
-                corr_height = 0
-                if dy >= 0:
-                    angle = math.atan(dz/dy)
-                elif dy < 0:
-                    angle = math.atan(dz/dy) + math.pi
+        if max_dis < mindis:
+            geometry_ok = False
+            disdiff = mindis - max_dis
 
-                if (math.pi/4) < angle < math.pi/2:
-                    corr_b_sup -= disdiff / math.tan(angle)
-                    corr_b_inf -= disdiff / math.tan(angle)
-                elif (-math.pi/2) < angle < math.pi/4:
-                    corr_height -= disdiff
-                else:
-                    corr_b_sup -= disdiff
-                    corr_b_inf -= disdiff
+            corr_b_sup = 0
+            corr_b_inf = 0
+            corr_height = 0
 
-                stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr_b_sup
-                stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr_b_inf
-                stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).height -= corr_height
-                stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr_b_sup
-                stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr_b_inf
-                stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).height -= corr_height
+            corr_b_sup -= disdiff*math.cos(angle)
+            corr_b_inf -= disdiff*math.cos(angle)
+            corr_height -= disdiff*math.sin(angle)
+
+
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr_b_sup
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr_b_inf
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).height -= corr_height
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr_b_sup
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr_b_inf
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).height -= corr_height
 
 
     if left_bottom != None and bottom_left != None:
@@ -451,9 +442,9 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         max_dis = 0
         cut = False
         if dis_point_line(lines_left_bottom, lines_bottom_left) > max_dis:
-            max_dis = dis_point_line(lines_left_bottom, lines_bottom_left)
+            max_dis, angle = dis_point_line(lines_left_bottom, lines_bottom_left)
         elif dis_point_line(lines_bottom_left, lines_left_bottom) > max_dis:
-            max_dis = dis_point_line(lines_bottom_left, lines_left_bottom)
+            max_dis, angle = dis_point_line(lines_bottom_left, lines_left_bottom)
         elif cut(lines_bottom_left, lines_left_bottom) == True:
             max_dis = (-1) * max_dis
             cut = True
@@ -461,25 +452,14 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         if max_dis < mindis:
             geometry_ok = False
             disdiff = mindis - max_dis
-            #angle defined by the two corners, only the fourth quadrant is negative (if 4a is to the bottom right of 2b)
-            dy = left_bottom_4a.y - bottom_left_2b.y
-            dz = bottom_left_2b.z - left_bottom_4a.z
+
             corr_b_sup = 0
             corr_b_inf = 0
             corr_height = 0
-            if dy >= 0:
-                angle = math.atan(dz/dy)
-            elif dy < 0:
-                angle = math.atan(dz/dy) + math.pi
 
-            if (math.pi/4) < angle < math.pi/2:
-                corr_b_sup -= disdiff / math.tan(angle)
-                corr_b_inf -= disdiff / math.tan(angle)
-            elif (-math.pi/2) < angle < math.pi/4:
-                corr_height -= disdiff
-            else:
-                corr_b_sup -= disdiff
-                corr_b_inf -= disdiff
+            corr_b_sup -= disdiff*math.cos(angle)
+            corr_b_inf -= disdiff*math.cos(angle)
+            corr_height -= disdiff*math.sin(angle)
 
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr_b_sup
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr_b_inf
@@ -535,6 +515,7 @@ def dis_point_line(lines1, lines):
         points.append(line.b)
 
     dis = 1000
+    angle = 0
     for line in lines:
         for point in points:
             #dot product
@@ -544,4 +525,6 @@ def dis_point_line(lines1, lines):
             dis_new = abs(1/norm *(l_y * point.y + l_z * point.z))
             if dis_new < dis:
                 dis = dis_new
-    return dis
+                angle = math.atan(l_z / l_y)
+
+    return dis, angle
