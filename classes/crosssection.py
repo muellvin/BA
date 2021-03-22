@@ -164,13 +164,19 @@ class crosssection():
             self.lines.remove(pl)
 
     def add_stiffener_set(self, proposition):
+        iterations = 0
         while geometry_ok == False:
             pass
-            stiffener_list = substantiate (self, proposition)
+            stiffener_list = substantiate(self, proposition)
             #check_geometry(crosssection, stiffener_list, proposition)
             #set geometry_ok flag
-            if geometry_ok == True:
-                pass
+            geometry_ok = check_geometry(cs_collector.initial_cs, stiffener_list, proposition)
+        
+            if iterations > 5:
+                geometry_ok == True
+
+        next_cs = merge(initial_cs, stiffener_list)
+        return next_cs
                 #merge(stiffener_list, corsssection)
             #abortion criterium for #iterations?
         #merge stiffeners and crosssection
