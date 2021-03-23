@@ -159,15 +159,15 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     stiffeners4 = []
 
     for line in crosssection.lines:
-        if line.code.pl_type == 1:
+        if line.code.pl_position == 1:
             stiffeners1lines.append(line)
 
     for stiffener in stiffeners:
-        if stiffener.lines[0].code.tpl_number == 2:
+        if stiffener.lines[0].code.pl_position== 2:
             stiffeners2.append(stiffener)
-        elif stiffener.lines[0].code.tpl_number == 3:
+        elif stiffener.lines[0].code.pl_position == 3:
             stiffeners3.append(stiffener)
-        elif stiffener.lines[0].code.tpl_number == 4:
+        elif stiffener.lines[0].code.pl_position == 4:
             stiffeners4.append(stiffener)
         else:
             print("the lines of the stiffeners that were given to check_geometry do not contain codes")
@@ -198,43 +198,43 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 max = line.code.st_number
 
     if stiffeners2 != []:
-        min = random.choice(stiffeners2)[0].code.st_number
-        max = random.choice(stiffeners2)[0].code.st_number
+        min = random.choice(stiffeners2).lines[0].code.st_number
+        max = random.choice(stiffeners2).lines[0].code.st_number
         right_top = None
         right_bottom = None
         for stiffener in stiffeners2:
-            if stiffener[0].code.st_number <= min:
+            if stiffener.lines[0].code.st_number <= min:
                 right_top = stiffener
-                min = stiffener[0].code.st_number
+                min = stiffener.lines[0].code.st_number
             elif stiffener[0].code.st_number >= max:
                 right_bottom = stiffener
-                max = stiffener[0].code.st_number
+                max = stiffener.lines[0].code.st_number
 
     if stiffeners3 != []:
-        min = random.choice(stiffeners3)[0].code.st_number
-        max = random.choice(stiffeners3)[0].code.st_number
+        min = random.choice(stiffeners3).lines[0].code.st_number
+        max = random.choice(stiffeners3).lines[0].code.st_number
         bottom_left = None
         bottom_right = None
         for stiffener in stiffeners2:
-            if stiffener[0].code.st_number <= min:
+            if stiffener.lines[0].code.st_number <= min:
                 bottom_right = stiffener
-                min = stiffener[0].code.st_number
-            elif stiffener[0].code.st_number >= max:
+                min = stiffener.lines[0].code.st_number
+            elif stiffener.lines[0].code.st_number >= max:
                 bottom_left = stiffener
-                max = stiffener[0].code.st_number
+                max = stiffener.lines[0].code.st_number
 
     if stiffeners4 != []:
-        min = random.choice(stiffeners4)[0].code.st_number
-        max = random.choice(stiffeners4)[0].code.st_number
+        min = random.choice(stiffeners4).lines[0].code.st_number
+        max = random.choice(stiffeners4).lines[0].code.st_number
         left_top = None
         left_bottom = None
         for stiffener in stiffeners4:
-            if stiffener[0].code.st_number <= min:
+            if stiffener.lines[0].code.st_number <= min:
                 left_bottom = stiffener
-                min = stiffener[0].code.st_number
-            elif stiffener[0].code.st_number >= max:
+                min = stiffener.lines[0].code.st_number
+            elif stiffener.lines[0].code.st_number >= max:
                 left_top = stiffener
-            max = stiffener[0].code.st_number
+            max = stiffener.lines[0].code.st_number
 
     #points from track plate stiffeners
     top_left_4a = None
