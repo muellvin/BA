@@ -442,8 +442,6 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 z_bottom_max = point.z
 
 
-
-
     """check distances to corners of crosssection"""
     mindis_top_corner = 30
     mindis_side_top_corner = 30
