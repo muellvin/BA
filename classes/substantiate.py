@@ -36,6 +36,10 @@ def substantiate(crosssection, propositions):
         y,z = crosssection.get_coordinates(stiffener.location, code)
         global_st = st.create_stiffener_global(stiffener.pl_position, stiffener.st_number, \
         y, z, angle, b_sup, b_inf, h, t)
+
+        #check if code correct
+        test = global_st.lines[0].code.pl_position
+        print(test)
         stiffener_list.append(global_st)
 
     #This function return a list of stiffeners in the global coordinate system

@@ -34,7 +34,8 @@ prop_list.add(prop_3)
 prop_list.add(prop_4)
 #prop_list.add(prop_5)
 
-st.add_stiffener_set(test_cs, prop_list)
+end_cs = st.add_stiffener_set(test_cs, prop_list)
+go.print_cs(end_cs)
 
 #stiffener_list = ss.substantiate(test_cs, prop_list)
-#go.print_cs(test_cs, stiffener_list)
+#go.print_cs_st(test_cs, stiffener_list)
