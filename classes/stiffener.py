@@ -146,19 +146,26 @@ def get_area_stiffener(b_sup, b_inf, h, t):
 
 
 
+
     #this function should check weather the proposed stiffeners are feasable in the initial crosssection with the track_plate
     #as an argument it takes the initial crosssection and a list of all proposed stiffeners of type crosssection in the global coordinate system
+    #as well as the stiffener_proposition list which then will be adjusted according to the geometry such that it might fit
 def check_geometry(crosssection, stiffeners, stiffeners_proposition):
-    #reorganize the stiffeners into own lists
+
+
+    geometry_ok = True
+
+
+"""reorganize the stiffeners into own lists"""
     stiffeners1lines = []
     stiffeners2 = []
     stiffeners3 = []
     stiffeners4 = []
 
-
     for line in crosssection:
         if line.pl_type == 1:
             stiffeners1lines.append(line)
+
     for stiffener in stiffeners:
         if stiffener[0].code.pl_number == 2:
             stiffeners2.append(stiffener)
@@ -170,7 +177,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             print("the lines of the stiffeners that were given to check_geometry do not contain codes")
 
 
-    #find for each side the most left and the most right one
+"""find for each side the most left and the most right one"""
     min = random.choice(stiffeners1lines).code.st_number
     max = random.choice(stiffeners1lines).code.st_number
     top_right = None
@@ -280,205 +287,202 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
 
 
-    #check distances to corners of crosssection
+"""check distances to corners of crosssection"""
     mindis_top_corner = 30
     mindis_side_top_corner = 30
     mindis_side_bottom_corner = 30
     mindis_bottom_corner = 30
 
-    dis_top_left_corner = corner_top_left.y - top_left_4b.y
-    if  dis < mindis_top_corner:
-        print("track_plate stiffeners do not fit!!!")
+    if top_left != None:
+        dis_top_left_corner = corner_top_left.y - top_left_4b.y
+        if  dis < mindis_top_corner:
+            print("track_plate stiffeners do not fit!!!")
+            geometry_ok = False
 
-    dis_top_right_corner = corner_top_right.y - top_right_2a.y
-    if dis_top_right_corner > mindis_top_corner:
-        print("track_plate stiffeners do not fit!!!")
+    if top_right != None:
+        dis_top_right_corner = corner_top_right.y - top_right_2a.y
+        if dis_top_right_corner > mindis_top_corner:
+            print("track_plate stiffeners do not fit!!!")
+            geometry_ok = False
 
-    if right_top_4b.z < mindis_side_top_corner.z:
-        corr = mindis_side_top_corner.z - right_top_4b.z
-        stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr
-        stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr
+    if right_top != None and left_top != None:
+        if right_top_4b.z < mindis_side_top_corner.z:
+            corr = mindis_side_top_corner.z - right_top_4b.z
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr
+            geometry_ok = False
 
-    if left_top_2a.z < mindis_side_top_corner.z:
-        corr = mindis_side_top_corner.z - left_top_2a.z
-        stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr
-        stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr
+    if right_bottom != None and left_bottom != None:
+        dis_right_bottom_corner = corner_bottom_right.z - right_bottom_2a.z
+        if dis_bottom_right_corner < mindis_side_bottom_corner:
+            corr = mindis_side_bottom_corner - dis_bottom_right_corner
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup -= corr
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_inf -= corr
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup -= corr
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_inf -= corr
+            geometry_ok = False
 
-    dis_right_bottom_corner = corner_bottom_right.z - right_bottom_2a.z
-    if dis_bottom_right_corner < mindis_side_bottom_corner:
-        corr = mindis_side_bottom_corner - dis_bottom_right_corner
-        stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup -= corr
-        stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_inf -= corr
-
-    dis_left_bottom_corner = corner_bottom_left.z - left_bottom_4b.z
-    if  dis_bottom_left_corner < mindis_side_bottom_corner:
-        corr = mindis_side_bottom_corner - dis_bottom_left_corner
-        stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup -= corr
-    stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_inf -= corr
-
-    dis_bottom_left_corner = corner_bottom_left.y - bottom_right_4b.y
-    if corner_bottom_left.y - bottom_right_4b.y > mindis_bottom_corner:
-        corr = mindis_bottom_corner - dis_bottom_left_corner
-        stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup -= corr
-        stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_inf -= corr
-
-    dis_bottom_right_corner = corner_bottom_right.y - bottom_left_2a.y
-    if dis_bottom_right_corner < mindis_bottom_corner:
-        corr = mindis_bottom_corner - dis_bottom_right_corner
-        stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup -= corr
-        stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_inf -= corr
-
+    if bottom_left != None and bottom_right != None:
+        dis_bottom_left_corner = corner_bottom_left.y - bottom_right_4b.y
+        if corner_bottom_left.y - bottom_right_4b.y > mindis_bottom_corner:
+            corr = mindis_bottom_corner - dis_bottom_left_corner
+            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup -= corr
+            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_inf -= corr
+            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup -= corr
+            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_inf -= corr
+            geometry_ok = False
 
 
-    #check distances between stiffeners
+"""check distances between stiffeners"""
     mindis_between = 30
 
-    st_number_min = right_top[0].code.st_number
-    i = st_number_min
-    st_number_max = right_bottom[0].code.st_number
-    while i < st_number_max:
-        upper = stiffener2.get_stiffener_line(2,i,2).a
-        lower = stiffener2.get_stiffener_line(2,i+1,4).b
-        distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
-        if distance < mindis_between:
-            corr = (mindis-distance)/2
-            stiffeners_proposition.get_proposed_stiffener(2,i).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(2,i+1).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(2,i).b_inf -= corr
-            stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf -= corr
+    if right_top != None and right_bottom != None:
+        st_number_min = right_top[0].code.st_number
+        i = st_number_min
+        st_number_max = right_bottom[0].code.st_number
+        while i < st_number_max:
+            upper = stiffener2.get_stiffener_line(2,i,2).a
+            lower = stiffener2.get_stiffener_line(2,i+1,4).b
+            distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
+            if distance < mindis_between:
+                corr = (mindis-distance)/2
+                stiffeners_proposition.get_proposed_stiffener(2,i).b_sup -= corr
+                stiffeners_proposition.get_proposed_stiffener(2,i+1).b_sup -= corr
+                stiffeners_proposition.get_proposed_stiffener(2,i).b_inf -= corr
+                stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf -= corr
+                geometry_ok = False
 
-    st_number_min = bottom_right[0].code.st_number
-    i = st_number_min
-    st_number_max = bottom_left[0].code.st_number
-    while i < st_number_max:
-        right = stiffener3.get_stiffener_line(2,i,2).a
-        left = stiffener3.get_stiffener_line(2,i+1,4).b
-        distance = math.sqrt((abs(right.y) - abs(left.y))**2 + (abs(right.z) - abs(left.z))**2)
-        if distance < mindis_between:
-            corr = (mindis-distance)/2
-            stiffeners_proposition.get_proposed_stiffener(3,i).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(3,i+1).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(3,i).b_inf -= corr
-            stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf -= corr
+    if bottom_right != None and bottom_left != None:
+        st_number_min = bottom_right[0].code.st_number
+        i = st_number_min
+        st_number_max = bottom_left[0].code.st_number
+        while i < st_number_max:
+            right = stiffener3.get_stiffener_line(2,i,2).a
+            left = stiffener3.get_stiffener_line(2,i+1,4).b
+            distance = math.sqrt((abs(right.y) - abs(left.y))**2 + (abs(right.z) - abs(left.z))**2)
+            if distance < mindis_between:
+                corr = (mindis-distance)/2
+                stiffeners_proposition.get_proposed_stiffener(3,i).b_sup -= corr
+                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_sup -= corr
+                stiffeners_proposition.get_proposed_stiffener(3,i).b_inf -= corr
+                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf -= corr
+                geometry_ok = False
 
-    st_number_min = left_bottom[0].code.st_number
-    i = st_number_min
-    st_number_max = left_top[0].code.st_number
-
-    while i < st_number_max:
-        lower = stiffener4.get_stiffener_line(2,i,2).a
-        upper = stiffener4.get_stiffener_line(2,i+1,4).b
-        distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
-        if distance < mindis_between:
-            corr = (mindis-distance)/2
-            stiffeners_proposition.get_proposed_stiffener(4,i).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(4,i+1).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(4,i).b_inf -= corr
-            stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf -= corr
-
-
-
-        #check distances in corners between stiffeners
-    mindis = 30
-    #the two edges are each defined by two lines
-
-    #top corners (using symmetry, just doing left one)
-    lines_left_top = []
-    lines_left_top.append(left_top.get_line(4,2))
-    lines_left_top.append(left_top.get_line(4,3))
-    lines_top_left = []
-    lines_top_left.append(top_left.get_line(1,4))
-    lines_top_left.append(top_left.get_line(1,3))
-
-    max_dis = 0
-    cut = False
-    if dis_point_line(lines_top_left, lines_left_top) > max_dis:
-        max_dis = dis_point_line(lines_top_left, lines_left_top)
-    elif dis_point_line(lines_left_top, lines_top_left) > max_dis:
-        max_dis = dis_point_line(points_left_top, lines_top_left)
-    elif cut(lines_left_top, lines_top_left) == True:
-        max_dis = (-1) * max_dis
-        cut = True
-
-    """this code is not totally correct, dunno how well it will work"""
-    if max_dis < mindis:
-        disdiff = mindis - max_dis
-        #angle defined by the two corners, only the fourth quadrant is negative (if 4a is to the bottom right of 2b)
-        dy = left_top_2b.y - top_left_4a.y
-        dz = left_top_2b.z - top_left_4a.z
-        corr_b_sup = 0
-        corr_b_inf = 0
-        corr_height = 0
-        if dy >= 0:
-            angle = math.atan(dz/dy)
-        elif dy < 0:
-            angle = math.atan(dz/dy) + math.pi
-
-        if (math.pi/4) < angle < math.pi/2:
-            corr_b_sup -= disdiff / math.tan(angle)
-            corr_b_inf -= disdiff / math.tan(angle)
-        elif (-math.pi/2) < angle < math.pi/4:
-            corr_height -= disdiff
-        else:
-            corr_b_sup -= disdiff
-            corr_b_inf -= disdiff
-
-        stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr_b_sup
-        stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr_b_inf
-        stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).height -= corr_height
-        stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr_b_sup
-        stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr_b_inf
-        stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).height -= corr_height
+    if left_top != None and left_bottom != None:
+        st_number_min = left_bottom[0].code.st_number
+        i = st_number_min
+        st_number_max = left_top[0].code.st_number
+        while i < st_number_max:
+            lower = stiffener4.get_stiffener_line(2,i,2).a
+            upper = stiffener4.get_stiffener_line(2,i+1,4).b
+            distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
+            if distance < mindis_between:
+                corr = (mindis-distance)/2
+                stiffeners_proposition.get_proposed_stiffener(4,i).b_sup -= corr
+                stiffeners_proposition.get_proposed_stiffener(4,i+1).b_sup -= corr
+                stiffeners_proposition.get_proposed_stiffener(4,i).b_inf -= corr
+                stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf -= corr
+                geometry_ok = False
 
 
 
-    #bottom (using symmetry, just doing left one)
-    lines_left_bottom = []
-    lines_left_bottom.append(left_bottom.get_line(4,3))
-    lines_left_bottom.append(left_bottom.get_line(4,4))
-    lines_top_left = []
-    lines_bottom_left.append(bottom_left.get_line(3,1))
-    lines_bottom_left.append(bottom_left.get_line(3,2))
+"""check distances in corners between stiffeners"""
+    if left_top != None and top_left != None
+        mindis = 30
+        #the two edges are each defined by two lines
+        #top corners (using symmetry, just doing left one)
+        lines_left_top = []
+        lines_left_top.append(left_top.get_line(4,2))
+        lines_left_top.append(left_top.get_line(4,3))
+        lines_top_left = []
+        lines_top_left.append(top_left.get_line(1,4))
+        lines_top_left.append(top_left.get_line(1,3))
 
-    max_dis = 0
-    cut = False
-    if dis_point_line(lines_left_bottom, lines_bottom_left) > max_dis:
-        max_dis = dis_point_line(lines_left_bottom, lines_bottom_left)
-    elif dis_point_line(lines_bottom_left, lines_left_bottom) > max_dis:
-        max_dis = dis_point_line(lines_bottom_left, lines_left_bottom)
-    elif cut(lines_bottom_left, lines_left_bottom) == True:
-        max_dis = (-1) * max_dis
-        cut = True
+        max_dis = 0
+        angle = 0
+        cut = False
+        if dis_point_line(lines_top_left, lines_left_top) > max_dis:
+            max_dis, angle = dis_lines_lines(lines_top_left, lines_left_top)
+        elif dis_point_line(lines_left_top, lines_top_left) > max_dis:
+            max_dis, angle = dis_lines_lines(points_left_top, lines_top_left)
+        elif cut(lines_left_top, lines_top_left) == True:
+            max_dis = (-1) * max_dis
+            cut = True
 
-    """this code is not totally correct, dunno how well it will work"""
-    if max_dis < mindis:
-        disdiff = mindis - max_dis
-        #angle defined by the two corners, only the fourth quadrant is negative (if 4a is to the bottom right of 2b)
-        dy = left_bottom_4a.y - bottom_left_2b.y
-        dz = bottom_left_2b.z - left_bottom_4a.z
-        corr_b_sup = 0
-        corr_b_inf = 0
-        corr_height = 0
-        if dy >= 0:
-            angle = math.atan(dz/dy)
-        elif dy < 0:
-            angle = math.atan(dz/dy) + math.pi
+        if max_dis < mindis:
+            geometry_ok = False
+            disdiff = mindis - max_dis
 
-        if (math.pi/4) < angle < math.pi/2:
-            corr_b_sup -= disdiff / math.tan(angle)
-            corr_b_inf -= disdiff / math.tan(angle)
-        elif (-math.pi/2) < angle < math.pi/4:
-            corr_height -= disdiff
-        else:
-            corr_b_sup -= disdiff
-            corr_b_inf -= disdiff
+            corr_b_sup = 0
+            corr_b_inf = 0
+            corr_height = 0
 
-        stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr_b_sup
-        stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr_b_inf
-        stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).height -= corr_height
-        stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr_b_sup
-        stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr_b_inf
-        stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).height -= corr_height
+            angle -= (math.pi/2 - left_top.get_line(4, 3),get_angle())
+            corr_b_sup -= disdiff*math.cos(angle)
+            corr_b_inf -= disdiff*math.cos(angle)
+            corr_height -= disdiff*math.sin(angle)
+
+
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr_b_sup
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr_b_inf
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).height -= corr_height
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr_b_sup
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr_b_inf
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).height -= corr_height
+
+
+    if left_bottom != None and bottom_left != None:
+        mindis = 30
+        #bottom (using symmetry, just doing left one)
+        lines_left_bottom = []
+        lines_left_bottom.append(left_bottom.get_line(4,3))
+        lines_left_bottom.append(left_bottom.get_line(4,4))
+        lines_top_left = []
+        lines_bottom_left.append(bottom_left.get_line(3,1))
+        lines_bottom_left.append(bottom_left.get_line(3,2))
+
+        max_dis = 0
+        cut = False
+        if dis_point_line(lines_left_bottom, lines_bottom_left) > max_dis:
+            max_dis, angle = dis_lines_lines(lines_left_bottom, lines_bottom_left)
+        elif dis_point_line(lines_bottom_left, lines_left_bottom) > max_dis:
+            max_dis, angle = dis_lines_lines(lines_bottom_left, lines_left_bottom)
+        elif cut(lines_bottom_left, lines_left_bottom) == True:
+            max_dis = (-1) * max_dis
+            cut = True
+
+        if max_dis < mindis:
+            geometry_ok = False
+            disdiff = mindis - max_dis
+
+            corr_b_sup = 0
+            corr_b_inf = 0
+            corr_height = 0
+
+            angle += (math.pi/2 - left_bottom.get_line(4,3).get_angle())
+            corr_b_sup -= disdiff*math.cos(angle)
+            corr_b_inf -= disdiff*math.cos(angle)
+            corr_height -= disdiff*math.sin(angle)
+
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr_b_sup
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr_b_inf
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).height -= corr_height
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr_b_sup
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr_b_inf
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).height -= corr_height
+
+    return geometry_ok
+
+
+
+
+
+
+
+
+
 
 
 
@@ -508,7 +512,7 @@ def cut(lines1, lines2):
 
 
 
-def dis_point_line(lines1, lines):
+def dis_lines_lines(lines1, lines):
     #calculates the minimal width of a bar that fits between two corners created each by two lines
     points = []
     for line in lines1:
@@ -516,6 +520,7 @@ def dis_point_line(lines1, lines):
         points.append(line.b)
 
     dis = 1000
+    angle = 0
     for line in lines:
         for point in points:
             #dot product
@@ -525,4 +530,6 @@ def dis_point_line(lines1, lines):
             dis_new = abs(1/norm *(l_y * point.y + l_z * point.z))
             if dis_new < dis:
                 dis = dis_new
-    return dis
+                angle = math.atan(l_z / l_y)
+
+    return dis, angle
