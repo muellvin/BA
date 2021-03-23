@@ -3,20 +3,23 @@
 
 import math
 import shapely
+import random
 from classes import point
 from classes import line
 from classes import crosssection
 from classes import plate_code
 from shapely.geometry import LineString, Point
+from classes import substantiate as ss
 
 
 def add_stiffener_set(initial_cs, proposition):
     iterations = 0
+    geometry_ok = False
 
     while geometry_ok == False:
         iterations += 1
-        stiffener_list = substantiate(self, proposition)
-        geometry_ok = check_geometry(cs_collector.initial_cs, stiffener_list, proposition)
+        stiffener_list = ss.substantiate(initial_cs, proposition)
+        geometry_ok = check_geometry(initial_cs, stiffener_list, proposition)
 
         if iterations > 5:
             geometry_ok == True
@@ -159,16 +162,16 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     stiffeners3 = []
     stiffeners4 = []
 
-    for line in crosssection:
-        if line.pl_type == 1:
+    for line in crosssection.lines:
+        if line.code.pl_type == 1:
             stiffeners1lines.append(line)
 
     for stiffener in stiffeners:
-        if stiffener[0].code.pl_number == 2:
+        if stiffener.lines[0].code.tpl_number == 2:
             stiffeners2.append(stiffener)
-        elif stiffener[0].code.pl_number == 3:
+        elif stiffener.lines[0].code.tpl_number == 3:
             stiffeners3.append(stiffener)
-        elif stiffener[0].code.pl_number == 4:
+        elif stiffener.lines[0].code.tpl_number == 4:
             stiffeners4.append(stiffener)
         else:
             print("the lines of the stiffeners that were given to check_geometry do not contain codes")
