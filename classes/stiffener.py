@@ -66,16 +66,13 @@ def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, w
     half_width_diff = (width_top - width_bottom)/2
     length_side = math.sqrt(half_width_diff**2 + height**2)
     own_angle = math.atan(height/half_width_diff)
-    print("own_angle = " + str(own_angle))
-    print("angle = " + str(angle))
 
     #create plate 2
     a2 = point.point(y_corr,z_corr)
     b2 = point.point(y_corr + math.cos(own_angle+angle)*length_side, z_corr + math.sin(own_angle+angle)*length_side)
-    print(b2.y,b2.z)
     code2 = plate_code.plate_code(pl_position, 1, 0, st_number, 2)
     line2 = line.line(code2, a2, b2, t)
-    
+
 
     #create plate 3
     a3 = b2
@@ -156,7 +153,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     geometry_ok = True
 
 
-"""reorganize the stiffeners into own lists"""
+    """reorganize the stiffeners into own lists"""
     stiffeners1lines = []
     stiffeners2 = []
     stiffeners3 = []
@@ -177,7 +174,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             print("the lines of the stiffeners that were given to check_geometry do not contain codes")
 
 
-"""find for each side the most left and the most right one"""
+    """find for each side the most left and the most right one"""
     min = random.choice(stiffeners1lines).code.st_number
     max = random.choice(stiffeners1lines).code.st_number
     top_right = None
@@ -287,7 +284,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
 
 
-"""check distances to corners of crosssection"""
+    """check distances to corners of crosssection"""
     mindis_top_corner = 30
     mindis_side_top_corner = 30
     mindis_side_bottom_corner = 30
@@ -335,7 +332,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             geometry_ok = False
 
 
-"""check distances between stiffeners"""
+    """check distances between stiffeners"""
     mindis_between = 30
 
     if right_top != None and right_bottom != None:
@@ -388,8 +385,8 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
 
 
-"""check distances in corners between stiffeners"""
-    if left_top != None and top_left != None
+    """check distances in corners between stiffeners"""
+    if left_top != None and top_left != None:
         mindis = 30
         #the two edges are each defined by two lines
         #top corners (using symmetry, just doing left one)

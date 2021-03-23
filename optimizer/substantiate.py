@@ -20,7 +20,6 @@ def substantiate(crosssection, propositions):
             b_sup, b_inf, h, t = find_dimensions(stiffener)
             code = plcd.plate_code(2,0,0,0,0)
             angle = math.pi + crosssection.get_angle(code)
-            print("Rotation Angle = " + str(angle))
             #sidplate right side
         elif stiffener.pl_position == 3:
             b_sup, b_inf, h, t = find_dimensions(stiffener)
@@ -35,8 +34,6 @@ def substantiate(crosssection, propositions):
             angle = math.pi - crosssection.get_angle(code)
             #make us of symmetry tbd
         y,z = crosssection.get_coordinates(stiffener.location, code)
-        print(y,z)
-        print(b_sup, b_inf, h, t)
         global_st = st.create_stiffener_global(stiffener.pl_position, stiffener.st_number, \
         y, z, angle, b_sup, b_inf, h, t)
         stiffener_list.append(global_st)
@@ -53,11 +50,11 @@ def find_dimensions(stiffener):
     best = [0,0,0,0,0]
     #set maximum default values and step size for range
     b_inf_max_geo = 500
-    b_inf_step = 10
+    b_inf_step = 20
     b_sup_max_geo = 500
-    b_sup_step = 10
+    b_sup_step = 20
     h_max_geo = 200
-    h_step = 5
+    h_step = 10
     t_range = [5,7,9,11,13,15,17,20]
 
     #set new default values, if corrections need to be made
@@ -97,6 +94,7 @@ def find_dimensions(stiffener):
     b_inf = best[1]
     h = best[2]
     t = best[3]
+    print(b_sup, b_inf, h, t)
     return b_sup, b_inf, h, t
 
 def trackplate():
