@@ -94,6 +94,7 @@ def find_dimensions(stiffener):
     b_inf = best[1]
     h = best[2]
     t = best[3]
+    print(b_sup, b_inf, h, t)
     return b_sup, b_inf, h, t
 
 def trackplate():
