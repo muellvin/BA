@@ -4,7 +4,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-def print_cs(crosssection, stiffeners = None):
+def print_cs_st(crosssection, stiffeners = None):
 
     #print primary cross section
     y_p = []
@@ -19,11 +19,9 @@ def print_cs(crosssection, stiffeners = None):
 
     y_points = np.array(y_p)
     z_points = np.array(z_p)
-    plt.plot(y_points, z_points)
+    plt.plot(y_points, z_points, 'k')
 
     #print stiffeners
-    y_list = []
-    z_list = []
 
     for i in range(len(stiffeners)):
         y = []
@@ -36,7 +34,27 @@ def print_cs(crosssection, stiffeners = None):
             z.append(-line.b.z)
         y_list = np.array(y)
         z_list = np.array(z)
-        plt.plot(y_list, z_list)
+        plt.plot(y_list, z_list, 'r')
+
+    plt.axis('scaled')
+    plt.show()
+
+def print_cs(crosssection):
+    for i in range(len(crosssection.lines)):
+        y = []
+        z = []
+        line = crosssection.lines[i]
+        y.append(-line.a.y)
+        y.append(-line.b.y)
+        z.append(-line.a.z)
+        z.append(-line.b.z)
+        y_list = np.array(y)
+        z_list = np.array(z)
+        if line.code.tpl_number != 0:
+            plt.plot(y_list, z_list, 'k')
+        else:
+            plt.plot(y_list, z_list, 'r')
+
 
     plt.axis('scaled')
     plt.show()
