@@ -3,20 +3,23 @@
 
 import math
 import shapely
+import random
 from classes import point
 from classes import line
 from classes import crosssection
 from classes import plate_code
 from shapely.geometry import LineString, Point
+from classes import substantiate as ss
 
 
 def add_stiffener_set(initial_cs, proposition):
     iterations = 0
+    geometry_ok = False
 
     while geometry_ok == False:
         iterations += 1
-        stiffener_list = substantiate(self, proposition)
-        geometry_ok = check_geometry(cs_collector.initial_cs, stiffener_list, proposition)
+        stiffener_list = ss.substantiate(initial_cs, proposition)
+        geometry_ok = check_geometry(initial_cs, stiffener_list, proposition)
 
         if iterations > 5:
             geometry_ok == True
@@ -28,15 +31,14 @@ def add_stiffener_set(initial_cs, proposition):
 #This functions merges a cross section and a list of stiffeners
 """we need initial_cs to always have the updated thickness of the trapezoid plates!!!!"""
 def merge(initial_cs, stiffener_list):
-    remove = []
     for stiffener in stiffener_list:
-        side = stiffener[0].code.pl_number
+        side = stiffener.lines[0].code.pl_position
         old_plate = initial_cs.get_pl_line(side)
         tpl_number = old_plate.code.tpl_number
         new_plate_1_a = old_plate.a
-        new_plate_1_b = stiffener.get_line(side, 1).a
-        new_plate_2_a = new_plate_1b
-        new_plate_2_b = stiffener.get_line(side, 1).b
+        new_plate_1_b = stiffener.get_line(side, 4).b
+        new_plate_2_a = new_plate_1_b
+        new_plate_2_b = stiffener.get_line(side, 2).a
         new_plate_3_a = new_plate_2_a
         new_plate_3_b = old_plate.b
         code_1 = [side, 0, tpl_number, 0, 0]
@@ -46,13 +48,10 @@ def merge(initial_cs, stiffener_list):
         new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t)
         new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t)
         new_plate_3 = line.line(code_3, new_plate_3_a, new_plate_3_b, t)
-        initial_cs.append(new_plate_1)
-        initial_cs.append(new_plate_2)
-        initial_cs.append(new_plate_3)
-        remove.append(old_plate)
-
-    for i in remove:
-        initial_cs.remove(i)
+        initial_cs.addline(new_plate_1)
+        initial_cs.addline(new_plate_2)
+        initial_cs.addline(new_plate_3)
+        initial_cs.lines.remove(old_plate)
 
     return initial_cs
 
@@ -60,16 +59,16 @@ def merge(initial_cs, stiffener_list):
 
 #function creating a crosssection, which is the three lines of a stiffener at the place desired
 def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, width_top, width_bottom, height, t):
-    y_corr = center_y - math.cos(angle)*width_top
-    z_corr = center_z - math.sin(angle)*width_top
+    y_corr = center_y - math.cos(angle)*width_top*0.5
+    z_corr = center_z - math.sin(angle)*width_top*0.5
     assert width_top >= width_bottom, "width out of bound or wrong way around"
-    half_width_diff = width_top - width_bottom
+    half_width_diff = (width_top - width_bottom)/2
     length_side = math.sqrt(half_width_diff**2 + height**2)
-    own_angle = math.atan(half_width_diff / height)
+    own_angle = math.atan(height/half_width_diff)
 
     #create plate 2
     a2 = point.point(y_corr,z_corr)
-    b2 = point.point(y_corr + math.sin(own_angle-angle)*length_side, z_corr + math.cos(own_angle-angle)*length_side)
+    b2 = point.point(y_corr + math.cos(own_angle+angle)*length_side, z_corr + math.sin(own_angle+angle)*length_side)
     code2 = plate_code.plate_code(pl_position, 1, 0, st_number, 2)
     line2 = line.line(code2, a2, b2, t)
 
@@ -153,104 +152,145 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     geometry_ok = True
 
 
-"""reorganize the stiffeners into own lists"""
+    """reorganize the stiffeners into own lists"""
     stiffeners1lines = []
     stiffeners2 = []
     stiffeners3 = []
     stiffeners4 = []
 
-    for line in crosssection:
-        if line.pl_type == 1:
+    for line in crosssection.lines:
+        if line.code.pl_type == 1:
             stiffeners1lines.append(line)
 
     for stiffener in stiffeners:
-        if stiffener[0].code.pl_number == 2:
+        if stiffener.lines[0].code.tpl_number == 2:
             stiffeners2.append(stiffener)
-        elif stiffener[0].code.pl_number == 3:
+        elif stiffener.lines[0].code.tpl_number == 3:
             stiffeners3.append(stiffener)
-        elif stiffener[0].code.pl_number == 4:
+        elif stiffener.lines[0].code.tpl_number == 4:
             stiffeners4.append(stiffener)
         else:
             print("the lines of the stiffeners that were given to check_geometry do not contain codes")
 
 
-"""find for each side the most left and the most right one"""
-    min = random.choice(stiffeners1lines).code.st_number
-    max = random.choice(stiffeners1lines).code.st_number
-    top_right = None
+    """find for each side the most left and the most right one"""
     top_left = None
-    for line in stiffeners1lines:
-        if line.code.st_number <= min:
-            top_left = line
-            min = line.code.st_number
-        elif line.code.st_number >= max:
-            top_right = line
-            max = line.code.st_number
-    min = random.choice(stiffeners2)[0].code.st_number
-    max = random.choice(stiffeners2)[0].code.st_number
+    top_right = None
+    left_top = None
     right_top = None
-    right_bottom = None
-    for stiffener in stiffeners2:
-        if stiffener[0].code.st_number <= min:
-            right_top = stiffener
-            min = stiffener[0].code.st_number
-        elif stiffener[0].code.st_number >= max:
-            right_bottom = stiffener
-            max = stiffener[0].code.st_number
-    min = random.choice(stiffeners3)[0].code.st_number
-    max = random.choice(stiffeners3)[0].code.st_number
     bottom_left = None
     bottom_right = None
-    for stiffener in stiffeners2:
-        if stiffener[0].code.st_number <= min:
-            bottom_right = stiffener
-            min = stiffener[0].code.st_number
-        elif stiffener[0].code.st_number >= max:
-            bottom_left = stiffener
-            max = stiffener[0].code.st_number
-    min = random.choice(stiffeners4)[0].code.st_number
-    max = random.choice(stiffeners4)[0].code.st_number
-    left_top = None
+    right_bottom = None
     left_bottom = None
-    for stiffener in stiffeners4:
-        if stiffener[0].code.st_number <= min:
-            left_bottom = stiffener
-            min = stiffener[0].code.st_number
-        elif stiffener[0].code.st_number >= max:
-            left_top = stiffener
-        max = stiffener[0].code.st_number
+
+
+    if stiffeners1lines != []:
+        min = random.choice(stiffeners1lines).code.st_number
+        max = random.choice(stiffeners1lines).code.st_number
+        top_right = None
+        top_left = None
+        for line in stiffeners1lines:
+            if line.code.st_number <= min:
+                top_left = line
+                min = line.code.st_number
+            elif line.code.st_number >= max:
+                top_right = line
+                max = line.code.st_number
+
+    if stiffeners2 != []:
+        min = random.choice(stiffeners2)[0].code.st_number
+        max = random.choice(stiffeners2)[0].code.st_number
+        right_top = None
+        right_bottom = None
+        for stiffener in stiffeners2:
+            if stiffener[0].code.st_number <= min:
+                right_top = stiffener
+                min = stiffener[0].code.st_number
+            elif stiffener[0].code.st_number >= max:
+                right_bottom = stiffener
+                max = stiffener[0].code.st_number
+
+    if stiffeners3 != []:
+        min = random.choice(stiffeners3)[0].code.st_number
+        max = random.choice(stiffeners3)[0].code.st_number
+        bottom_left = None
+        bottom_right = None
+        for stiffener in stiffeners2:
+            if stiffener[0].code.st_number <= min:
+                bottom_right = stiffener
+                min = stiffener[0].code.st_number
+            elif stiffener[0].code.st_number >= max:
+                bottom_left = stiffener
+                max = stiffener[0].code.st_number
+
+    if stiffeners4 != []:
+        min = random.choice(stiffeners4)[0].code.st_number
+        max = random.choice(stiffeners4)[0].code.st_number
+        left_top = None
+        left_bottom = None
+        for stiffener in stiffeners4:
+            if stiffener[0].code.st_number <= min:
+                left_bottom = stiffener
+                min = stiffener[0].code.st_number
+            elif stiffener[0].code.st_number >= max:
+                left_top = stiffener
+            max = stiffener[0].code.st_number
 
     #points from track plate stiffeners
-    top_left_4b = top_left.get_line(1,4).b
-    top_left_4a = top_left.get_line(1,4).a
-    st_num_top_left = top_left.get_line(1,4).code.st_number
-    top_right_2b = top_right.get_line(1,2).b
-    top_right_2a = top_right.get_line(1,2).a
-    st_num_top_right = top_right.get_line(1,2).code.st_number
+    top_left_4a = None
+    top_left_4b = None
+    top_right_2a = None
+    top_right_2b = None
+
+    if top_left != None and top_right != None:
+        top_left_4b = top_left.get_line(1,4).b
+        top_left_4a = top_left.get_line(1,4).a
+        st_num_top_left = top_left.get_line(1,4).code.st_number
+        top_right_2b = top_right.get_line(1,2).b
+        top_right_2a = top_right.get_line(1,2).a
+        st_num_top_right = top_right.get_line(1,2).code.st_number
 
     #points from right side stiffeners
-    right_top_4b = right_top.get_line(2,4).b
-    right_top_4a = right_top.get_line(2,4).a
-    st_num_right_top = right_top.get_line(2,4).code.st_number
-    right_bottom_2b = right_bottom.get_line(2,2).b
-    right_bottom_2a = right_bottom.get_line(2,2).a
-    st_num_right_bottom = right_bottom.get_line(2,2).code.st_number
+    right_top_4a = None
+    right_top_4b = None
+    right_bottom_2a = None
+    right_bottom_2b = None
+
+    if right_top != None and right_bottom != None:
+        right_top_4b = right_top.get_line(2,4).b
+        right_top_4a = right_top.get_line(2,4).a
+        st_num_right_top = right_top.get_line(2,4).code.st_number
+        right_bottom_2b = right_bottom.get_line(2,2).b
+        right_bottom_2a = right_bottom.get_line(2,2).a
+        st_num_right_bottom = right_bottom.get_line(2,2).code.st_number
 
     #points from bottom side stiffeners
-    bottom_right_4b = bottom_right.get_line(3,4).b
-    bottom_right_4a = bottom_right.get_line(3,4).a
-    st_num_bottom_right = bottom_right.get_line(3,4).code.st_number
-    bottom_left_2b = bottom_left.get_line(3,2).b
-    bottom_left_2a = bottom_left.get_line(3,2).a
-    st_num_bottom_left = bottom_left.get_line(3,2).code.st_number
+    bottom_right_4a = None
+    bottom_right_4b = None
+    bottom_left_2a = None
+    bottom_left_2b = None
+
+    if bottom_right != None and bottom_left != None:
+        bottom_right_4b = bottom_right.get_line(3,4).b
+        bottom_right_4a = bottom_right.get_line(3,4).a
+        st_num_bottom_right = bottom_right.get_line(3,4).code.st_number
+        bottom_left_2b = bottom_left.get_line(3,2).b
+        bottom_left_2a = bottom_left.get_line(3,2).a
+        st_num_bottom_left = bottom_left.get_line(3,2).code.st_number
 
     #points from left side stiffeners
-    left_bottom_4b = left_bottom.get_line(4,4).b
-    left_bottom_4a = left_bottom.get_line(4,4).a
-    st_num_left_bottom = left_bottom.get_line(4,4).code.st_number
-    left_top_2b = left_top.get_line(4,2).b
-    left_top_2a = left_top.get_line(4,2).a
-    st_num_left_top = left_top.get_line(4,2).code.st_number
+    left_top_2a = None
+    left_top_2b = None
+    left_bottom_4a = None
+    left_bottom_4b = None
+
+    if left_top != None and left_bottom != None:
+        left_bottom_4b = left_bottom.get_line(4,4).b
+        left_bottom_4a = left_bottom.get_line(4,4).a
+        st_num_left_bottom = left_bottom.get_line(4,4).code.st_number
+        left_top_2b = left_top.get_line(4,2).b
+        left_top_2a = left_top.get_line(4,2).a
+        st_num_left_top = left_top.get_line(4,2).code.st_number
 
 
     #corners of the crosssection
@@ -265,8 +305,11 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     y_bottom_max = 0
     y_bottom_min = 0
 
-    for plate in crosssection:
-        for point in plate:
+    for plate in crosssection.lines:
+        points = []
+        points.append(plate.a)
+        points.append(plate.b)
+        for point in points:
             if point.y >= y_top_max and point.z == 0:
                 y_top_max = point.y
                 corner_top_left = point
@@ -284,7 +327,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
 
 
-"""check distances to corners of crosssection"""
+    """check distances to corners of crosssection"""
     mindis_top_corner = 30
     mindis_side_top_corner = 30
     mindis_side_bottom_corner = 30
@@ -332,7 +375,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             geometry_ok = False
 
 
-"""check distances between stiffeners"""
+    """check distances between stiffeners"""
     mindis_between = 30
 
     if right_top != None and right_bottom != None:
@@ -385,8 +428,8 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
 
 
-"""check distances in corners between stiffeners"""
-    if left_top != None and top_left != None
+    """check distances in corners between stiffeners"""
+    if left_top != None and top_left != None:
         mindis = 30
         #the two edges are each defined by two lines
         #top corners (using symmetry, just doing left one)

@@ -29,11 +29,14 @@ class crosssection():
     #to get trapezoid plates from initial cs -> to add stiffeners
     def get_pl_line(self, pl_position):
         for i in self.lines:
-            if i.code.pl_postion == pl_position:
+            if i.code.pl_position == pl_position:
                 return i
+        else:
+            print("You are stupid!")
+            return
 
     def get_angle(self, code):
-        line = self.get_line_code(self, code)
+        line = self.get_line_code(code)
         return line.cal_angle_y()
 
     #This function returns the coordinates of the position where the stiffener should be placed
