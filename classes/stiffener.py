@@ -2,7 +2,6 @@
 #has methods for creating stiffeners of the type crosssection
 
 import math
-import shapely
 import random
 from classes import point
 from classes import line
