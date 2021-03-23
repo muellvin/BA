@@ -66,16 +66,13 @@ def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, w
     half_width_diff = (width_top - width_bottom)/2
     length_side = math.sqrt(half_width_diff**2 + height**2)
     own_angle = math.atan(height/half_width_diff)
-    print("own_angle = " + str(own_angle))
-    print("angle = " + str(angle))
 
     #create plate 2
     a2 = point.point(y_corr,z_corr)
     b2 = point.point(y_corr + math.cos(own_angle+angle)*length_side, z_corr + math.sin(own_angle+angle)*length_side)
-    print(b2.y,b2.z)
     code2 = plate_code.plate_code(pl_position, 1, 0, st_number, 2)
     line2 = line.line(code2, a2, b2, t)
-    
+
 
     #create plate 3
     a3 = b2
