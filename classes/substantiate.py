@@ -14,23 +14,23 @@ def substantiate(crosssection, propositions):
             #trackplate should not be called within the for loop
             I_min = min_inertial_mom()
             b_sup, b_inf, h, t = trackplate(I_min)
-            code = plcd.plate_code(1,0,0,0,0)
+            code = plcd.plate_code(1,0,1,0,0)
             angle = 0
         elif stiffener.pl_position == 2:
             b_sup, b_inf, h, t = find_dimensions(stiffener)
-            code = plcd.plate_code(2,0,0,0,0)
+            code = plcd.plate_code(2,0,2,0,0)
             angle = math.pi + crosssection.get_angle(code)
             #sidplate right side
         elif stiffener.pl_position == 3:
             b_sup, b_inf, h, t = find_dimensions(stiffener)
-            code = plcd.plate_code(3,0,0,0,0)
+            code = plcd.plate_code(3,0,3,0,0)
             angle = math.pi
             #bottom plate
             #make use of symmetry and equal stiffeners
         else:
             assert stiffener.pl_position == 4, "Plate not found."
             b_sup, b_inf, h, t = find_dimensions(stiffener)
-            code = plcd.plate_code(4,0,0,0,0)
+            code = plcd.plate_code(4,0,4,0,0)
             angle = math.pi - crosssection.get_angle(code)
             #make us of symmetry tbd
         y,z = crosssection.get_coordinates(stiffener.location, code)
