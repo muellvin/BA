@@ -45,10 +45,13 @@ while geometry_ok == False:
     if iterations > 5:
         geometry_ok == True
     print(geometry_ok)
+end_cs = st.merge(test_cs, stiffener_list)
+go.print_cs(end_cs)
+
 
 #end_cs = st.add_stiffener_set(test_cs, prop_list)
 #go.print_cs(end_cs)
 
 #stiffener_list = ss.substantiate(test_cs, prop_list)
 #geometry_ok = st.check_geometry(test_cs, stiffener_list, prop_list)
-go.print_cs_st(test_cs, stiffener_list)
+#go.print_cs_st(test_cs, stiffener_list)

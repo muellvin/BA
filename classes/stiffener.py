@@ -10,6 +10,7 @@ from classes import crosssection
 from classes import plate_code
 from shapely.geometry import LineString, Point
 from classes import substantiate as ss
+from output import geometry_output as go
 
 
 def add_stiffener_set(initial_cs, proposition):
@@ -86,131 +87,137 @@ def merge(initial_cs, stiffener_list):
     new_tpl_lines_1.append(new_plate_3)
 
     #side 2
-    old_plate_2 = initial_cs.get_pl_line(2)
-    initial_cs.remove(initial_cs.get_pl_line(2))
-    t_2 = old_plate_2.t
-    tpl_number_2_min = initial_cs.get_pl_line(2).code.tpl_number
-    side = 2
     new_tpl_lines_2 = []
+    if stiffeners_2 != []:
+        old_plate_2 = initial_cs.get_pl_line(2)
+        tpl_number_2_min = initial_cs.get_pl_line(2).code.tpl_number
+        initial_cs.lines.remove(initial_cs.get_pl_line(2))
+        t_2 = old_plate_2.t
+        side = 2
 
-    st_number_2_min = stiffeners2[0].lines[0].code.st_number
-    st_number_2_max = st_number_2_min
-    for stiffener in stiffeners2:
-        this_st_number = stiffener.lines[0].code.st_number
-        if st_number < st_number_2_min:
-            st_number_2_min = this_st_number
-        elif this_st_number > st_number_2_max:
-            st_number_2_max = this_st_number
+        st_number_2_min = stiffeners2[0].lines[0].code.st_number
+        st_number_2_max = st_number_2_min
+        for stiffener in stiffeners2:
+            this_st_number = stiffener.lines[0].code.st_number
+            if this_st_number < st_number_2_min:
+                st_number_2_min = this_st_number
+            elif this_st_number > st_number_2_max:
+                st_number_2_max = this_st_number
 
-    i = st_number_2_min
-    j = tpl_number_2_min
-    next_tpl_a = None
+        i = st_number_2_min
+        j = tpl_number_2_min
+        next_tpl_a = None
 
-    while i <= st_number_2_max:
-        new_plate_1_a = old_plate_2.a
-        new_plate_1_b = stiffener.get_line(side, 4).b
-        new_plate_2_a = new_plate_1_b
-        new_plate_2_b = stiffener.get_line(side, 2).a
-        next_tpl_a = new_plate_2_b
-        code_1 = [side, 0, j, 0, 0]
-        code_2 = [side, 0, j+1, 0, 0]
-        new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t)
-        new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t)
-        new_tpl_lines_2.append(new_plate_1)
-        new_tpl_lines_2.append(new_plate_2)
-        j += 1
-        i += 1
-    code_3 = [side, 0, tpl_number+2, 0, 0]
-    new_plate_3 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
-    new_tpl_lines_2.append(new_plate_3)
+        while i <= st_number_2_max:
+            new_plate_1_a = old_plate_2.a
+            new_plate_1_b = stiffener.get_line(side, 4).b
+            new_plate_2_a = new_plate_1_b
+            new_plate_2_b = stiffener.get_line(side, 2).a
+            next_tpl_a = new_plate_2_b
+            code_1 = plate_code.plate_code(side, 0, j, 0, 0)
+            code_2 = plate_code.plate_code(side, 0, j+1, 0, 0)
+            new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_2)
+            new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t_2)
+            new_tpl_lines_2.append(new_plate_1)
+            new_tpl_lines_2.append(new_plate_2)
+            j += 1
+            i += 1
+        code_3 = plate_code.plate_code(side, 0, j+2, 0, 0)
+        new_plate_3 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
+        new_tpl_lines_2.append(new_plate_3)
 
 
     #side 3
-    old_plate_3 = initial_cs.get_pl_line(3)
-    initial_cs.remove(initial_cs.get_pl_line(3))
-    t_3 = old_plate_3.t
-    tpl_number_3_min = initial_cs.get_pl_line(3).code.tpl_number
-    side = 3
     new_tpl_lines_3 = []
+    if stiffeners3 != []:
+        old_plate_3 = initial_cs.get_pl_line(3)
+        tpl_number_3_min = initial_cs.get_pl_line(3).code.tpl_number
+        initial_cs.lines.remove(initial_cs.get_pl_line(3))
+        t_3 = old_plate_3.t
+        side = 3
 
-    st_number_3_min = stiffeners3[0].lines[0].code.st_number
-    st_number_3_max = st_number_3_min
-    for stiffener in stiffeners3:
-        this_st_number = stiffener.lines[0].code.st_number
-        if st_number < st_number_3_min:
-            st_number_3_min = this_st_number
-        elif this_st_number > st_number_3_max:
-            st_number_3_max = this_st_number
+        st_number_3_min = stiffeners3[0].lines[0].code.st_number
+        st_number_3_max = st_number_3_min
+        for stiffener in stiffeners3:
+            this_st_number = stiffener.lines[0].code.st_number
+            if this_st_number < st_number_3_min:
+                st_number_3_min = this_st_number
+            elif this_st_number > st_number_3_max:
+                st_number_3_max = this_st_number
 
-    i = st_number_3_min
-    j = tpl_number_3_min
-    next_tpl_a = None
+        i = st_number_3_min
+        j = tpl_number_3_min
+        next_tpl_a = None
 
-    while i <= st_number_3_max:
-        new_plate_1_a = old_plate_3.a
-        new_plate_1_b = stiffener.get_line(side, 4).b
-        new_plate_2_a = new_plate_1_b
-        new_plate_2_b = stiffener.get_line(side, 2).a
-        next_tpl_a = new_plate_2_b
-        code_1 = [side, 0, j, 0, 0]
-        code_2 = [side, 0, j+1, 0, 0]
-        new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t)
-        new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t)
-        new_tpl_lines_3.append(new_plate_1)
-        new_tpl_lines_3.append(new_plate_2)
-        j += 1
-        i += 1
-    code_3 = [side, 0, tpl_number+2, 0, 0]
-    new_plate_3 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
-    new_tpl_lines_3.append(new_plate_3)
+        while i <= st_number_3_max:
+            new_plate_1_a = old_plate_3.a
+            new_plate_1_b = stiffener.get_line(side, 4).b
+            new_plate_2_a = new_plate_1_b
+            new_plate_2_b = stiffener.get_line(side, 2).a
+            next_tpl_a = new_plate_2_b
+            code_1 = plate_code.plate_code(side, 0, j, 0, 0)
+            code_2 = plate_code.plate_code(side, 0, j+1, 0, 0)
+            new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_3)
+            new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t_3)
+            new_tpl_lines_3.append(new_plate_1)
+            new_tpl_lines_3.append(new_plate_2)
+            j += 1
+            i += 1
+        code_3 = plate_code.plate_code(side, 0, j+2, 0, 0)
+        new_plate_3 = line.line(code_3, next_tpl_a, old_plate_3.b, t_2)
+        new_tpl_lines_3.append(new_plate_3)
 
 
-    #side 3
-    old_plate_4 = initial_cs.get_pl_line(4)
-    initial_cs.remove(initial_cs.get_pl_line(4))
-    t_4 = old_plate_4.t
-    tpl_number_4_min = initial_cs.get_pl_line(4).code.tpl_number
-    side = 4
+    #side 4
     new_tpl_lines_4 = []
+    if stiffeners4 != []:
+        old_plate_4 = initial_cs.get_pl_line(4)
+        tpl_number_4_min = initial_cs.get_pl_line(4).code.tpl_number
+        initial_cs.lines.remove(initial_cs.get_pl_line(4))
+        t_4 = old_plate_4.t
+        side = 4
 
-    st_number_4_min = stiffeners3[0].lines[0].code.st_number
-    st_number_4_max = st_number_4_min
-    for stiffener in stiffeners4:
-        this_st_number = stiffener.lines[0].code.st_number
-        if st_number < st_number_4_min:
-            st_number_4_min = this_st_number
-        elif this_st_number > st_number_4_max:
-            st_number_4_max = this_st_number
+        st_number_4_min = stiffeners4[0].lines[0].code.st_number
+        st_number_4_max = st_number_4_min
+        for stiffener in stiffeners4:
+            this_st_number = stiffener.lines[0].code.st_number
+            if this_st_number < st_number_4_min:
+                st_number_4_min = this_st_number
+            elif this_st_number > st_number_4_max:
+                st_number_4_max = this_st_number
 
-    i = st_number_4_min
-    j = tpl_number_4_min
-    next_tpl_a = None
+        i = st_number_4_min
+        j = tpl_number_4_min
+        next_tpl_a = None
 
-    while i <= st_number_4_max:
-        new_plate_1_a = old_plate_4.a
-        new_plate_1_b = stiffener.get_line(side, 4).b
-        new_plate_2_a = new_plate_1_b
-        new_plate_2_b = stiffener.get_line(side, 2).a
-        next_tpl_a = new_plate_2_b
-        code_1 = [side, 0, j, 0, 0]
-        code_2 = [side, 0, j+1, 0, 0]
-        new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t)
-        new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t)
-        new_tpl_lines_3.append(new_plate_1)
-        new_tpl_lines_3.append(new_plate_2)
-        j += 1
-        i += 1
-    code_4 = [side, 0, tpl_number+2, 0, 0]
-    new_plate_4 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
-    new_tpl_lines_4.append(new_plate_3)
+        while i <= st_number_4_max:
+            new_plate_1_a = old_plate_4.a
+            new_plate_1_b = stiffener.get_line(side, 4).b
+            new_plate_2_a = new_plate_1_b
+            new_plate_2_b = stiffener.get_line(side, 2).a
+            next_tpl_a = new_plate_2_b
+            code_1 = plate_code.plate_code(side, 0, j, 0, 0)
+            code_2 = plate_code.plate_code(side, 0, j+1, 0, 0)
+            new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_4)
+            new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t_4)
+            new_tpl_lines_4.append(new_plate_1)
+            new_tpl_lines_4.append(new_plate_2)
+            j += 1
+            i += 1
+        code_4 = plate_code.plate_code(side, 0, j+2, 0, 0)
+        new_plate_4 = line.line(code_4, next_tpl_a, old_plate_4.b, t_2)
+        new_tpl_lines_4.append(new_plate_4)
 
     for plate in new_tpl_lines_2:
-        initial_cs.append(plate)
+        initial_cs.addline(plate)
     for plate in new_tpl_lines_3:
-        initial_cs.append(plate)
+        initial_cs.addline(plate)
     for plate in new_tpl_lines_4:
-        initial_cs.append(plate)
+        initial_cs.addline(plate)
 
+    for stiffener in stiffener_list:
+        for i in range(len(stiffener.lines)):
+            initial_cs.addline(stiffener.lines[i])
 
     return initial_cs
 
@@ -340,6 +347,8 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         else:
             print("the lines of the stiffeners that were given to check_geometry do not contain codes")
 
+    #sort the list of stiffeners according to st_number
+    #this should be implemented right here in the input, because it is required by check_geometry
 
     """find for each side the most left and the most right one"""
     top_left = None
