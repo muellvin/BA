@@ -202,7 +202,7 @@ def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, w
     code4 = plate_code.plate_code(pl_position, 1, 0, st_number, 4)
     line4 = line.line(code4, a4, b4, t)
 
-    stiffener_global = crosssection.crosssection()
+    stiffener_global = crosssection.crosssection(width_top, width_bottom, height)
     #add the lines to itself
     stiffener_global.addline(line2)
     stiffener_global.addline(line3)
@@ -234,7 +234,7 @@ def create_stiffener_local(width_top, width_bottom, height, t):
     code4 = plate_code.plate_code(0, 1, 0, 0, 4)
     line4 = line.line(code4, a4, b4, t)
 
-    stiffener_local = crosssection.crosssection()
+    stiffener_local = crosssection.crosssection(width_top, width_bottom, height)
     #add the lines to itself
     stiffener_local.addline(line2)
     stiffener_local.addline(line3)
@@ -465,19 +465,13 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             print("track_plate stiffeners do not fit!!!")
             geometry_ok = False
 
-    print(left_top.lines[0].a.y)
-
     if right_top != None and left_top != None:
-        print("I am really stupid")
-        print(right_top_4b.z)
-        print(mindis_side_top_corner)
         if right_top_4b.z < mindis_side_top_corner:
-            print("I am stupid")
             corr = mindis_side_top_corner - right_top_4b.z
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup = right_top.b_sup - corr
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf = right_top.b_sup - corr
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup = left_top.b_sup - corr
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf = left_top.b_sup - corr
             geometry_ok = False
 
     if right_bottom != None and left_bottom != None:
