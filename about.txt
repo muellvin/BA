@@ -1,0 +1,2 @@
+requirements.txt:
+https://blog.usejournal.com/why-and-how-to-make-a-requirements-txt-f329c685181e
