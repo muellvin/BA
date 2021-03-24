@@ -10,4 +10,4 @@ class point():
         self.z = float(z)
 
     def __str__(self):
-        return "Point at (" + self.y + ", " + self.z + ")"
+        return "Point at (" + str(self.y) + ", " + str(self.z) + ")"

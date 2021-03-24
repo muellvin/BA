@@ -63,7 +63,9 @@ def find_dimensions(stiffener):
 
     #set new default values, if corrections need to be made
     if stiffener.b_inf != 0:
+        print(stiffener.b_inf)
         b_inf_max_geo = stiffener.b_inf
+        print(b_inf_max_geo)
         assert b_inf_max_geo > b_inf_step, "Error, nothing could be found."
 
     if stiffener.b_sup != 0:

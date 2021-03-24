@@ -64,8 +64,9 @@ class crosssection():
         return y,z
     #
     def get_stiffener_line(self, pl_position, st_number, st_pl_position):
-        for i in self:
-            if i.code.pl_position == pl_position and i.st_number == st_number:
+        for i in self.lines:
+            if i.code.pl_position == pl_position and i.code.st_number == st_number \
+            and i.code.st_pl_position == st_pl_position:
                 return i
 
 
