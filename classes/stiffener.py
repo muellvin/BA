@@ -32,17 +32,59 @@ def add_stiffener_set(initial_cs, proposition):
 #This functions merges a cross section and a list of stiffeners
 """we need initial_cs to always have the updated thickness of the trapezoid plates!!!!"""
 def merge(initial_cs, stiffener_list):
+    stiffeners1 = []
     stiffeners2 = []
     stiffeners3 = []
     stiffeners4 = []
     for stiffener in stiffener_list:
-        pos = stiffener.lines[0].code.pl_position
-        if pos == 2:
+        pos = stiffener[0].code.pl_position
+        if pos == 1:
+            stiffeners1.append(stiffener)
+        elif pos == 2:
             stiffeners2.append(stiffener)
         elif pos == 3:
             stiffeners3.append(stiffener)
         elif pos == 4:
             stiffeners4.append(stiffener)
+
+    #side 1
+    old_plate_1 = initial_cs.get_pl_line(1)
+    initial_cs.remove(initial_cs.get_pl_line(1))
+    t_1 = old_plate_1.t
+    tpl_number_1_min = initial_cs.get_pl_line(1).code.tpl_number
+    side = 1
+    new_tpl_lines_1 = []
+
+    st_number_1_min = stiffeners1[0].lines[0].code.st_number
+    st_number_1_max = st_number_1_min
+    for stiffener in stiffeners1:
+        this_st_number = stiffener.lines[0].code.st_number
+        if st_number < st_number_1_min:
+            st_number_1_min = this_st_number
+        elif this_st_number > st_number_1_max:
+            st_number_1_max = this_st_number
+
+    i = st_number_1_min
+    j = tpl_number_1_min
+    next_tpl_a = None
+
+    while i <= st_number_1_max:
+        new_plate_1_a = old_plate_1.a
+        new_plate_1_b = stiffener.get_line(side, 4).b
+        new_plate_2_a = new_plate_1_b
+        new_plate_2_b = stiffener.get_line(side, 2).a
+        next_tpl_a = new_plate_2_b
+        code_1 = [side, 0, j, 0, 0]
+        code_2 = [side, 0, j+1, 0, 0]
+        new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t)
+        new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t)
+        new_tpl_lines_1.append(new_plate_1)
+        new_tpl_lines_1.append(new_plate_2)
+        j += 1
+        i += 1
+    code_3 = [side, 0, tpl_number+2, 0, 0]
+    new_plate_3 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
+    new_tpl_lines_1.append(new_plate_3)
 
     #side 2
     new_tpl_lines_2 = []
@@ -178,6 +220,7 @@ def merge(initial_cs, stiffener_list):
             initial_cs.addline(stiffener.lines[i])
 
     return initial_cs
+
 
 
 
