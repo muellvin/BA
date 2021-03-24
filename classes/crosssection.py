@@ -4,8 +4,11 @@ import math
 #crosssection calculation
 class crosssection():
 #a crosssection is defined as a list of lines
-    def __init__(self):
+    def __init__(self, b_sup, b_inf, h):
         self.lines = []
+        self.b_sup = b_sup
+        self.b_inf = b_inf
+        self.b = h
 
     def addline(self, line):
         self.lines.append(line)
@@ -61,8 +64,9 @@ class crosssection():
         return y,z
     #
     def get_stiffener_line(self, pl_position, st_number, st_pl_position):
-        for i in self:
-            if i.code.pl_position == pl_position and i.st_number == st_number:
+        for i in self.lines:
+            if i.code.pl_position == pl_position and i.code.st_number == st_number \
+            and i.code.st_pl_position == st_pl_position:
                 return i
 
 

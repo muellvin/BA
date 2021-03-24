@@ -10,6 +10,7 @@ from classes import crosssection
 from classes import plate_code
 from shapely.geometry import LineString, Point
 from classes import substantiate as ss
+from output import geometry_output as go
 
 
 def add_stiffener_set(initial_cs, proposition):
@@ -86,131 +87,137 @@ def merge(initial_cs, stiffener_list):
     new_tpl_lines_1.append(new_plate_3)
 
     #side 2
-    old_plate_2 = initial_cs.get_pl_line(2)
-    initial_cs.remove(initial_cs.get_pl_line(2))
-    t_2 = old_plate_2.t
-    tpl_number_2_min = initial_cs.get_pl_line(2).code.tpl_number
-    side = 2
     new_tpl_lines_2 = []
+    if stiffeners_2 != []:
+        old_plate_2 = initial_cs.get_pl_line(2)
+        tpl_number_2_min = initial_cs.get_pl_line(2).code.tpl_number
+        initial_cs.lines.remove(initial_cs.get_pl_line(2))
+        t_2 = old_plate_2.t
+        side = 2
 
-    st_number_2_min = stiffeners2[0].lines[0].code.st_number
-    st_number_2_max = st_number_2_min
-    for stiffener in stiffeners2:
-        this_st_number = stiffener.lines[0].code.st_number
-        if st_number < st_number_2_min:
-            st_number_2_min = this_st_number
-        elif this_st_number > st_number_2_max:
-            st_number_2_max = this_st_number
+        st_number_2_min = stiffeners2[0].lines[0].code.st_number
+        st_number_2_max = st_number_2_min
+        for stiffener in stiffeners2:
+            this_st_number = stiffener.lines[0].code.st_number
+            if this_st_number < st_number_2_min:
+                st_number_2_min = this_st_number
+            elif this_st_number > st_number_2_max:
+                st_number_2_max = this_st_number
 
-    i = st_number_2_min
-    j = tpl_number_2_min
-    next_tpl_a = None
+        i = st_number_2_min
+        j = tpl_number_2_min
+        next_tpl_a = None
 
-    while i <= st_number_2_max:
-        new_plate_1_a = old_plate_2.a
-        new_plate_1_b = stiffener.get_line(side, 4).b
-        new_plate_2_a = new_plate_1_b
-        new_plate_2_b = stiffener.get_line(side, 2).a
-        next_tpl_a = new_plate_2_b
-        code_1 = [side, 0, j, 0, 0]
-        code_2 = [side, 0, j+1, 0, 0]
-        new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t)
-        new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t)
-        new_tpl_lines_2.append(new_plate_1)
-        new_tpl_lines_2.append(new_plate_2)
-        j += 1
-        i += 1
-    code_3 = [side, 0, tpl_number+2, 0, 0]
-    new_plate_3 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
-    new_tpl_lines_2.append(new_plate_3)
+        while i <= st_number_2_max:
+            new_plate_1_a = old_plate_2.a
+            new_plate_1_b = stiffener.get_line(side, 4).b
+            new_plate_2_a = new_plate_1_b
+            new_plate_2_b = stiffener.get_line(side, 2).a
+            next_tpl_a = new_plate_2_b
+            code_1 = plate_code.plate_code(side, 0, j, 0, 0)
+            code_2 = plate_code.plate_code(side, 0, j+1, 0, 0)
+            new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_2)
+            new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t_2)
+            new_tpl_lines_2.append(new_plate_1)
+            new_tpl_lines_2.append(new_plate_2)
+            j += 1
+            i += 1
+        code_3 = plate_code.plate_code(side, 0, j+2, 0, 0)
+        new_plate_3 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
+        new_tpl_lines_2.append(new_plate_3)
 
 
     #side 3
-    old_plate_3 = initial_cs.get_pl_line(3)
-    initial_cs.remove(initial_cs.get_pl_line(3))
-    t_3 = old_plate_3.t
-    tpl_number_3_min = initial_cs.get_pl_line(3).code.tpl_number
-    side = 3
     new_tpl_lines_3 = []
+    if stiffeners3 != []:
+        old_plate_3 = initial_cs.get_pl_line(3)
+        tpl_number_3_min = initial_cs.get_pl_line(3).code.tpl_number
+        initial_cs.lines.remove(initial_cs.get_pl_line(3))
+        t_3 = old_plate_3.t
+        side = 3
 
-    st_number_3_min = stiffeners3[0].lines[0].code.st_number
-    st_number_3_max = st_number_3_min
-    for stiffener in stiffeners3:
-        this_st_number = stiffener.lines[0].code.st_number
-        if st_number < st_number_3_min:
-            st_number_3_min = this_st_number
-        elif this_st_number > st_number_3_max:
-            st_number_3_max = this_st_number
+        st_number_3_min = stiffeners3[0].lines[0].code.st_number
+        st_number_3_max = st_number_3_min
+        for stiffener in stiffeners3:
+            this_st_number = stiffener.lines[0].code.st_number
+            if this_st_number < st_number_3_min:
+                st_number_3_min = this_st_number
+            elif this_st_number > st_number_3_max:
+                st_number_3_max = this_st_number
 
-    i = st_number_3_min
-    j = tpl_number_3_min
-    next_tpl_a = None
+        i = st_number_3_min
+        j = tpl_number_3_min
+        next_tpl_a = None
 
-    while i <= st_number_3_max:
-        new_plate_1_a = old_plate_3.a
-        new_plate_1_b = stiffener.get_line(side, 4).b
-        new_plate_2_a = new_plate_1_b
-        new_plate_2_b = stiffener.get_line(side, 2).a
-        next_tpl_a = new_plate_2_b
-        code_1 = [side, 0, j, 0, 0]
-        code_2 = [side, 0, j+1, 0, 0]
-        new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t)
-        new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t)
-        new_tpl_lines_3.append(new_plate_1)
-        new_tpl_lines_3.append(new_plate_2)
-        j += 1
-        i += 1
-    code_3 = [side, 0, tpl_number+2, 0, 0]
-    new_plate_3 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
-    new_tpl_lines_3.append(new_plate_3)
+        while i <= st_number_3_max:
+            new_plate_1_a = old_plate_3.a
+            new_plate_1_b = stiffener.get_line(side, 4).b
+            new_plate_2_a = new_plate_1_b
+            new_plate_2_b = stiffener.get_line(side, 2).a
+            next_tpl_a = new_plate_2_b
+            code_1 = plate_code.plate_code(side, 0, j, 0, 0)
+            code_2 = plate_code.plate_code(side, 0, j+1, 0, 0)
+            new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_3)
+            new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t_3)
+            new_tpl_lines_3.append(new_plate_1)
+            new_tpl_lines_3.append(new_plate_2)
+            j += 1
+            i += 1
+        code_3 = plate_code.plate_code(side, 0, j+2, 0, 0)
+        new_plate_3 = line.line(code_3, next_tpl_a, old_plate_3.b, t_2)
+        new_tpl_lines_3.append(new_plate_3)
 
 
-    #side 3
-    old_plate_4 = initial_cs.get_pl_line(4)
-    initial_cs.remove(initial_cs.get_pl_line(4))
-    t_4 = old_plate_4.t
-    tpl_number_4_min = initial_cs.get_pl_line(4).code.tpl_number
-    side = 4
+    #side 4
     new_tpl_lines_4 = []
+    if stiffeners4 != []:
+        old_plate_4 = initial_cs.get_pl_line(4)
+        tpl_number_4_min = initial_cs.get_pl_line(4).code.tpl_number
+        initial_cs.lines.remove(initial_cs.get_pl_line(4))
+        t_4 = old_plate_4.t
+        side = 4
 
-    st_number_4_min = stiffeners3[0].lines[0].code.st_number
-    st_number_4_max = st_number_4_min
-    for stiffener in stiffeners4:
-        this_st_number = stiffener.lines[0].code.st_number
-        if st_number < st_number_4_min:
-            st_number_4_min = this_st_number
-        elif this_st_number > st_number_4_max:
-            st_number_4_max = this_st_number
+        st_number_4_min = stiffeners4[0].lines[0].code.st_number
+        st_number_4_max = st_number_4_min
+        for stiffener in stiffeners4:
+            this_st_number = stiffener.lines[0].code.st_number
+            if this_st_number < st_number_4_min:
+                st_number_4_min = this_st_number
+            elif this_st_number > st_number_4_max:
+                st_number_4_max = this_st_number
 
-    i = st_number_4_min
-    j = tpl_number_4_min
-    next_tpl_a = None
+        i = st_number_4_min
+        j = tpl_number_4_min
+        next_tpl_a = None
 
-    while i <= st_number_4_max:
-        new_plate_1_a = old_plate_4.a
-        new_plate_1_b = stiffener.get_line(side, 4).b
-        new_plate_2_a = new_plate_1_b
-        new_plate_2_b = stiffener.get_line(side, 2).a
-        next_tpl_a = new_plate_2_b
-        code_1 = [side, 0, j, 0, 0]
-        code_2 = [side, 0, j+1, 0, 0]
-        new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t)
-        new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t)
-        new_tpl_lines_3.append(new_plate_1)
-        new_tpl_lines_3.append(new_plate_2)
-        j += 1
-        i += 1
-    code_4 = [side, 0, tpl_number+2, 0, 0]
-    new_plate_4 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
-    new_tpl_lines_4.append(new_plate_3)
+        while i <= st_number_4_max:
+            new_plate_1_a = old_plate_4.a
+            new_plate_1_b = stiffener.get_line(side, 4).b
+            new_plate_2_a = new_plate_1_b
+            new_plate_2_b = stiffener.get_line(side, 2).a
+            next_tpl_a = new_plate_2_b
+            code_1 = plate_code.plate_code(side, 0, j, 0, 0)
+            code_2 = plate_code.plate_code(side, 0, j+1, 0, 0)
+            new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_4)
+            new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t_4)
+            new_tpl_lines_4.append(new_plate_1)
+            new_tpl_lines_4.append(new_plate_2)
+            j += 1
+            i += 1
+        code_4 = plate_code.plate_code(side, 0, j+2, 0, 0)
+        new_plate_4 = line.line(code_4, next_tpl_a, old_plate_4.b, t_2)
+        new_tpl_lines_4.append(new_plate_4)
 
     for plate in new_tpl_lines_2:
-        initial_cs.append(plate)
+        initial_cs.addline(plate)
     for plate in new_tpl_lines_3:
-        initial_cs.append(plate)
+        initial_cs.addline(plate)
     for plate in new_tpl_lines_4:
-        initial_cs.append(plate)
+        initial_cs.addline(plate)
 
+    for stiffener in stiffener_list:
+        for i in range(len(stiffener.lines)):
+            initial_cs.addline(stiffener.lines[i])
 
     return initial_cs
 
@@ -245,7 +252,7 @@ def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, w
     code4 = plate_code.plate_code(pl_position, 1, 0, st_number, 4)
     line4 = line.line(code4, a4, b4, t)
 
-    stiffener_global = crosssection.crosssection()
+    stiffener_global = crosssection.crosssection(width_top, width_bottom, height)
     #add the lines to itself
     stiffener_global.addline(line2)
     stiffener_global.addline(line3)
@@ -277,7 +284,7 @@ def create_stiffener_local(width_top, width_bottom, height, t):
     code4 = plate_code.plate_code(0, 1, 0, 0, 4)
     line4 = line.line(code4, a4, b4, t)
 
-    stiffener_local = crosssection.crosssection()
+    stiffener_local = crosssection.crosssection(width_top, width_bottom, height)
     #add the lines to itself
     stiffener_local.addline(line2)
     stiffener_local.addline(line3)
@@ -340,6 +347,8 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         else:
             print("the lines of the stiffeners that were given to check_geometry do not contain codes")
 
+    #sort the list of stiffeners according to st_number
+    #this should be implemented right here in the input, because it is required by check_geometry
 
     """find for each side the most left and the most right one"""
     top_left = None
@@ -359,7 +368,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             if line.code.st_number <= min:
                 top_left = line
                 min = line.code.st_number
-            elif line.code.st_number >= max:
+            if line.code.st_number >= max:
                 top_right = line
                 max = line.code.st_number
 
@@ -370,7 +379,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             if stiffener.lines[0].code.st_number <= min:
                 right_top = stiffener
                 min = stiffener.lines[0].code.st_number
-            elif stiffener[0].code.st_number >= max:
+            if stiffener.lines[0].code.st_number >= max:
                 right_bottom = stiffener
                 max = stiffener.lines[0].code.st_number
 
@@ -381,7 +390,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             if stiffener.lines[0].code.st_number <= min:
                 bottom_right = stiffener
                 min = stiffener.lines[0].code.st_number
-            elif stiffener.lines[0].code.st_number >= max:
+            if stiffener.lines[0].code.st_number >= max:
                 bottom_left = stiffener
                 max = stiffener.lines[0].code.st_number
 
@@ -392,7 +401,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             if stiffener.lines[0].code.st_number <= min:
                 left_bottom = stiffener
                 min = stiffener.lines[0].code.st_number
-            elif stiffener.lines[0].code.st_number >= max:
+            if stiffener.lines[0].code.st_number >= max:
                 left_top = stiffener
             max = stiffener.lines[0].code.st_number
 
@@ -490,7 +499,6 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 corner_bottom_right = point
                 print("3")
 
-
     """check distances to corners of crosssection"""
     mindis_top_corner = 30
     mindis_side_top_corner = 30
@@ -510,54 +518,64 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             geometry_ok = False
 
     if right_top != None and left_top != None:
-        if right_top_4b.z < mindis_side_top_corner.z:
-            corr = mindis_side_top_corner.z - right_top_4b.z
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf -= corr
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf -= corr
+        if right_top_4b.z < mindis_side_top_corner:
+            corr = mindis_side_top_corner - right_top_4b.z
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup = right_top.b_sup - corr
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf = right_top.b_sup - corr
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup = left_top.b_sup - corr
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf = left_top.b_sup - corr
             geometry_ok = False
 
     if right_bottom != None and left_bottom != None:
         dis_right_bottom_corner = corner_bottom_right.z - right_bottom_2a.z
-        if dis_bottom_right_corner < mindis_side_bottom_corner:
-            corr = mindis_side_bottom_corner - dis_bottom_right_corner
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_inf -= corr
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_inf -= corr
+        if dis_right_bottom_corner < mindis_side_bottom_corner:
+            corr = mindis_side_bottom_corner - dis_right_bottom_corner
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup = right_bottom.b_sup - corr
+            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_inf = right_bottom.b_inf - corr
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup = left_bottom.b_sup - corr
+            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_inf = left_bottom.b_inf - corr
             geometry_ok = False
 
     if bottom_left != None and bottom_right != None:
         dis_bottom_left_corner = corner_bottom_left.y - bottom_right_4b.y
         if corner_bottom_left.y - bottom_right_4b.y > mindis_bottom_corner:
             corr = mindis_bottom_corner - dis_bottom_left_corner
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_inf -= corr
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup -= corr
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_inf -= corr
+            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup = bottom_left.b_sup -corr
+            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_inf = bottom_left.b_inf - corr
+            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup = bottom_right.b_sup - corr
+            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_inf = bottom_right.b_inf - corr
             geometry_ok = False
 
 
     """check distances between stiffeners"""
+    #what is if stiffeners overlap?
+    #Distances are only calculated in absolute values ...
     mindis_between = 30
 
-    if right_top != None and right_bottom != None:
-        st_number_min = right_top[0].code.st_number
-        i = st_number_min
-        st_number_max = right_bottom[0].code.st_number
-        while i < st_number_max:
-            upper = stiffener2.get_stiffener_line(2,i,2).a
-            lower = stiffener2.get_stiffener_line(2,i+1,4).b
+    if right_top != None and right_bottom != None and right_top != right_bottom:
+        st_number_min = right_top.lines[0].code.st_number
+        st_number_max = right_bottom.lines[0].code.st_number
+        for i in range(st_number_min, st_number_max, 1):
+            upper = stiffeners2[i-st_number_min].get_stiffener_line(2,i,2).a
+            lower = stiffeners2[i+1-st_number_min].get_stiffener_line(2,i+1,4).b
             distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
+            print("Distance")
+            print(distance)
             if distance < mindis_between:
-                corr = (mindis-distance)/2
-                stiffeners_proposition.get_proposed_stiffener(2,i).b_sup -= corr
-                stiffeners_proposition.get_proposed_stiffener(2,i+1).b_sup -= corr
-                stiffeners_proposition.get_proposed_stiffener(2,i).b_inf -= corr
-                stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf -= corr
+                corr = (mindis_between-distance)/2
+                print("Corr")
+                print(corr)
+                print("b_sup")
+                print(stiffeners2[i-st_number_min].b_sup)
+                stiffeners_proposition.get_proposed_stiffener(2,i).b_sup = stiffeners2[i-st_number_min].b_sup - corr
+                print(stiffeners_proposition.get_proposed_stiffener(2,i).b_sup)
+                stiffeners_proposition.get_proposed_stiffener(2,i+1).b_sup = stiffeners2[i+1-st_number_min].b_sup - corr
+                stiffeners_proposition.get_proposed_stiffener(2,i).b_inf = stiffeners2[i-st_number_min].b_inf - corr
+                stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf = stiffeners2[i+1-st_number_min].b_inf - corr
                 geometry_ok = False
 
+    #this part of the code still should be improved according to the other two parts
+    #this will be done when the code for the sideplate works
     if bottom_right != None and bottom_left != None:
         st_number_min = bottom_right[0].code.st_number
         i = st_number_min
@@ -575,19 +593,18 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 geometry_ok = False
 
     if left_top != None and left_bottom != None:
-        st_number_min = left_bottom[0].code.st_number
-        i = st_number_min
-        st_number_max = left_top[0].code.st_number
-        while i < st_number_max:
-            lower = stiffener4.get_stiffener_line(2,i,2).a
-            upper = stiffener4.get_stiffener_line(2,i+1,4).b
+        st_number_min = left_bottom.lines[0].code.st_number
+        st_number_max = left_top.lines[0].code.st_number
+        for i in range(st_number_min, st_number_max, 1):
+            lower = stiffeners4[i-st_number_min].get_stiffener_line(4,i,2).a
+            upper = stiffeners4[i+1-st_number_min].get_stiffener_line(4,i+1,4).b
             distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
             if distance < mindis_between:
-                corr = (mindis-distance)/2
-                stiffeners_proposition.get_proposed_stiffener(4,i).b_sup -= corr
-                stiffeners_proposition.get_proposed_stiffener(4,i+1).b_sup -= corr
-                stiffeners_proposition.get_proposed_stiffener(4,i).b_inf -= corr
-                stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf -= corr
+                corr = (mindis_between-distance)/2
+                stiffeners_proposition.get_proposed_stiffener(4,i).b_sup = stiffeners4[i-st_number_min].b_sup - corr
+                stiffeners_proposition.get_proposed_stiffener(4,i+1).b_sup = stiffeners4[i+1-st_number_min].b_sup - corr
+                stiffeners_proposition.get_proposed_stiffener(4,i).b_inf = stiffeners4[i-st_number_min].b_inf - corr
+                stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf = stiffeners4[i+1-st_number_min].b_inf - corr
                 geometry_ok = False
 
 

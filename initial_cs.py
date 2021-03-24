@@ -22,7 +22,7 @@ def create_initial_cs(b_sup, b_inf, h):
     line_4 = ln.line(code_4, d, a, 1)
 
     #add lines to crosssection
-    x_section = cs.crosssection()
+    x_section = cs.crosssection(b_sup, b_inf, h)
     x_section.addline(line_1)
     x_section.addline(line_2)
     x_section.addline(line_3)
