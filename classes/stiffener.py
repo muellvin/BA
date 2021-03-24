@@ -35,7 +35,7 @@ def merge(initial_cs, stiffener_list):
     stiffeners3 = []
     stiffeners4 = []
     for stiffener in stiffener_list:
-        pos = stiffener[0].code.pl_position
+        pos = stiffener.lines[0].code.pl_position
         if pos == 2:
             stiffeners2.append(stiffener)
         elif pos == 3:
@@ -45,7 +45,7 @@ def merge(initial_cs, stiffener_list):
 
     #side 2
     old_plate_2 = initial_cs.get_pl_line(2)
-    initial_cs.remove(initial_cs.get_pl_line(2))
+    initial_cs.lines.remove(initial_cs.get_pl_line(2))
     t_2 = old_plate_2.t
     tpl_number_2_min = initial_cs.get_pl_line(2).code.tpl_number
     side = 2
@@ -270,14 +270,22 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
 
     """reorganize the stiffeners into own lists"""
-    stiffeners1lines = []
+    lines1 = []
+    stiffeners1 = []
     stiffeners2 = []
     stiffeners3 = []
     stiffeners4 = []
 
     for line in crosssection.lines:
-        if line.code.pl_position == 1:
-            stiffeners1lines.append(line)
+        if line.code.pl_position == 1 and line.code.tpl_number == 0:
+            lines1.append(line)
+
+    for i in range(int(len(lines1)/3)):
+        stiffeners1[i] = crosssection.crosssection()
+        for line in lines1:
+            if line.code.st_number == i+1:
+                stiffeners[i].append(line)
+
 
     for stiffener in stiffeners:
         if stiffener.lines[0].code.pl_position== 2:
@@ -301,9 +309,9 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     left_bottom = None
 
 
-    if stiffeners1lines != []:
-        min = random.choice(stiffeners1lines).code.st_number
-        max = random.choice(stiffeners1lines).code.st_number
+    if stiffeners1 != []:
+        min = random.choice(stiffeners1).code.st_number
+        max = random.choice(stiffeners1).code.st_number
         for line in stiffeners1lines:
             if line.code.st_number <= min:
                 top_left = line
