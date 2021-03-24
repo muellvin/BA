@@ -23,7 +23,7 @@ for line in test_cs.lines:
 prop_1 = ps.proposed_stiffener(3, 1, 0.5, 20*10**6)
 prop_2 = ps.proposed_stiffener(3, 2, -0.5, 10**7)
 prop_3 = ps.proposed_stiffener(2, 1, 0.5, 15*10**6)
-prop_4 = ps.proposed_stiffener(4, 1, 0.9, 10**6)
+prop_4 = ps.proposed_stiffener(2, 1, 0.99, 10**6)
 prop_5 = ps.proposed_stiffener(3,1, -0.3, 3*10**6)
 
 #add all propositions to a list
@@ -34,8 +34,12 @@ prop_list.add(prop_3)
 prop_list.add(prop_4)
 #prop_list.add(prop_5)
 
-end_cs = st.add_stiffener_set(test_cs, prop_list)
-go.print_cs(end_cs)
 
-#stiffener_list = ss.substantiate(test_cs, prop_list)
-#go.print_cs_st(test_cs, stiffener_list)
+
+#end_cs = st.add_stiffener_set(test_cs, prop_list)
+#go.print_cs(end_cs)
+
+stiffener_list = ss.substantiate(test_cs, prop_list)
+geometry_ok = st.check_geometry(test_cs, stiffener_list, prop_list)
+print(geometry_ok)
+go.print_cs_st(test_cs, stiffener_list)
