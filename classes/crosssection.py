@@ -25,9 +25,15 @@ class crosssection():
 
     #to get certain line of stiffener
     def get_line(self, pl_position, st_pl_position):
+        success = 0
         for i in self.lines:
             if i.code.pl_position == pl_position and i.code.st_pl_position == st_pl_position:
+                success = 1
                 return i
+            else:
+                pass
+        assert success != 0, "Line could not be found."
+
 
     #to get trapezoid plates from initial cs -> to add stiffeners
     def get_pl_line(self, pl_position):
