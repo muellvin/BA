@@ -20,11 +20,16 @@ for line in test_cs.lines:
     line.t = 20
 
 #propose stiffeners, mimicking input from optimizer
-prop_1 = ps.proposed_stiffener(2, 1, 0.67, 20*10**6)
-prop_2 = ps.proposed_stiffener(2, 2, 0.4, 2*10**7)
-prop_3 = ps.proposed_stiffener(4, 3, 0.4, 2*10**7)
-prop_4 = ps.proposed_stiffener(4, 4, 0.67, 20*10**6)
-prop_5 = ps.proposed_stiffener(3,1, -0.3, 3*10**6)
+prop_1 = ps.proposed_stiffener(2, 1, 0.67, 10**7)
+prop_2 = ps.proposed_stiffener(2, 2, 0.4, 10**7)
+prop_3 = ps.proposed_stiffener(3, 3, -0.6, 10**7)
+prop_4 = ps.proposed_stiffener(3, 4, -0.3, 10**7)
+prop_5 = ps.proposed_stiffener(3, 5, 0, 10**7)
+prop_6 = ps.proposed_stiffener(3, 6, 0.3, 10**7)
+prop_7 = ps.proposed_stiffener(3, 7, 0.6, 10**7)
+prop_8 = ps.proposed_stiffener(4, 8, 0.4, 10**7)
+prop_9 = ps.proposed_stiffener(4, 9, 0.67, 10**7)
+
 
 #add all propositions to a list
 prop_list = st_prop.stiffeners_proposition()
@@ -32,25 +37,15 @@ prop_list.add(prop_1)
 prop_list.add(prop_2)
 prop_list.add(prop_3)
 prop_list.add(prop_4)
-#prop_list.add(prop_5)
+prop_list.add(prop_5)
+prop_list.add(prop_6)
+prop_list.add(prop_7)
+prop_list.add(prop_8)
+prop_list.add(prop_9)
 
-iterations = 0
-geometry_ok = False
 
-while geometry_ok == False:
-    iterations += 1
-    stiffener_list = ss.substantiate(test_cs, prop_list)
-    geometry_ok = st.check_geometry(test_cs, stiffener_list, prop_list)
-
-    if iterations > 5:
-        geometry_ok == True
-    print(geometry_ok)
-end_cs = st.merge(test_cs, stiffener_list)
+end_cs = st.add_stiffener_set(test_cs, prop_list)
 go.print_cs(end_cs)
-
-
-#end_cs = st.add_stiffener_set(test_cs, prop_list)
-#go.print_cs(end_cs)
 
 #stiffener_list = ss.substantiate(test_cs, prop_list)
 #geometry_ok = st.check_geometry(test_cs, stiffener_list, prop_list)
