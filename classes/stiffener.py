@@ -17,13 +17,11 @@ def add_stiffener_set(initial_cs, proposition):
     iterations = 0
     geometry_ok = False
 
-    while geometry_ok == False:
+    while geometry_ok == False and iterations < 5:
         iterations += 1
         stiffener_list = ss.substantiate(initial_cs, proposition)
         geometry_ok = check_geometry(initial_cs, stiffener_list, proposition)
 
-        if iterations > 5:
-            geometry_ok == True
 
     next_cs = merge(initial_cs, stiffener_list)
     return next_cs
