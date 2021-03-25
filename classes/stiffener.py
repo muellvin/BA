@@ -234,7 +234,10 @@ def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, w
     assert width_top >= width_bottom, "width out of bound or wrong way around"
     half_width_diff = (width_top - width_bottom)/2
     length_side = math.sqrt(half_width_diff**2 + height**2)
-    own_angle = math.atan(height/half_width_diff)
+    if half_width_diff > 0:
+        own_angle = math.atan(height/half_width_diff)
+    else:
+        own_angle = math.pi/2
 
     #create plate 2
     a2 = point.point(y_corr,z_corr)
@@ -336,7 +339,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         stiffeners1[i] = crosssection.crosssection()
         for line in lines1:
             if line.code.st_number == i+1:
-                stiffeners[i].append(line)
+                stiffeners1[i].lines.append(line)
 
 
     for stiffener in stiffeners:
@@ -364,15 +367,15 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
 
     if stiffeners1 != []:
-        min = random.choice(stiffeners1).code.st_number
-        max = random.choice(stiffeners1).code.st_number
-        for line in stiffeners1lines:
-            if line.code.st_number <= min:
-                top_left = line
-                min = line.code.st_number
-            if line.code.st_number >= max:
-                top_right = line
-                max = line.code.st_number
+        min = random.choice(stiffeners1).lines[0].code.st_number
+        max = random.choice(stiffeners1).lines[0].code.st_number
+        for stiffener in stiffeners1:
+            if stiffener.lines[0].code.st_number <= min:
+                top_left = stiffener
+                min = stiffener.lines[0].code.st_number
+            if stiffener.lines[0].code.st_number >= max:
+                top_right = stiffener
+                max = stiffener.lines[0].code.st_number
 
     if stiffeners2 != []:
         min = random.choice(stiffeners2).lines[0].code.st_number
@@ -498,8 +501,8 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 corner_bottom_right = point
 
     """check distances to corners of crosssection"""
-    mindis_top_corner = 30
-    mindis_side_top_corner = 30
+    mindis_top_corner = 200
+    mindis_side_top_corner = 200
     mindis_side_bottom_corner = 30
     mindis_bottom_corner = 30
 
@@ -616,13 +619,14 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 geometry_ok = False
 
 
-    "Temporary Return statement for testing"
-    print("geometry_ok")
-    print(geometry_ok)
-    return(geometry_ok)
+    #"Temporary Return statement for testing"
+    #print("geometry_ok")
+    #print(geometry_ok)
+    #return(geometry_ok)
 
     """check distances in corners between stiffeners"""
     if left_top != None and top_left != None:
+        print("stiffeners in left top corner")
         mindis = 30
         #the two edges are each defined by two lines
         #top corners (using symmetry, just doing left one)
@@ -636,13 +640,19 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         max_dis = 0
         angle = 0
         cut = False
-        if dis_point_line(lines_top_left, lines_left_top) > max_dis:
-            max_dis, angle = dis_lines_lines(lines_top_left, lines_left_top)
-        elif dis_point_line(lines_left_top, lines_top_left) > max_dis:
-            max_dis, angle = dis_lines_lines(points_left_top, lines_top_left)
-        elif cut(lines_left_top, lines_top_left) == True:
-            max_dis = (-1) * max_dis
-            cut = True
+
+        if lines_top_left != [] and lines_left_top != []:
+            if dis_point_line(lines_top_left, lines_left_top)[0] > max_dis:
+                max_dis = dis_lines_lines(lines_top_left, lines_left_top)[0]
+                angle = dis_lines_lines(lines_top_left, lines_left_top)[1]
+            elif dis_point_line(lines_left_top, lines_top_left)[0] > max_dis:
+                max_dis = dis_lines_lines(points_left_top, lines_top_left)[0]
+                angle = dis_lines_lines(points_left_top, lines_top_left)[1]
+            elif cut(lines_left_top, lines_top_left) == True:
+                max_dis = (-1) * max_dis
+                cut = True
+        else:
+             max_dis = 1000
 
         if max_dis < mindis:
             geometry_ok = False
@@ -667,24 +677,34 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
 
     if left_bottom != None and bottom_left != None:
+        print("stiffeners in bottom left corner")
         mindis = 30
         #bottom (using symmetry, just doing left one)
         lines_left_bottom = []
         lines_left_bottom.append(left_bottom.get_line(4,3))
         lines_left_bottom.append(left_bottom.get_line(4,4))
-        lines_top_left = []
-        lines_bottom_left.append(bottom_left.get_line(3,1))
+        lines_bottom_left = []
         lines_bottom_left.append(bottom_left.get_line(3,2))
+        lines_bottom_left.append(bottom_left.get_line(3,3))
 
+        print(bottom_left)
+        print(lines_bottom_left[0])
         max_dis = 0
+        angle = 0
         cut = False
-        if dis_point_line(lines_left_bottom, lines_bottom_left) > max_dis:
-            max_dis, angle = dis_lines_lines(lines_left_bottom, lines_bottom_left)
-        elif dis_point_line(lines_bottom_left, lines_left_bottom) > max_dis:
-            max_dis, angle = dis_lines_lines(lines_bottom_left, lines_left_bottom)
-        elif cut(lines_bottom_left, lines_left_bottom) == True:
-            max_dis = (-1) * max_dis
-            cut = True
+
+        if lines_left_bottom != [] and lines_bottom_left != []:
+            if dis_lines_lines(lines_left_bottom, lines_bottom_left)[0] > max_dis:
+                max_dis = dis_lines_lines(lines_left_bottom, lines_bottom_left)[0]
+                angle = dis_lines_lines(lines_left_bottom, lines_bottom_left)[1]
+            elif dis_lines_lines(lines_bottom_left, lines_left_bottom)[0] > max_dis:
+                max_dis = dis_lines_lines(lines_bottom_left, lines_left_bottom)[0]
+                angle = dis_lines_lines(lines_bottom_left, lines_left_bottom)[1]
+            elif cut(lines_bottom_left, lines_left_bottom) == True:
+                max_dis = (-1) * max_dis
+                cut = True
+        else:
+            max_dis = 1000
 
         if max_dis < mindis:
             geometry_ok = False
@@ -745,7 +765,7 @@ def cut(lines1, lines2):
 
 
 
-def dis_lines_lines(lines1, lines):
+def dis_lines_lines(lines1, lines2):
     #calculates the minimal width of a bar that fits between two corners created each by two lines
     points = []
     for line in lines1:
@@ -754,7 +774,7 @@ def dis_lines_lines(lines1, lines):
 
     dis = 1000
     angle = 0
-    for line in lines:
+    for line in lines2:
         for point in points:
             #dot product
             l_y = line.b.y - line.a.y
@@ -765,4 +785,5 @@ def dis_lines_lines(lines1, lines):
                 dis = dis_new
                 angle = math.atan(l_z / l_y)
 
-    return dis, angle
+    dis_angle = [dis, angle]
+    return dis_angle

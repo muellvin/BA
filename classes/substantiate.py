@@ -138,7 +138,7 @@ def trackplate():
     return b_sup, b_inf, h, t
 
 
-def min_inertial_mom(a):
+def min_inertial_mom():
     #returns the minimal required inertial moment of the track plate according to EC-3 2
     #This inertial momenent is calculated with the track plate
     #Lower Inertial moments for stiffeners in the corners should be considered
