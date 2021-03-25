@@ -61,16 +61,16 @@ def find_dimensions(stiffener):
     t_range = [5,7,9,11,13,15,17,20]
 
     #set new default values, if corrections need to be made
-    if stiffener.b_inf != 0:
+    if stiffener.b_inf_corr == True:
         b_inf_max_geo = stiffener.b_inf
         assert b_inf_max_geo > b_inf_step, "Error, nothing could be found."
 
-    if stiffener.b_sup != 0:
+    if stiffener.b_sup_corr == True:
         b_sup_max_geo = 10*math.floor(stiffener.b_sup/10)
         print(b_sup_max_geo)
         assert b_sup_max_geo > b_sup_step, "Error, nothing could be found."
 
-    if stiffener.height != 0:
+    if stiffener.height_corr == True:
         h_max_geo = stiffener.height
         assert h_max_geo > h_step, "Error, nothing could be found."
 
@@ -98,7 +98,7 @@ def find_dimensions(stiffener):
     b_inf = best[1]
     h = best[2]
     t = best[3]
-    print(b_sup, b_inf, h, t)
+    print("suitable stiffener: b_sup=", b_sup, " b_inf=", b_inf, " h=", h," t=", t)
     return b_sup, b_inf, h, t
 
 def trackplate():
