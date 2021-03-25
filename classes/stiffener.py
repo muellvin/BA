@@ -678,7 +678,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     #"Temporary Return statement for testing"
     #print("geometry_ok")
     #print(geometry_ok)
-    return(geometry_ok)
+    return geometry_ok
 
     """check distances in corners between stiffeners"""
     if left_top != None and top_left != None:
@@ -723,7 +723,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             corr_b_inf -= disdiff*math.cos(angle)/2
             corr_height -= disdiff*math.sin(angle)/2
 
-            print("corr" + corr_b_sup, corr_b_inf, corr_height)
+            print("Problem in top corners: corr" + corr_b_sup, corr_b_inf, corr_height)
 
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup  = left_top.b_sup - corr_b_sup
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf = left_top.b_inf - corr_b_inf
@@ -737,6 +737,8 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup_corr = True
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf_corr = True
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).height_corr = True
+        else:
+            print("no problems between stiffeners in top corners")
 
     if left_bottom != None and bottom_left != None:
         print("stiffeners in bottom left corner")
@@ -781,7 +783,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             corr_b_inf -= disdiff*math.cos(angle)/2
             corr_height -= disdiff*math.sin(angle)/2
 
-            print("corr" + corr_b_sup, corr_b_inf, corr_height)
+            print("problems in bottom corners: corr" + corr_b_sup, corr_b_inf, corr_height)
 
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup = left_top.b_sup - corr_b_sup
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf = left_top.b_inf - corr_b_inf
@@ -795,6 +797,8 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup_corr = True
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf_corr = True
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).height_corr = True
+        else:
+            print("no problems between stiffeners in bottom corners")
 
     return geometry_ok
 
