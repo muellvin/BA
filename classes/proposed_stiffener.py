@@ -10,3 +10,6 @@ class proposed_stiffener():
         self.b_inf = b_inf if b_inf is not None else 0
         self.height = height if height is not None else 0
         self.t = t if t is not None else 0
+        self.b_sup_corr = False
+        self.b_inf_corr = False
+        self.height_corr = False
