@@ -24,10 +24,14 @@ for line in test_cs.lines:
 prop_list = st_prop.stiffeners_proposition()
 #propose stiffeners, mimicking input from optimizer
 
-prop_1 = ps.proposed_stiffener(2, 1, 0.5, 10**7)
+prop_1 = ps.proposed_stiffener(2, 1, 0.8, 10**7)
 prop_list.add(prop_1)
-prop_2 = ps.proposed_stiffener(4, 2, 0.5, 10**7)
+prop_2 = ps.proposed_stiffener(4, 3, 0.8, 10**7)
 prop_list.add(prop_2)
+
+prop_1 = ps.proposed_stiffener(3, 2, 0.7, 10**7)
+prop_list.add(prop_1)
+
 
 
 

@@ -501,10 +501,10 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 corner_bottom_right = point
 
     """check distances to corners of crosssection"""
-    mindis_top_corner = 20
-    mindis_side_top_corner = 20
-    mindis_side_bottom_corner = 30
-    mindis_bottom_corner = 30
+    mindis_top_corner = 300
+    mindis_side_top_corner = 300
+    mindis_side_bottom_corner = 200
+    mindis_bottom_corner = 200
 
     if top_left != None:
         dis_top_left_corner = corner_top_left.y - top_left_4b.y
@@ -522,14 +522,14 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         if right_top_4b.z < mindis_side_top_corner:
             corr = mindis_side_top_corner - right_top_4b.z
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup = right_top.b_sup - corr
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf = right_top.b_sup - corr
+            #stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf = right_top.b_sup - corr
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup = left_top.b_sup - corr
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf = left_top.b_sup - corr
+            #stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf = left_top.b_sup - corr
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup_corr = True
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf_corr = True
+            #stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf_corr = True
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup_corr = True
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf_corr = True
-            print("highest side stiffeners too close to corners")
+            #stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf_corr = True
+            print("highest side - stiffeners too close to corners")
             geometry_ok = False
 
     if right_bottom != None and left_bottom != None:
@@ -537,14 +537,14 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         if dis_right_bottom_corner < mindis_side_bottom_corner:
             corr = mindis_side_bottom_corner - dis_right_bottom_corner
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup = right_bottom.b_sup - corr
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_inf = right_bottom.b_inf - corr
+            #stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_inf = right_bottom.b_inf - corr
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup = left_bottom.b_sup - corr
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_inf = left_bottom.b_inf - corr
+            #stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_inf = left_bottom.b_inf - corr
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup_corr = True
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_inf_corr = True
+            #stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_inf_corr = True
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup_corr = True
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_inf_corr = True
-            print("lowest side stiffeners too close to corners")
+            #stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_inf_corr = True
+            print("lowest side - stiffeners too close to corners")
             geometry_ok = False
 
     if bottom_left != None and bottom_right != None:
@@ -552,13 +552,13 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         if corner_bottom_left.y - bottom_right_4b.y < mindis_bottom_corner:
             corr = mindis_bottom_corner - dis_bottom_left_corner
             stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup = bottom_left.b_sup -corr
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_inf = bottom_left.b_inf - corr
+            #stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_inf = bottom_left.b_inf - corr
             stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup = bottom_right.b_sup - corr
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_inf = bottom_right.b_inf - corr
+            #stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_inf = bottom_right.b_inf - corr
             stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup_corr = True
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_inf_corr = True
+            #stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_inf_corr = True
             stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup_corr = True
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_inf_corr = True
+            #stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_inf_corr = True
             print("bottom stiffeners too close to the corners")
             geometry_ok = False
 
@@ -585,24 +585,24 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 corr = (mindis_between-distance)/2
                 stiffeners_proposition.get_proposed_stiffener(2,i).b_sup = stiffeners2[i-st_number_min].b_sup - corr
                 stiffeners_proposition.get_proposed_stiffener(2,i+1).b_sup = stiffeners2[i+1-st_number_min].b_sup - corr
-                stiffeners_proposition.get_proposed_stiffener(2,i).b_inf = stiffeners2[i-st_number_min].b_inf - corr
-                stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf = stiffeners2[i+1-st_number_min].b_inf - corr
+                #stiffeners_proposition.get_proposed_stiffener(2,i).b_inf = stiffeners2[i-st_number_min].b_inf - corr
+                #stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf = stiffeners2[i+1-st_number_min].b_inf - corr
                 stiffeners_proposition.get_proposed_stiffener(2,i).b_sup_corr = True
                 stiffeners_proposition.get_proposed_stiffener(2,i+1).b_sup_corr = True
-                stiffeners_proposition.get_proposed_stiffener(2,i).b_inf_corr = True
-                stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf_corr = True
+                #stiffeners_proposition.get_proposed_stiffener(2,i).b_inf_corr = True
+                #stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf_corr = True
                 print("right side stiffeners too close to each other without overlap")
                 geometry_ok = False
             elif overlap == True:
                 corr = (mindis_between+distance)/2
                 stiffeners_proposition.get_proposed_stiffener(2,i).b_sup = stiffeners2[i-st_number_min].b_sup - corr
                 stiffeners_proposition.get_proposed_stiffener(2,i+1).b_sup = stiffeners2[i+1-st_number_min].b_sup - corr
-                stiffeners_proposition.get_proposed_stiffener(2,i).b_inf = stiffeners2[i-st_number_min].b_inf - corr
-                stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf = stiffeners2[i+1-st_number_min].b_inf - corr
+                #stiffeners_proposition.get_proposed_stiffener(2,i).b_inf = stiffeners2[i-st_number_min].b_inf - corr
+                #stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf = stiffeners2[i+1-st_number_min].b_inf - corr
                 stiffeners_proposition.get_proposed_stiffener(2,i).b_sup_corr = True
                 stiffeners_proposition.get_proposed_stiffener(2,i+1).b_sup_corr = True
-                stiffeners_proposition.get_proposed_stiffener(2,i).b_inf_corr = True
-                stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf_corr = True
+                #stiffeners_proposition.get_proposed_stiffener(2,i).b_inf_corr = True
+                #stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf_corr = True
                 print("right side stiffeners too close to each other with overlap")
                 geometry_ok = False
 
@@ -624,24 +624,24 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 corr = (mindis_between-distance)/2
                 stiffeners_proposition.get_proposed_stiffener(3,i).b_sup = stiffeners3[i-st_number_min].b_sup - corr
                 stiffeners_proposition.get_proposed_stiffener(3,i+1).b_sup = stiffeners3[i+1-st_number_min].b_sup - corr
-                stiffeners_proposition.get_proposed_stiffener(3,i).b_inf = stiffeners3[i-st_number_min].b_inf - corr
-                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf = stiffeners3[i+1-st_number_min].b_inf - corr
+                #stiffeners_proposition.get_proposed_stiffener(3,i).b_inf = stiffeners3[i-st_number_min].b_inf - corr
+                #stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf = stiffeners3[i+1-st_number_min].b_inf - corr
                 stiffeners_proposition.get_proposed_stiffener(3,i).b_sup_corr = True
                 stiffeners_proposition.get_proposed_stiffener(3,i+1).b_sup_corr = True
-                stiffeners_proposition.get_proposed_stiffener(3,i).b_inf_corr = True
-                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf_corr = True
+                #stiffeners_proposition.get_proposed_stiffener(3,i).b_inf_corr = True
+                #stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf_corr = True
                 geometry_ok = False
             elif overlap == True:
                 print("bottom stiffeners are too close with overlap")
                 corr = (mindis_between+distance)/2
                 stiffeners_proposition.get_proposed_stiffener(3,i).b_sup = stiffeners3[i-st_number_min].b_sup - corr
                 stiffeners_proposition.get_proposed_stiffener(3,i+1).b_sup = stiffeners3[i+1-st_number_min].b_sup - corr
-                stiffeners_proposition.get_proposed_stiffener(3,i).b_inf = stiffeners3[i-st_number_min].b_inf - corr
-                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf = stiffeners3[i+1-st_number_min].b_inf - corr
+                #stiffeners_proposition.get_proposed_stiffener(3,i).b_inf = stiffeners3[i-st_number_min].b_inf - corr
+                #stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf = stiffeners3[i+1-st_number_min].b_inf - corr
                 stiffeners_proposition.get_proposed_stiffener(3,i).b_sup_corr = True
                 stiffeners_proposition.get_proposed_stiffener(3,i+1).b_sup_corr = True
-                stiffeners_proposition.get_proposed_stiffener(3,i).b_inf_corr = True
-                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf_corr = True
+                #stiffeners_proposition.get_proposed_stiffener(3,i).b_inf_corr = True
+                #stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf_corr = True
                 geometry_ok = False
 
     if left_top != None and left_bottom != None and left_top != left_bottom:
@@ -656,24 +656,24 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 corr = (mindis_between-distance)/2
                 stiffeners_proposition.get_proposed_stiffener(4,i).b_sup = stiffeners4[i-st_number_min].b_sup - corr
                 stiffeners_proposition.get_proposed_stiffener(4,i+1).b_sup = stiffeners4[i+1-st_number_min].b_sup - corr
-                stiffeners_proposition.get_proposed_stiffener(4,i).b_inf = stiffeners4[i-st_number_min].b_inf - corr
-                stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf = stiffeners4[i+1-st_number_min].b_inf - corr
+                #stiffeners_proposition.get_proposed_stiffener(4,i).b_inf = stiffeners4[i-st_number_min].b_inf - corr
+                #stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf = stiffeners4[i+1-st_number_min].b_inf - corr
                 stiffeners_proposition.get_proposed_stiffener(4,i).b_sup_corr = True
                 stiffeners_proposition.get_proposed_stiffener(4,i+1).b_sup_corr = True
-                stiffeners_proposition.get_proposed_stiffener(4,i).b_inf_corr = True
-                stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf_corr = True
+                #stiffeners_proposition.get_proposed_stiffener(4,i).b_inf_corr = True
+                #stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf_corr = True
                 print("left side stiffeners are too close without overlap")
                 geometry_ok = False
             elif overlap == True:
                 corr = (mindis_between+distance)/2
                 stiffeners_proposition.get_proposed_stiffener(4,i).b_sup = stiffeners4[i-st_number_min].b_sup - corr
                 stiffeners_proposition.get_proposed_stiffener(4,i+1).b_sup = stiffeners4[i+1-st_number_min].b_sup - corr
-                stiffeners_proposition.get_proposed_stiffener(4,i).b_inf = stiffeners4[i-st_number_min].b_inf - corr
-                stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf = stiffeners4[i+1-st_number_min].b_inf - corr
+                #stiffeners_proposition.get_proposed_stiffener(4,i).b_inf = stiffeners4[i-st_number_min].b_inf - corr
+                #stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf = stiffeners4[i+1-st_number_min].b_inf - corr
                 stiffeners_proposition.get_proposed_stiffener(4,i).b_sup_corr = True
                 stiffeners_proposition.get_proposed_stiffener(4,i+1).b_sup_corr = True
-                stiffeners_proposition.get_proposed_stiffener(4,i).b_inf_corr = True
-                stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf_corr = True
+                #stiffeners_proposition.get_proposed_stiffener(4,i).b_inf_corr = True
+                #stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf_corr = True
                 print("left side stiffeners are too close without overlap")
                 geometry_ok = False
 

@@ -3,6 +3,7 @@ from classes import crosssection as cs
 from classes import plate_code as plcd
 from classes import line as ln
 import math
+import numpy
 
 def substantiate(crosssection, propositions):
     #initialize list for stiffeners
@@ -60,15 +61,40 @@ def find_dimensions(stiffener):
     h_step = 10
     t_range = [5,7,9,11,13,15,17,20]
 
+    locationchange = False
+    error_inf = 0
+    error_sup = 0
     #set new default values, if corrections need to be made
     if stiffener.b_inf_corr == True:
-        b_inf_max_geo = stiffener.b_inf
-        assert b_inf_max_geo > b_inf_step, "Error, nothing could be found."
+        if stiffener.b_inf > b_inf_step:
+            b_inf_max_geo = stiffener.b_inf
+        else:
+            locationchange = True
+            error_inf = abs(b_inf_step - stiffener.b_inf)
+            b_inf_max_geo = b_inf_step
+        #assert b_inf_max_geo > b_inf_step, "Error, nothing could be found."
 
     if stiffener.b_sup_corr == True:
-        b_sup_max_geo = 10*math.floor(stiffener.b_sup/10)
-        print(b_sup_max_geo)
-        assert b_sup_max_geo > b_sup_step, "Error, nothing could be found."
+        if stiffener.b_sup > b_sup_step:
+            b_sup_max_geo = min(10*math.floor((stiffener.b_sup)/10), stiffener.b_sup)
+        else:
+            locationchange = True
+            error_sup = abs(b_sup_step - stiffener.b_sup)
+            b_sup_max_geo = 10*math.floor((error_sup)/10)
+        #assert b_sup_max_geo > b_sup_step, "Error, nothing could be found."
+
+
+    #if the inferior one is negative then both are
+    if locationchange == True:
+        error = max(error_inf, error_sup)
+        if stiffener.pl_position == 2 or stiffener.pl_position == 4:
+            if stiffener.location > 0.5: stiffener.location -= error*1.3
+            elif stiffener.location <= 0.5: stiffener.location += error*1.3
+        elif stiffener.pl_position == 3:
+            if stiffener.location > 0: stiffener.location -= error*1.3
+            elif stiffener.location < 0: stiffener.location += error*1.3
+
+
 
     if stiffener.height_corr == True:
         h_max_geo = stiffener.height
@@ -98,7 +124,9 @@ def find_dimensions(stiffener):
     b_inf = best[1]
     h = best[2]
     t = best[3]
-    print("suitable stiffener: b_sup=", b_sup, " b_inf=", b_inf, " h=", h," t=", t)
+    print("suitable stiffener:   b_sup=", b_sup, " b_inf=", b_inf, " h=", h," t=", t, \
+    "      corrections:   b_sup:", stiffener.b_sup_corr, "b_inf:", stiffener.b_inf_corr, "height:", stiffener.height_corr)
+
     return b_sup, b_inf, h, t
 
 def trackplate():
