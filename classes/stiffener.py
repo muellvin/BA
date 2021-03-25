@@ -37,7 +37,7 @@ def merge(initial_cs, stiffener_list):
     stiffeners3 = []
     stiffeners4 = []
     for stiffener in stiffener_list:
-        pos = stiffener[0].code.pl_position
+        pos = stiffener.lines[0].code.pl_position
         if pos == 1:
             stiffeners1.append(stiffener)
         elif pos == 2:
@@ -48,47 +48,50 @@ def merge(initial_cs, stiffener_list):
             stiffeners4.append(stiffener)
 
     #side 1
-    old_plate_1 = initial_cs.get_pl_line(1)
-    initial_cs.remove(initial_cs.get_pl_line(1))
-    t_1 = old_plate_1.t
-    tpl_number_1_min = initial_cs.get_pl_line(1).code.tpl_number
-    side = 1
     new_tpl_lines_1 = []
+    if stiffeners1 != []:
+        assert True, "Is this case really needed?"
+        old_plate_1 = initial_cs.get_pl_line(1)
+        tpl_number_1_min = initial_cs.get_pl_line(1).code.tpl_number
+        initial_cs.lines.remove(initial_cs.get_pl_line(1))
+        t_1 = old_plate_1.t
+        side = 1
 
-    st_number_1_min = stiffeners1[0].lines[0].code.st_number
-    st_number_1_max = st_number_1_min
-    for stiffener in stiffeners1:
-        this_st_number = stiffener.lines[0].code.st_number
-        if st_number < st_number_1_min:
-            st_number_1_min = this_st_number
-        elif this_st_number > st_number_1_max:
-            st_number_1_max = this_st_number
 
-    i = st_number_1_min
-    j = tpl_number_1_min
-    next_tpl_a = None
+        st_number_1_min = stiffeners1[0].lines[0].code.st_number
+        st_number_1_max = st_number_1_min
+        for stiffener in stiffeners1:
+            this_st_number = stiffener.lines[0].code.st_number
+            if st_number < st_number_1_min:
+                st_number_1_min = this_st_number
+            elif this_st_number > st_number_1_max:
+                st_number_1_max = this_st_number
 
-    while i <= st_number_1_max:
-        new_plate_1_a = old_plate_1.a
-        new_plate_1_b = stiffener.get_line(side, 4).b
-        new_plate_2_a = new_plate_1_b
-        new_plate_2_b = stiffener.get_line(side, 2).a
-        next_tpl_a = new_plate_2_b
-        code_1 = [side, 0, j, 0, 0]
-        code_2 = [side, 0, j+1, 0, 0]
-        new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t)
-        new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t)
-        new_tpl_lines_1.append(new_plate_1)
-        new_tpl_lines_1.append(new_plate_2)
-        j += 1
-        i += 1
-    code_3 = [side, 0, tpl_number+2, 0, 0]
-    new_plate_3 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
-    new_tpl_lines_1.append(new_plate_3)
+        i = st_number_1_min
+        j = tpl_number_1_min
+        next_tpl_a = None
+
+        while i <= st_number_1_max:
+            new_plate_1_a = old_plate_1.a
+            new_plate_1_b = stiffener.get_line(side, 4).b
+            new_plate_2_a = new_plate_1_b
+            new_plate_2_b = stiffener.get_line(side, 2).a
+            next_tpl_a = new_plate_2_b
+            code_1 = [side, 0, j, 0, 0]
+            code_2 = [side, 0, j+1, 0, 0]
+            new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t)
+            new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t)
+            new_tpl_lines_1.append(new_plate_1)
+            new_tpl_lines_1.append(new_plate_2)
+            j += 1
+            i += 1
+        code_3 = [side, 0, tpl_number+2, 0, 0]
+        new_plate_3 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
+        new_tpl_lines_1.append(new_plate_3)
 
     #side 2
     new_tpl_lines_2 = []
-    if stiffeners_2 != []:
+    if stiffeners2 != []:
         old_plate_2 = initial_cs.get_pl_line(2)
         tpl_number_2_min = initial_cs.get_pl_line(2).code.tpl_number
         initial_cs.lines.remove(initial_cs.get_pl_line(2))
@@ -315,7 +318,6 @@ def get_area_stiffener(b_sup, b_inf, h, t):
     #as well as the stiffener_proposition list which then will be adjusted according to the geometry such that it might fit
 def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
-
     geometry_ok = True
 
 
@@ -386,7 +388,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     if stiffeners3 != []:
         min = random.choice(stiffeners3).lines[0].code.st_number
         max = random.choice(stiffeners3).lines[0].code.st_number
-        for stiffener in stiffeners2:
+        for stiffener in stiffeners3:
             if stiffener.lines[0].code.st_number <= min:
                 bottom_right = stiffener
                 min = stiffener.lines[0].code.st_number
@@ -483,21 +485,17 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             if point.y >= y_top_max and point.z == 0:
                 y_top_max = point.y
                 corner_top_left = point
-                print("1")
             elif point.y <= y_top_min and point.z == 0:
                 y_top_min = point.y
                 corner_top_right = point
-                print("2")
             elif point.y >= y_bottom_max and point.z >= z_bottom_max:
                 y_bottom_max = point.y
                 z_bottom_max = point.z
                 corner_bottom_left = point
-                print("4")
             elif point.y <= y_bottom_min and point.z >= z_bottom_max:
                 y_bottom_min = point.y
                 z_bottom_max = point.z
                 corner_bottom_right = point
-                print("3")
 
     """check distances to corners of crosssection"""
     mindis_top_corner = 30
@@ -524,6 +522,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_inf = right_top.b_sup - corr
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup = left_top.b_sup - corr
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_inf = left_top.b_sup - corr
+            print("Problem #1")
             geometry_ok = False
 
     if right_bottom != None and left_bottom != None:
@@ -534,16 +533,18 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_inf = right_bottom.b_inf - corr
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup = left_bottom.b_sup - corr
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_inf = left_bottom.b_inf - corr
+            print("Problem #2")
             geometry_ok = False
 
     if bottom_left != None and bottom_right != None:
         dis_bottom_left_corner = corner_bottom_left.y - bottom_right_4b.y
-        if corner_bottom_left.y - bottom_right_4b.y > mindis_bottom_corner:
+        if corner_bottom_left.y - bottom_right_4b.y < mindis_bottom_corner:
             corr = mindis_bottom_corner - dis_bottom_left_corner
             stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup = bottom_left.b_sup -corr
             stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_inf = bottom_left.b_inf - corr
             stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup = bottom_right.b_sup - corr
             stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_inf = bottom_right.b_inf - corr
+            print("Problem #3")
             geometry_ok = False
 
 
@@ -559,40 +560,46 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             upper = stiffeners2[i-st_number_min].get_stiffener_line(2,i,2).a
             lower = stiffeners2[i+1-st_number_min].get_stiffener_line(2,i+1,4).b
             distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
-            print("Distance")
-            print(distance)
             if distance < mindis_between:
                 corr = (mindis_between-distance)/2
-                print("Corr")
-                print(corr)
-                print("b_sup")
-                print(stiffeners2[i-st_number_min].b_sup)
                 stiffeners_proposition.get_proposed_stiffener(2,i).b_sup = stiffeners2[i-st_number_min].b_sup - corr
-                print(stiffeners_proposition.get_proposed_stiffener(2,i).b_sup)
                 stiffeners_proposition.get_proposed_stiffener(2,i+1).b_sup = stiffeners2[i+1-st_number_min].b_sup - corr
                 stiffeners_proposition.get_proposed_stiffener(2,i).b_inf = stiffeners2[i-st_number_min].b_inf - corr
                 stiffeners_proposition.get_proposed_stiffener(2,i+1).b_inf = stiffeners2[i+1-st_number_min].b_inf - corr
+                print("Problem #4")
                 geometry_ok = False
 
-    #this part of the code still should be improved according to the other two parts
-    #this will be done when the code for the sideplate works
-    if bottom_right != None and bottom_left != None:
-        st_number_min = bottom_right[0].code.st_number
-        i = st_number_min
-        st_number_max = bottom_left[0].code.st_number
-        while i < st_number_max:
-            right = stiffener3.get_stiffener_line(2,i,2).a
-            left = stiffener3.get_stiffener_line(2,i+1,4).b
+
+    if bottom_right != None and bottom_left != None and bottom_left != bottom_right:
+        st_number_min = bottom_right.lines[0].code.st_number
+        st_number_max = bottom_left.lines[0].code.st_number
+        for i in range(st_number_min, st_number_max, 1):
+            right = stiffeners3[i-st_number_min].get_stiffener_line(3,i,2).a
+            left = stiffeners3[i+1-st_number_min].get_stiffener_line(3,i+1,4).b
+            overlap = right.y > left.y
+            print("overlap")
+            print(overlap)
             distance = math.sqrt((abs(right.y) - abs(left.y))**2 + (abs(right.z) - abs(left.z))**2)
-            if distance < mindis_between:
-                corr = (mindis-distance)/2
-                stiffeners_proposition.get_proposed_stiffener(3,i).b_sup -= corr
-                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_sup -= corr
-                stiffeners_proposition.get_proposed_stiffener(3,i).b_inf -= corr
-                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf -= corr
+            print("distance")
+            print(distance)
+            if distance < mindis_between and overlap == False:
+                print("Problem #5")
+                corr = (mindis_between-distance)/2
+                stiffeners_proposition.get_proposed_stiffener(3,i).b_sup = stiffeners3[i-st_number_min].b_sup - corr
+                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_sup = stiffeners3[i+1-st_number_min].b_sup - corr
+                stiffeners_proposition.get_proposed_stiffener(3,i).b_inf = stiffeners3[i-st_number_min].b_inf - corr
+                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf = stiffeners3[i+1-st_number_min].b_inf - corr
+                geometry_ok = False
+            elif overlap == True:
+                print("Problem #6")
+                corr = (mindis_between+distance)/2
+                stiffeners_proposition.get_proposed_stiffener(3,i).b_sup = stiffeners3[i-st_number_min].b_sup - corr
+                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_sup = stiffeners3[i+1-st_number_min].b_sup - corr
+                stiffeners_proposition.get_proposed_stiffener(3,i).b_inf = stiffeners3[i-st_number_min].b_inf - corr
+                stiffeners_proposition.get_proposed_stiffener(3,i+1).b_inf = stiffeners3[i+1-st_number_min].b_inf - corr
                 geometry_ok = False
 
-    if left_top != None and left_bottom != None:
+    if left_top != None and left_bottom != None and left_top != left_bottom:
         st_number_min = left_bottom.lines[0].code.st_number
         st_number_max = left_top.lines[0].code.st_number
         for i in range(st_number_min, st_number_max, 1):
@@ -605,9 +612,14 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 stiffeners_proposition.get_proposed_stiffener(4,i+1).b_sup = stiffeners4[i+1-st_number_min].b_sup - corr
                 stiffeners_proposition.get_proposed_stiffener(4,i).b_inf = stiffeners4[i-st_number_min].b_inf - corr
                 stiffeners_proposition.get_proposed_stiffener(4,i+1).b_inf = stiffeners4[i+1-st_number_min].b_inf - corr
+                print("Problem #7")
                 geometry_ok = False
 
 
+    "Temporary Return statement for testing"
+    print("geometry_ok")
+    print(geometry_ok)
+    return(geometry_ok)
 
     """check distances in corners between stiffeners"""
     if left_top != None and top_left != None:
