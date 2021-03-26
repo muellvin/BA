@@ -696,7 +696,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     #"Temporary Return statement for testing"
     #print("geometry_ok")
     #print(geometry_ok)
-    return geometry_ok
+
 
     """check distances in corners between stiffeners"""
     if left_top != None and top_left != None:
@@ -889,23 +889,54 @@ def cut(lines1, lines2):
 
 def dis_lines_lines(lines1, lines2):
     #calculates the minimal width of a bar that fits between two corners created each by two lines
-    points = []
+    #list of points in lines1
+    #lines2 stays a list of lines
+    points1 = []
     for line in lines1:
-        points.append(line.a)
-        points.append(line.b)
+        points1.append(line.a)
+        points1.append(line.b)
 
-    dis = 1000
+    points2 = []
+    for line in lines2:
+        points2.append(line.a)
+        points2.append(line.b)
+
+    seen = set()
+    corner = 0
+    for x in points2:
+        if x not in seen:
+            seen.add(x)
+        if x in seen:
+            corner = x
+
+    mindis = 1000
     angle = 0
     for line in lines2:
-        for point in points:
+        #unit vector of line from a to b (one is corner, but not important weather in plus or minus direction)
+        l_y = line.b.y - line.a.y
+        l_z = line.b.z - line.a.z
+        length = math.sqrt(l_y**2 + l_z**2)
+        #unit vector perpendicular to line
+        l_y_norm = -l_y / length
+        l_z_norm = -l_z / length
+
+        for point in points1:
             #dot product
-            l_y = line.b.y - line.a.y
-            l_z = line.b.z - line.a.z
-            norm = math.sqrt(l_y**2 + l_z**2)
-            dis_new = abs(1/norm *(l_y * point.y + l_z * point.z))
-            if dis_new < dis:
+            #vector from corner to point
+            d_y = point.y - corner.y
+            d_z = point.z - corner.z
+            dis_new = abs((l_y_norm * d_y + l_z_norm * d_z))
+
+            if dis_new < mindis:
                 dis = dis_new
-                angle = math.atan(l_z / l_y)
+                if d_y != 0:
+                    angle = math.atan(d_z / d_y)
+                    if angle < 0:
+                        angle += math.pi
+                    elif angle > math.pi / 2:
+                        angle -= math.pi
+                else:
+                    angle = math.pi/2
 
     dis_angle = [dis, angle]
     return dis_angle

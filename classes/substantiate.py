@@ -59,9 +59,10 @@ def find_dimensions(stiffener):
     best = [0,0,0,0,0]
     #set maximum default values and step size for range
     b_inf_max_geo = 500
-    b_inf_minimal = 0
+    b_inf_minimal = 50
     b_inf_step = 20
     b_sup_max_geo = 500
+    b_sup_minimal = 100
     b_sup_step = 20
     b_sup_minimal = 50
     h_max_geo = 200
@@ -117,11 +118,11 @@ def find_dimensions(stiffener):
     best_default = best
     max_angle = math.pi/3
     assert b_sup_max_geo >= b_sup_minimal
-    for b_sup in range(50, b_sup_max_geo, b_sup_step):
+    for b_sup in range(b_sup_minimal, b_sup_max_geo, b_sup_step):
         h_max = 10*math.floor(min(h_max_geo, 0.5*math.sqrt(3)*b_sup)/10)
-        if h_max > 30:
+        if h_max > 50:
             for h in range(30, h_max, h_step):
-                b_inf_min = 10*math.floor(max(0,b_sup - 2*h)/10)
+                b_inf_min = max(10*math.floor(max(0,b_sup - 2*h)/10),b_inf_minimal)
                 b_inf_max = 10*math.floor(min(b_sup - 2*h/math.tan(max_angle), b_inf_max_geo)/10)
                 if b_inf_min < b_inf_max:
                     for b_inf in range(b_inf_min, b_inf_max, b_inf_step):
@@ -141,9 +142,15 @@ def find_dimensions(stiffener):
     print("chosen stiffener:   b_sup=", b_sup, " b_inf=", b_inf, " h=", h," t=", t, \
     "      corrections:   b_sup:", stiffener.b_sup_corr, "b_inf:", stiffener.b_inf_corr, "height:", stiffener.height_corr)
 
+    stiffener.b_inf = 0
+    stiffener.b_sup = 0
+    stiffener.height = 0
     stiffener.b_inf_corr = False
     stiffener.b_sup_corr = False
     stiffener.height_corr = False
+    stiffener.b_inf_corr_val = False
+    stiffener.b_sup_corr_val = False
+    stiffener.height_corr_val = False
     return b_sup, b_inf, h, t
 
 def trackplate():
