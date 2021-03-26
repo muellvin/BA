@@ -566,8 +566,6 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
 
 
     """check distances between stiffeners"""
-    #what is if stiffeners overlap?
-    #Distances are only calculated in absolute values ...
     mindis_between = 30
 
     if right_top != None and right_bottom != None and right_top != right_bottom:
