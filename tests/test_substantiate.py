@@ -20,15 +20,15 @@ for line in test_cs.lines:
     line.t = 20
 
 #propose stiffeners, mimicking input from optimizer
-prop_1 = ps.proposed_stiffener(2, 1, 0.67, 10**7)
-prop_2 = ps.proposed_stiffener(2, 2, 0.4, 10**7)
+prop_1 = ps.proposed_stiffener(2, 1, 0.7, 10**7)
+prop_2 = ps.proposed_stiffener(2, 2, 0.15, 10**7)
 prop_3 = ps.proposed_stiffener(3, 3, -0.6, 10**7)
 prop_4 = ps.proposed_stiffener(3, 4, -0.3, 10**7)
 prop_5 = ps.proposed_stiffener(3, 5, 0, 10**7)
 prop_6 = ps.proposed_stiffener(3, 6, 0.3, 10**7)
 prop_7 = ps.proposed_stiffener(3, 7, 0.6, 10**7)
-prop_8 = ps.proposed_stiffener(4, 8, 0.4, 10**7)
-prop_9 = ps.proposed_stiffener(4, 9, 0.67, 10**7)
+prop_8 = ps.proposed_stiffener(4, 8, 0.15, 10**7)
+prop_9 = ps.proposed_stiffener(4, 9, 0.7, 10**7)
 
 
 #add all propositions to a list
