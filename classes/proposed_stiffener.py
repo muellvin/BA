@@ -13,3 +13,6 @@ class proposed_stiffener():
         self.b_sup_corr = False
         self.b_inf_corr = False
         self.height_corr = False
+        self.b_sup_corr_val = 0
+        self.b_inf_corr_val = 0
+        self.height_corr_val = 0
