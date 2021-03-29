@@ -4,6 +4,7 @@ from classes import crosssection as cs
 from classes import stiffener as st
 from classes import plate_code as plcd
 import math
+import data
 
 
 def deck(b_deck):
@@ -11,6 +12,7 @@ def deck(b_deck):
     min_Iy = min_inertial_mom()
     #choose correct value according to EC 3-2
     t_deck = 14
+    data.input_data.update({"t_deck": t_deck})
     #set maximum default values and step size for range
     h_max = 300
     h_step = 5
