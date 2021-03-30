@@ -55,12 +55,13 @@ def merge(initial_cs, stiffener_list):
         t_1 = old_plate_1.t
         side = 1
 
-
+        print(len(stiffeners1))
+        print(stiffeners1[0].lines[0].code.st_number)
         st_number_1_min = stiffeners1[0].lines[0].code.st_number
         st_number_1_max = st_number_1_min
         for stiffener in stiffeners1:
             this_st_number = stiffener.lines[0].code.st_number
-            if st_number < st_number_1_min:
+            if this_st_number < st_number_1_min:
                 st_number_1_min = this_st_number
             elif this_st_number > st_number_1_max:
                 st_number_1_max = this_st_number
@@ -77,14 +78,14 @@ def merge(initial_cs, stiffener_list):
             next_tpl_a = new_plate_2_b
             code_1 = [side, 0, j, 0, 0]
             code_2 = [side, 0, j+1, 0, 0]
-            new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t)
-            new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t)
+            new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_1)
+            new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t_1)
             new_tpl_lines_1.append(new_plate_1)
             new_tpl_lines_1.append(new_plate_2)
             j += 1
             i += 1
-        code_3 = [side, 0, tpl_number+2, 0, 0]
-        new_plate_3 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
+        code_3 = [side, 0, j+2, 0, 0]
+        new_plate_3 = line.line(code_3, next_tpl_a, old_plate_1.b, t_1)
         new_tpl_lines_1.append(new_plate_3)
 
     #side 2
@@ -317,7 +318,7 @@ def get_area_stiffener(b_sup, b_inf, h, t):
     #this function should check weather the proposed stiffeners are feasable in the initial crosssection with the track_plate
     #as an argument it takes the initial crosssection and a list of all proposed stiffeners of type crosssection in the global coordinate system
     #as well as the stiffener_proposition list which then will be adjusted according to the geometry such that it might fit
-def check_geometry(crosssection, stiffeners, stiffeners_proposition):
+def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
 
     geometry_ok = True
 
@@ -329,12 +330,12 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     stiffeners3 = []
     stiffeners4 = []
 
-    for line in crosssection.lines:
+    for line in crosssection_cs.lines:
         if line.code.pl_position == 1 and line.code.tpl_number == 0:
             lines1.append(line)
 
     for i in range(int(len(lines1)/3)):
-        stiffeners1[i] = crosssection.crosssection()
+        stiffeners1.append(crosssection.crosssection(0, 0, 0))
         for line in lines1:
             if line.code.st_number == i+1:
                 stiffeners1[i].lines.append(line)
@@ -478,7 +479,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     y_bottom_max = 0
     y_bottom_min = 0
 
-    for plate in crosssection.lines:
+    for plate in crosssection_cs.lines:
         points = []
         points.append(plate.a)
         points.append(plate.b)
@@ -504,9 +505,9 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
     mindis_side_bottom_corner = 100
     mindis_bottom_corner = 100
 
-    if top_left != None:
+    """if top_left != None:
         dis_top_left_corner = corner_top_left.y - top_left_4b.y
-        if  dis < mindis_top_corner:
+        if  dis_top_left_corner < mindis_top_corner:
             print("track_plate stiffeners do not fit!!!")
             geometry_ok = False
 
@@ -516,7 +517,8 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             print("track_plate stiffeners do not fit!!!")
             geometry_ok = False
 
-    if right_top != None and left_top != None:
+    do_top_plates = False
+    if do_top_plates == True and right_top != None and left_top != None:
         if right_top_4b.z < mindis_side_top_corner:
             corr = mindis_side_top_corner - right_top_4b.z
             stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top).b_sup = right_top.b_sup - corr
@@ -527,7 +529,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top).b_sup_corr_val = corr
 
             print("highest side - stiffeners too close to corners")
-            geometry_ok = False
+            geometry_ok = False"""
 
     if right_bottom != None and left_bottom != None:
         dis_right_bottom_corner = corner_bottom_right.z - right_bottom_2a.z
@@ -716,7 +718,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
         cut = False
 
         if lines_top_left != [] and lines_left_top != []:
-            if dis_point_line(lines_top_left, lines_left_top)[0] > max_dis:
+            if dis_lines_lines(lines_top_left, lines_left_top)[0] > max_dis:
                 max_dis = dis_lines_lines(lines_top_left, lines_left_top)[0]
                 disangle = dis_lines_lines(lines_top_left, lines_left_top)[1]
             elif dis_point_line(lines_left_top, lines_top_left)[0] > max_dis:
@@ -732,27 +734,23 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             geometry_ok = False
             disdiff = mindis - max_dis
 
-            stangle = -(math.pi/2 - left_top.get_line(4, 3),get_angle())
+            stangle = -(math.pi/2 - float(left_top.get_line(4, 3).cal_angle_y()))
             angle = disangle + stangle
-            corr_b_inf = disdiff*math.cos(angle)/2
-            corr_height = disdiff*math.sin(angle)/2
+            corr_b_inf = disdiff*math.cos(angle)
+            corr_height = disdiff*math.sin(angle)
 
             print("Stiffeners in top corners are too close")
 
             st_left_top = stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top)
-            st_top_left = stiffeners_proposition.get_proposed_stiffener(1, st_num_top_left)
             st_left_top_b_inf_corr_old = st_left_top.b_inf_corr_val
-            st_top_left_b_inf_corr_old = st_top_left.b_inf_corr_val
             st_left_top_h_corr_old = st_left_top.height_corr_val
-            st_top_left_h_corr_old = st_top_left.height_corr_val
+
 
             #heights are only adjusted in case of this problem
-            st_left_top.height = left_top.height - corr_height
+            st_left_top.height = left_top.h - corr_height
             st_left_top.height_corr = True
             st_left_top.height_corr_val = corr_height
-            st_top_left.height = top_left.height - corr_height
-            st_top_left.height_corr = True
-            st_top_left.height_corr_val = corr_height
+
 
             if st_left_top_b_inf_corr_old == 0:
                 st_left_top.b_inf = left_top.b_inf - corr_b_inf
@@ -763,14 +761,29 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 st_left_top.b_inf_corr = True
                 st_left_top.b_inf_corr_val = corr_b_inf
 
-            if st_top_left_b_inf_corr_old == 0:
-                st_top_left.b_inf = top_left.b_inf - corr_b_inf
-                st_top_left.b_inf_corr = True
-                st_top_left.b_inf_corr_val = corr_b_inf
-            if st_top_left_b_inf_corr_old < corr_b_inf:
-                st_top_left.b_inf += st_top_left_b_inf_corr_old - corr_b_inf
-                st_top_left.b_inf_corr = True
-                st_top_left.b_inf_corr_val = corr_b_inf
+
+
+            st_right_top = stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top)
+            st_right_top_b_inf_corr_old = st_right_top.b_inf_corr_val
+            st_right_top_h_corr_old = st_right_top.height_corr_val
+
+
+            #heights are only adjusted in case of this problem
+            st_right_top.height = right_top.h - corr_height
+            st_right_top.height_corr = True
+            st_right_top.height_corr_val = corr_height
+
+
+            if st_right_top_b_inf_corr_old == 0:
+                st_right_top.b_inf = right_top.b_inf - corr_b_inf
+                st_right_top.b_inf_corr = True
+                st_right_top.b_inf_corr_val = corr_b_inf
+            if st_right_top_b_inf_corr_old < corr_b_inf:
+                st_right_top.b_inf += st_right_top_b_inf_corr_old  - corr_b_inf
+                st_right_top.b_inf_corr = True
+                st_right_top.b_inf_corr_val = corr_b_inf
+
+
 
 
 
@@ -807,7 +820,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             geometry_ok = False
             disdiff = mindis - max_dis
 
-            stangle = (math.pi/2 - left_bottom.get_line(4,3).get_angle())
+            stangle = (math.pi/2 - float(left_bottom.get_line(4,3).cal_angle_y()))
             angle = disangle + stangle
             corr_b_inf = disdiff*math.cos(angle)/2
             corr_height = disdiff*math.sin(angle)/2
@@ -820,7 +833,7 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
             st_bottom_left_h_corr_old = st_bottom_left.height_corr_val
 
             #heights are only adjusted in case of this problem
-            st_left_bottom.height = left_bottom.height - corr_height
+            st_left_bottom.height = left_bottom.h - corr_height
             st_left_bottom.height_corr = True
             st_left_bottom.height_corr_val = corr_height
             st_bottom_left.height = bottom_left.height - corr_height
@@ -844,6 +857,41 @@ def check_geometry(crosssection, stiffeners, stiffeners_proposition):
                 st_bottom_left.b_inf += st_bottom_left_b_inf_corr_old - corr_b_inf
                 st_bottom_left.b_inf_corr = True
                 st_bottom_left.b_inf_corr_val = corr_b_inf
+
+
+
+            st_right_bottom = stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom)
+            st_bottom_right = stiffeners_proposition.get_proposed_stiffener(1, st_num_bottom_right)
+            st_right_bottom_b_inf_corr_old = st_right_bottom.b_inf_corr_val
+            st_bottom_right_b_inf_corr_old = st_bottom_right.b_inf_corr_val
+            st_right_bottom_h_corr_old = st_right_bottom.height_corr_val
+            st_bottom_right_h_corr_old = st_bottom_right.height_corr_val
+
+            #heights are only adjusted in case of this problem
+            st_right_bottom.height = right_bottom.h - corr_height
+            st_right_bottom.height_corr = True
+            st_right_bottom.height_corr_val = corr_height
+            st_bottom_right.height = bottom_right.height - corr_height
+            st_bottom_right.height_corr = True
+            st_bottom_right.height_corr_val = corr_height
+
+            if st_right_bottom_b_inf_corr_old == 0:
+                st_right_bottom.b_inf = right_bottom.b_inf - corr_b_inf
+                st_right_bottom.b_inf_corr = True
+                st_right_bottom.b_inf_corr_val = corr_b_inf
+            if st_right_bottom_b_inf_corr_old < corr_b_inf:
+                st_right_bottom.b_inf += st_right_bottom_b_inf_corr_old  - corr_b_inf
+                st_right_bottom.b_inf_corr = True
+                st_right_bottom.b_inf_corr_val = corr_b_inf
+
+            if st_bottom_right_b_inf_corr_old == 0:
+                st_bottom_right.b_inf = bottom_right.b_inf - corr_b_inf
+                st_bottom_right.b_inf_corr = True
+                st_bottom_right.b_inf_corr_val = corr_b_inf
+            if st_bottom_right_b_inf_corr_old < corr_b_inf:
+                st_bottom_right.b_inf += st_bottom_right_b_inf_corr_old - corr_b_inf
+                st_bottom_right.b_inf_corr = True
+                st_bottom_right.b_inf_corr_val = corr_b_inf
 
 
 

@@ -8,7 +8,7 @@ class crosssection():
         self.lines = []
         self.b_sup = b_sup
         self.b_inf = b_inf
-        self.b = h
+        self.h = h
 
     def addline(self, line):
         self.lines.append(line)

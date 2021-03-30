@@ -10,17 +10,23 @@ from classes import stiffeners_proposition as st_prop
 import initial_cs as ics
 from output import geometry_output as go
 from classes import stiffener as st
+import deck
 
 #assign input to variables
 b_sup = 4000 #data.input_data["b_sup"]
 b_inf = 2000 #data.input_data["b_inf"]
 h = 1500 #data.input_data["h"]
+t_side = 10
+t_deck = 10
+t_bottom = 10
 
 #create initial cross section with t=20mm
-test_cs = ics.create_initial_cs(b_sup, b_inf, h)
+test_cs = ics.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
 for line in test_cs.lines:
     line.t = 20
 
+deck_stiffeners = deck.deck(b_sup)
+test_cs = st.merge(test_cs, deck_stiffeners)
 
 prop_list = st_prop.stiffeners_proposition()
 #propose stiffeners, mimicking input from optimizer
