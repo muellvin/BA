@@ -36,7 +36,7 @@ prop_list.add(prop_1)
 
 prop_2 = ps.proposed_stiffener(2, 2, 0.3, 10**7)
 prop_list.add(prop_2)
-prop_3 = ps.proposed_stiffener(3, 3, -0.7, 10**7)
+prop_3 = ps.proposed_stiffener(3, 3, -0.8, 10**7)
 prop_list.add(prop_3)
 prop_4 = ps.proposed_stiffener(3, 4, 0.8, 10**7)
 prop_list.add(prop_4)
