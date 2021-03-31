@@ -38,4 +38,5 @@ max_angle = math.pi/12*5
 
 """do_modules"""
 do_check_geometry = True
-do_check_stiffeners_in_corners = True
+do_check_stiffeners_in_corners_top = True
+do_check_stiffeners_in_corners_bottom = False

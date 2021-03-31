@@ -23,8 +23,8 @@ def add_stiffener_set(initial_cs, proposition):
         iterations += 1
         stiffener_list = ss.substantiate(initial_cs, proposition)
         geometry_ok = check_geometry(initial_cs, stiffener_list, proposition)
-        cs = merge(initial_cs, stiffener_list)
-        go.print_cs(cs)
+        #cs = merge(initial_cs, stiffener_list)
+        #go.print_cs(cs)
 
     next_cs = merge(initial_cs, stiffener_list)
     return next_cs
@@ -703,7 +703,7 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
 
 
     """check distances in corners between stiffeners"""
-    if defaults.do_check_stiffeners_in_corners == True and left_top != None and top_left != None:
+    if defaults.do_check_stiffeners_in_corners_top == True and left_top != None and top_left != None:
         #the two edges are each defined by two lines
         #top corners (using symmetry, just doing left one)
         lines_left_top = []
@@ -713,77 +713,108 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
         lines_top_left.append(top_left.get_line(1,4))
         lines_top_left.append(top_left.get_line(1,3))
 
-        #problem values
-        max_dis = 0
-        disangle = 0
+
         change_height = False
         change_b_inf = False
-        cutoffangle = defaults.cutoffangle
         cut = False
-        correction_needed = False
-        #angle between bottom plate of left top stiffener
+        corrections_needed = False
+        #angle defining border III and IV
+        cutoffangle = defaults.cutoffangle
+        #angle between bottom plate of left top stiffener and the y axis
         stangle = float(left_top.get_line(4, 3).cal_angle_y())
+        #distance between the two croner points of the stiffeners
+        dis = dis_lines_lines(lines_left_top, lines_top_left)[0]
+        #angle of this distance to the y axis
+        disangle = dis_lines_lines(lines_left_top, lines_top_left)[1]
 
-        if lines_top_left != [] and lines_left_top != []:
-            #distance and angle from left top to top left
-            max_dis += dis_lines_lines(lines_left_top, lines_top_left)[0]
-            disangle = dis_lines_lines(lines_left_top, lines_top_left)[1]
-
-            if top_left_4a.y > left_top_2a.y and top_left_4a.z > left_top_2a.z:
-                max_dis += defaults.mindis_across_top
-                disdiff = max_dis + defaults.mindis_across_top
-                cut = True
-                change_height = True
-                correction_needed = True
-            elif left_top_2b.z < top_left_4a.z:
-                angle_between_st_dis = angle + stangle
-                dis_norm = max_dis*math.cos(angle_between_st_dis)
-                change_height = True
-                if dis_norm < defaults.mindis_across_top
-                    disdiff = defaults.mindis_across_top - dis_norm
-                    correction_needed = True
-            elif disangle < cutoffangle:
-                disdiff = defaults.mindis_across_top - max_dis
-                change_height = True
-            else:
-                disdiff = defaults.mindis_across_top - max_dis
-                change_b_inf = True
-
-        else:
-             max_dis = 1000
+        corr_b_inf = 0
+        corr_height = 0
+        situation = 0
 
 
-        angle_deg = disangle/(2*math.pi)*360
-        print("top: disangle=",angle_deg)
-        print("top: distance=",max_dis)
-        if change_height == True:
-            print("top: change height")
-        elif change_b_inf == True:
-            print("top: change b_inf")
-
-        if max_dis < defaults.mindis_across_top or cut == True:
+        #situation I
+        if top_left_4a.y > left_top_2a.y and top_left_4a.z > left_top_2a.z:
+            situation = 1
+            #angle between the dis and the stiffener bottom line of left top
+            angle_between_st_dis = disangle - stangle
+            disdiff = dis + defaults.mindis_across_top
+            disdiff_norm = disdiff*math.cos(angle_between_st_dis)
+            corr_height = disdiff_norm
+            cut = True
+            change_height = True
+            corrections_needed = True
             geometry_ok = False
+        #situation II (may be that bottom line of left top still cuts)
+        elif left_top_2b.z < top_left_4a.z:
+            situation = 2
+            #angle between the dis and the stiffener bottom line of left top
+            angle_between_st_dis = disangle - stangle
+            disdiff = defaults.mindis_across_top - dis
+            dis_norm = disdiff*math.cos(angle_between_st_dis)
+            if 0 < dis_norm < defaults.mindis_across_top:
+                corr_height = defaults.mindis_across_top - dis_norm
+                change_height = True
+                corrections_needed = True
+                geometry_ok = False
+        #situation III
+        elif disangle < cutoffangle and left_top_2a.y > top_left_4a.y:
+            situation = 3
+            #angle between the dis and the stiffener bottom line of left top
+            angle_between_st_dis = disangle + stangle
+            disdiff = defaults.mindis_across_top - dis
+            disdiff_norm = disdiff*math.cos(angle_between_st_dis)
+            if 0 < disdiff_norm < defaults.mindis_across_top:
+                corr_height = disdiff_norm
+                change_height = True
+                corrections_needed = True
+                geometry_ok = False
+        #situation IV
+        elif left_top_2a.y > top_left_4a.y:
+            situation = 4
+            disdiff = defaults.mindis_across_top - dis
+            disdiff_parallel = disdiff*math.sin(angle_between_st_dis)
+            if 0 < disdiff_parallel < default.mindis_across_top:
+                corr_b_inf = disdiff_parallel
+                change_b_inf = True
+                corrections_needed = True
+                geometry_ok = False
+        #situation V
+        else:
+            situation = 5
+            disdiff = defaults.mindis_across_top - dis
+            angle_between_st_dis = disangle + stangle
+            disdiff_norm = disdiff*math.cos(angle_between_st_dis)
+            if 0 < disdiff_norm < defaults.mindis_across_top:
+                corr_height = disdiff_norm
+                change_height = True
+                corrections_needed = True
+                geometry_ok = False
 
 
 
+
+
+
+
+        if corrections_needed == True:
+            #temporal output
+            angle_deg = disangle/(2*math.pi)*360
+            print("situation: ",situation)
+            print("top: disangle=",angle_deg)
+            print("top: distance=",dis)
             if change_height == True:
-                corr_height = disdiff
-                corr_b_inf = 0
-            else:
-                #projecting the needed additional distance into the vertical
-                dis_vert = disdiff/math.cos(disangle)
-                corr_b_inf = dis_vert/math.sin(stangle)
-                corr_height = dis_vert*math.cos(stangle)
+                print("top: change height")
+            elif change_b_inf == True:
+                print("top: change b_inf")
 
-
-            print("Stiffeners in top corners are too close: ",math.floor(max_dis)," should be ",defaults.mindis_across_top," -> shorten by val: b_inf-=",math.floor(corr_b_inf)," height-=",math.floor(corr_height))
+            print("Stiffeners in top corners are too close: ",math.floor(dis)," should be ",defaults.mindis_across_top," -> shorten by val: b_inf-=",math.floor(corr_b_inf)," height-=",math.floor(corr_height))
 
             st_left_top = stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top)
             st_left_top_b_inf_corr_old = st_left_top.b_inf_corr_val
             st_left_top_h_corr_old = st_left_top.height_corr_val
 
 
-            #heights are only adjusted in case of this problem
+            #heights are only adjusted in case of this problem (no check for previous corrections necessary)
             st_left_top.height = left_top.h - corr_height
             st_left_top.height_corr = True
             st_left_top.height_corr_val = corr_height
@@ -805,7 +836,7 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
             st_right_top_h_corr_old = st_right_top.height_corr_val
 
 
-            #heights are only adjusted in case of this problem
+            #heights are only adjusted in case of this problem (no check for previous corrections necessary)
             st_right_top.height = right_top.h - corr_height
             st_right_top.height_corr = True
             st_right_top.height_corr_val = corr_height
@@ -825,7 +856,7 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
 
 
 
-    if defaults.do_check_stiffeners_in_corners == True and left_bottom != None and bottom_left != None:
+    if defaults.do_check_stiffeners_in_corners_bottom == True and left_bottom != None and bottom_left != None:
 
         #bottom (using symmetry, just doing left one)
         lines_left_bottom = []
