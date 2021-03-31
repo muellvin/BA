@@ -31,7 +31,7 @@ test_cs = st.merge(test_cs, deck_stiffeners)
 prop_list = st_prop.stiffeners_proposition()
 #propose stiffeners, mimicking input from optimizer
 
-prop_1 = ps.proposed_stiffener(2, 1, 0.7, 10**7)
+prop_1 = ps.proposed_stiffener(2, 1, 0.5, 10**7)
 prop_list.add(prop_1)
 
 #prop_2 = ps.proposed_stiffener(2, 2, 0.3, 10**7)
@@ -42,7 +42,7 @@ prop_list.add(prop_1)
 #prop_list.add(prop_4)
 #prop_5 = ps.proposed_stiffener(4, 5, 0.3, 10**7)
 #prop_list.add(prop_5)
-prop_5 = ps.proposed_stiffener(4, 2, 0.7, 10**7)
+prop_5 = ps.proposed_stiffener(4, 2, 0.5, 10**7)
 prop_list.add(prop_5)
 
 
