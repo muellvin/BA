@@ -16,7 +16,7 @@ mindis_bottom_corner = 100
 
 mindis_between = 30
 
-mindis_across_top = 100
+mindis_across_top = 500
 mindis_across_bottom = 100
 cutoffangle = math.pi/3
 

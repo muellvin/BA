@@ -865,7 +865,7 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
             corr_b_inf = disdiff*math.cos(angle)/2
             corr_height = disdiff*math.sin(angle)/2
 
-            print("Stiffeners in bottom corners are too close: ",math.floor(max_dis)," should be ",defaults.mindis_across_bottom," -> shorten by val: b_inf-=",math.floor(corr_b_inf)," height-=",math.floor(corr_height))
+            print("Stiffeners in bottom corners are too close: ",math.floor(max_dis)," should be ",defaults.mindis_across_bottom," ---> shorten by val: b_inf-=",math.floor(corr_b_inf)," height-=",math.floor(corr_height))
 
             st_left_bottom = stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom)
             st_bottom_left = stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left)

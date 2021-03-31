@@ -139,7 +139,7 @@ def find_dimensions(stiffener):
         if h_max > h_min:
             for h in range(h_min, h_max, h_step):
                 b_inf_min = b_inf_minimal
-                b_inf_max = 10*math.floor(min(max(0,b_sup/2 - h/math.tan(max_angle)), b_inf_max_geo)/10)
+                b_inf_max = 10*math.floor(min(max(0,b_sup - 2*h/math.tan(max_angle)), b_inf_max_geo)/10)
                 if b_inf_min < b_inf_max:
                     for b_inf in range(b_inf_min, b_inf_max, b_inf_step):
                         for t in t_range:
@@ -147,7 +147,7 @@ def find_dimensions(stiffener):
                             if I_a > stiffener.i_along:
                                 m = st.get_area_stiffener(b_sup, b_inf, h, t) #get_area to be implemented
                                 if m < best[4]:
-                                    print("b_sup: ",b_sup," b_inf: ",b_inf," h: ",h," t: ",t)
+                                    #print("b_sup: ",b_sup," b_inf: ",b_inf," h: ",h," t: ",t)
                                     best = [b_sup, b_inf, h, t, m]
     if best == best_default:
         best = [b_sup_minimal, b_inf_minimal, 10*math.floor(b_sup_minimal*math.tan(max_angle)/10) ,5]
