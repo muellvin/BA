@@ -2,9 +2,6 @@
 
 
 
-"""3.2.1 mittragende Breite"""
-
-
 
 
 """4 Längspannung"""
@@ -18,8 +15,19 @@
 #column behaviour with 4.5
 #interaction of plate and column in 4.5.4
 
+
+"""3 Schubverzerrung"""
+#3.2.1 mittragende Breite
+#if one wants the deck to act plastically, we need to take an alpha_0 star
+#that depends on the effective widths of the deck plate
+
+
+
 """4.6 Nachweis"""
 #gives us eta 1
+
+
+
 
 
 """5 Schubbeulen"""
