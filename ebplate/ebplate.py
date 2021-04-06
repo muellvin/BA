@@ -39,6 +39,7 @@ def ebplate(b, h, t, sigma_sup, sigma_inf):
                      "      Dimension 2 = 12.5 \n",\
                      "      Dimension 3 = 7.5 \n",\
                      "      Dimension 4 = 1.2 \n"]
+        input_file.writelines(stiffening)
     stresses = ["#STRESSES \n",\
                 "Longitudinal stresses : User's data No \n",\
                  "Analytical Longitudinal stresses \n",\
