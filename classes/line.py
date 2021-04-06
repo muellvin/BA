@@ -22,6 +22,8 @@ class line():
         self.sigma_b_red = 0
         #ratio of sigma at a and b, smaller/larger with tension being negative
         self.psi = 1
+        #local plate buckling reduction factor
+        self.rho_loc = 1
 
 #p1 should be closer to a and p2 closer to b
     def sanitycheck(self):
