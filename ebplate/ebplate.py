@@ -4,16 +4,16 @@ def ebplate(b, h, t, sigma_sup, sigma_inf):
     #write the input for ebplate to ebplate.EBP
     input_file = open('ebplate\plate.EBP', 'w')
     preamble = ["EBPlate - v2.01 \n",
-                "Firm          # Test\n",\
+                "Firm          # \n",\
                 "Contract      # \n",\
                 "Item          # \n",\
                 "Users         # \n",\
                 "Commentary    # \n"]
     input_file.writelines(preamble)
     plate = ["#PLATE \n",\
-             "   Width           " + str(b/10) + "cm \n",\
-             "   Height          " + str(h/10) + "cm \n",\
-             "   Thickness       " + str(t/10) + "cm \n",\
+             "   Width           " + str(b/10) + " cm \n",\
+             "   Height          " + str(h/10) + " cm \n",\
+             "   Thickness       " + str(t/10) + " cm \n",\
              "   Young Modulus    210000.000 MPa \n",\
              "   Poisson Ratio        0.300 \n",\
              "   Boundary Conditions \n",\
@@ -22,8 +22,7 @@ def ebplate(b, h, t, sigma_sup, sigma_inf):
              "      Edge 3 0 \n",\
              "      Edge 4 0 \n"]
     input_file.writelines(plate)
-    for i in range(0):
-        print("Hello")
+    for i in range(1):
         stiffening = ["#STIFFENING \n",\
                       "   Orthotropic Plate =  0 \n",\
                       "   Referential 2 \n",\
@@ -44,10 +43,10 @@ def ebplate(b, h, t, sigma_sup, sigma_inf):
                 "Longitudinal stresses : User's data No \n",\
                  "Analytical Longitudinal stresses \n",\
                   "Imposed values : No \n",\
-                   "Longitudinal Stress Top Left                200.000 MPa \n",\
-                   "Longitudinal Stress Bottom Left            -200.000 MPa \n",\
-                   "Longitudinal Stress Top Right               200.000 MPa \n",\
-                   "Longitudinal Stress Bottom Right           -200.000 MPa \n",\
+                   "Longitudinal Stress Top Left                " + str(sigma_sup) + " MPa \n",\
+                   "Longitudinal Stress Bottom Left             " + str(sigma_inf) + " MPa \n",\
+                   "Longitudinal Stress Top Right               " + str(sigma_sup) + " MPa \n",\
+                   "Longitudinal Stress Bottom Right            " + str(sigma_inf) + " MPa \n",\
                  "Transverse stresses : User's data No \n",\
                  "Analytical Transverse stresses \n",\
                   "Imposed values : No \n",\
