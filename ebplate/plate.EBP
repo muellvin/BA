@@ -1,13 +1,13 @@
 EBPlate - v2.01 
-Firm          # 
+Firm          # Test
 Contract      # 
 Item          # 
 Users         # 
 Commentary    # 
 #PLATE 
-   Width           300.000 cm 
-   Height          200.000 cm 
-   Thickness         2.000 cm 
+   Width           300.0cm 
+   Height          200.0cm 
+   Thickness       2.0cm 
    Young Modulus    210000.000 MPa 
    Poisson Ratio        0.300 
    Boundary Conditions 
@@ -15,21 +15,6 @@ Commentary    #
       Edge 2 0 
       Edge 3 0 
       Edge 4 0 
-#STIFFENING 
-   Orthotropic Plate =  0 
-   Referential 2 
-   Number of stiffeners =  1 
-    - Stiffener n° 1 Active=1 
-      Orientation = 0 
-      Location    = 100. 
-      Gamma       = 25.46 
-      Teta        = 5.487 
-      Delta       = 0.107 
-      Type        =  3 
-      Dimension 1 = 15. 
-      Dimension 2 = 12.5 
-      Dimension 3 = 7.5 
-      Dimension 4 = 1.2 
 #STRESSES 
 Longitudinal stresses : User's data No 
 Analytical Longitudinal stresses 
