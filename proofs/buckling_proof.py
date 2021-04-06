@@ -37,8 +37,7 @@
 #gives us eta 3
 
 
-"""6 Querbelastung"""
-#is already accounted for when dimensioning the deck??
+
 
 
 """7 Interaktion"""
