@@ -36,6 +36,10 @@ t_range = [5,7,9,11,13,15,17,20]
 max_angle = math.pi/12*5 #75 grad
 
 
+"""buckling defaults"""
+#convergence limit for m_rd_el in effective width iterations of local buckling
+convergence_limit = 0.005
+
 """do_modules"""
 do_check_geometry = True
 do_check_stiffeners_in_corners_top = True
