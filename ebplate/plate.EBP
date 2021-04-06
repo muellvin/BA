@@ -1,0 +1,61 @@
+EBPlate - v2.01 
+Firm          # 
+Contract      # 
+Item          # 
+Users         # 
+Commentary    # 
+#PLATE 
+   Width           300.0 cm 
+   Height          200.0 cm 
+   Thickness       2.0 cm 
+   Young Modulus    210000.000 MPa 
+   Poisson Ratio        0.300 
+   Boundary Conditions 
+      Edge 1 0 
+      Edge 2 0 
+      Edge 3 0 
+      Edge 4 0 
+#STIFFENING 
+   Orthotropic Plate =  0 
+   Referential 2 
+   Number of stiffeners =  1 
+    - Stiffener n° 1 Active=1 
+      Orientation = 0 
+      Location    = 100. 
+      Gamma       = 25.46 
+      Teta        = 5.487 
+      Delta       = 0.107 
+      Type        =  3 
+      Dimension 1 = 15. 
+      Dimension 2 = 12.5 
+      Dimension 3 = 7.5 
+      Dimension 4 = 1.2 
+#STRESSES 
+Longitudinal stresses : User's data No 
+Analytical Longitudinal stresses 
+Imposed values : No 
+Longitudinal Stress Top Left                2000 MPa 
+Longitudinal Stress Bottom Left             -2000 MPa 
+Longitudinal Stress Top Right               2000 MPa 
+Longitudinal Stress Bottom Right            -2000 MPa 
+Transverse stresses : User's data No 
+Analytical Transverse stresses 
+Imposed values : No 
+Transverse stress Top                         0.000 MPa 
+Transverse stress Bottom                      0.000 MPa 
+Patch Load Stress Top                         0.000 MPa 
+Patch Load Stress Bottom                      0.000 MPa 
+Patch Load Width Top                          0.000 cm 
+Patch Load Width Bottom                       0.000 cm 
+Local longitudinal stresses under patch load : No 
+Local shear stresses under patch load : Yes 
+W Top                      -1.000 
+W Bot                      -1.000 
+Shear distribution  1 
+Shear stresses : User's data No 
+Analytical Shear stresses 
+Imposed values : No 
+Shear stress                                 0.000 MPa 
+#PARAMETERS 
+Complexity : 1 
+Effective width parameter :  10.000
