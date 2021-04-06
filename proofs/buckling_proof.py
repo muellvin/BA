@@ -20,6 +20,7 @@
 #3.2.1 mittragende Breite
 #if one wants the deck to act plastically, we need to take an alpha_0 star
 #that depends on the effective widths of the deck plate
+#it is accounted for by reducing the thickness instead of the width (same result, easier calculation)
 
 
 
