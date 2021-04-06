@@ -22,23 +22,23 @@ def ebplate(b, h, t, sigma_sup, sigma_inf):
              "      Edge 3 0 \n",\
              "      Edge 4 0 \n"]
     input_file.writelines(plate)
+    stiffening_preamble = ["#STIFFENING \n",\
+                  "   Orthotropic Plate =  0 \n",\
+                  "   Referential 2 \n",\
+                  "   Number of stiffeners =  1 \n"]
+    input_file.writelines(stiffening_preamble)
     for i in range(1):
-        stiffening = ["#STIFFENING \n",\
-                      "   Orthotropic Plate =  0 \n",\
-                      "   Referential 2 \n",\
-                      "   Number of stiffeners =  1 \n",\
-                      "    - Stiffener n° 1 Active=1 \n",\
-                      "      Orientation = 0 \n",\
-                      "      Location    = 100. \n",\
-                      "      Gamma       = 25.46 \n",\
-                      "      Teta        = 5.487 \n",\
-                      "      Delta       = 0.107 \n",\
-                      "      Type        =  3 \n",\
-                      "      Dimension 1 = 15. \n",\
-                      "      Dimension 2 = 12.5 \n",\
-                      "      Dimension 3 = 7.5 \n",\
-                      "      Dimension 4 = 1.2 \n"]
-        input_file.writelines(stiffening)
+        stiffening = "    - Stiffener n° " + str(i) + " Active=1 \n",\
+                     "      Orientation = 0 \n",\
+                     "      Location    = 100. \n",\
+                     "      Gamma       = 25.46 \n",\
+                     "      Teta        = 5.487 \n",\
+                     "      Delta       = 0.107 \n",\
+                     "      Type        =  3 \n",\
+                     "      Dimension 1 = 15. \n",\
+                     "      Dimension 2 = 12.5 \n",\
+                     "      Dimension 3 = 7.5 \n",\
+                     "      Dimension 4 = 1.2 \n"]
     stresses = ["#STRESSES \n",\
                 "Longitudinal stresses : User's data No \n",\
                  "Analytical Longitudinal stresses \n",\
