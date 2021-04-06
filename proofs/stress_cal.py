@@ -1,8 +1,36 @@
 #imports
 import math
 
-def get_sigma_sup(cs, code, m_y):
-    line = cs.get_line(code)
+def get_sigma_a(cs, line, m_y):
+    i_y = cs.get_i_y_tot()
+    z_center = cs.get_center_z_tot()
+    z = line.a.z
+    sigma_a = m_y * (z-z_center) / i_y
+    return sigma_a
+
+def get_sigma_b(cs, line, m_y):
+    i_y = cs.get_i_y_tot()
+    z_center = cs.get_center_z_tot()
+    z = line.b.z
+    sigma_b = m_y * (z-z_center) / i_y
+    return sigma_b
+
+def get_sigma_a_red(cs, line, m_y):
+    i_y = cs.get_i_y_red()
+    z_center = cs.get_center_z_red()
+    z = line.a.z
+    sigma_a_red = m_y * (z-z_center) / i_y
+    return sigma_a_red
+
+def get_sigma_b_red(cs, line, m_y):
+    i_y = cs.get_i_y_red()
+    z_center = cs.get_center_z_red()
+    z = line.b.z
+    sigma_b_red = m_y * (z-z_center) / i_y
+    return sigma_b_red
+
+
+def get_sigma_sup(cs, line, m_y):
     i_y = cs.get_i_y_tot()
     z_center = cs.get_center_z_tot()
     if line.a.z <= line.b.z:
@@ -12,8 +40,7 @@ def get_sigma_sup(cs, code, m_y):
     sigma_sup = m_y * (z_sup-z_center) / i_y
     return sigma_sup
 
-def get_sigma_inf(cs, code, m_y):
-    line = cs.get_line(code)
+def get_sigma_inf(cs, line, m_y):
     i_y = cs.get_i_y_tot()
     z_center = cs.get_center_z_tot()
     if line.a.z >= line.b.z:
@@ -23,8 +50,7 @@ def get_sigma_inf(cs, code, m_y):
     sigma_inf = m_y / i_y * (z_inf-z_center)
     return sigma_inf
 
-def get_sigma_sup_red(cs, code, m_y):
-    line = cs.get_line(code)
+def get_sigma_sup_red(cs, line, m_y):
     i_y = cs.get_i_y_red()
     z_center = cs.get_center_z_red()
     if line.p1.z <= line.p2.z:
@@ -34,8 +60,7 @@ def get_sigma_sup_red(cs, code, m_y):
     sigma_sup_red = m_y / i_y * (z_sup-z_center)
     return sigma_sup_red
 
-def get_sigma_inf_red(cs, code, m_y):
-    line = cs.get_line(code)
+def get_sigma_inf_red(cs, line, m_y):
     i_y = cs.get_i_y_red()
     z_center = cs.get_center_z_red()
     if line.p1.z >= line.p2.z:
@@ -46,12 +71,11 @@ def get_sigma_inf_red(cs, code, m_y):
     return sigma_inf_red
 
 #returns the absolute value of the resulting shear force in a plate of the crosssection
-def get_tau_int(cs, code, v_ed, t_ed):
-    return abs(get_tau_int_t(cs, code, t_ed) + get_tau_int_qy(cs, code, v_ed))
+def get_tau_int(cs, line, v_ed, t_ed):
+    return abs(get_tau_int_t(cs, line, t_ed) + get_tau_int_qy(cs, line, v_ed))
 
 #shear stresses positive in counterclockwise direction
-def get_tau_int_qy(cs, code, v_ed):
-    line = cs.get_line(code)
+def get_tau_int_qy(cs, line, v_ed):
     y_center = line.get_center_y_tot()
     if code.pl_position == 1 or code.pl_position ==3:
         if y_center == 0:
@@ -71,8 +95,7 @@ def get_tau_int_qy(cs, code, v_ed):
     return tau_int
 
 #shear stresses positive in counterclokwise direction
-def get_tau_int_t(cs, code, tor):
-    line = cs.get_line(code)
+def get_tau_int_t(cs, line, tor):
     azero = cs.get_azero()
     l = line.get_length_tot()
     tau = tor / (2*azero)

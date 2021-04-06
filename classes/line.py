@@ -14,6 +14,14 @@ class line():
         self.p1 = p1 if p1 is not None else point.point(a.y + 1/2*(b.y - a.y), a.z + 1/2*(b.z-a.z))
         self.p2 = p2 if p1 is not None else point.point(a.y + 1/2*(b.y - a.y), a.z + 1/2*(b.z-a.z))
         self.t = float(t)
+        self.beta = 1
+        self.rohc1 = 1
+        self.rohc2 = 1
+        #normal stress with tension being positive at point a and point b for the effective crosssection
+        self.sigma_a_red = 0
+        self.sigma_b_red = 0
+        #ratio of sigma at a and b, smaller/larger with tension being negative
+        self.psi = 1
 
 #p1 should be closer to a and p2 closer to b
     def sanitycheck(self):
@@ -122,7 +130,7 @@ class line():
         center_z_red1 = self.cal_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
         center_z_red2 = self.cal_center_z(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
         center = center_z_red1 * weight1 + center_z_red2 * weight2
-        return center 
+        return center
     def cal_length_red(self):
         return self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.cal_length(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
     def cal_area_red(self):
