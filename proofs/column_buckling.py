@@ -12,7 +12,6 @@ import data
 #
 #according to A.2 (3) -> Illustration A.1
 #the contributing widths are the ones defined by local buckling
-#for both the stiffener and the neighbouring plates
 
 
 def column_buckling(plate_glob, side):
