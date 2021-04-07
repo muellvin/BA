@@ -6,13 +6,12 @@ import data
 
 
 
-#EC 1993 1-5 (7) all combinations of stiffeners as a member have to be investigated
+#EC 1993 1-5 (7)  stiffeners as a member have to be investigated as they can be of different form
 #
 #according to the EC 1993 1-5 (1) the equivalent member can no longer be seen as supported on the sides
 #
 #according to A.2 (3) -> Illustration A.1
 #the contributing widths are the ones defined by local buckling
-#for both the stiffener and the neighbouring plates
 
 
 def column_buckling(plate_glob, side):
