@@ -345,6 +345,7 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
         for line in lines1:
             if line.code.st_number == i+1:
                 stiffeners1[i].lines.append(line)
+                lines1.remove(line)
 
 
     for stiffener in stiffeners:

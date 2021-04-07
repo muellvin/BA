@@ -32,7 +32,8 @@ def cal_sigma__psi_red(cs):
 
 
 def local_buckling_plate(plate):
-    #all plates are supported on both sides -> Table 4.1
+    #all plates are supported on both sides (internal compression elements) -> Table 4.1
+    #plate buckling coefficient
     k_sigma_loc = 0
     if plate.psi == 1:
         k_sigma_loc = 4
@@ -52,6 +53,7 @@ def local_buckling_plate(plate):
 
     #EC A.1
     sigma_E_loc = (math.pi**2 * data.constants.get("E") * plate.t**2) / (12 * (1-data.constans.get("nu")**2) * plate.get_length_tot()**2)
+    #elastic critical plate buckling stress
     sigma_cr_p_loc = k_sigma_loc * sigma_E_loc
 
     #EC 4.4 (2)
