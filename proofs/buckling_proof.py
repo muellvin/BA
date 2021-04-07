@@ -1,5 +1,7 @@
 #buckling proof
 import local_buckling
+import column
+import plate_global
 
 
 
@@ -9,11 +11,28 @@ import local_buckling
 """4.4 Einzelfeldbeulen"""
 #in a first step, the effective width of the plates are determined (rho of each plate)
 #(iterative process): moving p1 and p2 of the
+local_buckling.local_buckling(cs)
 
 """4.5 Längsausgesteifte Blechfelder"""
 #plate behaviour with help of EB Plate
 #column behaviour with 4.5
 #interaction of plate and column in 4.5.4
+
+#create a cs with all plates of this side
+def global_buckling(cs, side):
+    plate_glob = crosssection.crosssection()
+    for line in cs.lines:
+    if line.code.pl_position == side:
+        plate_glob.addline(line)
+    chi_c, sigma_cr_c = column.column(plate_glob)
+    rho_p, sigma_cr_p = plate_global.plate_global(plate_glob)
+
+    eta = sigma_cr_p/sigma_cr_c -1
+    rho_c = (rho_p - chi_c) * eta * (2 - eta) + chi_c
+
+    for line in cs.lines:
+        if line.code.pl_position == side:
+            line.rho_c = rho_c
 
 
 """3 Schubverzerrung"""

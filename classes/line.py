@@ -24,6 +24,8 @@ class line():
         self.psi = 1
         #local plate buckling reduction factor
         self.rho_loc = 1
+        #global plate buckling reduction factor from interaction plate and column
+        self.rho_c = 1
 
 #p1 should be closer to a and p2 closer to b
     def sanitycheck(self):
