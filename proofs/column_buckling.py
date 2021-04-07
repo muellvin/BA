@@ -6,7 +6,7 @@ import data
 
 
 
-#EC 1993 1-5 (7) all combinations of stiffeners as a member have to be investigated
+#EC 1993 1-5 (7)  stiffeners as a member have to be investigated as they can be of different form
 #
 #according to the EC 1993 1-5 (1) the equivalent member can no longer be seen as supported on the sides
 #
