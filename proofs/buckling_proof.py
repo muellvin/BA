@@ -1,6 +1,6 @@
 #buckling proof
 import local_buckling
-import column
+import column_buckling
 import plate_global
 
 
@@ -24,7 +24,7 @@ def global_buckling(cs, side):
     for line in cs.lines:
     if line.code.pl_position == side:
         plate_glob.addline(line)
-    chi_c, sigma_cr_c = column.column(plate_glob)
+    chi_c, sigma_cr_c = column_buckling.column_buckling(plate_glob)
     rho_p, sigma_cr_p = plate_global.plate_global(plate_glob)
 
     eta = sigma_cr_p/sigma_cr_c -1

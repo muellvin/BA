@@ -1,7 +1,9 @@
 from classes import crosssection
+from classes import point
+from classes import line
 import math
 import data
-from classes import point
+
 
 
 #EC 1993 1-5 (7) all combinations of stiffeners as a member have to be investigated
@@ -13,7 +15,7 @@ from classes import point
 #for both the stiffener and the neighbouring plates
 
 
-def column(plate_glob, side):
+def column_buckling(plate_glob, side):
     #add the lines to the right list
     stiffener_lines = []
     tpl_lines_list = []
@@ -67,6 +69,8 @@ def column(plate_glob, side):
         stiffeners_set.add(st_number, stiffener)
 
 
+
+
     """A_sl,i and I_sl,i for every single column (one stiffener with the supporting plate widths on each side)"""
     columns = {}
 
@@ -83,28 +87,33 @@ def column(plate_glob, side):
             plate_before_I = plate_before.get_i_along_tot()
             sigma_border_before = plate_before.sigma_a_red
             border_before = plate_before.a
+            plate_before_eff = line.line(border_before, plate_before.b)
         else:
             plate_before_A = plate_before.get_area_red2()
             plate_before_I = plate_before.get_i_along_red2()
             sigma_border_before = plate_before.sigma_a_red
             border_before = plate_before.p2
+            plate_before_eff = line.line(border_before, plate_before.b)
 
         if dis_points(plate_after.p1, plate_after.p2) < 0.05:
             plate_after_A = plate_after.get_area_tot()
             plate_after_I = plate_after.get_i_along_tot()
             sigma_border_after = plate_after.sigma_b_red
             border_after = plate_after.b
+            plate_after_eff = line.line(plate_after.a, border_after)
         else:
             plate_after_A = plate_after.get_area_red1()
             plate_after_I = plate_after.get_i_along_red1())
             sigma_border_after = plate_after.sigma_b_red
             border_after = plate_after.p1
+            plate_after_eff = line.line(plate_after.a, border_after)
 
 
         #EC 1993 1-5 4.5.3 (3)
-        A_sl_i = stiffener_i.get_area_red() + plate_before_A + plate_after_A
-        I_sl_i = stiffener_i.get_i_along_red() + plate_before_I + plate_after_I
-        sigma_cr_sl_i = (math.pi**2 * data.constants.get("E") * I_sl_i) / (A_sl_i * data.input_data.get("l"))
+        A_sl = stiffener_i.get_area_tot() + plate_before_A + plate_after_A
+        A_sl_eff = stiffener_i.get_area_red() + plate_before_A + plate_after_A
+        I_sl = stiffener_i.get_i_along_tot() + plate_before_I + plate_after_I
+        sigma_cr_sl = (math.pi**2 * data.constants.get("E") * I_sl) / (A_sl * data.input_data.get("l"))
 
 
         ######calculation of sigma_cr_c################
@@ -121,30 +130,85 @@ def column(plate_glob, side):
 
         tpl_st_center = point.point(tpl_st_lines_set.get(i).get_center_y_tot(), tpl_st_lines_set_get(i).get_center_z_tot())
 
+
         if sigma_border_before < sigma_border_after:
             b_sl_1 = dis_points(border_before, tpl_st_center)
         if sigma_border_before > sigma_border_after:
             b_sl_1 = dis_points(border_after, tpl_st_center)
 
-        sigma_cr_c = sigma_cr_sl_i * b_c / b_sl_1
+        sigma_cr_c = sigma_cr_sl * b_c / b_sl_1
 
+        #excentrisities
+        st_center = point.point(stiffener_i.get_center_y_tot(), stiffener_i.get_center_z_tot())
 
+        sl_cs = crosssection.crossection(0,0,0)
+        for line in stiffener_i.lines:
+            sl_cs.addline(line)
+        sl_cs.addline(plate_before_eff)
+        sl_cs.addline(plate_after_eff)
 
+        sl_center = point.point(sl_cs.get_center_y_tot(), sl_cs.get_center_z_tot())
 
-        column_i = column_class(i, A_sl_i, I_sl_i, sigma_cr_c)
-        columns.add(st_number, column_i)
+        e2 = dis_line_point(tpl_st_lines_set.get(i), sl_center)
+        e1 = dis_line_point(tpl_st_lines_set.get(i), st_center) - e2
 
+        column = column_class(i, A_sl, A_sl_eff I_sl, sigma_cr_c, e1, e2)
+        columns.add(st_number, column)
 
         i += 1
+
+    Chi_c = 1
+    sigma_cr_c = 1
+
+    #searches for the single column buckling mechanism with the smallest Chi_c
+    for column in columns:
+        Chi_c_column = column_buckling_Chi_c(column)
+        if Chi_c_column < Chi_c:
+            Chi_c = Chi_c_column
+            sigma_cr_c = column.sigma_cr_c
+
+    return Chi_c, sigma_cr_c
+
+
+def column_buckling_Chi_c(column):
+    beta_A_c = column.A_sl_eff / column.A_sl
+    lambda_c_bar = math.sqrt(beta_A_c * data.constants.get("fy") / column.sigma_cr_c)
+
+    i = math.sqrt(column.I_sl/column.A_sl)
+    e = max(column.e1, column.e2)
+    alpha = 0.34 #curve b for closed stiffeners
+    alpha_e = alpha + 0.09/(e/i)
+
+    Phi_c = 0.5*(1+alpha_e*(lambda_c_bar - 0.2) + lambda_c_bar**2)
+    Chi_c = 1 / (Phi_c + math.sqrt(Phi_c**2 - lambda_c_bar**2))
+
+    return Chi_c
 
 
 
 def dis_points(a, b):
     return math.sqrt((a.y - b.y)**2 + (a.z - b.z)**2)
 
+def dis_line_point(line, point):
+    line_vector_y = 1/line.get_length_tot() * (line.b.y - line.a.y)
+    line_vector_z = 1/line.get_length_tot() * (line.b.z - line.a.z)
+    norm_vector_y = - line_vector_z
+    norm_vector_z = line_vector_y
+
+    point_vector_y = point.y - line.a.y
+    point_vector_z = point.z - line.a.z
+
+    #dot product
+    dis = point_vector_y * norm_vector_y + point_vector_z * norm_vector_z
+
+    return dis
+
+
+
 class column_class():
-    def __init__(self,st_number, A, I, sigma_cr_sl):
+    def __init__(self,st_number, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2):
         self.st_number = st_number
-        self.A = A
-        self.I = I
-        self.sigma_cr_sl = sigma_cr_sl
+        self.A_sl = A_sl
+        self.A_sl_eff = A_sl_eff
+        self.I_sl = I_sl
+        self.sigma_cr_c = sigma_cr_c
