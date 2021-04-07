@@ -25,7 +25,7 @@ def global_buckling(cs, side):
     if line.code.pl_position == side:
         plate_glob.addline(line)
     chi_c, sigma_cr_c = column.column(plate_glob)
-    rho_p, sigma_cr_p = plate_global.plate_global(plate_glob)
+    rho_p, sigma_cr_p = plate_global.plate_global(cs, plate_glob)
 
     eta = sigma_cr_p/sigma_cr_c -1
     rho_c = (rho_p - chi_c) * eta * (2 - eta) + chi_c

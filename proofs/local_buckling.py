@@ -49,7 +49,7 @@ def local_buckling_plate(plate):
         pass
 
     #EC A.1
-    sigma_E_loc = (math.pi**2 * data.constants.get("E") * plate.t**2) / (12 * (1-data.constans.get("nu")**2) * plate.get_length_tot()**2)
+    sigma_E_loc = (math.pi**2 * data.constants.get("E") * plate.t**2) / (12 * (1-data.constants.get("nu")**2) * plate.get_length_tot()**2)
     sigma_cr_p_loc = k_sigma_loc * sigma_E_loc
 
     #EC 4.4 (2)
