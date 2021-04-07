@@ -26,6 +26,8 @@ def cal_sigma__psi_red(cs):
         #set the stress ratio = sigma min / sigma max
         #correct for EC having tension as negative by inverting the ratio to be sigma max / sigma min
         if line.sigma_a_red < line.sigma_b_red:
+            line.psi = line.sigma_a_red / line.sigma_b_red
+        else:
             line.psi = line.sigma_b_red / line.sigma_a_red
 
 
