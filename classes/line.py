@@ -67,8 +67,16 @@ class line():
         return self.cal_length_red()
     def get_area_red(self):
         return self.cal_area_red()
+    def get_area_red1(self):
+        return self.cal_area_red1()
+    def get_area_red2(self):
+        return self.cal_area_red2()
     def get_i_along_red(self):
         return self.cal_i_along_red()
+    def get_i_along_red1(self):
+        return self.cal_i_along_red1()
+    def get_i_along_red2(self):
+        return self.cal_i_along_red2()    
     def get_i_perpen_red(self):
         return self.cal_i_perpen_red()
     def get_i_y_red(self):
@@ -139,8 +147,16 @@ class line():
         return self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.cal_length(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
     def cal_area_red(self):
         return self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.cal_area(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
+    def cal_area_red1(self):
+        return self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+    def cal_area_red2(self):
+        return self.cal_area(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
     def cal_i_along_red(self):
         return self.cal_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.cal_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
+    def cal_i_along_red1(self):
+        return self.cal_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+    def cal_i_along_red2(self):
+        return self.cal_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
     def cal_i_perpen_red(self):
         i_perpen_red1 = self.cal_i_perpen(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
         i_perpen_red2 = self.cal_i_perpen(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
