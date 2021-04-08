@@ -5,11 +5,11 @@ import data
 #EC 1993 1-5 3.3 shear lag at ULS
 #3.3 (3): A_eff can be calculated from A_c_eff (width from plate buckling 4.4 and 4.5)
 #and the values beta and kappa from table 3.1
-#for ULS the value alpha_0 is replaced by alpha_0*
 
 #in the book design of plated structures: equation 2.8
 
 def shear_lag(cs):
+
     #the top flange is pl_position 1
     #the bottom flange is pl_position 3
     reduction_shear_lag(1)
@@ -17,7 +17,14 @@ def shear_lag(cs):
 
 
 def reduction_shear_lag(cs, flange):
+    if flange == 1:
+        b_0 = cs.b_sup / 2 #3.1 (2)
+    elif flange == 3:
+        b_0 = cs.b_inf / 2
 
+    #check if necessary
+    if b_0 < data.input_data.get("L_e")/50:
+        pass
 
     A_c_eff = 0
     for line in cs.lines:
@@ -29,10 +36,7 @@ def reduction_shear_lag(cs, flange):
         if line.code.pl_position == flange and line.code.pl_type == 1:
             A_sl += line.get_area_tot()
 
-    if flange == 1:
-        b_0 = cs.b_sup / 2 #3.1 (2)
-    elif flange == 3:
-        b_0 = cs.b_inf / 2
+
 
     t_f = t = cs.get_pl_line(flange).t
 
