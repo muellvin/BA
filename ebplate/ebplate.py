@@ -1,6 +1,6 @@
 import os
 
-def ebplate(b, h, t, sigma_sup, sigma_inf):
+def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
     #write the input for ebplate to ebplate.EBP
     input_file = open('ebplate\plate.EBP', 'w')
     preamble = ["EBPlate - v2.01 \n",
@@ -23,31 +23,37 @@ def ebplate(b, h, t, sigma_sup, sigma_inf):
              "      Edge 4 0 \n"]
     input_file.writelines(plate)
     stiffening_preamble = ["#STIFFENING \n",\
-                  "   Orthotropic Plate =  0 \n",\
-                  "   Referential 2 \n",\
+                  "   Orthotropic Plate =  1 \n",\
+                  "   Orthotropic coefficients \n",\
+                  "   X Direction : Beta = 0 \n",\
+                  "                 Eta = -1 \n",\
+                  "   Smearing : No \n",\
+                  "   Y Direction : Beta = 0 \n",\
+                  "                 Eta = 0 \n",\
+                  "   Referential 1 \n",\
                   "   Number of stiffeners =  1 \n"]
     input_file.writelines(stiffening_preamble)
-    for i in range(1):
-        stiffening = "    - Stiffener n° " + str(i) + " Active=1 \n",\
+    for i in range(len(stiffeners_ebp)):
+        stiffening = "    - Stiffener n° " + str(i+1) + " Active=1 \n",\
                      "      Orientation = 0 \n",\
-                     "      Location    = 100. \n",\
-                     "      Gamma       = 25.46 \n",\
-                     "      Teta        = 5.487 \n",\
-                     "      Delta       = 0.107 \n",\
-                     "      Type        =  3 \n",\
-                     "      Dimension 1 = 15. \n",\
-                     "      Dimension 2 = 12.5 \n",\
-                     "      Dimension 3 = 7.5 \n",\
-                     "      Dimension 4 = 1.2 \n"]
+                     "      Location    = " + str(stiffeners_ebp[i][0]/10) + " \n",\
+                     "      Gamma       = " + str(stiffeners_ebp[i][1]) + " \n",\
+                     "      Teta        = " + str(stiffeners_ebp[i][2]) + " \n",\
+                     "      Delta       = " + str(stiffeners_ebp[i][3]) + " \n",\
+                     "      Type        =  0 \n",\
+                     "      Dimension 1 = 0 \n",\
+                     "      Dimension 2 = 0 \n",\
+                     "      Dimension 3 = 0 \n",\
+                     "      Dimension 4 = 0 \n"]
         input_file.writelines(stiffening)
     stresses = ["#STRESSES \n",\
                 "Longitudinal stresses : User's data No \n",\
                  "Analytical Longitudinal stresses \n",\
                   "Imposed values : No \n",\
-                   "Longitudinal Stress Top Left                " + str(sigma_sup) + " MPa \n",\
-                   "Longitudinal Stress Bottom Left             " + str(sigma_inf) + " MPa \n",\
-                   "Longitudinal Stress Top Right               " + str(sigma_sup) + " MPa \n",\
-                   "Longitudinal Stress Bottom Right            " + str(sigma_inf) + " MPa \n",\
+                   "Longitudinal Stress Top Left                " + str(sigma_a) + " MPa \n",\
+                   "Longitudinal Stress Bottom Left             " + str(sigma_b) + " MPa \n",\
+                   "Longitudinal Stress Top Right               " + str(sigma_a) + " MPa \n",\
+                   "Longitudinal Stress Bottom Right            " + str(sigma_b) + " MPa \n",\
                  "Transverse stresses : User's data No \n",\
                  "Analytical Transverse stresses \n",\
                   "Imposed values : No \n",\
