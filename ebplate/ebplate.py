@@ -2,7 +2,7 @@ import os
 
 def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
     #write the input for ebplate to ebplate.EBP
-    input_file = open('ebplate\plate.EBP', 'w')
+    input_file = open('ebplate\plate.EBP', 'w', encoding = 'latin-1')
     preamble = ["EBPlate - v2.01 \n",
                 "Firm          # \n",\
                 "Contract      # \n",\
@@ -31,20 +31,20 @@ def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
                   "   Y Direction : Beta = 0 \n",\
                   "                 Eta = 0 \n",\
                   "   Referential 1 \n",\
-                  "   Number of stiffeners =  1 \n"]
+                  "   Number of stiffeners = " + str(len(stiffeners_ebp)) + " \n"]
     input_file.writelines(stiffening_preamble)
     for i in range(len(stiffeners_ebp)):
-        stiffening = "    - Stiffener n° " + str(i+1) + " Active=1 \n",\
-                     "      Orientation = 0 \n",\
-                     "      Location    = " + str(stiffeners_ebp[i][0]/10) + " \n",\
-                     "      Gamma       = " + str(stiffeners_ebp[i][1]) + " \n",\
-                     "      Teta        = " + str(stiffeners_ebp[i][2]) + " \n",\
-                     "      Delta       = " + str(stiffeners_ebp[i][3]) + " \n",\
-                     "      Type        =  0 \n",\
-                     "      Dimension 1 = 0 \n",\
-                     "      Dimension 2 = 0 \n",\
-                     "      Dimension 3 = 0 \n",\
-                     "      Dimension 4 = 0 \n"]
+        stiffening = ["    - Stiffener n° " + str(i+1) + " Active=1 \n",\
+                      "      Orientation = 0 \n",\
+                      "      Location    = " + str(stiffeners_ebp[i][0]/10) + " \n",\
+                      "      Gamma       = " + str(stiffeners_ebp[i][1]) + " \n",\
+                      "      Teta        = " + str(stiffeners_ebp[i][2]) + " \n",\
+                      "      Delta       = " + str(stiffeners_ebp[i][3]) + " \n",\
+                      "      Type        =  0 \n",\
+                      "      Dimension 1 = 0 \n",\
+                      "      Dimension 2 = 0 \n",\
+                      "      Dimension 3 = 0 \n",\
+                      "      Dimension 4 = 0 \n"]
         input_file.writelines(stiffening)
     stresses = ["#STRESSES \n",\
                 "Longitudinal stresses : User's data No \n",\
@@ -83,7 +83,7 @@ def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
     os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Nino\Google Drive\Studium\FS 2021\Bachelorarbeit\BA\ebplate\plate.EBP')
 
     #get phi_cr from the ebplate.EBR
-    result_file = open('ebplate\plate.EBR', 'r')
+    result_file = open('ebplate\plate.EBR', 'r', encoding = 'latin-1')
     results_text = result_file.readlines()
     phi_cr_line = results_text[1]
     phi_cr = float(phi_cr_line[7:])
