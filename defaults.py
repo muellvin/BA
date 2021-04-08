@@ -39,6 +39,8 @@ max_angle = math.pi/12*5 #75 grad
 """buckling defaults"""
 #convergence limit for m_rd_el in effective width iterations of local buckling
 convergence_limit = 0.005
+plate_length = 4000
+effective_width_parameter = 10
 
 """do_modules"""
 do_check_geometry = True
