@@ -174,7 +174,8 @@ class crosssection():
             plate.b.y = math.cos(angle)*by - math.sin(angle)*bz
             plate.b.z = math.sin(angle)*by + math.cos(angle)*bz
 
-        cs.get_i_y_tot()
+        return cs.get_i_y_tot()
+
 
     def get_i_along_red(self, line):
         #make a copy of the crosssection
@@ -194,7 +195,7 @@ class crosssection():
             plate.b.y = math.cos(angle)*by - math.sin(angle)*bz
             plate.b.z = math.sin(angle)*by + math.cos(angle)*bz
 
-        cs.get_i_y_red()
+        return cs.get_i_y_red()
 
 
     """ important convention: the point b of a line is always in clockwise direction of point a"""
