@@ -114,7 +114,7 @@ def global_plate_buckling(cs, stiffened_plate):
         stiffener.lines.remove(top_plate)
         stiffener.lines.remove(bottom_plate)
         length_top =
-        length_bottom =
+        length_bottom = 
         new_top_plate = ln.line(top_plate.code, top_plate.b + unit_vec_to_a * length_top, \
         top_plate.b, top_plate.t)
         new_bottom_plate = ln.line(bottom_plate.code, bottom_plate.a, bottom_plate.a + \
