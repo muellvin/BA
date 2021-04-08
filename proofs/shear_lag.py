@@ -18,22 +18,35 @@ def shear_lag(cs):
 
 def reduction_shear_lag(cs, flange):
 
-    #calculation of alpha_0*
+
     A_c_eff = 0
     for line in cs.lines:
         if line.code.pl_position == flange:
+            #if the side is under tension, A_c_eff is the gross cross-sectional area as said in last remark in the EC after eq 3.5
             A_c_eff += line.get_area_red()
+    A_sl = 0
+    for line in cs.lines:
+        if line.code.pl_position == flange and line.code.pl_type == 1:
+            A_sl += line.get_area_tot()
 
     if flange == 1:
         b_0 = cs.b_sup / 2 #3.1 (2)
     elif flange == 3:
         b_0 = cs.b_inf / 2
 
-    t_f = cs.get_pl_line(flange).t
+    t_f = t = cs.get_pl_line(flange).t
+
 
     alpha_0_star = math.sqrt(A_c_eff / (b_0 * t_f))
+    alpha_0 = math.sqrt(1 + A_sl / (b_0*t))
 
-    kappa = alpha_0_star * b_0 / data.input_data.get("L_e")
+
+
+
+    """beta_ult mit alpha_0_star oder beta mit alpha_0, dafür beta**kappa"""
+    """letzteres ist besser (eq 3.5)"""
+
+    kappa = alpha_0 * b_0 / data.input_data.get("L_e")
 
     beta = beta_from_kappa(kappa)
 
