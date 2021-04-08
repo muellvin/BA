@@ -111,18 +111,71 @@ def global_plate_buckling(cs, stiffened_plate):
         #calculate delta
         unit_vec_to_a = (top_plate.a.y - top_plate.b.y) / top_plate.get_length_tot()
         unit_vec_to_b = (bottom_plate.b.y - bottom_plate.a.y) / top_plate.get_length_tot()
-        stiffener.lines.remove(top_plate)
-        stiffener.lines.remove(bottom_plate)
-        length_top = 
-        length_bottom =
+        #find additional parts of top plate
+        sigma_a_top = stc.get_sigma_a(cs, top_plate, data.input_data.get("M_Ed"))
+        sigma_b_top = stc.get_sigma_b(cs, top_plate, data.input_data.get("M_Ed"))
+        psi_top =  min(sigma_a_top, sigma_b_top) / max(sigma_a_top, sigma_b_top)
+        length_top = 0
+        if sigma_a_top > 0 or sigma_b_top > 0:
+            #stiffener is at least partly in compression zone
+            if sigma_a_top > sigma_b_top:
+                if psi_top > 0:
+                    #low stress side
+                    length_top = top_plate.get_length_tot()*(3-psi_top)/(5-psi_top)
+                else:
+                    #tension zone
+                    pass
+            else:
+                if psi_top > 0:
+                    #high stress side
+                    length_top = top_plate.get_length_tot()*2/(5-psi_top)
+                else:
+                    b_comp = top_plate.get_length_tot()/(1-psi_top)
+                    length_top = 0.4*b_comp
+                    pass
+        else:
+            #stiffener is in tension zone
+            pass
+
+        #find additional parts of bottom plate
+        sigma_a_bottom = stc.get_sigma_a(cs, top_plate, data.input_data.get("M_Ed"))
+        sigma_b_bottom = stc.get_sigma_b(cs, top_plate, data.input_data.get("M_Ed"))
+        psi_bottom = min(sigma_a_bottom, sigma_b_bottom) / max(sigma_a_bottom, sigma_b_bottom)
+        length_bottom = 0
+                if sigma_a_bottom > 0 or sigma_b_bottom > 0:
+                    #stiffener is at least partly in compression zone
+                    if sigma_b_botton > sigma_a_bottom:
+                        if psi_bottom > 0:
+                            #low stress side
+                            length_bottom = bottom_plate.get_length_tot()*(3-psi_bottom)/(5-psi_bottom)
+                        else:
+                            #tension zone
+                            pass
+                    else:
+                        if psi_bottom > 0:
+                            #high stress side
+                            length_bottom = bottom_plate.get_length_tot()*2/(5-psi_bottom)
+                        else:
+                            b_comp = bottom_plate.get_length_tot()/(1-psi_bottom)
+                            length_bottom = 0.4*b_comp
+                            pass
+                else:
+                    #stiffener is in tension zone
+                    pass
+
+        #add additional parts of plate to stiffener
         new_top_plate = ln.line(top_plate.code, top_plate.b + unit_vec_to_a * length_top, \
         top_plate.b, top_plate.t)
         new_bottom_plate = ln.line(bottom_plate.code, bottom_plate.a, bottom_plate.a + \
         unit_vec_to_b * length_bottom, top_plate.t)
+        stiffener.lines.remove(top_plate)
+        stiffener.lines.remove(bottom_plate)
         stiffener.lines.append(new_top_plate)
         stiffener.lines.append(new_bottom_plate)
 
         delta = stiffener.get_area_tot()/A_tot
+
+
         #calculate gamma
         length_gamma = defaults.effective_width_parameter*center_plate.t
         if length_gamma > 0.5*center_plate.get_length_tot():
@@ -148,10 +201,8 @@ def global_plate_buckling(cs, stiffened_plate):
     sigma_cr_p = sigma_max * phi_cr_p
 
     #calculating plate slenderness
-    #correct beta_a_c still to be implemented
-    A_c_eff_loc = 1
-    A_c = 1
-    beta_a_c = A_c_eff_loc / A_c
+    "correct beta_a_c still to be implemented"
+    beta_a_c = 1
     lambda_p_glob_bar = math.sqrt(beta_a_c * data.constants.get("fy") / sigma_cr_p)
 
     #calculate rho_glob for plate buckling
