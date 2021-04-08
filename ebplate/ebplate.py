@@ -34,12 +34,12 @@ def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
                   "   Number of stiffeners =  1 \n"]
     input_file.writelines(stiffening_preamble)
     for i in range(len(stiffeners_ebp)):
-        stiffening = "    - Stiffener n° " + str(i) + " Active=1 \n",\
+        stiffening = "    - Stiffener n° " + str(i+1) + " Active=1 \n",\
                      "      Orientation = 0 \n",\
-                     "      Location    = 100. \n",\
-                     "      Gamma       = 25.46 \n",\
-                     "      Teta        = 5.487 \n",\
-                     "      Delta       = 0.107 \n",\
+                     "      Location    = " + str(stiffeners_ebp[i][0]/10) + " \n",\
+                     "      Gamma       = " + str(stiffeners_ebp[i][1]) + " \n",\
+                     "      Teta        = " + str(stiffeners_ebp[i][2]) + " \n",\
+                     "      Delta       = " + str(stiffeners_ebp[i][3]) + " \n",\
                      "      Type        =  0 \n",\
                      "      Dimension 1 = 0 \n",\
                      "      Dimension 2 = 0 \n",\
