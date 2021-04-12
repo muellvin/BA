@@ -8,7 +8,7 @@ import math
 def local_buckling(cs):
     cal_sigma_psi_red(cs)
     change = 1
-    while change > defaults.convergence_limit:
+    while change > defaults.convergence_limit_local_buckling:
         m_rd_el_eff_old = cs.get_m_rd_el_eff()
         for line in cs.lines:
             local_buckling_plate(line)
