@@ -89,13 +89,7 @@ def local_buckling_plate(cs, line_to_do):
             print("plate slenderness or stress ratio out of range")
             pass
 
-
-
         plate.rho_loc = rho_loc
-
-        print("pl_position: ", plate.code.pl_position," psi: ", plate.psi, "rho_loc: ", plate.rho_loc)
-        if plate.psi > 1:
-            print("sigma_a_red: ", plate.sigma_a_red, "sigma_b_red: ", plate.sigma_b_red)
 
         #again in table 4.1 the effective widths
         b_eff = 0
@@ -124,4 +118,5 @@ def local_buckling_plate(cs, line_to_do):
         plate.p2.y = plate.b.y + b_e2/plate.get_length_tot()*(plate.a.y - plate.b.y)
         plate.p2.z = plate.b.z + b_e2/plate.get_length_tot()*(plate.a.z - plate.b.z)
 
+    print("pl_position: ", plate.code.pl_position," psi: ", int(100*plate.psi)/100, "rho_loc: ", int(100*plate.rho_loc)/100)
     return cs
