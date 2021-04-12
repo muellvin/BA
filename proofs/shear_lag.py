@@ -24,7 +24,7 @@ def reduction_shear_lag(cs, flange):
 
     #check if necessary
     if b_0 < data.input_data.get("L_e")/50:
-        pass
+        return cs
 
     A_c_eff = 0
     for line in cs.lines:
@@ -36,33 +36,34 @@ def reduction_shear_lag(cs, flange):
         if line.code.pl_position == flange and line.code.pl_type == 1:
             A_sl += line.get_area_tot()
 
-
-
     t_f = t = cs.get_pl_line(flange).t
-
-
-    alpha_0_star = math.sqrt(A_c_eff / (b_0 * t_f))
+    #alpha_0_star = math.sqrt(A_c_eff / (b_0 * t_f))
     alpha_0 = math.sqrt(1 + A_sl / (b_0*t))
-
-
-
-
-    """beta_ult mit alpha_0_star oder beta mit alpha_0, dafür beta**kappa"""
-    """letzteres ist besser (eq 3.5)"""
 
     kappa = alpha_0 * b_0 / data.input_data.get("L_e")
 
     beta = beta_from_kappa(kappa)
 
-    #recommended calculation from book design of plated structures (2.8)
-    #also in EC 1993 1-5 3.3 eq 3.5
-    A_eff = beta**kappa * A_c_eff
-    reduction_factor_shear_lag = beta**kappa
+    if defaults.do_shear_lag_plastically == True:
+        #follow EC 3.3; plastically
+        #recommended calculation from book design of plated structures (2.8):
+        #also in EC 1993 1-5 3.3 eq 3.5
+        #A_eff = beta**kappa * A_c_eff
+        reduction_factor_shear_lag = beta**kappa
+    else:
+        #follow EC 3.2; elastically; conservative, no iterations needed
+        reduction_factor_shear_lag = beta
 
     #the book recommends to apply this reduction to the thickness of the flange plates
     for line in cs.lines:
         if line.code.pl_position == flange:
             line.t = line.t * reduction_factor_shear_lag
+
+    return cs
+
+
+
+
 
 
 

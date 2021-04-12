@@ -15,6 +15,7 @@ def local_buckling(cs):
         cal_sigma_psi_red(cs)
         m_rd_el_eff_new = cs.get_m_rd_el_eff()
         change = abs(abs( m_rd_el_eff_new / m_rd_el_eff_old ) - 1)
+    return cs
 
 
 #function calculating the normal stresses at points a and b of every plate and setting these attributes as well as the stress ratio
