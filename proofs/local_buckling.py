@@ -1,7 +1,7 @@
 
 import data
 import defaults
-import stress_cal
+from proofs import stress_cal
 import math
 
 
@@ -19,11 +19,11 @@ def local_buckling(cs):
 
 
 #function calculating the normal stresses at points a and b of every plate and setting these attributes as well as the stress ratio
-def cal_sigma__psi_red(cs):
+def cal_sigma_psi_red(cs):
     M_Ed = data.input_data.get("M_Ed")
     for line in cs.lines:
-        line.sigma_a_red = stress_cal.sigma_a_red(cs, line, M_Ed)
-        line.sigma_b_red = stress_cal.sigma_b_red(cs, line, M_Ed)
+        line.sigma_a_red = stress_cal.get_sigma_a_red(cs, line, M_Ed)
+        line.sigma_b_red = stress_cal.get_sigma_b_red(cs, line, M_Ed)
         #set the stress ratio = sigma min / sigma max
         #correct for EC having tension as negative by inverting the ratio to be sigma max / sigma min
         if line.sigma_a_red < line.sigma_b_red:
@@ -67,7 +67,7 @@ def local_buckling_plate(plate):
         rho_loc = 1.0
     elif lambda_p_loc_bar > 0.673 and (3 + plate.psi) >= 0:
         rho_loc = (lambda_p_loc_bar - 0.055 * (3 + plate.psi)) / lambda_p_loc_bar**2
-        if rho_loc > 1.0
+        if rho_loc > 1.0:
             rho_loc = 1.0
     else:
         print("plate slenderness or stress ratio out of range")
