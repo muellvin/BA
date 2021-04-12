@@ -379,7 +379,7 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
         #angle defining border III and IV
         cutoffangle = defaults.cutoffangle
         #angle between bottom plate of left top stiffener and the y axis
-        stangle = float(left_top.get_line(4, 3).cal_angle_y())
+        stangle = float(left_top.get_line(4, 3).get_angle_y())
         #distance between the two croner points of the stiffeners
         dis = dis_lines_lines(lines_left_top, lines_top_left)[0]
         #angle of this distance to the y axis
@@ -542,7 +542,7 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
             geometry_ok = False
             disdiff = defaults.mindis_across_bottom - max_dis
 
-            stangle = (math.pi/2 - float(left_bottom.get_line(4,3).cal_angle_y()))
+            stangle = (math.pi/2 - float(left_bottom.get_line(4,3).get_angle_y()))
             angle = disangle + stangle
             corr_b_inf = disdiff*math.cos(angle)/2
             corr_height = disdiff*math.sin(angle)/2
@@ -688,7 +688,7 @@ def dis_lines_lines(lines1, lines2):
 
     help_line = line.line([0,0,0,0,0], corner1, corner2, 1)
     dis = help_line.get_length_tot()
-    angle = help_line.cal_angle_y()
+    angle = help_line.get_angle_y()
 
 
 
