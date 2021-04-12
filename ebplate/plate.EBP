@@ -1,67 +1,79 @@
-EBPlate - v2.01 
-Firm          # 
-Contract      # 
-Item          # 
-Users         # 
-Commentary    # 
+	EBPlate - v2.01 
+Société       # 
+Affaire       # 
+Référence     # 
+Utilisateur   # 
+Commentaire   # 
 #PLATE 
    Width           300.0 cm 
    Height          200.0 cm 
-   Thickness       2.0 cm 
-   Young Modulus    210000.000 MPa 
-   Poisson Ratio        0.300 
+   Thickness         2.0 cm 
+   Module Young    210000.000 MPa 
+   Poisson Coefficient         0.300 
    Boundary Conditions 
-      Edge 1 0 
-      Edge 2 0 
-      Edge 3 0 
-      Edge 4 0 
+      Bord 1 0 
+      Bord 2 0 
+      Bord 3 0 
+      Bord 4 0 
 #STIFFENING 
    Orthotropic Plate =  1 
-   Orthotropic coefficients 
-   X Direction : Beta = 0 
-                 Eta = -1 
-   Smearing : No 
-   Y Direction : Beta = 0 
-                 Eta = 0 
-   Referential 1 
-   Number of stiffeners = 1 
-    - Stiffener n° 1 Active=1 
+   Coefficients d'orthotropie : 
+      Direction X : Beta =  0.000 
+                     Eta =  -1.000 
+        Smearing : No 
+      Direction Y : Beta =  0.000 
+                     Eta =  0.000 
+        Smearing : No 
+   Referentiel 2 
+   Nombre de raidisseurs  2 
+   - Raidisseur n° 1 Active=1 
       Orientation = 0 
-      Location    = 60.0 
+      Position    = 50.0 
       Gamma       = 10 
       Teta        = 6 
       Delta       = 0.2 
-      Type        =  0 
       Dimension 1 = 0 
+      Type        = 0 
+      Dimension 2 = 0 
+      Dimension 3 = 0 
+      Dimension 4 = 0 
+   - Raidisseur n° 2 Active=1 
+      Orientation = 0 
+      Position    = 105.0 
+      Gamma       = 10 
+      Teta        = 6 
+      Delta       = 0.2 
+      Dimension 1 = 0 
+      Type        = 0 
       Dimension 2 = 0 
       Dimension 3 = 0 
       Dimension 4 = 0 
 #STRESSES 
-Longitudinal stresses : User's data No 
-Analytical Longitudinal stresses 
-Imposed values : No 
-Longitudinal Stress Top Left                200 MPa 
-Longitudinal Stress Bottom Left             -200 MPa 
-Longitudinal Stress Top Right               200 MPa 
-Longitudinal Stress Bottom Right            -200 MPa 
-Transverse stresses : User's data No 
-Analytical Transverse stresses 
-Imposed values : No 
-Transverse stress Top                         0.000 MPa 
-Transverse stress Bottom                      0.000 MPa 
-Patch Load Stress Top                         0.000 MPa 
-Patch Load Stress Bottom                      0.000 MPa 
-Patch Load Width Top                          0.000 cm 
-Patch Load Width Bottom                       0.000 cm 
-Local longitudinal stresses under patch load : No 
-Local shear stresses under patch load : Yes 
-W Top                      -1.000 
-W Bot                      -1.000 
-Shear distribution  1 
+ Longitudinal stresses : User's data No 
+ Analytical Longitudinal stresses 
+  Imposed values : No 
+   Longitudinal Stress Top Left                200 MPa 
+   Longitudinal Stress Bottom Left             -200 MPa 
+   Longitudinal Stress Top Right               200 MPa 
+   Longitudinal Stress Bottom Right            -200 MPa 
+ Transverse stresses : User's data No 
+ Analytical Transverse stresses 
+  Imposed values : No 
+   Transverse stress Top                         0.000 MPa 
+   Transverse stress Bottom                      0.000 MPa 
+   Patch Load Stress Bottom                      0.000 MPa 
+   Patch Load Stress Top                         0.000 MPa 
+   Patch Load Width Top                          0.000 cm 
+   Patch Load Width Bottom                       0.000 cm 
+   Local longitudinal stresses under patch load : No 
+   Local shear stresses under patch load : Yes 
+   W Top                      -1.000 
+   W Bot                      -1.000 
+   Shear distribution  1 
 Shear stresses : User's data No 
 Analytical Shear stresses 
-Imposed values : No 
-Shear stress                                 0.000 MPa 
+  Imposed values : No 
+   Shear stress                                 0.000 MPa 
 #PARAMETERS 
-Complexity : 1 
-Effective width parameter :  10.000
+   Complexity : 1 
+   Effective width parameter :  10.000
