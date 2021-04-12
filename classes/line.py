@@ -12,12 +12,12 @@ class line():
         self.a = a
         self.b = b
         self.p1 = p1 if p1 is not None else point.point(a.y + 1/2*(b.y - a.y), a.z + 1/2*(b.z-a.z))
-        self.p2 = p2 if p1 is not None else point.point(a.y + 1/2*(b.y - a.y), a.z + 1/2*(b.z-a.z))
+        self.p2 = p2 if p2 is not None else point.point(a.y + 1/2*(b.y - a.y), a.z + 1/2*(b.z-a.z))
         self.t = float(t)
         self.beta = 1
         self.rohc1 = 1
         self.rohc2 = 1
-        #normal stress with tension being positive at point a and point b for the effective crosssection
+        #normal stress with tension being negative at point a and point b for the effective crosssection
         self.sigma_a_red = 0
         self.sigma_b_red = 0
         #ratio of sigma at a and b, smaller/larger with tension being negative
@@ -76,7 +76,7 @@ class line():
     def get_i_along_red1(self):
         return self.cal_i_along_red1()
     def get_i_along_red2(self):
-        return self.cal_i_along_red2()    
+        return self.cal_i_along_red2()
     def get_i_perpen_red(self):
         return self.cal_i_perpen_red()
     def get_i_y_red(self):
