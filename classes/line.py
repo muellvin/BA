@@ -36,7 +36,46 @@ class line():
         else:
             return false
 
+#methods to calculate line propreties for non-reduced
+    def get_center_y_tot(self):
+        return self.cal_center_y(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    def get_center_z_tot(self):
+        return self.cal_center_z(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    def get_length_tot(self):
+        return self.cal_length(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    def get_area_tot(self):
+        return self.cal_area(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    def get_i_along_tot(self):
+        return self.cal_i_along(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    def get_i_perpen_tot(self):
+        return self.cal_i_perpen(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    def get_i_y_tot(self):
+        return self.cal_i_y(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    def get_i_z_tot(self):
+        return self.cal_i_z(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    def get_i_rot_tot(self, angle):
+        return self.cal_i_rot(self.a.y, self.a.z, self.b.y, self.b.z, self.t, angle)
 
+
+#methods to calculate line propreties for reduced
+    def get_center_y_red(self):
+        return self.cal_center_y_red()
+    def get_center_z_red(self):
+        return self.cal_center_z_red()
+    def get_length_red(self):
+        return self.cal_length_red()
+    def get_area_red(self):
+        return self.cal_area_red()
+    def get_i_along_red(self):
+        return self.cal_i_along_red()
+    def get_i_perpen_red(self):
+        return self.cal_i_perpen_red()
+    def get_i_y_red(self):
+        return self.cal_i_y_red()
+    def get_i_z_red(self):
+        return self.cal_i_z_red()
+    def get_i_rot_red(self, angle):
+        return self.cal_i_rot_red(angle)
 
 #GENERAL
     def get_angle_y(self):
@@ -53,76 +92,76 @@ class line():
 
 
 #NON-REDUCED (and also used for reduced, that's why with coordinates as arguments)
-    def get_center_y(self, ay, az, by, bz, t):
+    def cal_center_y(self, ay, az, by, bz, t):
         return 1/2 * (ay + by)
-    def get_center_z(self, ay, az, by, bz, t):
+    def cal_center_z(self, ay, az, by, bz, t):
         return 1/2 * (az + bz)
-    def get_length(self, ay, az, by, bz, t):
+    def cal_length(self, ay, az, by, bz, t):
         return math.sqrt((ay - by)**2 + (az - bz)**2)
-    def get_area(self, ay, az, by, bz, t):
-        return self.get_length(ay, az, by, bz, t) * self.t
-    def get_i_along(self, ay, az, by, bz, t):
-        return self.t**3 * self.get_length(ay, az, by, bz, t) / 12
-    def get_i_perpen(self, ay, az, by, bz, t):
-        return self.get_length(ay, az, by, bz, t)**3 * self.t / 12
-    def get_i_y(self, ay, az, by, bz, t):
-        angle = self.get_angle_y()
-        return math.cos(angle)**2 * self.get_i_along(ay, az, by, bz, t) + math.sin(angle)**2 * self.get_i_perpen(ay, az, by, bz, t)
-    def get_i_z(self, ay, az, by, bz, t):
-        complangle = self.get_angle_z()
-        return math.cos(complangle)**2 * self.get_i_along(ay, az, by, bz, t) + math.sin(complangle)**2 * self.get_i_perpen(ay, az, by, bz, t)
-    def get_i_rot(self, ay, az, by, bz, t, angle):
-        return math.cos(angle)**2 * self.get_i_along(ay, az, by, bz, t) + math.sin(angle)**2 * self.get_i_perpen(ay, az, by, bz, t)
+    def cal_area(self, ay, az, by, bz, t):
+        return self.cal_length(ay, az, by, bz, t) * self.t
+    def cal_i_along(self, ay, az, by, bz, t):
+        return self.t**3 * self.cal_length(ay, az, by, bz, t) / 12
+    def cal_i_perpen(self, ay, az, by, bz, t):
+        return self.cal_length(ay, az, by, bz, t)**3 * self.t / 12
+    def cal_i_y(self, ay, az, by, bz, t):
+        angle = self.cal_angle_y()
+        return math.cos(angle)**2 * self.cal_i_along(ay, az, by, bz, t) + math.sin(angle)**2 * self.cal_i_perpen(ay, az, by, bz, t)
+    def cal_i_z(self, ay, az, by, bz, t):
+        complangle = self.cal_angle_z()
+        return math.cos(complangle)**2 * self.cal_i_along(ay, az, by, bz, t) + math.sin(complangle)**2 * self.cal_i_perpen(ay, az, by, bz, t)
+    def cal_i_rot(self, ay, az, by, bz, t, angle):
+        return math.cos(angle)**2 * self.cal_i_along(ay, az, by, bz, t) + math.sin(angle)**2 * self.cal_i_perpen(ay, az, by, bz, t)
 
 
 #FOR REDUCED
-    def get_center_y_red(self):
-        length_red1 = self.get_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
-        length_red2 = self.get_length(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
+    def cal_center_y_red(self):
+        length_red1 = self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+        length_red2 = self.cal_length(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
         weight_1 = length_red1/(length_red1+length_red2)
         weight_2 = length_red2 /(length_red1+length_red2)
-        center_y_red1 = self.get_center_y(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
-        center_y_red2 = self.get_center_y(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
+        center_y_red1 = self.cal_center_y(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+        center_y_red2 = self.cal_center_y(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
         center = center_y_red1 * weight_1 + center_y_red2 * weight_2
         return center
-    def get_center_z_red(self):
-        length_red1 = self.get_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
-        length_red2 = self.get_length(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
+    def cal_center_z_red(self):
+        length_red1 = self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+        length_red2 = self.cal_length(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
         weight1 = length_red1 /(length_red1+length_red2)
         weight2 = length_red2 /(length_red1+length_red2)
-        center_z_red1 = self.get_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
-        center_z_red2 = self.get_center_z(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
+        center_z_red1 = self.cal_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+        center_z_red2 = self.cal_center_z(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
         center = center_z_red1 * weight1 + center_z_red2 * weight2
         return center
-    def get_length_red(self):
-        return self.get_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.get_length(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
-    def get_area_red(self):
-        return self.get_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.get_area(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
-    def get_area_red1(self):
-        return self.get_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
-    def get_area_red2(self):
-        return self.get_area(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
-    def get_i_along_red(self):
-        return self.get_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.get_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-    def get_i_along_red1(self):
-        return self.get_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
-    def get_i_along_red2(self):
-        return self.get_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-    def get_i_perpen_red(self):
-        i_perpen_red1 = self.get_i_perpen(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
-        i_perpen_red2 = self.get_i_perpen(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-        dis1 = math.sqrt((abs(self.get_center_y_red()) - abs(self.get_center_y(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)))**2 + (abs(self.get_center_z_red())-abs(self.get_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)))**2)
-        dis2 = math.sqrt((abs(self.get_center_y_red()) - abs(self.get_center_y(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)))**2 + (abs(self.get_center_z_red())-abs(self.get_center_z(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)))**2)
-        steiner1 = self.get_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) * dis1**2
-        steiner2 = self.get_area(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t) * dis2**2
+    def cal_length_red(self):
+        return self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.cal_length(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
+    def cal_area_red(self):
+        return self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.cal_area(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
+    def cal_area_red1(self):
+        return self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+    def cal_area_red2(self):
+        return self.cal_area(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
+    def cal_i_along_red(self):
+        return self.cal_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + self.cal_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
+    def cal_i_along_red1(self):
+        return self.cal_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+    def cal_i_along_red2(self):
+        return self.cal_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
+    def cal_i_perpen_red(self):
+        i_perpen_red1 = self.cal_i_perpen(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+        i_perpen_red2 = self.cal_i_perpen(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
+        dis1 = math.sqrt((abs(self.cal_center_y_red()) - abs(self.cal_center_y(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)))**2 + (abs(self.cal_center_z_red())-abs(self.cal_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)))**2)
+        dis2 = math.sqrt((abs(self.cal_center_y_red()) - abs(self.cal_center_y(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)))**2 + (abs(self.cal_center_z_red())-abs(self.cal_center_z(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)))**2)
+        steiner1 = self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) * dis1**2
+        steiner2 = self.cal_area(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t) * dis2**2
         i_perpen_red1_withsteiner = i_perpen_red1 + steiner1
         i_perpen_red2_withsteiner = i_perpen_red2 + steiner2
         return i_perpen_red1_withsteiner + i_perpen_red2_withsteiner
-    def get_i_y_red(self):
-        angle = self.get_angle_y()
-        return math.cos(angle)**2 * self.get_i_along_red() + math.sin(angle)**2 * self.get_i_perpen_red()
-    def get_i_z_red(self):
-        complangle = self.get_angle_z()
-        return math.cos(complangle)**2 * self.get_i_along_red() + math.sin(complangle)**2 * self.get_i_perpen_red()
-    def get_i_rot_red(self, angle):
-        return math.cos(angle)**2 * self.get_i_along_red() + math.sin(angle)**2 * self.get_i_perpen_red()
+    def cal_i_y_red(self):
+        angle = self.cal_angle_y()
+        return math.cos(angle)**2 * self.cal_i_along_red() + math.sin(angle)**2 * self.cal_i_perpen_red()
+    def cal_i_z_red(self):
+        complangle = self.cal_angle_z()
+        return math.cos(complangle)**2 * self.cal_i_along_red() + math.sin(complangle)**2 * self.cal_i_perpen_red()
+    def cal_i_rot_red(self, angle):
+        return math.cos(angle)**2 * self.cal_i_along_red() + math.sin(angle)**2 * self.cal_i_perpen_red()
