@@ -5,8 +5,8 @@ Référence     #
 Utilisateur   # 
 Commentaire   # 
 #PLATE
-   Width           300.000 cm
-   Height          200.000 cm
+   Width           230.000 cm
+   Height          230.000 cm
    Thickness         2.000 cm
    Module Young    210000.000 MPa
    Poisson Coefficient         0.300
@@ -18,26 +18,15 @@ Commentaire   #
 #STIFFENING
    Orthotropic Plate =  0
    Referentiel 2
-   Nombre de raidisseurs  1
-   - Raidisseur n° 1 Active=1
-      Orientation = 0
-      Position    = 100.
-      Gamma       = 25.46
-      Teta        = 5.487
-      Delta       = 0.107
-      Type        =  3
-      Dimension 1 = 15.
-      Dimension 2 = 12.5
-      Dimension 3 = 7.5
-      Dimension 4 = 1.2
+   Nombre de raidisseurs  0
 #STRESSES
  Longitudinal stresses : User's data No
  Analytical Longitudinal stresses
   Imposed values : No
    Longitudinal Stress Top Left                200.000 MPa
-   Longitudinal Stress Bottom Left            -200.000 MPa
+   Longitudinal Stress Bottom Left             200.000 MPa
    Longitudinal Stress Top Right               200.000 MPa
-   Longitudinal Stress Bottom Right           -200.000 MPa
+   Longitudinal Stress Bottom Right            200.000 MPa
  Transverse stresses : User's data No
  Analytical Transverse stresses
   Imposed values : No
