@@ -20,7 +20,7 @@ mindis_across_top = 500
 mindis_across_bottom = 100
 cutoffangle = math.pi/3
 
-do_check_geometry = True
+do_check_geometry = False
 do_check_stiffeners_in_corners_top = True
 do_check_stiffeners_in_corners_bottom = False
 

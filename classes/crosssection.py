@@ -138,8 +138,8 @@ class crosssection():
         return iz_tot
 
     def get_m_rd_el_eff(self):
-            max_z_dis = max(self.get_center_y_red() + self.get_pl_line(1).t/2 ,  data.input_data.get("h") + self.get_pl_line(3).t/2 - self.get_center_y_red())
-            m_rd_el_eff = self.get_i_y_red() / max_z_dis * data.constants.get("fy")/data.constants.get("gamma_M1")
+            max_z_dis = max(self.get_center_z_red() + self.get_pl_line(1).t/2 ,  data.input_data.get("h") + self.get_pl_line(3).t/2 - self.get_center_z_red())
+            m_rd_el_eff = (self.get_i_y_red() / max_z_dis) * (data.constants.get("f_y")/data.constants.get("gamma_M1"))
             return m_rd_el_eff
 
 

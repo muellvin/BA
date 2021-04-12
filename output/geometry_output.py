@@ -58,3 +58,36 @@ def print_cs(crosssection):
 
     plt.axis('scaled')
     plt.show()
+
+def print_cs_red(crosssection):
+
+
+    for i in range(len(crosssection.lines)):
+        line = crosssection.lines[i]
+        y = []
+        z = []
+
+        y.append(-line.a.y)
+        y.append(-line.p1.y)
+        z.append(-line.a.z)
+        z.append(-line.p1.z)
+        y_list = np.array(y)
+        z_list = np.array(z)
+        plt.plot(y_list, z_list, 'k')
+
+
+
+    for i in range(len(crosssection.lines)):
+        line = crosssection.lines[i]
+        y = []
+        z = []
+        y.append(-line.p2.y)
+        y.append(-line.b.y)
+        z.append(-line.p2.z)
+        z.append(-line.b.z)
+        y_list = np.array(y)
+        z_list = np.array(z)
+        plt.plot(y_list, z_list, 'k')
+
+    plt.axis('scaled')
+    plt.show()
