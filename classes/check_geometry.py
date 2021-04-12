@@ -1,3 +1,16 @@
+import defaults
+import math
+import shapely
+import random
+from classes import point
+from classes import line
+from classes import crosssection
+from classes import plate_code
+from shapely.geometry import LineString, Point
+from classes import substantiate as ss
+from output import geometry_output as go
+import defaults
+from output import geometry_output as go
 
     #this function should check weather the proposed stiffeners are feasable in the initial crosssection with the track_plate
     #as an argument it takes the initial crosssection and a list of all proposed stiffeners of type crosssection in the global coordinate system

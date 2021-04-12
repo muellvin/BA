@@ -105,10 +105,10 @@ class line():
     def cal_i_perpen(self, ay, az, by, bz, t):
         return self.cal_length(ay, az, by, bz, t)**3 * self.t / 12
     def cal_i_y(self, ay, az, by, bz, t):
-        angle = self.cal_angle_y()
+        angle = self.get_angle_y()
         return math.cos(angle)**2 * self.cal_i_along(ay, az, by, bz, t) + math.sin(angle)**2 * self.cal_i_perpen(ay, az, by, bz, t)
     def cal_i_z(self, ay, az, by, bz, t):
-        complangle = self.cal_angle_z()
+        complangle = self.get_angle_z()
         return math.cos(complangle)**2 * self.cal_i_along(ay, az, by, bz, t) + math.sin(complangle)**2 * self.cal_i_perpen(ay, az, by, bz, t)
     def cal_i_rot(self, ay, az, by, bz, t, angle):
         return math.cos(angle)**2 * self.cal_i_along(ay, az, by, bz, t) + math.sin(angle)**2 * self.cal_i_perpen(ay, az, by, bz, t)
@@ -158,10 +158,10 @@ class line():
         i_perpen_red2_withsteiner = i_perpen_red2 + steiner2
         return i_perpen_red1_withsteiner + i_perpen_red2_withsteiner
     def cal_i_y_red(self):
-        angle = self.cal_angle_y()
+        angle = self.get_angle_y()
         return math.cos(angle)**2 * self.cal_i_along_red() + math.sin(angle)**2 * self.cal_i_perpen_red()
     def cal_i_z_red(self):
-        complangle = self.cal_angle_z()
+        complangle = self.get_angle_z()
         return math.cos(complangle)**2 * self.cal_i_along_red() + math.sin(complangle)**2 * self.cal_i_perpen_red()
     def cal_i_rot_red(self, angle):
         return math.cos(angle)**2 * self.cal_i_along_red() + math.sin(angle)**2 * self.cal_i_perpen_red()
