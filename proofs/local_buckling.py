@@ -8,13 +8,18 @@ import math
 def local_buckling(cs):
     cs = cal_sigma_psi_red(cs)
     change = 1
+    i = 1
     while change > defaults.convergence_limit_local_buckling:
         m_rd_el_eff_old = cs.get_m_rd_el_eff()
+        print("iteration: ", i)
         for line in cs.lines:
             cs = local_buckling_plate(cs, line)
         cs = cal_sigma_psi_red(cs)
         m_rd_el_eff_new = cs.get_m_rd_el_eff()
         change = abs(abs( m_rd_el_eff_new / m_rd_el_eff_old ) - 1)
+        print ("change: ", change)
+
+        i += 1
     return cs
 
 
@@ -26,6 +31,9 @@ def cal_sigma_psi_red(cs):
         line.sigma_b_red = stress_cal.get_sigma_b_red(cs, line, M_Ed)
         #set the stress ratio = sigma min / sigma max
         line.psi = min(line.sigma_a_red, line.sigma_b_red) / max(line.sigma_a_red, line.sigma_b_red)
+
+        if line.sigma_a_red < 0 and line.sigma_b_red < 0:
+            line.psi = 1
     return cs
 
 
@@ -34,6 +42,9 @@ def local_buckling_plate(cs, line_to_do):
     for line in cs.lines:
         if line == line_to_do:
             plate = line
+
+    only_tension = plate.sigma_a_red < 0 and plate.sigma_b_red < 0
+    deck = plate.code.pl_position == 1
 
     #all plates are supported on both sides (internal compression elements) -> Table 4.1
     #plate buckling coefficient
@@ -51,47 +62,47 @@ def local_buckling_plate(cs, line_to_do):
     elif -3 < plate.psi < -1:
         k_sigma_loc = 5.98*(1-plate.psi)**2
     else:
-        print("Psi value out of range: ", plate.psi, " for a plate at: ", plate.code.pl_position, ", found at k sigma loc")
-        k_sigma_loc = 1000000
+        #the only other case is if psi is smaller than -3 because when psi was set
+        #if there is only tension (the only way to have a psi greater than 1) we set psi to 1
+        only_tension = True
 
-    #EC A.1
-    sigma_E_loc = (math.pi**2 * data.constants.get("E") * plate.t**2) / (12 * (1-data.constants.get("nu")**2) * plate.get_length_tot()**2)
-    #elastic critical plate buckling stress
+    if only_tension != True and deck != True:
+        #EC A.1
+        sigma_E_loc = (math.pi**2 * data.constants.get("E") * plate.t**2) / (12 * (1-data.constants.get("nu")**2) * plate.get_length_tot()**2)
+        #elastic critical plate buckling stress
 
-    sigma_cr_p_loc = k_sigma_loc * sigma_E_loc
+        sigma_cr_p_loc = k_sigma_loc * sigma_E_loc
 
-    #EC 4.4 (2)
+        #EC 4.4 (2)
 
-    lambda_p_loc_bar = math.sqrt(data.constants.get("f_y") / sigma_cr_p_loc)
-    #held on both sides -> EC 4.4 (2)
-    rho_loc = 0
-    #held on both sides
-    if lambda_p_loc_bar <= 0.673:
-        rho_loc = 1.0
-    elif lambda_p_loc_bar > 0.673 and (3 + plate.psi) >= 0:
-        rho_loc = (lambda_p_loc_bar - 0.055 * (3 + plate.psi)) / lambda_p_loc_bar**2
-        if rho_loc > 1.0:
+        lambda_p_loc_bar = math.sqrt(data.constants.get("f_y") / sigma_cr_p_loc)
+        #held on both sides -> EC 4.4 (2)
+        rho_loc = 0
+        #held on both sides
+        if lambda_p_loc_bar <= 0.673:
             rho_loc = 1.0
-    else:
-        print("plate slenderness or stress ratio out of range")
-        pass
+        elif lambda_p_loc_bar > 0.673 and (3 + plate.psi) >= 0:
+            rho_loc = (lambda_p_loc_bar - 0.055 * (3 + plate.psi)) / lambda_p_loc_bar**2
+            if rho_loc > 1.0:
+                rho_loc = 1.0
+        else:
+            print("plate slenderness or stress ratio out of range")
+            pass
 
 
 
-    plate.rho_loc = rho_loc
+        plate.rho_loc = rho_loc
 
-    print("pl_position: ", plate.code.pl_position," psi: ", plate.psi, "rho_loc: ", plate.rho_loc)
+        print("pl_position: ", plate.code.pl_position," psi: ", plate.psi, "rho_loc: ", plate.rho_loc)
+        if plate.psi > 1:
+            print("sigma_a_red: ", plate.sigma_a_red, "sigma_b_red: ", plate.sigma_b_red)
 
-    #again in table 4.1 the effective widths
-    b_eff = 0
-    b_e1 = 0
-    b_e2 = 0
-
-    only_tension = plate.sigma_a_red < 0 and plate.sigma_b_red < 0
-    deck = plate.code.pl_position == 1
+        #again in table 4.1 the effective widths
+        b_eff = 0
+        b_e1 = 0
+        b_e2 = 0
 
 
-    if only_tension == False and deck == False:
         if plate.psi == 1:
             b_eff = plate.rho_loc * plate.get_length_tot()
             b_e1 =  b_e2 = 0.5 * b_eff

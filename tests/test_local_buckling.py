@@ -15,7 +15,7 @@ import data
 b_sup = 3000
 b_inf = 2000
 h = 1500
-M_Ed = 1
+M_Ed = -100000000
 data.input_data["M_Ed"] = M_Ed
 data.input_data["h"] = h
 data.input_data["b_inf"] = b_inf
@@ -36,13 +36,13 @@ prop_list.add(prop_1)
 
 #prop_2 = ps.proposed_stiffener(2, 2, 0.3, 10**7)
 #prop_list.add(prop_2)
-#prop_3 = ps.proposed_stiffener(3, 3, -0.8, 10**7)
-#prop_list.add(prop_3)
-#prop_4 = ps.proposed_stiffener(3, 4, 0.8, 10**7)
-#prop_list.add(prop_4)
+prop_3 = proposed_stiffener.proposed_stiffener(3, 2, -0.7, 10**7)
+prop_list.add(prop_3)
+prop_4 = proposed_stiffener.proposed_stiffener(3, 3, 0.7, 10**7)
+prop_list.add(prop_4)
 #prop_5 = ps.proposed_stiffener(4, 5, 0.3, 10**7)
 #prop_list.add(prop_5)
-prop_5 = proposed_stiffener.proposed_stiffener(4, 2, 0.5, 10**7)
+prop_5 = proposed_stiffener.proposed_stiffener(4, 4, 0.5, 10**7)
 prop_list.add(prop_5)
 
 
