@@ -44,7 +44,7 @@ def global_plate_buckling(total_cs, stiffened_plate):
     for plate in stiffened_plate.lines:
         if plate.code.pl_type == 0:
             h += plate.get_length_tot()
-            print(plate.get_length_tot())
+            print("length: " + str(plate.get_length_tot()))
     t = plate_a.t
     print("t = " + str(t))
     b = defaults.plate_length
@@ -52,8 +52,6 @@ def global_plate_buckling(total_cs, stiffened_plate):
     go.print_cs(stiffened_plate)
     #coordinate transformation (a+b)/2 is the new origin and baseplate is horizontal
     #set new origin
-    print("Point a:  " + str(plate_a.a))
-    print("Point b:  " + str(plate_b.b))
     move_z = 0.5*(plate_a.a.z + plate_b.b.z)
     move_y = 0.5*(plate_a.a.y + plate_b.b.y)
 
@@ -75,7 +73,6 @@ def global_plate_buckling(total_cs, stiffened_plate):
         #inclined plate
         angle = - math.atan((plate_b.b.z-plate_a.a.z)/(plate_b.b.y-plate_a.a.y))
 
-    print("Angle = " + str(angle))
     #perform rotation
     for plate in stiffened_plate.lines:
         ay = plate.a.y
@@ -130,9 +127,7 @@ def global_plate_buckling(total_cs, stiffened_plate):
                 top_plate = plate
         #find distance to point a
         delta_z = center_plate.get_center_z_tot() - plate_a.a.z
-        print("Delta_z :" +str(delta_z))
         delta_y = center_plate.get_center_y_tot() - plate_a.a.y
-        print("Delta_y :" +str(delta_y))
         distance = math.sqrt(delta_z **2 + delta_y **2)
 
         #calculate delta
