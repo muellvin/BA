@@ -55,7 +55,7 @@ cs = stiffener.add_stiffener_set(cs, prop_list)
 
 cs = local_buckling.local_buckling(cs)
 
-cs =
+cs = global_buckling.global_buckling(cs)
 
 print("area_tot: ", cs.get_area_tot())
 print("area_red: ", cs.get_area_red())
