@@ -41,13 +41,12 @@ class crosssection():
         for i in self.lines:
             if i.code.pl_position == pl_position:
                 return i
-        else:
-            print("You are stupid!")
-            return
+        print("Line could not be found")
+        return
 
     def get_angle(self, code):
         line = self.get_line_code(code)
-        return line.cal_angle_y()
+        return line.get_angle_y()
 
     #This function returns the coordinates of the position where the stiffener should be placed
     def get_coordinates(self, location, code):
@@ -139,8 +138,8 @@ class crosssection():
         return iz_tot
 
     def get_m_rd_el_eff(self):
-            max_z_dis = max(self.get_center_y_red + self.get_pl_line(0).t/2 ,  data.input_data.get("h") + self.get_pl_line(3).t/2 - self.get_center_y_red)
-            m_rd_el_eff = self.get_i_y_red() / max_z_dis * data.constants.get("fy")/data.constants.get("gamma_M1")
+            max_z_dis = max(self.get_center_z_red() + self.get_pl_line(1).t/2 ,  data.input_data.get("h") + self.get_pl_line(3).t/2 - self.get_center_z_red())
+            m_rd_el_eff = (self.get_i_y_red() / max_z_dis) * (data.constants.get("f_y")/data.constants.get("gamma_M1"))
             return m_rd_el_eff
 
 
@@ -153,6 +152,49 @@ class crosssection():
                 a_line = height * width
                 azero += a_line
         return azero
+
+
+    #calculates the moment of inertia along the line given as an argument
+    def get_i_along_tot(self, line):
+        #make a copy of the crosssection
+        cs = crosssection(0,0,0)
+        for line in self.lines:
+            cs.addline(line)
+
+        angle = line.get_angle_y()
+
+        for plate in cs.lines:
+            ay = plate.a.y
+            az = plate.a.z
+            by = plate.b.y
+            bz = plate.b.z
+            plate.a.y = math.cos(angle)*ay - math.sin(angle)*az
+            plate.a.z = math.sin(angle)*ay + math.cos(angle)*az
+            plate.b.y = math.cos(angle)*by - math.sin(angle)*bz
+            plate.b.z = math.sin(angle)*by + math.cos(angle)*bz
+
+        return cs.get_i_y_tot()
+
+
+    def get_i_along_red(self, line):
+        #make a copy of the crosssection
+        cs = crosssection(0,0,0)
+        for line in self.lines:
+            cs.addline(line)
+
+        angle = line.get_angle_y()
+
+        for plate in cs.lines:
+            ay = plate.a.y
+            az = plate.a.z
+            by = plate.b.y
+            bz = plate.b.z
+            plate.a.y = math.cos(angle)*ay - math.sin(angle)*az
+            plate.a.z = math.sin(angle)*ay + math.cos(angle)*az
+            plate.b.y = math.cos(angle)*by - math.sin(angle)*bz
+            plate.b.z = math.sin(angle)*by + math.cos(angle)*bz
+
+        return cs.get_i_y_red()
 
 
     """ important convention: the point b of a line is always in clockwise direction of point a"""
