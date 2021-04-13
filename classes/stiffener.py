@@ -162,7 +162,6 @@ def merge(initial_cs, stiffener_list):
 
         while i <= st_number_3_max:
             new_plate_1_a = initial_point_3
-            for xxx in stiffeners3[i-st_number_3_min].lines:
             new_plate_1_b = copy.deepcopy(stiffeners3[i-st_number_3_min].get_line(side, 4).b)
             new_plate_2_a = copy.deepcopy(new_plate_1_b)
             new_plate_2_b = copy.deepcopy(stiffeners3[i-st_number_3_min].get_line(side, 2).a)
