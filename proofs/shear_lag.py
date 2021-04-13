@@ -93,7 +93,7 @@ def beta_from_kappa(kappa):
         beta = beta_0 = (0.55 + 0.025 / kappa) * beta_1
         if beta_0 >= beta_1:
             beta = beta_0 = beta_1
-    elif data.input_data.get("cs position") == "cantilever":
+    elif data.input_data.get("cs position") == "Cantilever":
         beta = beta_2
     #if no cs position is given, it is a sagging or bending moment inbetween the ends of the bridge
     #thus no else clause

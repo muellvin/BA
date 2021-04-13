@@ -112,7 +112,7 @@ def column_buckling(plate_glob, side):
         A_sl = stiffener_i.get_area_tot() + plate_before_A + plate_after_A
         A_sl_eff = stiffener_i.get_area_red() + plate_before_A + plate_after_A
         I_sl = stiffener_i.get_i_along_tot(stiffener_i.get_pl_line(side)) + plate_before_I + plate_after_I
-        sigma_cr_sl = (math.pi**2 * data.constants.get("E") * I_sl) / (A_sl * data.input_data.get("l"))
+        sigma_cr_sl = (math.pi**2 * data.constants.get("E") * I_sl) / (A_sl * data.input_data.get("a"))
 
 
         ######calculation of sigma_cr_c################
@@ -171,7 +171,7 @@ def column_buckling(plate_glob, side):
 
 def column_buckling_Chi_c(column):
     beta_A_c = column.A_sl_eff / column.A_sl
-    lambda_c_bar = math.sqrt(beta_A_c * data.constants.get("fy") / column.sigma_cr_c)
+    lambda_c_bar = math.sqrt(beta_A_c * data.constants.get("f_y") / column.sigma_cr_c)
 
     i = math.sqrt(column.I_sl/column.A_sl)
     e = max(column.e1, column.e2)
