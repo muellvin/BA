@@ -14,10 +14,34 @@ class crosssection():
     def addline(self, line):
         self.lines.append(line)
 
+    def get_line(self, pl_position = None, pl_type = None, tpl_number = None, st_number = None, st_pl_position = None):
+        values = [pl_position, pl_type, tpl_number, st_number, st_pl_number]
+        found = False
+            for line in self.lines:
+                match_pl_position = False
+                match_pl_type = False
+                match_tpl_number = False
+                match_st_number = False
+                match_st_pl_number = False
+                if pl_position == None or pl_position == line.code.pl_position:
+                    match_pl_position = True
+                if pl_type == None or pl_type == line.code.pl_type:
+                    match_pl_type = True
+                if tpl_number == None or tpl_number == line.code.tpl_number:
+                    match_tpl_number = True
+                if st_number == None or st_number == line.code.st_number:
+                    match_st_number = True
+                if st_pl_position == None or st_pl_position == line.code.st_pl_position:
+                    match_st_pl_position = True
+                if match_pl_position == True and match_pl_type == True and match_tpl_number == True and match_st_number == True and match_st_pl_number == True:
+                    found = True
+                    return line
+        assert found == True, "Line could not be found"
+
     def get_line_code(self, code):
         success = 0
         for line in self.lines:
-            if line.code == code: 
+            if line.code == code:
                 success = 1
                 return line
             else:
