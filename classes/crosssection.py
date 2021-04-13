@@ -44,8 +44,19 @@ class crosssection():
         print("Line could not be found")
         return
 
+    def get_line_for_angle(self, code):
+        success = 0
+        for line in self.lines:
+            if line.code.pl_position == code.pl_position and line.code.pl_type == 0:
+                success = 1
+                return line
+            else:
+                pass
+        assert success != 0, "Line could not be found."
+
+
     def get_angle(self, code):
-        line = self.get_line_code(code)
+        line = self.get_line_for_angle(code)
         return line.get_angle_y()
 
     #This function returns the coordinates of the position where the stiffener should be placed
