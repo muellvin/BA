@@ -91,6 +91,8 @@ def merge(initial_cs, stiffener_list):
         code_1 = [side, 0, j, 0, 0]
         new_plate_1 = line.line(code_1, next_tpl_a, old_plate_1.b, t_1)
         new_tpl_lines_1.append(new_plate_1)
+        initial_cs.get_pl_line(2).code.tpl_number = j+1
+
 
     #side 2
     new_tpl_lines_2 = []
@@ -131,6 +133,8 @@ def merge(initial_cs, stiffener_list):
         code_2 = plate_code.plate_code(side, 0, j, 0, 0)
         new_plate_2 = line.line(code_2, next_tpl_a, old_plate_2.b, t_2)
         new_tpl_lines_2.append(new_plate_2)
+        initial_cs.get_pl_line(3).code.tpl_number = j+1
+
 
 
     #side 3
@@ -174,6 +178,8 @@ def merge(initial_cs, stiffener_list):
         code_3 = plate_code.plate_code(side, 0, j, 0, 0)
         new_plate_3 = line.line(code_3, next_tpl_a, end_point_3, t_3)
         new_tpl_lines_3.append(new_plate_3)
+        initial_cs.get_pl_line(4).code.tpl_number = j+1
+
 
 
     #side 4
