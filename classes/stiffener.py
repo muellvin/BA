@@ -138,8 +138,6 @@ def merge(initial_cs, stiffener_list):
         tpl_number_3_min = initial_cs.get_pl_line(3).code.tpl_number
         initial_cs.lines.remove(initial_cs.get_pl_line(3))
         t_3 = old_plate_3.t
-        print("t3: " +str(t_3))
-        side = 3
 
         st_number_3_min = stiffeners3[0].lines[0].code.st_number
         st_number_3_max = st_number_3_min
