@@ -17,7 +17,7 @@ class crosssection():
     def get_line_code(self, code):
         success = 0
         for line in self.lines:
-            if line.code == code:
+            if line.code == code: 
                 success = 1
                 return line
             else:
