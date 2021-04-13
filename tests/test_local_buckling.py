@@ -1,6 +1,7 @@
 import sys
 #just add the directory where the BA folder is on your computer
-sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
+#sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
+sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
 
 import initial_cs
 from proofs import local_buckling
