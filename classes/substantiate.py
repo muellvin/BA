@@ -119,8 +119,8 @@ def find_dimensions(stiffener):
             if stiffener.location > 0: stiffener.location -= error*1.3/cs_b_inf
             elif stiffener.location < 0: stiffener.location += error*1.3/cs_b_inf
 
-    if stiffener.height_corr == True:
-        h_max_geo = stiffener.height
+    if stiffener.h_corr == True:
+        h_max_geo = stiffener.h
         print("h_max_geo: ",h_max_geo)
         assert h_max_geo > h_step, "Error, nothing could be found."
 
@@ -160,8 +160,8 @@ def find_dimensions(stiffener):
         print("correction b_sup:", stiffener.b_sup_corr_val)
     if stiffener.b_inf_corr == True:
         print("correction b_inf:", stiffener.b_inf_corr_val)
-    if stiffener.height_corr == True:
-        print("correction height:", stiffener.height_corr_val)
+    if stiffener.h_corr == True:
+        print("correction h:", stiffener.h_corr_val)
     print("chosen dimensions:         b_sup: ",b_sup,"        b_inf: ",b_inf,"         h: ",h,"          t:",t)
     print(" ")
         #print(f"{Fore.GREEN}No corrections were needed {Style.RESET_ALL}")
@@ -169,11 +169,11 @@ def find_dimensions(stiffener):
 
     stiffener.b_inf = 0
     stiffener.b_sup = 0
-    stiffener.height = 0
+    stiffener.h = 0
     stiffener.b_inf_corr = False
     stiffener.b_sup_corr = False
-    stiffener.height_corr = False
+    stiffener.h_corr = False
     stiffener.b_inf_corr_val = False
     stiffener.b_sup_corr_val = False
-    stiffener.height_corr_val = False
+    stiffener.h_corr_val = False
     return b_sup, b_inf, h, t
