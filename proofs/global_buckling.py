@@ -10,9 +10,9 @@ import random
 import data
 
 def global_buckling(cs):
-    cs = global_buckling(cs, 2)
-    cs = global_buckling(cs, 3)
-    cs = global_buckling(cs, 4)
+    cs = reduction_global_buckling(cs, 2)
+    cs = reduction_global_buckling(cs, 3)
+    cs = reduction_global_buckling(cs, 4)
     return cs
 
 #create a cs with all plates of this side
@@ -22,7 +22,7 @@ def reduction_global_buckling(cs, side):
     if line.code.pl_position == side:
         plate_glob.addline(line)
 
-    chi_c, sigma_cr_c = column.column(plate_glob)
+    chi_c, sigma_cr_c = column.column(plate_glob, side)
     rho_p, sigma_cr_p = plate_global.plate_global(cs, plate_glob)
 
 
@@ -31,6 +31,11 @@ def reduction_global_buckling(cs, side):
 
     for line in cs.lines:
         if line.code.pl_position == side:
+            self.chi_c = chi_c
+            self.sigma_cr_c = sigma_cr_c
+            self.rho_p = rho_p
+            self.sigma_cr_p = sigma_cr_p
             line.rho_c = rho_c
+
 
     return cs

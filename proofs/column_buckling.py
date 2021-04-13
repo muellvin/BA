@@ -13,7 +13,7 @@ import data
 #according to A.2 (3) -> Illustration A.1
 #the contributing widths are the ones defined by local buckling
 
-
+#does not write attributes thus does not need cs
 def column_buckling(plate_glob, side):
     #add the lines to the right list
     stiffener_lines = []
@@ -56,16 +56,16 @@ def column_buckling(plate_glob, side):
     for line in tpl_lines:
         if i%2 == 0:
             st_number = st_number_min + int(i/2) - 1
-            tpl_lines_set.add(st_number, line)
+            tpl_lines_set.update({st_number: line})
         else:
             st_number_before = st_number_min + int(i/2) - 1
-            tpl_betw_lines_set.add(st_number_before, line)
+            tpl_betw_lines_set.update({st_number_before: line})
         i += 1
 
     stiffeners_set = {}
     for stiffener in stiffeners_list:
         st_number = stiffener.lines[0].code.st_number
-        stiffeners_set.add(st_number, stiffener)
+        stiffeners_set.update({st_number, stiffener})
 
 
 
@@ -102,7 +102,7 @@ def column_buckling(plate_glob, side):
             plate_after_eff = line.line(plate_after.a, border_after)
         else:
             plate_after_A = plate_after.get_area_red1()
-            plate_after_I = plate_after.get_i_along_red1())
+            plate_after_I = plate_after.get_i_along_red1()
             sigma_border_after = plate_after.sigma_b_red
             border_after = plate_after.p1
             plate_after_eff = line.line(plate_after.a, border_after)
@@ -112,7 +112,7 @@ def column_buckling(plate_glob, side):
         A_sl = stiffener_i.get_area_tot() + plate_before_A + plate_after_A
         A_sl_eff = stiffener_i.get_area_red() + plate_before_A + plate_after_A
         I_sl = stiffener_i.get_i_along_tot(stiffener_i.get_pl_line(side)) + plate_before_I + plate_after_I
-        sigma_cr_sl = (math.pi**2 * data.constants.get("E") * I_sl) / (A_sl * data.input_data.get("l"))
+        sigma_cr_sl = (math.pi**2 * data.constants.get("E") * I_sl) / (A_sl * data.input_data.get("a"))
 
 
         ######calculation of sigma_cr_c################
@@ -151,7 +151,7 @@ def column_buckling(plate_glob, side):
         e2 = dis_line_point(tpl_st_lines_set.get(i), sl_center)
         e1 = dis_line_point(tpl_st_lines_set.get(i), st_center) - e2
 
-        column = column_class(i, A_sl, A_sl_eff I_sl, sigma_cr_c, e1, e2)
+        column = column_class(i, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2)
         columns.add(st_number, column)
 
         i += 1
@@ -171,7 +171,7 @@ def column_buckling(plate_glob, side):
 
 def column_buckling_Chi_c(column):
     beta_A_c = column.A_sl_eff / column.A_sl
-    lambda_c_bar = math.sqrt(beta_A_c * data.constants.get("fy") / column.sigma_cr_c)
+    lambda_c_bar = math.sqrt(beta_A_c * data.constants.get("f_y") / column.sigma_cr_c)
 
     i = math.sqrt(column.I_sl/column.A_sl)
     e = max(column.e1, column.e2)

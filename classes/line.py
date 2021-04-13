@@ -24,7 +24,11 @@ class line():
         self.psi = 1
         #local plate buckling reduction factor
         self.rho_loc = 1
-        #global plate buckling reduction factor from interaction plate and column
+        #global plate buckling reduction factors
+        self.chi_c = 1
+        self.sigma_cr_c = 0
+        self.rho_p = 1
+        self.sigma_cr_p = 0
         self.rho_c = 1
 
 #p1 should be closer to a and p2 closer to b
