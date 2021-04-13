@@ -50,7 +50,6 @@ def merge(initial_cs, stiffener_list):
             stiffeners3.append(stiffener)
         elif pos == 4:
             stiffeners4.append(stiffener)
-
     #side 1
     new_tpl_lines_1 = []
     if stiffeners1 != []:
@@ -163,10 +162,6 @@ def merge(initial_cs, stiffener_list):
 
         while i <= st_number_3_max:
             new_plate_1_a = initial_point_3
-            print("side: " + str(side))
-            for xxx in stiffeners3[i-st_number_3_min].lines:
-                print("Plate Position: " + str(xxx.code.pl_position))
-                print("Stiffener Plate Position: " + str(xxx.code.st_pl_position))
             new_plate_1_b = copy.deepcopy(stiffeners3[i-st_number_3_min].get_line(side, 4).b)
             new_plate_2_a = copy.deepcopy(new_plate_1_b)
             new_plate_2_b = copy.deepcopy(stiffeners3[i-st_number_3_min].get_line(side, 2).a)
@@ -184,7 +179,6 @@ def merge(initial_cs, stiffener_list):
         new_plate_3 = line.line(code_3, next_tpl_a, end_point_3, t_3)
         new_tpl_lines_3.append(new_plate_3)
         initial_cs.get_pl_line(4).code.tpl_number = j+1
-
 
 
     #side 4

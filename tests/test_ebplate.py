@@ -11,7 +11,7 @@ from classes import point as pt
 from classes import line as ln
 from classes import plate_code as plcd
 from classes import crosssection as cs
-from proofs import global_buckling as glb
+from proofs import global_plate_buckling as glb
 import data
 import math
 
@@ -30,8 +30,10 @@ point_a = pt.point(-1500, 2000)
 point_b = pt.point(1500, 2000)
 code = plcd.plate_code(3,0,3,0,0)
 plate = ln.line(code, point_a, point_b, 5)
-x_sec = cs.crosssection(4000, 3000, 2000)
-x_sec.lines.append(plate)
+x_sec = ics.create_initial_cs(4000, 3000, 2000, 10, 10, 5)
 stiffened_plate = st.merge(x_sec, stiffener_list)
+x_sec.lines.remove(x_sec.get_pl_line(1))
+x_sec.lines.remove(x_sec.get_pl_line(2))
+x_sec.lines.remove(x_sec.get_pl_line(4))
 
 glb.global_plate_buckling(final_cs, stiffened_plate)
