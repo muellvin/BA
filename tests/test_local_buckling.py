@@ -5,6 +5,7 @@ sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
 
 import initial_cs
 from proofs import local_buckling
+from proofs import column_buckling
 from output import geometry_output
 from classes import stiffener
 from classes import stiffeners_proposition
@@ -53,6 +54,8 @@ cs = stiffener.add_stiffener_set(cs, prop_list)
 
 
 cs = local_buckling.local_buckling(cs)
+
+cs =
 
 print("area_tot: ", cs.get_area_tot())
 print("area_red: ", cs.get_area_red())
