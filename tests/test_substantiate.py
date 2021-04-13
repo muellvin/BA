@@ -15,7 +15,7 @@ b_inf = 2000 #data.input_data["b_inf"]
 h = 1500 #data.input_data["h"]
 
 #create initial cross section with t=20mm
-test_cs = ics.create_initial_cs(b_sup, b_inf, h)
+test_cs = ics.create_initial_cs(b_sup, b_inf, h, 20, 20, 20)
 for line in test_cs.lines:
     line.t = 20
 

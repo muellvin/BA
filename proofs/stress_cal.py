@@ -5,7 +5,7 @@ def get_sigma_a(cs, line, m_y):
     i_y = cs.get_i_y_tot()
     z_center = cs.get_center_z_tot()
     z = line.a.z
-    sigma_a = -m_y * (z-z_center) / i_y
+    sigma_a = - m_y * (z-z_center) / i_y
     return sigma_a
 
 def get_sigma_b(cs, line, m_y):

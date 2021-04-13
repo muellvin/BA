@@ -13,7 +13,9 @@ from classes import substantiate as ss
 from output import geometry_output as go
 import defaults
 from output import geometry_output as go
+import copy
 from classes import check_geometry
+
 
 
 def add_stiffener_set(initial_cs, proposition):
@@ -59,8 +61,6 @@ def merge(initial_cs, stiffener_list):
         t_1 = old_plate_1.t
         side = 1
 
-        print(len(stiffeners1))
-        print(stiffeners1[0].lines[0].code.st_number)
         st_number_1_min = stiffeners1[0].lines[0].code.st_number
         st_number_1_max = st_number_1_min
         for stiffener in stiffeners1:
@@ -81,16 +81,16 @@ def merge(initial_cs, stiffener_list):
             new_plate_2_b = stiffener.get_line(side, 2).a
             next_tpl_a = new_plate_2_b
             code_1 = [side, 0, j, 0, 0]
-            code_2 = [side, 0, j+1, 0, 0]
+            code_2 = [side, 0, j+1, i, 1]
             new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_1)
             new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t_1)
             new_tpl_lines_1.append(new_plate_1)
             new_tpl_lines_1.append(new_plate_2)
-            j += 1
+            j += 2
             i += 1
-        code_3 = [side, 0, j+2, 0, 0]
-        new_plate_3 = line.line(code_3, next_tpl_a, old_plate_1.b, t_1)
-        new_tpl_lines_1.append(new_plate_3)
+        code_1 = [side, 0, j, 0, 0]
+        new_plate_1 = line.line(code_1, next_tpl_a, old_plate_1.b, t_1)
+        new_tpl_lines_1.append(new_plate_1)
 
     #side 2
     new_tpl_lines_2 = []
@@ -121,16 +121,16 @@ def merge(initial_cs, stiffener_list):
             new_plate_2_b = stiffener.get_line(side, 2).a
             next_tpl_a = new_plate_2_b
             code_1 = plate_code.plate_code(side, 0, j, 0, 0)
-            code_2 = plate_code.plate_code(side, 0, j+1, 0, 0)
+            code_2 = plate_code.plate_code(side, 0, j+1, i, 1)
             new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_2)
             new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t_2)
             new_tpl_lines_2.append(new_plate_1)
             new_tpl_lines_2.append(new_plate_2)
-            j += 1
+            j += 2
             i += 1
-        code_3 = plate_code.plate_code(side, 0, j+2, 0, 0)
-        new_plate_3 = line.line(code_3, next_tpl_a, old_plate_2.b, t_2)
-        new_tpl_lines_2.append(new_plate_3)
+        code_2 = plate_code.plate_code(side, 0, j, 0, 0)
+        new_plate_2 = line.line(code_2, next_tpl_a, old_plate_2.b, t_2)
+        new_tpl_lines_2.append(new_plate_2)
 
 
     #side 3
@@ -140,7 +140,6 @@ def merge(initial_cs, stiffener_list):
         tpl_number_3_min = initial_cs.get_pl_line(3).code.tpl_number
         initial_cs.lines.remove(initial_cs.get_pl_line(3))
         t_3 = old_plate_3.t
-        side = 3
 
         st_number_3_min = stiffeners3[0].lines[0].code.st_number
         st_number_3_max = st_number_3_min
@@ -154,23 +153,26 @@ def merge(initial_cs, stiffener_list):
         i = st_number_3_min
         j = tpl_number_3_min
         next_tpl_a = None
+        initial_point_3 = old_plate_3.a
+        end_point_3 = old_plate_3.b
 
         while i <= st_number_3_max:
-            new_plate_1_a = old_plate_3.a
-            new_plate_1_b = stiffener.get_line(side, 4).b
-            new_plate_2_a = new_plate_1_b
-            new_plate_2_b = stiffener.get_line(side, 2).a
-            next_tpl_a = new_plate_2_b
+            new_plate_1_a = initial_point_3
+            new_plate_1_b = copy.deepcopy(stiffeners3[i-st_number_3_min].get_line(side, 4).b)
+            new_plate_2_a = copy.deepcopy(new_plate_1_b)
+            new_plate_2_b = copy.deepcopy(stiffeners3[i-st_number_3_min].get_line(side, 2).a)
+            next_tpl_a = copy.deepcopy(new_plate_2_b)
             code_1 = plate_code.plate_code(side, 0, j, 0, 0)
-            code_2 = plate_code.plate_code(side, 0, j+1, 0, 0)
+            code_2 = plate_code.plate_code(side, 0, j+1, i, 1)
             new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_3)
             new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t_3)
             new_tpl_lines_3.append(new_plate_1)
             new_tpl_lines_3.append(new_plate_2)
-            j += 1
+            j += 2
             i += 1
-        code_3 = plate_code.plate_code(side, 0, j+2, 0, 0)
-        new_plate_3 = line.line(code_3, next_tpl_a, old_plate_3.b, t_2)
+            initial_point_3 = copy.deepcopy(new_plate_2_b)
+        code_3 = plate_code.plate_code(side, 0, j, 0, 0)
+        new_plate_3 = line.line(code_3, next_tpl_a, end_point_3, t_3)
         new_tpl_lines_3.append(new_plate_3)
 
 
@@ -203,15 +205,15 @@ def merge(initial_cs, stiffener_list):
             new_plate_2_b = stiffener.get_line(side, 2).a
             next_tpl_a = new_plate_2_b
             code_1 = plate_code.plate_code(side, 0, j, 0, 0)
-            code_2 = plate_code.plate_code(side, 0, j+1, 0, 0)
+            code_2 = plate_code.plate_code(side, 0, j+1, i, 1)
             new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_4)
             new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t_4)
             new_tpl_lines_4.append(new_plate_1)
             new_tpl_lines_4.append(new_plate_2)
-            j += 1
+            j += 2
             i += 1
-        code_4 = plate_code.plate_code(side, 0, j+2, 0, 0)
-        new_plate_4 = line.line(code_4, next_tpl_a, old_plate_4.b, t_2)
+        code_4 = plate_code.plate_code(side, 0, j, 0, 0)
+        new_plate_4 = line.line(code_4, next_tpl_a, old_plate_4.b, t_4)
         new_tpl_lines_4.append(new_plate_4)
 
     for plate in new_tpl_lines_2:
@@ -250,13 +252,13 @@ def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, w
 
 
     #create plate 3
-    a3 = b2
+    a3 = point.point(y_corr + math.cos(own_angle+angle)*length_side, z_corr + math.sin(own_angle+angle)*length_side)
     b3 = point.point(a3.y + math.cos(angle)*width_bottom, a3.z + math.sin(angle)*width_bottom)
     code3 = plate_code.plate_code(pl_position, 1, 0, st_number, 3)
     line3 = line.line(code3, a3, b3, t)
 
     #create plate 4
-    a4 = b3
+    a4 = point.point(a3.y + math.cos(angle)*width_bottom, a3.z + math.sin(angle)*width_bottom)
     b4 = point.point(y_corr + math.cos(angle)*width_top, z_corr + math.sin(angle)*width_top)
     code4 = plate_code.plate_code(pl_position, 1, 0, st_number, 4)
     line4 = line.line(code4, a4, b4, t)
