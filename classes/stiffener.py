@@ -238,11 +238,11 @@ def merge(initial_cs, stiffener_list):
 
 
 #function creating a crosssection, which is the three lines of a stiffener at the place desired
-def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, b_sup, b_sup, h, t):
+def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, b_sup, b_inf, h, t):
     y_corr = center_y - math.cos(angle)*b_sup*0.5
     z_corr = center_z - math.sin(angle)*b_sup*0.5
-    assert b_sup >= b_sup, "width out of bound or wrong way around"
-    half_width_diff = (b_sup - b_sup)/2
+    assert b_sup >= b_inf, "width out of bound or wrong way around"
+    half_width_diff = (b_sup - b_inf)/2
     length_side = math.sqrt(half_width_diff**2 + h**2)
     if half_width_diff > 0:
         own_angle = math.atan(h/half_width_diff)
@@ -258,17 +258,17 @@ def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, b
 
     #create plate 3
     a3 = point.point(y_corr + math.cos(own_angle+angle)*length_side, z_corr + math.sin(own_angle+angle)*length_side)
-    b3 = point.point(a3.y + math.cos(angle)*b_sup, a3.z + math.sin(angle)*b_sup)
+    b3 = point.point(a3.y + math.cos(angle)*b_inf, a3.z + math.sin(angle)*b_inf)
     code3 = plate_code.plate_code(pl_position, 1, 0, st_number, 3)
     line3 = line.line(code3, a3, b3, t)
 
     #create plate 4
-    a4 = point.point(a3.y + math.cos(angle)*b_sup, a3.z + math.sin(angle)*b_sup)
+    a4 = point.point(a3.y + math.cos(angle)*b_inf, a3.z + math.sin(angle)*b_inf)
     b4 = point.point(y_corr + math.cos(angle)*b_sup, z_corr + math.sin(angle)*b_sup)
     code4 = plate_code.plate_code(pl_position, 1, 0, st_number, 4)
     line4 = line.line(code4, a4, b4, t)
 
-    stiffener_global = crosssection.crosssection(b_sup, b_sup, h)
+    stiffener_global = crosssection.crosssection(b_sup, b_inf, h)
     #add the lines to itself
     stiffener_global.addline(line2)
     stiffener_global.addline(line3)
@@ -276,9 +276,9 @@ def create_stiffener_global(pl_position, st_number, center_y, center_z, angle, b
     return stiffener_global
 
 #function creating a crosssection, which is the three lines of a stiffener. it is in its own coordinate system -> for calculation of i_along
-def create_stiffener_local(b_sup, b_sup, h, t):
-    #assert b_sup >= b_sup, "width out of bound or wrong way around"
-    half_width_diff = b_sup - b_sup
+def create_stiffener_local(b_sup, b_inf, h, t):
+    #assert b_sup >= b_inf, "width out of bound or wrong way around"
+    half_width_diff = b_sup - b_inf
     length_side = math.sqrt(half_width_diff**2 + h**2)
     own_angle = math.atan(half_width_diff / h)
 
@@ -290,7 +290,7 @@ def create_stiffener_local(b_sup, b_sup, h, t):
 
     #create plate 3
     a3 = b2
-    b3 = point.point(a3.y + b_sup, a3.z)
+    b3 = point.point(a3.y + b_inf, a3.z)
     code3 = plate_code.plate_code(0, 1, 0, 0, 3)
     line3 = line.line(code3, a3, b3, t)
 
@@ -300,7 +300,7 @@ def create_stiffener_local(b_sup, b_sup, h, t):
     code4 = plate_code.plate_code(0, 1, 0, 0, 4)
     line4 = line.line(code4, a4, b4, t)
 
-    stiffener_local = crosssection.crosssection(b_sup, b_sup, h)
+    stiffener_local = crosssection.crosssection(b_sup, b_inf, h)
     #add the lines to itself
     stiffener_local.addline(line2)
     stiffener_local.addline(line3)
@@ -308,8 +308,8 @@ def create_stiffener_local(b_sup, b_sup, h, t):
     return stiffener_local
 
 
-def get_i_along_stiffener(b_sup, b_sup, h, t):
-    stiffener_local = create_stiffener_local(b_sup, b_sup, h, t)
+def get_i_along_stiffener(b_sup, b_inf, h, t):
+    stiffener_local = create_stiffener_local(b_sup, b_inf, h, t)
     i_along = stiffener_local.get_i_y_tot()
     return i_along
 

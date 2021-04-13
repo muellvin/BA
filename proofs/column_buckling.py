@@ -102,7 +102,7 @@ def column_buckling(plate_glob, side):
             plate_after_eff = line.line(plate_after.a, border_after)
         else:
             plate_after_A = plate_after.get_area_red1()
-            plate_after_I = plate_after.get_i_along_red1())
+            plate_after_I = plate_after.get_i_along_red1()
             sigma_border_after = plate_after.sigma_b_red
             border_after = plate_after.p1
             plate_after_eff = line.line(plate_after.a, border_after)
@@ -151,7 +151,7 @@ def column_buckling(plate_glob, side):
         e2 = dis_line_point(tpl_st_lines_set.get(i), sl_center)
         e1 = dis_line_point(tpl_st_lines_set.get(i), st_center) - e2
 
-        column = column_class(i, A_sl, A_sl_eff I_sl, sigma_cr_c, e1, e2)
+        column = column_class(i, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2)
         columns.add(st_number, column)
 
         i += 1
