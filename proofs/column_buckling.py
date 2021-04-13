@@ -13,7 +13,7 @@ import data
 #according to A.2 (3) -> Illustration A.1
 #the contributing widths are the ones defined by local buckling
 
-
+#does not write attributes thus does not need cs
 def column_buckling(plate_glob, side):
     #add the lines to the right list
     stiffener_lines = []
@@ -56,16 +56,16 @@ def column_buckling(plate_glob, side):
     for line in tpl_lines:
         if i%2 == 0:
             st_number = st_number_min + int(i/2) - 1
-            tpl_lines_set.add(st_number, line)
+            tpl_lines_set.update({st_number: line})
         else:
             st_number_before = st_number_min + int(i/2) - 1
-            tpl_betw_lines_set.add(st_number_before, line)
+            tpl_betw_lines_set.update({st_number_before: line})
         i += 1
 
     stiffeners_set = {}
     for stiffener in stiffeners_list:
         st_number = stiffener.lines[0].code.st_number
-        stiffeners_set.add(st_number, stiffener)
+        stiffeners_set.update({st_number, stiffener})
 
 
 

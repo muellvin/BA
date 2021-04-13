@@ -12,8 +12,11 @@ def shear_lag(cs):
 
     #the top flange is pl_position 1
     #the bottom flange is pl_position 3
-    reduction_shear_lag(1)
-    reduction_shear_lag(3)
+    cs = reduction_shear_lag(cs, 1)
+    cs = reduction_shear_lag(cs, 3)
+
+    return cs
+
 
 
 def reduction_shear_lag(cs, flange):
@@ -97,3 +100,5 @@ def beta_from_kappa(kappa):
         beta = beta_2
     #if no cs position is given, it is a sagging or bending moment inbetween the ends of the bridge
     #thus no else clause
+
+    return beta
