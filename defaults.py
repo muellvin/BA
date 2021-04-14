@@ -45,8 +45,10 @@ max_angle = math.pi/12*5 #75 grad
 """buckling defaults"""
 #convergence limit for m_rd_el in effective width iterations of local buckling
 convergence_limit_local_buckling = 0.005
-#plate_length = 4000
-#effective_width_parameter = 10
+plate_length = 4000
+effective_width_parameter = 10
+#eta should be changed if fy > 460 MPa
+eta = 1.0
 
 #convergence limit for when width reduction due to shear lag is calculated plastically
 convergence_limit_shear_lag = 0.05
