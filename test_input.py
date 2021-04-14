@@ -19,6 +19,3 @@ class TestInitialCS(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-#test comment to check if this works
-#can be deleted soon ... 
