@@ -11,6 +11,12 @@ class crosssection():
         self.b_inf = b_inf
         self.h = h
 
+    def __str__(self):
+        string = "\n cross-section with b_sup=" + str(self.b_sup) + ", b_inf=" + str(self.b_inf) + ", h=" + str(self.h) + "\n"
+        for line in self.lines:
+            string += str(line)
+        return string
+
     def addline(self, line):
         self.lines.append(line)
 
@@ -21,7 +27,7 @@ class crosssection():
             match_pl_type = False
             match_tpl_number = False
             match_st_number = False
-            match_st_pl_number = False
+            match_st_pl_position = False
             if pl_position == None or pl_position == line.code.pl_position:
                 match_pl_position = True
             print("match_pl_position: ",match_pl_position)

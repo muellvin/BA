@@ -31,6 +31,17 @@ class line():
         self.sigma_cr_p = 0
         self.rho_c = 1
 
+    def __str__(self):
+        if self.code.pl_type == 0:
+            line1 = "   trapezoid plate on cs side " + str(self.code.pl_position) + " with the number " + str(self.code.tpl_number) +"\n"
+        elif self.code.pl_type == 1:
+            line1 = "   stiffener plate on cs side " + str(self.code.pl_position) + " of stiffener nr " + str(self.code.st_number) + " on stiffener plate position " + str(self.code.st_pl_position) + "\n"
+        line2 = "       from point a=" + str(self.a) + " to b=" + str(self.b) + "\n"
+        line3 = "       with sigma_a_red=" + str(int(self.sigma_a_red)) + " and sigma_b_red=" + str(int(self.sigma_b_red)) + "\n"
+
+        string = line1 + line2 + line3
+        return string
+
 #p1 should be closer to a and p2 closer to b
     def sanitycheck(self):
         disap1 = math.sqrt((self.a.y - self.p1.y)**2 + (self.a.z - self.p1.z)**2)
