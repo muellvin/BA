@@ -42,7 +42,7 @@ class crosssection():
                 match_st_pl_position = True
             print("match_st_pl_position: ",match_st_pl_position)
 
-            if (match_pl_position == True) and (match_pl_type == True and match_tpl_number == True and match_st_number == True and match_st_pl_number == True:
+            if match_pl_position == True and match_pl_type == True and match_tpl_number == True and match_st_number == True and match_st_pl_number == True:
                 found = True
                 print("found: ",found)
                 return line
