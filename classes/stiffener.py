@@ -123,7 +123,7 @@ def merge(initial_cs, stiffener_list):
 
         while i <= st_number_2_max:
             new_plate_1_a = initial_point_2
-            new_plate_1_b = copy.deepcopy(stiffeners2[i-st_number__min].get_line(side, 4).b)
+            new_plate_1_b = copy.deepcopy(stiffeners2[i-st_number_2_min].get_line(side, 4).b)
             new_plate_2_a = copy.deepcopy(new_plate_1_b)
             new_plate_2_b = copy.deepcopy(stiffeners2[i-st_number_2_min].get_line(side, 2).a)
             next_tpl_a = copy.deepcopy(new_plate_2_b)
