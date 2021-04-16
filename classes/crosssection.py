@@ -30,25 +30,15 @@ class crosssection():
             match_st_pl_position = False
             if pl_position == None or pl_position == line.code.pl_position:
                 match_pl_position = True
-            print("match_pl_position: ",match_pl_position)
-
             if pl_type == None or pl_type == line.code.pl_type:
                 match_pl_type = True
-            print("match_pl_type: ",match_pl_type)
-
             if tpl_number == None or tpl_number == line.code.tpl_number:
                 match_tpl_number = True
-            print("match_tpl_number: ",match_tpl_number)
-
             if st_number == None or st_number == line.code.st_number:
                 match_st_number = True
-            print("match_st_number: ",match_st_number)
-
             if st_pl_position == None or st_pl_position == line.code.st_pl_position:
                 match_st_pl_position = True
-            print("match_st_pl_position: ",match_st_pl_position)
             found = match_pl_position == True and match_pl_type == True and match_tpl_number == True and match_st_number == True and match_st_pl_position == True
-            print("found: ",found)
             if found == True:
                 return line
 
