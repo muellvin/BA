@@ -53,7 +53,6 @@ def merge(initial_cs, stiffener_list):
     #side 1
     new_tpl_lines_1 = []
     if stiffeners1 != []:
-        stiffeners1.sort(key = lambda x: x.lines[0].code.st_number)
         old_plate_1 = initial_cs.get_pl_line(1)
         tpl_number_1_min = initial_cs.get_pl_line(1).code.tpl_number
         initial_cs.lines.remove(initial_cs.get_pl_line(1))
@@ -101,7 +100,6 @@ def merge(initial_cs, stiffener_list):
     #side 2
     new_tpl_lines_2 = []
     if stiffeners2 != []:
-        stiffeners2.sort(key = lambda x: x.lines[0].code.st_number)
         old_plate_2 = initial_cs.get_pl_line(2)
         tpl_number_2_min = initial_cs.get_pl_line(2).code.tpl_number
         initial_cs.lines.remove(initial_cs.get_pl_line(2))
@@ -149,7 +147,6 @@ def merge(initial_cs, stiffener_list):
     #side 3
     new_tpl_lines_3 = []
     if stiffeners3 != []:
-        stiffeners3.sort(key = lambda x: x.lines[0].code.st_number)
         old_plate_3 = initial_cs.get_pl_line(3)
         tpl_number_3_min = initial_cs.get_pl_line(3).code.tpl_number
         initial_cs.lines.remove(initial_cs.get_pl_line(3))
@@ -195,7 +192,6 @@ def merge(initial_cs, stiffener_list):
     #side 4
     new_tpl_lines_4 = []
     if stiffeners4 != []:
-        stiffeners4.sort(key = lambda x: x.lines[0].code.st_number)
         old_plate_4 = initial_cs.get_pl_line(4)
         tpl_number_4_min = initial_cs.get_pl_line(4).code.tpl_number
         initial_cs.lines.remove(initial_cs.get_pl_line(4))
