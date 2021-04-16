@@ -22,5 +22,5 @@ for line in test_cs.lines:
     line.t = 20
 
 code = plcd.plate_code(2,0,0,0,0)
-test_cs.get_line_code(code)
+test_cs.get_line(pl_position = code.pl_position, pl_type = code.pl_type, tpl_number = code.tpl_number, st_number = code.st_number, st_pl_position = code.st_pl_position)
 print(line.a.z, line.a.y)

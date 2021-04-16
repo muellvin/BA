@@ -39,7 +39,7 @@ def reduction_shear_lag(cs, flange):
         if line.code.pl_position == flange and line.code.pl_type == 1:
             A_sl += line.get_area_tot()
 
-    t_f = t = cs.get_pl_line(flange).t
+    t_f = t = cs.get_line(pl_position = flange, pl_type = 0).t
     #alpha_0_star = math.sqrt(A_c_eff / (b_0 * t_f))
     alpha_0 = math.sqrt(1 + A_sl / (b_0*t))
 
