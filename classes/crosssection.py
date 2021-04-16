@@ -15,7 +15,6 @@ class crosssection():
         self.lines.append(line)
 
     def get_line(self, pl_position = None, pl_type = None, tpl_number = None, st_number = None, st_pl_position = None):
-        values = [pl_position, pl_type, tpl_number, st_number, st_pl_number]
         found = False
         for line in self.lines:
             match_pl_position = False
@@ -25,17 +24,30 @@ class crosssection():
             match_st_pl_number = False
             if pl_position == None or pl_position == line.code.pl_position:
                 match_pl_position = True
+            print("match_pl_position: ",match_pl_position)
+
             if pl_type == None or pl_type == line.code.pl_type:
                 match_pl_type = True
+            print("match_pl_type: ",match_pl_type)
+
             if tpl_number == None or tpl_number == line.code.tpl_number:
                 match_tpl_number = True
+            print("match_tpl_number: ",match_tpl_number)
+
             if st_number == None or st_number == line.code.st_number:
                 match_st_number = True
+            print("match_st_number: ",match_st_number)
+
             if st_pl_position == None or st_pl_position == line.code.st_pl_position:
                 match_st_pl_position = True
-            if match_pl_position == True and match_pl_type == True and match_tpl_number == True and match_st_number == True and match_st_pl_number == True:
+            print("match_st_pl_position: ",match_st_pl_position)
+
+            if (match_pl_position == True) and (match_pl_type == True and match_tpl_number == True and match_st_number == True and match_st_pl_number == True:
                 found = True
+                print("found: ",found)
                 return line
+
+            print("found: ",found)
         assert found == True, "Line could not be found"
 
     def get_line_code(self, code):
@@ -49,15 +61,15 @@ class crosssection():
         assert success != 0, "Line could not be found."
 
     #to get certain line of stiffener
-    def get_line(self, pl_position, st_pl_position):
-        success = 0
-        for i in self.lines:
-            if i.code.pl_position == pl_position and i.code.st_pl_position == st_pl_position:
-                success = 1
-                return i
-            else:
-                pass
-        assert success != 0, "Line could not be found."
+    #def get_line(self, pl_position, st_pl_position):
+    #    success = 0
+    #    for i in self.lines:
+    #        if i.code.pl_position == pl_position and i.code.st_pl_position == st_pl_position:
+    #            success = 1
+    #            return i
+    #        else:
+    #            pass
+    #    assert success != 0, "Line could not be found."
 
 
     #to get trapezoid plates from initial cs -> to add stiffeners
