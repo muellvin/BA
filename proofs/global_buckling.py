@@ -2,6 +2,7 @@ import math
 import defaults
 from proofs import stress_cal
 from proofs import column_buckling
+from proofs import global_plate_buckling
 
 from ebplate import ebplate as ebp
 from classes import line as ln
@@ -10,6 +11,7 @@ from classes import point as pt
 from output import geometry_output as go
 import random
 import data
+import defaults
 
 def global_buckling(cs):
     cs = reduction_global_buckling(cs, 2)
@@ -19,24 +21,38 @@ def global_buckling(cs):
 
 #create a cs with all plates of this side
 def reduction_global_buckling(cs, side):
+    print("\n------------------------ reduction_global_buckling for side "+str(side)+" ---------------------------------")
     plate_glob = crosssection.crosssection(0,0,0)
     for line in cs.lines:
         if line.code.pl_position == side:
             plate_glob.addline(line)
 
-    chi_c, sigma_cr_c = column_buckling.column_buckling(plate_glob, side)
-    rho_p, sigma_cr_p = plate_global.plate_global(cs, plate_glob)
+    chi_c = 1
+    rho_p = 1
+    sigma_cr_c = 1
+    sigma_cr_p = 1
+    eta = 1
 
+    if defaults.do_column_plate_buckling == True:
+        chi_c, sigma_cr_c = column_buckling.column_buckling(plate_glob, side)
+    elif defaults.do_global_plate_buckling == True:
+        rho_p, sigma_cr_p = global_plate_buckling.global_plate_buckling(cs, plate_glob)
 
-    eta = sigma_cr_p/sigma_cr_c -1
+    if defaults.do_column_plate_buckling == True and defaults.do_column_plate_buckling == True:
+        eta = sigma_cr_p/sigma_cr_c -1
+    elif defaults.do_column_plate_buckling == True and defaults.do_column_plate_buckling == False:
+        eta = 0
+    elif defaults.do_column_plate_buckling == False and defaults.do_column_plate_buckling == True:
+        eta = 1
+
     rho_c = (rho_p - chi_c) * eta * (2 - eta) + chi_c
 
     for line in cs.lines:
         if line.code.pl_position == side:
-            self.chi_c = chi_c
-            self.sigma_cr_c = sigma_cr_c
-            self.rho_p = rho_p
-            self.sigma_cr_p = sigma_cr_p
+            line.chi_c = chi_c
+            line.sigma_cr_c = sigma_cr_c
+            line.rho_p = rho_p
+            line.sigma_cr_p = sigma_cr_p
             line.rho_c = rho_c
 
 

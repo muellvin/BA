@@ -157,8 +157,8 @@ class crosssection():
     def get_i_along_tot(self, line):
         #make a copy of the crosssection
         cs = crosssection(0,0,0)
-        for line in self.lines:
-            cs.addline(line)
+        for plate in self.lines:
+            cs.addline(plate)
 
         angle = line.get_angle_y()
 

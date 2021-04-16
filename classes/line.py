@@ -81,8 +81,16 @@ class line():
         return self.cal_length_red()
     def get_area_red(self):
         return self.cal_area_red()
+    def get_area_red1(self):
+        return self.cal_area_red1()
+    def get_area_red2(self):
+        return self.cal_area_red2()
     def get_i_along_red(self):
         return self.cal_i_along_red()
+    def get_i_along_red1(self):
+        return self.cal_i_along_red1()
+    def get_i_along_red2(self):
+        return self.cal_i_along_red2()
     def get_i_perpen_red(self):
         return self.cal_i_perpen_red()
     def get_i_y_red(self):
