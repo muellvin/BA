@@ -6,8 +6,8 @@ Utilisateur   #
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
-   Height          300.0 cm 
-   Thickness         0.5 cm 
+   Height          158.11388300841895 cm 
+   Thickness         2.0 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
    Boundary Conditions 
@@ -25,37 +25,15 @@ Commentaire   #
                      Eta =  0.000 
         Smearing : No 
    Referentiel 2 
-   Nombre de raidisseurs  2 
-   - Raidisseur n° 1 Active=1 
-      Orientation = 0 
-      Position    = 50.0 
-      Gamma       = 150.8871189102969 
-      Teta        = 1.0 
-      Delta       = 0.14981378090767683 
-      Dimension 1 = 0 
-      Type        = 0 
-      Dimension 2 = 0 
-      Dimension 3 = 0 
-      Dimension 4 = 0 
-   - Raidisseur n° 2 Active=1 
-      Orientation = 0 
-      Position    = 250.0 
-      Gamma       = 150.8871189102969 
-      Teta        = 1.0 
-      Delta       = 0.14981378090767683 
-      Dimension 1 = 0 
-      Type        = 0 
-      Dimension 2 = 0 
-      Dimension 3 = 0 
-      Dimension 4 = 0 
+   Nombre de raidisseurs  0 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
   Imposed values : No 
-   Longitudinal Stress Top Left                816.3382243201679 MPa 
-   Longitudinal Stress Bottom Left             816.3382243201679 MPa 
-   Longitudinal Stress Top Right               816.3382243201679 MPa 
-   Longitudinal Stress Bottom Right            816.3382243201679 MPa 
+   Longitudinal Stress Top Left                -0.7763979484211362 MPa 
+   Longitudinal Stress Bottom Left             1.1473251679418053 MPa 
+   Longitudinal Stress Top Right               -0.7763979484211362 MPa 
+   Longitudinal Stress Bottom Right            1.1473251679418053 MPa 
  Transverse stresses : User's data No 
  Analytical Transverse stresses 
   Imposed values : No 
