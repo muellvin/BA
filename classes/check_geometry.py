@@ -117,13 +117,13 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
     top_right_2b = None
 
     if top_left != None:
-        top_left_4b = top_left.get_line(1,4).b
-        top_left_4a = top_left.get_line(1,4).a
-        st_num_top_left = top_left.get_line(1,4).code.st_number
+        top_left_4b = top_left.get_line(pl_position = 1, st_pl_position = 4).b
+        top_left_4a = top_left.get_line(pl_position = 1, st_pl_position = 4).a
+        st_num_top_left = top_left.get_line(pl_position = 1, st_pl_position = 4).code.st_number
     if top_right != None:
-        top_right_2b = top_right.get_line(1,2).b
-        top_right_2a = top_right.get_line(1,2).a
-        st_num_top_right = top_right.get_line(1,2).code.st_number
+        top_right_2b = top_right.get_line(pl_position = 1, st_pl_position = 2).b
+        top_right_2a = top_right.get_line(pl_position = 1, st_pl_position = 2).a
+        st_num_top_right = top_right.get_line(pl_position = 1, st_pl_position = 2).code.st_number
 
     #points from right side stiffeners
     right_top_4a = None
@@ -132,12 +132,12 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
     right_bottom_2b = None
 
     if right_top != None and right_bottom != None:
-        right_top_4b = right_top.get_line(2,4).b
-        right_top_4a = right_top.get_line(2,4).a
-        st_num_right_top = right_top.get_line(2,4).code.st_number
-        right_bottom_2b = right_bottom.get_line(2,2).b
-        right_bottom_2a = right_bottom.get_line(2,2).a
-        st_num_right_bottom = right_bottom.get_line(2,2).code.st_number
+        right_top_4b = right_top.get_line(pl_position = 2, st_pl_position = 4).b
+        right_top_4a = right_top.get_line(pl_position = 2, st_pl_position = 4).a
+        st_num_right_top = right_top.get_line(pl_position = 2, st_pl_position = 4).code.st_number
+        right_bottom_2b = right_bottom.get_line(pl_position = 2, st_pl_position = 2).b
+        right_bottom_2a = right_bottom.get_line(pl_position = 2, st_pl_position = 2).a
+        st_num_right_bottom = right_bottom.get_line(pl_position = 2, st_pl_position = 2).code.st_number
 
     #points from bottom side stiffeners
     bottom_right_4a = None
@@ -146,12 +146,12 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
     bottom_left_2b = None
 
     if bottom_right != None and bottom_left != None:
-        bottom_right_4b = bottom_right.get_line(3,4).b
-        bottom_right_4a = bottom_right.get_line(3,4).a
-        st_num_bottom_right = bottom_right.get_line(3,4).code.st_number
-        bottom_left_2b = bottom_left.get_line(3,2).b
-        bottom_left_2a = bottom_left.get_line(3,2).a
-        st_num_bottom_left = bottom_left.get_line(3,2).code.st_number
+        bottom_right_4b = bottom_right.get_line(pl_position = 3, st_pl_position = 4).b
+        bottom_right_4a = bottom_right.get_line(pl_position = 3, st_pl_position = 4).a
+        st_num_bottom_right = bottom_right.get_line(pl_position = 3, st_pl_position = 4).code.st_number
+        bottom_left_2b = bottom_left.get_line(pl_position = 3, st_pl_position = 2).b
+        bottom_left_2a = bottom_left.get_line(pl_position = 3, st_pl_position = 2).a
+        st_num_bottom_left = bottom_left.get_line(pl_position = 3, st_pl_position = 2).code.st_number
 
     #points from left side stiffeners
     left_top_2a = None
@@ -160,12 +160,12 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
     left_bottom_4b = None
 
     if left_top != None and left_bottom != None:
-        left_bottom_4b = left_bottom.get_line(4,4).b
-        left_bottom_4a = left_bottom.get_line(4,4).a
-        st_num_left_bottom = left_bottom.get_line(4,4).code.st_number
-        left_top_2b = left_top.get_line(4,2).b
-        left_top_2a = left_top.get_line(4,2).a
-        st_num_left_top = left_top.get_line(4,2).code.st_number
+        left_bottom_4b = left_bottom.get_line(pl_position = 4, st_pl_position = 4).b
+        left_bottom_4a = left_bottom.get_line(pl_position = 4, st_pl_position = 4).a
+        st_num_left_bottom = left_bottom.get_line(pl_position = 4, st_pl_position = 4).code.st_number
+        left_top_2b = left_top.get_line(pl_position = 4, st_pl_position = 2).b
+        left_top_2a = left_top.get_line(pl_position = 4, st_pl_position = 2).a
+        st_num_left_top = left_top.get_line(pl_position = 4, st_pl_position = 2).code.st_number
 
 
     #corners of the crosssection
@@ -242,8 +242,8 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
         st_number_min = right_top.lines[0].code.st_number
         st_number_max = right_bottom.lines[0].code.st_number
         for i in range(st_number_min, st_number_max, 1):
-            upper = stiffeners2[i-st_number_min].get_stiffener_line(2,i,2).a
-            lower = stiffeners2[i+1-st_number_min].get_stiffener_line(2,i+1,4).b
+            upper = stiffeners2[i-st_number_min].get_line(pl_position = 2, st_number = i, st_pl_position = 2).a
+            lower = stiffeners2[i+1-st_number_min].get_line(pl_position = 2,st_number = i+1,st_pl_position = 4).b
             overlap = lower.z < upper.z
             distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
             corr = 0
@@ -286,8 +286,8 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
         st_number_min = left_bottom.lines[0].code.st_number
         st_number_max = left_top.lines[0].code.st_number
         for i in range(st_number_min, st_number_max, 1):
-            lower = stiffeners4[i-st_number_min].get_stiffener_line(4,i,2).a
-            upper = stiffeners4[i+1-st_number_min].get_stiffener_line(4,i+1,4).b
+            lower = stiffeners4[i-st_number_min].get_line(pl_position = 4, st_number = i, st_pl_position = 2).a
+            upper = stiffeners4[i+1-st_number_min].get_line(pl_position = 4, st_number = i+1,st_pl_position = 4).b
             overlap = upper.z > lower.z
             distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
             corr = 0
@@ -327,8 +327,8 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
         st_number_min = bottom_right.lines[0].code.st_number
         st_number_max = bottom_left.lines[0].code.st_number
         for i in range(st_number_min, st_number_max, 1):
-            right = stiffeners3[i-st_number_min].get_stiffener_line(3,i,2).a
-            left = stiffeners3[i+1-st_number_min].get_stiffener_line(3,i+1,4).b
+            right = stiffeners3[i-st_number_min].get_line(pl_position = 3,st_number = i,st_pl_position = 2).a
+            left = stiffeners3[i+1-st_number_min].get_line(pl_position = 3,st_number = i+1, st_pl_position = 4).b
             y_shift = 100000
             overlap = right.y + y_shift > left.y + y_shift
             distance = abs((right.y + y_shift) - (left.y + y_shift))
@@ -378,11 +378,11 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
         #the two edges are each defined by two lines
         #top corners (using symmetry, just doing left one)
         lines_left_top = []
-        lines_left_top.append(left_top.get_line(4,2))
-        lines_left_top.append(left_top.get_line(4,3))
+        lines_left_top.append(left_top.get_line(pl_position = 4, st_pl_position = 2))
+        lines_left_top.append(left_top.get_line(pl_position = 4, st_pl_position = 3))
         lines_top_left = []
-        lines_top_left.append(top_left.get_line(1,4))
-        lines_top_left.append(top_left.get_line(1,3))
+        lines_top_left.append(top_left.get_line(pl_position = 1, st_pl_position = 4))
+        lines_top_left.append(top_left.get_line(pl_position = 1, st_pl_position = 3))
 
 
         change_h = False
@@ -392,7 +392,7 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
         #angle defining border III and IV
         cutoffangle = defaults.cutoffangle
         #angle between bottom plate of left top stiffener and the y axis
-        stangle = float(left_top.get_line(4, 3).get_angle_y())
+        stangle = float(left_top.get_line(pl_position = 4, st_pl_position = 3).get_angle_y())
         #distance between the two croner points of the stiffeners
         dis = dis_lines_lines(lines_left_top, lines_top_left)[0]
         #angle of this distance to the y axis
@@ -528,11 +528,11 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
 
         #bottom (using symmetry, just doing left one)
         lines_left_bottom = []
-        lines_left_bottom.append(left_bottom.get_line(4,3))
-        lines_left_bottom.append(left_bottom.get_line(4,4))
+        lines_left_bottom.append(left_bottom.get_line(pl_position = 4, st_pl_position = 3))
+        lines_left_bottom.append(left_bottom.get_line(pl_position = 4, st_pl_position = 4))
         lines_bottom_left = []
-        lines_bottom_left.append(bottom_left.get_line(3,2))
-        lines_bottom_left.append(bottom_left.get_line(3,3))
+        lines_bottom_left.append(bottom_left.get_line(pl_position = 3, st_pl_position = 2))
+        lines_bottom_left.append(bottom_left.get_line(pl_position = 3, st_pl_position = 3))
 
         max_dis = 0
         disangle = 0
@@ -555,7 +555,7 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
             geometry_ok = False
             disdiff = defaults.mindis_across_bottom - max_dis
 
-            stangle = (math.pi/2 - float(left_bottom.get_line(4,3).get_angle_y()))
+            stangle = (math.pi/2 - float(left_bottom.get_line(pl_position = 4, st_pl_position = 3).get_angle_y()))
             angle = disangle + stangle
             corr_b_inf = disdiff*math.cos(angle)/2
             corr_h = disdiff*math.sin(angle)/2
