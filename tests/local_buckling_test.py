@@ -6,6 +6,7 @@ sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
 import initial_cs
 from proofs import local_buckling
 from proofs import column_buckling
+from proofs import global_buckling
 from output import geometry_output
 from classes import stiffener
 from classes import stiffeners_proposition
