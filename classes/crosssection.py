@@ -42,62 +42,23 @@ class crosssection():
                 match_st_pl_position = True
             print("match_st_pl_position: ",match_st_pl_position)
 
-            if (match_pl_position == True) and (match_pl_type == True and match_tpl_number == True and match_st_number == True and match_st_pl_number == True:
-                found = True
-                print("found: ",found)
+            found = match_pl_position == True and match_pl_type == True and match_tpl_number == True and match_st_number == True and match_st_pl_position == True
+            print("found: ",found)
+
+            if found == True:
                 return line
 
-            print("found: ",found)
         assert found == True, "Line could not be found"
 
-    def get_line_code(self, code):
-        success = 0
-        for line in self.lines:
-            if line.code == code:
-                success = 1
-                return line
-            else:
-                pass
-        assert success != 0, "Line could not be found."
-
-    #to get certain line of stiffener
-    #def get_line(self, pl_position, st_pl_position):
-    #    success = 0
-    #    for i in self.lines:
-    #        if i.code.pl_position == pl_position and i.code.st_pl_position == st_pl_position:
-    #            success = 1
-    #            return i
-    #        else:
-    #            pass
-    #    assert success != 0, "Line could not be found."
-
-
-    #to get trapezoid plates from initial cs -> to add stiffeners
-    def get_pl_line(self, pl_position):
-        for i in self.lines:
-            if i.code.pl_position == pl_position:
-                return i
-        print("Line could not be found")
-        return
-
-    def get_line_for_angle(self, code):
-        success = 0
-        for line in self.lines:
-            if line.code.pl_position == code.pl_position and line.code.pl_type == 0:
-                success = 1
-                return line
-            else:
-                pass
-        assert success != 0, "Line could not be found."
 
 
     def get_angle(self, code):
-        line = self.get_line_for_angle(code)
+        line = self.get_line(pl_position = code.pl_position, pl_type = code.pl_type)
         return line.get_angle_y()
 
     #This function returns the coordinates of the position where the stiffener should be placed
     def get_coordinates(self, location, code):
-        line = self.get_line_code(code)
+        line = self.get_line(pl_position = code.pl_position, pl_type = code.pl_type, tpl_number = code.tpl_number, st_number = code.st_number, st_pl_position = code.st_pl_position)
         #bottom or top plate
         if line.a.z == line.b.z:
             if line.a.y > 0:
@@ -115,12 +76,9 @@ class crosssection():
                 y = line.b.y + location * (line.a.y-line.b.y)
                 z = line.b.z + location * (line.a.z-line.b.z)
         return y,z
-    #
-    def get_stiffener_line(self, pl_position, st_number, st_pl_position):
-        for i in self.lines:
-            if i.code.pl_position == pl_position and i.code.st_number == st_number \
-            and i.code.st_pl_position == st_pl_position:
-                return i
+
+
+
 
 
 # methods to calculate properties of total crossection
