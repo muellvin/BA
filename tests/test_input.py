@@ -15,7 +15,7 @@ class TestInitialCS(unittest.TestCase):
         y_top_right = cs.lines[0].b.y
         z_top_right = cs.lines[0].b.z
         self.assertEqual(y_top_right, -2000)
-        self.assertEqual(z_top_right, 0)
+        self.assertEqual(z_top_right, 5)
 
 if __name__ == '__main__':
     unittest.main()
