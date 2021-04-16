@@ -11,6 +11,12 @@ class crosssection():
         self.b_inf = b_inf
         self.h = h
 
+    def __str__(self):
+        string = "\n cross-section with b_sup=" + str(self.b_sup) + ", b_inf=" + str(self.b_inf) + ", h=" + str(self.h) + "\n"
+        for line in self.lines:
+            string += str(line)
+        return string
+
     def addline(self, line):
         self.lines.append(line)
 

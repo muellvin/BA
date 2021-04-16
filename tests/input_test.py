@@ -53,7 +53,7 @@ v_web_r = str_cal.get_tau_int(test_cs, code, vz, tx)
 print("V_web_r =" + str(v_web_r))
 
 #modifying top plate
-test_line = test_cs.get_line(code)
+test_line = test_cs.get_line(pl_position = code.pl_position, pl_type = code.pl_type, tpl_number = code.tpl_number, st_number = code.st_number, st_pl_position = code.st_pl_position)
 test_line.p1.y = 1000
 test_line.p2.y = -1000
 
