@@ -1,70 +1,21 @@
-#initialisation
+import unittest
+from initial_cs import create_initial_cs
 
-#this statement adds the project path to the path where the python interpreter looks
-#for packages to import
-#if we start the program from main, this should not be an issue
-import sys
-#just add the directory where the BA folder is on your computer
-sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
+class TestInitialCS(unittest.TestCase):
 
-#imports
-#import input.input
-import data
-import initial_cs as ics
-from classes import crosssection as cs
-from classes import plate_code as plcd
-from proofs import stress_cal as str_cal
+    def test_top_left(self):
+        cs = create_initial_cs(4000, 3000, 2000, 10, 10, 10)
+        y_top_left = cs.lines[0].a.y
+        z_top_left = cs.lines[0].a.z
+        self.assertEqual(y_top_left, 2000)
+        self.assertEqual(z_top_left, 0)
 
-#assign input to variables
-b_sup = 4000 #data.input_data["b_sup"]
-b_inf = 2000 #data.input_data["b_inf"]
-h = 1500 #data.input_data["h"]
+    def test_top_right(self):
+        cs = create_initial_cs(4000, 3000, 2000, 10, 10, 10)
+        y_top_right = cs.lines[0].b.y
+        z_top_right = cs.lines[0].b.z
+        self.assertEqual(y_top_right, -2000)
+        self.assertEqual(z_top_right, 0)
 
-#create initial cross section
-test_cs = ics.create_initial_cs(b_sup, b_inf, h)
-for line in test_cs.lines:
-    line.t = 20
-
-#get geometry values of cross section
-y_center = test_cs.get_center_y_tot()
-print("y_center = " + str(y_center))
-z_center = test_cs.get_center_z_tot()
-print("z_center = " + str(z_center))
-A = test_cs.get_area_tot()
-print("Area = " + str(A))
-I_y = test_cs.get_i_y_tot()
-print("I_y = " + str(I_y))
-I_z = test_cs.get_i_z_tot()
-print("I_z = " + str(I_z))
-A_0 = test_cs.get_azero()
-print("A_0 = " + str(A_0))
-
-#assign load input to variables
-my = 2500 * 10**6 #data.input_data["M_Ed"]
-vz = 500 * 10**3 #data.input_data["V_Ed"]
-tx = 300 * 10**6 #data.input_data["T_Ed"]
-
-#testing of stresscal
-code = plcd.plate_code(1,0,0,0,0)
-sigma_sup_test_cs = str_cal.get_sigma_sup(test_cs, code, my)
-print("sigma_sup = " + str(sigma_sup_test_cs))
-
-v_web_r = str_cal.get_tau_int(test_cs, code, vz, tx)
-print("V_web_r =" + str(v_web_r))
-
-#modifying top plate
-test_line = test_cs.get_line(code)
-test_line.p1.y = 1000
-test_line.p2.y = -1000
-
-#testing of the reduced cross section functions
-y = test_cs.get_center_y_red()
-print("y_center_red = " + str(y))
-z = test_cs.get_center_z_red()
-print("z_center_red = " + str(z))
-a_red = test_cs.get_area_red()
-print("A_red = " + str(a_red))
-iy_red = test_cs.get_i_y_red()
-print("iy_red = " + str(iy_red))
-iz_red = test_cs.get_i_z_red()
-print("iz_red = " + str(iz_red))
+if __name__ == '__main__':
+    unittest.main()
