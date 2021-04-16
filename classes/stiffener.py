@@ -171,9 +171,9 @@ def merge(initial_cs, stiffener_list):
 
         while i <= st_number_3_max:
             new_plate_1_a = initial_point_3
-            new_plate_1_b = copy.deepcopy(stiffeners3[i-st_number_3_min].get_line(pl_position = side, pl_type = 4).b)
+            new_plate_1_b = copy.deepcopy(stiffeners3[i-st_number_3_min].get_line(pl_position = side, st_pl_position = 4).b)
             new_plate_2_a = copy.deepcopy(new_plate_1_b)
-            new_plate_2_b = copy.deepcopy(stiffeners3[i-st_number_3_min].get_line(pl_position = side, pl_type = 2).a)
+            new_plate_2_b = copy.deepcopy(stiffeners3[i-st_number_3_min].get_line(pl_position = side, st_pl_position = 2).a)
             next_tpl_a = copy.deepcopy(new_plate_2_b)
             code_1 = plate_code.plate_code(side, 0, j, 0, 0)
             code_2 = plate_code.plate_code(side, 0, j+1, i, 1)
