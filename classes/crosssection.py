@@ -1,6 +1,7 @@
 from classes import line
 import math
 import data
+import copy
 
 #crosssection calculation
 class crosssection():
@@ -158,7 +159,7 @@ class crosssection():
         #make a copy of the crosssection
         cs = crosssection(0,0,0)
         for plate in self.lines:
-            cs.addline(plate)
+            cs.addline(copy.deepcopy(plate))
 
         angle = line.get_angle_y()
 

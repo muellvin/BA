@@ -4,6 +4,7 @@ from classes import line
 from output import geometry_output
 import math
 import data
+import copy
 
 
 
@@ -32,21 +33,21 @@ def column_buckling(plate_glob, side):
 
     st_number_min = stiffener_lines[0].code.st_number
     st_number_max = stiffener_lines[0].code.st_number
-    number_of_stiffeners = int(len(stiffener_lines)/3)
-    print("there are "+str(number_of_stiffeners)+" stiffeners on side "+str(side))
-
     for plate in stiffener_lines:
         if plate.code.st_number < st_number_min:
             st_number_min = plate.code.st_number
         elif plate.code.st_number > st_number_max:
             st_number_max = plate.code.st_number
 
+
+    number_of_stiffeners = int(len(stiffener_lines)/3)
+    print("there are "+str(number_of_stiffeners)+" stiffeners on side "+str(side))
+
     for i in range(number_of_stiffeners):
         stiffeners_list.append(crosssection.crosssection(0, 0, 0))
         for plate in stiffener_lines:
             if plate.code.st_number == i+st_number_min:
                 stiffeners_list[i].lines.append(plate)
-                stiffener_lines.remove(plate)
 
     #sort the lists
     tpl_lines_list = sorted(tpl_lines_list, key = lambda plate: plate.code.tpl_number)
@@ -55,8 +56,11 @@ def column_buckling(plate_glob, side):
     #create sets
     tpl_st_lines_set = {}
     tpl_betw_lines_set = {}
+
     i = 1
     for plate in tpl_lines_list:
+        #is the tpl_number even, (or odd, see correction)
+        #meaning included in a stiffener
         if i%2 == 0:
             st_number = st_number_min + int(i/2) - 1
             tpl_st_lines_set.update({st_number: plate})
@@ -78,20 +82,24 @@ def column_buckling(plate_glob, side):
 
 
 
+
     columns = {}
     i = st_number_min
     #a set of all columns (stiffener + carrying widths) is created -> see column_class
     #they carry the number of the stiffener and they have the stiffener number as a key
-    while i < st_number_max:
-        stiffener_i = stiffeners_set.get(i)
-        plate_between = tpl_st_lines_set.get(i)
-        plate_before = tpl_betw_lines_set.get(i-1)
-        plate_after = tpl_betw_lines_set.get(i)
+    while i < st_number_max+1:
+        print("     creating column of stiffener "+str(i))
+        stiffener_i = copy.deepcopy(stiffeners_set.get(i))
+        plate_before = copy.deepcopy(tpl_betw_lines_set.get(i-1))
+        plate_between = copy.deepcopy(tpl_st_lines_set.get(i))
+        plate_after = copy.deepcopy(tpl_betw_lines_set.get(i))
         code_before = plate_before.code
+        code_between = plate_between.code
         code_after = plate_after.code
 
         #if the widths were not reduced (p1 is the same as p2) the whole plate is taken into account not only until one of p1 or p2
         if dis_points(plate_before.p1, plate_before.p2) < 0.05:
+            print(dis_points(plate_before.p1, plate_before.p2))
             plate_before_A = plate_before.get_area_tot()
             plate_before_I = plate_before.get_i_along_tot()
             sigma_border_before = plate_before.sigma_a_red
@@ -123,8 +131,8 @@ def column_buckling(plate_glob, side):
         #EC 1993 1-5 4.5.3 (3)
         A_sl = stiffener_i.get_area_tot() + plate_before_A + plate_after_A
         A_sl_eff = stiffener_i.get_area_red() + plate_before_A + plate_after_A
-        plate_between_stiffener = tpl_betw_lines_set.get(i)
-        I_sl = stiffener_i.get_i_along_tot(plate_between_stiffener) + plate_before_I + plate_after_I
+        plate_inside_stiffener = copy.deepcopy(tpl_betw_lines_set.get(i))
+        I_sl = stiffener_i.get_i_along_tot(plate_inside_stiffener) + plate_before_I + plate_after_I
         sigma_cr_sl = (math.pi**2 * data.constants.get("E") * I_sl) / (A_sl * data.input_data.get("a"))
 
 
