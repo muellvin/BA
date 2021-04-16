@@ -46,13 +46,13 @@ class crosssection():
 
 
 
-    def get_angle(self, code):
-        line = self.get_line(pl_position = code.pl_position, pl_type = code.pl_type)
+    def get_angle(self, side):
+        line = self.get_line(pl_position = side)
         return line.get_angle_y()
 
     #This function returns the coordinates of the position where the stiffener should be placed
-    def get_coordinates(self, location, code):
-        line = self.get_line(pl_position = code.pl_position, pl_type = code.pl_type, tpl_number = code.tpl_number, st_number = code.st_number, st_pl_position = code.st_pl_position)
+    def get_coordinates(self, location, side):
+        line = self.get_line(pl_position = side)
         #bottom or top plate
         if line.a.z == line.b.z:
             if line.a.y > 0:
@@ -137,7 +137,7 @@ class crosssection():
         return iz_tot
 
     def get_m_rd_el_eff(self):
-            max_z_dis = max(self.get_center_z_red() + self.get_pl_line(1).t/2 ,  data.input_data.get("h") + self.get_pl_line(3).t/2 - self.get_center_z_red())
+            max_z_dis = max(self.get_center_z_red() + self.get_line(pl_position = 1, pl_type = 0).t/2 ,  data.input_data.get("h") + self.get_line(pl_position = 3, pl_type = 0).t/2 - self.get_center_z_red())
             m_rd_el_eff = (self.get_i_y_red() / max_z_dis) * (data.constants.get("f_y")/data.constants.get("gamma_M1"))
             return m_rd_el_eff
 

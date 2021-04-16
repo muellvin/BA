@@ -1,9 +1,11 @@
 import math
 import defaults
-from proofs import stress_cal as stc
+from proofs import stress_cal
+from proofs import column_buckling
+
 from ebplate import ebplate as ebp
 from classes import line as ln
-from classes import crosssection as cs
+from classes import crosssection
 from classes import point as pt
 from output import geometry_output as go
 import random
@@ -17,12 +19,12 @@ def global_buckling(cs):
 
 #create a cs with all plates of this side
 def reduction_global_buckling(cs, side):
-    plate_glob = crosssection.crosssection()
+    plate_glob = crosssection.crosssection(0,0,0)
     for line in cs.lines:
-    if line.code.pl_position == side:
-        plate_glob.addline(line)
+        if line.code.pl_position == side:
+            plate_glob.addline(line)
 
-    chi_c, sigma_cr_c = column.column(plate_glob, side)
+    chi_c, sigma_cr_c = column_buckling.column_buckling(plate_glob, side)
     rho_p, sigma_cr_p = plate_global.plate_global(cs, plate_glob)
 
 
