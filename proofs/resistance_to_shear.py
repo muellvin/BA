@@ -2,9 +2,7 @@ import defaults
 import math
 import data
 
-def resistance_to_shear(initial_cs, stiffened_cs):
-    #cs only contains the four main plates
-    assert len(initial_cs.lines) = 4, print("wrong input format")
+def resistance_to_shear(stiffened_cs):
     #get values of constants
     f_y = data.input_data.get("f_y")
     gamma_M1 = data.input_data.get("gamma_M1")
