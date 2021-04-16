@@ -15,6 +15,11 @@ class plate_code():
             return self.pl_position == other.pl_position and self.pl_type == other.pl_type and self.tpl_number == other.tpl_number and self.st_number == other.st_number and self.st_pl_position == other.st_pl_position
         return False
 
+    def __str__(self):
+        return "Plate Code (" + str(self.pl_position) + ", " + str(self.pl_type) \
+        + ", " + str(self.tpl_number) + ", "+ str(self.st_number) + ", " \
+        + str(self.st_pl_position) + ")"
+
 #pl_position:
     #clockwise, starting with the (top) track plate from 1 to 4
 #pl_type:
