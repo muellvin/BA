@@ -53,10 +53,11 @@ def merge(initial_cs, stiffener_list):
     #side 1
     new_tpl_lines_1 = []
     if stiffeners1 != []:
-        assert True, "Is this case really needed?"
+
         old_plate_1 = initial_cs.get_line(pl_position = 1, pl_type = 0)
         tpl_number_1_min = initial_cs.get_line(pl_position = 1, pl_type = 0).code.tpl_number
         initial_cs.lines.remove(initial_cs.get_line(pl_position = 1, pl_type = 0))
+
         t_1 = old_plate_1.t
         side = 1
 
@@ -72,26 +73,31 @@ def merge(initial_cs, stiffener_list):
         i = st_number_1_min
         j = tpl_number_1_min
         next_tpl_a = None
+        initial_point_1 = old_plate_1.a
+        end_point_1 = old_plate_1.b
 
         while i <= st_number_1_max:
-            new_plate_1_a = old_plate_1.a
-            new_plate_1_b = stiffener.get_line(pl_position = side, st_pl_position = 4).b
-            new_plate_2_a = new_plate_1_b
-            new_plate_2_b = stiffener.get_line(pl_position = side, st_pl_position = 2).a
-            next_tpl_a = new_plate_2_b
-            code_1 = [side, 0, j, 0, 0]
-            code_2 = [side, 0, j+1, i, 1]
+
+            new_plate_1_a = initial_point_1
+            new_plate_1_b = copy.deepcopy(stiffeners1[i-st_number_1_min].get_line(pl_position = side, st_pl_position = 4).b)
+            new_plate_2_a = copy.deepcopy(new_plate_1_b)
+            new_plate_2_b = copy.deepcopy(stiffeners1[i-st_number_1_min].get_line(pl_position = side, st_pl_position = 2).a)
+            next_tpl_a = copy.deepcopy(new_plate_2_b)
+            code_1 = plate_code.plate_code(side, 0, j, 0, 0)
+            code_2 = plate_code.plate_code(side, 0, j+1, i, 1)
             new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_1)
             new_plate_2 = line.line(code_2, new_plate_2_a, new_plate_2_b, t_1)
             new_tpl_lines_1.append(new_plate_1)
             new_tpl_lines_1.append(new_plate_2)
             j += 2
             i += 1
-        code_1 = [side, 0, j, 0, 0]
-        new_plate_1 = line.line(code_1, next_tpl_a, old_plate_1.b, t_1)
+            initial_point_1 = copy.deepcopy(new_plate_2_b)
+        code_1 = plate_code.plate_code(side, 0, j, 0, 0)
+        new_plate_1 = line.line(code_1, next_tpl_a, end_point_1, t_1)
         new_tpl_lines_1.append(new_plate_1)
         initial_cs.get_line(pl_position = 2, pl_type = 0).code.tpl_number = j+1
-
+        initial_cs.get_line(pl_position = 3, pl_type = 0).code.tpl_number = j+2
+        initial_cs.get_line(pl_position = 4, pl_type = 0).code.tpl_number = j+3
 
     #side 2
     new_tpl_lines_2 = []
@@ -114,13 +120,15 @@ def merge(initial_cs, stiffener_list):
         i = st_number_2_min
         j = tpl_number_2_min
         next_tpl_a = None
+        initial_point_2 = old_plate_2.a
+        end_point_2 = old_plate_2.b
 
         while i <= st_number_2_max:
-            new_plate_1_a = old_plate_2.a
-            new_plate_1_b = stiffener.get_line(pl_position = side, st_pl_position = 4).b
-            new_plate_2_a = new_plate_1_b
-            new_plate_2_b = stiffener.get_line(pl_position = side, st_pl_position = 2).a
-            next_tpl_a = new_plate_2_b
+            new_plate_1_a = initial_point_2
+            new_plate_1_b = copy.deepcopy(stiffeners2[i-st_number_2_min].get_line(pl_position = side, st_pl_position = 4).b)
+            new_plate_2_a = copy.deepcopy(new_plate_1_b)
+            new_plate_2_b = copy.deepcopy(stiffeners2[i-st_number_2_min].get_line(pl_position = side, st_pl_position = 2).a)
+            next_tpl_a = copy.deepcopy(new_plate_2_b)
             code_1 = plate_code.plate_code(side, 0, j, 0, 0)
             code_2 = plate_code.plate_code(side, 0, j+1, i, 1)
             new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_2)
@@ -129,11 +137,12 @@ def merge(initial_cs, stiffener_list):
             new_tpl_lines_2.append(new_plate_2)
             j += 2
             i += 1
+            initial_point_3 = copy.deepcopy(new_plate_2_b)
         code_2 = plate_code.plate_code(side, 0, j, 0, 0)
-        new_plate_2 = line.line(code_2, next_tpl_a, old_plate_2.b, t_2)
+        new_plate_2 = line.line(code_2, next_tpl_a, end_point_2, t_2)
         new_tpl_lines_2.append(new_plate_2)
         initial_cs.get_line(pl_position = 3, pl_type = 0).code.tpl_number = j+1
-
+        initial_cs.get_line(pl_position = 4, pl_type = 0).code.tpl_number = j+2
 
 
     #side 3
@@ -202,13 +211,15 @@ def merge(initial_cs, stiffener_list):
         i = st_number_4_min
         j = tpl_number_4_min
         next_tpl_a = None
+        initial_point_4 = old_plate_4.a
+        end_point_4 = old_plate_4.b
 
         while i <= st_number_4_max:
-            new_plate_1_a = old_plate_4.a
-            new_plate_1_b = stiffener.get_line(pl_position = side, st_pl_position = 4).b
-            new_plate_2_a = new_plate_1_b
-            new_plate_2_b = stiffener.get_line(pl_position = side, st_pl_position = 2).a
-            next_tpl_a = new_plate_2_b
+            new_plate_1_a = initial_point_4
+            new_plate_1_b = copy.deepcopy(stiffeners4[i-st_number_4_min].get_line(pl_position = side, st_pl_position = 4).b)
+            new_plate_2_a = copy.deepcopy(new_plate_1_b)
+            new_plate_2_b = copy.deepcopy(stiffeners4[i-st_number_4_min].get_line(pl_position = side, st_pl_position = 2).a)
+            next_tpl_a = copy.deepcopy(new_plate_2_b)
             code_1 = plate_code.plate_code(side, 0, j, 0, 0)
             code_2 = plate_code.plate_code(side, 0, j+1, i, 1)
             new_plate_1 = line.line(code_1, new_plate_1_a, new_plate_1_b, t_4)
@@ -217,10 +228,13 @@ def merge(initial_cs, stiffener_list):
             new_tpl_lines_4.append(new_plate_2)
             j += 2
             i += 1
+            initial_point_4 = copy.deepcopy(new_plate_2_b)
         code_4 = plate_code.plate_code(side, 0, j, 0, 0)
-        new_plate_4 = line.line(code_4, next_tpl_a, old_plate_4.b, t_4)
+        new_plate_4 = line.line(code_4, next_tpl_a, end_point_4, t_4)
         new_tpl_lines_4.append(new_plate_4)
 
+    for plate in new_tpl_lines_1:
+        initial_cs.addline(plate)
     for plate in new_tpl_lines_2:
         initial_cs.addline(plate)
     for plate in new_tpl_lines_3:

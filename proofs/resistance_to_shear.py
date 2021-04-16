@@ -5,14 +5,16 @@ import data
 def resistance_to_shear(initial_cs, stiffened_cs):
     #cs only contains the four main plates
     assert len(initial_cs.lines) = 4, print("wrong input format")
+    #get values of constants
+    f_y = data.input_data.get("f_y")
+    gamma_M1 = data.input_data.get("gamma_M1")
+    eta = defaults.eta
 
+    #proof for all plates
     for line in initial_cs.lines:
         #import important geometry parameters
         h_w = line.get_length_tot
         t = line.t
-        f_y = data.input_data.get("f_y")
-        gamma_M1 = data.input_data.get("gamma_M1")
-        eta = defaults.eta
 
         #is plate stiffened?
         #this method need to be implemented
@@ -30,8 +32,11 @@ def resistance_to_shear(initial_cs, stiffened_cs):
             eval = 31 / eta * math.sqrt(235 *k_tau/f_y)
             if h_w/t < eval:
                 proof_required = False
-        #perform buckling proof
-        if proof_required = True
+
+        #Does V_Rd have to be multiplied with eta? --> rather not, but I'm not sure...
+        V_Rd = f_y*h_w*t/(math.sqrt(3)*gamma_M1)
+        #calculate reduction factor chi_w if required
+        if proof_required = True:
             #calculate tau_cr
             sigma_E = 190000*(t/h_w)**2
             tau_cr = k_tau * sigma_E
