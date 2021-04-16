@@ -10,10 +10,7 @@ class TestMerge(unittest.TestCase):
         stiffeners = []
         final_cs = st.merge(initial_cs, stiffeners)
         length = len(final_cs)
-        final_cs.get_line()
         self.assertEqual(length, 4)
-        self.assertEqual()
-
 
 if __name__ == '__main__':
     unittest.main()

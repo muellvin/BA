@@ -41,10 +41,8 @@ class crosssection():
             if st_pl_position == None or st_pl_position == line.code.st_pl_position:
                 match_st_pl_position = True
             print("match_st_pl_position: ",match_st_pl_position)
-
             found = match_pl_position == True and match_pl_type == True and match_tpl_number == True and match_st_number == True and match_st_pl_position == True
             print("found: ",found)
-
             if found == True:
                 return line
 
