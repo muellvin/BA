@@ -1,6 +1,7 @@
 from classes import line
 import math
 import data
+import copy
 
 #crosssection calculation
 class crosssection():
@@ -46,13 +47,13 @@ class crosssection():
 
 
 
-    def get_angle(self, code):
-        line = self.get_line(pl_position = code.pl_position, pl_type = code.pl_type)
+    def get_angle(self, side):
+        line = self.get_line(pl_position = side)
         return line.get_angle_y()
 
     #This function returns the coordinates of the position where the stiffener should be placed
-    def get_coordinates(self, location, code):
-        line = self.get_line(pl_position = code.pl_position, pl_type = code.pl_type, tpl_number = code.tpl_number, st_number = code.st_number, st_pl_position = code.st_pl_position)
+    def get_coordinates(self, location, side):
+        line = self.get_line(pl_position = side)
         #bottom or top plate
         if line.a.z == line.b.z:
             if line.a.y > 0:
@@ -137,9 +138,13 @@ class crosssection():
         return iz_tot
 
     def get_m_rd_el_eff(self):
+<<<<<<< HEAD
             print(self.get_center_z_red())
             print(self.get_line(pl_position = 1).t/2)
             max_z_dis = max(self.get_center_z_red() + self.get_line(pl_position = 1).t/2 ,  data.input_data.get("h") + self.get_line(pl_position = 3).t/2 - self.get_center_z_red())
+=======
+            max_z_dis = max(self.get_center_z_red() + self.get_line(pl_position = 1, pl_type = 0).t/2 ,  data.input_data.get("h") + self.get_line(pl_position = 3, pl_type = 0).t/2 - self.get_center_z_red())
+>>>>>>> 3102747adda743a0d0acff8dc886964b6d55d5d9
             m_rd_el_eff = (self.get_i_y_red() / max_z_dis) * (data.constants.get("f_y")/data.constants.get("gamma_M1"))
             return m_rd_el_eff
 
@@ -159,8 +164,8 @@ class crosssection():
     def get_i_along_tot(self, line):
         #make a copy of the crosssection
         cs = crosssection(0,0,0)
-        for line in self.lines:
-            cs.addline(line)
+        for plate in self.lines:
+            cs.addline(copy.deepcopy(plate))
 
         angle = line.get_angle_y()
 

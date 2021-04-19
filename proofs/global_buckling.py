@@ -1,6 +1,9 @@
 import math
 import defaults
-from proofs import stress_cal as stc
+from proofs import stress_cal
+from proofs import column_buckling
+from proofs import global_plate_buckling
+
 from ebplate import ebplate as ebp
 from classes import line as ln
 from classes import crosssection
@@ -10,6 +13,7 @@ from proofs import column_buckling as column
 from proofs import global_plate_buckling as plate_global
 import random
 import data
+import defaults
 
 def global_buckling(cs):
     cs = reduction_global_buckling(cs, 2)
@@ -19,27 +23,50 @@ def global_buckling(cs):
 
 #create a cs with all plates of this side
 def reduction_global_buckling(cs, side):
+<<<<<<< HEAD
+=======
+    print("\n------------------------ reduction_global_buckling for side "+str(side)+" ---------------------------------")
+>>>>>>> 3102747adda743a0d0acff8dc886964b6d55d5d9
     plate_glob = crosssection.crosssection(0,0,0)
     for line in cs.lines:
         if line.code.pl_position == side:
             plate_glob.addline(line)
 
+<<<<<<< HEAD
     chi_c, sigma_cr_c = column.column_buckling(plate_glob, side)
     rho_p, sigma_cr_p = plate_global.global_plate_buckling(cs, plate_glob)
     print("rho_p = " + str(rho_p))
     print("chi_c = " + str(chi_c))
 
+=======
+    chi_c = 1
+    rho_p = 1
+    sigma_cr_c = 1
+    sigma_cr_p = 1
+    eta = 1
 
-    eta = sigma_cr_p/sigma_cr_c -1
+    if defaults.do_column_plate_buckling == True:
+        chi_c, sigma_cr_c = column_buckling.column_buckling(plate_glob, side)
+    elif defaults.do_global_plate_buckling == True:
+        rho_p, sigma_cr_p = global_plate_buckling.global_plate_buckling(cs, plate_glob)
+
+    if defaults.do_column_plate_buckling == True and defaults.do_column_plate_buckling == True:
+        eta = sigma_cr_p/sigma_cr_c -1
+    elif defaults.do_column_plate_buckling == True and defaults.do_column_plate_buckling == False:
+        eta = 0
+    elif defaults.do_column_plate_buckling == False and defaults.do_column_plate_buckling == True:
+        eta = 1
+>>>>>>> 3102747adda743a0d0acff8dc886964b6d55d5d9
+
     rho_c = (rho_p - chi_c) * eta * (2 - eta) + chi_c
     print("rho_c = " + str(rho_c))
 
     for line in cs.lines:
         if line.code.pl_position == side:
-            self.chi_c = chi_c
-            self.sigma_cr_c = sigma_cr_c
-            self.rho_p = rho_p
-            self.sigma_cr_p = sigma_cr_p
+            line.chi_c = chi_c
+            line.sigma_cr_c = sigma_cr_c
+            line.rho_p = rho_p
+            line.sigma_cr_p = sigma_cr_p
             line.rho_c = rho_c
 
 
