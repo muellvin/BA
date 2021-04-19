@@ -5,6 +5,7 @@ from output import geometry_output
 import math
 import data
 import copy
+import defaults
 
 
 
@@ -32,7 +33,7 @@ def column_buckling(plate_glob, side):
             tpl_lines_list.append(plate)
 
     #case 1: stiffened plate
-    if stiffener_lines == []:
+    if stiffener_lines != []:
         st_number_min = stiffener_lines[0].code.st_number
         st_number_max = stiffener_lines[0].code.st_number
         for plate in stiffener_lines:
@@ -135,7 +136,7 @@ def column_buckling(plate_glob, side):
             A_sl_eff = stiffener_i.get_area_red() + plate_before_A + plate_after_A
             plate_inside_stiffener = copy.deepcopy(tpl_betw_lines_set.get(i))
             I_sl = stiffener_i.get_i_along_tot(plate_inside_stiffener) + plate_before_I + plate_after_I
-            sigma_cr_sl = (math.pi**2 * data.constants.get("E") * I_sl) / (A_sl * data.input_data.get("a"))
+            sigma_cr_sl = (math.pi**2 * data.constants.get("E") * I_sl) / (A_sl * defaults.plate_length**2)
 
 
 
@@ -214,10 +215,10 @@ def column_buckling(plate_glob, side):
     else:
         t_plate = tpl_lines_list[0].t
         sigma_cr_c = math.pi**2 * data.constants.get("E") * t_plate**2 / \
-        (12 * (1-data.constants.get(nu)**2)*defaults.plate_length**2)
-        lambda_c_bar = math.sqrt(data.constants.get("f_y") / column.sigma_cr_c)
+        (12 * (1-data.constants.get("nu")**2)*defaults.plate_length**2)
+        lambda_c_bar = math.sqrt(data.constants.get("f_y") / sigma_cr_c)
         alpha = 0.21
-        Phi_c = 0.5*(1+alpha_e*(lambda_c_bar - 0.2) + lambda_c_bar**2)
+        Phi_c = 0.5*(1+alpha*(lambda_c_bar - 0.2) + lambda_c_bar**2)
         Chi_c = 1 / (Phi_c + math.sqrt(Phi_c**2 - lambda_c_bar**2))
 
     return Chi_c, sigma_cr_c
