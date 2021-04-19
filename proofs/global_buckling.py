@@ -23,22 +23,12 @@ def global_buckling(cs):
 
 #create a cs with all plates of this side
 def reduction_global_buckling(cs, side):
-<<<<<<< HEAD
-=======
     print("\n------------------------ reduction_global_buckling for side "+str(side)+" ---------------------------------")
->>>>>>> 3102747adda743a0d0acff8dc886964b6d55d5d9
     plate_glob = crosssection.crosssection(0,0,0)
     for line in cs.lines:
         if line.code.pl_position == side:
             plate_glob.addline(line)
 
-<<<<<<< HEAD
-    chi_c, sigma_cr_c = column.column_buckling(plate_glob, side)
-    rho_p, sigma_cr_p = plate_global.global_plate_buckling(cs, plate_glob)
-    print("rho_p = " + str(rho_p))
-    print("chi_c = " + str(chi_c))
-
-=======
     chi_c = 1
     rho_p = 1
     sigma_cr_c = 1
@@ -56,7 +46,6 @@ def reduction_global_buckling(cs, side):
         eta = 0
     elif defaults.do_column_plate_buckling == False and defaults.do_column_plate_buckling == True:
         eta = 1
->>>>>>> 3102747adda743a0d0acff8dc886964b6d55d5d9
 
     rho_c = (rho_p - chi_c) * eta * (2 - eta) + chi_c
     print("rho_c = " + str(rho_c))
