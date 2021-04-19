@@ -8,8 +8,10 @@ from classes import point as pt
 from output import geometry_output as go
 import random
 import data
+import copy 
 
-def global_plate_buckling(total_cs, stiffened_plate):
+def global_plate_buckling(total_cs, plate_glob):
+    stiffened_plate = copy.deepcopy(plate_glob)
     #all methods still to be correctly implemented
     #identify the border plates a and b and numbers of end stiffeners
     plate_a = None
@@ -53,13 +55,11 @@ def global_plate_buckling(total_cs, stiffened_plate):
         print("t = " + str(t))
         b = defaults.plate_length
 
-        go.print_cs(stiffened_plate)
         #coordinate transformation (a+b)/2 is the new origin and baseplate is horizontal
         #set new origin
         move_z = 0.5*(plate_a.a.z + plate_b.b.z)
         move_y = 0.5*(plate_a.a.y + plate_b.b.y)
 
-        "This part urgently needs to be changed because it is very faulty."
         for plate in stiffened_plate.lines:
             plate.a.y -= move_y
             plate.a.z -= move_z

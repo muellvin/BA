@@ -124,5 +124,5 @@ def local_buckling_plate(cs, line_to_do):
             plate.p2.y = plate.b.y + b_e1/plate.get_length_tot()*(plate.a.y - plate.b.y)
             plate.p2.z = plate.b.z + b_e1/plate.get_length_tot()*(plate.a.z - plate.b.z)
 
-    print("pl_position: ", plate.code.pl_position," psi: ", int(100*plate.psi)/100, "rho_loc: ", int(100*plate.rho_loc)/100)
+    #print("pl_position: ", plate.code.pl_position," psi: ", int(100*plate.psi)/100, "rho_loc: ", int(100*plate.rho_loc)/100)
     return cs
