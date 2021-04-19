@@ -9,6 +9,8 @@ from classes import line as ln
 from classes import crosssection
 from classes import point as pt
 from output import geometry_output as go
+from proofs import column_buckling as column
+from proofs import global_plate_buckling as plate_global
 import random
 import data
 import defaults
@@ -46,6 +48,7 @@ def reduction_global_buckling(cs, side):
         eta = 1
 
     rho_c = (rho_p - chi_c) * eta * (2 - eta) + chi_c
+    print("rho_c = " + str(rho_c))
 
     for line in cs.lines:
         if line.code.pl_position == side:
