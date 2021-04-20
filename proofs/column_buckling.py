@@ -130,7 +130,6 @@ def column_buckling(plate_glob, side):
 
 
 
-<<<<<<< HEAD
     for i in range(number_of_stiffeners):
         stiffeners_list.append(crosssection.crosssection(0, 0, 0))
         for plate in stiffener_lines:
@@ -247,8 +246,6 @@ def column_buckling(plate_glob, side):
                 b_c = dis_points(border_before,border_after)
         else:
             b_c = 0
-=======
->>>>>>> ec5b2ae13a65125088c378ebad5f95cd19770e19
 
             #EC 1993 1-5 4.5.3 (3)
             A_sl = stiffener_i.get_area_tot() + plate_before_A + plate_after_A
