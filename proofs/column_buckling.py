@@ -100,6 +100,10 @@ def column_buckling(plate_glob, side):
             code_between = plate_between.code
             code_after = plate_after.code
 
+            plate_between_A_tot = plate_between.get_area_tot()
+            plate_between_A_red = plate_between.get_area_red()
+            plate_between_I_tot = plate_between.get_i_along_tot()
+
             #if the widths were not reduced (p1 is the same as p2) the whole plate is taken into account not only until one of p1 or p2
             if dis_points(plate_before.p1, plate_before.p2) < 0.05:
                 print(dis_points(plate_before.p1, plate_before.p2))
@@ -132,10 +136,9 @@ def column_buckling(plate_glob, side):
 
 
             #EC 1993 1-5 4.5.3 (3)
-            A_sl = stiffener_i.get_area_tot() + plate_before_A + plate_after_A
-            A_sl_eff = stiffener_i.get_area_red() + plate_before_A + plate_after_A
-            plate_inside_stiffener = copy.deepcopy(tpl_betw_lines_set.get(i))
-            I_sl = stiffener_i.get_i_along_tot(plate_inside_stiffener) + plate_before_I + plate_after_I
+            A_sl = stiffener_i.get_area_tot() + plate_before_A + plate_after_A + plate_between_A_tot
+            A_sl_eff = stiffener_i.get_area_red() + plate_before_A + plate_after_A + plate_between_A_red
+            I_sl = stiffener_i.get_i_along_tot(plate_between) + plate_before_I + plate_after_I + plate_between_I_tot
             sigma_cr_sl = (math.pi**2 * data.constants.get("E") * I_sl) / (A_sl * defaults.plate_length**2)
 
 
@@ -151,9 +154,11 @@ def column_buckling(plate_glob, side):
             column_for_printing = stiffener_i
             column_for_printing.addline(plate_before_eff)
             column_for_printing.addline(plate_after_eff)
+            column_for_printing.addline(plate_between)
             geometry_output.print_cs_red(column_for_printing)
             #print(stiffener_i.lines[0].code.st_number)
 
+            all_tension = False
             #assure the column is under pressure (positive) somewhere
             if sigma_border_before > 0 or sigma_border_after > 0:
                 if sigma_border_before != sigma_border_after:
@@ -162,6 +167,7 @@ def column_buckling(plate_glob, side):
                     b_c = dis_points(border_before,border_after)
             else:
                 b_c = 0
+                all_tension = True
 
             tpl_st_center = point.point(tpl_st_lines_set.get(i).get_center_y_tot(), tpl_st_lines_set.get(i).get_center_z_tot())
 
@@ -186,13 +192,16 @@ def column_buckling(plate_glob, side):
                 sl_cs.addline(plate)
             sl_cs.addline(plate_before_eff)
             sl_cs.addline(plate_after_eff)
+            sl_cs.addline(plate_between)
 
+            #center of the whole column
+            """center of reduced or total area??????????"""
             sl_center = point.point(sl_cs.get_center_y_tot(), sl_cs.get_center_z_tot())
 
             e2 = dis_plate_point(tpl_st_lines_set.get(i), sl_center)
             e1 = dis_plate_point(tpl_st_lines_set.get(i), st_center) - e2
 
-            column = column_class(i, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2)
+            column = column_class(i, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2, all_tension)
             columns.update({st_number: column})
 
             i += 1
@@ -219,6 +228,8 @@ def column_buckling(plate_glob, side):
         lambda_c_bar = math.sqrt(data.constants.get("f_y") / sigma_cr_c)
         alpha = 0.21
         Phi_c = 0.5*(1+alpha*(lambda_c_bar - 0.2) + lambda_c_bar**2)
+        print("lambda_c_bar =", lambda_c_bar)
+        print("Phi_c =", Phi_c)
         Chi_c = 1 / (Phi_c + math.sqrt(Phi_c**2 - lambda_c_bar**2))
 
     return Chi_c, sigma_cr_c
@@ -230,18 +241,25 @@ def column_buckling(plate_glob, side):
 
 
 def column_buckling_Chi_c(column):
-    beta_A_c = column.A_sl_eff / column.A_sl
-    lambda_c_bar = math.sqrt(beta_A_c * data.constants.get("f_y") / column.sigma_cr_c)
+    if column.all_tension == True:
+        return 1
+    else:
+        beta_A_c = column.A_sl_eff / column.A_sl
+        print("beta_A_c =", beta_A_c)
+        lambda_c_bar = math.sqrt(beta_A_c * data.constants.get("f_y") / column.sigma_cr_c)
 
-    i = math.sqrt(column.I_sl/column.A_sl)
-    e = max(column.e1, column.e2)
-    alpha = 0.34 #curve b for closed stiffeners
-    alpha_e = alpha + 0.09/(e/i)
+        i = math.sqrt(column.I_sl/column.A_sl)
+        e = max(column.e1, column.e2)
+        alpha = 0.34 #curve b for closed stiffeners
+        alpha_e = alpha + 0.09/(e/i)
 
-    Phi_c = 0.5*(1+alpha_e*(lambda_c_bar - 0.2) + lambda_c_bar**2)
-    Chi_c = 1 / (Phi_c + math.sqrt(Phi_c**2 - lambda_c_bar**2))
+        Phi_c = 0.5*(1+alpha_e*(lambda_c_bar - 0.2) + lambda_c_bar**2)
 
-    return Chi_c
+        print("lambda_c_bar =", lambda_c_bar)
+        print("Phi_c =", Phi_c)
+        Chi_c = 1 / (Phi_c + math.sqrt(Phi_c**2 - lambda_c_bar**2))
+
+        return Chi_c
 
 
 
@@ -265,7 +283,7 @@ def dis_plate_point(plate, point):
 
 
 class column_class():
-    def __init__(self,st_number, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2):
+    def __init__(self,st_number, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2, all_tension):
         self.st_number = st_number
         self.A_sl = A_sl
         self.A_sl_eff = A_sl_eff
@@ -273,3 +291,4 @@ class column_class():
         self.sigma_cr_c = sigma_cr_c
         self.e1 = e1
         self.e2 = e2
+        self.all_tension = all_tension

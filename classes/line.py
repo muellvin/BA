@@ -112,7 +112,28 @@ class line():
     def get_angle_z(self):
         complangle = math.pi/2 - self.get_angle_y()
         return complangle
+    def get_angle_y_true(self):
+        dy = self.b.y - self.a.y
+        dz = self.b.z - self.a.z
 
+        if dy > 0 and dz == 0:
+            angle = 0
+        if dy > 0 and dz > 0:
+            angle = math.atan(dz/dy)
+        if dy == 0 and dz > 0:
+            angle = math.pi / 2
+        if dy < 0 and dz > 0:
+            angle = math.atan(dz/dy)
+        if dy < 0 and dz == 0:
+            angle = math.pi
+        if dy < 0 and dz < 0:
+            angle = 2*math.pi + math.atan(dz / dy)
+        if dy == 0 and dz < 0:
+            angle = 3/2*math.pi
+        if dy > 0 and dz < 0:
+            angle = 2*math.pi + math.atan(dz / dy)
+
+        return angle
 
 #NON-REDUCED (and also used for reduced, that's why with coordinates as arguments)
     def cal_center_y(self, ay, az, by, bz, t):
