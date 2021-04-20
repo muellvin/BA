@@ -25,7 +25,6 @@ def deck(b_deck):
     #iterate through all the possible solutions, in order to find viable ones
     for t in t_range:
         b_sup_theor = min(25*t, 300)
-        print(b_sup_theor)
         num_of_plates = math.ceil(b_deck / b_sup_theor)
         if num_of_plates % 2 == 0:
             num_of_plates += 1
@@ -50,15 +49,12 @@ def deck(b_deck):
     h = best[2]
     t = best[3]
     assert best[4] != 10**8, "You are Stupid."
-    print(b_sup, b_inf, h, t)
     #create a list of deck stiffeners
     deck_stiffener_list = []
     num_of_plates = round(b_deck / b_sup)
     num_of_stiffeners = (num_of_plates-1)/2
-    print(num_of_stiffeners)
     for i in range(int(num_of_stiffeners)):
         center_y = (0.5*b_deck - (2*i+1.5)*b_sup)
-        print(center_y)
         stiffener = st.create_stiffener_global(1, i+1, center_y, 0, 0, b_sup, b_inf, h, t)
         deck_stiffener_list.append(stiffener)
 
