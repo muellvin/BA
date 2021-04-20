@@ -20,6 +20,7 @@ def shear_lag(cs):
 
 
 def reduction_shear_lag(cs, flange):
+    print("")
     if flange == 1:
         b_0 = cs.b_sup / 2 #3.1 (2)
     elif flange == 3:
