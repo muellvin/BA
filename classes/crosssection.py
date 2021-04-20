@@ -21,6 +21,37 @@ class crosssection():
     def addline(self, line):
         self.lines.append(line)
 
+    def get_stiffened_plate(side):
+        plate_glob = crosssection.crosssection(0,0,0)
+        for line in self.lines:
+            if line.code.pl_position == side:
+                plate_glob.addline(line)
+        return plate_glob
+
+    def get_plate_a(side):
+        #returns the plate in the corner a
+        plate_a = None
+        min_tpl = 10000
+
+        for line in self.lines:
+            if line.code.pl_type == 0 and line.code.pl_position == side:
+                if line.code.tpl_number <= min_tpl:
+                    min_tpl = line.code.tpl_number
+                    plate_a = line
+        return plate_a
+
+    def get_plate_b(side):
+        #return the plate in the corner b
+        plate_b = None
+        max_tpl = 0
+
+        for line in self.lines:
+            if line.code.pl_type == 0 and line.code.pl_position == side:
+                if line.code.tpl_number >= max_tpl:
+                    max_tpl = line.code.tpl_number
+                    plate_b = line
+        return plate_b 
+
     def get_line(self, pl_position = None, pl_type = None, tpl_number = None, st_number = None, st_pl_position = None):
         found = False
         for line in self.lines:
