@@ -75,7 +75,7 @@ def column_buckling(plate_glob, side):
         st_number = stiffener.lines[0].code.st_number
         stiffeners_set.update({st_number: stiffener})
         stiffeners_set_length += 1
-        geometry_output.print_cs_red(stiffener)
+        #geometry_output.print_cs_red(stiffener)
 
 
     print("there are "+str(stiffeners_set_length)+" columns to be created")
