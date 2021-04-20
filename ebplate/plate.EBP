@@ -6,8 +6,8 @@ Utilisateur   #
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
-   Height          158.11388300841898 cm 
-   Thickness         0.4 cm 
+   Height          400.0 cm 
+   Thickness         1.2 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
    Boundary Conditions 
@@ -17,16 +17,34 @@ Commentaire   #
       Bord 4 0 
 #STIFFENING 
    Orthotropic Plate =  0 
+   Coefficients d'orthotropie : 
+      Direction X : Beta =  0.000 
+                     Eta =  0.000 
+        Smearing : No 
+      Direction Y : Beta =  0.000 
+                     Eta =  0.000 
+        Smearing : No 
    Referentiel 2 
-   Nombre de raidisseurs  0 
+   Nombre de raidisseurs  1 
+   - Raidisseur n° 1 Active=1 
+      Orientation = 0 
+      Position    = 100.0 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 15.0 
+      Dimension 2 = 30.0 
+      Dimension 3 = 20.0 
+      Dimension 4 = 1.2 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
   Imposed values : No 
-   Longitudinal Stress Top Left                -2245.894657614669 MPa 
-   Longitudinal Stress Bottom Left             754.6151694730827 MPa 
-   Longitudinal Stress Top Right               -2245.894657614669 MPa 
-   Longitudinal Stress Bottom Right            754.6151694730827 MPa 
+   Longitudinal Stress Top Left                0.000 MPa 
+   Longitudinal Stress Bottom Left             0.000 MPa 
+   Longitudinal Stress Top Right               0.000 MPa 
+   Longitudinal Stress Bottom Right            0.000 MPa 
  Transverse stresses : User's data No 
  Analytical Transverse stresses 
   Imposed values : No 
@@ -44,7 +62,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 0.000 MPa 
+   Shear stress                                 30 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000
