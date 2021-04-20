@@ -15,8 +15,8 @@ class line():
         self.p2 = p2 if p2 is not None else point.point(a.y + 1/2*(b.y - a.y), a.z + 1/2*(b.z-a.z))
         self.t = float(t)
         self.beta = 1
-        self.rohc1 = 1
-        self.rohc2 = 1
+        self.roh_c_a = 1
+        self.roh_c_b = 1
         #normal stress with tension being negative at point a and point b for the effective crosssection
         self.sigma_a_red = 0
         self.sigma_b_red = 0
