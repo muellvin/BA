@@ -8,7 +8,7 @@ sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA/eb
 from proofs import resistance_to_shear as rts
 from classes import crosssection as cs
 from classes import stiffener as st
-import deck 
+import deck
 import data
 import initial_cs as ics
 
@@ -18,7 +18,7 @@ data.input_data.update({"b_sup": 4000})
 data.input_data.update({"h": 1500})
 data.input_data.update({"M_Ed": 50*10**9})
 data.input_data.update({"Q_Ed": 100*10**3})
-data.input_data.update({"T_Ed": 30*10**6})
+data.input_data.update({"T_Ed": 3*10**9})
 data.input_data.update({"a": 1000})
 data.input_data.update({"L_e": 1000})
 data.input_data.update({"bending type": 1000})

@@ -7,7 +7,7 @@ Commentaire   #
 #PLATE 
    Width           400.0 cm 
    Height          400.0 cm 
-   Thickness         1.2 cm 
+   Thickness         0.4 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
    Boundary Conditions 
@@ -17,26 +17,85 @@ Commentaire   #
       Bord 4 0 
 #STIFFENING 
    Orthotropic Plate =  0 
-   Coefficients d'orthotropie : 
-      Direction X : Beta =  0.000 
-                     Eta =  0.000 
-        Smearing : No 
-      Direction Y : Beta =  0.000 
-                     Eta =  0.000 
-        Smearing : No 
    Referentiel 2 
-   Nombre de raidisseurs  1 
+   Nombre de raidisseurs  7 
    - Raidisseur n° 1 Active=1 
       Orientation = 0 
-      Position    = 100.0 
+      Position    = 40.0 
       Gamma       = 0 
       Teta        = 0 
       Delta       = 0 
       Type        = 3 
-      Dimension 1 = 15.0 
-      Dimension 2 = 30.0 
-      Dimension 3 = 20.0 
-      Dimension 4 = 1.2 
+      Dimension 1 = 22.516660498395407 
+      Dimension 2 = 26.666666666666675 
+      Dimension 3 = 4.150006168271261 
+      Dimension 4 = 1.3 
+   - Raidisseur n° 2 Active=1 
+      Orientation = 0 
+      Position    = 93.33333333333337 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 22.516660498395403 
+      Dimension 2 = 26.666666666666664 
+      Dimension 3 = 4.150006168271261 
+      Dimension 4 = 1.3 
+   - Raidisseur n° 3 Active=1 
+      Orientation = 0 
+      Position    = 146.66666666666669 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 22.516660498395407 
+      Dimension 2 = 26.666666666666664 
+      Dimension 3 = 4.15000616827125 
+      Dimension 4 = 1.3 
+   - Raidisseur n° 4 Active=1 
+      Orientation = 0 
+      Position    = 200.00000000000003 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 22.516660498395407 
+      Dimension 2 = 26.666666666666668 
+      Dimension 3 = 4.150006168271256 
+      Dimension 4 = 1.3 
+   - Raidisseur n° 5 Active=1 
+      Orientation = 0 
+      Position    = 253.33333333333334 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 22.516660498395407 
+      Dimension 2 = 26.666666666666668 
+      Dimension 3 = 4.15000616827125 
+      Dimension 4 = 1.3 
+   - Raidisseur n° 6 Active=1 
+      Orientation = 0 
+      Position    = 306.6666666666667 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 22.516660498395407 
+      Dimension 2 = 26.666666666666675 
+      Dimension 3 = 4.150006168271261 
+      Dimension 4 = 1.3 
+   - Raidisseur n° 7 Active=1 
+      Orientation = 0 
+      Position    = 360.00000000000006 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 22.516660498395407 
+      Dimension 2 = 26.666666666666675 
+      Dimension 3 = 4.150006168271261 
+      Dimension 4 = 1.3 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
@@ -62,7 +121,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 30 MPa 
+   Shear stress                                 71.42857142857143 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000
