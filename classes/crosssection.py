@@ -184,48 +184,43 @@ class crosssection():
                 azero += a_line
         return azero
 
-
-    #calculates the moment of inertia along the line given as an argument
-    def get_i_along_tot(self, line):
+    def get_cs_rot(self, angle):
         #make a copy of the crosssection
         cs = crosssection(0,0,0)
         for plate in self.lines:
             cs.addline(copy.deepcopy(plate))
 
-        angle = line.get_angle_y()
-
         for plate in cs.lines:
             ay = plate.a.y
             az = plate.a.z
+            p1y = plate.p1.y
+            p1z = plate.p1.z
             by = plate.b.y
             bz = plate.b.z
+            p2y = plate.p2.y
+            p2z = plate.p2.z
             plate.a.y = math.cos(angle)*ay - math.sin(angle)*az
             plate.a.z = math.sin(angle)*ay + math.cos(angle)*az
+            plate.p1.y = math.cos(angle)*p1y - math.sin(angle)*p1z
+            plate.p1.z = math.sin(angle)*p1y + math.cos(angle)*p1z
             plate.b.y = math.cos(angle)*by - math.sin(angle)*bz
             plate.b.z = math.sin(angle)*by + math.cos(angle)*bz
+            plate.p2.y = math.cos(angle)*p2y - math.sin(angle)*p2z
+            plate.p2.z = math.sin(angle)*p2y + math.cos(angle)*p2z
 
-        return cs.get_i_y_tot()
+        return cs
+
+    #calculates the moment of inertia along the line given as an argument
+    def get_i_along_tot(self, line):
+        angle = (-1)* line.get_angle_y_true()
+        cs_rot = self.get_cs_rot(angle)
+        return cs_rot.get_i_y_tot()
 
 
     def get_i_along_red(self, line):
-        #make a copy of the crosssection
-        cs = crosssection(0,0,0)
-        for line in self.lines:
-            cs.addline(line)
-
-        angle = line.get_angle_y()
-
-        for plate in cs.lines:
-            ay = plate.a.y
-            az = plate.a.z
-            by = plate.b.y
-            bz = plate.b.z
-            plate.a.y = math.cos(angle)*ay - math.sin(angle)*az
-            plate.a.z = math.sin(angle)*ay + math.cos(angle)*az
-            plate.b.y = math.cos(angle)*by - math.sin(angle)*bz
-            plate.b.z = math.sin(angle)*by + math.cos(angle)*bz
-
-        return cs.get_i_y_red()
+        angle = (-1)*line.get_angle_y_true()
+        cs_rot = self.get_cs_rot(angle)
+        return cs_rot.get_i_y_red()
 
 
     """ important convention: the point b of a line is always in clockwise direction of point a"""
