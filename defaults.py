@@ -55,3 +55,8 @@ convergence_limit_shear_lag = 0.05
 do_shear_lag_plastically = True
 do_global_plate_buckling = True
 do_column_plate_buckling = True
+
+
+"""cs_analysis_tool"""
+do_print = True
+do_print_to_txt = False
