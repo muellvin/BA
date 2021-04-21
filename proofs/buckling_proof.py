@@ -23,14 +23,20 @@ def buckling_proof(cs):
         for side in range(1,5,1):
             #5. resistance to shear
             plate_glob = cs.get_stiffened_plate(side)
-            eta_3 = resistance_to_shear.resistance_to_shear(total_cs, plate_glob)
+            #interaction
             if side == 1 or side == 3:
+                V_Ed_plate = stress_cal.get_tau_int_flange(cs, side, data.input_data.get("Q_Ed"),\
+                data.input_data.get("T_Ed"))
+                eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
                 interaction.interaction_flange()
             if side == 2 or side == 4:
+                V_Ed_plate = stress_cal.get_tau_int_web(cs, side, data.input_data.get("Q_Ed"),\
+                data.input_data.get("T_Ed"))
+                eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
                 interaction.interaction_web()
-            
+
             #7.1 Interaction between shear forces, bending moment and axial force
-        return report
+        return cs
 
     else:
         convergence = 1
