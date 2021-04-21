@@ -127,12 +127,15 @@ class line():
         if dy < 0 and dz == 0:
             angle = math.pi
         if dy < 0 and dz < 0:
-            angle = 2*math.pi + math.atan(dz / dy)
+            angle = math.pi + math.atan(dz / dy)
         if dy == 0 and dz < 0:
             angle = 3/2*math.pi
         if dy > 0 and dz < 0:
             angle = 2*math.pi + math.atan(dz / dy)
 
+        #horizontal is not 0 degrees but pi (line from positive y to negative)
+        angle -= math.pi
+        print(angle/math.pi)
         return angle
 
 #NON-REDUCED (and also used for reduced, that's why with coordinates as arguments)
