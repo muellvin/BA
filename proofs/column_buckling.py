@@ -9,6 +9,7 @@ import defaults
 
 
 
+
 #EC 1993 1-5 (7)  stiffeners as a member have to be investigated as they can be of different form
 #
 #according to the EC 1993 1-5 (1) the equivalent member can no longer be seen as supported on the sides
@@ -18,7 +19,11 @@ import defaults
 
 #does not write attributes thus does not need cs
 def column_buckling(plate_glob, side):
-    print("***************************** column_buckling for side "+str(side)+" **************************************")
+    if defaults.do_print == True:
+        if defaults.do_print_to_txt == True:
+            pass
+        else:
+            print("***************************** column_buckling for side "+str(side)+" **************************************")
 
 
     #add the lines to the right list
@@ -41,7 +46,11 @@ def column_buckling(plate_glob, side):
             elif plate.code.st_number > st_number_max:
                 st_number_max = plate.code.st_number
         number_of_stiffeners = int(len(stiffener_lines)/3)
-        print("there are "+str(number_of_stiffeners)+" stiffeners on side "+str(side))
+        if defaults.do_print == True:
+            if defaults.do_print_to_txt == True:
+                pass
+            else:
+                print("there are "+str(number_of_stiffeners)+" stiffeners on side "+str(side))
         for i in range(number_of_stiffeners):
             stiffeners_list.append(crosssection.crosssection(0, 0, 0))
             for plate in stiffener_lines:
@@ -73,7 +82,11 @@ def column_buckling(plate_glob, side):
             stiffeners_set.update({st_number: stiffener})
             stiffeners_set_length += 1
             geometry_output.print_cs_red(stiffener)
-        print("there are "+str(stiffeners_set_length)+" columns to be created")
+        if defaults.do_print == True:
+            if defaults.do_print_to_txt == True:
+                pass
+            else:
+                print("there are "+str(stiffeners_set_length)+" columns to be created")
 
 
         #a set of all columns (stiffener + carrying widths) is created -> see column_class
@@ -81,7 +94,11 @@ def column_buckling(plate_glob, side):
         columns = {}
         i = st_number_min
         while i < st_number_max+1:
-            print("     creating column of stiffener "+str(i))
+            if defaults.do_print == True:
+                if defaults.do_print_to_txt == True:
+                    pass
+                else:
+                    print("     creating column of stiffener "+str(i))
             stiffener_i = copy.deepcopy(stiffeners_set.get(i))
             plate_before = copy.deepcopy(tpl_betw_lines_set.get(i-1))
             plate_between = copy.deepcopy(tpl_st_lines_set.get(i))
@@ -96,7 +113,6 @@ def column_buckling(plate_glob, side):
 
             #if the widths were not reduced (p1 is the same as p2) the whole plate is taken into account not only until one of p1 or p2
             if dis_points(plate_before.p1, plate_before.p2) < 0.05:
-                print(dis_points(plate_before.p1, plate_before.p2))
                 plate_before_A = plate_before.get_area_tot()
                 plate_before_I = plate_before.get_i_along_tot()
                 sigma_border_before = plate_before.sigma_a_red
@@ -135,14 +151,11 @@ def column_buckling(plate_glob, side):
             #stress ratio across the whole cross-section of the column
             stress_ratio = min(sigma_border_before, sigma_border_after) / max(sigma_border_before, sigma_border_after)
 
-            #print(sigma_border_before)
-            #print(sigma_border_after)
-            column_for_printing = stiffener_i
-            column_for_printing.addline(plate_before_eff)
-            column_for_printing.addline(plate_after_eff)
-            column_for_printing.addline(plate_between)
-            geometry_output.print_cs_red(column_for_printing)
-            #print(stiffener_i.lines[0].code.st_number)
+            column_as_cs = stiffener_i
+            column_as_cs.addline(plate_before_eff)
+            column_as_cs.addline(plate_after_eff)
+            column_as_cs.addline(plate_between)
+            geometry_output.print_cs_red(column_as_cs)
 
             #assure the column is under pressure (positive) somewhere
             all_tension = False
@@ -193,7 +206,7 @@ def column_buckling(plate_glob, side):
             e2 = dis_plate_point(tpl_st_lines_set.get(i), sl_center)
             e1 = dis_plate_point(tpl_st_lines_set.get(i), st_center) - e2
 
-            column = column_class(i, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2, all_tension)
+            column = column_class(i, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2, all_tension, column_as_cs)
             columns.update({st_number: column})
 
             i += 1
@@ -205,6 +218,11 @@ def column_buckling(plate_glob, side):
         #this one will be the defining column mechanism
         #as not all our stiffeners will be the same, we can not conclude that it is one at a border (highest pressure)
         for column in columns.values():
+            if defaults.do_print == True:
+                if defaults.do_print_to_txt == True:
+                    pass
+                else:
+                    print(column)
             Chi_c_column = column_buckling_Chi_c(column)
             if Chi_c_column < Chi_c:
                 Chi_c = Chi_c_column
@@ -222,6 +240,8 @@ def column_buckling(plate_glob, side):
         print("lambda_c_bar =", lambda_c_bar)
         print("Phi_c =", Phi_c)
         Chi_c = 1 / (Phi_c + math.sqrt(Phi_c**2 - lambda_c_bar**2))
+
+
 
     return Chi_c, sigma_cr_c
 
@@ -274,7 +294,7 @@ def dis_plate_point(plate, point):
 
 
 class column_class():
-    def __init__(self,st_number, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2, all_tension):
+    def __init__(self,st_number, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2, all_tension, column_as_cs):
         self.st_number = st_number
         self.A_sl = A_sl
         self.A_sl_eff = A_sl_eff
@@ -283,3 +303,16 @@ class column_class():
         self.e1 = e1
         self.e2 = e2
         self.all_tension = all_tension
+        self.column_as_cs = column_as_cs
+
+
+    def __str__(self):
+        line1 = "''''''''''''''''''''''''''Column number "+str(self.st_number)+"'''''''''''''''''''''''''\n"
+        line2 = "A_sl="+str(int(100*self.A_sl)/100)+", A_sl_eff="+str(int(100*self.A_sl_eff)/100)+", I_sl="+str(int(100*self.I_sl)/100)+"\n"
+        line3 = "sigma_cr_c="+str(int(100*self.sigma_cr_c)/100)+"\n"
+        line4 = "e1="+str(int(100*self.e1)/100)+", e2="+str(int(100*self.e2)/100)+"\n"
+        line5 = "All tension ="+str(self.all_tension)+"\n"
+        rest = str(self.column_as_cs)
+
+        string = line1 + line2 + line3 + line4 + line5 + rest
+        return string
