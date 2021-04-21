@@ -6,14 +6,12 @@ import ebplate
 import copy
 from classes import crosssection as cs
 
-def resistance_to_shear(total_cs, plate_glob):
+def resistance_to_shear(plate_glob, V_Ed_plate):
     #get values of constants
     f_y = data.constants.get("f_y")
     gamma_M1 = data.constants.get("gamma_M1")
     eta = defaults.eta
     side = plate_glob.lines[0].code.pl_position
-    V_Ed_plate = stress_cal.get_tau_int(total_cs, side, data.input_data.get("Q_Ed"),\
-    data.input_data.get("T_Ed"))
     a = defaults.plate_length
 
     #import important geometry parameters
