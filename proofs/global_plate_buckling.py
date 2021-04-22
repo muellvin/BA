@@ -8,7 +8,7 @@ from classes import point as pt
 from output import geometry_output as go
 import random
 import data
-import copy 
+import copy
 
 def global_plate_buckling(total_cs, plate_glob):
     stiffened_plate = copy.deepcopy(plate_glob)
