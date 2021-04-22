@@ -35,16 +35,16 @@ class Testcrosssection(unittest.TestCase):
         cs_rot_plate_between = cs_rot.get_line(pl_type = 0)
         cs_rot_i_along = cs_rot.get_i_along_tot(cs_rot_plate_between)
         cs_rot_i_along_red = cs_rot.get_i_along_red(cs_rot_plate_between)
-        test.assertTrue(cs_rot_i_along/cs_y_i_y - 1 < 0.001)
-        test.assertTrue(cs_rot_i_along_red/cs_y_i_y_red - 1 < 0.001)
+        self.assertTrue(cs_rot_i_along/cs_y_i_y - 1 < 0.001)
+        self.assertTrue(cs_rot_i_along_red/cs_y_i_y_red - 1 < 0.001)
 
         angle = math.pi*3.453
         cs_rot = cs_y.get_cs_rot(angle)
         cs_rot_plate_between = cs_rot.get_line(pl_type = 0)
         cs_rot_i_along = cs_rot.get_i_along_tot(cs_rot_plate_between)
         cs_rot_i_along_red = cs_rot.get_i_along_red(cs_rot_plate_between)
-        test.assertTrue(cs_rot_i_along/cs_y_i_y - 1 < 0.001)
-        test.assertTrue(cs_rot_i_along_red/cs_y_i_y_red - 1 < 0.001)
+        self.assertTrue(cs_rot_i_along/cs_y_i_y - 1 < 0.001)
+        self.assertTrue(cs_rot_i_along_red/cs_y_i_y_red - 1 < 0.001)
 
 
         angle = math.pi*(-2.34)
@@ -52,8 +52,8 @@ class Testcrosssection(unittest.TestCase):
         cs_rot_plate_between = cs_rot.get_line(pl_type = 0)
         cs_rot_i_along = cs_rot.get_i_along_tot(cs_rot_plate_between)
         cs_rot_i_along_red = cs_rot.get_i_along_red(cs_rot_plate_between)
-        test.assertTrue(cs_rot_i_along/cs_y_i_y - 1 < 0.001)
-        test.assertTrue(cs_rot_i_along_red/cs_y_i_y_red - 1 < 0.001)
+        self.assertTrue(cs_rot_i_along/cs_y_i_y - 1 < 0.001)
+        self.assertTrue(cs_rot_i_along_red/cs_y_i_y_red - 1 < 0.001)
 
 
 if __name__ == '__main__':
