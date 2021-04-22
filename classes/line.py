@@ -111,6 +111,7 @@ class line():
     def get_angle_z(self):
         complangle = math.pi/2 - self.get_angle_y()
         return complangle
+
     def get_angle_y_true(self):
         dy = self.b.y - self.a.y
         dz = self.b.z - self.a.z
@@ -134,7 +135,6 @@ class line():
 
         #horizontal is not 0 degrees but pi (line from positive y to negative)
         angle -= math.pi
-        print(angle/math.pi)
         return angle
 
 #NON-REDUCED (and also used for reduced, that's why with coordinates as arguments)
