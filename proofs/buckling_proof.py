@@ -1,13 +1,13 @@
 #buckling proof
 from proofs import local_buckling
 from proofs import column_buckling
-from proofs import plate_global
 from proofs import shear_lag
 from proofs import resistance_to_shear
 from proofs import global_buckling
-from proofs import verification
 from proofs import interaction
 import defaults
+import data
+from proofs import stress_cal
 
 
 def buckling_proof(cs):
@@ -28,12 +28,12 @@ def buckling_proof(cs):
                 V_Ed_plate = stress_cal.get_tau_int_flange(cs, side, data.input_data.get("Q_Ed"),\
                 data.input_data.get("T_Ed"))
                 eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
-                interaction.interaction_flange()
+                interaction.interaction_flange(cs, plate_glob, eta_3)
             if side == 2 or side == 4:
                 V_Ed_plate = stress_cal.get_tau_int_web(cs, side, data.input_data.get("Q_Ed"),\
                 data.input_data.get("T_Ed"))
                 eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
-                interaction.interaction_web()
+                interaction.interaction_web(cs, plate_glob, eta_3)
 
             #7.1 Interaction between shear forces, bending moment and axial force
         return cs

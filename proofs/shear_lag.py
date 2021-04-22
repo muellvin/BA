@@ -1,5 +1,6 @@
 import math
 import data
+import defaults
 
 
 #EC 1993 1-5 3.3 shear lag at ULS
@@ -47,6 +48,8 @@ def reduction_shear_lag(cs, flange):
     kappa = alpha_0 * b_0 / data.input_data.get("L_e")
 
     beta = beta_from_kappa(kappa)
+    print("Beta")
+    print(beta)
 
     if defaults.do_shear_lag_plastically == True:
         #follow EC 3.3; plastically
@@ -78,21 +81,25 @@ def beta_from_kappa(kappa):
     #beta_0: end support
     #beta_1: sagging bending
     #beta_2: hogging bending (and also cantilever at support and at the end)
+    beta = 0
     if kappa <= 0.02:
         beta = 1.0
     elif 0.02 < kappa <= 0.7:
         if data.input_data.get("bending type") == "sagging bending":
-            beta = beta_1 = 1 / (1 + 6.4 * kappa**2)
+            beta_1 = 1 / (1 + 6.4 * kappa**2)
+            beta = beta_1
         elif data.input_data.get("bending type") == "hogging bending":
-            beta = beta_2 = 1 / (1 + 6.0 * (kappa - 1 / (2500 * kappa) + 1.6 * kappa**2)
+            beta = beta_2 = 1 / (1 + 6.0 * (kappa - 1 / (2500 * kappa) + 1.6 * kappa**2))
         else:
             print("bending type is not defined")
-            pass
     elif 0.7 < kappa:
         if data.input_data.get("bending type") == "sagging bending":
             beta = beta_1 = 1 / (5.9 * kappa)
         elif data.input_data.get("bending type") == "hogging bending":
             beta = beta_2 = 1 / (8.6 * kappa)
+        else:
+            print("bending type is not defined")
+
     if data.input_data.get("cs position") == "end support":
         beta = beta_0 = (0.55 + 0.025 / kappa) * beta_1
         if beta_0 >= beta_1:

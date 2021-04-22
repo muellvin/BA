@@ -52,7 +52,7 @@ eta = 1.0
 
 #convergence limit for when width reduction due to shear lag is calculated plastically
 convergence_limit_shear_lag = 0.05
-do_shear_lag_plastically = True
+do_shear_lag_plastically = False
 do_global_plate_buckling = True
 do_column_plate_buckling = True
 
