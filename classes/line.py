@@ -32,11 +32,11 @@ class line():
 
     def __str__(self):
         if self.code.pl_type == 0:
-            line1 = "   trapezoid plate on cs side " + str(self.code.pl_position) + " with the number " + str(self.code.tpl_number) +"\n"
+            line1 = "   trapezoid plate on side " + str(self.code.pl_position) + "   with the number " + str(self.code.tpl_number) +"\n"
         elif self.code.pl_type == 1:
-            line1 = "   stiffener plate on cs side " + str(self.code.pl_position) + " of stiffener nr " + str(self.code.st_number) + " on stiffener plate position " + str(self.code.st_pl_position) + "\n"
-        line2 = "       from point a=" + str(self.a) + " to b=" + str(self.b) + " with t=" + str(self.t) + "\n"
-        line3 = "       with sigma_a_red=" + str(int(self.sigma_a_red)) + " and sigma_b_red=" + str(int(self.sigma_b_red)) + "\n"
+            line1 = "   stiffener plate on side " + str(self.code.pl_position) + "   of stiffener nr " + str(self.code.st_number) + "    on stiffener plate position " + str(self.code.st_pl_position) + "\n"
+        line2 = "           a=" + str(self.a) + "    p1=" + str(self.p1) + "    p2=" + str(self.p2) + "    b=" + str(self.b) + "t=" + str(self.t) + "\n"
+        line3 = "           sigma_a_red=" + str(int(100*self.sigma_a_red)/100) + "   sigma_b_red=" + str(int(100*self.sigma_b_red)/100) + "\n"
 
         string = line1 + line2 + line3
         return string
@@ -111,7 +111,31 @@ class line():
     def get_angle_z(self):
         complangle = math.pi/2 - self.get_angle_y()
         return complangle
+    def get_angle_y_true(self):
+        dy = self.b.y - self.a.y
+        dz = self.b.z - self.a.z
 
+        if dy > 0 and dz == 0:
+            angle = 0
+        if dy > 0 and dz > 0:
+            angle = math.atan(dz/dy)
+        if dy == 0 and dz > 0:
+            angle = math.pi / 2
+        if dy < 0 and dz > 0:
+            angle = math.atan(dz/dy)
+        if dy < 0 and dz == 0:
+            angle = math.pi
+        if dy < 0 and dz < 0:
+            angle = math.pi + math.atan(dz / dy)
+        if dy == 0 and dz < 0:
+            angle = 3/2*math.pi
+        if dy > 0 and dz < 0:
+            angle = 2*math.pi + math.atan(dz / dy)
+
+        #horizontal is not 0 degrees but pi (line from positive y to negative)
+        angle -= math.pi
+        print(angle/math.pi)
+        return angle
 
 #NON-REDUCED (and also used for reduced, that's why with coordinates as arguments)
     def cal_center_y(self, ay, az, by, bz, t):
