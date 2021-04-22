@@ -67,13 +67,20 @@ def reduction_global_buckling(cs, side):
     print("all_tension: ", all_tension)
     print("rho_c = " + str(rho_c))
 
+    plate_a = cs.get_plate_a(side)
+    plate_b = cs.get_plate_b(side)
     for line in cs.lines:
         if line.code.pl_position == side:
             line.chi_c = chi_c
             line.sigma_cr_c = sigma_cr_c
             line.rho_p = rho_p
             line.sigma_cr_p = sigma_cr_p
-            line.rho_c = rho_c
+            line.rho_c_a = rho_c
+            line.rho_c_b = rho_c
+            if line == plate_a:
+                line.rho_c_a = 1
+            if line == plate_b:
+                line.rho_c_b = 1
 
 
     return cs

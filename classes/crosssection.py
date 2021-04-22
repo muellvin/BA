@@ -21,6 +21,37 @@ class crosssection():
     def addline(self, line):
         self.lines.append(line)
 
+    def get_stiffened_plate(side):
+        plate_glob = crosssection.crosssection(0,0,0)
+        for line in self.lines:
+            if line.code.pl_position == side:
+                plate_glob.addline(line)
+        return plate_glob
+
+    def get_plate_a(side):
+        #returns the plate in the corner a
+        plate_a = None
+        min_tpl = 10000
+
+        for line in self.lines:
+            if line.code.pl_type == 0 and line.code.pl_position == side:
+                if line.code.tpl_number <= min_tpl:
+                    min_tpl = line.code.tpl_number
+                    plate_a = line
+        return plate_a
+
+    def get_plate_b(side):
+        #return the plate in the corner b
+        plate_b = None
+        max_tpl = 0
+
+        for line in self.lines:
+            if line.code.pl_type == 0 and line.code.pl_position == side:
+                if line.code.tpl_number >= max_tpl:
+                    max_tpl = line.code.tpl_number
+                    plate_b = line
+        return plate_b
+
     def get_line(self, pl_position = None, pl_type = None, tpl_number = None, st_number = None, st_pl_position = None):
         found = False
         for line in self.lines:
@@ -142,6 +173,24 @@ class crosssection():
             m_rd_el_eff = (self.get_i_y_red() / max_z_dis) * (data.constants.get("f_y")/data.constants.get("gamma_M1"))
             return m_rd_el_eff
 
+    def get_m_f_rd_eff(self):
+        top_flange = self.get_stiffened_plate(side = 1)
+        top_flange_area = top_flange.get_area_red()
+        bottom_flange = self.get_stiffened_plate(side = 3)
+        bottom_flange_area = bottom_flange.get_area_red()
+        if bottom_flange_area < top_flange_area:
+            m_f_rd_eff = bottom_flange_area * self.h * data.constants.get("f_y") / data.constants.get("gamma_M1")
+        else:
+            m_f_rd_eff = bottom_flange_area * self.h * data.constants.get("f_y") / data.constants.get("gamma_M1")
+
+    def get_m_rd_pl_eff(self):
+        "This is only a place holder and should still be implemented, is however quite difficult"
+        "The implementation will happen later"
+        #returns the value required in EC 1-5, section 7.1 interaction
+        #attention: this value is very specific for this section
+
+        #calculate effective areas of top and bottom flange
+        return 1.15 * self.get_m_rd_el_eff()
 
     def get_azero(self):
         azero = 0
