@@ -15,8 +15,8 @@ class line():
         self.p2 = p2 if p2 is not None else point.point(a.y + 1/2*(b.y - a.y), a.z + 1/2*(b.z-a.z))
         self.t = float(t)
         self.beta = 1
-        self.roh_c_a = 1
-        self.roh_c_b = 1
+        self.rho_c_a = 1
+        self.rho_c_b = 1
         #normal stress with tension being negative at point a and point b for the effective crosssection
         self.sigma_a_red = 0
         self.sigma_b_red = 0
@@ -35,7 +35,7 @@ class line():
             line1 = "   trapezoid plate on cs side " + str(self.code.pl_position) + " with the number " + str(self.code.tpl_number) +"\n"
         elif self.code.pl_type == 1:
             line1 = "   stiffener plate on cs side " + str(self.code.pl_position) + " of stiffener nr " + str(self.code.st_number) + " on stiffener plate position " + str(self.code.st_pl_position) + "\n"
-        line2 = "       from point a=" + str(self.a) + " to b=" + str(self.b) + "\n"
+        line2 = "       from point a=" + str(self.a) + " to b=" + str(self.b) + " with t=" + str(self.t) + "\n"
         line3 = "       with sigma_a_red=" + str(int(self.sigma_a_red)) + " and sigma_b_red=" + str(int(self.sigma_b_red)) + "\n"
 
         string = line1 + line2 + line3

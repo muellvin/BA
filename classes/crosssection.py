@@ -21,14 +21,14 @@ class crosssection():
     def addline(self, line):
         self.lines.append(line)
 
-    def get_stiffened_plate(side):
-        plate_glob = crosssection.crosssection(0,0,0)
+    def get_stiffened_plate(self, side):
+        plate_glob = crosssection(0,0,0)
         for line in self.lines:
             if line.code.pl_position == side:
                 plate_glob.addline(line)
         return plate_glob
 
-    def get_plate_a(side):
+    def get_plate_a(self, side):
         #returns the plate in the corner a
         plate_a = None
         min_tpl = 10000
@@ -40,7 +40,7 @@ class crosssection():
                     plate_a = line
         return plate_a
 
-    def get_plate_b(side):
+    def get_plate_b(self, side):
         #return the plate in the corner b
         plate_b = None
         max_tpl = 0
@@ -182,6 +182,8 @@ class crosssection():
             m_f_rd_eff = bottom_flange_area * self.h * data.constants.get("f_y") / data.constants.get("gamma_M1")
         else:
             m_f_rd_eff = bottom_flange_area * self.h * data.constants.get("f_y") / data.constants.get("gamma_M1")
+
+        return m_f_rd_eff
 
     def get_m_rd_pl_eff(self):
         "This is only a place holder and should still be implemented, is however quite difficult"
