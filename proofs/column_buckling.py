@@ -169,12 +169,6 @@ def column_buckling(plate_glob, side):
                 b_c = 0
                 all_tension = True
 
-            #EC 1993 1-5 4.5.3 (3)
-            A_sl = stiffener_i.get_area_tot() + plate_before_A + plate_after_A + plate_between_A_tot
-            A_sl_eff = stiffener_i.get_area_red() + plate_before_A + plate_after_A + plate_between_A_red
-            I_sl = stiffener_i.get_i_along_tot(plate_between) + plate_before_I + plate_after_I + plate_between_I_tot
-            sigma_cr_sl = (math.pi**2 * data.constants.get("E") * I_sl) / (A_sl * defaults.plate_length**2)
-
 
             tpl_st_center = point.point(tpl_st_lines_set.get(i).get_center_y_tot(), tpl_st_lines_set.get(i).get_center_z_tot())
 
