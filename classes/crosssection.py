@@ -79,28 +79,28 @@ class crosssection():
 
 
     def get_angle(self, side):
-        line = self.get_line(pl_position = side)
-        return line.get_angle_y()
+        plate = self.get_line(pl_position = side)
+        return plate.get_angle_y()
 
     #This function returns the coordinates of the position where the stiffener should be placed
     def get_coordinates(self, location, side):
-        line = self.get_line(pl_position = side)
+        plate = self.get_line(pl_position = side, pl_type = 0)
         #bottom or top plate
-        if line.a.z == line.b.z:
-            if line.a.y > 0:
-                y = location * line.a.y
-                z = line.a.z
+        if plate.a.z == plate.b.z:
+            if plate.a.y > 0:
+                y = location * plate.a.y
+                z = plate.a.z
             else:
-                y = location * line.b.y
-                z = line.a.z
+                y = location * plate.b.y
+                z = plate.a.z
         #side plates
         else:
-            if line.a.z > line.b.z:
-                y = line.a.y + location * (line.b.y-line.a.y)
-                z = line.a.z + location * (line.b.z-line.a.z)
+            if plate.a.z > plate.b.z:
+                y = plate.a.y + location * (plate.b.y-plate.a.y)
+                z = plate.a.z + location * (plate.b.z-plate.a.z)
             else:
-                y = line.b.y + location * (line.a.y-line.b.y)
-                z = line.b.z + location * (line.a.z-line.b.z)
+                y = plate.b.y + location * (plate.a.y-plate.b.y)
+                z = plate.b.z + location * (plate.a.z-plate.b.z)
         return y,z
 
 

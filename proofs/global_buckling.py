@@ -27,13 +27,13 @@ def reduction_global_buckling(cs, side):
     plate_glob = crosssection.crosssection(0,0,0)
     line_min = cs.get_line(pl_position = side, pl_type = 0)
     line_max = line_min
-    for line in cs.lines:
-        if line.code.pl_position == side:
-            plate_glob.addline(line)
-            if line.code.tpl_number != 0 and line.code.tpl_number < line_min.code.tpl_number:
-                line_min = line
-            if line.code.tpl_number != 0 and line.code.tpl_number > line_max.code.tpl_number:
-                line_max = line
+    for plate in cs.lines:
+        if plate.code.pl_position == side:
+            plate_glob.addline(plate)
+            if plate.code.tpl_number != 0 and plate.code.tpl_number < line_min.code.tpl_number:
+                line_min = plate
+            if plate.code.tpl_number != 0 and plate.code.tpl_number > line_max.code.tpl_number:
+                line_max = plate
 
     chi_c = 1
     rho_p = 1
@@ -69,18 +69,18 @@ def reduction_global_buckling(cs, side):
 
     plate_a = cs.get_plate_a(side)
     plate_b = cs.get_plate_b(side)
-    for line in cs.lines:
-        if line.code.pl_position == side:
-            line.chi_c = chi_c
-            line.sigma_cr_c = sigma_cr_c
-            line.rho_p = rho_p
-            line.sigma_cr_p = sigma_cr_p
-            line.rho_c_a = rho_c
-            line.rho_c_b = rho_c
-            if line == plate_a:
-                line.rho_c_a = 1
-            if line == plate_b:
-                line.rho_c_b = 1
+    for plate in cs.lines:
+        if plate.code.pl_position == side:
+            plate.chi_c = chi_c
+            plate.sigma_cr_c = sigma_cr_c
+            plate.rho_p = rho_p
+            plate.sigma_cr_p = sigma_cr_p
+            plate.rho_c_a = rho_c
+            plate.rho_c_b = rho_c
+            if plate == plate_a:
+                plate.rho_c_a = 1
+            if plate == plate_b:
+                plate.rho_c_b = 1
 
 
     return cs
