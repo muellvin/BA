@@ -25,12 +25,12 @@ def buckling_proof(cs):
             plate_glob = cs.get_stiffened_plate(side)
             #interaction
             if side == 1 or side == 3:
-                V_Ed_plate = stress_cal.get_tau_int_flange(cs, side, data.input_data.get("Q_Ed"),\
+                V_Ed_plate = stress_cal.get_tau_int_flange(cs, side, data.input_data.get("V_Ed"),\
                 data.input_data.get("T_Ed"))
                 eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
                 interaction.interaction_flange(cs, plate_glob, eta_3)
             if side == 2 or side == 4:
-                V_Ed_plate = stress_cal.get_tau_int_web(cs, side, data.input_data.get("Q_Ed"),\
+                V_Ed_plate = stress_cal.get_tau_int_web(cs, side, data.input_data.get("V_Ed"),\
                 data.input_data.get("T_Ed"))
                 eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
                 interaction.interaction_web(cs, plate_glob, eta_3)

@@ -2,7 +2,7 @@ import defaults
 import math
 import data
 from proofs import stress_cal
-import ebplate
+from ebplate import ebplate
 import copy
 from classes import crosssection as cs
 

@@ -156,9 +156,7 @@ def set_forces():
     print("\nDo you want to use default vaules? y/n :",end='')
     string = str(input())
     if string == "y":
-        data.input_data.update({"M_Ed": defaults.cs_M_Ed})
-        data.input_data.update({"V_Ed": defaults.cs_V_Ed})
-        data.input_data.update({"T_Ed": defaults.cs_T_Ed})
+        defaults.set_forces_defaults()
     else:
         print('Value of M_Ed? [kNm]')
         M_Ed= 10**6 * float(input())
