@@ -17,6 +17,7 @@ import data
 import defaults
 
 defaults.set_cs_defaults()
+defaults.set_forces_defaults()
 
 
 cs = initial_cs.create_initial_cs(data.input_data.get("b_sup"), data.input_data.get("b_inf"), data.input_data.get("h"), 20, 20, 20)

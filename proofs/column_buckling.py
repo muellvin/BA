@@ -152,7 +152,7 @@ def column_buckling(plate_glob, side):
             #stress ratio across the whole cross-section of the column
             stress_ratio = min(sigma_border_before, sigma_border_after) / max(sigma_border_before, sigma_border_after)
 
-            column_as_cs = stiffener_i
+            column_as_cs = copy.deepcopy(stiffener_i)
             column_as_cs.addline(plate_before_eff)
             column_as_cs.addline(plate_after_eff)
             column_as_cs.addline(plate_between)
@@ -285,7 +285,7 @@ def dis_plate_point(plate, point):
     #dot product
     dis = point_vector_y * norm_vector_y + point_vector_z * norm_vector_z
 
-    return dis
+    return abs(dis)
 
 
 

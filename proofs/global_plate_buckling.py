@@ -1,7 +1,7 @@
 import math
 import defaults
 from proofs import stress_cal as stc
-import ebplate
+from ebplate import ebplate
 from classes import line as ln
 from classes import crosssection as cs
 from classes import point as pt

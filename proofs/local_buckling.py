@@ -27,6 +27,7 @@ def local_buckling(cs):
 def cal_sigma_psi_red(cs):
     M_Ed = data.input_data.get("M_Ed")
     for line in cs.lines:
+        print(line)
         line.sigma_a_red = stress_cal.get_sigma_a_red(cs, line, M_Ed)
         line.sigma_b_red = stress_cal.get_sigma_b_red(cs, line, M_Ed)
         #set the stress ratio = sigma min / sigma max

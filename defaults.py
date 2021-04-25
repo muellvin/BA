@@ -26,16 +26,26 @@ def set_cs_defaults():
     data.input_data.update({"bending type": cs_bending_type})
     data.input_data.update({"cs position": cs_cs_position})
 
+
+"""default crosssectional forces"""
+cs_M_Ed = 10000000
+cs_V_Ed = 0
+cs_T_Ed = 0
+def set_forces_defaults():
+    data.input_data.update({"M_Ed": cs_M_Ed})
+    data.input_data.update({"V_Ed": cs_V_Ed})
+    data.input_data.update({"T_Ed": cs_T_Ed})
+
+
+
 """default stiffener"""
 st_b_sup = 300
 st_b_inf = 200
 st_h = 200
 st_t = 5
 
-"""default crosssectional forces"""
-cs_M_Ed = 10000000
-cs_V_Ed = 0
-cs_T_Ed = 0
+
+
 
 
 
