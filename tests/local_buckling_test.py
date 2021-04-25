@@ -14,25 +14,14 @@ from classes import proposed_stiffener
 from classes import crosssection
 import deck
 import data
+import defaults
 
-b_sup = 3000
-b_inf = 2000
-h = 1501
-M_Ed = -1000000000
-data.input_data["M_Ed"] = M_Ed
-data.input_data["h"] = h
-data.input_data["b_inf"] = b_inf
-data.input_data["b_sup"] = b_sup
-data.input_data["a"] = 10000
-data.input_data["L_e"] = 8000
-
-print(data.input_data)
-print(data.constants)
+defaults.set_cs_defaults()
 
 
-cs = initial_cs.create_initial_cs(b_sup, b_inf, h, 20, 20, 20)
+cs = initial_cs.create_initial_cs(data.input_data.get("b_sup"), data.input_data.get("b_inf"), data.input_data.get("h"), 20, 20, 20)
 geometry_output.print_cs_red(cs)
-deck_stiffeners = deck.deck(b_sup)
+deck_stiffeners = deck.deck(data.input_data.get("b_sup"))
 cs = stiffener.merge(cs, deck_stiffeners)
 geometry_output.print_cs_red(cs)
 

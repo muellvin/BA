@@ -1,10 +1,41 @@
 import math
+import data
 
-"""input defaults"""
-#cs_b_sup = 4000
-#cs_b_inf = 2000
-#cs_h = 1500
 
+"""default cs"""
+cs_b_sup = 4000
+cs_t_deck = 20
+cs_b_inf = 3000
+cs_t_bottom = 20
+cs_h = 1500
+cs_t_side = 20
+cs_a = 10000
+cs_L_e = 15000
+cs_bending_type = "sagging bending"
+cs_cs_position = "neither"
+
+def set_cs_defaults():
+    data.input_data.update({"b_sup": cs_b_sup})
+    data.input_data.update({"t_deck": cs_t_deck})
+    data.input_data.update({"b_inf": cs_b_inf})
+    data.input_data.update({"t_bottom": cs_t_bottom})
+    data.input_data.update({"h": cs_h})
+    data.input_data.update({"t_side": cs_t_side})
+    data.input_data.update({"a": cs_a})
+    data.input_data.update({"L_e": cs_L_e})
+    data.input_data.update({"bending type": cs_bending_type})
+    data.input_data.update({"cs position": cs_cs_position})
+
+"""default stiffener"""
+st_b_sup = 300
+st_b_inf = 200
+st_h = 200
+st_t = 5
+
+"""default crosssectional forces"""
+cs_M_Ed = 10000000
+cs_V_Ed = 0
+cs_T_Ed = 0
 
 
 
@@ -60,3 +91,23 @@ do_column_plate_buckling = True
 """cs_analysis_tool"""
 do_print = True
 do_print_to_txt = False
+
+def cs_defaults_tostring():
+    line1 = "defaults for crosssection geometry: \n"
+    line2 = "b_sup ="+str(cs_b_sup)+"\n"
+    line3 = "b_inf ="+str(cs_b_inf)+"\n"
+    line4 = "h ="+str(cs_h)+"\n"
+    string = line1 + line2 + line3 + line4
+    return string
+def check_geometry_defaults_tostring():
+    line1 = "geometry check defaults: tbd \n"
+    return line1
+def stiffener_defaults_tostring():
+    line1 = "defaults for stiffener geometry: tbd \n"
+    return line1
+def buckling_defaults_tostring():
+    line1 = "defaults for buckling proofs: tbd \n"
+    return line1
+def cs_analysis_tool_defaults_tostring():
+    line1 = "defaults for the cross-section analysis tool: \n"
+    line2 = "print text = "+str(do_print)+" to txt "+str(do_print_to_txt)+"\n"

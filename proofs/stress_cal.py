@@ -5,28 +5,28 @@ def get_sigma_a(cs, line, m_y):
     i_y = cs.get_i_y_tot()
     z_center = cs.get_center_z_tot()
     z = line.a.z
-    sigma_a = - m_y * (z-z_center) / i_y
+    sigma_a = (-1)* m_y * (z-z_center) / i_y
     return sigma_a
 
 def get_sigma_b(cs, line, m_y):
     i_y = cs.get_i_y_tot()
     z_center = cs.get_center_z_tot()
     z = line.b.z
-    sigma_b = -m_y * (z-z_center) / i_y
+    sigma_b = (-1)*m_y * (z-z_center) / i_y
     return sigma_b
 
 def get_sigma_a_red(cs, line, m_y):
     i_y = cs.get_i_y_red()
     z_center = cs.get_center_z_red()
     z = line.a.z
-    sigma_a_red = -m_y * (z-z_center) / i_y
+    sigma_a_red = (-1)*m_y * (z-z_center) / i_y
     return sigma_a_red
 
 def get_sigma_b_red(cs, line, m_y):
     i_y = cs.get_i_y_red()
     z_center = cs.get_center_z_red()
     z = line.b.z
-    sigma_b_red = -m_y * (z-z_center) / i_y
+    sigma_b_red = (-1)*m_y * (z-z_center) / i_y
     return sigma_b_red
 
 
@@ -37,7 +37,7 @@ def get_sigma_sup(cs, line, m_y):
         z_sup = line.a.z
     else:
         z_sup = line.b.z
-    sigma_sup = -m_y * (z_sup-z_center) / i_y
+    sigma_sup = (-1)*m_y * (z_sup-z_center) / i_y
     return sigma_sup
 
 def get_sigma_inf(cs, line, m_y):
@@ -47,7 +47,7 @@ def get_sigma_inf(cs, line, m_y):
         z_inf = line.a.z
     else:
         z_inf = line.b.z
-    sigma_inf = -m_y / i_y * (z_inf-z_center)
+    sigma_inf = (-1)*m_y / i_y * (z_inf-z_center)
     return sigma_inf
 
 def get_sigma_sup_red(cs, line, m_y):
@@ -57,7 +57,7 @@ def get_sigma_sup_red(cs, line, m_y):
         z_sup = line.p1.z
     else:
         z_sup = line.p2.z
-    sigma_sup_red = -m_y / i_y * (z_sup-z_center)
+    sigma_sup_red = (-1)*m_y / i_y * (z_sup-z_center)
     return sigma_sup_red
 
 def get_sigma_inf_red(cs, line, m_y):
@@ -67,7 +67,7 @@ def get_sigma_inf_red(cs, line, m_y):
         z_inf = line.p1.z
     else:
         z_inf = line.p2.z
-    sigma_inf_red = -m_y / i_y * (z_inf-z_center)
+    sigma_inf_red = (-1)*m_y / i_y * (z_inf-z_center)
     return sigma_inf_red
 
 #returns the absolute value of the resulting shear force in a plate of the crosssection
@@ -84,7 +84,7 @@ def get_tau_int_qy(cs, side, v_ed):
         if side == 2:
             tau_int = v_ed / (2* math.cos(math.atan(sideplate_slope)))
         if side == 4:
-            tau_int = - v_ed / (2* math.cos(math.atan(sideplate_slope)))
+            tau_int = (-1)*v_ed / (2* math.cos(math.atan(sideplate_slope)))
     return tau_int
 
 #shear stresses positive in counterclokwise direction
