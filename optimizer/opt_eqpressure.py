@@ -5,32 +5,45 @@ from classes import proposed_stiffener
 
 
 #an optimizer that puts the stiffeners in place, such that the single plates inbetween each have the same total pressure
-def opt_eqpressure(cs):
+def opt_eqpressure(cs_fresh):
     t_values = [5, 10, 20]
     n_st_side_max = 8
     n_st_bottom_max = 10
 
-    for t_side in t_values:
-        set_t_side(cs,t_side)
+    if data.input_data.get("M_Ed") > 1:
+        tension_bottom = True
+    else:
+        tension_bottom = False
 
+    for t_side in t_values:
         for t_bottom in t_values:
-            set_t_bottom(cs, t_bottom)
 
             stop_side = False
+            stop_bottom = False
 
             n_st_side = 0
             while n_st_side <= n_st_side_max and stop_side == False:
-                set_stiffeners_side(cs, n_st_side)
 
-                n_st_bottom = 0
-                while n_st_bottom <= n_st_bottom_max and stop_bottom == False:
-
-                    set_stiffeners_bottom(cs, n_st_bottom)
+                if tension_bottom == True:
+                    cs = set_t_side(copy.deepcopy(cs_fresh), t_side)
+                    cs = set_t_bottom(cs, t_bottom)
+                    cs = set_stiffeners_side(cs, n_st_side)
                     cs = buckling_proof.buckling_proof(cs)
-
-                    if passed == True:
+                    if cs.interaction <= 1:
                         cs_collector.into_collector(cs)
-                        stop = True
+                        stop_side = stop_bottom = True
+                else:
+                    n_st_bottom = 0
+                    while n_st_bottom <= n_st_bottom_max and stop_bottom == False:
+                        cs = set_t_side(copy.deepcopy(cs_fresh), t_side)
+                        cs = set_t_bottom(cs, t_bottom)
+                        cs = set_stiffeners_side(cs, n_st_side)
+                        cs = set_stiffeners_bottom(cs, n_st_bottom)
+
+                        cs = buckling_proof.buckling_proof(cs)
+                        if cs.interaction <= 1:
+                            cs_collector.into_collector(cs)
+                            stop_side = stop_bottom = True
     return cs
 
 def set_t_side(cs, t_side):
@@ -56,4 +69,19 @@ def set_stiffeners_bottom(cs, amount):
         return cs
     else:
         cs_b_inf = data.input_data.get("b_inf")
-        b_st_sup = data.input_data.get("b_inf")/(2*amount + 1)
+        st_b_sup = data.input_data.get("b_inf")/(2*amount + 1)
+
+        locations = []
+        #where are the centers of the stiffeners
+        #the location is the number of st_b_sup away from y = 0
+        #1 st gives 0
+        #2 st give -1, 1
+        #3 st give -2, 0, 2 ...
+        i = -amount + 1
+        while i <= amount:
+            locations.append(i)
+            i += 2
+
+        #change it to the convention of create_stiffener_global
+        for location in locations:
+            location = location * b_st_sup / cs_b_inf
