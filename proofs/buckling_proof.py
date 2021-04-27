@@ -20,6 +20,7 @@ def buckling_proof(cs):
         cs = global_buckling.global_buckling(cs)
         #4.6 verification
         m_rd_eff = cs.get_m_rd_el_eff()
+        cs.eta_1 = abs(data.input_data.get("M_Ed")/m_rd_eff)
         for side in range(1,5,1):
             #5. resistance to shear
             plate_glob = cs.get_stiffened_plate(side)

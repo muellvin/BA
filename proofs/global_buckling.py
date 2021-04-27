@@ -14,6 +14,7 @@ from proofs import global_plate_buckling as plate_global
 import random
 import data
 import defaults
+from output import geometry_output as go
 
 def global_buckling(cs):
     cs = reduction_global_buckling(cs, 2)
@@ -34,7 +35,6 @@ def reduction_global_buckling(cs, side):
                 line_min = plate
             if plate.code.tpl_number != 0 and plate.code.tpl_number > line_max.code.tpl_number:
                 line_max = plate
-
     chi_c = 1
     rho_p = 1
     sigma_cr_c = 1
