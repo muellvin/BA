@@ -31,7 +31,7 @@ def interaction_flange(total_cs, flange_plate, eta_3):
     #prove shear resistance for each subpanel
     for plate in flange_plate.lines:
         if plate.code.tpl_number != 0:
-            v_ed_panel = stress_cal.get_tau_int_subpanel(total_cs, plate, data.input_data.get("Q_Ed"),\
+            v_ed_panel = stress_cal.get_tau_int_subpanel(total_cs, plate, data.input_data.get("V_Ed"),\
             data.input_data.get("T_Ed"))
             panel_cs = crosssection.crosssection(0,0,0)
             panel_cs.addline(plate)
@@ -39,7 +39,7 @@ def interaction_flange(total_cs, flange_plate, eta_3):
             if eta_3_panel < 1:
                 print("pass subpanel")
             elif eta_3_panel > 1:
-                print("fail subpanel")
+                utilisation = 10
             else:
                 assert True, "This is not possible"
-    return
+    return utilisation
