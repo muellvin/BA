@@ -9,7 +9,7 @@ class cs_collection():
         self.last_cs = last_cs if last_cs is not None else initial_cs
         self.best_cs = best_cs if best_cs is not None else initial_cs
 
-    def in_from_optimizer(self, new_cs):
+    def into_collector(self, new_cs):
         pass
 
     def compare(self, new_cs):
