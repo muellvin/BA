@@ -6,11 +6,12 @@ import copy
 #crosssection calculation
 class crosssection():
 #a crosssection is defined as a list of lines
-    def __init__(self, b_sup, b_inf, h):
+    def __init__(self, b_sup, b_inf, h, eta_1 = -2):
         self.lines = []
         self.b_sup = b_sup
         self.b_inf = b_inf
         self.h = h
+        self.eta_1 = eta_1
 
     def __str__(self):
         string = "\n cross-section with b_sup=" + str(self.b_sup) + ", b_inf=" + str(self.b_inf) + ", h=" + str(self.h) + "\n"
