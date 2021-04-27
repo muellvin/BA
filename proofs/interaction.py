@@ -26,7 +26,7 @@ def interaction_flange(total_cs, flange_plate, eta_3):
         #what is a resonable return value, -1?
         utilisation = -1
     else:
-        eta_1 = data.input_data.get("M_Ed") / toal_cs.get_m_rd_el_eff()
+        eta_1 = abs(data.input_data.get("M_Ed") / total_cs.get_m_rd_el_eff())
         utilisation = eta_1 + (2*eta_3-1)**2
     #prove shear resistance for each subpanel
     for plate in flange_plate.lines:
