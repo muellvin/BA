@@ -7,7 +7,7 @@ Commentaire   #
 #PLATE 
    Width           400.0 cm 
    Height          158.11388300841898 cm 
-   Thickness         1.0 cm 
+   Thickness         0.5 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
    Boundary Conditions 
@@ -23,10 +23,10 @@ Commentaire   #
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
   Imposed values : No 
-   Longitudinal Stress Top Left                532.5133682244287 MPa 
-   Longitudinal Stress Bottom Left             -214.76251207600112 MPa 
-   Longitudinal Stress Top Right               532.5133682244287 MPa 
-   Longitudinal Stress Bottom Right            -214.76251207600112 MPa 
+   Longitudinal Stress Top Left                0.000 MPa 
+   Longitudinal Stress Bottom Left             0.000 MPa 
+   Longitudinal Stress Top Right               0.000 MPa 
+   Longitudinal Stress Bottom Right            0.000 MPa 
  Transverse stresses : User's data No 
  Analytical Transverse stresses 
   Imposed values : No 
@@ -44,7 +44,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 0.000 MPa 
+   Shear stress                                 68.57142857142857 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000

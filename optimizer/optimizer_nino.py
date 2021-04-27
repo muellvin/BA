@@ -14,6 +14,7 @@ from proofs import shear_lag
 from proofs import resistance_to_shear
 from proofs import global_buckling
 from proofs import interaction
+from proofs import buckling_proof
 import defaults
 import data
 from proofs import stress_cal
@@ -25,54 +26,52 @@ def optimize():
     b_inf = data.input_data["b_inf"]
     h = data.input_data["h"]
     t_deck = data.input_data["t_deck"]
-    t_range = [5,10]
-    I_range = [3*10**7, 6*10**7, 9*10**7]
+    t_range = [5]
+    I_range = [3*10**7, 6*10**7]
     base_css = []
+    "Use correct stiffener numbers!!!"
 
     deck_stiffeners = deck.deck(b_sup)
+    cs_collection = set()
+    num_top_stiffeners = len(deck_stiffeners)
+    m_ed = data.input_data.get("M_Ed")
+    sign = math.copysign(1, m_ed)
     for t_side in t_range:
         for t_bottom in t_range:
             initial_cs = ics.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
             base_cs = stiffener.merge(initial_cs, deck_stiffeners)
-            #find required number of stiffeners in bottom plate
-            #only with elastic shear lag for the moment
-            utilisation = prove_bottom_plate(base_cs)
-            print("Utilisation")
-            print(utilisation)
-            number_of_btm_stiffeners = 0
-            test_cs = copy.deepcopy(base_cs)
-            while utilisation > 1 or number_of_btm_stiffeners < 6:
-                number_of_btm_stiffeners += 1
-                while utilisation > 1 or I_index < len(I_range):
-                    prop = stiffeners_proposition.stiffeners_proposition()
-                    for i in range(number_of_btm_stiffeners):
-                        loc = 1 - 2/(number_of_btm_stiffeners+1)*i
-                        st = proposed_stiffener.proposed_stiffener(pl_position = 3, st_number = i, location = loc, i_along = I_range[i])
-                        prop.stiffeners.append(st)
-                    base_cs_copy = copy.deepcopy(base_cs)
-                    st_list = substantiate(x_sec, prop)
-                    test_cs = stiffener.merge(base_cs_copy, st_list)
-                    utilisation = prove_bottom_plate(test_cs)
-                    print("Utilisation")
-                    print(utilisation)
-            base_cs = test_cs
-            go.print_cs(base_cs)
-            #find optimal solution for stiffeners in side plates
-            #tbd
-
-def prove_bottom_plate(cs):
-    #3.2 shear lag elastically
-    #cs = shear_lag.shear_lag(cs)
-    #4.4 plate elements without longitudinal stiffeners
-    cs = local_buckling.local_buckling(cs)
-    #4.5 stiffened plate elements with longitudinal stiffeners
-    cs = global_buckling.global_buckling(cs)
-    #4.6 verification
-    m_rd_eff = cs.get_m_rd_el_eff()
-    plate_glob = cs.get_stiffened_plate(side = 3)
-    #interaction
-    V_Ed_plate = stress_cal.get_tau_int_flange(cs, 3, data.input_data.get("V_Ed"),\
-    data.input_data.get("T_Ed"))
-    eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
-    utilisation = interaction.interaction_flange(cs, plate_glob, eta_3)
-    return utilisation
+            for num_side_stiffeners in range(2):
+                for num_btm_stiffeners in range(4):
+                    for I_a in I_range:
+                        prop = stiffeners_proposition.stiffeners_proposition()
+                        for num in range(num_side_stiffeners):
+                            #create side stiffeners
+                            loc = 0
+                            if num_side_stiffeners == 1:
+                                if sign > 0:
+                                    loc = 5/6
+                                else:
+                                    loc = 1/6
+                            st_number_right = num_top_stiffeners + num + 1
+                            st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
+                            st_right = proposed_stiffener.proposed_stiffener(pl_position = 2, st_number = st_number_right, location = loc, i_along = I_a)
+                            st_left = proposed_stiffener.proposed_stiffener(pl_position = 4, st_number = st_number_left, location = loc, i_along = I_a)
+                            prop.stiffeners.append(st_right)
+                            prop.stiffeners.append(st_left)
+                            #create bottom siffeners
+                        for num in range(num_btm_stiffeners):
+                            loc = 1 - 2/(num_btm_stiffeners+1)*(num+1)
+                            st_number = num_top_stiffeners + num_side_stiffeners + num + 1
+                            st = proposed_stiffener.proposed_stiffener(pl_position = 3, st_number = st_number, location = loc, i_along = I_a)
+                            prop.stiffeners.append(st)
+                        base_cs_copy = copy.deepcopy(base_cs)
+                        st_list = substantiate.substantiate(base_cs_copy, prop)
+                        test_cs = stiffener.merge(base_cs_copy, st_list)
+                        end_cs = buckling_proof.buckling_proof(test_cs)
+                        proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
+                        if proven:
+                            cs_collection.add(end_cs)
+    print("# of passed CS")
+    print(len(cs_collection))
+    for cs in cs_collection:
+        go.print_cs(cs)

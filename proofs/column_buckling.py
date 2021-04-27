@@ -59,6 +59,10 @@ def column_buckling(plate_glob, side):
                 if plate.code.st_number == i+st_number_min:
                     stiffeners_list[i].lines.append(plate)
 
+        for i in range(len(stiffeners_list)):
+            print(i)
+            print(stiffeners_list[i])
+
         #sort the lists
         tpl_lines_list = sorted(tpl_lines_list, key = lambda plate: plate.code.tpl_number)
         stiffeners_list = sorted(stiffeners_list, key = lambda stiffener: stiffener.lines[0].code.st_number)
@@ -156,7 +160,7 @@ def column_buckling(plate_glob, side):
             column_as_cs.addline(plate_before_eff)
             column_as_cs.addline(plate_after_eff)
             column_as_cs.addline(plate_between)
-            geometry_output.print_cs_red(column_as_cs)
+            #geometry_output.print_cs_red(column_as_cs)
 
             #assure the column is under pressure (positive) somewhere
             all_tension = False
