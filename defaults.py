@@ -69,15 +69,15 @@ do_check_stiffeners_in_corners_bottom = False
 
 """stiffener (substantiate) defaults"""
 b_inf_minimal = 50
-b_inf_step = 20
+b_inf_step = 50
 b_inf_maximal = 500
 b_sup_minimal = 150
-b_sup_step = 20
+b_sup_step = 50
 b_sup_maximal = 500
 b_sup_minimal = 50
 h_minimal = 100
-h_step = 10
-h_maximal = 500
+h_step = 20
+h_maximal = 300
 t_range = [5,7,9,11,13,15,17,20]
 max_angle = math.pi/12*5 #75 grad
 
@@ -94,12 +94,13 @@ eta = 1.0
 #convergence limit for when width reduction due to shear lag is calculated plastically
 convergence_limit_shear_lag = 0.05
 do_shear_lag_plastically = False
+do_shear_lag = False
 do_global_plate_buckling = True
 do_column_plate_buckling = True
 
 
 """cs_analysis_tool"""
-do_print = True
+do_print = False
 do_print_to_txt = False
 
 def cs_defaults_tostring():

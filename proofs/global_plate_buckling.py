@@ -221,7 +221,15 @@ def global_plate_buckling(total_cs, plate_glob):
 
         #finding critical buckling load
         print(len(stiffeners_ebp))
-        phi_cr_p = ebplate.ebplate(b,h,t,sigma_a, sigma_b, stiffeners_ebp)
+        phi_cr_p = 0
+        if abs(sigma_a) > 0.1 and abs(sigma_b) > 0.1 and 3<=t:
+            phi_cr_p = ebplate.ebplate(b,h,t,sigma_a, sigma_b, stiffeners_ebp)
+        elif t<3:
+            print("plate too thin")
+            return 0, 1
+        else: 
+            print("stresses too low")
+            return 1, 10**9
         sigma_max = max(sigma_a, sigma_b)
         sigma_cr_p = sigma_max * phi_cr_p
         print("sigma_cr = " + str(sigma_cr_p))

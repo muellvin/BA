@@ -110,7 +110,14 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
             stiffeners_ebp.insert(i, (distance, h, b_sup, b_inf, t_stiff))
         tau = V_Ed_plate / (t*h_w)
         sigma_E = 190000*(t/h_w)**2
-        k_tau = ebplate.ebplate_shear(a, h_w, t, tau, stiffeners_ebp) * tau / sigma_E
+        if abs(tau) > 0.1 and 3 <= t:
+            k_tau = ebplate.ebplate_shear(a, h_w, t, tau, stiffeners_ebp) * tau / sigma_E
+        elif t<3:
+            print("plate too thin")
+            return 10**-2
+        else:
+            print("tau too small")
+            return 1
 
     #pre_evaluation
     proof_required = True

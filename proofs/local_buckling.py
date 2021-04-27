@@ -11,13 +11,13 @@ def local_buckling(cs):
     i = 1
     while change > defaults.convergence_limit_local_buckling:
         m_rd_el_eff_old = cs.get_m_rd_el_eff()
-        print("iteration: ", i)
+        #print("iteration: ", i)
         for line in cs.lines:
             cs = local_buckling_plate(cs, line)
         cs = cal_sigma_psi_red(cs)
         m_rd_el_eff_new = cs.get_m_rd_el_eff()
         change = abs(abs( m_rd_el_eff_new / m_rd_el_eff_old ) - 1)
-        print ("change: ", change)
+        #print ("change: ", change)
 
         i += 1
     return cs
@@ -27,7 +27,7 @@ def local_buckling(cs):
 def cal_sigma_psi_red(cs):
     M_Ed = data.input_data.get("M_Ed")
     for line in cs.lines:
-        print(line)
+        #print(line)
         line.sigma_a_red = stress_cal.get_sigma_a_red(cs, line, M_Ed)
         line.sigma_b_red = stress_cal.get_sigma_b_red(cs, line, M_Ed)
         #set the stress ratio = sigma min / sigma max
