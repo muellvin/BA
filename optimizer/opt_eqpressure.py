@@ -24,13 +24,22 @@ def opt_eqpressure(cs_fresh):
             stop_bottom = False
 
             n_st_side = 0
-            i_along_side
+            sigma_top_red = 0
+            sigma_bottom_red = 0
             #the optimizer loop does not loop i_along, as this should be set optimally by the set functions
             while n_st_side <= n_st_side_max and stop_side == False:
+                cs_temp = buckling_proof.buckling_proof(copy.deepcopy(cs))
+                sigma_top_red = cs_temp.get_line(pl_position = 2).sigma_a_red
+                sigma_bottom_red = cs_temp.get_line(pl_position = 2).sigma_b_red
+
                 if tension_bottom == True:
                     cs = set_t_side(copy.deepcopy(cs_fresh), t_side)
                     cs = set_t_bottom(cs, t_bottom)
-                    cs = set_stiffeners_side(cs, n_st_side)
+                    cs = set_stiffeners_side(cs, n_st_side, sigma_a_red, sigma_b_red)
+                    #stresses at the top and bottom corner
+                    sigma_top_red = get_sigma_top_red(cs)
+                    sigma_bottom_red = get_sigma_bottom_red(cs)
+
 
                     if cs.utilisation_web <= 1:
                         cs_collector.into_collector(cs)
@@ -70,12 +79,75 @@ def set_t_bottom(cs, t_bottom):
     return cs
 
 
-def set_stiffeners_side(cs, amount):
+def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
     if amount == 0:
         cs = buckling_proof.buckling_proof(cs)
         return cs
     else:
-        pass
+        #all tension?
+        if sigma_top_red < 0 and sigma_bottom_red < 0:
+            return cs
+        #where is the higher pressure
+        if sigma_top_red > sigma_bottom_red:
+            higher_top = True
+            sigma_max = sigma_top_red
+        else:
+            higher_top = False
+            sigma_max = sigma_bottom_red
+        #the max stress and if all pressure than also the small one
+        if sigma_top_red > 0 and sigma_bottom_red > 0:
+            if higher_top == True:
+                sigma_min = sigma_bottom_red
+            else:
+                sigma_min = sigma_top_red
+        else:
+            sigma_min = 0
+
+        psi = min(sigma_top_red, sigma_bottom_red)/max(sigma_top_red, sigma_bottom_red)
+        h = data.input_data.get("h")
+        h_c = h / (1-psi)
+        if h_c < h:
+            h_min = 0
+            h_0 = h - h_c
+        else:
+            h_min = h_c - h
+            h_0 = 0
+        #pressure gradient m
+        m = (sigma_max - sigma_min) / (h_c - h_min)
+        #eqpressure means all single plates get the same total force F
+        F = (h_c**2/2 - h_min**2/2)*m / (amount + 1)
+
+        #now to find the distances between the welding points
+        distances = []
+        plate_i = 1
+        sigma_i_before = sigma_min
+        #from sigma_min to sigma_max find the distances using m and F
+        while plate_i <= amount:
+            #F = 1/2 * (2*sigma_before + m * distance_i) * distance_i
+            #= = m*distance_i**2 + 2*sigma_before*distance_i -2*F
+            distance_i = 1/(2*m) * ( (-2)*sigma_before + math.sqrt((2*sigma_before)**2 - 4*m*(-2*F)))
+            distances.append(distance_i)
+            sigma_i_before = sigma_i_before + m*distance_i
+            plate_i += 1
+
+        locations = []
+        """do the locations"""
+
+        #create the proposed_stiffeners
+        i_along_values = [3*10**7, 6*10**7, 9*10**7]
+        st_number_side1_max = 0
+        for plate in cs.plates:
+            if plate.code.pl_position == 1 and plate.code.st_number > st_number_side1_max:
+                st_number_side1_max = plate.code.st_number
+        propositions = stiffeners_proposition.stiffeners_proposition()
+        i = 1
+        while i <= amount:
+            proposition = proposed_stiffener.proposed_stiffener(2,st_number_side1_max + i, location[i-1], i_along_values[0], distances[i])
+            proposition.b_sup_corr = True
+            i += 1
+
+
+        """do side 4 and the i_along loop"""
 
 
 def set_stiffeners_bottom(cs, amount):
@@ -115,6 +187,8 @@ def set_stiffeners_bottom(cs, amount):
             proposition.b_sup_corr = True
             st_number += 1
 
+        """correct the stiffener numbers for side 4"""
+
 
         #try all i_along give the smallest one that works or then the biggest one
         for i_along in i_along_values:
@@ -126,3 +200,18 @@ def set_stiffeners_bottom(cs, amount):
             if cs.utilisation_flange_bottom <= 1:
                 return cs
         return cs
+
+
+def get_sigma_top_red(cs):
+    top_plate = cs.get_line(pl_position = 2 and pl_type = 0)
+    for plate in cs.lines:
+        if plate.code.tpl_number =< top_plate.code.tpl_number and plate.code.pl_type = 0:
+            top_plate = plate
+    return top_plate.sigma_a_red
+
+def get_sigma_bottom_red(cs):
+    bottom_plate = cs.get_line(pl_position = 2 and pl_type = 0)
+    for plate in cs.lines:
+        if plate.code.tpl_number >= top_plate.code.tpl_number and plate.code.pl_type = 0:
+            bottom_plate = plate
+    return top_plate.sigma_b_red
