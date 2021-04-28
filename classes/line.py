@@ -164,21 +164,31 @@ class line():
     def cal_center_y_red(self):
         length_red1 = self.rho_c_a * self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
         length_red2 = self.rho_c_b * self.cal_length(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-        weight_1 = length_red1/(length_red1+length_red2)
-        weight_2 = length_red2 /(length_red1+length_red2)
-        center_y_red1 = self.cal_center_y(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
-        center_y_red2 = self.cal_center_y(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-        center = center_y_red1 * weight_1 + center_y_red2 * weight_2
-        return center
+        if length_red1 == 0 and length_red2 == 0:
+            return self.cal_center_y(1,1,1,1,1)
+            weight_1 = 0
+            weight_2 = 0
+        else:
+            weight_1 = length_red1/(length_red1+length_red2)
+            weight_2 = length_red2 /(length_red1+length_red2)
+            center_y_red1 = self.cal_center_y(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+            center_y_red2 = self.cal_center_y(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
+            center = center_y_red1 * weight_1 + center_y_red2 * weight_2
+            return center
     def cal_center_z_red(self):
         length_red1 = self.rho_c_a * self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
         length_red2 = self.rho_c_b * self.cal_length(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-        weight1 = length_red1 /(length_red1+length_red2)
-        weight2 = length_red2 /(length_red1+length_red2)
-        center_z_red1 = self.cal_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
-        center_z_red2 = self.cal_center_z(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
-        center = center_z_red1 * weight1 + center_z_red2 * weight2
-        return center
+        if length_red1 == 0 and length_red2 == 0:
+            return self.cal_center_z(1,1,1,1,1)
+            weight_1 = 0
+            weight_2 = 0
+        else:
+            weight_1 = length_red1/(length_red1+length_red2)
+            weight_2 = length_red2 /(length_red1+length_red2)
+            center_z_red1 = self.cal_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t)
+            center_z_red2 = self.cal_center_z(self.b.y, self.b.z, self.p2.y, self.p2.z, self.t)
+            center = center_z_red1 * weight_1 + center_z_red2 * weight_2
+            return center
     def cal_length_red(self):
         return self.rho_c_a * self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.t) + \
         self.rho_c_b * self.cal_length(self.p2.y, self.p2.z, self.b.y, self.b.z, self.t)
