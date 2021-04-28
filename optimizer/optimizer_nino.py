@@ -12,6 +12,7 @@ from proofs import buckling_proof
 import defaults
 import data
 from proofs import stress_cal
+from optimizer import cost_estimate
 
 #optimization step 1
 #the goal of this method is to create
@@ -20,7 +21,7 @@ def optimize():
     b_inf = data.input_data["b_inf"]
     h = data.input_data["h"]
     t_deck = data.input_data["t_deck"]
-    t_range = [10]
+    t_range = [16]
     I_range = [3*10**7, 6*10**7]
     counter = 1
     deck_stiffeners = deck.deck(b_sup)
@@ -49,6 +50,7 @@ def optimize():
                             prop = stiffeners_proposition.stiffeners_proposition()
                             proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
                             if proven:
+                                print(str(cost_estimate.cost(end_cs)) + " CHF")
                                 print("PASS!")
                                 cs_collection.add(end_cs)
                             else:
@@ -78,6 +80,7 @@ def optimize():
                                     if proven:
                                         strong_enough = True
                                         cs_collection.add(end_cs)
+                                        print(str(cost_estimate.cost(end_cs)) + " CHF")
                                         print("PASS!")
                                     else:
                                         print("FAIl!")
@@ -118,6 +121,7 @@ def optimize():
                                         if proven:
                                             strong_enough = True
                                             cs_collection.add(end_cs)
+                                            print(str(cost_estimate.cost(end_cs)) + " CHF")
                                             print("PASS!")
                                         else:
                                             print("FAIL!")
@@ -163,6 +167,7 @@ def optimize():
                                             if proven:
                                                 strong_enough = True
                                                 cs_collection.add(end_cs)
+                                                print(str(cost_estimate.cost(end_cs)) + " CHF")
                                                 print("PASS!")
                                             else:
                                                 print("FAIL!")

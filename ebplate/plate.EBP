@@ -1,13 +1,13 @@
 	EBPlate - v2.01 
-SociÃ©tÃ©       # 
+Société       # 
 Affaire       # 
-RÃ©fÃ©rence     # 
+Référence     # 
 Utilisateur   # 
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
-   Height          171.49110640673518 cm 
-   Thickness         1.0 cm 
+   Height          590.0 cm 
+   Thickness         1.6 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
    Boundary Conditions 
@@ -18,51 +18,29 @@ Commentaire   #
 #STIFFENING 
    Orthotropic Plate =  0 
    Referentiel 2 
-   Nombre de raidisseurs  4 
-   - Raidisseur nÂ° 1 Active=1 
+   Nombre de raidisseurs  2 
+   - Raidisseur n° 1 Active=1 
       Orientation = 0 
-      Position    = 105.0 
+      Position    = 200.0 
       Gamma       = 0 
       Teta        = 0 
       Delta       = 0 
       Type        = 3 
-      Dimension 1 = 20.615528128088304 
-      Dimension 2 = 30.0 
-      Dimension 3 = 19.999999999999993 
-      Dimension 4 = 0.5 
-   - Raidisseur nÂ° 2 Active=1 
+      Dimension 1 = 26.575364531836623 
+      Dimension 2 = 45.0 
+      Dimension 3 = 10.0 
+      Dimension 4 = 1.1 
+   - Raidisseur n° 2 Active=1 
       Orientation = 0 
-      Position    = 59.999999999999986 
+      Position    = 100.0 
       Gamma       = 0 
       Teta        = 0 
       Delta       = 0 
       Type        = 3 
-      Dimension 1 = 20.615528128088304 
-      Dimension 2 = 30.0 
-      Dimension 3 = 20.0 
-      Dimension 4 = 0.5 
-   - Raidisseur nÂ° 3 Active=1 
-      Orientation = 0 
-      Position    = 240.0 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 20.615528128088304 
-      Dimension 2 = 30.0 
-      Dimension 3 = 20.0 
-      Dimension 4 = 0.5 
-   - Raidisseur nÂ° 4 Active=1 
-      Orientation = 0 
-      Position    = 195.0 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 20.615528128088304 
-      Dimension 2 = 30.0 
-      Dimension 3 = 20.0 
-      Dimension 4 = 0.5 
+      Dimension 1 = 26.575364531836623 
+      Dimension 2 = 45.0 
+      Dimension 3 = 10.000000000000005 
+      Dimension 4 = 1.1 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
@@ -88,7 +66,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 31.621564110962115 MPa 
+   Shear stress                                 5.107119315638718 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000
