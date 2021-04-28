@@ -19,6 +19,7 @@ from classes import check_geometry
 #This functions merges a cross section and a list of stiffeners
 """we need initial_cs to always have the updated thickness of the trapezoid plates!!!!"""
 def merge(initial_cs, stiffener_list):
+    assert len(initial_cs.lines) == 4, "Merge does not accept crosssections with stiffeners"
     stiffeners1 = []
     stiffeners2 = []
     stiffeners3 = []

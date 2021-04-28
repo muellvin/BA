@@ -134,7 +134,7 @@ def set_stiffeners(number_st_top):
             st_list.add(stiffener_bottom_middle)
         elif number_bottom%2 ==1 and i!= 1:
             print("right", iterations -int(number_bottom/2)-2 + i)
-            stiffener_bottom_right_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side + iterations -int(number_bottom/2)-2 + i), location, \
+            stiffener_bottom_right_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side + iterations -int(number_bottom/2)-2 + i), -location, \
             i_along, b_sup, b_inf, h, t)
             st_list.add(stiffener_bottom_right_i)
             print("left", iterations +int(number_bottom/2)+2 - i)
