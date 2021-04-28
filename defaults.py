@@ -28,8 +28,8 @@ def set_cs_defaults():
 
 
 """default crosssectional forces"""
-cs_M_Ed = 10000000
-cs_V_Ed = 0
+cs_M_Ed = 10000000000
+cs_V_Ed = 100000
 cs_T_Ed = 0
 def set_forces_defaults():
     data.input_data.update({"M_Ed": cs_M_Ed})
