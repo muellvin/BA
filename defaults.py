@@ -100,8 +100,8 @@ do_column_plate_buckling = True
 
 
 """cs_analysis_tool"""
-do_print = False
-do_print_to_txt = False
+do_print = True
+do_print_to_txt = True
 
 def cs_defaults_tostring():
     line1 = "defaults for crosssection geometry: \n"

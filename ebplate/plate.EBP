@@ -6,8 +6,8 @@ Utilisateur   #
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
-   Height          158.11388300841898 cm 
-   Thickness         0.5 cm 
+   Height          171.49110640673518 cm 
+   Thickness         1.0 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
    Boundary Conditions 
@@ -44,7 +44,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 68.57142857142857 MPa 
+   Shear stress                                 31.621564110962115 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000
