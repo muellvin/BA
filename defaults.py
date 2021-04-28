@@ -45,7 +45,9 @@ st_h = 200
 st_t = 5
 
 
-
+"""defaults cost"""
+welding_cost = 40 #[CHF/m]
+steel_cost = 1.5 #[CHF/kg]
 
 
 
