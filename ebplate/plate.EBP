@@ -16,7 +16,14 @@ Commentaire   #
       Bord 3 0 
       Bord 4 0 
 #STIFFENING 
-   Orthotropic Plate =  0 
+   Orthotropic Plate =  1 
+   Coefficients d'orthotropie : 
+      Direction X : Beta =  0.000 
+                     Eta =  -1.000 
+        Smearing : No 
+      Direction Y : Beta =  0.000 
+                     Eta =  0.000 
+        Smearing : No 
    Referentiel 2 
    Nombre de raidisseurs  2 
    - Raidisseur n° 1 Active=1 
@@ -45,10 +52,10 @@ Commentaire   #
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
   Imposed values : No 
-   Longitudinal Stress Top Left                0.000 MPa 
-   Longitudinal Stress Bottom Left             0.000 MPa 
-   Longitudinal Stress Top Right               0.000 MPa 
-   Longitudinal Stress Bottom Right            0.000 MPa 
+   Longitudinal Stress Top Left                68.86360489409101 MPa 
+   Longitudinal Stress Bottom Left             -262.31081273725 MPa 
+   Longitudinal Stress Top Right               68.86360489409101 MPa 
+   Longitudinal Stress Bottom Right            -262.31081273725 MPa 
  Transverse stresses : User's data No 
  Analytical Transverse stresses 
   Imposed values : No 
