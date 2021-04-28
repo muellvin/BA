@@ -259,23 +259,9 @@ def set_stiffeners_bottom(cs, amount):
             if plate.code.pl_type == 1 and plate.code.pl_position == 4:
                 plate.code.st_number += amount
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-            cs = merge.merge(cs, propositions)
-            cs = buckling_proof.buckling_proof(cs)
-            if cs.utilisation_flange_bottom <= 1:
-                return cs
-=======
-        propositions.stiffeners = sorted(propositions.stiffeners, key = lambda st: st.st_number)
-        stiffeners_list = substantiate.substantiate(copy.deepcopy(cs), propositions)
-        cs = stiffener.merge(cs, stiffeners_list)
->>>>>>> master
-=======
         propositions.stiffeners = sorted(propositions.stiffeners, key = lambda st: st.st_number)
         stiffeners_list = substantiate.substantiate(copy.deepcopy(cs), propositions)
         cs = merge.merge(cs, stiffeners_list)
-
->>>>>>> b8d66335fec68618bb82b1f9630f013d09342cc1
         return cs
 
 
