@@ -54,7 +54,7 @@ def set_stiffeners(number_st_top):
     number_bottom = int(input())
 
     #set the side ones
-    st_list = []
+    st_list = stiffeners_proposition.stiffeners_proposition()
     i = 1
     while i <= number_side:
         if i == 1:
@@ -85,10 +85,10 @@ def set_stiffeners(number_st_top):
 
         stiffener_right_i = proposed_stiffener.proposed_stiffener(2, int(number_st_top + i), location, \
         i_along, b_sup, b_inf, h, t)
-        st_list.append(stiffener_right_i)
+        st_list.add(stiffener_right_i)
         stiffener_left_i = proposed_stiffener.proposed_stiffener(4, int(number_st_top + number_side + number_bottom + i), location, \
         i_along, b_sup, b_inf, h, t)
-        st_list.append(stiffener_left_i)
+        st_list.add(stiffener_left_i)
         i+=1
 
     i = 1
@@ -128,26 +128,33 @@ def set_stiffeners(number_st_top):
 
 
         if number_bottom%2 == 1 and i == 1:
+            print("middle: ", iterations)
             stiffener_bottom_middle = proposed_stiffener.proposed_stiffener(3, int(number_st_top +number_side + iterations), location, \
             i_along, b_sup, b_inf, h, t)
-            st_list.append(stiffener_bottom_middle)
-        if number_bottom%2 ==1 and i!= 1:
-            stiffener_bottom_right_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side + iterations + 1 - i), location, \
+            st_list.add(stiffener_bottom_middle)
+        elif number_bottom%2 ==1 and i!= 1:
+            print("right", iterations -int(number_bottom/2)-2 + i)
+            stiffener_bottom_right_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side + iterations -int(number_bottom/2)-2 + i), location, \
             i_along, b_sup, b_inf, h, t)
-            st_list.append(stiffener_bottom_right_i)
-            stiffener_bottom_left_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side + iterations -1 + i), location, \
+            st_list.add(stiffener_bottom_right_i)
+            print("left", iterations +int(number_bottom/2)+2 - i)
+            stiffener_bottom_left_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side + iterations +int(number_bottom/2)+2 - i), location, \
             i_along, b_sup, b_inf, h, t)
-            st_list.append(stiffener_bottom_left_i)
-        else:
-            stiffener_bottom_right_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side + iterations +1 - i), -location, \
+            st_list.add(stiffener_bottom_left_i)
+        elif number_bottom%2 == 0:
+            print("right", i)
+            stiffener_bottom_right_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side + i), -location, \
             i_along, b_sup, b_inf, h, t)
-            st_list.append(stiffener_bottom_right_i)
-            stiffener_bottom_left_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side + iterations -1 + i), location, \
+            st_list.add(stiffener_bottom_right_i)
+            print("left",number_bottom+ 1-i)
+            stiffener_bottom_left_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side+ number_bottom + 1 - i), location, \
             i_along, b_sup, b_inf, h, t)
-            st_list.append(stiffener_bottom_left_i)
+            st_list.add(stiffener_bottom_left_i)
         i+=1
 
-    st_list = sorted(st_list, key = lambda st: st.st_number)
+    st_list.stiffeners = sorted(st_list.stiffeners, key = lambda st: st.st_number)
+    for st in st_list.stiffeners:
+        print(st.st_number)
     data.stiffener_data = st_list
 
 
