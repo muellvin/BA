@@ -3,6 +3,7 @@ from initial_cs import create_initial_cs
 from classes import stiffener as st
 from classes import plate_code as plcd
 from classes import crosssection
+from classes import merge
 import math
 
 class TestMerge(unittest.TestCase):
@@ -10,7 +11,7 @@ class TestMerge(unittest.TestCase):
     def test_empty(self):
         initial_cs = create_initial_cs(4000, 3000, 2000, 20, 20, 20)
         stiffeners = []
-        final_cs = st.merge(initial_cs, stiffeners)
+        final_cs = merge.merge(initial_cs, stiffeners)
         length = len(final_cs.lines)
         line_4 = final_cs.get_line(pl_type = 0, pl_position = 4, tpl_number = 4)
         code_4 = plcd.plate_code(4,0,4,0,0)
@@ -22,7 +23,7 @@ class TestMerge(unittest.TestCase):
         stiffener_1 = st.create_stiffener_global(1, 1, 1000, 0, 0, 300, 200, 200, 15)
         stiffener_2 = st.create_stiffener_global(1, 2, -1000, 0, 0, 300, 200, 200, 15)
         stiffeners = [stiffener_1, stiffener_2]
-        final_cs = st.merge(initial_cs, stiffeners)
+        final_cs = merge.merge(initial_cs, stiffeners)
         length = len(final_cs.lines)
         self.assertEqual(length, 14)
         stiffener_1_line_3 = final_cs.get_line(st_number = 1, st_pl_position = 3)
@@ -42,7 +43,7 @@ class TestMerge(unittest.TestCase):
         stiffener_5 = st.create_stiffener_global(3, 5, 1000, 2000, math.pi, 300, 200, 200, 15)
         stiffener_6 = st.create_stiffener_global(4, 6, 2000, 1000, math.pi/2, 200, 100, 100, 10)
         stiffeners = [stiffener_1, stiffener_2, stiffener_3, stiffener_4, stiffener_5, stiffener_6]
-        final_cs = st.merge(initial_cs, stiffeners)
+        final_cs = merge.merge(initial_cs, stiffeners)
         length = len(final_cs.lines)
         self.assertEqual(length, 34)
         last_line = final_cs.get_line(tpl_number = 16)

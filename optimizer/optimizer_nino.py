@@ -7,6 +7,7 @@ from classes import stiffener
 from classes import proposed_stiffener
 from classes import stiffeners_proposition
 from classes import substantiate
+from classes import merge
 from output import geometry_output as go
 from proofs import buckling_proof
 import defaults
@@ -22,7 +23,7 @@ def optimize():
     h = data.input_data["h"]
     t_deck = data.input_data["t_deck"]
     t_range = [16]
-    I_range = [3*10**7, 6*10**7]
+    I_range = [3*10**7]
     counter = 1
     deck_stiffeners = deck.deck(b_sup)
     cs_collection = set()
@@ -32,7 +33,7 @@ def optimize():
     for t_side in t_range:
         for t_bottom in t_range:
             initial_cs = ics.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
-            base_cs = stiffener.merge(initial_cs, deck_stiffeners)
+            base_cs = merge.merge(initial_cs, deck_stiffeners)
             for num_side_stiffeners in range(2):
                 for num_btm_stiffeners in range(4):
                     strong_enough = False
@@ -73,7 +74,7 @@ def optimize():
                                         prop.stiffeners.append(st)
                                     base_cs_copy = copy.deepcopy(base_cs)
                                     st_list = substantiate.substantiate(base_cs_copy, prop)
-                                    test_cs = stiffener.merge(base_cs_copy, st_list)
+                                    test_cs = merge.merge(base_cs_copy, st_list)
                                     end_cs = buckling_proof.buckling_proof(test_cs)
                                     prop = stiffeners_proposition.stiffeners_proposition()
                                     proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
@@ -114,7 +115,7 @@ def optimize():
                                             prop.stiffeners.append(st_left)
                                         base_cs_copy = copy.deepcopy(base_cs)
                                         st_list = substantiate.substantiate(base_cs_copy, prop)
-                                        test_cs = stiffener.merge(base_cs_copy, st_list)
+                                        test_cs = merge.merge(base_cs_copy, st_list)
                                         end_cs = buckling_proof.buckling_proof(test_cs)
                                         prop = stiffeners_proposition.stiffeners_proposition()
                                         proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
@@ -160,7 +161,7 @@ def optimize():
                                                 prop.stiffeners.append(st)
                                             base_cs_copy = copy.deepcopy(base_cs)
                                             st_list = substantiate.substantiate(base_cs_copy, prop)
-                                            test_cs = stiffener.merge(base_cs_copy, st_list)
+                                            test_cs = merge.merge(base_cs_copy, st_list)
                                             end_cs = buckling_proof.buckling_proof(test_cs)
                                             prop = stiffeners_proposition.stiffeners_proposition()
                                             proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
@@ -174,13 +175,13 @@ def optimize():
     print("# of passed CS")
     print(len(cs_collection))
     for cs in cs_collection:
-        go.print_cs(cs)
+        go.print_cs_red(cs)
 
 
-def get_locations_side(num_btm_stiffeners, sign):
-    if num_btm_stiffeners == 0:
+def get_locations_side(num_side_stiffeners, sign):
+    if num_side_stiffeners == 0:
         return [(-1, -1)]
-    if num_btm_stiffeners == 1:
+    if num_side_stiffeners == 1:
         if sign == -1:
             return [(0.4, -1), (0.3, -1), (0.2, -1), (0.1, -1)]
         if sign == 1:

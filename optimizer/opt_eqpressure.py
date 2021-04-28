@@ -4,7 +4,7 @@ import data
 from classes import proposed_stiffener
 from classes import stiffeners_proposition
 from classes import stiffener
-
+from classes import merge
 
 #an optimizer that puts the stiffeners in place, such that the single plates inbetween each have the same total pressure
 def opt_eqpressure(cs_fresh):
@@ -195,7 +195,7 @@ def set_stiffeners_bottom(cs, amount):
             for proposition in propositions:
                 proposition.i_along = i_along
 
-            cs = stiffener.merge(cs, propositions)
+            cs = merge.merge(cs, propositions)
             cs = buckling_proof.buckling_proof(cs)
             if cs.utilisation_flange_bottom <= 1:
                 return cs

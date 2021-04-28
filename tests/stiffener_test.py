@@ -6,6 +6,7 @@ sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
 
 from classes import substantiate as ss
 from classes import proposed_stiffener as ps
+from classes import merge
 from classes import stiffeners_proposition as st_prop
 import initial_cs as ics
 from output import geometry_output as go
@@ -26,7 +27,7 @@ for line in test_cs.lines:
     line.t = 20
 
 deck_stiffeners = deck.deck(b_sup)
-test_cs = st.merge(test_cs, deck_stiffeners)
+test_cs = merge.merge(test_cs, deck_stiffeners)
 
 prop_list = st_prop.stiffeners_proposition()
 #propose stiffeners, mimicking input from optimizer
