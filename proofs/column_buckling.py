@@ -59,10 +59,6 @@ def column_buckling(plate_glob, side):
                 if plate.code.st_number == i+st_number_min:
                     stiffeners_list[i].lines.append(plate)
 
-        for i in range(len(stiffeners_list)):
-            print(i)
-            print(stiffeners_list[i])
-
         #sort the lists
         tpl_lines_list = sorted(tpl_lines_list, key = lambda plate: plate.code.tpl_number)
         stiffeners_list = sorted(stiffeners_list, key = lambda stiffener: stiffener.lines[0].code.st_number)
@@ -92,7 +88,7 @@ def column_buckling(plate_glob, side):
             #geometry_output.print_cs_red(stiffener)
 
 
-        print("there are "+str(stiffeners_set_length)+" columns to be created")
+        #print("there are "+str(stiffeners_set_length)+" columns to be created")
 
 
 
@@ -102,7 +98,7 @@ def column_buckling(plate_glob, side):
         #a set of all columns (stiffener + carrying widths) is created -> see column_class
         #they carry the number of the stiffener and they have the stiffener number as a key
         while i < st_number_max+1:
-            print("     creating column of stiffener "+str(i))
+            #print("     creating column of stiffener "+str(i))
             stiffener_i = copy.deepcopy(stiffeners_set.get(i))
             plate_before = copy.deepcopy(tpl_betw_lines_set.get(i-1))
             plate_between = copy.deepcopy(tpl_st_lines_set.get(i))
@@ -116,7 +112,7 @@ def column_buckling(plate_glob, side):
 
             #if the widths were not reduced (p1 is the same as p2) the whole plate is taken into account not only until one of p1 or p2
             if dis_points(plate_before.p1, plate_before.p2) < 0.05:
-                print(dis_points(plate_before.p1, plate_before.p2))
+                #print(dis_points(plate_before.p1, plate_before.p2))
                 plate_before_A = plate_before.get_area_tot()
                 plate_before_I = plate_before.get_i_along_tot()
                 sigma_border_before = plate_before.sigma_a_red
@@ -231,7 +227,6 @@ def column_buckling(plate_glob, side):
     #case 2: unstiffened plate
     else:
         t_plate = tpl_lines_list[0].t
-        print(t_plate)
         sigma_cr_c = math.pi**2 * data.constants.get("E") * t_plate**2 / \
         (12 * (1-data.constants.get("nu")**2)*defaults.plate_length**2)
         lambda_c_bar = math.sqrt(data.constants.get("f_y") / sigma_cr_c)

@@ -50,9 +50,7 @@ def global_plate_buckling(total_cs, plate_glob):
         for plate in stiffened_plate.lines:
             if plate.code.pl_type == 0:
                 h += plate.get_length_tot()
-                print("length: " + str(plate.get_length_tot()))
         t = plate_a.t
-        print("t = " + str(t))
         b = defaults.plate_length
 
         #coordinate transformation (a+b)/2 is the new origin and baseplate is horizontal
@@ -220,14 +218,13 @@ def global_plate_buckling(total_cs, plate_glob):
             stiffeners_ebp.insert(i,(distance, gamma, theta, delta))
 
         #finding critical buckling load
-        print(len(stiffeners_ebp))
         phi_cr_p = 0
         if abs(sigma_a) > 0.1 and abs(sigma_b) > 0.1 and 3<=t:
             phi_cr_p = ebplate.ebplate(b,h,t,sigma_a, sigma_b, stiffeners_ebp)
         elif t<3:
             print("plate too thin")
             return 0, 1
-        else: 
+        else:
             print("stresses too low")
             return 1, 10**9
         sigma_max = max(sigma_a, sigma_b)
