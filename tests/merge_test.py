@@ -13,12 +13,13 @@ from classes import point as pt
 from classes import line as ln
 from classes import plate_code as plcd
 from classes import crosssection as cs
+from classes import merge
 import deck
 
 initial_cs = ics.create_initial_cs(4000, 4000, 2000, 20, 20, 20)
 
 st_list_deck = deck.deck(4000)
-intermediate_cs = st.merge(initial_cs, st_list_deck)
+intermediate_cs = merge.merge(initial_cs, st_list_deck)
 
 
 stiffener_1 = st.create_stiffener_global(2, 1, -2000, 1000, 3*math.pi/2, 200, 100, 100, 10)
@@ -35,7 +36,7 @@ stiffener_list.append(stiffener_4)
 
 
 #deck.deck(4000)
-#final_cs = st.merge(initial_cs, stiffener_list)
+#final_cs = merge.merge(initial_cs, stiffener_list)
 print(intermediate_cs)
 go.print_cs_red(intermediate_cs)
 print(len(intermediate_cs.lines))

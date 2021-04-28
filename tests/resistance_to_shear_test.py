@@ -8,6 +8,7 @@ sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA/eb
 from proofs import resistance_to_shear as rts
 from classes import crosssection as cs
 from classes import stiffener as st
+from classes import merge
 import deck
 import data
 import initial_cs as ics
@@ -26,7 +27,7 @@ data.input_data.update({"cs position": 1000})
 
 initial_cs = ics.create_initial_cs(4000, 3000, 1500, 4, 4, 4)
 deck_stiffeners = deck.deck(4000)
-stiffened_cs = st.merge(initial_cs, deck_stiffeners)
+stiffened_cs = merge.merge(initial_cs, deck_stiffeners)
 plate_glob = cs.crosssection(0,0,0)
 for line in stiffened_cs.lines:
     if line.code.pl_position == 1:

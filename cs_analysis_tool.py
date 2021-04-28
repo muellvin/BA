@@ -3,6 +3,7 @@ from classes import stiffener
 from classes import crosssection
 from input import input_analysis_tool
 from proofs import buckling_proof
+from classes import merge
 import initial_cs
 import data
 import deck
@@ -18,7 +19,7 @@ cs = initial_cs.create_initial_cs(data.input_data.get("b_sup"), data.input_data.
 
 #add the deck stiffeners
 deck_stiffener_list = deck.deck(data.input_data.get("b_sup"))
-cs = stiffener.merge(cs, deck_stiffener_list)
+cs = merge.merge(cs, deck_stiffener_list)
 number_stplates_top = 0
 for plate in cs.lines:
     if plate.code.pl_type == 1:
@@ -43,7 +44,7 @@ for st in data.stiffener_data.stiffeners:
     stiffener_i = stiffener.create_stiffener_global(st.pl_position, st.st_number, y, z, angle, \
     st.b_sup, st.b_inf, st.h, st.t)
     stiffener_list.append(stiffener_i)
-cs = stiffener.merge(cs, stiffener_list)
+cs = merge.merge(cs, stiffener_list)
 
 geometry_output.print_cs_red(cs)
 
