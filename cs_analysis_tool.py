@@ -32,7 +32,7 @@ number_st_top= number_stplates_top/3
 #add all other stiffeners
 input_analysis_tool.set_stiffeners(number_st_top)
 stiffener_list = []
-for st in data.stiffener_data:
+for st in data.stiffener_data.stiffeners:
     y,z = cs.get_coordinates(st.location, st.pl_position)
     if st.pl_position == 2:
         angle = math.pi + cs.get_angle(2)

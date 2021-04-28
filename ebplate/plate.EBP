@@ -6,8 +6,8 @@ Utilisateur   #
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
-   Height          158.11388300841898 cm 
-   Thickness         0.5 cm 
+   Height          600.0 cm 
+   Thickness         2.0 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
    Boundary Conditions 
@@ -18,7 +18,51 @@ Commentaire   #
 #STIFFENING 
    Orthotropic Plate =  0 
    Referentiel 2 
-   Nombre de raidisseurs  0 
+   Nombre de raidisseurs  4 
+   - Raidisseur n° 1 Active=1 
+      Orientation = 0 
+      Position    = 105.0 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 20.615528128088304 
+      Dimension 2 = 30.0 
+      Dimension 3 = 19.999999999999993 
+      Dimension 4 = 0.5 
+   - Raidisseur n° 2 Active=1 
+      Orientation = 0 
+      Position    = 59.999999999999986 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 20.615528128088304 
+      Dimension 2 = 30.0 
+      Dimension 3 = 20.0 
+      Dimension 4 = 0.5 
+   - Raidisseur n° 3 Active=1 
+      Orientation = 0 
+      Position    = 240.0 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 20.615528128088304 
+      Dimension 2 = 30.0 
+      Dimension 3 = 20.0 
+      Dimension 4 = 0.5 
+   - Raidisseur n° 4 Active=1 
+      Orientation = 0 
+      Position    = 195.0 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 20.615528128088304 
+      Dimension 2 = 30.0 
+      Dimension 3 = 20.0 
+      Dimension 4 = 0.5 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
@@ -44,7 +88,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 68.57142857142857 MPa 
+   Shear stress                                 0.36727913323947525 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000
