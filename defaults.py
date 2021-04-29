@@ -4,11 +4,11 @@ import data
 
 """default cs"""
 cs_b_sup = 4000
-cs_t_deck = 20
+cs_t_deck = 5
 cs_b_inf = 3000
-cs_t_bottom = 20
+cs_t_bottom = 5
 cs_h = 1500
-cs_t_side = 20
+cs_t_side = 5
 cs_a = 10000
 cs_L_e = 15000
 cs_bending_type = "sagging bending"
@@ -28,7 +28,8 @@ def set_cs_defaults():
 
 
 """default crosssectional forces"""
-cs_M_Ed = -10000000000
+
+cs_M_Ed = 10**9
 cs_V_Ed = 100000
 cs_T_Ed = 0
 def set_forces_defaults():
