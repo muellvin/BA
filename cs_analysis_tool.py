@@ -55,5 +55,8 @@ input_analysis_tool.set_forces()
 
 #buckling proof
 cs = buckling_proof.buckling_proof(cs)
-
+print("eta_1", cs.eta_1)
+print("verification 2", cs.interaction_2)
+print("verification 3", cs.interaction_3)
+print("verification 4", cs.interaction_4)
 geometry_output.print_cs_red(cs)
