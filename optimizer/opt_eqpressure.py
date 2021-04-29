@@ -262,7 +262,6 @@ def set_stiffeners_bottom(cs, amount):
         propositions.stiffeners = sorted(propositions.stiffeners, key = lambda st: st.st_number)
         stiffeners_list = substantiate.substantiate(copy.deepcopy(cs), propositions)
         cs = merge.merge(cs, stiffeners_list)
-
         return cs
 
 

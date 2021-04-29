@@ -19,24 +19,22 @@ import deck
 initial_cs = ics.create_initial_cs(4000, 4000, 2000, 20, 20, 20)
 
 st_list_deck = deck.deck(4000)
-intermediate_cs = merge.merge(initial_cs, st_list_deck)
+
+s = len(st_list_deck)
+
+stiffener_1 = st.create_stiffener_global(2, s+1, -2000, 1000, 3*math.pi/2, 200, 100, 100, 10)
+stiffener_2 = st.create_stiffener_global(3, s+2, -1000, 2000, math.pi, 300, 200, 200, 15)
+stiffener_3 = st.create_stiffener_global(3, s+3, 1000, 2000, math.pi, 300, 200, 200, 15)
+stiffener_4 = st.create_stiffener_global(4, s+4, 2000, 1000, math.pi/2, 200, 100, 100, 10)
 
 
-stiffener_1 = st.create_stiffener_global(2, 1, -2000, 1000, 3*math.pi/2, 200, 100, 100, 10)
-stiffener_2 = st.create_stiffener_global(3, 2, -1000, 2000, math.pi, 300, 200, 200, 15)
-stiffener_3 = st.create_stiffener_global(3, 3, 1000, 2000, math.pi, 300, 200, 200, 15)
-stiffener_4 = st.create_stiffener_global(4, 4, 2000, 1000, math.pi/2, 200, 100, 100, 10)
+st_list_rest = [stiffener_1, stiffener_2, stiffener_3, stiffener_4]
 
+st_list = st_list_deck + st_list_rest
 
-stiffener_list = [stiffener_1, stiffener_2, stiffener_3, stiffener_4]
-stiffener_list.append(stiffener_1)
-stiffener_list.append(stiffener_2)
-stiffener_list.append(stiffener_3)
-stiffener_list.append(stiffener_4)
+print(len(st_list))
 
-
-#deck.deck(4000)
-#final_cs = merge.merge(initial_cs, stiffener_list)
-print(intermediate_cs)
-go.print_cs_red(intermediate_cs)
-print(len(intermediate_cs.lines))
+final_cs = merge.merge(initial_cs, st_list)
+print(final_cs)
+print(len(final_cs.lines))
+go.print_cs_red(final_cs)
