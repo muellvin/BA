@@ -24,8 +24,6 @@ cs = initial_cs.create_initial_cs(data.input_data.get("b_sup"), data.input_data.
 
 #add the deck stiffeners
 deck_stiffener_list = deck.deck(data.input_data.get("b_sup"))
-cs = stiffener.merge(cs, deck_stiffener_list)
 
-cs = opt_eqpressure.opt_eqpressure(cs)
 
-geometry_output.print_cs_red(cs)
+opt_eqpressure.opt_eqpressure(cs, deck_stiffener_list)
