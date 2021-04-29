@@ -20,30 +20,20 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
     if defaults.do_check_geometry == False:
         return True
 
+    if defaults.do_height_only == True and defaults.do_width_only == True:
+        conflict = True
+        assert conflict == True, "cannot do only height and only width"
+
     geometry_ok = True
 
-
-    """reorganize the stiffeners into own lists"""
-    lines1 = []
     stiffeners1 = []
     stiffeners2 = []
     stiffeners3 = []
     stiffeners4 = []
-
-    for line in crosssection_cs.lines:
-        if line.code.pl_position == 1 and line.code.tpl_number == 0:
-            lines1.append(line)
-
-    for i in range(int(len(lines1)/3)):
-        stiffeners1.append(crosssection.crosssection(0, 0, 0))
-        for line in lines1:
-            if line.code.st_number == i+1:
-                stiffeners1[i].lines.append(line)
-                lines1.remove(line)
-
-
     for stiffener in stiffeners:
-        if stiffener.lines[0].code.pl_position== 2:
+        if stiffener.lines[0].code.pl_position == 1:
+            stiffeners1.append(stiffener)
+        elif stiffener.lines[0].code.pl_position== 2:
             stiffeners2.append(stiffener)
         elif stiffener.lines[0].code.pl_position == 3:
             stiffeners3.append(stiffener)
@@ -53,7 +43,12 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
             print("the lines of the stiffeners that were given to check_geometry do not contain codes")
 
     #sort the list of stiffeners according to st_number
-    #this should be implemented right here in the input, because it is required by check_geometry
+    stiffeners1 = sorted(stiffeners1, key = lambda stiffener: stiffener.lines[0].code.st_number)
+    stiffeners2 = sorted(stiffeners2, key = lambda stiffener: stiffener.lines[0].code.st_number)
+    stiffeners3 = sorted(stiffeners3, key = lambda stiffener: stiffener.lines[0].code.st_number)
+    stiffeners4 = sorted(stiffeners4, key = lambda stiffener: stiffener.lines[0].code.st_number)
+
+
 
     """find for each side the most left and the most right one"""
     top_left = None
@@ -64,8 +59,6 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
     bottom_right = None
     right_bottom = None
     left_bottom = None
-
-
     if stiffeners1 != []:
         min = random.choice(stiffeners1).lines[0].code.st_number
         max = random.choice(stiffeners1).lines[0].code.st_number
@@ -76,7 +69,6 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
             if stiffener.lines[0].code.st_number >= max:
                 top_right = stiffener
                 max = stiffener.lines[0].code.st_number
-
     if stiffeners2 != []:
         min = random.choice(stiffeners2).lines[0].code.st_number
         max = random.choice(stiffeners2).lines[0].code.st_number
@@ -87,7 +79,6 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
             if stiffener.lines[0].code.st_number >= max:
                 right_bottom = stiffener
                 max = stiffener.lines[0].code.st_number
-
     if stiffeners3 != []:
         min = random.choice(stiffeners3).lines[0].code.st_number
         max = random.choice(stiffeners3).lines[0].code.st_number
@@ -98,7 +89,6 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
             if stiffener.lines[0].code.st_number >= max:
                 bottom_left = stiffener
                 max = stiffener.lines[0].code.st_number
-
     if stiffeners4 != []:
         min = random.choice(stiffeners4).lines[0].code.st_number
         max = random.choice(stiffeners4).lines[0].code.st_number
@@ -115,7 +105,6 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
     top_left_4b = None
     top_right_2a = None
     top_right_2b = None
-
     if top_left != None:
         top_left_4b = top_left.get_line(pl_position = 1, st_pl_position = 4).b
         top_left_4a = top_left.get_line(pl_position = 1, st_pl_position = 4).a
@@ -124,13 +113,11 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
         top_right_2b = top_right.get_line(pl_position = 1, st_pl_position = 2).b
         top_right_2a = top_right.get_line(pl_position = 1, st_pl_position = 2).a
         st_num_top_right = top_right.get_line(pl_position = 1, st_pl_position = 2).code.st_number
-
     #points from right side stiffeners
     right_top_4a = None
     right_top_4b = None
     right_bottom_2a = None
     right_bottom_2b = None
-
     if right_top != None and right_bottom != None:
         right_top_4b = right_top.get_line(pl_position = 2, st_pl_position = 4).b
         right_top_4a = right_top.get_line(pl_position = 2, st_pl_position = 4).a
@@ -138,13 +125,11 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
         right_bottom_2b = right_bottom.get_line(pl_position = 2, st_pl_position = 2).b
         right_bottom_2a = right_bottom.get_line(pl_position = 2, st_pl_position = 2).a
         st_num_right_bottom = right_bottom.get_line(pl_position = 2, st_pl_position = 2).code.st_number
-
     #points from bottom side stiffeners
     bottom_right_4a = None
     bottom_right_4b = None
     bottom_left_2a = None
     bottom_left_2b = None
-
     if bottom_right != None and bottom_left != None:
         bottom_right_4b = bottom_right.get_line(pl_position = 3, st_pl_position = 4).b
         bottom_right_4a = bottom_right.get_line(pl_position = 3, st_pl_position = 4).a
@@ -152,13 +137,11 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
         bottom_left_2b = bottom_left.get_line(pl_position = 3, st_pl_position = 2).b
         bottom_left_2a = bottom_left.get_line(pl_position = 3, st_pl_position = 2).a
         st_num_bottom_left = bottom_left.get_line(pl_position = 3, st_pl_position = 2).code.st_number
-
     #points from left side stiffeners
     left_top_2a = None
     left_top_2b = None
     left_bottom_4a = None
     left_bottom_4b = None
-
     if left_top != None and left_bottom != None:
         left_bottom_4b = left_bottom.get_line(pl_position = 4, st_pl_position = 4).b
         left_bottom_4a = left_bottom.get_line(pl_position = 4, st_pl_position = 4).a
@@ -167,19 +150,16 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
         left_top_2a = left_top.get_line(pl_position = 4, st_pl_position = 2).a
         st_num_left_top = left_top.get_line(pl_position = 4, st_pl_position = 2).code.st_number
 
-
     #corners of the crosssection
     corner_top_right = None
     corner_top_left = None
     corner_bottom_right = None
     corner_bottom_left = None
-
     y_top_max = 0
     y_top_min = 0
     z_bottom_max = 0
     y_bottom_max = 0
     y_bottom_min = 0
-
     for plate in crosssection_cs.lines:
         points = []
         points.append(plate.a)
@@ -204,32 +184,32 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
 
 
     """check distances to corners of crosssection"""
+    if defaults.do_width_only == True:
+        if right_bottom != None and left_bottom != None:
+            dis_right_bottom_corner = corner_bottom_right.z - right_bottom_2a.z
+            if dis_right_bottom_corner < defaults.mindis_side_bottom_corner:
+                corr = defaults.mindis_side_bottom_corner - dis_right_bottom_corner
+                stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup = right_bottom.b_sup - corr
+                stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup = left_bottom.b_sup - corr
+                stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup_corr = True
+                stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup_corr = True
+                stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup_corr_val = corr
+                stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup_corr_val = corr
+                print("side stiffeners too close to the bottom corners: ", dis_right_bottom_corner)
+                geometry_ok = False
 
-    if right_bottom != None and left_bottom != None:
-        dis_right_bottom_corner = corner_bottom_right.z - right_bottom_2a.z
-        if dis_right_bottom_corner < defaults.mindis_side_bottom_corner:
-            corr = defaults.mindis_side_bottom_corner - dis_right_bottom_corner
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup = right_bottom.b_sup - corr
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup = left_bottom.b_sup - corr
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup_corr = True
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup_corr = True
-            stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup_corr_val = corr
-            stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup_corr_val = corr
-            print("side stiffeners too close to the bottom corners: ", dis_right_bottom_corner)
-            geometry_ok = False
-
-    if bottom_left != None and bottom_right != None:
-        dis_bottom_left_corner = corner_bottom_left.y - bottom_left_2a.y
-        if dis_bottom_left_corner < defaults.mindis_bottom_corner:
-            corr = defaults.mindis_bottom_corner - dis_bottom_left_corner
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup = bottom_left.b_sup -corr
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup = bottom_right.b_sup - corr
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup_corr = True
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup_corr = True
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup_corr_val = corr
-            stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup_corr_val = corr
-            print("bottom stiffeners too close to the corners: ", dis_bottom_left_corner)
-            geometry_ok = False
+        if bottom_left != None and bottom_right != None:
+            dis_bottom_left_corner = corner_bottom_left.y - bottom_left_2a.y
+            if dis_bottom_left_corner < defaults.mindis_bottom_corner:
+                corr = defaults.mindis_bottom_corner - dis_bottom_left_corner
+                stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup = bottom_left.b_sup -corr
+                stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup = bottom_right.b_sup - corr
+                stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup_corr = True
+                stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup_corr = True
+                stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup_corr_val = corr
+                stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup_corr_val = corr
+                print("bottom stiffeners too close to the corners: ", dis_bottom_left_corner)
+                geometry_ok = False
 
 
 
@@ -237,140 +217,135 @@ def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
 
 
     """check distances between stiffeners"""
-
-    if right_top != None and right_bottom != None and right_top != right_bottom:
-        st_number_min = right_top.lines[0].code.st_number
-        st_number_max = right_bottom.lines[0].code.st_number
-        for i in range(st_number_min, st_number_max, 1):
-            upper = stiffeners2[i-st_number_min].get_line(pl_position = 2, st_number = i, st_pl_position = 2).a
-            lower = stiffeners2[i+1-st_number_min].get_line(pl_position = 2,st_number = i+1,st_pl_position = 4).b
-            overlap = lower.z < upper.z
-            distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
-            corr = 0
-            if overlap == True:
-                corr = (defaults.mindis_between+distance)/2
-            else:
-                corr = (defaults.mindis_between-distance)/2
-            #needs correction
-            if distance < defaults.mindis_between:
-                st_1 = stiffeners_proposition.get_proposed_stiffener(2,i)
-                st_2 = stiffeners_proposition.get_proposed_stiffener(2,i+1)
-                corr_old_1 = st_1.b_sup_corr_val
-                corr_old_2 = st_2.b_sup_corr_val
-                #no change to the stiffener yet
-                if corr_old_1 == 0:
-                    st_1.b_sup = stiffeners2[i-st_number_min].b_sup - corr
-                    st_1.b_sup_corr = True
-                    st_1.b_sup_corr_val = corr
-                #there has been a correction but not enough
-                if corr_old_1 < corr:
-                    st_1.b_sup += corr_old_1 - corr
-                    st_1.b_sup_corr = True
-                    st_1.b_sup_corr_val = corr
-                if corr_old_2 == 0:
-                    st_2.b_sup = stiffeners2[i+1-st_number_min].b_sup - corr
-                    st_2.b_sup_corr = True
-                    st_2.b_sup_corr_val = corr
-                if corr_old_2 < corr:
-                    st_2.b_sup += corr_old_2 - corr
-                    st_2.b_sup_corr = True
-                    st_2.b_sup_corr_val = corr
-                geometry_ok = False
-                print("stiffeners on the right side are too close to each other ", end ='')
+    if defaults.do_width_only == True:
+        if right_top != None and right_bottom != None and right_top != right_bottom:
+            st_number_min = right_top.lines[0].code.st_number
+            st_number_max = right_bottom.lines[0].code.st_number
+            for i in range(st_number_min, st_number_max, 1):
+                upper = stiffeners2[i-st_number_min].get_line(pl_position = 2, st_number = i, st_pl_position = 2).a
+                lower = stiffeners2[i+1-st_number_min].get_line(pl_position = 2,st_number = i+1,st_pl_position = 4).b
+                overlap = lower.z < upper.z
+                distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
+                corr = 0
                 if overlap == True:
-                    print("with overlap: ", distance)
+                    corr = (defaults.mindis_between+distance)/2
                 else:
-                    print("without overlap: ", distance)
+                    corr = (defaults.mindis_between-distance)/2
+                #needs correction
+                if distance < defaults.mindis_between:
+                    st_1 = stiffeners_proposition.get_proposed_stiffener(2,i)
+                    st_2 = stiffeners_proposition.get_proposed_stiffener(2,i+1)
+                    corr_old_1 = st_1.b_sup_corr_val
+                    corr_old_2 = st_2.b_sup_corr_val
+                    #no change to the stiffener yet
+                    if corr_old_1 == 0:
+                        st_1.b_sup = stiffeners2[i-st_number_min].b_sup - corr
+                        st_1.b_sup_corr = True
+                        st_1.b_sup_corr_val = corr
+                    #there has been a correction but not enough
+                    if corr_old_1 < corr:
+                        st_1.b_sup += corr_old_1 - corr
+                        st_1.b_sup_corr = True
+                        st_1.b_sup_corr_val = corr
+                    if corr_old_2 == 0:
+                        st_2.b_sup = stiffeners2[i+1-st_number_min].b_sup - corr
+                        st_2.b_sup_corr = True
+                        st_2.b_sup_corr_val = corr
+                    if corr_old_2 < corr:
+                        st_2.b_sup += corr_old_2 - corr
+                        st_2.b_sup_corr = True
+                        st_2.b_sup_corr_val = corr
+                    geometry_ok = False
+                    print("stiffeners on the right side are too close to each other ", end ='')
+                    if overlap == True:
+                        print("with overlap: ", distance)
+                    else:
+                        print("without overlap: ", distance)
 
-    if left_top != None and left_bottom != None and left_top != left_bottom:
-        st_number_min = left_bottom.lines[0].code.st_number
-        st_number_max = left_top.lines[0].code.st_number
-        for i in range(st_number_min, st_number_max, 1):
-            lower = stiffeners4[i-st_number_min].get_line(pl_position = 4, st_number = i, st_pl_position = 2).a
-            upper = stiffeners4[i+1-st_number_min].get_line(pl_position = 4, st_number = i+1,st_pl_position = 4).b
-            overlap = upper.z > lower.z
-            distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
-            corr = 0
-            if overlap == True:
-                corr = (defaults.mindis_between+distance)/2
-            else:
-                corr = (defaults.mindis_between-distance)/2
-            if distance < defaults.mindis_between:
-                st_1 = stiffeners_proposition.get_proposed_stiffener(4,i)
-                st_2 = stiffeners_proposition.get_proposed_stiffener(4,i+1)
-                corr_old_1 = st_1.b_sup_corr_val
-                corr_old_2 = st_2.b_sup_corr_val
-                if corr_old_1 == 0:
-                    st_1.b_sup = stiffeners4[i-st_number_min].b_sup - corr
-                    st_1.b_sup_corr = True
-                    st_1.b_sup_corr_val = corr
-                if corr_old_1 < corr:
-                    st_1.b_sup += corr_old_1 - corr
-                    st_1.b_sup_corr = True
-                    st_1.b_sup_corr_val = corr
-                if corr_old_2 == 0:
-                    st_2.b_sup = stiffeners4[i+1-st_number_min].b_sup - corr
-                    st_2.b_sup_corr = True
-                    st_2.b_sup_corr_val = corr
-                if corr_old_2 < corr:
-                    st_2.b_sup += corr_old_2 - corr
-                    st_2.b_sup_corr = True
-                    st_2.b_sup_corr_val = corr
-                geometry_ok = False
-                print("stiffeners on the left side are too close to each other ", end ='')
+        if left_top != None and left_bottom != None and left_top != left_bottom:
+            st_number_min = left_bottom.lines[0].code.st_number
+            st_number_max = left_top.lines[0].code.st_number
+            for i in range(st_number_min, st_number_max, 1):
+                lower = stiffeners4[i-st_number_min].get_line(pl_position = 4, st_number = i, st_pl_position = 2).a
+                upper = stiffeners4[i+1-st_number_min].get_line(pl_position = 4, st_number = i+1,st_pl_position = 4).b
+                overlap = upper.z > lower.z
+                distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
+                corr = 0
                 if overlap == True:
-                    print("with overlap: ", distance)
+                    corr = (defaults.mindis_between+distance)/2
                 else:
-                    print("without overlap: ", distance)
+                    corr = (defaults.mindis_between-distance)/2
+                if distance < defaults.mindis_between:
+                    st_1 = stiffeners_proposition.get_proposed_stiffener(4,i)
+                    st_2 = stiffeners_proposition.get_proposed_stiffener(4,i+1)
+                    corr_old_1 = st_1.b_sup_corr_val
+                    corr_old_2 = st_2.b_sup_corr_val
+                    if corr_old_1 == 0:
+                        st_1.b_sup = stiffeners4[i-st_number_min].b_sup - corr
+                        st_1.b_sup_corr = True
+                        st_1.b_sup_corr_val = corr
+                    if corr_old_1 < corr:
+                        st_1.b_sup += corr_old_1 - corr
+                        st_1.b_sup_corr = True
+                        st_1.b_sup_corr_val = corr
+                    if corr_old_2 == 0:
+                        st_2.b_sup = stiffeners4[i+1-st_number_min].b_sup - corr
+                        st_2.b_sup_corr = True
+                        st_2.b_sup_corr_val = corr
+                    if corr_old_2 < corr:
+                        st_2.b_sup += corr_old_2 - corr
+                        st_2.b_sup_corr = True
+                        st_2.b_sup_corr_val = corr
+                    geometry_ok = False
+                    print("stiffeners on the left side are too close to each other ", end ='')
+                    if overlap == True:
+                        print("with overlap: ", distance)
+                    else:
+                        print("without overlap: ", distance)
 
-    if bottom_right != None and bottom_left != None and bottom_left != bottom_right:
-        st_number_min = bottom_right.lines[0].code.st_number
-        st_number_max = bottom_left.lines[0].code.st_number
-        for i in range(st_number_min, st_number_max, 1):
-            right = stiffeners3[i-st_number_min].get_line(pl_position = 3,st_number = i,st_pl_position = 2).a
-            left = stiffeners3[i+1-st_number_min].get_line(pl_position = 3,st_number = i+1, st_pl_position = 4).b
-            y_shift = 100000
-            overlap = right.y + y_shift > left.y + y_shift
-            distance = abs((right.y + y_shift) - (left.y + y_shift))
-            corr = 0
-            if overlap == False:
-                corr = (defaults.mindis_between-distance)/2
-            elif overlap == True:
-                corr = (defaults.mindis_between+distance)/2
-            if distance < defaults.mindis_between:
-                st_1 = stiffeners_proposition.get_proposed_stiffener(3,i)
-                st_2 = stiffeners_proposition.get_proposed_stiffener(3,i+1)
-                corr_old_1 = st_1.b_sup_corr_val
-                corr_old_2 = st_2.b_sup_corr_val
-                if corr_old_1 == 0:
-                    st_1.b_sup = stiffeners3[i-st_number_min].b_sup - corr
-                    st_1.b_sup_corr = True
-                    st_1.b_sup_corr_val = corr
-                if corr_old_1 < corr:
-                    st_1.b_sup += corr_old_1 - corr
-                    st_1.b_sup_corr = True
-                    st_1.b_sup_corr_val = corr
-                if corr_old_2 == 0:
-                    st_2.b_sup = stiffeners3[i+1-st_number_min].b_sup - corr
-                    st_2.b_sup_corr = True
-                    st_2.b_sup_corr_val = corr
-                if corr_old_2 < corr:
-                    st_2.b_sup += corr_old_2 - corr
-                    st_2.b_sup_corr = True
-                    st_2.b_sup_corr_val = corr
-                geometry_ok = False
-                print("bottom stiffeners are too close to each other ", end = '')
-                if overlap == True:
-                    print("with overlap: ", distance)
-                else:
-                    print("without overlap: ", distance)
+        if bottom_right != None and bottom_left != None and bottom_left != bottom_right:
+            st_number_min = bottom_right.lines[0].code.st_number
+            st_number_max = bottom_left.lines[0].code.st_number
+            for i in range(st_number_min, st_number_max, 1):
+                right = stiffeners3[i-st_number_min].get_line(pl_position = 3,st_number = i,st_pl_position = 2).a
+                left = stiffeners3[i+1-st_number_min].get_line(pl_position = 3,st_number = i+1, st_pl_position = 4).b
+                y_shift = 100000
+                overlap = right.y + y_shift > left.y + y_shift
+                distance = abs((right.y + y_shift) - (left.y + y_shift))
+                corr = 0
+                if overlap == False:
+                    corr = (defaults.mindis_between-distance)/2
+                elif overlap == True:
+                    corr = (defaults.mindis_between+distance)/2
+                if distance < defaults.mindis_between:
+                    st_1 = stiffeners_proposition.get_proposed_stiffener(3,i)
+                    st_2 = stiffeners_proposition.get_proposed_stiffener(3,i+1)
+                    corr_old_1 = st_1.b_sup_corr_val
+                    corr_old_2 = st_2.b_sup_corr_val
+                    if corr_old_1 == 0:
+                        st_1.b_sup = stiffeners3[i-st_number_min].b_sup - corr
+                        st_1.b_sup_corr = True
+                        st_1.b_sup_corr_val = corr
+                    if corr_old_1 < corr:
+                        st_1.b_sup += corr_old_1 - corr
+                        st_1.b_sup_corr = True
+                        st_1.b_sup_corr_val = corr
+                    if corr_old_2 == 0:
+                        st_2.b_sup = stiffeners3[i+1-st_number_min].b_sup - corr
+                        st_2.b_sup_corr = True
+                        st_2.b_sup_corr_val = corr
+                    if corr_old_2 < corr:
+                        st_2.b_sup += corr_old_2 - corr
+                        st_2.b_sup_corr = True
+                        st_2.b_sup_corr_val = corr
+                    geometry_ok = False
+                    print("bottom stiffeners are too close to each other ", end = '')
+                    if overlap == True:
+                        print("with overlap: ", distance)
+                    else:
+                        print("without overlap: ", distance)
 
 
-
-
-    #"Temporary Return statement for testing"
-    #print("geometry_ok")
-    #print(geometry_ok)
 
 
     """check distances in corners between stiffeners"""

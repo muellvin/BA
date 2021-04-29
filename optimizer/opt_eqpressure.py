@@ -33,7 +33,7 @@ def opt_eqpressure(cs_fresh, st_list_deck):
             empty_cs = set_t_side(copy.deepcopy(cs_fresh), t_side)
             empty_cs = set_t_bottom(empty_cs, t_bottom)
 
-            cs_temp = stiffener.merge(copy.deepcopy(empty_cs), st_list_deck)
+            cs_temp = merge.merge(copy.deepcopy(empty_cs), st_list_deck)
             cs_temp = buckling_proof.buckling_proof(copy.deepcopy(empty_cs))
             sigma_top_red = get_sigma_top_red(cs_temp)
             sigma_bottom_red = get_sigma_bottom_red(cs_temp)
@@ -55,7 +55,7 @@ def opt_eqpressure(cs_fresh, st_list_deck):
                         st_list = st_list_deck + st_list_side
                         st_list = sorted(st_list, key = lambda st: st.lines[0].code.st_number)
 
-                        stiffened_cs = stiffener.merge(copy.deepcopy(empty_cs), st_list)
+                        stiffened_cs = merge.merge(copy.deepcopy(empty_cs), st_list)
                         stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
 
                         #stresses at the top and bottom corner
@@ -85,7 +85,7 @@ def opt_eqpressure(cs_fresh, st_list_deck):
                             st_list = st_list_deck + st_list_side + st_list_bottom
                             st_list = sorted(st_list, key = lambda st: st.lines[0].code.st_number)
 
-                            stiffened_cs = stiffener.merge(copy.deepcopy(empty_cs), st_list)
+                            stiffened_cs = merge.merge(copy.deepcopy(empty_cs), st_list)
                             stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
 
                             #stresses at the top and bottom corner
