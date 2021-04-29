@@ -1,7 +1,7 @@
 	EBPlate - v2.01 
-Société       # 
+SociÃ©tÃ©       # 
 Affaire       # 
-Référence     # 
+RÃ©fÃ©rence     # 
 Utilisateur   # 
 Commentaire   # 
 #PLATE 
@@ -19,7 +19,7 @@ Commentaire   #
    Orthotropic Plate =  0 
    Referentiel 2 
    Nombre de raidisseurs  3 
-   - Raidisseur n° 1 Active=1 
+   - Raidisseur nÂ° 1 Active=1 
       Orientation = 0 
       Position    = 75.0 
       Gamma       = 0 
@@ -30,7 +30,7 @@ Commentaire   #
       Dimension 2 = 30.0 
       Dimension 3 = 20.0 
       Dimension 4 = 0.5 
-   - Raidisseur n° 2 Active=1 
+   - Raidisseur nÂ° 2 Active=1 
       Orientation = 0 
       Position    = 150.0 
       Gamma       = 0 
@@ -41,7 +41,7 @@ Commentaire   #
       Dimension 2 = 30.0 
       Dimension 3 = 20.0 
       Dimension 4 = 0.5 
-   - Raidisseur n° 3 Active=1 
+   - Raidisseur nÂ° 3 Active=1 
       Orientation = 0 
       Position    = 225.0 
       Gamma       = 0 
