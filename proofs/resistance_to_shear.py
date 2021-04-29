@@ -5,6 +5,7 @@ from proofs import stress_cal
 from ebplate import ebplate
 import copy
 from classes import crosssection as cs
+from output import geometry_output as go
 
 def resistance_to_shear(plate_glob, V_Ed_plate):
     #get values of constants
@@ -21,8 +22,7 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
             h_w += plate.get_length_tot()
     t = plate_glob.get_line(pl_type = 0).t
 
-    #is plate stiffened?
-    #this method need to be implemented
+
     stiffened = True
     if len(plate_glob.lines) == 1:
         stiffened = False
@@ -52,10 +52,11 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
                     plate_a = plate
                 if plate.code.tpl_number >= max_tpl:
                     plate_b = plate
-            elif plate.code.st_number <= min_stn and plate.code.st_number != 0:
-                min_stn = plate.code.st_number
-            elif plate.code.st_number >= max_stn and plate.code.st_number != 0:
-                max_stn = plate.code.st_number
+            else:
+                if plate.code.st_number <= min_stn and plate.code.st_number != 0:
+                    min_stn = plate.code.st_number
+                if plate.code.st_number >= max_stn and plate.code.st_number != 0:
+                    max_stn = plate.code.st_number
 
         assert plate_a != None and plate_b != None, "For-Loop failed."
 
@@ -112,6 +113,7 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         sigma_E = 190000*(t/h_w)**2
         if abs(tau) > 0.1 and 3 <= t:
             k_tau = ebplate.ebplate_shear(a, h_w, t, tau, stiffeners_ebp) * tau / sigma_E
+            go.print_cs(plate_glob)
         elif t<3:
             print("plate too thin")
             return 10**-2
