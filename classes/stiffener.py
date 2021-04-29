@@ -1,6 +1,3 @@
-#not really a class
-#has methods for creating stiffeners of the type crosssection
-
 import math
 import shapely
 import random
@@ -18,7 +15,7 @@ import copy
 from classes import check_geometry
 
 
-
+#initial cs is empty (only four lines)
 def add_stiffener_set(initial_cs, proposition):
     iterations = 0
     geometry_ok = False

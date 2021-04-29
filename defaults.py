@@ -1,7 +1,6 @@
 import math
 import data
 
-
 """default cs"""
 cs_b_sup = 4000
 cs_t_deck = 5
@@ -13,7 +12,6 @@ cs_a = 10000
 cs_L_e = 15000
 cs_bending_type = "sagging bending"
 cs_cs_position = "neither"
-
 def set_cs_defaults():
     data.input_data.update({"b_sup": cs_b_sup})
     data.input_data.update({"t_deck": cs_t_deck})
@@ -28,7 +26,6 @@ def set_cs_defaults():
 
 
 """default crosssectional forces"""
-
 cs_M_Ed = 10**9
 cs_V_Ed = 100000
 cs_T_Ed = 0
@@ -36,7 +33,6 @@ def set_forces_defaults():
     data.input_data.update({"M_Ed": cs_M_Ed})
     data.input_data.update({"V_Ed": cs_V_Ed})
     data.input_data.update({"T_Ed": cs_T_Ed})
-
 
 
 """default stiffener"""
@@ -51,23 +47,15 @@ welding_cost = 40 #[CHF/m]
 steel_cost = 1.5 #[CHF/kg]
 
 
-
 """check_geometry defaults"""
 mindis_top_corner = 100
 mindis_side_top_corner = 100
 mindis_side_bottom_corner = 100
 mindis_bottom_corner = 100
-
 mindis_between = 30
-
 mindis_across_top = 500
 mindis_across_bottom = 100
 cutoffangle = math.pi/3
-
-do_check_geometry = False
-do_check_stiffeners_in_corners_top = True
-do_check_stiffeners_in_corners_bottom = False
-
 
 
 """stiffener (substantiate) defaults"""
@@ -85,7 +73,6 @@ t_range = [5,7,9,11,13,15,17,20]
 max_angle = math.pi/12*5 #75 grad
 
 
-
 """buckling defaults"""
 #convergence limit for m_rd_el in effective width iterations of local buckling
 convergence_limit_local_buckling = 0.005
@@ -93,18 +80,26 @@ plate_length = 4000
 effective_width_parameter = 10
 #eta should be changed if fy > 460 MPa
 eta = 1.0
-
 #convergence limit for when width reduction due to shear lag is calculated plastically
 convergence_limit_shear_lag = 0.05
+
+
+"""do module defaults"""
+#check_geometry
+do_check_geometry = True
+do_check_stiffeners_in_corners_top = False
+do_check_stiffeners_in_corners_bottom = False
+do_height_only = True
+do_width_only = False
+
 do_shear_lag_plastically = False
 do_shear_lag = False
 do_global_plate_buckling = True
 do_column_plate_buckling = True
 
-
-"""cs_analysis_tool"""
 do_print = True
 do_print_to_txt = True
+
 
 def cs_defaults_tostring():
     line1 = "defaults for crosssection geometry: \n"
