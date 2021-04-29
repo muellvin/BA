@@ -1,19 +1,26 @@
-#crosssection generation framework still to be completely implemented
-class cs_collection():
-    """This is a collection of crossections."""
+import data
 
-    #constructor creates four empty crosssection lists
-    def __init__(self, initial_cs, current_cs = None, last_cs = None, best_cs = None):
-        self.initial_cs = initial_cs
-        self.current_cs = current_cs if current_cs is not None else initial_cs
-        self.last_cs = last_cs if last_cs is not None else initial_cs
-        self.best_cs = best_cs if best_cs is not None else initial_cs
+def into_collector(new_cs):
+    data.cs_collection.append(new_cs)
 
-    def into_collector(self, new_cs):
-        pass
-
-    def compare(self, new_cs):
-        pass
-
-    def update(self, new_cs, worsebetterbest):
-        pass
+def get_best():
+    best_cs = []
+    if data.cs_collection == []:
+        return best_cs
+    else:
+        for cs_fromall in data.cs_collection:
+            add = False
+            if best_cs == []:
+                add = True
+            else:
+                for cs_frombest in best_cs:
+                    if cs_fromall.cost < cs_frombest.cost:
+                        add = True
+                        best_cs.remove(cs_frombest)
+                    elif cs_fromall.cost == cs_frombest.cost:
+                        add = True
+                    else:
+                        add = False
+            if add == True:
+                best_cs.append(cs_fromall)
+        return best_cs

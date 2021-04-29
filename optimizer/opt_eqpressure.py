@@ -8,88 +8,101 @@ from classes import stiffener
 from classes import substantiate
 import copy
 import math
+from output import geometry_output
 
 
 #an optimizer that puts the stiffeners in place, such that the single plates inbetween each have the same total pressure
-def opt_eqpressure(cs_fresh):
-    t_values = [5, 10, 20]
-    i_along_values = [3*10**7, 6*10**7, 9*10**7]
-    n_st_side_max = 8
-    n_st_bottom_max = 10
+def opt_eqpressure(cs_fresh, st_list_deck):
+    t_values = [5]
+    #i_along_values = [3*10**7, 6*10**7, 9*10**7]
+    n_st_side_max = 1
+    n_st_bottom_max = 1
 
+    """TILL NOW: ONLY ONE I_ALONG FOR ALL"""
+    
     if data.input_data.get("M_Ed") > 1:
         tension_bottom = True
     else:
         tension_bottom = False
 
     for t_side in t_values:
+        print("888888888888888888888888888888888  SIDE T = ", t_side, "888888888888888888888888888888888")
         for t_bottom in t_values:
+            print("888888888888888888888888888888888  BOTTOM T = ", t_bottom, "888888888888888888888888888888888")
 
-            stop_side = False
-            stop_bottom = False
+            empty_cs = set_t_side(copy.deepcopy(cs_fresh), t_side)
+            empty_cs = set_t_bottom(empty_cs, t_bottom)
 
-            n_st_side = 0
-            sigma_top_red = 0
-            sigma_bottom_red = 0
-            first_iteration_side = True
-            iteration_i = 0
+            cs_temp = stiffener.merge(copy.deepcopy(empty_cs), st_list_deck)
+            cs_temp = buckling_proof.buckling_proof(copy.deepcopy(empty_cs))
+            sigma_top_red = get_sigma_top_red(cs_temp)
+            sigma_bottom_red = get_sigma_bottom_red(cs_temp)
+
+            iteration_side = 1
+
             #the optimizer loop does not loop i_along, as this should be set optimally by the set functions
-            while n_st_side <= n_st_side_max and stop_side == False:
-                print("888888888888888888888888888888888  ITERATION ", iteration_i, "88888888888888888888888888888888")
-                if first_iteration_side == True:
-                    cs_temp = local_buckling.local_buckling(copy.deepcopy(cs_fresh))
-                    print(" I WAS HERE I WAS HERE I WAS HERE I AWS HERE")
-                    sigma_top_red = cs_temp.get_line(pl_position = 2).sigma_a_red
-                    sigma_bottom_red = cs_temp.get_line(pl_position = 2).sigma_b_red
-
-                else:
-                    print(" I WAS HERE TOOOOOOOOOOOOOOOO I WAS HERE I WAS HERE I AWS HERE")
-                    sigma_top_red = cs.get_line(pl_position = 2).sigma_a_red
-                    sigma_bottom_red = cs.get_line(pl_position = 2).sigma_b_red
-
+            n_st_side = 0
+            while n_st_side <= n_st_side_max:
+                print("888888888888888888888888888888888  ITERATION SIDE ", iteration_side, "888888888888888888888888888888888")
 
                 if tension_bottom == True:
-                    print("TENSION BOTTOM TRUEEEEEEEEEEEEEEEEEEEEEE")
-                    cs = set_t_side(copy.deepcopy(cs_fresh), t_side)
+                    #do it twice; the stresses now are the ones calculated for the same amount of stiffeners (but different place (could do more))
+                    for twice in range(2):
+                        print("sigma_top_red: ", sigma_top_red)
+                        print("sigma_bottom_red: ", sigma_bottom_red)
+                        st_prop_side = set_stiffeners_side(copy.deepcopy(empty_cs), n_st_side, sigma_top_red, sigma_bottom_red)
+                        st_list_side = substantiate.substantiate(copy.deepcopy(empty_cs), st_prop_side)
+                        st_list = st_list_deck + st_list_side
+                        st_list = sorted(st_list, key = lambda st: st.lines[0].code.st_number)
 
-                    cs = set_t_bottom(cs, t_bottom)
-                    print("im stuck heereee")
-                    cs = set_stiffeners_side(cs, n_st_side, sigma_top_red, sigma_bottom_red)
-                    print("im stuck heereee")
+                        stiffened_cs = stiffener.merge(copy.deepcopy(empty_cs), st_list)
+                        stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
 
-                    cs = buckling_proof.buckling_proof(copy.deepcopy(cs))
-                    #stresses at the top and bottom corner
-                    sigma_top_red = get_sigma_top_red(cs)
-                    sigma_bottom_red = get_sigma_bottom_red(cs)
+                        #stresses at the top and bottom corner
+                        sigma_top_red = get_sigma_top_red(stiffened_cs)
+                        sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
 
-                    if cs.interaction_2 <= 1:
-                        return cs
-                        cs_collector.into_collector(cs)
-                        stop_side = True
-                    elif cs.interaction_2 >1:
-                        n_st_side += 1
-                    first_iteration_side = False
-                    iteration_i += 1
+
+
+                    if stiffened_cs.eta_1 <= 1 and stiffened_cs.interaction_2 < 1 and stiffened_cs.interaction_3 < 1 and stiffened_cs.interaction_4 < 1:
+                        #cs_collector.into_collector(stiffened_cs)
+                        pass
+
+                    geometry_output.print_cs_red(stiffened_cs)
+
+
                 else:
-                    print("TENSION BOTTOM FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALSE")
                     n_st_bottom = 0
-                    while n_st_bottom <= n_st_bottom_max and stop_bottom == False:
-                        cs = set_t_side(copy.deepcopy(cs_fresh), t_side)
-                        cs = set_t_bottom(cs, t_bottom)
-                        cs = set_stiffeners_side(cs, n_st_side)
-                        cs = set_stiffeners_bottom(cs, n_st_bottom)
+                    iteration_bottom = 1
+                    while n_st_bottom <= n_st_bottom_max:
+                        print("888888888888888888888888888888888  ITERATION BOTTOM ", iteration_bottom, "888888888888888888888888888888888")
+                        #do it twice; the stresses now are the ones calculated for the same amount of stiffeners (but different place (could do more))
+                        for twice in range(2):
+                            st_prop_side = set_stiffeners_side(copy.deepcopy(empty_cs), n_st_side, sigma_top_red, sigma_bottom_red)
+                            st_prop_bottom = set_stiffeners_bottom(copy.deepcopy(empty_cs), n_st_bottom, sigma_bottom_red)
+                            st_list_side = substantiate.substantiate(copy.deepcopy(empty_cs), st_prop_side)
+                            st_list_bottom = substantiate.substantiate(copy.deepcopy(empty_cs), st_prop_bottom)
+                            st_list = st_list_deck + st_list_side + st_list_bottom
+                            st_list = sorted(st_list, key = lambda st: st.lines[0].code.st_number)
 
-                        if cs.interaction_2 <= 1 and cs.interaction_2 <= 1 and cs.utilisation_flange_bottom <= 1:
-                            return cs
+                            stiffened_cs = stiffener.merge(copy.deepcopy(empty_cs), st_list)
+                            stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
+
+                            #stresses at the top and bottom corner
+                            sigma_top_red = get_sigma_top_red(stiffened_cs)
+                            sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
+
+
+                        if stiffened_cs.eta_1 <= 1 and stiffened_cs.interaction_2 < 1 and stiffened_cs.interaction_3 < 1 and stiffened_cs.interaction_4 < 1:
                             cs_collector.into_collector(cs)
-                            stop_bottom = True
-                        else:
-                            n_st_bottom += 1
-                    first_iteration_side = False
-                    iteration_i += 1
-                    n_st_side += 1
+                        n_st_bottom += 1
+                        iteration_bottom += 1
 
-    return cs
+                        geometry_output.print_cs_red(stiffened_cs)
+
+                n_st_side += 1
+                iteration_side += 1
+
 
 
 
@@ -109,12 +122,14 @@ def set_t_bottom(cs, t_bottom):
 
 def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
     if amount == 0:
-        cs = buckling_proof.buckling_proof(cs)
-        return cs
+        propositions = stiffeners_proposition.stiffeners_proposition()
+        return propositions
     else:
         #all tension?
         if sigma_top_red < 0 and sigma_bottom_red < 0:
-            return cs
+            propositions = stiffeners_proposition.stiffeners_proposition()
+            return propositions
+
         #where is the higher pressure
         if sigma_top_red > sigma_bottom_red:
             higher_top = True
@@ -122,6 +137,7 @@ def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
         else:
             higher_top = False
             sigma_max = sigma_bottom_red
+
         #the max stress and if all pressure than also the small one
         if sigma_top_red > 0 and sigma_bottom_red > 0:
             if higher_top == True:
@@ -133,40 +149,53 @@ def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
 
         psi = min(sigma_top_red, sigma_bottom_red)/max(sigma_top_red, sigma_bottom_red)
         h = data.input_data.get("h")
-        h_c = h / (1-psi)
+
+        #h_c height that is under pressure length of whole triangle
+        if psi == 1:
+            h_c = 10**10
+        else:
+            h_c = h / (1-psi)
+
+        #h_min is the height under pressure that exceeds h
+        #h_0 is the height under tension of h
         if h_c < h:
             h_min = 0
             h_0 = h - h_c
         else:
             h_min = h_c - h
             h_0 = 0
+
         #pressure gradient m
-        m = (sigma_max - sigma_min) / (h_c - h_min)
+        m = sigma_max / h_c
         #eqpressure means all single plates get the same total force F
-        F = (h_c**2/2 - h_min**2/2)*m / (amount + 1)
+        F = (h_c**2/2 - h_min**2/2)*m / (2*amount + 1)
 
         #now to find the distances between the welding points
         distances = []
-        plate_i = 1
+        i = 1
         sigma_i_before = sigma_min
+        #distance is
         #from sigma_min to sigma_max find the distances using m and F
-        while plate_i <= amount:
+        while i <= 2*amount+1:
             #F = 1/2 * (2*sigma_before + m * distance_i) * distance_i
             #= = m*distance_i**2 + 2*sigma_before*distance_i -2*F
             distance_i = 1/(2*m) * ( (-2)*sigma_i_before + math.sqrt((2*sigma_i_before)**2 - 4*m*(-2*F)))
             distances.append(distance_i)
             sigma_i_before = sigma_i_before + m*distance_i
-            plate_i += 1
+            i += 1
+
+        #sanity check
+        assert h == h_0 + sum(distances), "distances are wrong"
 
         locations_abs = []
         b_sup_list = []
         i = 1
         location_abs_last = distances[0]/2
         while i <= amount:
-            location_abs_i = location_abs_last + distances[i-2]/2 + distances[i-1]/2
+            location_abs_i = h_0 + location_abs_last + distances[i-1]/2 + distances[i]/2
             locations_abs.append(location_abs_i)
             location_abs_last = location_abs_i
-            width_i = distances[i-1]
+            width_i = distances[i]
             b_sup_list.append(width_i)
             i+=1
 
@@ -190,7 +219,7 @@ def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
         if higher_top == True:
             #propositions are created from bottom to top
             i = 1
-            while i < amount:
+            while i <= amount:
                 proposition_right_i = proposed_stiffener.proposed_stiffener(2, st_number_side1_max + amount + 1 - i, locations[i-1], i_along, distances[i])
                 proposition_right_i.b_sup_corr = True
                 propositions.add(proposition_right_i)
@@ -201,7 +230,7 @@ def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
         else:
             #propositions are created from top to bottom
             i = 1
-            while i < amount:
+            while i <= amount:
                 proposition_right_i = proposed_stiffener.proposed_stiffener(2, st_number_side1_max + i, locations[i-1], i_along, distances[i])
                 proposition_right_i.b_sup_corr = True
                 propositions.add(proposition_right_i)
@@ -211,16 +240,15 @@ def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
 
 
         propositions.stiffeners = sorted(propositions.stiffeners, key = lambda st: st.st_number)
-        stiffener_list = substantiate.substantiate(copy.deepcopy(cs),propositions)
-        cs = stiffener.merge(cs, stiffener_list)
-        return cs
+
+        return propositions
 
 
 
-def set_stiffeners_bottom(cs, amount):
+def set_stiffeners_bottom(cs, amount, sigma_bottom_red):
     if amount == 0:
-        cs = buckling_proof.buckling_proof(cs)
-        return cs
+        propositions = stiffeners_proposition.stiffeners_proposition()
+        return propositions
     else:
         cs_b_inf = data.input_data.get("b_inf")
         st_b_sup = data.input_data.get("b_inf")/(2*amount + 1)
@@ -237,13 +265,13 @@ def set_stiffeners_bottom(cs, amount):
             i += 2
         #change it to the convention of create_stiffener_global
         for location in locations:
-            location = location * b_st_sup / cs_b_inf
+            location = location * st_b_sup / cs_b_inf
 
 
         #create the proposed_stiffeners
         i_along = 3*10**7
         st_number_side2_max = 0
-        for plate in cs.plates:
+        for plate in cs.lines:
             if plate.code.pl_position == 2 and plate.code.st_number > st_number_side2_max:
                 st_number_side2_max = plate.code.st_number
 
@@ -260,21 +288,19 @@ def set_stiffeners_bottom(cs, amount):
                 plate.code.st_number += amount
 
         propositions.stiffeners = sorted(propositions.stiffeners, key = lambda st: st.st_number)
-        stiffeners_list = substantiate.substantiate(copy.deepcopy(cs), propositions)
-        cs = stiffener.merge(cs, stiffeners_list)
-        return cs
+        return propositions
 
 
 def get_sigma_top_red(cs):
     top_plate = cs.get_line(pl_position = 2, pl_type = 0)
     for plate in cs.lines:
-        if plate.code.tpl_number <= top_plate.code.tpl_number and plate.code.pl_type == 0:
+        if plate.code.tpl_number <= top_plate.code.tpl_number and plate.code.pl_position == 2 and plate.code.pl_type == 0:
             top_plate = plate
     return top_plate.sigma_a_red
 
 def get_sigma_bottom_red(cs):
-    bottom_plate = cs.get_line(pl_position = 2, pl_type = 0)
+    bottom_plate = copy.deepcopy(cs.get_line(pl_position = 2, pl_type = 0))
     for plate in cs.lines:
-        if plate.code.tpl_number <= bottom_plate.code.tpl_number and plate.code.pl_type == 0:
-            bottom_plate = plate
+        if plate.code.tpl_number >= bottom_plate.code.tpl_number and plate.code.pl_position == 2 and plate.code.pl_type == 0:
+            bottom_plate = copy.deepcopy(plate)
     return bottom_plate.sigma_b_red
