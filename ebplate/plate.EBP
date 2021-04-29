@@ -18,7 +18,18 @@ Commentaire   #
 #STIFFENING 
    Orthotropic Plate =  0 
    Referentiel 2 
-   Nombre de raidisseurs  0 
+   Nombre de raidisseurs  1 
+   - Raidisseur n° 1 Active=1 
+      Orientation = 0 
+      Position    = 150.0 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 20.615528128088304 
+      Dimension 2 = 30.0 
+      Dimension 3 = 20.0 
+      Dimension 4 = 0.5 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
