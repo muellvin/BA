@@ -3,6 +3,7 @@ from classes import stiffener
 from classes import crosssection
 from input import input_analysis_tool
 from proofs import buckling_proof
+from classes import merge
 import initial_cs
 import data
 import deck
@@ -17,21 +18,15 @@ input_analysis_tool.set_cs_geometry()
 cs = initial_cs.create_initial_cs(data.input_data.get("b_sup"), data.input_data.get("b_inf"), data.input_data.get("h"), data.input_data.get("t_side"), data.input_data.get("t_deck"), data.input_data.get("t_bottom"))
 
 #add the deck stiffeners
-deck_stiffener_list = deck.deck(data.input_data.get("b_sup"))
-cs = stiffener.merge(cs, deck_stiffener_list)
-number_stplates_top = 0
-for plate in cs.lines:
-    if plate.code.pl_type == 1:
-        number_stplates_top += 1
-assert number_stplates_top%3 == 0; "wattt"
-number_st_top= number_stplates_top/3
+st_list_deck = deck.deck(data.input_data.get("b_sup"))
+number_st_top = len(st_list_deck)
 
 
 
 
 #add all other stiffeners
 input_analysis_tool.set_stiffeners(number_st_top)
-stiffener_list = []
+st_list_rest = []
 for st in data.stiffener_data.stiffeners:
     y,z = cs.get_coordinates(st.location, st.pl_position)
     if st.pl_position == 2:
@@ -42,9 +37,10 @@ for st in data.stiffener_data.stiffeners:
         angle = math.pi - cs.get_angle(2)
     stiffener_i = stiffener.create_stiffener_global(st.pl_position, st.st_number, y, z, angle, \
     st.b_sup, st.b_inf, st.h, st.t)
-    stiffener_list.append(stiffener_i)
-cs = stiffener.merge(cs, stiffener_list)
-
+    st_list_rest.append(stiffener_i)
+stiffener_list = st_list_deck + st_list_rest
+cs = merge.merge(cs, stiffener_list)
+print(cs)
 geometry_output.print_cs_red(cs)
 
 

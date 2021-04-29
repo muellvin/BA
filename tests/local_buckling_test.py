@@ -12,6 +12,7 @@ from classes import stiffener
 from classes import stiffeners_proposition
 from classes import proposed_stiffener
 from classes import crosssection
+from classes import merge
 import deck
 import data
 import defaults
@@ -23,7 +24,7 @@ defaults.set_forces_defaults()
 cs = initial_cs.create_initial_cs(data.input_data.get("b_sup"), data.input_data.get("b_inf"), data.input_data.get("h"), 20, 20, 20)
 geometry_output.print_cs_red(cs)
 deck_stiffeners = deck.deck(data.input_data.get("b_sup"))
-cs = stiffener.merge(cs, deck_stiffeners)
+cs = merge.merge(cs, deck_stiffeners)
 geometry_output.print_cs_red(cs)
 
 prop_list = stiffeners_proposition.stiffeners_proposition()

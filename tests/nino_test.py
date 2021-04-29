@@ -11,6 +11,7 @@ from proofs import local_buckling as locb
 from output import geometry_output as go
 import data
 import deck
+from classes import merge
 from classes import stiffener as st
 from proofs import buckling_proof
 
@@ -26,5 +27,5 @@ data.input_data.update({"bending type": "sagging bending"})
 data.input_data.update({"cs position": 1000})
 initial_cs = ics.create_initial_cs(4000, 3000, 1500, 4, 4, 4)
 deck_stiffeners = deck.deck(4000)
-stiffened_cs = st.merge(initial_cs, deck_stiffeners)
+stiffened_cs = merge.merge(initial_cs, deck_stiffeners)
 buckling_proof.buckling_proof(stiffened_cs)

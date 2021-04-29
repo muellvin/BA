@@ -5,11 +5,11 @@ import data
 from classes import proposed_stiffener
 from classes import stiffeners_proposition
 from classes import stiffener
+from classes import merge
 from classes import substantiate
 import copy
 import math
 from output import geometry_output
-
 
 #an optimizer that puts the stiffeners in place, such that the single plates inbetween each have the same total pressure
 def opt_eqpressure(cs_fresh, st_list_deck):
@@ -288,7 +288,13 @@ def set_stiffeners_bottom(cs, amount, sigma_bottom_red):
                 plate.code.st_number += amount
 
         propositions.stiffeners = sorted(propositions.stiffeners, key = lambda st: st.st_number)
+<<<<<<< HEAD
         return propositions
+=======
+        stiffeners_list = substantiate.substantiate(copy.deepcopy(cs), propositions)
+        cs = merge.merge(cs, stiffeners_list)
+        return cs
+>>>>>>> be3f51ee8e373a93ad71bba8bdc9f8ec841397bb
 
 
 def get_sigma_top_red(cs):
