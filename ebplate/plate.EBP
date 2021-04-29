@@ -1,13 +1,13 @@
 	EBPlate - v2.01 
-Société       # 
+SociÃ©tÃ©       # 
 Affaire       # 
-Référence     # 
+RÃ©fÃ©rence     # 
 Utilisateur   # 
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
-   Height          158.11388300841895 cm 
-   Thickness         0.5 cm 
+   Height          300.0 cm 
+   Thickness         2.0 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
    Boundary Conditions 
@@ -18,7 +18,40 @@ Commentaire   #
 #STIFFENING 
    Orthotropic Plate =  0 
    Referentiel 2 
-   Nombre de raidisseurs  0 
+   Nombre de raidisseurs  3 
+   - Raidisseur nÂ° 1 Active=1 
+      Orientation = 0 
+      Position    = 75.0 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 20.615528128088304 
+      Dimension 2 = 30.0 
+      Dimension 3 = 20.0 
+      Dimension 4 = 0.5 
+   - Raidisseur nÂ° 2 Active=1 
+      Orientation = 0 
+      Position    = 150.0 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 20.615528128088304 
+      Dimension 2 = 30.0 
+      Dimension 3 = 20.0 
+      Dimension 4 = 0.5 
+   - Raidisseur nÂ° 3 Active=1 
+      Orientation = 0 
+      Position    = 225.0 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 20.615528128088304 
+      Dimension 2 = 30.0 
+      Dimension 3 = 20.0 
+      Dimension 4 = 0.5 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
@@ -44,7 +77,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 6.666666666666667 MPa 
+   Shear stress                                 0.6283553546585493 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000
