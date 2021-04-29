@@ -19,7 +19,7 @@ def opt_eqpressure(cs_fresh, st_list_deck):
     n_st_bottom_max = 1
 
     """TILL NOW: ONLY ONE I_ALONG FOR ALL"""
-    
+
     if data.input_data.get("M_Ed") > 1:
         tension_bottom = True
     else:
@@ -288,13 +288,7 @@ def set_stiffeners_bottom(cs, amount, sigma_bottom_red):
                 plate.code.st_number += amount
 
         propositions.stiffeners = sorted(propositions.stiffeners, key = lambda st: st.st_number)
-<<<<<<< HEAD
         return propositions
-=======
-        stiffeners_list = substantiate.substantiate(copy.deepcopy(cs), propositions)
-        cs = merge.merge(cs, stiffeners_list)
-        return cs
->>>>>>> be3f51ee8e373a93ad71bba8bdc9f8ec841397bb
 
 
 def get_sigma_top_red(cs):
