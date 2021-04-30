@@ -27,7 +27,7 @@ def check_geometry(cs, stiffeners, propositions):
         propositions, ok1 = distances_to_corners(cs, stiffeners, propositions)
         propositions, ok2 = distances_betw_stiffeners(cs, stiffeners, propositions)
         propositions, ok3 = distances_betw_st_inc_top(cs, stiffeners, propositions, False)
-        """distances across on bottom side are not done, maybe not needed
+        """distances across on bottom side are not done, maybe not needed"""
         geometry_ok = ( ok1 == ok2 == ok3 == True )
 
     elif defaults.do_height_only == True:
