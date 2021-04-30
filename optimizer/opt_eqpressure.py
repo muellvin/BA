@@ -19,7 +19,7 @@ def opt_eqpressure(cs_fresh, st_list_deck):
     t_values = [5]
     #i_along_values = [3*10**7, 6*10**7, 9*10**7]
     n_st_side_max = 2
-    n_st_bottom_max = 5
+    n_st_bottom_max = 4
 
     """TILL NOW: ONLY ONE I_ALONG FOR ALL"""
 
@@ -85,6 +85,7 @@ def opt_eqpressure(cs_fresh, st_list_deck):
                             st_list = sorted(st_list, key = lambda st: st.lines[0].code.st_number)
 
                             stiffened_cs = merge.merge(copy.deepcopy(empty_cs), st_list)
+                            geometry_output.print_cs_red(stiffened_cs)
                             stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
 
                             #stresses at the top and bottom corner
