@@ -1,7 +1,7 @@
 	EBPlate - v2.01 
-Société       # 
+Sociï¿½tï¿½       # 
 Affaire       # 
-Référence     # 
+Rï¿½fï¿½rence     # 
 Utilisateur   # 
 Commentaire   # 
 #PLATE 
@@ -44,7 +44,11 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
+<<<<<<< HEAD
    Shear stress                                 6.666666666666666 MPa 
+=======
+   Shear stress                                 0.6643723213844434 MPa 
+>>>>>>> 026d30564fa0fd7ca3fffa44e3fa72025c91fc95
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000

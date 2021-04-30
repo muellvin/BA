@@ -21,6 +21,10 @@ def global_plate_buckling(total_cs, plate_glob):
     max_stn = 0
     min_stn = 1000
 
+    print("#1")
+    print(len(stiffened_plate.lines))
+    go.print_cs(stiffened_plate)
+
     for plate in stiffened_plate.lines:
         if plate.code.pl_type == 0:
             if min_tpl == -1 and max_tpl == -1:
@@ -30,10 +34,11 @@ def global_plate_buckling(total_cs, plate_glob):
                 plate_a = plate
             if plate.code.tpl_number >= max_tpl:
                 plate_b = plate
-        elif plate.code.st_number <= min_stn and plate.code.st_number != 0:
-            min_stn = plate.code.st_number
-        elif plate.code.st_number >= max_stn and plate.code.st_number != 0:
-            max_stn = plate.code.st_number
+        else:
+            if plate.code.st_number <= min_stn and plate.code.st_number != 0:
+                min_stn = plate.code.st_number
+            if plate.code.st_number >= max_stn and plate.code.st_number != 0:
+                max_stn = plate.code.st_number
 
     assert plate_a != None and plate_b != None, "For-Loop failed."
 
@@ -156,7 +161,6 @@ def global_plate_buckling(total_cs, plate_glob):
                     else:
                         b_comp = top_plate.get_length_tot()/(1-psi_top)
                         length_top = 0.4*b_comp
-                        pass
             else:
                 #stiffener is in tension zone
                 pass

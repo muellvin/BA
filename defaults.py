@@ -26,7 +26,11 @@ def set_cs_defaults():
 
 
 """default crosssectional forces"""
+<<<<<<< HEAD
 cs_M_Ed = -10**8
+=======
+cs_M_Ed = 10**9
+>>>>>>> 026d30564fa0fd7ca3fffa44e3fa72025c91fc95
 cs_V_Ed = 100000
 cs_T_Ed = 0
 def set_forces_defaults():
