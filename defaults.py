@@ -26,7 +26,7 @@ def set_cs_defaults():
 
 
 """default crosssectional forces"""
-cs_M_Ed = 10**8
+cs_M_Ed = -10**8
 cs_V_Ed = 100000
 cs_T_Ed = 0
 def set_forces_defaults():
@@ -59,18 +59,20 @@ cutoffangle = math.pi/3
 
 
 """stiffener (substantiate) defaults"""
-b_inf_minimal = 50
+b_inf_minimal = 10
 b_inf_step = 50
 b_inf_maximal = 500
-b_sup_minimal = 150
+b_sup_minimal = 1
 b_sup_step = 50
 b_sup_maximal = 500
 b_sup_minimal = 50
-h_minimal = 100
-h_step = 20
+h_minimal = 1
+h_step = 10
 h_maximal = 300
 t_range = [5,7,9,11,13,15,17,20]
 max_angle = math.pi/12*5 #75 grad
+optimizer_type = 0
+#0: opt_eqpressure
 
 
 """buckling defaults"""
