@@ -31,7 +31,7 @@ def check_geometry(cs, stiffeners, propositions):
         geometry_ok = ( ok1 == ok2 == ok3 == True )
 
     elif defaults.do_height_only == True:
-    propositions, geometry_ok = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
+        propositions, geometry_ok = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
 
     return propositions, geometry_ok
 
@@ -369,7 +369,7 @@ def distances_betw_st_inc_top(cs, stiffeners, propositions, do_height):
             st_right_top.h = right_top.h - corr_h
             st_right_top.h_corr = True
             st_right_top.h_corr_val = corr_h
-        else do_height == False:
+        elif do_height == False:
             ok3 = False
             """correction for width"""
             #has to be written: problem correction of b_inf -> maybe already b_sup
