@@ -23,7 +23,7 @@ def global_plate_buckling(total_cs, plate_glob):
 
     print("#1")
     print(len(stiffened_plate.lines))
-    go.print_cs(stiffened_plate)
+    #go.print_cs(stiffened_plate)
 
     for plate in stiffened_plate.lines:
         if plate.code.pl_type == 0:

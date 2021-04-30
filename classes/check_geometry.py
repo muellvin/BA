@@ -6,713 +6,511 @@ from classes import point
 from classes import line
 from classes import crosssection
 from classes import plate_code
-from shapely.geometry import LineString, Point
-from classes import substantiate as ss
-from output import geometry_output as go
+from classes import substantiate
+from output import geometry_output
 import defaults
-from output import geometry_output as go
+from output import geometry_output
 
-    #this function should check weather the proposed stiffeners are feasable in the initial crosssection with the track_plate
-    #as an argument it takes the initial crosssection and a list of all proposed stiffeners of type crosssection in the global coordinate system
-    #as well as the stiffener_proposition list which then will be adjusted according to the geometry such that it might fit
-def check_geometry(crosssection_cs, stiffeners, stiffeners_proposition):
 
-    if defaults.do_check_geometry == False:
-        return True
 
+
+#cs ist empty (only 4 lines)
+#stiffeners is a list of crosssections
+#propositions is the only file that is changed and given back
+def check_geometry(cs, stiffeners, propositions):
+    geometry_ok = True
     if defaults.do_height_only == True and defaults.do_width_only == True:
         conflict = True
         assert conflict == True, "cannot do only height and only width"
 
-    geometry_ok = True
-
-    stiffeners1 = []
-    stiffeners2 = []
-    stiffeners3 = []
-    stiffeners4 = []
-    for stiffener in stiffeners:
-        if stiffener.lines[0].code.pl_position == 1:
-            stiffeners1.append(stiffener)
-        elif stiffener.lines[0].code.pl_position== 2:
-            stiffeners2.append(stiffener)
-        elif stiffener.lines[0].code.pl_position == 3:
-            stiffeners3.append(stiffener)
-        elif stiffener.lines[0].code.pl_position == 4:
-            stiffeners4.append(stiffener)
-        else:
-            print("the lines of the stiffeners that were given to check_geometry do not contain codes")
-
-    #sort the list of stiffeners according to st_number
-    stiffeners1 = sorted(stiffeners1, key = lambda stiffener: stiffener.lines[0].code.st_number)
-    stiffeners2 = sorted(stiffeners2, key = lambda stiffener: stiffener.lines[0].code.st_number)
-    stiffeners3 = sorted(stiffeners3, key = lambda stiffener: stiffener.lines[0].code.st_number)
-    stiffeners4 = sorted(stiffeners4, key = lambda stiffener: stiffener.lines[0].code.st_number)
-
-
-
-    """find for each side the most left and the most right one"""
-    top_left = None
-    top_right = None
-    left_top = None
-    right_top = None
-    bottom_left = None
-    bottom_right = None
-    right_bottom = None
-    left_bottom = None
-    if stiffeners1 != []:
-        min = random.choice(stiffeners1).lines[0].code.st_number
-        max = random.choice(stiffeners1).lines[0].code.st_number
-        for stiffener in stiffeners1:
-            if stiffener.lines[0].code.st_number <= min:
-                top_left = stiffener
-                min = stiffener.lines[0].code.st_number
-            if stiffener.lines[0].code.st_number >= max:
-                top_right = stiffener
-                max = stiffener.lines[0].code.st_number
-    if stiffeners2 != []:
-        min = random.choice(stiffeners2).lines[0].code.st_number
-        max = random.choice(stiffeners2).lines[0].code.st_number
-        for stiffener in stiffeners2:
-            if stiffener.lines[0].code.st_number <= min:
-                right_top = stiffener
-                min = stiffener.lines[0].code.st_number
-            if stiffener.lines[0].code.st_number >= max:
-                right_bottom = stiffener
-                max = stiffener.lines[0].code.st_number
-    if stiffeners3 != []:
-        min = random.choice(stiffeners3).lines[0].code.st_number
-        max = random.choice(stiffeners3).lines[0].code.st_number
-        for stiffener in stiffeners3:
-            if stiffener.lines[0].code.st_number <= min:
-                bottom_right = stiffener
-                min = stiffener.lines[0].code.st_number
-            if stiffener.lines[0].code.st_number >= max:
-                bottom_left = stiffener
-                max = stiffener.lines[0].code.st_number
-    if stiffeners4 != []:
-        min = random.choice(stiffeners4).lines[0].code.st_number
-        max = random.choice(stiffeners4).lines[0].code.st_number
-        for stiffener in stiffeners4:
-            if stiffener.lines[0].code.st_number <= min:
-                left_bottom = stiffener
-                min = stiffener.lines[0].code.st_number
-            if stiffener.lines[0].code.st_number >= max:
-                left_top = stiffener
-            max = stiffener.lines[0].code.st_number
-
-    #points from track plate stiffeners
-    top_left_4a = None
-    top_left_4b = None
-    top_right_2a = None
-    top_right_2b = None
-    if top_left != None:
-        top_left_4b = top_left.get_line(pl_position = 1, st_pl_position = 4).b
-        top_left_4a = top_left.get_line(pl_position = 1, st_pl_position = 4).a
-        st_num_top_left = top_left.get_line(pl_position = 1, st_pl_position = 4).code.st_number
-    if top_right != None:
-        top_right_2b = top_right.get_line(pl_position = 1, st_pl_position = 2).b
-        top_right_2a = top_right.get_line(pl_position = 1, st_pl_position = 2).a
-        st_num_top_right = top_right.get_line(pl_position = 1, st_pl_position = 2).code.st_number
-    #points from right side stiffeners
-    right_top_4a = None
-    right_top_4b = None
-    right_bottom_2a = None
-    right_bottom_2b = None
-    if right_top != None and right_bottom != None:
-        right_top_4b = right_top.get_line(pl_position = 2, st_pl_position = 4).b
-        right_top_4a = right_top.get_line(pl_position = 2, st_pl_position = 4).a
-        st_num_right_top = right_top.get_line(pl_position = 2, st_pl_position = 4).code.st_number
-        right_bottom_2b = right_bottom.get_line(pl_position = 2, st_pl_position = 2).b
-        right_bottom_2a = right_bottom.get_line(pl_position = 2, st_pl_position = 2).a
-        st_num_right_bottom = right_bottom.get_line(pl_position = 2, st_pl_position = 2).code.st_number
-    #points from bottom side stiffeners
-    bottom_right_4a = None
-    bottom_right_4b = None
-    bottom_left_2a = None
-    bottom_left_2b = None
-    if bottom_right != None and bottom_left != None:
-        bottom_right_4b = bottom_right.get_line(pl_position = 3, st_pl_position = 4).b
-        bottom_right_4a = bottom_right.get_line(pl_position = 3, st_pl_position = 4).a
-        st_num_bottom_right = bottom_right.get_line(pl_position = 3, st_pl_position = 4).code.st_number
-        bottom_left_2b = bottom_left.get_line(pl_position = 3, st_pl_position = 2).b
-        bottom_left_2a = bottom_left.get_line(pl_position = 3, st_pl_position = 2).a
-        st_num_bottom_left = bottom_left.get_line(pl_position = 3, st_pl_position = 2).code.st_number
-    #points from left side stiffeners
-    left_top_2a = None
-    left_top_2b = None
-    left_bottom_4a = None
-    left_bottom_4b = None
-    if left_top != None and left_bottom != None:
-        left_bottom_4b = left_bottom.get_line(pl_position = 4, st_pl_position = 4).b
-        left_bottom_4a = left_bottom.get_line(pl_position = 4, st_pl_position = 4).a
-        st_num_left_bottom = left_bottom.get_line(pl_position = 4, st_pl_position = 4).code.st_number
-        left_top_2b = left_top.get_line(pl_position = 4, st_pl_position = 2).b
-        left_top_2a = left_top.get_line(pl_position = 4, st_pl_position = 2).a
-        st_num_left_top = left_top.get_line(pl_position = 4, st_pl_position = 2).code.st_number
-
-    #corners of the crosssection
-    corner_top_right = None
-    corner_top_left = None
-    corner_bottom_right = None
-    corner_bottom_left = None
-    y_top_max = 0
-    y_top_min = 0
-    z_bottom_max = 0
-    y_bottom_max = 0
-    y_bottom_min = 0
-    for plate in crosssection_cs.lines:
-        points = []
-        points.append(plate.a)
-        points.append(plate.b)
-        for point in points:
-            if point.y >= y_top_max and point.z == 0:
-                y_top_max = point.y
-                corner_top_left = point
-            elif point.y <= y_top_min and point.z == 0:
-                y_top_min = point.y
-                corner_top_right = point
-            elif point.y >= y_bottom_max and point.z >= z_bottom_max:
-                y_bottom_max = point.y
-                z_bottom_max = point.z
-                corner_bottom_left = point
-            elif point.y <= y_bottom_min and point.z >= z_bottom_max:
-                y_bottom_min = point.y
-                z_bottom_max = point.z
-                corner_bottom_right = point
-
-
-
-
-    """check distances to corners of crosssection"""
     if defaults.do_width_only == True:
-        if right_bottom != None and left_bottom != None:
-            dis_right_bottom_corner = corner_bottom_right.z - right_bottom_2a.z
-            if dis_right_bottom_corner < defaults.mindis_side_bottom_corner:
-                corr = defaults.mindis_side_bottom_corner - dis_right_bottom_corner
-                stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup = right_bottom.b_sup - corr
-                stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup = left_bottom.b_sup - corr
-                stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup_corr = True
-                stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup_corr = True
-                stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom).b_sup_corr_val = corr
-                stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom).b_sup_corr_val = corr
-                print("side stiffeners too close to the bottom corners: ", dis_right_bottom_corner)
-                geometry_ok = False
+        propositions, ok1 = distances_to_corners(cs, stiffeners, propositions)
+        propositions, ok2 = distances_betw_stiffeners(cs, stiffeners, propositions)
+        propositions, ok3 = distances_betw_st_inc_top(cs, stiffeners, propositions, False)
+        """distances across on bottom side are not done, maybe not needed"""
+        geometry_ok = ( ok1 == ok2 == ok3 == True )
 
-        if bottom_left != None and bottom_right != None:
-            dis_bottom_left_corner = corner_bottom_left.y - bottom_left_2a.y
-            if dis_bottom_left_corner < defaults.mindis_bottom_corner:
-                corr = defaults.mindis_bottom_corner - dis_bottom_left_corner
-                stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup = bottom_left.b_sup -corr
-                stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup = bottom_right.b_sup - corr
-                stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup_corr = True
-                stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup_corr = True
-                stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left).b_sup_corr_val = corr
-                stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right).b_sup_corr_val = corr
-                print("bottom stiffeners too close to the corners: ", dis_bottom_left_corner)
-                geometry_ok = False
+    elif defaults.do_height_only == True:
+        propositions, geometry_ok = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
+
+    return propositions, geometry_ok
 
 
 
 
+def distances_to_corners(cs, stiffeners, propositions):
+    ok1 = True
+
+    right_top = get_right_top_stiffener(stiffeners)
+    right_top_4b = right_top.get_line(st_pl_position = 4).b
+    right_top_4a = right_top.get_line(st_pl_position = 4).a
+    st_num_right_top = right_top.get_line(st_pl_position = 4).code.st_number
+
+    right_bottom = get_right_bottom_stiffener(stiffeners)
+    right_bottom_2b = right_bottom.get_line(st_pl_position = 2).b
+    right_bottom_2a = right_bottom.get_line(st_pl_position = 2).a
+    st_num_right_bottom = right_bottom.get_line(st_pl_position = 2).code.st_number
+
+    bottom_right = get_bottom_right_stiffener(stiffeners)
+    bottom_right_4b = bottom_right.get_line(st_pl_position = 4).b
+    bottom_right_4a = bottom_right.get_line(st_pl_position = 4).a
+    st_num_bottom_right = bottom_right.get_line(st_pl_position = 4).code.st_number
+
+    bottom_left = get_bottom_left_stiffener(stiffeners)
+    bottom_left_2b = bottom_left.get_line(st_pl_position = 2).b
+    bottom_left_2a = bottom_left.get_line(st_pl_position = 2).a
+    st_num_bottom_left = bottom_left.get_line(st_pl_position = 2).code.st_number
+
+    left_bottom = get_left_bottom_stiffener(stiffeners)
+    left_bottom_4b = left_bottom.get_line(st_pl_position = 4).b
+    left_bottom_4a = left_bottom.get_line(st_pl_position = 4).a
+    st_num_left_bottom = left_bottom.get_line(st_pl_position = 4).code.st_number
+
+    left_top = get_left_top_stiffener(stiffeners)
+    left_top_2b = left_top.get_line(st_pl_position = 2).b
+    left_top_2a = left_top.get_line(st_pl_position = 2).a
+    st_num_left_top = left_top.get_line(st_pl_position = 2).code.st_number
 
 
-    """check distances between stiffeners"""
-    if defaults.do_width_only == True:
-        if right_top != None and right_bottom != None and right_top != right_bottom:
-            st_number_min = right_top.lines[0].code.st_number
-            st_number_max = right_bottom.lines[0].code.st_number
-            for i in range(st_number_min, st_number_max, 1):
-                upper = stiffeners2[i-st_number_min].get_line(pl_position = 2, st_number = i, st_pl_position = 2).a
-                lower = stiffeners2[i+1-st_number_min].get_line(pl_position = 2,st_number = i+1,st_pl_position = 4).b
-                overlap = lower.z < upper.z
-                distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
-                corr = 0
+
+    corner_bottom_right = get_bottom_right_corner(cs)
+    corner_top_right = get_top_right_corner(cs)
+
+    if right_top != None:
+        dis_side_top_corner = corner_top_right.z - right_top_4b.z
+        if dis_side_top_corner < defaults.mindis_side_top_corner:
+            corr = defaults.mindis_side_top_corner - dis_side_top_corner
+            propositions.get_proposed_stiffener(2, st_num_right_top).b_sup = right_top.b_sup - corr
+            propositions.get_proposed_stiffener(4, st_num_left_top).b_sup = right_top.b_sup - corr
+            propositions.get_proposed_stiffener(2, st_num_right_top).b_sup_corr = True
+            propositions.get_proposed_stiffener(4, st_num_left_top).b_sup_corr = True
+            propositions.get_proposed_stiffener(2, st_num_right_top).b_sup_corr_val = corr
+            propositions.get_proposed_stiffener(4, st_num_left_top).b_sup_corr_val = corr
+            print("side stiffeners too close to the top corners: ", dis_right_top_corner)
+            ok1 = False
+
+    if right_bottom != None:
+        dis_right_bottom_corner = corner_bottom_right.z - right_bottom_2a.z
+        if dis_right_bottom_corner < defaults.mindis_side_bottom_corner:
+            corr = defaults.mindis_side_bottom_corner - dis_right_bottom_corner
+            propositions.get_proposed_stiffener(2, st_num_right_bottom).b_sup = right_bottom.b_sup - corr
+            propositions.get_proposed_stiffener(4, st_num_left_bottom).b_sup = left_bottom.b_sup - corr
+            propositions.get_proposed_stiffener(2, st_num_right_bottom).b_sup_corr = True
+            propositions.get_proposed_stiffener(4, st_num_left_bottom).b_sup_corr = True
+            propositions.get_proposed_stiffener(2, st_num_right_bottom).b_sup_corr_val = corr
+            propositions.get_proposed_stiffener(4, st_num_left_bottom).b_sup_corr_val = corr
+            print("side stiffeners too close to the bottom corners: ", dis_right_bottom_corner)
+            ok1 = False
+
+    if bottom_right != None:
+        dis_bottom_left_corner = corner_bottom_left.y - bottom_left_2a.y
+        if dis_bottom_left_corner < defaults.mindis_bottom_corner:
+            corr = defaults.mindis_bottom_corner - dis_bottom_left_corner
+            propositions.get_proposed_stiffener(3, st_num_bottom_left).b_sup = bottom_left.b_sup -corr
+            propositions.get_proposed_stiffener(3, st_num_bottom_right).b_sup = bottom_right.b_sup - corr
+            propositions.get_proposed_stiffener(3, st_num_bottom_left).b_sup_corr = True
+            propositions.get_proposed_stiffener(3, st_num_bottom_right).b_sup_corr = True
+            propositions.get_proposed_stiffener(3, st_num_bottom_left).b_sup_corr_val = corr
+            propositions.get_proposed_stiffener(3, st_num_bottom_right).b_sup_corr_val = corr
+            print("bottom stiffeners too close to the corners: ", dis_bottom_left_corner)
+            ok1 = False
+
+    return propositions, ok1
+
+
+
+
+
+def distances_betw_stiffeners(cs, stiffeners, propositions):
+    ok2 = True
+
+    right_top = get_right_top_stiffener(stiffeners)
+    right_top_4b = right_top.get_line(st_pl_position = 4).b
+    right_top_4a = right_top.get_line(st_pl_position = 4).a
+    st_num_right_top = right_top.get_line(st_pl_position = 4).code.st_number
+
+    right_bottom = get_right_bottom_stiffener(stiffeners)
+    right_bottom_2b = right_bottom.get_line(st_pl_position = 2).b
+    right_bottom_2a = right_bottom.get_line(st_pl_position = 2).a
+    st_num_right_bottom = right_bottom.get_line(st_pl_position = 2).code.st_number
+
+    bottom_right = get_bottom_right_stiffener(stiffeners)
+    bottom_right_4b = bottom_right.get_line(st_pl_position = 4).b
+    bottom_right_4a = bottom_right.get_line(st_pl_position = 4).a
+    st_num_bottom_right = bottom_right.get_line(st_pl_position = 4).code.st_number
+
+    bottom_left = get_bottom_left_stiffener(stiffeners)
+    bottom_left_2b = bottom_left.get_line(st_pl_position = 2).b
+    bottom_left_2a = bottom_left.get_line(st_pl_position = 2).a
+    st_num_bottom_left = bottom_left.get_line(st_pl_position = 2).code.st_number
+
+    left_bottom = get_left_bottom_stiffener(stiffeners)
+    left_bottom_4b = left_bottom.get_line(st_pl_position = 4).b
+    left_bottom_4a = left_bottom.get_line(st_pl_position = 4).a
+    st_num_left_bottom = left_bottom.get_line(st_pl_position = 4).code.st_number
+
+    left_top = get_left_top_stiffener(stiffeners)
+    left_top_2b = left_top.get_line(st_pl_position = 2).b
+    left_top_2a = left_top.get_line(st_pl_position = 2).a
+    st_num_left_top = left_top.get_line(st_pl_position = 2).code.st_number
+
+
+    if right_top != None and right_bottom != None and right_top != right_bottom:
+        st_number_min = right_top.lines[0].code.st_number
+        st_number_max = right_bottom.lines[0].code.st_number
+        for i in range(st_number_min, st_number_max, 1):
+            upper = stiffeners2[i-st_number_min].get_line(pl_position = 2, st_number = i, st_pl_position = 2).a
+            lower = stiffeners2[i+1-st_number_min].get_line(pl_position = 2,st_number = i+1,st_pl_position = 4).b
+            overlap = lower.z < upper.z
+            distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
+            corr = 0
+            if overlap == True:
+                corr = (defaults.mindis_between+distance)/2
+            else:
+                corr = (defaults.mindis_between-distance)/2
+            #needs correction
+            if distance < defaults.mindis_between:
+                st_1 = stiffeners_proposition.get_proposed_stiffener(2,i)
+                st_2 = stiffeners_proposition.get_proposed_stiffener(2,i+1)
+                corr_old_1 = st_1.b_sup_corr_val
+                corr_old_2 = st_2.b_sup_corr_val
+                #no change to the stiffener yet
+                if corr_old_1 == 0:
+                    st_1.b_sup = stiffeners2[i-st_number_min].b_sup - corr
+                    st_1.b_sup_corr = True
+                    st_1.b_sup_corr_val = corr
+                #there has been a correction but not enough
+                if corr_old_1 < corr:
+                    st_1.b_sup += corr_old_1 - corr
+                    st_1.b_sup_corr = True
+                    st_1.b_sup_corr_val = corr
+                if corr_old_2 == 0:
+                    st_2.b_sup = stiffeners2[i+1-st_number_min].b_sup - corr
+                    st_2.b_sup_corr = True
+                    st_2.b_sup_corr_val = corr
+                if corr_old_2 < corr:
+                    st_2.b_sup += corr_old_2 - corr
+                    st_2.b_sup_corr = True
+                    st_2.b_sup_corr_val = corr
+                ok2 = False
+                print("stiffeners on the right side are too close to each other ", end ='')
                 if overlap == True:
-                    corr = (defaults.mindis_between+distance)/2
+                    print("with overlap: ", distance)
                 else:
-                    corr = (defaults.mindis_between-distance)/2
-                #needs correction
-                if distance < defaults.mindis_between:
-                    st_1 = stiffeners_proposition.get_proposed_stiffener(2,i)
-                    st_2 = stiffeners_proposition.get_proposed_stiffener(2,i+1)
-                    corr_old_1 = st_1.b_sup_corr_val
-                    corr_old_2 = st_2.b_sup_corr_val
-                    #no change to the stiffener yet
-                    if corr_old_1 == 0:
-                        st_1.b_sup = stiffeners2[i-st_number_min].b_sup - corr
-                        st_1.b_sup_corr = True
-                        st_1.b_sup_corr_val = corr
-                    #there has been a correction but not enough
-                    if corr_old_1 < corr:
-                        st_1.b_sup += corr_old_1 - corr
-                        st_1.b_sup_corr = True
-                        st_1.b_sup_corr_val = corr
-                    if corr_old_2 == 0:
-                        st_2.b_sup = stiffeners2[i+1-st_number_min].b_sup - corr
-                        st_2.b_sup_corr = True
-                        st_2.b_sup_corr_val = corr
-                    if corr_old_2 < corr:
-                        st_2.b_sup += corr_old_2 - corr
-                        st_2.b_sup_corr = True
-                        st_2.b_sup_corr_val = corr
-                    geometry_ok = False
-                    print("stiffeners on the right side are too close to each other ", end ='')
-                    if overlap == True:
-                        print("with overlap: ", distance)
-                    else:
-                        print("without overlap: ", distance)
+                    print("without overlap: ", distance)
 
-        if left_top != None and left_bottom != None and left_top != left_bottom:
-            st_number_min = left_bottom.lines[0].code.st_number
-            st_number_max = left_top.lines[0].code.st_number
-            for i in range(st_number_min, st_number_max, 1):
-                lower = stiffeners4[i-st_number_min].get_line(pl_position = 4, st_number = i, st_pl_position = 2).a
-                upper = stiffeners4[i+1-st_number_min].get_line(pl_position = 4, st_number = i+1,st_pl_position = 4).b
-                overlap = upper.z > lower.z
-                distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
-                corr = 0
+    if left_top != None and left_bottom != None and left_top != left_bottom:
+        st_number_min = left_bottom.lines[0].code.st_number
+        st_number_max = left_top.lines[0].code.st_number
+        for i in range(st_number_min, st_number_max, 1):
+            lower = stiffeners4[i-st_number_min].get_line(pl_position = 4, st_number = i, st_pl_position = 2).a
+            upper = stiffeners4[i+1-st_number_min].get_line(pl_position = 4, st_number = i+1,st_pl_position = 4).b
+            overlap = upper.z > lower.z
+            distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
+            corr = 0
+            if overlap == True:
+                corr = (defaults.mindis_between+distance)/2
+            else:
+                corr = (defaults.mindis_between-distance)/2
+            if distance < defaults.mindis_between:
+                st_1 = stiffeners_proposition.get_proposed_stiffener(4,i)
+                st_2 = stiffeners_proposition.get_proposed_stiffener(4,i+1)
+                corr_old_1 = st_1.b_sup_corr_val
+                corr_old_2 = st_2.b_sup_corr_val
+                if corr_old_1 == 0:
+                    st_1.b_sup = stiffeners4[i-st_number_min].b_sup - corr
+                    st_1.b_sup_corr = True
+                    st_1.b_sup_corr_val = corr
+                if corr_old_1 < corr:
+                    st_1.b_sup += corr_old_1 - corr
+                    st_1.b_sup_corr = True
+                    st_1.b_sup_corr_val = corr
+                if corr_old_2 == 0:
+                    st_2.b_sup = stiffeners4[i+1-st_number_min].b_sup - corr
+                    st_2.b_sup_corr = True
+                    st_2.b_sup_corr_val = corr
+                if corr_old_2 < corr:
+                    st_2.b_sup += corr_old_2 - corr
+                    st_2.b_sup_corr = True
+                    st_2.b_sup_corr_val = corr
+                ok2 = False
+                print("stiffeners on the left side are too close to each other ", end ='')
                 if overlap == True:
-                    corr = (defaults.mindis_between+distance)/2
+                    print("with overlap: ", distance)
                 else:
-                    corr = (defaults.mindis_between-distance)/2
-                if distance < defaults.mindis_between:
-                    st_1 = stiffeners_proposition.get_proposed_stiffener(4,i)
-                    st_2 = stiffeners_proposition.get_proposed_stiffener(4,i+1)
-                    corr_old_1 = st_1.b_sup_corr_val
-                    corr_old_2 = st_2.b_sup_corr_val
-                    if corr_old_1 == 0:
-                        st_1.b_sup = stiffeners4[i-st_number_min].b_sup - corr
-                        st_1.b_sup_corr = True
-                        st_1.b_sup_corr_val = corr
-                    if corr_old_1 < corr:
-                        st_1.b_sup += corr_old_1 - corr
-                        st_1.b_sup_corr = True
-                        st_1.b_sup_corr_val = corr
-                    if corr_old_2 == 0:
-                        st_2.b_sup = stiffeners4[i+1-st_number_min].b_sup - corr
-                        st_2.b_sup_corr = True
-                        st_2.b_sup_corr_val = corr
-                    if corr_old_2 < corr:
-                        st_2.b_sup += corr_old_2 - corr
-                        st_2.b_sup_corr = True
-                        st_2.b_sup_corr_val = corr
-                    geometry_ok = False
-                    print("stiffeners on the left side are too close to each other ", end ='')
-                    if overlap == True:
-                        print("with overlap: ", distance)
-                    else:
-                        print("without overlap: ", distance)
+                    print("without overlap: ", distance)
 
-        if bottom_right != None and bottom_left != None and bottom_left != bottom_right:
-            st_number_min = bottom_right.lines[0].code.st_number
-            st_number_max = bottom_left.lines[0].code.st_number
-            for i in range(st_number_min, st_number_max, 1):
-                right = stiffeners3[i-st_number_min].get_line(pl_position = 3,st_number = i,st_pl_position = 2).a
-                left = stiffeners3[i+1-st_number_min].get_line(pl_position = 3,st_number = i+1, st_pl_position = 4).b
-                y_shift = 100000
-                overlap = right.y + y_shift > left.y + y_shift
-                distance = abs((right.y + y_shift) - (left.y + y_shift))
-                corr = 0
-                if overlap == False:
-                    corr = (defaults.mindis_between-distance)/2
-                elif overlap == True:
-                    corr = (defaults.mindis_between+distance)/2
-                if distance < defaults.mindis_between:
-                    st_1 = stiffeners_proposition.get_proposed_stiffener(3,i)
-                    st_2 = stiffeners_proposition.get_proposed_stiffener(3,i+1)
-                    corr_old_1 = st_1.b_sup_corr_val
-                    corr_old_2 = st_2.b_sup_corr_val
-                    if corr_old_1 == 0:
-                        st_1.b_sup = stiffeners3[i-st_number_min].b_sup - corr
-                        st_1.b_sup_corr = True
-                        st_1.b_sup_corr_val = corr
-                    if corr_old_1 < corr:
-                        st_1.b_sup += corr_old_1 - corr
-                        st_1.b_sup_corr = True
-                        st_1.b_sup_corr_val = corr
-                    if corr_old_2 == 0:
-                        st_2.b_sup = stiffeners3[i+1-st_number_min].b_sup - corr
-                        st_2.b_sup_corr = True
-                        st_2.b_sup_corr_val = corr
-                    if corr_old_2 < corr:
-                        st_2.b_sup += corr_old_2 - corr
-                        st_2.b_sup_corr = True
-                        st_2.b_sup_corr_val = corr
-                    geometry_ok = False
-                    print("bottom stiffeners are too close to each other ", end = '')
-                    if overlap == True:
-                        print("with overlap: ", distance)
-                    else:
-                        print("without overlap: ", distance)
-
-
-
-
-    """check distances in corners between stiffeners"""
-    if defaults.do_check_stiffeners_in_corners_top == True and left_top != None and top_left != None:
-        #the two edges are each defined by two lines
-        #top corners (using symmetry, just doing left one)
-        lines_left_top = []
-        lines_left_top.append(left_top.get_line(pl_position = 4, st_pl_position = 2))
-        lines_left_top.append(left_top.get_line(pl_position = 4, st_pl_position = 3))
-        lines_top_left = []
-        lines_top_left.append(top_left.get_line(pl_position = 1, st_pl_position = 4))
-        lines_top_left.append(top_left.get_line(pl_position = 1, st_pl_position = 3))
-
-
-        change_h = False
-        change_b_inf = False
-        cut = False
-        corrections_needed = False
-        #angle defining border III and IV
-        cutoffangle = defaults.cutoffangle
-        #angle between bottom plate of left top stiffener and the y axis
-        stangle = float(left_top.get_line(pl_position = 4, st_pl_position = 3).get_angle_y())
-        #distance between the two croner points of the stiffeners
-        dis = dis_lines_lines(lines_left_top, lines_top_left)[0]
-        #angle of this distance to the y axis
-        disangle = dis_lines_lines(lines_left_top, lines_top_left)[1]
-
-        corr_b_inf = 0
-        corr_h = 0
-        situation = 0
-
-
-        #situation I
-        if top_left_4a.y > left_top_2a.y and top_left_4a.z > left_top_2a.z:
-            situation = 1
-            #angle between the dis and the stiffener bottom line of left top
-            angle_between_st_dis = disangle - stangle
-            disdiff = dis + defaults.mindis_across_top
-            disdiff_norm = disdiff*math.cos(angle_between_st_dis)
-            corr_h = disdiff_norm
-            cut = True
-            change_h = True
-            corrections_needed = True
-            geometry_ok = False
-        #situation II (may be that bottom line of left top still cuts)
-        elif left_top_2b.z < top_left_4a.z:
-            situation = 2
-            #angle between the dis and the stiffener bottom line of left top
-            angle_between_st_dis = disangle - stangle
-            disdiff = defaults.mindis_across_top - dis
-            dis_norm = disdiff*math.cos(angle_between_st_dis)
-            if 0 < dis_norm < defaults.mindis_across_top:
-                corr_h = defaults.mindis_across_top - dis_norm
-                change_h = True
-                corrections_needed = True
-                geometry_ok = False
-        #situation III
-        elif disangle < cutoffangle and left_top_2a.y > top_left_4a.y:
-            situation = 3
-            #angle between the dis and the stiffener bottom line of left top
-            angle_between_st_dis = disangle + stangle
-            disdiff = defaults.mindis_across_top - dis
-            disdiff_norm = disdiff*math.cos(angle_between_st_dis)
-            if 0 < disdiff_norm < defaults.mindis_across_top:
-                corr_h = disdiff_norm
-                change_h = True
-                corrections_needed = True
-                geometry_ok = False
-        #situation IV
-        elif left_top_2a.y > top_left_4a.y:
-            situation = 4
-            angle_between_st_dis = disangle + stangle
-            disdiff = defaults.mindis_across_top - dis
-            disdiff_parallel = disdiff*math.sin(angle_between_st_dis)
-            if 0 < disdiff_parallel < default.mindis_across_top:
-                corr_b_inf = disdiff_parallel
-                change_b_inf = True
-                corrections_needed = True
-                geometry_ok = False
-        #situation V
-        else:
-            situation = 5
-            disdiff = defaults.mindis_across_top - dis
-            angle_between_st_dis = disangle + stangle
-            disdiff_norm = disdiff*math.cos(angle_between_st_dis)
-            if 0 < disdiff_norm < defaults.mindis_across_top:
-                corr_h = disdiff_norm
-                change_h = True
-                corrections_needed = True
-                geometry_ok = False
+    if bottom_right != None and bottom_left != None and bottom_left != bottom_right:
+        st_number_min = bottom_right.lines[0].code.st_number
+        st_number_max = bottom_left.lines[0].code.st_number
+        for i in range(st_number_min, st_number_max, 1):
+            right = stiffeners3[i-st_number_min].get_line(pl_position = 3,st_number = i,st_pl_position = 2).a
+            left = stiffeners3[i+1-st_number_min].get_line(pl_position = 3,st_number = i+1, st_pl_position = 4).b
+            y_shift = 100000
+            overlap = right.y + y_shift > left.y + y_shift
+            distance = abs((right.y + y_shift) - (left.y + y_shift))
+            corr = 0
+            if overlap == False:
+                corr = (defaults.mindis_between-distance)/2
+            elif overlap == True:
+                corr = (defaults.mindis_between+distance)/2
+            if distance < defaults.mindis_between:
+                st_1 = stiffeners_proposition.get_proposed_stiffener(3,i)
+                st_2 = stiffeners_proposition.get_proposed_stiffener(3,i+1)
+                corr_old_1 = st_1.b_sup_corr_val
+                corr_old_2 = st_2.b_sup_corr_val
+                if corr_old_1 == 0:
+                    st_1.b_sup = stiffeners3[i-st_number_min].b_sup - corr
+                    st_1.b_sup_corr = True
+                    st_1.b_sup_corr_val = corr
+                if corr_old_1 < corr:
+                    st_1.b_sup += corr_old_1 - corr
+                    st_1.b_sup_corr = True
+                    st_1.b_sup_corr_val = corr
+                if corr_old_2 == 0:
+                    st_2.b_sup = stiffeners3[i+1-st_number_min].b_sup - corr
+                    st_2.b_sup_corr = True
+                    st_2.b_sup_corr_val = corr
+                if corr_old_2 < corr:
+                    st_2.b_sup += corr_old_2 - corr
+                    st_2.b_sup_corr = True
+                    st_2.b_sup_corr_val = corr
+                ok2 = False
+                print("bottom stiffeners are too close to each other ", end = '')
+                if overlap == True:
+                    print("with overlap: ", distance)
+                else:
+                    print("without overlap: ", distance)
+    return propositions, ok2
 
 
 
 
 
 
+def distances_betw_st_inc_top(cs, stiffeners, propositions, do_height):
+    ok3 = True
+    right_top = get_right_top_stiffener(stiffeners)
+    right_top_4b = right_top.get_line(st_pl_position = 4).b
+    right_top_4a = right_top.get_line(st_pl_position = 4).a
+    st_num_right_top = right_top.get_line(st_pl_position = 4).code.st_number
 
-        if corrections_needed == True:
-            #temporal output
-            angle_deg = disangle/(2*math.pi)*360
-            print("situation: ",situation)
-            print("top: disangle=",angle_deg)
-            print("top: distance=",dis)
+    right_bottom = get_right_bottom_stiffener(stiffeners)
+    right_bottom_2b = right_bottom.get_line(st_pl_position = 2).b
+    right_bottom_2a = right_bottom.get_line(st_pl_position = 2).a
+    st_num_right_bottom = right_bottom.get_line(st_pl_position = 2).code.st_number
 
-            print("Stiffeners in top corners are too close: ",math.floor(dis)," should be ",defaults.mindis_across_top," -> shorten by val: b_inf-=",math.floor(corr_b_inf)," h-=",math.floor(corr_h))
+    bottom_right = get_bottom_right_stiffener(stiffeners)
+    bottom_right_4b = bottom_right.get_line(st_pl_position = 4).b
+    bottom_right_4a = bottom_right.get_line(st_pl_position = 4).a
+    st_num_bottom_right = bottom_right.get_line(st_pl_position = 4).code.st_number
 
-            st_left_top = stiffeners_proposition.get_proposed_stiffener(4, st_num_left_top)
-            st_left_top_b_inf_corr_old = st_left_top.b_inf_corr_val
-            st_left_top_h_corr_old = st_left_top.h_corr_val
+    bottom_left = get_bottom_left_stiffener(stiffeners)
+    bottom_left_2b = bottom_left.get_line(st_pl_position = 2).b
+    bottom_left_2a = bottom_left.get_line(st_pl_position = 2).a
+    st_num_bottom_left = bottom_left.get_line(st_pl_position = 2).code.st_number
+
+    left_bottom = get_left_bottom_stiffener(stiffeners)
+    left_bottom_4b = left_bottom.get_line(st_pl_position = 4).b
+    left_bottom_4a = left_bottom.get_line(st_pl_position = 4).a
+    st_num_left_bottom = left_bottom.get_line(st_pl_position = 4).code.st_number
+
+    left_top = get_left_top_stiffener(stiffeners)
+    left_top_2b = left_top.get_line(st_pl_position = 2).b
+    left_top_2a = left_top.get_line(st_pl_position = 2).a
+    st_num_left_top = left_top.get_line(st_pl_position = 2).code.st_number
 
 
-            #hs are only adjusted in case of this problem (no check for previous corrections necessary)
+    if top_right != None and right_top != None:
+        st_left_top = propositions.get_proposed_stiffener(st_num_left_top)
+        st_right_top = propositions.get_proposed_stiffener(st_num_right_top)
+
+        #y z coordinate system with top_right_2a as origin
+        #n t coordinate system showing normal and tangentially away from right_top (n normal)
+        #   with right_top_4a as origin
+        dis_line = line.line([0,0,0,0,0], top_right_2b, right_top_4a, 1)
+        dis = dis_line.get_length_tot()
+        dis_angle_y = dis_line.get_angle_y()
+        dis_dy = dis_line.b.y - dis_line.a.y
+        dis_dz = dis_line.b.z - dis_line.a.z
+
+        #general check weather this might even be a problem
+        if dis_line > 500 and right_top_4a.z > top_right_2b.z:
+            return propositions, ok3
+
+        st_angle_y = right_top.get_line(st_pl_position == 3).get_angle_y
+        #n: a line normal to the st bottom line points to positive y and negative z
+        #parallel to height of stiffener right top
+        n_dy = math.cos(st_angle_y)
+        n_dz = - math.sin(st_angle_y)
+        #t: a line tangential shows in the same direction as the stiffener
+        #parallel to width
+        t_dy = -math.sin(st_angle_y)
+        t_dz = -math.cos(st_angle_y)
+
+
+        #dis_line projected onto n t coordinate system
+        dis_n = (n_dy * dis_line_dy) + (n_dz * dis_line_dz)
+        dis_t = (t_dy * dis_line_dy) + (t_dy * dis_line_dy)
+
+        if dis > defaults.mindis_across_top and dis_n > 0 and dis_t > 0:
+            ok3 = True
+        elif dis_n > defaults.mindis_across_top:
+            ok3 = True
+        elif dis_t > defaults.mindis_across_top:
+            ok3 = True
+        elif do_height == True:
+            ok3 = False
+        #if we get here, changes have to be made
+            h_corr = defaults.mindis_across_top - dis_n
             st_left_top.h = left_top.h - corr_h
             st_left_top.h_corr = True
             st_left_top.h_corr_val = corr_h
-
-
-            if st_left_top_b_inf_corr_old == 0:
-                st_left_top.b_inf = left_top.b_inf - corr_b_inf
-                st_left_top.b_inf_corr = True
-                st_left_top.b_inf_corr_val = corr_b_inf
-            if st_left_top_b_inf_corr_old < corr_b_inf:
-                st_left_top.b_inf += st_left_top_b_inf_corr_old  - corr_b_inf
-                st_left_top.b_inf_corr = True
-                st_left_top.b_inf_corr_val = corr_b_inf
-
-
-
-            st_right_top = stiffeners_proposition.get_proposed_stiffener(2, st_num_right_top)
-            st_right_top_b_inf_corr_old = st_right_top.b_inf_corr_val
-            st_right_top_h_corr_old = st_right_top.h_corr_val
-
-
-            #hs are only adjusted in case of this problem (no check for previous corrections necessary)
             st_right_top.h = right_top.h - corr_h
             st_right_top.h_corr = True
             st_right_top.h_corr_val = corr_h
+        elif do_height == False:
+            ok3 = False
+            """correction for width"""
+            #has to be written: problem correction of b_inf -> maybe already b_sup
 
-
-            if st_right_top_b_inf_corr_old == 0:
-                st_right_top.b_inf = right_top.b_inf - corr_b_inf
-                st_right_top.b_inf_corr = True
-                st_right_top.b_inf_corr_val = corr_b_inf
-            if st_right_top_b_inf_corr_old < corr_b_inf:
-                st_right_top.b_inf += st_right_top_b_inf_corr_old  - corr_b_inf
-                st_right_top.b_inf_corr = True
-                st_right_top.b_inf_corr_val = corr_b_inf
+    return propositions, ok3
 
 
 
 
 
 
-    if defaults.do_check_stiffeners_in_corners_bottom == True and left_bottom != None and bottom_left != None:
+def get_top_right_corner(cs):
+    for plate in cs.lines:
+        points = []
+        points.append(copy.deepcopy(plate.a))
+        points.append(copy.deepcopy(plate.b))
+    y_top_min = 0
+    for point in points:
+        if point.y <= y_top_min and point.z == 0:
+            y_top_min = point.y
+            top_right_corner = point
+    return top_right_corner
 
-        #bottom (using symmetry, just doing left one)
-        lines_left_bottom = []
-        lines_left_bottom.append(left_bottom.get_line(pl_position = 4, st_pl_position = 3))
-        lines_left_bottom.append(left_bottom.get_line(pl_position = 4, st_pl_position = 4))
-        lines_bottom_left = []
-        lines_bottom_left.append(bottom_left.get_line(pl_position = 3, st_pl_position = 2))
-        lines_bottom_left.append(bottom_left.get_line(pl_position = 3, st_pl_position = 3))
-
-        max_dis = 0
-        disangle = 0
-        cut = False
-
-        if lines_left_bottom != [] and lines_bottom_left != []:
-            if dis_lines_lines(lines_left_bottom, lines_bottom_left)[0] > max_dis:
-                max_dis = dis_lines_lines(lines_left_bottom, lines_bottom_left)[0]
-                disangle = dis_lines_lines(lines_left_bottom, lines_bottom_left)[1]
-            elif dis_lines_lines(lines_bottom_left, lines_left_bottom)[0] > max_dis:
-                max_dis = dis_lines_lines(lines_bottom_left, lines_left_bottom)[0]
-                disangle = dis_lines_lines(lines_bottom_left, lines_left_bottom)[1]
-            elif cut(lines_bottom_left, lines_left_bottom) == True:
-                max_dis = (-1) * max_dis
-                cut = True
-        else:
-            max_dis = 1000
-
-        if max_dis < defaults.mindis_across_bottom:
-            geometry_ok = False
-            disdiff = defaults.mindis_across_bottom - max_dis
-
-            stangle = (math.pi/2 - float(left_bottom.get_line(pl_position = 4, st_pl_position = 3).get_angle_y()))
-            angle = disangle + stangle
-            corr_b_inf = disdiff*math.cos(angle)/2
-            corr_h = disdiff*math.sin(angle)/2
-
-            print("Stiffeners in bottom corners are too close: ",math.floor(max_dis)," should be ",defaults.mindis_across_bottom," ---> shorten by val: b_inf-=",math.floor(corr_b_inf)," h-=",math.floor(corr_h))
-
-            st_left_bottom = stiffeners_proposition.get_proposed_stiffener(4, st_num_left_bottom)
-            st_bottom_left = stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_left)
-            st_left_bottom_b_inf_corr_old = st_left_bottom.b_inf_corr_val
-            st_bottom_left_b_inf_corr_old = st_bottom_left.b_inf_corr_val
-            st_left_bottom_h_corr_old = st_left_bottom.h_corr_val
-            st_bottom_left_h_corr_old = st_bottom_left.h_corr_val
-
-            #hs are only adjusted in case of this problem
-            st_left_bottom.h = left_bottom.h - corr_h
-            st_left_bottom.h_corr = True
-            st_left_bottom.h_corr_val = corr_h
-            st_bottom_left.h = bottom_left.h - corr_h
-            st_bottom_left.h_corr = True
-            st_bottom_left.h_corr_val = corr_h
-
-            if st_left_bottom_b_inf_corr_old == 0:
-                st_left_bottom.b_inf = left_bottom.b_inf - corr_b_inf
-                st_left_bottom.b_inf_corr = True
-                st_left_bottom.b_inf_corr_val = corr_b_inf
-            if st_left_bottom_b_inf_corr_old < corr_b_inf:
-                st_left_bottom.b_inf += st_left_bottom_b_inf_corr_old  - corr_b_inf
-                st_left_bottom.b_inf_corr = True
-                st_left_bottom.b_inf_corr_val = corr_b_inf
-
-            if st_bottom_left_b_inf_corr_old == 0:
-                st_bottom_left.b_inf = bottom_left.b_inf - corr_b_inf
-                st_bottom_left.b_inf_corr = True
-                st_bottom_left.b_inf_corr_val = corr_b_inf
-            if st_bottom_left_b_inf_corr_old < corr_b_inf:
-                st_bottom_left.b_inf += st_bottom_left_b_inf_corr_old - corr_b_inf
-                st_bottom_left.b_inf_corr = True
-                st_bottom_left.b_inf_corr_val = corr_b_inf
+def get_bottom_right_corner(cs):
+    for plate in cs.lines:
+        points = []
+        points.append(copy.deepcopy(plate.a))
+        points.append(copy.deepcopy(plate.b))
+    y_bottom_min = 0
+    z_bottom_max = 0
+    for point in points:
+        if point.y <= y_bottom_min and point.z >= z_bottom_max:
+            y_bottom_min = point.y
+            z_bottom_max = point.z
+            bottom_right_corner = point
+    return bottom_right_corner
 
 
+def get_top_stiffeners(stiffeners):
+    top_stiffeners = []
+    for stiffener in stiffeners:
+        if stiffener.lines[0].code.pl_position == 1:
+            top_stiffeners.append(stiffener)
+    return top_stiffeners
 
-            st_right_bottom = stiffeners_proposition.get_proposed_stiffener(2, st_num_right_bottom)
-            st_bottom_right = stiffeners_proposition.get_proposed_stiffener(3, st_num_bottom_right)
-            st_right_bottom_b_inf_corr_old = st_right_bottom.b_inf_corr_val
-            st_bottom_right_b_inf_corr_old = st_bottom_right.b_inf_corr_val
-            st_right_bottom_h_corr_old = st_right_bottom.h_corr_val
-            st_bottom_right_h_corr_old = st_bottom_right.h_corr_val
+def get_right_stiffeners(stiffeners):
+    right_stiffeners = []
+    for stiffener in stiffeners:
+        if stiffener.lines[0].code.pl_position == 2:
+            right_stiffeners.append(stiffener)
+    return right_stiffeners
 
-            #hs are only adjusted in case of this problem
-            st_right_bottom.h = right_bottom.h - corr_h
-            st_right_bottom.h_corr = True
-            st_right_bottom.h_corr_val = corr_h
-            st_bottom_right.h = bottom_right.h - corr_h
-            st_bottom_right.h_corr = True
-            st_bottom_right.h_corr_val = corr_h
+def get_bottom_stiffeners(stiffeners):
+    bottom_stiffeners = []
+    for stiffener in stiffeners:
+        if stiffener.lines[0].code.pl_position == 3:
+            bottom_stiffeners.append(stiffener)
+    return bottom_stiffeners
 
-            if st_right_bottom_b_inf_corr_old == 0:
-                st_right_bottom.b_inf = right_bottom.b_inf - corr_b_inf
-                st_right_bottom.b_inf_corr = True
-                st_right_bottom.b_inf_corr_val = corr_b_inf
-            if st_right_bottom_b_inf_corr_old < corr_b_inf:
-                st_right_bottom.b_inf += st_right_bottom_b_inf_corr_old  - corr_b_inf
-                st_right_bottom.b_inf_corr = True
-                st_right_bottom.b_inf_corr_val = corr_b_inf
-
-            if st_bottom_right_b_inf_corr_old == 0:
-                st_bottom_right.b_inf = bottom_right.b_inf - corr_b_inf
-                st_bottom_right.b_inf_corr = True
-                st_bottom_right.b_inf_corr_val = corr_b_inf
-            if st_bottom_right_b_inf_corr_old < corr_b_inf:
-                st_bottom_right.b_inf += st_bottom_right_b_inf_corr_old - corr_b_inf
-                st_bottom_right.b_inf_corr = True
-                st_bottom_right.b_inf_corr_val = corr_b_inf
+def get_left_stiffeners(stiffeners):
+    left_stiffeners = []
+    for stiffener in stiffeners:
+        if stiffener.lines[0].code.pl_position == 4:
+            left_stiffeners.append(stiffener)
+    return left_stiffeners
 
 
+def get_top_left_stiffener(stiffeners):
+    top_stiffeners = get_top_stiffeners(stiffeners)
+    if top_stiffeners == []:
+        return None
+    top_left = top_stiffeners[0]
+    for top_stiffener in top_stiffeners:
+        if top_stiffener[0].code.st_number < top_left[0].code.st_number:
+            top_left = top_stiffener
+    return top_left
 
+def get_top_right_stiffener(stiffeners):
+    top_stiffeners = get_top_stiffeners(stiffeners)
+    if top_stiffeners == []:
+        return None
+    top_right = top_stiffeners[0]
+    for top_stiffener in top_stiffeners:
+        if top_stiffener[0].code.st_number > top_right[0].code.st_number:
+            top_right = top_stiffener
+    return top_right
 
-    return geometry_ok
+def get_right_top_stiffener(stiffeners):
+    right_stiffeners = get_right_stiffeners(stiffeners)
+    if right_stiffeners == []:
+        return None
+    right_top = right_stiffeners[0]
+    for right_stiffener in right_stiffeners:
+        if right_stiffener[0].code.st_number < right_top[0].code.st_number:
+            right_top = right_stiffener
+    return right_top
+def get_right_bottom_stiffener(stiffeners):
+    right_stiffeners = get_right_stiffeners(stiffeners)
+    if right_stiffeners == []:
+        return None
+    right_bottom = right_stiffeners[0]
+    for right_stiffener in right_stiffeners:
+        if right_stiffener[0].code.st_number > right_bottom[0].code.st_number:
+            right_bottom = right_stiffener
+    return right_bottom
 
+def get_bottom_right_stiffener(stiffeners):
+    bottom_stiffeners = get_bottom_stiffeners(stiffeners)
+    if bottom_stiffeners == []:
+        return None
+    bottom_right = bottom_stiffeners[0]
+    for bottom_stiffener in bottom_stiffeners:
+        if bottom_stiffener[0].code.st_number < bottom_right[0].code.st_number:
+            bottom_right = bottom_stiffener
+    return bottom_right
 
+def get_bottom_left_stiffener(stiffeners):
+    bottom_stiffeners = get_bottom_stiffeners(stiffeners)
+    if bottom_stiffeners == []:
+        return None
+    bottom_left = bottom_stiffeners[0]
+    for bottom_stiffener in bottom_stiffeners:
+        if bottom_stiffener[0].code.st_number > bottom_left[0].code.st_number:
+            bottom_left = bottom_stiffener
+    return bottom_left
 
-
-
-
-
-
-
-
-
-
-def cut(lines1, lines2):
-    a11 = (lines1[0].a.y, lines1[0].a.z)
-    b11 = (lines1[0].b.y, lines1[0].b.z)
-    a12 = (lines1[1].a.y, lines1[1].a.z)
-    b12 = (lines1[1].b.y, lines1[1].b.z)
-    a21 = (lines2[0].a.y, lines2[0].a.z)
-    b21 = (lines2[0].b.y, lines2[0].b.z)
-    a22 = (lines2[1].a.y, lines2[1].a.z)
-    b22 = (lines2[1].b.y, lines2[1].b.z)
-    line11 = LineString([a11, b11])
-    line12 = LineString([a12, b12])
-    line21 = LineString([a21, b21])
-    line22 = LineString([a22, b22])
-    int1 = line11.intersection(line21)
-    int2 = line11.intersection(line22)
-    int3 = line12.intersection(line21)
-    int4 = line12.intersection(line22)
-    if int1 == None and int2 == None and int3 == None and int4 == None:
-        return False
-    else:
-        return True
-
-
-
-
-
-def dis_lines_lines(lines1, lines2):
-    #to find the corner of lines1
-    points1 = []
-    for lines in lines1:
-        points1.append(lines.a)
-        points1.append(lines.b)
-    seen = set()
-    corner1 = 0
-    for x in points1:
-        if x not in seen:
-            seen.add(x)
-        if x in seen:
-            corner1 = x
-
-    #to find the corner of lines2
-    points2 = []
-    for lines in lines2:
-        points2.append(lines.a)
-        points2.append(lines.b)
-    seen = set()
-    corner2 = 0
-    for x in points2:
-        if x not in seen:
-            seen.add(x)
-        if x in seen:
-            corner2 = x
-
-    help_line = line.line([0,0,0,0,0], corner1, corner2, 1)
-    dis = help_line.get_length_tot()
-    angle = help_line.get_angle_y()
-
-
-
-    """
-    smallest = 10000
-    angle = 0
-    for line in lines2:
-        #calculates the minimal width of a bar that fits between two corners created each by two lines
-        #list of points in lines1
-        #lines2 stays a list of lines
-        #unit vector of line from a to b (one is corner, but not important weather in plus or minus direction)
-        l_y = line.b.y - line.a.y
-        l_z = line.b.z - line.a.z
-        length = math.sqrt(l_y**2 + l_z**2)
-        #unit vector perpendicular to line
-        l_y_norm = -l_y / length
-        l_z_norm = -l_z / length
-
-        for point in points1:
-            #dot product
-            #vector from corner to point
-            d_y = point.y - corner.y
-            d_z = point.z - corner.z
-            dis_new = abs((l_y_norm * d_y + l_z_norm * d_z))
-
-            if dis_new < smallest:
-                dis = dis_new
-                if d_y != 0:
-                    angle = math.atan(d_z / d_y)
-                    if angle < 0:
-                        angle += math.pi
-                    elif angle > math.pi / 2:
-                        angle -= math.pi
-                else:
-                    angle = math.pi/2
-                smallest = dis_new"""
-
-    dis_angle = [dis, angle]
-    return dis_angle
+def get_left_bottom_stiffener(stiffeners):
+    left_stiffeners = get_left_stiffeners(stiffeners)
+    if left_stiffeners == []:
+        return None
+    left_bottom = left_stiffeners[0]
+    for left_stiffener in left_stiffeners:
+        if left_stiffener[0].code.st_number < left_bottom[0].code.st_number:
+            left_bottom = left_stiffener
+    return left_bottom
+def get_bottom_left_stiffener(stiffeners):
+    left_stiffeners = get_left_stiffeners(stiffeners)
+    if left_stiffeners == []:
+        return None
+    bottom_left = left_stiffeners[0]
+    for left_stiffener in left_stiffeners:
+        if left_stiffener[0].code.st_number > bottom_left[0].code.st_number:
+            bottom_left = left_stiffener
+    return bottom_left
