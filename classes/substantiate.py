@@ -6,6 +6,7 @@ import defaults
 import math
 import numpy
 
+
 from colorama import Fore
 from colorama import Style
 
@@ -63,9 +64,11 @@ def substantiate(crosssection, propositions):
 
 def find_dimensions(stiffener):
     print("------------------- find_dimensions for stiffener ", stiffener.st_number,"------------------------------------------")
+
     #initialize dimensions container
     #b_sup, b_inf, h, t, mass
     best = [0,0,0,0,0]
+
     #set minimal default values and step size for range
     b_inf_minimal = defaults.b_inf_minimal
     b_inf_step = defaults.b_inf_step
@@ -75,99 +78,53 @@ def find_dimensions(stiffener):
     h_minimal = defaults.h_minimal
     h_step = defaults.h_step
     t_range = defaults.t_range
+    max_angle = defaults.max_angle
+
     #max values, are changed in case of geometrical restrictions
     b_inf_max_geo = defaults.b_inf_maximal
     b_sup_max_geo = defaults.b_sup_maximal
     h_max_geo = defaults.h_maximal
 
-    locationchange = False
-    #error_inf = 0
-    #error_sup = 0
+
 
 
     #set new default values, if corrections need to be made
-    """if stiffener.b_inf_corr == True:
-        if stiffener.b_inf > b_inf_minimal:
-            b_inf_max_geo = stiffener.b_inf
-            print("no location change, b_inf_max_geo: ",b_inf_max_geo)
-        else:
-            #locationchange = True
-            #error_inf = b_inf_minimal - stiffener.b_inf
-            b_inf_max_geo = b_inf_minimal
-            stiffener.b_inf = b_inf_minimal
-            print("no location change, b_inf_max_geo: ",b_inf_max_geo)"""
-
     if stiffener.b_sup_corr == True:
-        if stiffener.b_sup > b_sup_minimal:
-            b_sup_max_geo = min(10*math.floor((stiffener.b_sup)/10), stiffener.b_sup)
-            print("no location change, b_sup_max_geo: ",b_sup_max_geo)
-        else:
-            #locationchange = True
-            #error_sup = b_sup_minimal - stiffener.b_sup
-            b_sup_max_geo = b_sup_minimal
-            stiffener.b_sup = b_sup_minimal
-            print("no location change, b_sup_max_geo: ",b_sup_max_geo)
-
-
-    #if the inferior one is negative then both are
-    """if locationchange == True:
-        error = max(error_inf, error_sup)
-        if stiffener.pl_position == 2 or stiffener.pl_position == 4:
-            if stiffener.location > 0.5: stiffener.location -= error*1.3/cs_h
-            elif stiffener.location <= 0.5: stiffener.location += error*1.3/cs_h
-        elif stiffener.pl_position == 3:
-            if stiffener.location > 0: stiffener.location -= error*1.3/cs_b_inf
-            elif stiffener.location < 0: stiffener.location += error*1.3/cs_b_inf"""
+        b_sup_max_geo = stiffener.b_sup
+        assert b_sup_max_geo > b_sup_minimal, "Error, nothing could be found"
 
     if stiffener.h_corr == True:
         h_max_geo = stiffener.h
-        print("h_max_geo: ",h_max_geo)
         assert h_max_geo > h_step, "Error, nothing could be found."
 
-    print("location change: ",locationchange,"   b_sup: ",b_sup_minimal,"-",b_sup_max_geo,"   b_inf: ",b_inf_minimal,"-",b_sup_max_geo,"   h: ",h_minimal,"-",h_max_geo)
-    #iterate through all the possible solutions, in order to find viable ones
 
-    #still make restriction for angle in for-loop and possibly other restrictions...
-    best = [0,0,0,0,10**8]
+    best = [0,0,0,0,10**10]
     best_default = best
-    max_angle = defaults.max_angle
-    assert b_sup_max_geo >= b_sup_minimal
 
-    if stiffener.b_sup_corr == True:
+    if stiffener.b_sup_corr == True and defaults.do_height_only == True:
+        print("given b_sup, only correcting heights")
         b_sup = stiffener.b_sup
         h_min = h_minimal
-        h_max = 10*math.floor(min(h_max_geo, math.sin(max_angle)*b_sup/2)/10)
-        if h_max > h_min:
-            for h in range(h_min, h_max, h_step):
-                b_inf_min = b_inf_minimal
-                b_inf_max = 10*math.floor(min(max(0,b_sup - 2*h/math.tan(max_angle)), b_inf_max_geo)/10)
-                if b_inf_min < b_inf_max:
-                    for b_inf in range(b_inf_min, b_inf_max, b_inf_step):
-                        for t in t_range:
-                            I_a = st.get_i_along_stiffener(b_sup, b_inf, h, t)
-                            if I_a > stiffener.i_along:
-                                m = st.get_area_stiffener(b_sup, b_inf, h, t) #get_area to be implemented
-                                if m < best[4]:
-                                    #print("b_sup: ",b_sup," b_inf: ",b_inf," h: ",h," t: ",t)
-                                    best = [b_sup, b_inf, h, t, m]
+        h_max_angle = math.sin(max_angle)*b_sup/2
+        h_max = 10*math.floor(min(h_max_geo, h_max_angle, b_sup)/10)
+        print("b_sup: ",math.floor(b_sup),"   h: ",math.floor(h_min),"-",math.floor(h_max),"   I: ",math.floor(stiffener.i_along))
+        assert h_max > h_min, "Error, nothing could be found: subst"
 
-    elif stiffener.h_corr == True:
-        h = stiffener.h
-        for b_sup in range(b_sup_minimal, b_sup_max_geo, b_sup_step):
-                b_inf_min = b_inf_minimal
-                b_inf_max = 10*math.floor(min(max(0,b_sup - 2*h/math.tan(max_angle)), b_inf_max_geo)/10)
-                if b_inf_min < b_inf_max:
-                    for b_inf in range(b_inf_min, b_inf_max, b_inf_step):
-                        for t in t_range:
-                            I_a = st.get_i_along_stiffener(b_sup, b_inf, h, t)
-                            if I_a > stiffener.i_along:
-                                m = st.get_area_stiffener(b_sup, b_inf, h, t) #get_area to be implemented
-                                if m < best[4]:
-                                    #print("b_sup: ",b_sup," b_inf: ",b_inf," h: ",h," t: ",t)
-                                    best = [b_sup, b_inf, h, t, m]
-
+        for h in range(h_min, h_max, h_step):
+            b_inf_min = b_inf_minimal
+            b_inf_max = 10*math.floor(min(max(0,b_sup - 2*h/math.tan(max_angle)), b_inf_max_geo)/10)
+            if b_inf_min < b_inf_max:
+                for b_inf in range(b_inf_min, b_inf_max, b_inf_step):
+                    for t in t_range:
+                        I_a = st.get_i_along_stiffener(b_sup, b_inf, h, t)
+                        if I_a > stiffener.i_along:
+                            m = st.get_area_stiffener(b_sup, b_inf, h, t) #get_area to be implemented
+                            if m < best[4]:
+                                print("b_sup: ",b_sup," b_inf: ",b_inf," h: ",h," t: ",t)
+                                best = [b_sup, b_inf, h, t, m]
 
     else:
+        assert b_sup_max_geo >= b_sup_minimal
         for b_sup in range(b_sup_minimal, b_sup_max_geo, b_sup_step):
             h_min = h_minimal
             h_max = 10*math.floor(min(h_max_geo, math.sin(max_angle)*b_sup/2)/10)
@@ -184,6 +141,7 @@ def find_dimensions(stiffener):
                                     if m < best[4]:
                                         #print("b_sup: ",b_sup," b_inf: ",b_inf," h: ",h," t: ",t)
                                         best = [b_sup, b_inf, h, t, m]
+
     if best == best_default:
         best = [b_sup_minimal, b_inf_minimal, 10*math.floor(b_sup_minimal*math.tan(max_angle)/10) ,5]
 
@@ -197,7 +155,7 @@ def find_dimensions(stiffener):
         print("correction b_inf:", stiffener.b_inf_corr_val)
     if stiffener.h_corr == True:
         print("correction h:", stiffener.h_corr_val)
-    print("chosen dimensions:         b_sup: ",b_sup,"        b_inf: ",b_inf,"         h: ",h,"          t:",t)
+    print("chosen dimensions:         b_sup: ",math.floor(b_sup),"        b_inf: ",b_inf,"         h: ",h,"          t:",t)
     print(" ")
         #print(f"{Fore.GREEN}No corrections were needed {Style.RESET_ALL}")
 
