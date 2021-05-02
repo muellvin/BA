@@ -291,39 +291,25 @@ def distances_betw_stiffeners(cs, stiffeners, propositions):
 def distances_betw_st_inc_top(cs, stiffeners, propositions, do_height):
     ok3 = True
     right_top = get_right_top_stiffener(stiffeners)
-    right_top_4b = right_top.get_line(st_pl_position = 4).b
-    right_top_4a = right_top.get_line(st_pl_position = 4).a
-    st_num_right_top = right_top.get_line(st_pl_position = 4).code.st_number
-
-    right_bottom = get_right_bottom_stiffener(stiffeners)
-    right_bottom_2b = right_bottom.get_line(st_pl_position = 2).b
-    right_bottom_2a = right_bottom.get_line(st_pl_position = 2).a
-    st_num_right_bottom = right_bottom.get_line(st_pl_position = 2).code.st_number
-
-    bottom_right = get_bottom_right_stiffener(stiffeners)
-    bottom_right_4b = bottom_right.get_line(st_pl_position = 4).b
-    bottom_right_4a = bottom_right.get_line(st_pl_position = 4).a
-    st_num_bottom_right = bottom_right.get_line(st_pl_position = 4).code.st_number
-
-    bottom_left = get_bottom_left_stiffener(stiffeners)
-    bottom_left_2b = bottom_left.get_line(st_pl_position = 2).b
-    bottom_left_2a = bottom_left.get_line(st_pl_position = 2).a
-    st_num_bottom_left = bottom_left.get_line(st_pl_position = 2).code.st_number
-
-    left_bottom = get_left_bottom_stiffener(stiffeners)
-    left_bottom_4b = left_bottom.get_line(st_pl_position = 4).b
-    left_bottom_4a = left_bottom.get_line(st_pl_position = 4).a
-    st_num_left_bottom = left_bottom.get_line(st_pl_position = 4).code.st_number
-
+    top_right = get_top_right_stiffener(stiffeners)
     left_top = get_left_top_stiffener(stiffeners)
-    left_top_2b = left_top.get_line(st_pl_position = 2).b
-    left_top_2a = left_top.get_line(st_pl_position = 2).a
-    st_num_left_top = left_top.get_line(st_pl_position = 2).code.st_number
+
 
 
     if top_right != None and right_top != None:
-        st_left_top = propositions.get_proposed_stiffener(st_num_left_top)
-        st_right_top = propositions.get_proposed_stiffener(st_num_right_top)
+        right_top_4b = right_top.get_line(st_pl_position = 4).b
+        right_top_4a = right_top.get_line(st_pl_position = 4).a
+        st_num_right_top = right_top.get_line(st_pl_position = 4).code.st_number
+        top_right_2b = top_right.get_line(st_pl_position = 2).b
+        st_num_top_right = top_right.get_line(st_pl_position = 2).code.st_number
+        left_top_2b = left_top.get_line(st_pl_position = 2).b
+        left_top_2a = left_top.get_line(st_pl_position = 2).a
+        st_num_left_top = left_top.get_line(st_pl_position = 2).code.st_number
+
+
+
+        st_left_top = propositions.get_proposed_stiffener(4, st_num_left_top)
+        st_right_top = propositions.get_proposed_stiffener(2, st_num_right_top)
 
         #y z coordinate system with top_right_2a as origin
         #n t coordinate system showing normal and tangentially away from right_top (n normal)
@@ -335,7 +321,7 @@ def distances_betw_st_inc_top(cs, stiffeners, propositions, do_height):
         dis_dz = dis_line.b.z - dis_line.a.z
 
         #general check weather this might even be a problem
-        if dis_line > 500 and right_top_4a.z > top_right_2b.z:
+        if dis > 500 and right_top_4a.z > top_right_2b.z:
             return propositions, ok3
 
         st_angle_y = right_top.get_line(st_pl_position == 3).get_angle_y
@@ -443,7 +429,7 @@ def get_top_left_stiffener(stiffeners):
         return None
     top_left = top_stiffeners[0]
     for top_stiffener in top_stiffeners:
-        if top_stiffener[0].code.st_number < top_left[0].code.st_number:
+        if top_stiffener.lines[0].code.st_number < top_left.lines[0].code.st_number:
             top_left = top_stiffener
     return top_left
 
@@ -453,7 +439,7 @@ def get_top_right_stiffener(stiffeners):
         return None
     top_right = top_stiffeners[0]
     for top_stiffener in top_stiffeners:
-        if top_stiffener[0].code.st_number > top_right[0].code.st_number:
+        if top_stiffener.lines[0].code.st_number > top_right.lines[0].code.st_number:
             top_right = top_stiffener
     return top_right
 
@@ -463,7 +449,7 @@ def get_right_top_stiffener(stiffeners):
         return None
     right_top = right_stiffeners[0]
     for right_stiffener in right_stiffeners:
-        if right_stiffener[0].code.st_number < right_top[0].code.st_number:
+        if right_stiffener.lines[0].code.st_number < right_top.lines[0].code.st_number:
             right_top = right_stiffener
     return right_top
 def get_right_bottom_stiffener(stiffeners):
@@ -472,7 +458,7 @@ def get_right_bottom_stiffener(stiffeners):
         return None
     right_bottom = right_stiffeners[0]
     for right_stiffener in right_stiffeners:
-        if right_stiffener[0].code.st_number > right_bottom[0].code.st_number:
+        if right_stiffener.lines[0].code.st_number > right_bottom.lines[0].code.st_number:
             right_bottom = right_stiffener
     return right_bottom
 
@@ -482,7 +468,7 @@ def get_bottom_right_stiffener(stiffeners):
         return None
     bottom_right = bottom_stiffeners[0]
     for bottom_stiffener in bottom_stiffeners:
-        if bottom_stiffener[0].code.st_number < bottom_right[0].code.st_number:
+        if bottom_stiffener.lines[0].code.st_number < bottom_right.lines[0].code.st_number:
             bottom_right = bottom_stiffener
     return bottom_right
 
@@ -492,7 +478,7 @@ def get_bottom_left_stiffener(stiffeners):
         return None
     bottom_left = bottom_stiffeners[0]
     for bottom_stiffener in bottom_stiffeners:
-        if bottom_stiffener[0].code.st_number > bottom_left[0].code.st_number:
+        if bottom_stiffener.lines[0].code.st_number > bottom_left.lines[0].code.st_number:
             bottom_left = bottom_stiffener
     return bottom_left
 
@@ -502,15 +488,15 @@ def get_left_bottom_stiffener(stiffeners):
         return None
     left_bottom = left_stiffeners[0]
     for left_stiffener in left_stiffeners:
-        if left_stiffener[0].code.st_number < left_bottom[0].code.st_number:
+        if left_stiffener.lines[0].code.st_number < left_bottom.lines[0].code.st_number:
             left_bottom = left_stiffener
     return left_bottom
-def get_bottom_left_stiffener(stiffeners):
+def get_left_top_stiffener(stiffeners):
     left_stiffeners = get_left_stiffeners(stiffeners)
     if left_stiffeners == []:
         return None
-    bottom_left = left_stiffeners[0]
+    left_top = left_stiffeners[0]
     for left_stiffener in left_stiffeners:
-        if left_stiffener[0].code.st_number > bottom_left[0].code.st_number:
-            bottom_left = left_stiffener
-    return bottom_left
+        if left_stiffener.lines[0].code.st_number > left_top.lines[0].code.st_number:
+            left_top = left_stiffener
+    return left_top

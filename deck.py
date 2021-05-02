@@ -3,6 +3,9 @@ from classes import line as ln
 from classes import crosssection as cs
 from classes import stiffener as st
 from classes import plate_code as plcd
+from classes import stiffeners_proposition
+from classes import proposed_stiffener
+import defaults
 import math
 import data
 
@@ -49,16 +52,30 @@ def deck(b_deck):
     h = best[2]
     t = best[3]
     assert best[4] != 10**8, "You are Stupid."
-    #create a list of deck stiffeners
-    deck_stiffener_list = []
-    num_of_plates = round(b_deck / b_sup)
-    num_of_stiffeners = (num_of_plates-1)/2
-    for i in range(int(num_of_stiffeners)):
-        center_y = (0.5*b_deck - (2*i+1.5)*b_sup)
-        stiffener = st.create_stiffener_global(1, i+1, center_y, 0, 0, b_sup, b_inf, h, t)
-        deck_stiffener_list.append(stiffener)
 
-    return deck_stiffener_list
+    if defaults.do_deck_as_prop == True:
+        deck_st_prop = stiffeners_proposition.stiffeners_proposition()
+        num_of_plates = round(b_deck / b_sup)
+        num_of_stiffeners = (num_of_plates-1)/2
+
+        for i in range(int(num_of_stiffeners)):
+            center_y = (0.5*b_deck - (2*i+1.5)*b_sup)/b_deck*2
+            st_prop = proposed_stiffener.proposed_stiffener(1, i+1, center_y, min_Iy, b_sup, b_inf, h, t)
+            st_prop.deck_st = True
+            deck_st_prop.add(st_prop)
+        return deck_st_prop
+
+
+    elif defaults.do_deck_as_prop == False:
+        #create a list of deck stiffeners
+        deck_stiffener_list = []
+        num_of_plates = round(b_deck / b_sup)
+        num_of_stiffeners = (num_of_plates-1)/2
+        for i in range(int(num_of_stiffeners)):
+            center_y = (0.5*b_deck - (2*i+1.5)*b_sup)
+            stiffener = st.create_stiffener_global(1, i+1, center_y, 0, 0, b_sup, b_inf, h, t)
+            deck_stiffener_list.append(stiffener)
+        return deck_stiffener_list
 
 
 def min_inertial_mom():
