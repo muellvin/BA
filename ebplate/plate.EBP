@@ -1,85 +1,72 @@
 	EBPlate - v2.01 
-Société       # 
-Affaire       # 
-Référence     # 
-Utilisateur   # 
-Commentaire   # 
-#PLATE 
-   Width           400.0 cm 
-   Height          300.0 cm 
-   Thickness         0.7 cm 
-   Module Young    210000.000 MPa 
-   Poisson Coefficient         0.300 
-   Boundary Conditions 
-      Bord 1 0 
-      Bord 2 0 
-      Bord 3 0 
-      Bord 4 0 
-#STIFFENING 
-   Orthotropic Plate =  0 
-   Referentiel 2 
-   Nombre de raidisseurs  2 
-   - Raidisseur n° 1 Active=1 
-      Orientation = 0 
-<<<<<<< HEAD
-      Position    = 49.999999999999986 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 20.0 
-      Dimension 2 = 30.0 
-      Dimension 3 = 20.0 
-      Dimension 4 = 1.5 
-   - Raidisseur n� 2 Active=1 
-=======
-      Position    = 50.0 
-      Gamma       = 735.5993542507574 
-      Teta        = 1.0 
-      Delta       = 0.4688843978717793 
-      Dimension 1 = 0 
-      Type        = 0 
-      Dimension 2 = 0 
-      Dimension 3 = 0 
-      Dimension 4 = 0 
-   - Raidisseur n° 2 Active=1 
->>>>>>> 24f6d6720a5ab9a1df9e3708e2b909741b6e18e0
-      Orientation = 0 
-      Position    = 250.0 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 20.0 
-      Dimension 2 = 30.0 
-      Dimension 3 = 20.0 
-      Dimension 4 = 1.5 
-#STRESSES 
- Longitudinal stresses : User's data No 
- Analytical Longitudinal stresses 
-  Imposed values : No 
-   Longitudinal Stress Top Left                0.000 MPa 
-   Longitudinal Stress Bottom Left             0.000 MPa 
-   Longitudinal Stress Top Right               0.000 MPa 
-   Longitudinal Stress Bottom Right            0.000 MPa 
- Transverse stresses : User's data No 
- Analytical Transverse stresses 
-  Imposed values : No 
-   Transverse stress Top                         0.000 MPa 
-   Transverse stress Bottom                      0.000 MPa 
-   Patch Load Stress Bottom                      0.000 MPa 
-   Patch Load Stress Top                         0.000 MPa 
-   Patch Load Width Top                          0.000 cm 
-   Patch Load Width Bottom                       0.000 cm 
-   Local longitudinal stresses under patch load : No 
-   Local shear stresses under patch load : Yes 
-   W Top                      -1.000 
-   W Bot                      -1.000 
-   Shear distribution  1 
-Shear stresses : User's data No 
-Analytical Shear stresses 
-  Imposed values : No 
-   Shear stress                                 47.61904761904762 MPa 
-#PARAMETERS 
-   Complexity : 1 
+Société       #
+Affaire       #
+Référence     #
+Utilisateur   #
+Commentaire   #
+#PLATE
+   Width           400.0 cm
+   Height          300.0 cm
+   Thickness         0.7 cm
+   Module Young    210000.000 MPa
+   Poisson Coefficient         0.300
+   Boundary Conditions
+      Bord 1 0
+      Bord 2 0
+      Bord 3 0
+      Bord 4 0
+#STIFFENING
+   Orthotropic Plate =  0
+   Referentiel 2
+   Nombre de raidisseurs  2
+   - Raidisseur n° 1 Active=1
+      Orientation = 0
+      Position    = 49.999999999999986
+      Gamma       = 0
+      Teta        = 0
+      Delta       = 0
+      Type        = 3
+      Dimension 1 = 20.0
+      Dimension 2 = 30.0
+      Dimension 3 = 20.0
+      Dimension 4 = 1.5
+   - Raidisseur n� 2 Active=1
+      Orientation = 0
+      Position    = 250.0
+      Gamma       = 0
+      Teta        = 0
+      Delta       = 0
+      Type        = 3
+      Dimension 1 = 20.0
+      Dimension 2 = 30.0
+      Dimension 3 = 20.0
+      Dimension 4 = 1.5
+#STRESSES
+ Longitudinal stresses : User's data No
+ Analytical Longitudinal stresses
+  Imposed values : No
+   Longitudinal Stress Top Left                0.000 MPa
+   Longitudinal Stress Bottom Left             0.000 MPa
+   Longitudinal Stress Top Right               0.000 MPa
+   Longitudinal Stress Bottom Right            0.000 MPa
+ Transverse stresses : User's data No
+ Analytical Transverse stresses
+  Imposed values : No
+   Transverse stress Top                         0.000 MPa
+   Transverse stress Bottom                      0.000 MPa
+   Patch Load Stress Bottom                      0.000 MPa
+   Patch Load Stress Top                         0.000 MPa
+   Patch Load Width Top                          0.000 cm
+   Patch Load Width Bottom                       0.000 cm
+   Local longitudinal stresses under patch load : No
+   Local shear stresses under patch load : Yes
+   W Top                      -1.000
+   W Bot                      -1.000
+   Shear distribution  1
+Shear stresses : User's data No
+Analytical Shear stresses
+  Imposed values : No
+   Shear stress                                 47.61904761904762 MPa
+#PARAMETERS
+   Complexity : 1
    Effective width parameter :  10.000
