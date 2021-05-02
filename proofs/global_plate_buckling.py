@@ -64,6 +64,10 @@ def global_plate_buckling(total_cs, plate_glob):
             plate.a.z -= move_z
             plate.b.y -= move_y
             plate.b.z -= move_z
+            plate.p1.y -= move_y
+            plate.p1.z -= move_z
+            plate.p2.y -= move_y
+            plate.p2.z -= move_z
 
         #find rotation angle
         if plate_a.a.z == plate_b.b.z:
@@ -82,10 +86,18 @@ def global_plate_buckling(total_cs, plate_glob):
             az = plate.a.z
             by = plate.b.y
             bz = plate.b.z
+            p1y = plate.p1.y
+            p1z = plate.p1.z
+            p2y = plate.p2.y
+            p2z = plate.p2.z
             plate.a.y = math.cos(angle)*ay - math.sin(angle)*az
             plate.a.z = math.sin(angle)*ay + math.cos(angle)*az
             plate.b.y = math.cos(angle)*by - math.sin(angle)*bz
             plate.b.z = math.sin(angle)*by + math.cos(angle)*bz
+            plate.p1.y = math.cos(angle)*p1y - math.sin(angle)*p1z
+            plate.p1.z = math.sin(angle)*p1y + math.cos(angle)*p1z
+            plate.p2.y = math.cos(angle)*p2y - math.sin(angle)*p2z
+            plate.p2.z = math.sin(angle)*p2y + math.cos(angle)*p2z
 
         #claculate A and I of stiffened plate
         A_tot = stiffened_plate.get_area_tot()
@@ -200,8 +212,6 @@ def global_plate_buckling(total_cs, plate_glob):
             stiffener.lines.append(new_bottom_plate)
 
             delta = stiffener.get_area_tot()/A_tot
-            print(stiffener)
-            go.print_cs(stiffener)
 
 
             #calculate gamma
@@ -215,8 +225,6 @@ def global_plate_buckling(total_cs, plate_glob):
                 new_top_plate.b = pt.point(new_top_plate.b.y + unit_vec_to_b*length_gamma, new_top_plate.b.z)
                 new_bottom_plate.b = pt.point(new_bottom_plate.a.y + unit_vec_to_b*length_gamma, new_bottom_plate.a.z)
                 new_bottom_plate.a = pt.point(new_bottom_plate.a.y + unit_vec_to_a*length_gamma, new_bottom_plate.a.z)
-            print(stiffener)
-            go.print_cs(stiffener)
             gamma = stiffener.get_i_y_tot() * 12 * (1-0.3**2)/(h*t**3)
 
             #calculate theta
@@ -240,7 +248,7 @@ def global_plate_buckling(total_cs, plate_glob):
 
         #calculating plate slenderness
         "correct beta_a_c still to be implemented"
-        beta_a_c = 1
+        beta_a_c = get_beta_ac(plate_glob)
         lambda_p_glob_bar = math.sqrt(beta_a_c * data.constants.get("f_y") / sigma_cr_p)
         print("Lambda: " + str(lambda_p_glob_bar))
         #calculate rho_glob for plate buckling
@@ -259,3 +267,20 @@ def global_plate_buckling(total_cs, plate_glob):
 
         print("Rho_Global: " + str(rho_glob))
     return rho_glob, sigma_cr_p
+
+def get_beta_ac(plate_glob):
+    beta_plate = copy.deepcopy(plate_glob)
+    side = beta_plate.lines[0].code.pl_position
+    plate_a = beta_plate.get_plate_a(side)
+    plate_a.rho_c_a = 0
+    plate_b = beta_plate.get_plate_b(side)
+    plate_b.rho_c_b = 0
+    a_c = 0
+    for plate in beta_plate.lines:
+        if plate != plate_a and plate != plate_b:
+            a_c += plate.get_area_tot()
+        else:
+            a_c += 0.5*plate.get_area_tot()
+    a_c_eff_loc = beta_plate.get_area_red()
+    beta_a_c = a_c_eff_loc / a_c
+    return beta_a_c
