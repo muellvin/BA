@@ -247,7 +247,6 @@ def global_plate_buckling(total_cs, plate_glob):
         print("sigma_cr = " + str(sigma_cr_p))
 
         #calculating plate slenderness
-        "correct beta_a_c still to be implemented"
         beta_a_c = get_beta_ac(plate_glob)
         lambda_p_glob_bar = math.sqrt(beta_a_c * data.constants.get("f_y") / sigma_cr_p)
         print("Lambda: " + str(lambda_p_glob_bar))
