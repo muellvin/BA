@@ -71,8 +71,7 @@ h_step = 10
 h_maximal = 300
 t_range = [5,7,9,11,13,15,17,20]
 max_angle = math.pi/12*5 #75 grad
-optimizer_type = 0
-#0: opt_eqpressure
+
 
 
 """buckling defaults"""
@@ -101,6 +100,8 @@ do_column_plate_buckling = True
 
 do_print = True
 do_print_to_txt = True
+
+do_deck_as_prop = True
 
 
 def cs_defaults_tostring():

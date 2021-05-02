@@ -19,14 +19,17 @@ cs_h = 1500 #data.input_data["h"]
 def substantiate(crosssection, propositions):
     #initialize list for stiffeners
     stiffener_list =[]
-    print(" ")
-    print(" ")
+
+    if propositions.stiffeners == []:
+        return []
     #switch clause for plates
     for stiffener in propositions.stiffeners:
         if stiffener.pl_position == 1:
+            assert stiffener.deck_st == True, "stiffener at side 1 without beeing a deck stiffener from file deck"
+            b_sup, b_inf, h, t = stiffener.b_sup, stiffener.b_inf, stiffener.h, stiffener.t
             #trackplate should not be called within the for loop
-            I_min = min_inertial_mom()
-            b_sup, b_inf, h, t = trackplate(I_min)
+            #I_min = min_inertial_mom()
+            #b_sup, b_inf, h, t = trackplate(I_min)
             side = 1
             angle = 0
         elif stiffener.pl_position == 2:
