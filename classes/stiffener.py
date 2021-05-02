@@ -1,6 +1,3 @@
-#not really a class
-#has methods for creating stiffeners of the type crosssection
-
 import math
 import shapely
 import random
@@ -18,19 +15,22 @@ import copy
 from classes import check_geometry
 
 
-
-def add_stiffener_set(initial_cs, proposition):
+#initial cs is empty (only four lines)
+def add_stiffener_set(initial_cs, propositions):
     iterations = 0
     geometry_ok = False
 
-    while geometry_ok == False and iterations < 5:
+    if propositions.stiffeners == []:
+        return initial_cs
+
+    while geometry_ok == False and iterations < 1:
         iterations += 1
-        stiffener_list = ss.substantiate(initial_cs, proposition)
-        geometry_ok = check_geometry.check_geometry(initial_cs, stiffener_list, proposition)
+        stiffener_list = ss.substantiate(initial_cs, propositions)
+        proposition, geometry_ok = check_geometry.check_geometry(initial_cs, stiffener_list, propositions)
         #cs = merge.merge(initial_cs, stiffener_list)
         #go.print_cs(cs)
 
-    next_cs = merge.merge(initial_cs, stiffener_list)
+    next_cs = merge.merge(copy.deepcopy(initial_cs), stiffener_list)
     return next_cs
 
 
