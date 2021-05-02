@@ -101,7 +101,7 @@ do_column_plate_buckling = True
 do_print = True
 do_print_to_txt = True
 
-do_deck_as_prop = True
+do_deck_as_prop = False
 
 
 def cs_defaults_tostring():

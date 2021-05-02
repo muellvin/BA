@@ -11,6 +11,7 @@ import deck
 from output import geometry_output
 from classes import stiffener
 from classes import merge
+from proofs import resistance_to_shear
 import math
 
 data.input_data.update({"b_inf": 3000})
