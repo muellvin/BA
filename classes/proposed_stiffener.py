@@ -16,3 +16,5 @@ class proposed_stiffener():
         self.b_sup_corr_val = 0
         self.b_inf_corr_val = 0
         self.h_corr_val = 0
+
+        self.deck_st = False
