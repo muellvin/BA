@@ -21,10 +21,6 @@ def global_plate_buckling(total_cs, plate_glob):
     max_stn = 0
     min_stn = 1000
 
-    print("#1")
-    print(len(stiffened_plate.lines))
-    go.print_cs(stiffened_plate)
-
     for plate in stiffened_plate.lines:
         if plate.code.pl_type == 0:
             if min_tpl == -1 and max_tpl == -1:
@@ -124,14 +120,17 @@ def global_plate_buckling(total_cs, plate_glob):
             corresp_tpl = plate_num_list[i]
             center_plate = None
             top_plate = None
+            top_plate_tpl = 0
             bottom_plate = None
             for plate in stiffened_plate.lines:
                 if plate.code.tpl_number == corresp_tpl and plate.code.pl_type == 0:
                     center_plate = plate
                 if plate.code.tpl_number == corresp_tpl+1:
                     bottom_plate = plate
+                    bottom_plate_top = plate.code.tpl_number
                 elif plate.code.tpl_number == corresp_tpl-1:
                     top_plate = plate
+                    top_plate_tpl = plate.code.tpl_number
             #find distance to point a
             delta_z = center_plate.get_center_z_tot() - plate_a.a.z
             delta_y = center_plate.get_center_y_tot() - plate_a.a.y
@@ -141,8 +140,9 @@ def global_plate_buckling(total_cs, plate_glob):
             unit_vec_to_a = (top_plate.a.y - top_plate.b.y) / top_plate.get_length_tot()
             unit_vec_to_b = (bottom_plate.b.y - bottom_plate.a.y) / bottom_plate.get_length_tot()
             #find additional parts of top plate
-            sigma_a_top = stc.get_sigma_a(total_cs, top_plate, data.input_data.get("M_Ed"))
-            sigma_b_top = stc.get_sigma_b(total_cs, top_plate, data.input_data.get("M_Ed"))
+            top_original = total_cs.get_line(tpl_number = top_plate_tpl)
+            sigma_a_top = stc.get_sigma_a(total_cs, top_original, data.input_data.get("M_Ed"))
+            sigma_b_top = stc.get_sigma_b(total_cs, top_original, data.input_data.get("M_Ed"))
             psi_top =  min(sigma_a_top, sigma_b_top) / max(sigma_a_top, sigma_b_top)
             length_top = 0
             if sigma_a_top > 0 or sigma_b_top > 0:
@@ -166,8 +166,9 @@ def global_plate_buckling(total_cs, plate_glob):
                 pass
 
             #find additional parts of bottom plate
-            sigma_a_bottom = stc.get_sigma_a(total_cs, top_plate, data.input_data.get("M_Ed"))
-            sigma_b_bottom = stc.get_sigma_b(total_cs, top_plate, data.input_data.get("M_Ed"))
+            bottom_original = total_cs.get_line(tpl_number = top_plate_tpl)
+            sigma_a_bottom = stc.get_sigma_a(total_cs, bottom_original, data.input_data.get("M_Ed"))
+            sigma_b_bottom = stc.get_sigma_b(total_cs, bottom_original, data.input_data.get("M_Ed"))
             psi_bottom = min(sigma_a_bottom, sigma_b_bottom) / max(sigma_a_bottom, sigma_b_bottom)
             length_bottom = 0
             if sigma_a_bottom > 0 or sigma_b_bottom > 0:
@@ -190,7 +191,6 @@ def global_plate_buckling(total_cs, plate_glob):
             else:
                 #stiffener is in tension zone
                 pass
-
             #add additional parts of plate to stiffener
             new_top_point = pt.point(top_plate.b.y + unit_vec_to_a * length_top, top_plate.b.z)
             new_top_plate = ln.line(top_plate.code, new_top_point, top_plate.b, top_plate.t)
@@ -200,6 +200,8 @@ def global_plate_buckling(total_cs, plate_glob):
             stiffener.lines.append(new_bottom_plate)
 
             delta = stiffener.get_area_tot()/A_tot
+            print(stiffener)
+            go.print_cs(stiffener)
 
 
             #calculate gamma
@@ -213,7 +215,8 @@ def global_plate_buckling(total_cs, plate_glob):
                 new_top_plate.b = pt.point(new_top_plate.b.y + unit_vec_to_b*length_gamma, new_top_plate.b.z)
                 new_bottom_plate.b = pt.point(new_bottom_plate.a.y + unit_vec_to_b*length_gamma, new_bottom_plate.a.z)
                 new_bottom_plate.a = pt.point(new_bottom_plate.a.y + unit_vec_to_a*length_gamma, new_bottom_plate.a.z)
-
+            print(stiffener)
+            go.print_cs(stiffener)
             gamma = stiffener.get_i_y_tot() * 12 * (1-0.3**2)/(h*t**3)
 
             #calculate theta

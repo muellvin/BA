@@ -1,13 +1,13 @@
 	EBPlate - v2.01 
-SociÃ©tÃ©       # 
+Société       # 
 Affaire       # 
-RÃ©fÃ©rence     # 
+Référence     # 
 Utilisateur   # 
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
    Height          300.0 cm 
-   Thickness         2.0 cm 
+   Thickness         0.7 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
    Boundary Conditions 
@@ -16,50 +16,46 @@ Commentaire   #
       Bord 3 0 
       Bord 4 0 
 #STIFFENING 
-   Orthotropic Plate =  0 
+   Orthotropic Plate =  1 
+   Coefficients d'orthotropie : 
+      Direction X : Beta =  0.000 
+                     Eta =  -1.000 
+        Smearing : No 
+      Direction Y : Beta =  0.000 
+                     Eta =  0.000 
+        Smearing : No 
    Referentiel 2 
-   Nombre de raidisseurs  3 
-   - Raidisseur nÂ° 1 Active=1 
+   Nombre de raidisseurs  2 
+   - Raidisseur n° 1 Active=1 
       Orientation = 0 
-      Position    = 75.0 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 20.615528128088304 
-      Dimension 2 = 30.0 
-      Dimension 3 = 20.0 
-      Dimension 4 = 0.5 
-   - Raidisseur nÂ° 2 Active=1 
+      Position    = 50.0 
+      Gamma       = 735.5993542507574 
+      Teta        = 1.0 
+      Delta       = 0.4688843978717793 
+      Dimension 1 = 0 
+      Type        = 0 
+      Dimension 2 = 0 
+      Dimension 3 = 0 
+      Dimension 4 = 0 
+   - Raidisseur n° 2 Active=1 
       Orientation = 0 
-      Position    = 150.0 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 20.615528128088304 
-      Dimension 2 = 30.0 
-      Dimension 3 = 20.0 
-      Dimension 4 = 0.5 
-   - Raidisseur nÂ° 3 Active=1 
-      Orientation = 0 
-      Position    = 225.0 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 20.615528128088304 
-      Dimension 2 = 30.0 
-      Dimension 3 = 20.0 
-      Dimension 4 = 0.5 
+      Position    = 250.0 
+      Gamma       = 735.5993542507574 
+      Teta        = 1.0 
+      Delta       = 0.4688843978717793 
+      Dimension 1 = 0 
+      Type        = 0 
+      Dimension 2 = 0 
+      Dimension 3 = 0 
+      Dimension 4 = 0 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
   Imposed values : No 
-   Longitudinal Stress Top Left                0.000 MPa 
-   Longitudinal Stress Bottom Left             0.000 MPa 
-   Longitudinal Stress Top Right               0.000 MPa 
-   Longitudinal Stress Bottom Right            0.000 MPa 
+   Longitudinal Stress Top Left                84.07490585943084 MPa 
+   Longitudinal Stress Bottom Left             84.07490585943084 MPa 
+   Longitudinal Stress Top Right               84.07490585943084 MPa 
+   Longitudinal Stress Bottom Right            84.07490585943084 MPa 
  Transverse stresses : User's data No 
  Analytical Transverse stresses 
   Imposed values : No 
@@ -77,7 +73,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 0.6643723213844434 MPa 
+   Shear stress                                 0.000 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000
