@@ -11,6 +11,7 @@ import deck
 from output import geometry_output
 from classes import stiffener
 from classes import merge
+from proofs import resistance_to_shear
 import math
 
 data.input_data.update({"b_inf": 3000})
@@ -48,4 +49,4 @@ geometry_output.print_cs(final_cs)
 plate_glob = final_cs.get_stiffened_plate(side = 3)
 geometry_output.print_cs(plate_glob)
 
-global_plate_buckling.global_plate_buckling(final_cs, plate_glob)
+resistance_to_shear.resistance_to_shear(plate_glob, data.input_data.get("V_Ed"))

@@ -33,8 +33,10 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
     if stiffened == False:
         if a / h_w >= 1:
             k_tau = 5.34 + 4*(h_w/a)**2
+            print(k_tau)
         else:
             k_tau = 4.0 + 5.34 * (h_w/a)**2
+            print(k_tau)
     else:
         plate_a = None
         plate_b = None
@@ -102,8 +104,12 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
                     stiffener_list[st_number - min_stn].addline(plate)
             b_inf = stiffener_list[i].get_line(st_pl_position = 3).get_length_tot()
             b_sup = stiffener_list[i].get_line(st_pl_position = 1).get_length_tot()
-            diff = (0.5*(stiffener_list[i].b_sup - stiffener_list[i].b_inf))
+            diff = (0.5*(b_sup - b_inf))
+            print("diff")
+            print(diff)
             diag = stiffener_list[i].get_line(st_pl_position = 2).get_length_tot()
+            print("diag")
+            print(diag)
             h = math.sqrt(diag**2-diff**2)
             t_stiff = stiffener_list[i].get_line(st_pl_position = 3).t
             center_y = stiffener_list[i].get_center_y_tot()
@@ -113,7 +119,8 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         sigma_E = 190000*(t/h_w)**2
         if abs(tau) > 0.1 and 3 <= t:
             k_tau = ebplate.ebplate_shear(a, h_w, t, tau, stiffeners_ebp) * tau / sigma_E
-            go.print_cs(plate_glob)
+            print("EBPlate")
+            print(k_tau)
         elif t<3:
             print("plate too thin")
             return 10**-2
@@ -160,4 +167,5 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         V_Rd = chi_w*f_y*h_w*t/(math.sqrt(3)*gamma_M1)
 
     eta_3 = V_Ed_plate / V_Rd
+    print(eta_3)
     return eta_3
