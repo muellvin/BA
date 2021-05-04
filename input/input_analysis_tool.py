@@ -83,7 +83,7 @@ def set_stiffeners(number_st_top):
             t = float(input())
         i_along = stiffener.get_i_along_stiffener(b_sup, b_inf, h, t)
 
-        stiffener_right_i = proposed_stiffener.proposed_stiffener(2, int(number_st_top + i), location, \
+        stiffener_right_i = proposed_stiffener.proposed_stiffener(2, int(number_st_top + number_side + 1 - i), location, \
         i_along, b_sup, b_inf, h, t)
         st_list.add(stiffener_right_i)
         stiffener_left_i = proposed_stiffener.proposed_stiffener(4, int(number_st_top + number_side + number_bottom + i), location, \

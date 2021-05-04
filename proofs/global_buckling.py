@@ -47,7 +47,7 @@ def reduction_global_buckling(cs, side):
         rho_c = 1
         all_tension = True
 
-    elif len(plate_glob.lines == 1):
+    elif len(plate_glob.lines) == 1:
         rho_c = 1
         plate_stiffened = False
     else:
