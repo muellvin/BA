@@ -2,7 +2,12 @@ import data
 from proofs import resistance_to_shear
 from proofs import stress_cal
 from classes import crosssection
+from classes import line
+from classes import point
+from classes import plate_code
+from output import geometry_output
 import data
+import copy
 
 def interaction_web(total_cs, web_plate, eta_3):
     m_ed = data.input_data.get("M_Ed")
@@ -14,7 +19,8 @@ def interaction_web(total_cs, web_plate, eta_3):
         return utilisation
     else:
         #interaction required
-        m_pl_rd = total_cs.get_m_rd_pl_eff()
+        plastic_cs = copy.deepcopy(total_cs)
+        m_pl_rd = get_m_rd_pl_eff()
         eta_1 = m_ed / m_pl_rd
         utilisation = eta_1 + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
         return utilisation
@@ -43,3 +49,113 @@ def interaction_flange(total_cs, flange_plate, eta_3):
             else:
                 assert True, "This is not possible"
     return utilisation
+
+def get_m_rd_pl_eff(total_cs):
+    #returns the value required in EC 1-5, section 7.1 interaction
+    #attention: this value is very specific for this section
+    #remove side stiffeners
+    cs = crosssection.crosssection(total_cs.b_sup, total_cs.b_inf, total_cs.h)
+    for plate in total_cs.lines:
+        if (plate.code.pl_position == 2 or plate.code.pl_position == 4) and plate.code.pl_type == 1:
+            pass
+        else:
+            cs.addline(plate)
+    total_area = cs.get_area_red()
+    convergence = 0.05* total_area
+    continue_iteration = True
+    area_top = 0
+    area_btm = 0
+    start = True
+    z_min = 0
+    z = cs.h / 2
+    z_max = cs.h
+    code = plate_code.plate_code(-1,-1,-1,-1,-1)
+    counter = 0
+
+    while abs(area_top - area_btm)>convergence or start==True or continue_iteration == True:
+        start = False
+        top_part = crosssection.crosssection(0,0,0)
+        bottom_part = crosssection.crosssection(0,0,0)
+        for plate in cs.lines:
+            #plate is entirely below assumed plastic zero line
+            if plate.a.z >= z and plate.b.z >= z:
+                bottom_part.addline(plate)
+            #plate is entirely above plastic zero line
+            elif plate.a.z <= z and plate.b.z <= z:
+                top_part.addline(plate)
+            #plate crosses plastic zero line, a on top
+            elif plate.a.z <= z and plate.b.z >= z:
+                #case 1: pzl crosses a-p1
+                if plate.a.z < z and plate.p1.z > z:
+                    share = (z-plate.a.z)/(plate.p1.z - plate.a.z)
+                    y = plate.a.y + share * (plate.p1.y - plate.a.y)
+                    point_middle = point.point(y,z)
+                    line_a = line.line(code, plate.a, point_middle, plate.t)
+                    top_part.addline(line_a)
+                    line_b1 = line.line(code, point_middle, plate.p1, plate.t)
+                    bottom_part.addline(line_b1)
+                    line_b2 = line.line(code, plate.p2, plate.b, plate.t)
+                    bottom_part.addline(line_b2)
+                #case 2: pzl crosses p2-b
+                elif plate.p2.z < z and plate.b.z > z:
+                    share = (z-plate.p2.z)/(plate.b.z - plate.p2.z)
+                    y = plate.p2.y + share * (plate.b.y - plate.p2.y)
+                    point_middle = point.point(y,z)
+                    line_a1 = line.line(code, plate.a, plate.p1, plate.t)
+                    top_part.addline(line_a1)
+                    line_a2 = line.line(code, plate.p2, point_middle, plate.t)
+                    top_part.addline(line_a2)
+                    line_b = line.line(code, point_middle, plate.b, plate.t)
+                    bottom_part.addline(line_b)
+                #case 3 pzl crosses p1-p2
+                else:
+                    line_a = line.line(code, plate.a, plate.p1, plate.t)
+                    top_part.addline(line_a)
+                    line_b = line.line(code, plate.p1, plate.b, plate.t)
+                    bottom_part.addline(line_b)
+            elif plate.a.z >= z and plate.b.z <= z:
+                #case 1: pzl crosses b-p2
+                if plate.b.z < z and plate.p2.z > z:
+                    share = (z-plate.b.z)/(plate.p2.z - plate.b.z)
+                    y = plate.b.y + share * (plate.p2.y - plate.b.y)
+                    point_middle = point.point(y,z)
+                    line_b = line.line(code, plate.b, point_middle, plate.t)
+                    top_part.addline(line_b)
+                    line_a1 = line.line(code, point_middle, plate.p2, plate.t)
+                    bottom_part.addline(line_a1)
+                    line_a2 = line.line(code, plate.p1, plate.a, plate.t)
+                    bottom_part.addline(line_a2)
+                #case 2: pzl crosses p1-a
+                elif plate.p1.z < z and plate.a.z > z:
+                    share = (z-plate.p1.z)/(plate.a.z - plate.p1.z)
+                    y = plate.p1.y + share * (plate.a.y - plate.p1.y)
+                    point_middle = point.point(y,z)
+                    line_b1 = line.line(code, plate.b, plate.p2, plate.t)
+                    top_part.addline(line_b1)
+                    line_b2 = line.line(code, plate.p1, point_middle, plate.t)
+                    top_part.addline(line_b2)
+                    line_a = line.line(code, point_middle, plate.a, plate.t)
+                    bottom_part.addline(line_a)
+                #case 3 pzl crosses p1-p2
+                else:
+                    line_b = line.line(code, plate.b, plate.p2, plate.t)
+                    top_part.addline(line_b)
+                    line_a = line.line(code, plate.p2, plate.a, plate.t)
+                    bottom_part.addline(line_a)
+        area_top = top_part.get_area_red()
+        area_btm = bottom_part.get_area_red()
+        if area_top > area_btm:
+            z_max = z
+            z = 0.5*(z+z_min)
+        else:
+            z_min = z
+            z = 0.5*(z+z_max)
+        geometry_output.print_cs(top_part)
+        geometry_output.print_cs(bottom_part)
+        counter +=1
+        if counter > 10:
+            continue_iteration = False
+    z_s_top = abs(z-top_part.get_center_z_red())
+    z_s_btm = abs(z-bottom_part.get_center_z_red())
+    m_pl_rd_eff = (z_s_top * area_top + z_s_btm * area_btm)*data.constants.get("f_y")
+    return m_pl_rd_eff
