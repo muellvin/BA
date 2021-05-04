@@ -13,6 +13,7 @@ from classes import stiffener
 from classes import merge
 from proofs import resistance_to_shear
 import math
+from proofs import interaction
 
 data.input_data.update({"b_inf": 3000})
 data.input_data.update({"b_sup": 4000})
@@ -45,8 +46,4 @@ print(len(st_list))
 
 final_cs = merge.merge(initial_cs, st_list)
 geometry_output.print_cs(final_cs)
-
-plate_glob = final_cs.get_stiffened_plate(side = 3)
-geometry_output.print_cs(plate_glob)
-
-global_plate_buckling.global_plate_buckling(final_cs, plate_glob)
+interaction.get_m_rd_pl_eff(final_cs)

@@ -2,6 +2,9 @@ from classes import line
 import math
 import data
 import copy
+from classes import plate_code
+from classes import point
+from output import geometry_output
 
 #crosssection calculation
 class crosssection():
@@ -187,17 +190,8 @@ class crosssection():
             m_f_rd_eff = bottom_flange_area * self.h * data.constants.get("f_y") / data.constants.get("gamma_M1")
         else:
             m_f_rd_eff = bottom_flange_area * self.h * data.constants.get("f_y") / data.constants.get("gamma_M1")
-
         return m_f_rd_eff
 
-    def get_m_rd_pl_eff(self):
-        "This is only a place holder and should still be implemented, is however quite difficult"
-        "The implementation will happen later"
-        #returns the value required in EC 1-5, section 7.1 interaction
-        #attention: this value is very specific for this section
-
-        #calculate effective areas of top and bottom flange
-        return self.get_m_rd_el_eff()
 
     def get_azero(self):
         azero = 0
