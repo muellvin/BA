@@ -1,6 +1,7 @@
 #script for analysing an existing crosssection
 from classes import stiffener
 from classes import crosssection
+from classes import substantiate
 from input import input_analysis_tool
 from proofs import buckling_proof
 from classes import merge
@@ -19,7 +20,8 @@ cs = initial_cs.create_initial_cs(data.input_data.get("b_sup"), data.input_data.
 
 #add the deck stiffeners
 st_list_deck = deck.deck(data.input_data.get("b_sup"))
-number_st_top = len(st_list_deck)
+number_st_top = len(st_list_deck.stiffeners)
+st_list_deck = substantiate.substantiate(cs, st_list_deck)
 
 
 
@@ -55,4 +57,5 @@ print("eta_1", cs.eta_1)
 print("verification 2", cs.interaction_2)
 print("verification 3", cs.interaction_3)
 print("verification 4", cs.interaction_4)
+print(cs)
 geometry_output.print_cs_red(cs)
