@@ -20,6 +20,8 @@ class line():
         #normal stress with tension being negative at point a and point b for the effective crosssection
         self.sigma_a_red = 0
         self.sigma_b_red = 0
+        self.sigma_p1_red = 0
+        self.sigma_p2_red = 0
         #ratio of sigma at a and b, smaller/larger with tension being negative
         self.psi = 1
         #local plate buckling reduction factor

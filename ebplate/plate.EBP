@@ -6,7 +6,7 @@ Utilisateur   #
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
-   Height          158.11388300841898 cm 
+   Height          158.11388300841895 cm 
    Thickness         0.5 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
@@ -16,35 +16,39 @@ Commentaire   #
       Bord 3 0 
       Bord 4 0 
 #STIFFENING 
-   Orthotropic Plate =  1 
-   Coefficients d'orthotropie : 
-      Direction X : Beta =  0.000 
-                     Eta =  -1.000 
-        Smearing : No 
-      Direction Y : Beta =  0.000 
-                     Eta =  0.000 
-        Smearing : No 
+   Orthotropic Plate =  0 
    Referentiel 2 
-   Nombre de raidisseurs  1 
+   Nombre de raidisseurs  2 
    - Raidisseur n° 1 Active=1 
       Orientation = 0 
-      Position    = 125.59943008783179 
-      Gamma       = 137.40517774615046 
-      Teta        = 1.0 
-      Delta       = 0.29063576705282557 
-      Dimension 1 = 0 
-      Type        = 0 
-      Dimension 2 = 0 
-      Dimension 3 = 0 
-      Dimension 4 = 0 
+      Position    = 29.88035359716301 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 18.110770276274835 
+      Dimension 2 = 5.0 
+      Dimension 3 = 1.0 
+      Dimension 4 = 0.5 
+   - Raidisseur n° 2 Active=1 
+      Orientation = 0 
+      Position    = 46.378133041087345 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 18.110770276274827 
+      Dimension 2 = 4.999999999999995 
+      Dimension 3 = 1.0000000000000058 
+      Dimension 4 = 0.5 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
   Imposed values : No 
-   Longitudinal Stress Top Left                -1.253647564311186 MPa 
-   Longitudinal Stress Bottom Left             2.011847042251062 MPa 
-   Longitudinal Stress Top Right               -1.253647564311186 MPa 
-   Longitudinal Stress Bottom Right            2.011847042251062 MPa 
+   Longitudinal Stress Top Left                0.000 MPa 
+   Longitudinal Stress Bottom Left             0.000 MPa 
+   Longitudinal Stress Top Right               0.000 MPa 
+   Longitudinal Stress Bottom Right            0.000 MPa 
  Transverse stresses : User's data No 
  Analytical Transverse stresses 
   Imposed values : No 
@@ -62,7 +66,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 0.000 MPa 
+   Shear stress                                 6.666666666666667 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000

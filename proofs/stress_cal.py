@@ -29,6 +29,20 @@ def get_sigma_b_red(cs, line, m_y):
     sigma_b_red = (-1)*m_y * (z-z_center) / i_y
     return sigma_b_red
 
+def get_sigma_p1_red(cs, line, m_y):
+    i_y = cs.get_i_y_red()
+    z_center = cs.get_center_z_red()
+    z = line.p1.z
+    sigma_a_red = (-1)*m_y * (z-z_center) / i_y
+    return sigma_a_red
+
+def get_sigma_p2_red(cs, line, m_y):
+    i_y = cs.get_i_y_red()
+    z_center = cs.get_center_z_red()
+    z = line.p2.z
+    sigma_b_red = (-1)*m_y * (z-z_center) / i_y
+    return sigma_b_red
+
 
 def get_sigma_sup(cs, line, m_y):
     i_y = cs.get_i_y_tot()

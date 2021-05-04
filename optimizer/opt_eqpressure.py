@@ -18,6 +18,7 @@ def opt_eqpressure(cs_fresh, st_prop_deck):
     set_defaults_for_opt_eqpressure()
 
     t_values = [5]
+    i_along_values = [3*10**7]
     #i_along_values = [3*10**7, 6*10**7, 9*10**7]
     n_st_side_max = 2
     n_st_bottom_max = 4
@@ -46,56 +47,65 @@ def opt_eqpressure(cs_fresh, st_prop_deck):
             #the optimizer loop does not loop i_along, as this should be set optimally by the set functions
             n_st_side = 0
             while n_st_side <= n_st_side_max:
-                print("888888888888888888888888888888888  ITERATION SIDE ", n_st_side, "888888888888888888888888888888888")
 
-                if tension_bottom == True:
-                    #do it twice; the stresses now are the ones calculated for the same amount of stiffeners (but different place (could do more))
-                    for twice in range(2):
-                        st_prop_side = set_stiffeners_side(copy.deepcopy(empty_cs), n_st_side, sigma_top_red, sigma_bottom_red)
-                        st_prop = stiffeners_proposition.stiffeners_proposition()
-                        st_prop.stiffeners = copy.deepcopy(st_prop_deck.stiffeners) + copy.deepcopy(st_prop_side.stiffeners)
-                        st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda st: st.st_number)
-                        stiffened_cs = stiffener.add_stiffener_set(copy.deepcopy(empty_cs), st_prop)
-                        stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
+                for i_along_side in i_along_values:
+                    print("888888888888888888888888888888888  ITERATION SIDE ", n_st_side, "888888888888888888888888888888888")
 
-                        #stresses at the top and bottom corner
-                        sigma_top_red = get_sigma_top_red(stiffened_cs)
-                        sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
-
-                    if stiffened_cs.eta_1 <= 1 and stiffened_cs.interaction_2 < 1 and stiffened_cs.interaction_3 < 1 and stiffened_cs.interaction_4 < 1:
-                        #cs_collector.into_collector(stiffened_cs)
-                        pass
-
-                    geometry_output.print_cs_red(stiffened_cs)
-
-
-                else:
-                    n_st_bottom = 4
-                    while n_st_bottom <= n_st_bottom_max:
-                        print("888888888888888888888888888888888  ITERATION BOTTOM ", n_st_bottom, "888888888888888888888888888888888")
+                    if tension_bottom == True:
                         #do it twice; the stresses now are the ones calculated for the same amount of stiffeners (but different place (could do more))
-                        for twice in range(2):
-                            st_prop_side = set_stiffeners_side(copy.deepcopy(empty_cs), n_st_side, sigma_top_red, sigma_bottom_red)
-                            st_prop_bottom = set_stiffeners_bottom(copy.deepcopy(empty_cs), n_st_bottom, sigma_bottom_red)
+                        for times in range(2):
+                            st_prop_side = set_stiffeners_side(copy.deepcopy(empty_cs), n_st_side, sigma_top_red, sigma_bottom_red, i_along_side)
                             st_prop = stiffeners_proposition.stiffeners_proposition()
-                            st_prop.stiffeners = copy.deepcopy(st_prop_deck.stiffeners) + copy.deepcopy(st_prop_side.stiffeners) + copy.deepcopy(st_prop_bottom.stiffeners)
+                            st_prop.stiffeners = copy.deepcopy(st_prop_deck.stiffeners) + copy.deepcopy(st_prop_side.stiffeners)
                             st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda st: st.st_number)
-
                             stiffened_cs = stiffener.add_stiffener_set(copy.deepcopy(empty_cs), st_prop)
-                            geometry_output.print_cs_red(stiffened_cs)
                             stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
 
                             #stresses at the top and bottom corner
                             sigma_top_red = get_sigma_top_red(stiffened_cs)
                             sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
 
-
                         if stiffened_cs.eta_1 <= 1 and stiffened_cs.interaction_2 < 1 and stiffened_cs.interaction_3 < 1 and stiffened_cs.interaction_4 < 1:
-                            cs_collector.into_collector(stiffened_cs)
-                        n_st_bottom += 1
+                            #cs_collector.into_collector(stiffened_cs)
+                            pass
 
                         geometry_output.print_cs_red(stiffened_cs)
 
+                    #terminate tension bottom true
+
+
+                    else:
+                        n_st_bottom = 4
+                        while n_st_bottom <= n_st_bottom_max:
+                            for i_along_bottom in i_along_values:
+                                print("888888888888888888888888888888888  ITERATION BOTTOM ", n_st_bottom, "888888888888888888888888888888888")
+                                #do it twice; the stresses now are the ones calculated for the same amount of stiffeners (but different place (could do more))
+                                for times in range(2):
+                                    st_prop_side = set_stiffeners_side(copy.deepcopy(empty_cs), n_st_side, sigma_top_red, sigma_bottom_red, i_along_side)
+                                    st_prop_bottom = set_stiffeners_bottom(copy.deepcopy(empty_cs), n_st_bottom, sigma_bottom_red, i_along_bottom)
+                                    st_prop = stiffeners_proposition.stiffeners_proposition()
+                                    st_prop.stiffeners = copy.deepcopy(st_prop_deck.stiffeners) + copy.deepcopy(st_prop_side.stiffeners) + copy.deepcopy(st_prop_bottom.stiffeners)
+                                    st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda st: st.st_number)
+
+                                    stiffened_cs = stiffener.add_stiffener_set(copy.deepcopy(empty_cs), st_prop)
+                                    geometry_output.print_cs_red(stiffened_cs)
+                                    stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
+
+                                    #stresses at the top and bottom corner
+                                    sigma_top_red = get_sigma_top_red(stiffened_cs)
+                                    sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
+
+
+                                if stiffened_cs.eta_1 <= 1 and stiffened_cs.interaction_2 < 1 and stiffened_cs.interaction_3 < 1 and stiffened_cs.interaction_4 < 1:
+                                    cs_collector.into_collector(stiffened_cs)
+                                n_st_bottom += 1
+
+                                geometry_output.print_cs_red(stiffened_cs)
+                            #terminate i_along_bottom
+                        #terminate n_st_bottom
+                    #terminate else
+                #terminate i_along _side
+            #terminate n_st_side
                 n_st_side += 1
 
 
@@ -121,8 +131,8 @@ def set_defaults_for_opt_eqpressure():
 
     defaults.do_shear_lag_plastically = False
     defaults.do_shear_lag = False
-    defaults.do_global_plate_buckling = True
-    defaults.do_column_plate_buckling = True
+    defaults.do_global_plate_buckling = False
+    defaults.do_column_plate_buckling = False
 
     defaults.do_print = True
     defaults.do_print_to_txt = False
@@ -144,7 +154,7 @@ def set_t_bottom(cs, t_bottom):
     return cs
 
 
-def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
+def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red, i_along_side):
     if amount == 0:
         propositions = stiffeners_proposition.stiffeners_proposition()
         return propositions
@@ -217,7 +227,10 @@ def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
         i = 1
         location_abs_last = distances[0]/2
         while i <= amount:
-            location_abs_i = h_0 + location_abs_last + distances[i-1]/2 + distances[i]/2
+            if i ==1:
+                location_abs_i = h_0 + location_abs_last + distances[i-1]/2 + distances[i]/2
+            else:
+                location_abs_i = location_abs_last + distances[i-1]/2 + distances[i]/2
             locations_abs.append(location_abs_i)
             location_abs_last = location_abs_i
             width_i = distances[i]
@@ -228,6 +241,17 @@ def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
         locations = []
         for location_abs_i in locations_abs:
             locations.append(location_abs_i / h)
+
+        i_alongs = [i_along_side]
+        i = 2
+        i_along_before = i_along_side
+        #the i_alongs are scaled propotionally to the pressure gradient starting from i_along argument being the smallest
+        while i <= amount:
+            #2*i -1 is the width of the stiffener i
+            i_along_next = i_along_before*m*(distances[(2*i - 1) - 2] / 2 + distances[(2*i-1) -1] + distances[(2*i-1)] / 2)
+            i_alongs.append(i_along_next)
+            i_along_before = i_along_next
+            i += 1
 
 
         #create the proposed_stiffeners
@@ -245,18 +269,10 @@ def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
             #propositions are created from bottom to top
             i = 1
             while i <= amount:
-                if distances[i] < 100:
-                    i_along = 10**5
-                elif distances[i] < 300:
-                    i_along = 10**6
-                elif distances[i] < 500:
-                    i_along = 10**7
-                else:
-                    i_along = 5*10**7
-                proposition_right_i = proposed_stiffener.proposed_stiffener(2, st_number_side1_max + amount + 1 - i, locations[i-1], i_along, distances[i])
+                proposed_stiffener.proposed_stiffener(2, st_number_side1_max + amount + 1 - i, locations[i-1], i_alongs[i-1], distances[2*i-1])
                 proposition_right_i.b_sup_corr = True
                 propositions.add(proposition_right_i)
-                proposition_left_i = proposed_stiffener.proposed_stiffener(4, st_number_side1_max + amount + i - 1, locations[i-1], i_along, distances[i])
+                proposition_left_i = proposed_stiffener.proposed_stiffener(4, st_number_side1_max + amount + i - 1, locations[i-1], i_alongs[i-1], distances[2*i-1])
                 proposition_left_i.b_sup_corr = True
                 propositions.add(proposition_left_i)
                 i += 1
@@ -264,18 +280,10 @@ def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
             #propositions are created from top to bottom
             i = 1
             while i <= amount:
-                if distances[i] < 100:
-                    i_along = 10**5
-                elif distances[i] < 300:
-                    i_along = 10**6
-                elif distances[i] < 500:
-                    i_along = 10**7
-                else:
-                    i_along = 5*10**7
-                proposition_right_i = proposed_stiffener.proposed_stiffener(2, st_number_side1_max + i, (1-locations[i-1]), i_along, distances[i])
+                proposition_right_i = proposed_stiffener.proposed_stiffener(2, st_number_side1_max + i, (1-locations[i-1]), i_alongs[i-1], distances[2*i-1])
                 proposition_right_i.b_sup_corr = True
                 propositions.add(proposition_right_i)
-                proposition_left_i = proposed_stiffener.proposed_stiffener(4, st_number_side1_max + 2*amount - i + 1, (1-locations[i-1]), i_along, distances[i])
+                proposition_left_i = proposed_stiffener.proposed_stiffener(4, st_number_side1_max + 2*amount - i + 1, (1-locations[i-1]), i_alongs[i-1], distances[2*i-1])
                 proposition_left_i.b_sup_corr = True
                 propositions.add(proposition_left_i)
                 i += 1
@@ -287,7 +295,7 @@ def set_stiffeners_side(cs, amount, sigma_top_red, sigma_bottom_red):
 
 
 
-def set_stiffeners_bottom(cs, amount, sigma_bottom_red):
+def set_stiffeners_bottom(cs, amount, sigma_bottom_red, i_along_bottom):
     if amount == 0:
         propositions = stiffeners_proposition.stiffeners_proposition()
         return propositions

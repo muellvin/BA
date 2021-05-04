@@ -49,8 +49,14 @@ def reduction_global_buckling(cs, side):
     else:
         if defaults.do_column_plate_buckling == True:
             chi_c, sigma_cr_c = column_buckling.column_buckling(plate_glob, side)
+        else:
+            chi_c = 1
+            sigma_cr_c = 1
         if defaults.do_global_plate_buckling == True:
             rho_p, sigma_cr_p = global_plate_buckling.global_plate_buckling(cs, plate_glob)
+        else:
+            rho_p = 1
+            sigma_cr_p = 1
 
         if defaults.do_column_plate_buckling == True and defaults.do_column_plate_buckling == True:
             eta = sigma_cr_p/sigma_cr_c -1
@@ -61,6 +67,8 @@ def reduction_global_buckling(cs, side):
         elif defaults.do_column_plate_buckling == True and defaults.do_column_plate_buckling == False:
             eta = 0
         elif defaults.do_column_plate_buckling == False and defaults.do_column_plate_buckling == True:
+            eta = 1
+        else:
             eta = 1
         rho_c = (rho_p - chi_c) * eta * (2 - eta) + chi_c
 
