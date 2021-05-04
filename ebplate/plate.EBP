@@ -21,6 +21,28 @@ Commentaire   #
    Nombre de raidisseurs  2 
    - Raidisseur nÂ° 1 Active=1 
       Orientation = 0 
+<<<<<<< HEAD
+      Position    = 47.43416490252569 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 20.6155281280883 
+      Dimension 2 = 29.99999999999999 
+      Dimension 3 = 20.000000000000004 
+      Dimension 4 = 0.5 
+   - Raidisseur n° 2 Active=1 
+      Orientation = 0 
+      Position    = 110.67971810589327 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 20.6155281280883 
+      Dimension 2 = 30.00000000000001 
+      Dimension 3 = 20.000000000000007 
+      Dimension 4 = 0.5 
+=======
       Position    = 50.0 
       Gamma       = 735.5993542507574 
       Teta        = 1.0 
@@ -41,6 +63,7 @@ Commentaire   #
       Dimension 2 = 0 
       Dimension 3 = 0 
       Dimension 4 = 0 
+>>>>>>> 80419171f43ab459ee5f112680396a7627563d32
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
