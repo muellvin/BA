@@ -11,6 +11,7 @@ import deck
 from output import geometry_output
 from classes import stiffener
 from classes import merge
+from proofs import resistance_to_shear
 import math
 
 data.input_data.update({"b_inf": 3000})
@@ -26,7 +27,7 @@ data.input_data.update({"bending type": "hogging bending"})
 data.input_data.update({"cs position": 1000})
 
 
-initial_cs = ics.create_initial_cs(4000, 3000, 2000, 20, 20, 20)
+initial_cs = ics.create_initial_cs(4000, 3000, 2000, 7, 7, 7)
 
 st_list_deck = deck.deck(4000)
 

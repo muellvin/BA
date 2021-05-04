@@ -21,10 +21,6 @@ def global_plate_buckling(total_cs, plate_glob):
     max_stn = 0
     min_stn = 1000
 
-    print("#1")
-    print(len(stiffened_plate.lines))
-    #go.print_cs(stiffened_plate)
-
     for plate in stiffened_plate.lines:
         if plate.code.pl_type == 0:
             if min_tpl == -1 and max_tpl == -1:
@@ -68,6 +64,10 @@ def global_plate_buckling(total_cs, plate_glob):
             plate.a.z -= move_z
             plate.b.y -= move_y
             plate.b.z -= move_z
+            plate.p1.y -= move_y
+            plate.p1.z -= move_z
+            plate.p2.y -= move_y
+            plate.p2.z -= move_z
 
         #find rotation angle
         if plate_a.a.z == plate_b.b.z:
@@ -86,10 +86,18 @@ def global_plate_buckling(total_cs, plate_glob):
             az = plate.a.z
             by = plate.b.y
             bz = plate.b.z
+            p1y = plate.p1.y
+            p1z = plate.p1.z
+            p2y = plate.p2.y
+            p2z = plate.p2.z
             plate.a.y = math.cos(angle)*ay - math.sin(angle)*az
             plate.a.z = math.sin(angle)*ay + math.cos(angle)*az
             plate.b.y = math.cos(angle)*by - math.sin(angle)*bz
             plate.b.z = math.sin(angle)*by + math.cos(angle)*bz
+            plate.p1.y = math.cos(angle)*p1y - math.sin(angle)*p1z
+            plate.p1.z = math.sin(angle)*p1y + math.cos(angle)*p1z
+            plate.p2.y = math.cos(angle)*p2y - math.sin(angle)*p2z
+            plate.p2.z = math.sin(angle)*p2y + math.cos(angle)*p2z
 
         #claculate A and I of stiffened plate
         A_tot = stiffened_plate.get_area_tot()
@@ -124,14 +132,17 @@ def global_plate_buckling(total_cs, plate_glob):
             corresp_tpl = plate_num_list[i]
             center_plate = None
             top_plate = None
+            top_plate_tpl = 0
             bottom_plate = None
             for plate in stiffened_plate.lines:
                 if plate.code.tpl_number == corresp_tpl and plate.code.pl_type == 0:
                     center_plate = plate
                 if plate.code.tpl_number == corresp_tpl+1:
                     bottom_plate = plate
+                    bottom_plate_top = plate.code.tpl_number
                 elif plate.code.tpl_number == corresp_tpl-1:
                     top_plate = plate
+                    top_plate_tpl = plate.code.tpl_number
             #find distance to point a
             delta_z = center_plate.get_center_z_tot() - plate_a.a.z
             delta_y = center_plate.get_center_y_tot() - plate_a.a.y
@@ -141,8 +152,9 @@ def global_plate_buckling(total_cs, plate_glob):
             unit_vec_to_a = (top_plate.a.y - top_plate.b.y) / top_plate.get_length_tot()
             unit_vec_to_b = (bottom_plate.b.y - bottom_plate.a.y) / bottom_plate.get_length_tot()
             #find additional parts of top plate
-            sigma_a_top = stc.get_sigma_a(total_cs, top_plate, data.input_data.get("M_Ed"))
-            sigma_b_top = stc.get_sigma_b(total_cs, top_plate, data.input_data.get("M_Ed"))
+            top_original = total_cs.get_line(tpl_number = top_plate_tpl)
+            sigma_a_top = stc.get_sigma_a(total_cs, top_original, data.input_data.get("M_Ed"))
+            sigma_b_top = stc.get_sigma_b(total_cs, top_original, data.input_data.get("M_Ed"))
             psi_top =  min(sigma_a_top, sigma_b_top) / max(sigma_a_top, sigma_b_top)
             length_top = 0
             if sigma_a_top > 0 or sigma_b_top > 0:
@@ -166,8 +178,9 @@ def global_plate_buckling(total_cs, plate_glob):
                 pass
 
             #find additional parts of bottom plate
-            sigma_a_bottom = stc.get_sigma_a(total_cs, top_plate, data.input_data.get("M_Ed"))
-            sigma_b_bottom = stc.get_sigma_b(total_cs, top_plate, data.input_data.get("M_Ed"))
+            bottom_original = total_cs.get_line(tpl_number = top_plate_tpl)
+            sigma_a_bottom = stc.get_sigma_a(total_cs, bottom_original, data.input_data.get("M_Ed"))
+            sigma_b_bottom = stc.get_sigma_b(total_cs, bottom_original, data.input_data.get("M_Ed"))
             psi_bottom = min(sigma_a_bottom, sigma_b_bottom) / max(sigma_a_bottom, sigma_b_bottom)
             length_bottom = 0
             if sigma_a_bottom > 0 or sigma_b_bottom > 0:
@@ -190,7 +203,6 @@ def global_plate_buckling(total_cs, plate_glob):
             else:
                 #stiffener is in tension zone
                 pass
-
             #add additional parts of plate to stiffener
             new_top_point = pt.point(top_plate.b.y + unit_vec_to_a * length_top, top_plate.b.z)
             new_top_plate = ln.line(top_plate.code, new_top_point, top_plate.b, top_plate.t)
@@ -213,7 +225,6 @@ def global_plate_buckling(total_cs, plate_glob):
                 new_top_plate.b = pt.point(new_top_plate.b.y + unit_vec_to_b*length_gamma, new_top_plate.b.z)
                 new_bottom_plate.b = pt.point(new_bottom_plate.a.y + unit_vec_to_b*length_gamma, new_bottom_plate.a.z)
                 new_bottom_plate.a = pt.point(new_bottom_plate.a.y + unit_vec_to_a*length_gamma, new_bottom_plate.a.z)
-
             gamma = stiffener.get_i_y_tot() * 12 * (1-0.3**2)/(h*t**3)
 
             #calculate theta
@@ -236,8 +247,7 @@ def global_plate_buckling(total_cs, plate_glob):
         print("sigma_cr = " + str(sigma_cr_p))
 
         #calculating plate slenderness
-        "correct beta_a_c still to be implemented"
-        beta_a_c = 1
+        beta_a_c = get_beta_ac(plate_glob)
         lambda_p_glob_bar = math.sqrt(beta_a_c * data.constants.get("f_y") / sigma_cr_p)
         print("Lambda: " + str(lambda_p_glob_bar))
         #calculate rho_glob for plate buckling
@@ -256,3 +266,20 @@ def global_plate_buckling(total_cs, plate_glob):
 
         print("Rho_Global: " + str(rho_glob))
     return rho_glob, sigma_cr_p
+
+def get_beta_ac(plate_glob):
+    beta_plate = copy.deepcopy(plate_glob)
+    side = beta_plate.lines[0].code.pl_position
+    plate_a = beta_plate.get_plate_a(side)
+    plate_a.rho_c_a = 0
+    plate_b = beta_plate.get_plate_b(side)
+    plate_b.rho_c_b = 0
+    a_c = 0
+    for plate in beta_plate.lines:
+        if plate != plate_a and plate != plate_b:
+            a_c += plate.get_area_tot()
+        else:
+            a_c += 0.5*plate.get_area_tot()
+    a_c_eff_loc = beta_plate.get_area_red()
+    beta_a_c = a_c_eff_loc / a_c
+    return beta_a_c
