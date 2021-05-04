@@ -118,12 +118,17 @@ def column_buckling(plate_glob, side):
                 sigma_border_before = plate_before.sigma_a_red
                 border_before = plate_before.a
                 plate_before_eff = line.line(code_before, border_before, plate_before.b, plate_before.t)
+                plate_before_eff.sigma_a_red = sigma_border_before
+                plate_before_eff.sigma_b_red = plate_before.sigma_b_red
+
             else:
                 plate_before_A = plate_before.get_area_red2()
                 plate_before_I = plate_before.get_i_along_red2()
-                sigma_border_before = plate_before.sigma_a_red
+                sigma_border_before = plate_before.sigma_p2_red
                 border_before = plate_before.p2
                 plate_before_eff = line.line(code_before, border_before, plate_before.b, plate_before.t)
+                plate_before_eff.sigma_a_red = sigma_border_before
+                plate_before_eff.sigma_b_red = plate_before.sigma_b_red
 
             if dis_points(plate_after.p1, plate_after.p2) < 0.05:
                 plate_after_A = plate_after.get_area_tot()
@@ -131,12 +136,17 @@ def column_buckling(plate_glob, side):
                 sigma_border_after = plate_after.sigma_b_red
                 border_after = plate_after.b
                 plate_after_eff = line.line(code_after, plate_after.a, border_after, plate_after.t)
+                plate_after_eff.sigma_b_red  = sigma_border_after
+                plate_after_eff.sigma_a_red = plate_before.sigma_a_red
             else:
                 plate_after_A = plate_after.get_area_red1()
                 plate_after_I = plate_after.get_i_along_red1()
-                sigma_border_after = plate_after.sigma_b_red
+                sigma_border_after = plate_after.sigma_p2_red
                 border_after = plate_after.p1
                 plate_after_eff = line.line(code_after, plate_after.a, border_after, plate_after.t)
+                plate_after_eff.sigma_b_red  = sigma_border_after
+                plate_after_eff.sigma_a_red = plate_before.sigma_a_red
+
 
 
             #EC 1993 1-5 4.5.3 (3)

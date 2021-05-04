@@ -1,7 +1,7 @@
 	EBPlate - v2.01 
-Société       # 
+SociÃ©tÃ©       # 
 Affaire       # 
-Référence     # 
+RÃ©fÃ©rence     # 
 Utilisateur   # 
 Commentaire   # 
 #PLATE 
@@ -16,17 +16,10 @@ Commentaire   #
       Bord 3 0 
       Bord 4 0 
 #STIFFENING 
-   Orthotropic Plate =  1 
-   Coefficients d'orthotropie : 
-      Direction X : Beta =  0.000 
-                     Eta =  -1.000 
-        Smearing : No 
-      Direction Y : Beta =  0.000 
-                     Eta =  0.000 
-        Smearing : No 
+   Orthotropic Plate =  0 
    Referentiel 2 
    Nombre de raidisseurs  2 
-   - Raidisseur n° 1 Active=1 
+   - Raidisseur nÂ° 1 Active=1 
       Orientation = 0 
       Position    = 50.0 
       Gamma       = 735.5993542507574 
@@ -37,7 +30,7 @@ Commentaire   #
       Dimension 2 = 0 
       Dimension 3 = 0 
       Dimension 4 = 0 
-   - Raidisseur n° 2 Active=1 
+   - Raidisseur nÂ° 2 Active=1 
       Orientation = 0 
       Position    = 250.0 
       Gamma       = 735.5993542507574 
@@ -73,7 +66,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 0.000 MPa 
+   Shear stress                                 6.666666666666667 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000

@@ -29,6 +29,8 @@ def cal_sigma_psi_red(cs):
     for line in cs.lines:
         line.sigma_a_red = stress_cal.get_sigma_a_red(cs, line, M_Ed)
         line.sigma_b_red = stress_cal.get_sigma_b_red(cs, line, M_Ed)
+        line.sigma_p1_red = stress_cal.get_sigma_p1_red(cs, line, M_Ed)
+        line.sigma_p2_red = stress_cal.get_sigma_p2_red(cs, line, M_Ed)
         #print(line)
         #set the stress ratio = sigma min / sigma max
         line.psi = min(line.sigma_a_red, line.sigma_b_red) / max(line.sigma_a_red, line.sigma_b_red)
