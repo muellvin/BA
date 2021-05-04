@@ -197,7 +197,7 @@ class crosssection():
         #attention: this value is very specific for this section
 
         #calculate effective areas of top and bottom flange
-        return 1.15 * self.get_m_rd_el_eff()
+        return self.get_m_rd_el_eff()
 
     def get_azero(self):
         azero = 0

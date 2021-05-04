@@ -40,12 +40,16 @@ def reduction_global_buckling(cs, side):
     sigma_cr_c = 1
     sigma_cr_p = 1
     all_tension = False
+    plate_stiffened = True
 
     #the whole plate is under tension
     if line_min.sigma_a_red < 0 and line_max.sigma_b_red < 0:
         rho_c = 1
         all_tension = True
 
+    elif len(plate_glob.lines == 1):
+        rho_c = 1
+        plate_stiffened = False
     else:
         if defaults.do_column_plate_buckling == True:
             chi_c, sigma_cr_c = column_buckling.column_buckling(plate_glob, side)
@@ -73,6 +77,7 @@ def reduction_global_buckling(cs, side):
         rho_c = (rho_p - chi_c) * eta * (2 - eta) + chi_c
 
     print("all_tension: ", all_tension)
+    print("Plate stiffened", plate_stiffened)
     print("rho_c = " + str(rho_c))
 
     plate_a = cs.get_plate_a(side)
