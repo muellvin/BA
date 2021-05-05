@@ -2,7 +2,7 @@ import data
 from optimizer import optimization_value
 
 def into_collector(new_cs):
-    optimization_value.set_value(cs)
+    optimization_value.set_value(new_cs)
     data.cs_collection.append(new_cs)
 
 

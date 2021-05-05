@@ -45,12 +45,13 @@ st_t = 5
 """defaults cost"""
 welding_cost = 40 #[CHF/m]
 steel_cost = 1.5 #[CHF/kg]
-optimize_for_cost_only = False
 
+optimize_for_cost_only = False
 optimize_for_spec_ei = False
 
-weight_cost = 1
+weight_cost = -1000
 weight_ei = 1
+# target value will be maximized
 optimize_for_target_function = True
 
 
