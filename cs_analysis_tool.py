@@ -10,10 +10,28 @@ import data
 import deck
 from output import geometry_output
 import math
+import os
+import sys
+import defaults
 
 
+#sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
 #crosssection input and creation (only trapezoid plates)
-print("*************************** cross-section analysis tool ********************************")
+
+
+
+
+if defaults.do_print_to_txt == True:
+    os.remove("output\cs_analysis.txt")
+    file = open("output\cs_analysis.txt", "w+")
+    file.write("*************************** cross-section analysis tool ********************************")
+    file.close()
+if defaults.do_print_to_terminal == True:
+    print("*************************** cross-section analysis tool ********************************")
+
+
+input_analysis_tool.set_defaults()
+
 input_analysis_tool.set_cs_geometry()
 #data.check_input_data_complete()
 cs = initial_cs.create_initial_cs(data.input_data.get("b_sup"), data.input_data.get("b_inf"), data.input_data.get("h"), data.input_data.get("t_side"), data.input_data.get("t_deck"), data.input_data.get("t_bottom"))
