@@ -5,7 +5,13 @@ from classes import stiffeners_proposition
 from classes import proposed_stiffener
 from classes import stiffener
 
+
+def set_defaults():
+    data.print_constants()
+
+
 def set_cs_geometry():
+
     print("Defining the geometry of the cross-section")
     print("Do you want to use defaults? y/n: ", end='')
     string = str(input())
@@ -45,6 +51,7 @@ def set_cs_geometry():
         cs_position = str(input())
         data.input_data.update({"cs position": cs_position})
 
+    data.print_input_data()
 
 def set_stiffeners(number_st_top):
     stiffeners = stiffeners_proposition.stiffeners_proposition()
