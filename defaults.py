@@ -113,6 +113,9 @@ do_deck_as_prop = True
 
 
 
+do_deck_as_prop = True
+
+
 
 def cs_defaults_tostring():
     line1 = "defaults for crosssection geometry: \n"
