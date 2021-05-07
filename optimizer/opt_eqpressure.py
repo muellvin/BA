@@ -15,6 +15,8 @@ import defaults
 #an optimizer that puts the stiffeners in place, such that the single plates inbetween each have the same total pressure
 def opt_eqpressure(cs_fresh, st_prop_deck):
 
+
+
     set_defaults_for_opt_eqpressure()
 
     t_values = [5]
@@ -138,6 +140,11 @@ def set_defaults_for_opt_eqpressure():
     defaults.do_print_to_txt = False
 
     defaults.do_deck_as_prop = True
+
+    defaults.optimize_for_cost_only = False
+    defaults.optimize_for_spec_ei = False
+    defaults.optimize_for_target_function = True
+
 
 
 def set_t_side(cs, t_side):
