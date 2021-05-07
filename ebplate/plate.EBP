@@ -6,7 +6,7 @@ Utilisateur   #
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
-   Height          158.11388300841895 cm 
+   Height          300.0 cm 
    Thickness         0.5 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
@@ -18,29 +18,51 @@ Commentaire   #
 #STIFFENING 
    Orthotropic Plate =  0 
    Referentiel 2 
-   Nombre de raidisseurs  2 
+   Nombre de raidisseurs  4 
    - Raidisseur n° 1 Active=1 
       Orientation = 0 
-      Position    = 47.43416490252569 
+      Position    = 49.999999999999986 
       Gamma       = 0 
       Teta        = 0 
       Delta       = 0 
       Type        = 3 
-      Dimension 1 = 20.0 
-      Dimension 2 = 29.99999999999999 
-      Dimension 3 = 20.000000000000004 
-      Dimension 4 = 0.5 
+      Dimension 1 = 15.099999999999994 
+      Dimension 2 = 33.333333333333336 
+      Dimension 3 = 6.0 
+      Dimension 4 = 0.9 
    - Raidisseur n° 2 Active=1 
       Orientation = 0 
-      Position    = 94.86832980505137 
+      Position    = 116.66666666666667 
       Gamma       = 0 
       Teta        = 0 
       Delta       = 0 
       Type        = 3 
-      Dimension 1 = 19.999999999999996 
-      Dimension 2 = 30.000000000000007 
-      Dimension 3 = 20.0 
-      Dimension 4 = 0.5 
+      Dimension 1 = 15.1 
+      Dimension 2 = 33.333333333333336 
+      Dimension 3 = 6.0 
+      Dimension 4 = 0.9 
+   - Raidisseur n° 3 Active=1 
+      Orientation = 0 
+      Position    = 183.33333333333331 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 15.100000000000003 
+      Dimension 2 = 33.33333333333333 
+      Dimension 3 = 6.0 
+      Dimension 4 = 0.9 
+   - Raidisseur n° 4 Active=1 
+      Orientation = 0 
+      Position    = 250.0 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 15.100000000000009 
+      Dimension 2 = 33.33333333333333 
+      Dimension 3 = 6.0 
+      Dimension 4 = 0.9 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
@@ -66,7 +88,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 6.666666666666667 MPa 
+   Shear stress                                 1.5746257344278158 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000

@@ -62,7 +62,8 @@ stiffener_list = st_list_deck + st_list_rest
 cs = merge.merge(cs, stiffener_list)
 print(cs)
 geometry_output.print_cs_red(cs)
-
+for stiff in stiffener_list:
+    geometry_output.print_cs_red(stiff)
 
 
 #set the cross-sectional forces

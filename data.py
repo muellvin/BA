@@ -1,5 +1,7 @@
 import defaults
 
+sys_paths = {"vinz": 'C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA', "nino": 'C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA'}
+
 #list of constants
 #if f_y is set to a value > 460 MPa also change eta in defaults.py
 constants = {"E": 210000, "nu": 0.3, "f_y": 235, "G": 81000, "gamma_M1": 1.05}

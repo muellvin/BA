@@ -59,7 +59,7 @@ def merge(initial_cs, stiffener_list):
         next_tpl_a = None
         initial_point_1 = old_plate_1.a
         end_point_1 = old_plate_1.b
-
+        
         while i <= st_number_1_max:
 
             new_plate_1_a = initial_point_1
