@@ -134,15 +134,15 @@
           var label = document.createElement("label");
           label.setAttribute("for", input_data[j] + i);
           label.appendChild(text);
-          label.appendChild(sub)
-          label.appendChild(unit)
+          label.appendChild(sub);
+          label.appendChild(unit);
           var br = document.createElement("br");
           var element = document.getElementById("div1");
           td1.appendChild(label);
           td2.appendChild(box);
-          tr.appendChild(td1)
-          tr.appendChild(td2)
-          table.appendChild(tr)
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          table.appendChild(tr);
         {% endfor %}
         var br = document.createElement("br");
         var element = document.getElementById("div1");
