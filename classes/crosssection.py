@@ -18,7 +18,10 @@ class crosssection():
         self.interaction_2 = interaction_2
         self.interaction_3 = interaction_3
         self.interaction_4 = interaction_4
+
         self.cost = 0
+        self.ei = 0
+        self.target_value = 0
 
     def __str__(self):
         string = "\n cross-section with b_sup=" + str(self.b_sup) + ", b_inf=" + str(self.b_inf) + ", h=" + str(self.h) + "\n"

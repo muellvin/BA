@@ -46,6 +46,14 @@ st_t = 5
 welding_cost = 40 #[CHF/m]
 steel_cost = 1.5 #[CHF/kg]
 
+optimize_for_cost_only = False
+optimize_for_spec_ei = False
+
+weight_cost = -1000
+weight_ei = 1
+# target value will be maximized
+optimize_for_target_function = True
+
 
 """check_geometry defaults"""
 mindis_top_corner = 100
@@ -100,8 +108,14 @@ do_column_plate_buckling = False
 
 do_print = True
 do_print_to_txt = True
+do_print_to_terminal = True
 
 do_deck_as_prop = False
+
+
+
+do_deck_as_prop = True
+
 
 
 def cs_defaults_tostring():

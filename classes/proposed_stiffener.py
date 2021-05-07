@@ -18,3 +18,13 @@ class proposed_stiffener():
         self.h_corr_val = 0
 
         self.deck_st = False
+
+    def print_stiffener():
+        if defaults.do_print_to_txt == True:
+            file = open("output\cs_analysis.txt", "a+")
+            file.write("\nSTIFFENERS PROPOSITION")
+            for stiffener in self.stiffeners:
+                stiffener.print_stiffener()
+            file.close()
+        if defaults.do_print_to_terminal == True:
+            pass
