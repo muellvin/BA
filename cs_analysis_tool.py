@@ -59,11 +59,11 @@ for st in data.stiffener_data.stiffeners:
     st.b_sup, st.b_inf, st.h, st.t)
     st_list_rest.append(stiffener_i)
 stiffener_list = st_list_deck + st_list_rest
+stiffener_list = sorted(stiffener_list, key = lambda st: st.lines[0].code.st_number)
 cs = merge.merge(cs, stiffener_list)
-print(cs)
+#print(cs)
 geometry_output.print_cs_red(cs)
-for stiff in stiffener_list:
-    geometry_output.print_cs_red(stiff)
+
 
 
 #set the cross-sectional forces
@@ -76,5 +76,5 @@ print("eta_1", cs.eta_1)
 print("verification 2", cs.interaction_2)
 print("verification 3", cs.interaction_3)
 print("verification 4", cs.interaction_4)
-print(cs)
+#print(cs)
 geometry_output.print_cs_red(cs)
