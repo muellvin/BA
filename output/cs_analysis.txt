@@ -20,27 +20,19 @@ INPUT DATA
 ------------------------ reduction_global_buckling for side 2 ---------------------------------
 
 ------------------------------ column_buckling for side 2 ------------------------------
-there are 2 stiffeners on side 2
+there are 1 stiffeners on side 2
 ''''''''''''''''''''''''''Column number 8'''''''''''''''''''''''''
-A_sl=6918.0, A_sl_eff=6899.69, I_sl=13615896.6
-sigma_cr_c=436438.96
-e1=73.95, e2=58.7
+A_sl=7084.17, A_sl_eff=6023.84, I_sl=13616242.8
+sigma_cr_c=12047738.61
+e1=75.33, e2=57.33
 All tension =False
-beta_A_c =0.9973533556399582
-lambda_c_bar =0.023173770249245322
-Phi_c =0.46543457853567055
-''''''''''''''''''''''''''Column number 9'''''''''''''''''''''''''
-A_sl=5798.38, A_sl_eff=5473.79, I_sl=13613564.07
-sigma_cr_c=1871049.97
-e1=62.61, e2=70.04
-All tension =False
-beta_A_c =0.9440197709632558
-lambda_c_bar =0.010888844170270393
-Phi_c =0.4620236164344582
+beta_A_c =0.850323609303015
+lambda_c_bar =0.004072614297713643
+Phi_c =0.461569412755445
 
 ------------------------------ plate_buckling for side 2 ------------------------------
-sigma_cr = 2521.9698839002717
-Lambda: 0.29468454085603474
+sigma_cr = 3563.1368671291602
+Lambda: 0.22090507518943794
     Rho_Global: 1.0
 
 Values for side 2
@@ -49,47 +41,41 @@ Values for side 2
 
 ------------------------ reduction_global_buckling for side 3 ---------------------------------
 
+------------------------------ column_buckling for side 3 ------------------------------
+there are 1 stiffeners on side 3
+''''''''''''''''''''''''''Column number 9'''''''''''''''''''''''''
+A_sl=11311.55, A_sl_eff=5518.29, I_sl=13625049.83
+sigma_cr_c=249651.92
+e1=96.75, e2=35.9
+All tension =False
+beta_A_c =0.4878456922159876
+lambda_c_bar =0.02142928655464255
+Phi_c =0.4669902232800209
+
+------------------------------ plate_buckling for side 3 ------------------------------
+sigma_cr = 372.3804217891111
+Lambda: 0.554857867733283
+    Rho_Global: 1.0
+
 Values for side 3
      all_tension: False
-     rho_c = 1
+     rho_c = 1.0
 
 ------------------------ reduction_global_buckling for side 4 ---------------------------------
 
 ------------------------------ column_buckling for side 4 ------------------------------
-there are 2 stiffeners on side 4
+there are 1 stiffeners on side 4
 ''''''''''''''''''''''''''Column number 10'''''''''''''''''''''''''
-A_sl=5798.38, A_sl_eff=5473.79, I_sl=13613564.07
-sigma_cr_c=1778139.74
-e1=62.61, e2=70.04
-All tension =False
-beta_A_c =0.9440197709632562
-lambda_c_bar =0.011169700576701934
-Phi_c =0.4620832023395338
-''''''''''''''''''''''''''Column number 11'''''''''''''''''''''''''
-A_sl=6918.0, A_sl_eff=6899.69, I_sl=13615896.6
-sigma_cr_c=416503.54
-e1=73.95, e2=58.7
-All tension =False
-beta_A_c =0.9973533556399582
-lambda_c_bar =0.023721880234010343
-Phi_c =0.46555540560470066
+A_sl=7084.17, A_sl_eff=6023.84, I_sl=13616242.8
+sigma_cr_c=0.0
+e1=75.33, e2=57.33
+All tension =True
 
 ------------------------------ plate_buckling for side 4 ------------------------------
-sigma_cr = 1853.91387372125
-Lambda: 0.34370236791725733
+sigma_cr = 2240.971803203816
+Lambda: 0.2785503766465538
     Rho_Global: 1.0
 
 Values for side 4
      all_tension: False
      rho_c = 1.0
-INPUT DATA
-    b_sup: 4000
-    t_deck: 5
-    b_inf: 3000
-    t_bottom: 5
-    h: 1500
-    t_side: 5
-    a: 10000
-    L_e: 15000
-    bending type: sagging bending
-    cs position: neither

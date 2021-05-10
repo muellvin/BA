@@ -6,7 +6,7 @@ Utilisateur   #
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
-   Height          158.11388300841898 cm 
+   Height          158.11388300841895 cm 
    Thickness         0.5 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
@@ -18,28 +18,17 @@ Commentaire   #
 #STIFFENING 
    Orthotropic Plate =  0 
    Referentiel 2 
-   Nombre de raidisseurs  2 
+   Nombre de raidisseurs  1 
    - Raidisseur n° 1 Active=1 
       Orientation = 0 
-      Position    = 29.695333688543265 
+      Position    = 79.05694150420948 
       Gamma       = 0 
       Teta        = 0 
       Delta       = 0 
       Type        = 3 
-      Dimension 1 = 18.000000000000004 
-      Dimension 2 = 4.999999999999995 
-      Dimension 3 = 1.0000000000000058 
-      Dimension 4 = 0.5 
-   - Raidisseur n° 2 Active=1 
-      Orientation = 0 
-      Position    = 46.090958463005016 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 17.999999999999993 
-      Dimension 2 = 4.999999999999995 
-      Dimension 3 = 1.0000000000000058 
+      Dimension 1 = 19.999999999999996 
+      Dimension 2 = 30.0 
+      Dimension 3 = 20.000000000000007 
       Dimension 4 = 0.5 
 #STRESSES 
  Longitudinal stresses : User's data No 
@@ -66,7 +55,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 6.666666666666666 MPa 
+   Shear stress                                 6.666666666666667 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000
