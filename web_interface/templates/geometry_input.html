@@ -16,7 +16,6 @@
 
 <h1>CS Analysis Tool</h1>
 <p>Please fill the following form.</p>
-<p>{{ content["b_sup"] }}</p>
 
 </div>
 
@@ -36,30 +35,123 @@
       </tr>
       <tr>
         <td><label for="h">h [mm]</label></td>
-        <td><input type="number" name="h" value = "2000" form="step_1"></td>
+        <td><input type="number" name="h" value =  {{ content["h"] }}  form="step_1"></td>
       </tr>
       <tr>
         <td><label for="t_side">t<sub>side</sub> [mm]</label></td>
-        <td><input type="number" name="t_side" value = "10" form="step_1"></td>
+        <td><input type="number" name="t_side" value =  {{ content["t_side"] }}  form="step_1"></td>
       </tr>
       <tr>
-        <td><label for="t_bottom">t<sub>bottom</sub> [mm]</label></td>
-        <td><input type="number" name="t_bottom" value = "10" form="step_1"></td>
+        <td><label for="t_btm">t<sub>bottom</sub> [mm]</label></td>
+        <td><input type="number" name="t_btm" value =  {{ content["t_btm"] }}  form="step_1"></td>
       </tr>
     </table>
     <br>
-    <label for="side_stiffener_number">Choose the number of side stiffeners</label>
-    <select name="side_stiffener_number" onchange="set_side(this.value)" form="step_1">
-      <option value="0">0</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-    </select>
-    <br>
-    <br>
+    <div id = "div0">
+    </div>
     <div id = "div1">
     </div>
+    <script>
+      var label = document.createElement("label")
+      label.setAttribute("for", "num_side")
+      var label_text = document.createTextNode("Choose the number of side stiffeners ")
+      label.appendChild(label_text)
+      var sel = document.createElement("select");
+      var opt0 = document.createElement("option");
+      var opt1 = document.createElement("option");
+      var opt2 = document.createElement("option");
+      var opt3 = document.createElement("option");
+      var opt4 = document.createElement("option");
+      opt0.setAttribute("value", "0");
+      opt0.setAttribute("label", "0");
+      if ({{ content["num_side"] }} == 0) {
+        opt0.setAttribute("selected", true)
+      }
+      opt1.setAttribute("value", "1");
+      opt1.setAttribute("label", "1");
+      if ({{ content["num_side"] }} == 1) {
+        opt1.setAttribute("selected", true)
+      }
+      opt2.setAttribute("value", "2");
+      opt2.setAttribute("label", "2");
+      if ({{ content["num_side"] }} == 2) {
+        opt2.setAttribute("selected", true)
+      }
+      opt3.setAttribute("value", "3");
+      opt3.setAttribute("label", "3");
+      if ({{ content["num_side"] }} == 3) {
+        opt3.setAttribute("selected", true)
+      }
+      opt4.setAttribute("value", "4");
+      opt4.setAttribute("label", "4");
+      if ({{ content["num_side"] }} == 4) {
+        opt4.setAttribute("selected", true)
+      }
+      sel.appendChild(opt0);
+      sel.appendChild(opt1);
+      sel.appendChild(opt2);
+      sel.appendChild(opt3);
+      sel.appendChild(opt4);
+      sel.setAttribute("onchange", "set_side(this.value)")
+      sel.setAttribute("form", "step_1")
+      sel.setAttribute("name", "num_side")
+      sel.setAttribute("id", "num_side")
+      var element = document.getElementById("div0");
+      element.appendChild(label)
+      element.appendChild(sel);
+      /*create stiffener fields*/
+      var input_data = ["location", "b_sup", "b_inf", "h", "t"]
+      var normal = ["location", "b", "b", "h", "t"]
+      var subscripts = ["","sup", "inf", "", ""]
+      var units = [" [-]", " [mm]", " [mm]", " [mm]", " [mm]"]
+      var i = 0;
+      {% set input_data = ["location", "b_sup", "b_inf", "h", "t"] %}
+      {% for i in range(content["num_side"]) %}
+        i = i+1
+        var para = document.createElement("P")
+        var text = document.createTextNode("Stiffener " + (i));
+        var element = document.getElementById("div1");
+        para.appendChild(text)
+        element.appendChild(para);
+        var j = -1;
+        var table = document.createElement("table")
+        {% for j in range(5) %}
+          j = j + 1
+          var tr = document.createElement("tr")
+          var td1 = document.createElement("td")
+          var td2 = document.createElement("td")
+          var box = document.createElement("input");
+          box.setAttribute("type", "number");
+          box.setAttribute("name", input_data[j] + i);
+          box.setAttribute("id", input_data[j] + i)
+          box.setAttribute("form", "step_1")
+          box.setAttribute("value", {{ content[input_data[j]~(i+1)] }})
+          var text = document.createTextNode(normal[j]);
+          var sub = document.createElement("sub")
+          var sub_text = document.createTextNode(subscripts[j])
+          sub.appendChild(sub_text)
+          var unit = document.createTextNode(units[j])
+          var label = document.createElement("label");
+          label.setAttribute("for", input_data[j] + i);
+          label.appendChild(text);
+          label.appendChild(sub);
+          label.appendChild(unit);
+          var br = document.createElement("br");
+          var element = document.getElementById("div1");
+          td1.appendChild(label);
+          td2.appendChild(box);
+          tr.appendChild(td1);
+          tr.appendChild(td2);
+          table.appendChild(tr);
+        {% endfor %}
+        var br = document.createElement("br");
+        var element = document.getElementById("div1");
+        element.appendChild(table);
+      {% endfor %}
+      var br = document.createElement("br");
+      var element = document.getElementById("div1");
+      element.appendChild(br);
+    </script>
     <script>
     function set_side(val) {
       const myNode = document.getElementById("div1");
@@ -84,9 +176,10 @@
           var td1 = document.createElement("td")
           var td2 = document.createElement("td")
           var box = document.createElement("input");
-          box.setAttribute("type", "text");
+          box.setAttribute("type", "number");
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i)
+          box.setAttribute("form", "step_1")
           var text = document.createTextNode(normal[j]);
           var sub = document.createElement("sub")
           var sub_text = document.createTextNode(subscripts[j])
@@ -114,24 +207,152 @@
       element.appendChild(br);
     }
     </script>
-    <label for="btm_stiffener_number">Choose the number of bottom stiffeners</label>
-    <select name="btm_stiffener_number" onchange = "set_bottom(this.value)" form="step_1">
-      <option value="0">0</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5</option>
-      <option value="6">6</option>
-      <option value="7">7</option>
-    </select>
     <br>
-    <br>
-    <div id = "div2">
+    <div id=div2>
     </div>
+    <div id = "div3">
+    </div>
+    <br>
+    <script>
+      var label = document.createElement("label")
+      label.setAttribute("for", "num_btm")
+      var label_text = document.createTextNode("Choose the number of bottom stiffeners ")
+      label.appendChild(label_text)
+      var sel = document.createElement("select");
+      var opt0 = document.createElement("option");
+      var opt1 = document.createElement("option");
+      var opt2 = document.createElement("option");
+      var opt3 = document.createElement("option");
+      var opt4 = document.createElement("option");
+      var opt5 = document.createElement("option");
+      var opt6 = document.createElement("option");
+      var opt7 = document.createElement("option");
+      opt0.setAttribute("value", "0");
+      opt0.setAttribute("label", "0");
+      if ({{ content["num_btm"] }} == 0) {
+        opt0.setAttribute("selected", true)
+      }
+      opt1.setAttribute("value", "1");
+      opt1.setAttribute("label", "1");
+      if ({{ content["num_btm"] }} == 1) {
+        opt1.setAttribute("selected", true)
+      }
+      opt2.setAttribute("value", "2");
+      opt2.setAttribute("label", "2");
+      if ({{ content["num_btm"] }} == 2) {
+        opt2.setAttribute("selected", true)
+      }
+      opt3.setAttribute("value", "3");
+      opt3.setAttribute("label", "3");
+      if ({{ content["num_btm"] }} == 3) {
+        opt3.setAttribute("selected", true)
+      }
+      opt4.setAttribute("value", "4");
+      opt4.setAttribute("label", "4");
+      if ({{ content["num_btm"] }} == 4) {
+        opt4.setAttribute("selected", true)
+      }
+      opt5.setAttribute("value", "5");
+      opt5.setAttribute("label", "5");
+      if ({{ content["num_btm"] }} == 5) {
+        opt5.setAttribute("selected", true)
+      }
+      opt6.setAttribute("value", "6");
+      opt6.setAttribute("label", "6");
+      if ({{ content["num_btm"] }} == 6) {
+        opt6.setAttribute("selected", true)
+      }
+      opt7.setAttribute("value", "7");
+      opt7.setAttribute("label", "7");
+      if ({{ content["num_btm"] }} == 7) {
+        opt7.setAttribute("selected", true)
+      }
+      sel.appendChild(opt0);
+      sel.appendChild(opt1);
+      sel.appendChild(opt2);
+      sel.appendChild(opt3);
+      sel.appendChild(opt4);
+      sel.appendChild(opt5);
+      sel.appendChild(opt6);
+      sel.appendChild(opt7);
+      sel.setAttribute("onchange", "set_bottom(this.value)")
+      sel.setAttribute("form", "step_1")
+      sel.setAttribute("name", "num_btm")
+      sel.setAttribute("id", "num_btm")
+      var element = document.getElementById("div2");
+      element.appendChild(label)
+      element.appendChild(sel);
+      /*create stiffener fields*/
+      var input_data = ["location", "b_sup", "b_inf", "h", "t"]
+      var normal = ["location", "b", "b", "h", "t"]
+      var subscripts = ["","sup", "inf", "", ""]
+      var units = [" [-]", " [mm]", " [mm]", " [mm]", " [mm]"]
+      var i = 30;
+      {% set input_data = ["location", "b_sup", "b_inf", "h", "t"] %}
+      {% set it = 0 %}
+      {% set first = false%}
+      {% if content["num_btm"]%2 == 0 %}
+        {% set it = content["num_btm"]/2 %}
+      {% else %}
+        {% set it = content["num_btm"]/2 + 0.5 %}
+        {% set first = true %}
+      {% endif %}
+      {% for i in range(it|round|int) %}
+        i = i+1
+        var para = document.createElement("P")
+        var text = document.createTextNode("Stiffener Pair" );
+        {% if first == true and i == 0 %}
+          var text = document.createTextNode("Central Stiffener" );
+        {% endif %}
+        var element = document.getElementById("div3");
+        para.appendChild(text)
+        element.appendChild(para);
+        var j = -1;
+        var table = document.createElement("table")
+        {% for j in range(5) %}
+          j = j + 1
+          var tr = document.createElement("tr")
+          var td1 = document.createElement("td")
+          var td2 = document.createElement("td")
+          var box = document.createElement("input");
+          box.setAttribute("type", "number");
+          box.setAttribute("name", input_data[j] + i);
+          box.setAttribute("id", input_data[j] + i)
+          box.setAttribute("form", "step_1")
+          box.setAttribute("value", {{ content[input_data[j]~(i+31)] }})
+          {% if first == true and i == 0 and j == 0%}
+            box.setAttribute("disabled", "disabled")
+          {% endif %}
+          var text = document.createTextNode(normal[j]);
+          var sub = document.createElement("sub")
+          var sub_text = document.createTextNode(subscripts[j])
+          sub.appendChild(sub_text)
+          var unit = document.createTextNode(units[j])
+          var label = document.createElement("label");
+          label.setAttribute("for", input_data[j] + i);
+          label.appendChild(text);
+          label.appendChild(sub)
+          label.appendChild(unit)
+          var br = document.createElement("br");
+          var element = document.getElementById("div3");
+          td1.appendChild(label);
+          td2.appendChild(box);
+          tr.appendChild(td1)
+          tr.appendChild(td2)
+          table.appendChild(tr)
+        {% endfor %}
+        var br = document.createElement("br");
+        var element = document.getElementById("div3");
+        element.appendChild(table);
+      {% endfor %}
+      var br = document.createElement("br");
+      var element = document.getElementById("div3");
+      element.appendChild(br);
+    </script>
+    <br>
     <script>
     function set_bottom(val) {
-      const myNode = document.getElementById("div2");
+      const myNode = document.getElementById("div3");
       while (myNode.firstChild) {
         myNode.removeChild(myNode.lastChild);
       }
@@ -149,22 +370,26 @@
       var subscripts = ["","sup", "inf", "", ""]
       var units = [" [-]", " [mm]", " [mm]", " [mm]", " [mm]"]
       var i;
-      for (i = 1; i <= it; i++) {
+      for (i = 31; i <= 30+it; i++) {
         var para = document.createElement("P")
-        var text = document.createTextNode("Stiffener " + (i) );
-        var element = document.getElementById("div2");
+        var text = document.createTextNode("Stiffener Pair" );
+        if (first_field == true) {
+          var text = document.createTextNode("Central Stiffener" );
+        }
+        var element = document.getElementById("div3");
         para.appendChild(text)
         element.appendChild(para);
         var j;
-        var table = document.createElement("table")
+        var table = document.createElement("table");
         for (j = 0; j <5; j++) {
-          var tr = document.createElement("tr")
-          var td1 = document.createElement("td")
-          var td2 = document.createElement("td")
+          var tr = document.createElement("tr");
+          var td1 = document.createElement("td");
+          var td2 = document.createElement("td");
           var box = document.createElement("input");
-          box.setAttribute("type", "text");
+          box.setAttribute("type", "number");
           box.setAttribute("name", input_data[j] + i);
-          box.setAttribute("id", input_data[j] + i)
+          box.setAttribute("id", input_data[j] + i);
+          box.setAttribute("form", "step_1");
           if (first_field == true) {
             box.setAttribute("disabled", "disabled")
             box.setAttribute("value", "0")
@@ -181,7 +406,7 @@
           label.appendChild(sub)
           label.appendChild(unit)
           var br = document.createElement("br");
-          var element = document.getElementById("div2");
+          var element = document.getElementById("div3");
           td1.appendChild(label);
           td2.appendChild(box);
           tr.appendChild(td1)
@@ -189,11 +414,11 @@
           table.appendChild(tr)
         }
         var br = document.createElement("br");
-        var element = document.getElementById("div2");
+        var element = document.getElementById("div3");
         element.appendChild(table);
       }
       var br = document.createElement("br");
-      var element = document.getElementById("div2");
+      var element = document.getElementById("div3");
       element.appendChild(br);
     }
     </script>
