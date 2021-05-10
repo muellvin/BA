@@ -6,6 +6,8 @@ import math
 import data
 import copy
 import defaults
+from output import printing
+
 
 
 
@@ -19,11 +21,8 @@ import defaults
 
 #does not write attributes thus does not need cs
 def column_buckling(plate_glob, side):
-    if defaults.do_print == True:
-        if defaults.do_print_to_txt == True:
-            pass
-        else:
-            print("***************************** column_buckling for side "+str(side)+" **************************************")
+    string = "\n\n------------------------------ column_buckling for side "+str(side)+" ------------------------------"
+    printing.printing(string)
 
 
     #add the lines to the right list
@@ -46,11 +45,10 @@ def column_buckling(plate_glob, side):
             elif plate.code.st_number > st_number_max:
                 st_number_max = plate.code.st_number
         number_of_stiffeners = int(len(stiffener_lines)/3)
-        if defaults.do_print == True:
-            if defaults.do_print_to_txt == True:
-                pass
-            else:
-                print("there are "+str(number_of_stiffeners)+" stiffeners on side "+str(side))
+
+
+        string = "\nthere are "+str(number_of_stiffeners)+" stiffeners on side "+str(side)
+        printing.printing(string)
 
 
         for i in range(number_of_stiffeners):
@@ -86,9 +84,6 @@ def column_buckling(plate_glob, side):
             stiffeners_set.update({st_number: stiffener})
             stiffeners_set_length += 1
             #geometry_output.print_cs_red(stiffener)
-
-
-        #print("there are "+str(stiffeners_set_length)+" columns to be created")
 
 
 
@@ -212,23 +207,29 @@ def column_buckling(plate_glob, side):
             e1 = dis_plate_point(tpl_st_lines_set.get(i), st_center) - e2
 
             column = column_class(i, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2, all_tension, column_as_cs)
-            columns.update({st_number: column})
+            columns.update({i: column})
 
             i += 1
+        #all columns created
+
+
 
         Chi_c = 1
         sigma_cr_c = 1
 
+
+
         #searches for the single column buckling mechanism with the smallest Chi_c
         #this one will be the defining column mechanism
         #as not all our stiffeners will be the same, we can not conclude that it is one at a border (highest pressure)
-        for column in columns.values():
-            if defaults.do_print == True:
-                if defaults.do_print_to_txt == True:
-                    pass
-                else:
-                    print(column)
-            Chi_c_column = column_buckling_Chi_c(column)
+        for key in columns:
+
+
+            string = "\n" + str(columns.get(key))
+            printing.printing(string)
+
+
+            Chi_c_column = column_buckling_Chi_c(columns.get(key))
             if Chi_c_column < Chi_c:
                 Chi_c = Chi_c_column
                 sigma_cr_c = column.sigma_cr_c
@@ -242,10 +243,14 @@ def column_buckling(plate_glob, side):
         lambda_c_bar = math.sqrt(data.constants.get("f_y") / sigma_cr_c)
         alpha = 0.21
         Phi_c = 0.5*(1+alpha*(lambda_c_bar - 0.2) + lambda_c_bar**2)
-        print("lambda_c_bar =", lambda_c_bar)
-        print("Phi_c =", Phi_c)
+
         Chi_c = 1 / (Phi_c + math.sqrt(Phi_c**2 - lambda_c_bar**2))
 
+        line1 = "\n\nUnstiffened Plate"
+        line2 = "\nlambda_c_bar ="+str(lambda_c_bar)
+        line3 = "\nPhi_c ="+str(Phi_c)
+        string = line1 + line2 + line3
+        printing.printing(string)
 
 
     return Chi_c, sigma_cr_c
@@ -261,7 +266,6 @@ def column_buckling_Chi_c(column):
         return 1
     else:
         beta_A_c = column.A_sl_eff / column.A_sl
-        print("beta_A_c =", beta_A_c)
         lambda_c_bar = math.sqrt(beta_A_c * data.constants.get("f_y") / column.sigma_cr_c)
 
         i = math.sqrt(column.I_sl/column.A_sl)
@@ -270,10 +274,14 @@ def column_buckling_Chi_c(column):
         alpha_e = alpha + 0.09/(e/i)
 
         Phi_c = 0.5*(1+alpha_e*(lambda_c_bar - 0.2) + lambda_c_bar**2)
-
-        print("lambda_c_bar =", lambda_c_bar)
-        print("Phi_c =", Phi_c)
         Chi_c = 1 / (Phi_c + math.sqrt(Phi_c**2 - lambda_c_bar**2))
+
+
+        line1 = "\nbeta_A_c =" +str(beta_A_c)
+        line2 = "\nlambda_c_bar =" +str(lambda_c_bar)
+        line3 = "\nPhi_c ="+ str(Phi_c)
+        string = line1 + line2 + line3
+        printing.printing(string)
 
         return Chi_c
 
@@ -316,8 +324,8 @@ class column_class():
         line2 = "A_sl="+str(int(100*self.A_sl)/100)+", A_sl_eff="+str(int(100*self.A_sl_eff)/100)+", I_sl="+str(int(100*self.I_sl)/100)+"\n"
         line3 = "sigma_cr_c="+str(int(100*self.sigma_cr_c)/100)+"\n"
         line4 = "e1="+str(int(100*self.e1)/100)+", e2="+str(int(100*self.e2)/100)+"\n"
-        line5 = "All tension ="+str(self.all_tension)+"\n"
-        rest = str(self.column_as_cs)
+        line5 = "All tension ="+str(self.all_tension)
+        #rest = str(self.column_as_cs)
 
-        string = line1 + line2 + line3 + line4 + line5 + rest
+        string = line1 + line2 + line3 + line4 + line5 #+ rest
         return string

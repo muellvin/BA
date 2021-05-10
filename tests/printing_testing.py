@@ -8,10 +8,10 @@ import data
 def print_():
     if defaults.do_print_to_txt == True:
         file = open("output\cs_analysis.txt", "a+")
-        file.write()
+        file.write(string)
         file.close()
     if defaults.do_print_to_terminal == True:
-        pass
+        print(string, end = "")
 
 file = open("output\cs_analysis.txt", "a+")
 file.write("\nCONSTANTS")
