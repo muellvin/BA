@@ -115,7 +115,7 @@ do_print = True
 do_print_to_txt = True
 do_print_to_terminal = True
 
-do_deck_as_prop = True
+do_deck_as_prop = False
 
 
 
