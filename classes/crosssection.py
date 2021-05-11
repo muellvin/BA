@@ -180,7 +180,7 @@ class crosssection():
         return iz_tot
 
     def get_m_rd_el_eff(self):
-            max_z_dis = max(self.get_center_z_red() + self.get_line(pl_position = 1, pl_type = 0).t/2 ,  data.input_data.get("h") + self.get_line(pl_position = 3, pl_type = 0).t/2 - self.get_center_z_red())
+            max_z_dis = max(self.get_center_z_red() + self.get_line(pl_position = 1, pl_type = 0).t_stress/2 ,  data.input_data.get("h") + self.get_line(pl_position = 3, pl_type = 0).t_stress/2 - self.get_center_z_red())
             m_rd_el_eff = (self.get_i_y_red() / max_z_dis) * (data.constants.get("f_y")/data.constants.get("gamma_M1"))
             return m_rd_el_eff
 
@@ -266,6 +266,7 @@ class crosssection():
                     #creating a new line that spans over the length of all 3
                     new_code = plate_code.plate_code(line1.code.pl_position, 0, line1.code.tpl_number-1, 0, 0)
                     new_tr_pl = line.line(new_code, left_tr_pl.a, right_tr_pl.b, line1.t)
+                    new_tr_pl.t_stress = line1.t_stress
                     self.lines.append(new_tr_pl)
                     to_remove.append(rigth_tr_pl)
                     to_remove.append(left_tr_pl)
