@@ -15,6 +15,8 @@ import random
 import data
 import defaults
 from output import geometry_output as go
+from output import printing
+
 
 def global_buckling(cs):
     cs = reduction_global_buckling(cs, 2)
@@ -24,7 +26,9 @@ def global_buckling(cs):
 
 #create a cs with all plates of this side
 def reduction_global_buckling(cs, side):
-    print("\n------------------------ reduction_global_buckling for side "+str(side)+" ---------------------------------")
+    string = "\n\n------------------------ reduction_global_buckling for side "+str(side)+" ---------------------------------"
+    printing.printing(string)
+
     plate_glob = crosssection.crosssection(0,0,0)
     line_min = cs.get_line(pl_position = side, pl_type = 0)
     line_max = line_min
@@ -62,6 +66,7 @@ def reduction_global_buckling(cs, side):
             rho_p = 1
             sigma_cr_p = 1
 
+
         if defaults.do_column_plate_buckling == True and defaults.do_column_plate_buckling == True:
             eta = sigma_cr_p/sigma_cr_c -1
             if eta > 1:
@@ -74,14 +79,21 @@ def reduction_global_buckling(cs, side):
             eta = 1
         else:
             eta = 1
+
         rho_c = (rho_p - chi_c) * eta * (2 - eta) + chi_c
 
-    print("all_tension: ", all_tension)
-    print("Plate stiffened", plate_stiffened)
-    print("rho_c = " + str(rho_c))
 
+    line1 = "\n\nValues for side "+str(side)
+    line2 = "\n     all_tension: " + str(all_tension)
+    line3 = "\n     rho_c = " + str(rho_c)
+    string = line1 + line2 + line3
+    printing.printing(string)
+
+
+    #EC 1-5 (4.5) edge plates not reduced by rho_c
     plate_a = cs.get_plate_a(side)
     plate_b = cs.get_plate_b(side)
+
     for plate in cs.lines:
         if plate.code.pl_position == side:
             plate.chi_c = chi_c

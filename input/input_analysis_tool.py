@@ -68,7 +68,7 @@ def set_stiffeners(number_st_top):
             if number_side ==1:
                 print("\nSide Stiffener: ", end='')
             else:
-                print("\nSide stiffeners from top to bottom", end='')
+                print("\nSide stiffeners from bottom to top", end='')
         print("\nstiffener ", str(i), end='')
         print("\nlocation [height ratio from bottom 0 to top 1] =", end='')
         location = float(input())
@@ -92,9 +92,11 @@ def set_stiffeners(number_st_top):
 
         stiffener_right_i = proposed_stiffener.proposed_stiffener(2, int(number_st_top + number_side + 1 - i), location, \
         i_along, b_sup, b_inf, h, t)
+        print(stiffener_right_i.st_number)
         st_list.add(stiffener_right_i)
         stiffener_left_i = proposed_stiffener.proposed_stiffener(4, int(number_st_top + number_side + number_bottom + i), location, \
         i_along, b_sup, b_inf, h, t)
+        print(stiffener_left_i.st_number)
         st_list.add(stiffener_left_i)
         i+=1
 

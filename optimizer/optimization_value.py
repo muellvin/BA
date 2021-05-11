@@ -1,4 +1,5 @@
 import defaults
+import data
 
 def set_value(cs):
     if defaults.optimize_for_cost_only == True:

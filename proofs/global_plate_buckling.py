@@ -9,8 +9,13 @@ from output import geometry_output as go
 import random
 import data
 import copy
+from output import printing
 
 def global_plate_buckling(total_cs, plate_glob):
+    string = "\n\n------------------------------ plate_buckling for side "+str(plate_glob.lines[0].code.pl_position)+" ------------------------------"
+    printing.printing(string)
+
+
     stiffened_plate = copy.deepcopy(plate_glob)
     #all methods still to be correctly implemented
     #identify the border plates a and b and numbers of end stiffeners
@@ -237,19 +242,26 @@ def global_plate_buckling(total_cs, plate_glob):
         if abs(sigma_a) > 0.1 and abs(sigma_b) > 0.1 and 3<=t:
             phi_cr_p = ebplate.ebplate(b,h,t,sigma_a, sigma_b, stiffeners_ebp)
         elif t<3:
-            print("plate too thin")
+            string = "\nplate too thin"
+            printing.printing(string)
             return 0, 1
         else:
-            print("stresses too low")
+
+            string = "\nstresses too low"
+            printing.printing(string)
             return 1, 10**9
         sigma_max = max(sigma_a, sigma_b)
         sigma_cr_p = sigma_max * phi_cr_p
-        print("sigma_cr = " + str(sigma_cr_p))
+
+        string = "\nsigma_cr = " + str(sigma_cr_p)
+        printing.printing(string)
 
         #calculating plate slenderness
         beta_a_c = get_beta_ac(plate_glob)
         lambda_p_glob_bar = math.sqrt(beta_a_c * data.constants.get("f_y") / sigma_cr_p)
-        print("Lambda: " + str(lambda_p_glob_bar))
+        string = "\nLambda: " + str(lambda_p_glob_bar)
+        printing.printing(string)
+
         #calculate rho_glob for plate buckling
         #assumption: cross section parts always supported on both sides
         rho_glob = 0
@@ -261,10 +273,14 @@ def global_plate_buckling(total_cs, plate_glob):
             if rho_glob > 1.0:
                 rho_glob = 1.0
         else:
-            print("plate slenderness or stress ratio out of range")
+            string = "\nplate slenderness or stress ratio out of range"
+            printing.printing(string)
             pass
 
-        print("Rho_Global: " + str(rho_glob))
+        string = "\n    Rho_Global: " + str(rho_glob)
+        printing.printing(string)
+
+
     return rho_glob, sigma_cr_p
 
 def get_beta_ac(plate_glob):

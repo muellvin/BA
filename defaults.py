@@ -1,6 +1,11 @@
 import math
 import data
 
+"""path defaults"""
+sys_path = None
+ebp_path = None
+
+
 """default cs"""
 cs_b_sup = 4000
 cs_t_deck = 5
@@ -101,10 +106,10 @@ do_check_stiffeners_in_corners_bottom = False
 do_height_only = True
 do_width_only = False
 
-do_shear_lag_plastically = False
-do_shear_lag = False
-do_global_plate_buckling = False
-do_column_plate_buckling = False
+do_shear_lag_plastically = True
+do_shear_lag = True
+do_global_plate_buckling = True
+do_column_plate_buckling = True
 
 do_print = True
 do_print_to_txt = True

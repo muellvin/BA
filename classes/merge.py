@@ -121,7 +121,7 @@ def merge(initial_cs, stiffener_list):
             new_tpl_lines_2.append(new_plate_2)
             j += 2
             i += 1
-            initial_point_3 = copy.deepcopy(new_plate_2_b)
+            initial_point_2 = copy.deepcopy(new_plate_2_b)
         code_2 = plate_code.plate_code(side, 0, j, 0, 0)
         new_plate_2 = line.line(code_2, next_tpl_a, end_point_2, t_2)
         new_tpl_lines_2.append(new_plate_2)

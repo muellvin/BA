@@ -64,7 +64,7 @@ def reduction_shear_lag(cs, flange):
     #the book recommends to apply this reduction to the thickness of the flange plates
     for line in cs.lines:
         if line.code.pl_position == flange:
-            line.t = line.t * reduction_factor_shear_lag
+            line.t_stress = line.t * reduction_factor_shear_lag
 
     return cs
 
