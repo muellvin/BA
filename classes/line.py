@@ -259,7 +259,7 @@ class line():
             t_used = self.t_stress
         else:
             t_used = self.t
-        return self.cal_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, t_uesd) + self.cal_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, t_used)
+        return self.cal_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used) + self.cal_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, t_used)
     def cal_i_along_red1(self, stress = False):
         if stress:
             t_used = self.t_stress
