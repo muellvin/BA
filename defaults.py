@@ -106,8 +106,8 @@ do_check_stiffeners_in_corners_bottom = False
 do_height_only = True
 do_width_only = False
 
-do_shear_lag_plastically = False
-do_shear_lag = False
+do_shear_lag_plastically = True
+do_shear_lag = True
 do_global_plate_buckling = True
 do_column_plate_buckling = True
 

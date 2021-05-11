@@ -115,7 +115,7 @@ def get_tau_int_t(cs, side, t_ed):
 
 def get_tau_int_flange(cs, side, v_ed, t_ed):
     area = 0
-    t = cs.get_line(pl_position = side, pl_type = 0).t
+    t = cs.get_line(pl_position = side, pl_type = 0).t_stress
     for plate in cs.lines:
         if plate.code.pl_type == 0 and plate.code.pl_position == side:
             area += plate.get_area_tot()
@@ -145,8 +145,8 @@ def get_tau_int_subpanel(cs, panel, v_ed, t_ed):
         x = panel.get_length_tot()/4
     else:
         x = abs(center_of_panel)
-    S_y_panel = x*panel.t*abs(cs.get_center_z_tot()-panel.a.z)
-    tau_q_panel_abs = abs(v_ed * S_y_panel /(panel.t * cs.get_i_y_tot()))
+    S_y_panel = x*panel.t_stress*abs(cs.get_center_z_tot()-panel.a.z)
+    tau_q_panel_abs = abs(v_ed * S_y_panel /(panel.t_stress * cs.get_i_y_tot()))
     tau_int_qy_panel = panel.get_area_tot()*tau_q_panel_abs
 
     #calculate tau_mean from t
