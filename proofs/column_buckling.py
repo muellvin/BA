@@ -29,11 +29,24 @@ def column_buckling(plate_glob, side):
     stiffener_lines = []
     tpl_lines_list = []
     stiffeners_list = []
+    #points of max pressure and zero pressure; needed for extrapolation
+    point_max = None
+    sigma_max = 0
     for plate in plate_glob.lines:
         if plate.code.tpl_number == 0:
             stiffener_lines.append(plate)
         elif plate.code.pl_type == 0:
             tpl_lines_list.append(plate)
+        #for extrapolation b_c and the positions will be required
+        if plate.sigma_a_red >= sigma_max:
+            point_max = copy.deepcopy(plate.a)
+            sigma_max = plate.sigma_a_red
+        elif plate.sigma_b_red >= sigma_max:
+            point_max = copy.deepcopy(plate.b)
+            sigma_max = plate.sigma_b_red
+
+
+
 
     #case 1: stiffened plate
     if stiffener_lines != []:
@@ -214,7 +227,57 @@ def column_buckling(plate_glob, side):
             column_as_cs.addline(plate_between)
             #geometry_output.print_cs_red(column_as_cs)
 
-            #assure the column is under pressure (positive) somewhere
+
+            #calculating b_sl_1
+            tpl_st_center = point.point(tpl_st_lines_set.get(i).get_center_y_tot(), tpl_st_lines_set.get(i).get_center_z_tot())
+            if sigma_border_before_gross < sigma_border_after_gross:
+                b_sl_1 = dis_points(border_before_gross, tpl_st_center)
+            elif sigma_border_before_gross > sigma_border_after_gross:
+                b_sl_1 = dis_points(border_after_gross, tpl_st_center)
+
+            #calculating b_c and sigma_cr_c
+            all_tension = False
+            if sigma_border_before_gross<0 and sigma_border_after_gross<0:
+                #all tension
+                b_c = 0
+                sigma_cr_c = 0
+                all_tension = True
+            elif abs(sigma_border_before_gross - sigma_border_before_gross) < 0.5:
+                #same pressure; bottom stiffener; no extrapolation required
+                b_c = b
+                sigma_cr_c = sigma_cr_sl
+                all_tension = False
+            #different pressure; side stiffener; extrapolation required
+            else:
+                #different pressure; side stiffener; extrapolation required
+                #pressure gradient from border before to border after
+                m = (sigma_border_after_gross - sigma_border_before_gross) / b
+                #distance to zero pressure from border before
+                #0 = sigma_border_before + m * dis_to_zero
+                dis_to_zero = - sigma_border_before / m
+                #negative distance means forward
+                #positive distance means backwards
+                dis_before_max = dis_points(point_max, border_before_gross)
+
+                if point_max.z > border_before_gross.z:
+                        #max pressure is at bottom of cs
+                        if side == 2:
+                            b_c = dis_before_max + dis_to_zero
+                        elif side == 4:
+                            b_c = dis_before_max - dis_to_zero
+                elif point_max.z < border_before_gross.z:
+                        #max pressure is at top of cs
+                        if side == 2:
+                            b_c = dis_before_max - dis_to_zero
+                        elif side == 4:
+                            b_c = dis_before_max + dis_to_zero
+
+                sigma_cr_c = sigma_cr_sl * b_c / b_sl_1
+
+
+
+
+            """#assure the column is under pressure (positive) somewhere
             all_tension = False
             if sigma_border_before_gross > 0 or sigma_border_after_gross > 0:
                 if sigma_border_before_gross != sigma_border_after_gross:
@@ -238,7 +301,7 @@ def column_buckling(plate_glob, side):
             #all the same pressure, no extrapolation necessary
             else:
                 b_sl_1 = b_c
-                sigma_cr_c = sigma_cr_sl
+                sigma_cr_c = sigma_cr_sl"""
 
             #excentricities
             st_center = point.point(stiffener_i.get_center_y_tot(), stiffener_i.get_center_z_tot())
