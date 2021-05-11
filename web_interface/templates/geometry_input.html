@@ -122,6 +122,11 @@
           var td2 = document.createElement("td")
           var box = document.createElement("input");
           box.setAttribute("type", "number");
+          if (normal[j] == "location") {
+            box.setAttribute("min", "0")
+            box.setAttribute("step", "0.01")
+            box.setAttribute("max", "1")
+          }
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i)
           box.setAttribute("form", "step_1")
@@ -177,6 +182,11 @@
           var td2 = document.createElement("td")
           var box = document.createElement("input");
           box.setAttribute("type", "number");
+          if (normal[j] == "location") {
+            box.setAttribute("min", "0");
+            box.setAttribute("step", "0.01");
+            box.setAttribute("max", "1");
+          }
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i)
           box.setAttribute("form", "step_1")
@@ -316,6 +326,11 @@
           var td2 = document.createElement("td")
           var box = document.createElement("input");
           box.setAttribute("type", "number");
+          if (normal[j] == "location") {
+            box.setAttribute("min", "0")
+            box.setAttribute("step", "0.01")
+            box.setAttribute("max", "1")
+          }
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i)
           box.setAttribute("form", "step_1")
@@ -387,6 +402,11 @@
           var td2 = document.createElement("td");
           var box = document.createElement("input");
           box.setAttribute("type", "number");
+          if (normal[j] == "location") {
+            box.setAttribute("min", "0")
+            box.setAttribute("step", "0.01")
+            box.setAttribute("max", "1")
+          }
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i);
           box.setAttribute("form", "step_1");
