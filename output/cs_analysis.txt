@@ -44,17 +44,17 @@ Values for side 2
 ------------------------------ column_buckling for side 3 ------------------------------
 there are 1 stiffeners on side 3
 ''''''''''''''''''''''''''Column number 9'''''''''''''''''''''''''
-A_sl=11265.08, A_sl_eff=5475.87, I_sl=13486272.75
-sigma_cr_c=248128.52
-e1=96.97, e2=35.68
+A_sl=11311.55, A_sl_eff=5518.29, I_sl=13625049.83
+sigma_cr_c=249651.92
+e1=96.75, e2=35.9
 All tension =False
-beta_A_c =0.48609318544134317
-lambda_c_bar =0.0214563255803163
-Phi_c =0.4670111364948551
+beta_A_c =0.48784569221598767
+lambda_c_bar =0.02142928655464255
+Phi_c =0.4669902232800209
 
 ------------------------------ plate_buckling for side 3 ------------------------------
-sigma_cr = 367.74518696743473
-Lambda: 0.5583437635739082
+sigma_cr = 372.3804396525063
+Lambda: 0.5548578544247893
     Rho_Global: 1.0
 
 Values for side 3
@@ -85,17 +85,17 @@ Values for side 4
 ------------------------------ column_buckling for side 2 ------------------------------
 there are 1 stiffeners on side 2
 ''''''''''''''''''''''''''Column number 8'''''''''''''''''''''''''
-A_sl=7020.62, A_sl_eff=6011.0, I_sl=13616110.39
-sigma_cr_c=10058538.93
-e1=74.81, e2=57.85
+A_sl=7008.81, A_sl_eff=6007.69, I_sl=13616085.79
+sigma_cr_c=9754558.24
+e1=74.71, e2=57.94
 All tension =False
-beta_A_c =0.856192323726752
-lambda_c_bar =0.004472518497656761
-Phi_c =0.4615907885330802
+beta_A_c =0.8571632520471536
+lambda_c_bar =0.004544246694837007
+Phi_c =0.4615940925521017
 
 ------------------------------ plate_buckling for side 2 ------------------------------
-sigma_cr = 3889.4768784612797
-Lambda: 0.21167685796975752
+sigma_cr = 3957.4795132302843
+Lambda: 0.20989038153588005
     Rho_Global: 1.0
 
 Values for side 2
@@ -107,17 +107,17 @@ Values for side 2
 ------------------------------ column_buckling for side 3 ------------------------------
 there are 1 stiffeners on side 3
 ''''''''''''''''''''''''''Column number 9'''''''''''''''''''''''''
-A_sl=11265.27, A_sl_eff=5476.06, I_sl=13486866.9
-sigma_cr_c=248135.07
-e1=96.97, e2=35.68
+A_sl=11311.55, A_sl_eff=5518.29, I_sl=13625049.83
+sigma_cr_c=249651.92
+e1=96.75, e2=35.9
 All tension =False
-beta_A_c =0.48610071941553606
-lambda_c_bar =0.021456208708879026
-Phi_c =0.46701104655804454
+beta_A_c =0.48784569221598767
+lambda_c_bar =0.02142928655464255
+Phi_c =0.4669902232800209
 
 ------------------------------ plate_buckling for side 3 ------------------------------
-sigma_cr = 367.7649971262136
-Lambda: 0.5583287254005472
+sigma_cr = 372.3804396525063
+Lambda: 0.5548578544247893
     Rho_Global: 1.0
 
 Values for side 3
@@ -129,14 +129,14 @@ Values for side 3
 ------------------------------ column_buckling for side 4 ------------------------------
 there are 1 stiffeners on side 4
 ''''''''''''''''''''''''''Column number 10'''''''''''''''''''''''''
-A_sl=7020.62, A_sl_eff=6011.0, I_sl=13616110.39
+A_sl=7008.81, A_sl_eff=6007.69, I_sl=13616085.79
 sigma_cr_c=0.0
-e1=74.81, e2=57.85
+e1=74.71, e2=57.94
 All tension =True
 
 ------------------------------ plate_buckling for side 4 ------------------------------
-sigma_cr = 2415.642967304276
-Lambda: 0.26859789486300545
+sigma_cr = 2452.1331614063706
+Lambda: 0.2666427927614079
     Rho_Global: 1.0
 
 Values for side 4

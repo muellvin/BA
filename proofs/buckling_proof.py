@@ -52,6 +52,10 @@ def buckling_proof(cs):
         m_rd_eff_after = 1
         while (m_rd_eff_before / m_rd_eff_after - 1) > 0.05:
             m_rd_eff_before = cs.get_m_rd_el_eff()
+            #reset the rho_c to 1: it is multiplied into the get_sigma_red functions
+            #at this point the reduction should not happen yet
+            for plate in cs.lines:
+                plate.rho_c = 1
             #3.2 shear lag elastically
             if defaults.do_shear_lag == True:
                 cs = shear_lag.shear_lag(cs)

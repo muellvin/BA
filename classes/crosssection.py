@@ -119,76 +119,78 @@ class crosssection():
 
 
 # methods to calculate properties of total crossection
-    def get_center_z_tot(self):
+    def get_center_z_tot(self, stress = False):
         weighted_a = 0
         for i in self.lines:
-            weighted_a = weighted_a + i.get_area_tot()*i.get_center_z_tot()
-        return weighted_a/self.get_area_tot()
-    def get_center_y_tot(self):
+            weighted_a = weighted_a + i.get_area_tot(stress)*i.get_center_z_tot(stress)
+        return weighted_a/self.get_area_tot(stress)
+    def get_center_y_tot(self, stress = False):
         weighted_a = 0
         for i in self.lines:
-            weighted_a = weighted_a + i.get_area_tot()*i.get_center_y_tot()
-        return weighted_a/self.get_area_tot()
-    def get_area_tot(self):
+            weighted_a = weighted_a + i.get_area_tot(stress)*i.get_center_y_tot(stress)
+        return weighted_a/self.get_area_tot(stress)
+    def get_area_tot(self, stress = False):
         a=0
         for i in self.lines:
-            a = a + i.get_area_tot()
+            a = a + i.get_area_tot(stress)
         return a
 #functionality of inertial area moments function not tested yet
-    def get_i_y_tot(self):
-        z_s = self.get_center_z_tot()
+    def get_i_y_tot(self, stress = False):
+        z_s = self.get_center_z_tot(stress)
         iy_tot = 0
         for i in self.lines:
-            iy_tot = iy_tot + i.get_i_y_tot() + (z_s-i.get_center_z_tot())**2 * i.get_area_tot()
+            iy_tot = iy_tot + i.get_i_y_tot(stress) + (z_s-i.get_center_z_tot(stress))**2 * i.get_area_tot(stress)
         return iy_tot
-    def get_i_z_tot(self):
-        y_s = self.get_center_y_tot()
+    def get_i_z_tot(self, stress = False):
+        y_s = self.get_center_y_tot(stress)
         iz_tot = 0
         for i in self.lines:
-            iz_tot = iz_tot + i.get_i_z_tot() + (y_s-i.get_center_y_tot())**2 * i.get_area_tot()
+            iz_tot = iz_tot + i.get_i_z_tot(stress) + (y_s-i.get_center_y_tot(stress))**2 * i.get_area_tot(stress)
         return iz_tot
 
 
 #methods to calculate properties of reduced crossection
 #center functions for reduced crosssections still need to be properly defined
-    def get_center_z_red(self):
+    def get_center_z_red(self, stress = False):
         weighted_a = 0
         for i in self.lines:
-            weighted_a = weighted_a + i.get_area_red()*i.get_center_z_red()
-        return weighted_a/self.get_area_red()
-    def get_center_y_red(self):
+            weighted_a = weighted_a + i.get_area_red(stress)*i.get_center_z_red(stress)
+        return weighted_a/self.get_area_red(stress)
+    def get_center_y_red(self, stress = False):
         weighted_a = 0
         for i in self.lines:
-            weighted_a = weighted_a + i.get_area_red()*i.get_center_y_red()
-        return weighted_a/self.get_area_red()
-    def get_area_red(self):
+            weighted_a = weighted_a + i.get_area_red(stress)*i.get_center_y_red(stress)
+        return weighted_a/self.get_area_red(stress)
+    def get_area_red(self, stress = False):
         a=0
         for i in self.lines:
-            a = a + i.get_area_red()
+            a = a + i.get_area_red(stress)
         return a
-    def get_i_y_red(self):
-        z_s = self.get_center_z_red()
+    def get_i_y_red(self, stress = False):
+        z_s = self.get_center_z_red(stress)
         iy_tot = 0
         for i in self.lines:
-            iy_tot = iy_tot + i.get_i_y_red() + (z_s-i.get_center_z_red())**2 * i.get_area_red()
+            iy_tot = iy_tot + i.get_i_y_red(stress) + (z_s-i.get_center_z_red(stress))**2 * i.get_area_red(stress)
         return iy_tot
-    def get_i_z_red(self):
-        y_s = self.get_center_y_red()
+    def get_i_z_red(self, stress = False):
+        y_s = self.get_center_y_red(stress)
         iz_tot = 0
         for i in self.lines:
-            iz_tot = iz_tot + i.get_i_z_red() + (y_s-i.get_center_y_red())**2 * i.get_area_red()
+            iz_tot = iz_tot + i.get_i_z_red(stress) + (y_s-i.get_center_y_red(stress))**2 * i.get_area_red(stress)
         return iz_tot
 
     def get_m_rd_el_eff(self):
-            max_z_dis = max(self.get_center_z_red() + self.get_line(pl_position = 1, pl_type = 0).t_stress/2 ,  data.input_data.get("h") + self.get_line(pl_position = 3, pl_type = 0).t_stress/2 - self.get_center_z_red())
-            m_rd_el_eff = (self.get_i_y_red() / max_z_dis) * (data.constants.get("f_y")/data.constants.get("gamma_M1"))
-            return m_rd_el_eff
+        stress = True
+        max_z_dis = max(self.get_center_z_red(stress) + self.get_line(pl_position = 1, pl_type = 0).t_stress/2 ,  data.input_data.get("h") + self.get_line(pl_position = 3, pl_type = 0).t_stress/2 - self.get_center_z_red(stress))
+        m_rd_el_eff = (self.get_i_y_red(stress) / max_z_dis) * (data.constants.get("f_y")/data.constants.get("gamma_M1"))
+        return m_rd_el_eff
 
     def get_m_f_rd_eff(self):
+        stress = True
         top_flange = self.get_stiffened_plate(side = 1)
-        top_flange_area = top_flange.get_area_red()
+        top_flange_area = top_flange.get_area_red(stress)
         bottom_flange = self.get_stiffened_plate(side = 3)
-        bottom_flange_area = bottom_flange.get_area_red()
+        bottom_flange_area = bottom_flange.get_area_red(stress)
         if bottom_flange_area < top_flange_area:
             m_f_rd_eff = bottom_flange_area * self.h * data.constants.get("f_y") / data.constants.get("gamma_M1")
         else:
@@ -196,7 +198,7 @@ class crosssection():
         return m_f_rd_eff
 
 
-    def get_azero(self):
+    def get_azero(self, stress = False):
         azero = 0
         for l in self.lines:
             if l.code.pl_type == 0: #crosssection plate
@@ -206,7 +208,7 @@ class crosssection():
                 azero += a_line
         return azero
 
-    def get_cs_rot(self, angle):
+    def get_cs_rot(self, angle, stress = False):
         #make a copy of the crosssection
         cs = crosssection(0,0,0)
         for plate in self.lines:
@@ -233,16 +235,16 @@ class crosssection():
         return cs
 
     #calculates the moment of inertia along the line given as an argument
-    def get_i_along_tot(self, line):
+    def get_i_along_tot(self, line, stress = False):
         angle = (-1)* line.get_angle_y_true()
-        cs_rot = self.get_cs_rot(angle)
-        return cs_rot.get_i_y_tot()
+        cs_rot = self.get_cs_rot(angle, stress)
+        return cs_rot.get_i_y_tot(stress)
 
 
-    def get_i_along_red(self, line):
+    def get_i_along_red(self, line, stress = False):
         angle = (-1)*line.get_angle_y_true()
-        cs_rot = self.get_cs_rot(angle)
-        return cs_rot.get_i_y_red()
+        cs_rot = self.get_cs_rot(angle, stress)
+        return cs_rot.get_i_y_red(stress)
 
 
     """ important convention: the point b of a line is always in clockwise direction of point a"""
