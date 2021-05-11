@@ -23,12 +23,12 @@ INPUT DATA
 there are 1 stiffeners on side 2
 ''''''''''''''''''''''''''Column number 8'''''''''''''''''''''''''
 A_sl=7008.81, A_sl_eff=6007.72, I_sl=13616085.79
-sigma_cr_c=9754532.21
+sigma_cr_c=402649.17
 e1=74.71, e2=57.94
 All tension =False
 beta_A_c =0.8571665519974325
-lambda_c_bar =0.004544261503598448
-Phi_c =0.46159409454868594
+lambda_c_bar =0.022366762805880496
+Phi_c =0.4653368638266695
 
 ------------------------------ plate_buckling for side 2 ------------------------------
 sigma_cr = 3957.4795132302843
@@ -86,12 +86,12 @@ Values for side 4
 there are 1 stiffeners on side 2
 ''''''''''''''''''''''''''Column number 8'''''''''''''''''''''''''
 A_sl=7008.81, A_sl_eff=6007.69, I_sl=13616085.79
-sigma_cr_c=9754558.24
+sigma_cr_c=402649.11
 e1=74.71, e2=57.94
 All tension =False
 beta_A_c =0.8571632520471536
-lambda_c_bar =0.004544246694837007
-Phi_c =0.4615940925521017
+lambda_c_bar =0.022366721408651244
+Phi_c =0.4653368556560949
 
 ------------------------------ plate_buckling for side 2 ------------------------------
 sigma_cr = 3957.4795132302843
