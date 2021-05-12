@@ -146,6 +146,8 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
     if proof_required == True:
         #calculate tau_cr
         sigma_E = 190000*(t/h_w)**2
+        print(k_tau)
+        print(sigma_E)
         tau_cr = k_tau * sigma_E
         #can formula 5.6 be used here as well?
         #and what about formula 5.7? This needs to be considered as well...
