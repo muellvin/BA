@@ -6,8 +6,12 @@ from ebplate import ebplate
 import copy
 from classes import crosssection as cs
 from output import geometry_output as go
+from output import printing
 
 def resistance_to_shear(plate_glob, V_Ed_plate):
+    string = "\n   5. Resistance to shear"
+    printing.printing(string, terminal = True)
+
     #get values of constants
     f_y = data.constants.get("f_y")
     gamma_M1 = data.constants.get("gamma_M1")
@@ -31,13 +35,19 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
     #still needs to be implemented
     k_tau = 0
     if stiffened == False:
+        line1 = "\n      unstiffened plate; (A.5)"
         if a / h_w >= 1:
             k_tau = 5.34 + 4*(h_w/a)**2
-            print(k_tau)
+
+            line2 = "\n      k_tau: "+str(k_tau)
         else:
             k_tau = 4.0 + 5.34 * (h_w/a)**2
-            print(k_tau)
+            line2 = "\n      k_tau: "+str(k_tau)
+        string = line1 + line2
+        printing.printing(string, terminal = True)
+
     else:
+        line1 = "\n      stiffened plate; EBPlate"
         plate_a = None
         plate_b = None
         min_tpl = -1
@@ -105,11 +115,11 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
             b_inf = stiffener_list[i].get_line(st_pl_position = 3).get_length_tot()
             b_sup = stiffener_list[i].get_line(st_pl_position = 1).get_length_tot()
             diff = (0.5*(b_sup - b_inf))
-            print("diff")
-            print(diff)
+            #print("diff")
+            #print(diff)
             diag = stiffener_list[i].get_line(st_pl_position = 2).get_length_tot()
-            print("diag")
-            print(diag)
+            #print("diag")
+            #print(diag)
             h = math.sqrt(diag**2-diff**2)
             t_stiff = stiffener_list[i].get_line(st_pl_position = 3).t
             center_y = stiffener_list[i].get_center_y_tot()
@@ -119,14 +129,18 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         sigma_E = 190000*(t/h_w)**2
         if abs(tau) > 0.1 and 3 <= t:
             k_tau = ebplate.ebplate_shear(a, h_w, t, tau, stiffeners_ebp) * tau / sigma_E
-            print("EBPlate")
-            print(k_tau)
+            line2 = "\n      k_tau: "+str(k_tau)
+
         elif t<3:
-            print("plate too thin")
-            return 10**-2
+            eta_3 = 10**-2
+            line2 = "\n      plate too thin; eta_3: "+str(eta_3)
+            return eta_3
         else:
-            print("tau too small")
-            return 1
+            eta_3 = 1
+            line2 = "\n      tau too small; eta_3: "+1
+            return eta_3
+        string = line1 + line2
+        printing.printing(string, terminal = True)
 
     #pre_evaluation
     proof_required = True
@@ -167,5 +181,8 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         V_Rd = chi_w*f_y*h_w*t/(math.sqrt(3)*gamma_M1)
 
     eta_3 = V_Ed_plate / V_Rd
-    print(eta_3)
+
+    string = "\n      eta_3: "+str(eta_3)
+    printing.printing(string, terminal = True)
+
     return eta_3

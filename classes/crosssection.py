@@ -87,6 +87,10 @@ class crosssection():
 
         assert found == True, "Line could not be found"
 
+    def get_ei(self):
+        ei = self.get_i_y_red()*data.constants.get("E")
+        self.ei = ei
+        return ei
 
 
     def get_angle(self, side):
