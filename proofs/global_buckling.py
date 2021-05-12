@@ -18,6 +18,7 @@ from output import geometry_output as go
 from output import printing
 
 
+
 def global_buckling(cs):
     cs = reduction_global_buckling(cs, 2)
     cs = reduction_global_buckling(cs, 3)
@@ -26,8 +27,8 @@ def global_buckling(cs):
 
 #create a cs with all plates of this side
 def reduction_global_buckling(cs, side):
-    string = "\n\n------------------------ reduction_global_buckling for side "+str(side)+" ---------------------------------"
-    printing.printing(string)
+    string = "\n   Side "+str(side)
+    printing.printing(string, terminal = True)
 
     plate_glob = crosssection.crosssection(0,0,0)
     line_min = cs.get_line(pl_position = side, pl_type = 0)
@@ -55,16 +56,22 @@ def reduction_global_buckling(cs, side):
         rho_c = 1
         plate_stiffened = False
     else:
-        if defaults.do_column_plate_buckling == True:
-            chi_c, sigma_cr_c = column_buckling.column_buckling(plate_glob, side)
-        else:
-            chi_c = 1
-            sigma_cr_c = 1
         if defaults.do_global_plate_buckling == True:
             rho_p, sigma_cr_p = global_plate_buckling.global_plate_buckling(cs, plate_glob)
         else:
             rho_p = 1
             sigma_cr_p = 1
+        if defaults.do_column_plate_buckling == True:
+            height_zero_pressure = cs.get_center_z_red()
+            if data.input_data.get("M_Ed") < 0:
+                height_max_pressure = data.input_data.get("h")
+            else:
+                height_max_pressure = 0
+
+            chi_c, sigma_cr_c = column_buckling.column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
+        else:
+            chi_c = 1
+            sigma_cr_c = 1
 
 
         if defaults.do_column_plate_buckling == True and defaults.do_column_plate_buckling == True:
@@ -83,11 +90,11 @@ def reduction_global_buckling(cs, side):
         rho_c = (rho_p - chi_c) * eta * (2 - eta) + chi_c
 
 
-    line1 = "\n\nValues for side "+str(side)
-    line2 = "\n     all_tension: " + str(all_tension)
-    line3 = "\n     rho_c = " + str(rho_c)
+    line1 = "\n      4.5.4 Interaction between plate and column buckling"
+    line2 = "\n           all_tension: " + str(all_tension)
+    line3 = "\n           rho_c = " + str(rho_c)
     string = line1 + line2 + line3
-    printing.printing(string)
+    printing.printing(string, terminal = True)
 
 
     #EC 1-5 (4.5) edge plates not reduced by rho_c

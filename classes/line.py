@@ -168,6 +168,12 @@ class line():
         angle -= math.pi
         return angle
 
+
+    def get_sigma_red_from_a(self, factor):
+        return self.sigma_a_red + factor*(self.sigma_b_red - self.sigma_a_red)
+    def get_sigma_red_from_b(self, factor):
+        return self.sigma_b_red + factor*(self.sigma_a_red - self.sigma_b_red)
+
 #NON-REDUCED (and also used for reduced, that's why with coordinates as arguments)
     def cal_center_y(self, ay, az, by, bz, t):
         return 1/2 * (ay + by)

@@ -2,6 +2,7 @@ click==7.1.2
 colorama==0.4.4
 cycler==0.10.0
 Flask==1.1.2
+fpdf==1.7.2
 geos==0.2.3
 itsdangerous==1.1.0
 Jinja2==2.11.3
