@@ -17,9 +17,29 @@
 <h1>CS Analysis Tool</h1>
 <p>Check the Results.</p>
 
-
 <div class="row">
   <div class="side">
+  <table>
+    <tr>
+      <td> Eta_1</td>
+      <td> {{ results["eta_1"] }}</td>
+    </tr>
+    <tr>
+      <td> Verification for plate 2 </td>
+      <td> {{ results["verification_2"] }} </td>
+    </tr>
+    <tr>
+      <td> Verification for plate 3 </td>
+      <td> {{ results["verification_3"] }} </td>
+    </tr>
+    <tr>
+      <td> Verification for plate 4 </td>
+      <td> {{ results["verification_4"] }} </td>
+    </tr>
+    </table>
+  </div>
+  <div class="main">
+    {{ results["image"] | safe }}
   </div>
 </div>
 </body>

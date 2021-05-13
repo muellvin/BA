@@ -6,8 +6,8 @@ Utilisateur   #
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
-   Height          158.11388300841895 cm 
-   Thickness         0.5 cm 
+   Height          206.15528128088303 cm 
+   Thickness         1.0 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
    Boundary Conditions 
@@ -21,15 +21,15 @@ Commentaire   #
    Nombre de raidisseurs  1 
    - Raidisseur n° 1 Active=1 
       Orientation = 0 
-      Position    = 79.05694150420948 
+      Position    = 20.615528128088307 
       Gamma       = 0 
       Teta        = 0 
       Delta       = 0 
       Type        = 3 
-      Dimension 1 = 19.999999999999996 
-      Dimension 2 = 30.0 
-      Dimension 3 = 20.000000000000007 
-      Dimension 4 = 0.5 
+      Dimension 1 = 9.99999999999999 
+      Dimension 2 = 20.0 
+      Dimension 3 = 10.0 
+      Dimension 4 = 1.0 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
@@ -55,7 +55,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 6.666666666666667 MPa 
+   Shear stress                                 7.500000000000001 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000
