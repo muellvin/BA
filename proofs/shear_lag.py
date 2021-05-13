@@ -1,6 +1,7 @@
 import math
 import data
 import defaults
+from output import printing
 
 
 #EC 1993 1-5 3.3 shear lag at ULS
@@ -21,7 +22,9 @@ def shear_lag(cs):
 
 
 def reduction_shear_lag(cs, flange):
-    print("")
+    string = "\n   Shear lag reduction for flange "+str(flange)
+    printing.printing(string, terminal = True)
+
     if flange == 1:
         b_0 = cs.b_sup / 2 #3.1 (2)
     elif flange == 3:
@@ -29,7 +32,12 @@ def reduction_shear_lag(cs, flange):
 
     #check if necessary
     if b_0 < data.input_data.get("L_e")/50:
+        string = "\n      Shear Lag is neglectable"
+        printing.printing(string, terminal = True)
         return cs
+
+    string = "\n      Shear Lag is not neglectable"
+    printing.printing(string, terminal = True)
 
     A_c_eff = 0
     for line in cs.lines:
@@ -48,8 +56,9 @@ def reduction_shear_lag(cs, flange):
     kappa = alpha_0 * b_0 / data.input_data.get("L_e")
 
     beta = beta_from_kappa(kappa)
-    print("Beta")
-    print(beta)
+
+    string = "\n      Beta: "+str(beta)
+    printing.printing(string, terminal = True)
 
     if defaults.do_shear_lag_plastically == True:
         #follow EC 3.3; plastically
@@ -60,6 +69,7 @@ def reduction_shear_lag(cs, flange):
     else:
         #follow EC 3.2; elastically; conservative, no iterations needed
         reduction_factor_shear_lag = beta
+
 
     #the book recommends to apply this reduction to the thickness of the flange plates
     for line in cs.lines:

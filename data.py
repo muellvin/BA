@@ -13,30 +13,17 @@ stiffener_data = None
 
 cs_collection = []
 
-def print_constants():
-    if defaults.do_print_to_txt == True:
-        file = open("output\cs_analysis.txt", "a+")
-        file.write("\nCONSTANTS")
-        for key, value in constants.items():
-            string = "\n    "+ str(key) +": " +str(value)
-            file.write(string)
-        file.close()
-    if defaults.do_print_to_terminal == True:
-        print("CONSTANTS")
-        for key, value in constants.items():
-            string = "  "+str(key) +": " +str(value)
-            print(string)
+def constants_tostring():
+    string = "\nCONSTANTS"
+    for key, value in constants.items():
+        next_line = "\n    "+ str(key) +": " +str(value)
+        string += next_line
+    return string
+    
 
-def print_input_data():
-    if defaults.do_print_to_txt == True:
-        file = open("output\cs_analysis.txt", "a+")
-        file.write("\nINPUT DATA")
-        for key, value in input_data.items():
-            string = "\n    "+ str(key) +": " +str(value)
-            file.write(string)
-        file.close()
-    if defaults.do_print_to_terminal == True:
-        print("INPUT DATA")
-        for key, value in input_data.items():
-            string = "  "+str(key) +": " +str(value)
-            print(string)
+def input_data_tostring():
+    string = "\nINPUT DATA"
+    for key, value in input_data.items():
+        next_line = "\n    "+ str(key) +": " +str(value)
+        string += next_line
+    return string

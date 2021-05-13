@@ -106,12 +106,12 @@ do_check_stiffeners_in_corners_bottom = False
 do_height_only = True
 do_width_only = False
 
-do_shear_lag_plastically = True
+do_shear_lag_plastically = False
 do_shear_lag = True
 do_global_plate_buckling = True
 do_column_plate_buckling = True
 
-do_print = True
+do_print_to_pdf = True
 do_print_to_txt = True
 do_print_to_terminal = True
 
@@ -120,21 +120,22 @@ do_deck_as_prop = False
 
 
 def cs_defaults_tostring():
-    line1 = "defaults for crosssection geometry: \n"
-    line2 = "b_sup ="+str(cs_b_sup)+"\n"
-    line3 = "b_inf ="+str(cs_b_inf)+"\n"
-    line4 = "h ="+str(cs_h)+"\n"
+    line1 = "\ndefaults for crosssection geometry:"
+    line2 = "\nb_sup ="+str(cs_b_sup)
+    line3 = "\nb_inf ="+str(cs_b_inf)
+    line4 = "\nh ="+str(cs_h)
     string = line1 + line2 + line3 + line4
     return string
 def check_geometry_defaults_tostring():
-    line1 = "geometry check defaults: tbd \n"
+    line1 = "\ngeometry check defaults: tbd"
     return line1
 def stiffener_defaults_tostring():
-    line1 = "defaults for stiffener geometry: tbd \n"
+    line1 = "\ndefaults for stiffener geometry: tbd"
     return line1
 def buckling_defaults_tostring():
-    line1 = "defaults for buckling proofs: tbd \n"
+    line1 = "\ndefaults for buckling proofs: tbd"
     return line1
 def cs_analysis_tool_defaults_tostring():
-    line1 = "defaults for the cross-section analysis tool: \n"
-    line2 = "print text = "+str(do_print)+" to txt "+str(do_print_to_txt)+"\n"
+    line1 = "\ndefaults for the cross-section analysis tool:"
+    line2 = "\nprint text = "+str(do_print)+" to txt "+str(do_print_to_txt)
+    return line1 + line2

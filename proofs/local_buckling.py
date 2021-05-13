@@ -2,10 +2,14 @@
 import data
 import defaults
 from proofs import stress_cal
+from output import printing
 import math
 
 
 def local_buckling(cs):
+    string = "\n   Iteratively changing the widths until M_Rd_el_eff converges to a limit of "+str(defaults.convergence_limit_local_buckling)
+    printing.printing(string, terminal = True)
+
     cs = cal_sigma_psi_red(cs)
     change = 1
     i = 1
