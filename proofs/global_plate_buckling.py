@@ -48,8 +48,8 @@ def global_plate_buckling(total_cs, plate_glob):
     psi = min(sigma_a, sigma_b) / max(sigma_a, sigma_b)
 
     if sigma_a <= 0 and sigma_b <= 0:
-                rho_glob = 1
-                sigma_cr_p = 10**10
+        rho_glob = 1
+        sigma_cr_p = 10**10
     else:
         #get plate geometry
         h = 0
@@ -58,6 +58,19 @@ def global_plate_buckling(total_cs, plate_glob):
                 h += plate.get_length_tot()
         t = plate_a.t
         b = defaults.plate_length
+
+        #find borders of compression zone
+        comp = None
+        if sigma_a > 0 and sigma_b >0:
+            comp = (0, h)
+        elif sigma_a > 0 and sigma_b <= 0:
+            h_red = h * sigma_a / (sigma_a - sigma_b)
+            comp = (0, h_red)
+        elif sigma_b > 0 and sigma_a <= 0:
+            h_red = h * -sigma_a / (sigma_b - sigma_a)
+            comp = (h_red, h)
+        else:
+            assert True, "This should never happen!"
 
         #coordinate transformation (a+b)/2 is the new origin and baseplate is horizontal
         #set new origin
@@ -131,6 +144,7 @@ def global_plate_buckling(total_cs, plate_glob):
         #calculate adimensional parameters for each stiffener
         #tbd
         stiffeners_ebp = []
+        compression_stiffener = False
         for i in range(len(stiffener_list)):
             #extract the useful plates
             stiffener = stiffener_list[i]
@@ -152,6 +166,20 @@ def global_plate_buckling(total_cs, plate_glob):
             delta_z = center_plate.get_center_z_tot() - plate_a.a.z
             delta_y = center_plate.get_center_y_tot() - plate_a.a.y
             distance = math.sqrt(delta_z **2 + delta_y **2)
+
+            #calculate theta
+            b_sup_st = stiffener.get_line(st_pl_position = 1).get_length_tot()
+            b_inf_st = stiffener.get_line(st_pl_position = 3).get_length_tot()
+            t_st = stiffener.get_line(st_pl_position = 3).t
+            diag = stiffener.get_line(st_pl_position = 3).get_length_tot()
+            diff = (b_sup_st-b_inf_st)/2
+            h_st = math.sqrt(diag**2 - diff**2)
+            A_0 = 0.5*(b_sup_st + b_inf_st)*h_st
+            integral = b_sup_st / t + (2*diag + b_inf_st) / t_st
+            J_T = 4* A_0**2 / integral
+            J_T_ref = 1/3 * h * t**3
+            theta = 0.7 * J_T / J_T_ref
+
 
             #calculate delta
             unit_vec_to_a = (top_plate.a.y - top_plate.b.y) / top_plate.get_length_tot()
@@ -232,23 +260,44 @@ def global_plate_buckling(total_cs, plate_glob):
                 new_bottom_plate.a = pt.point(new_bottom_plate.a.y + unit_vec_to_a*length_gamma, new_bottom_plate.a.z)
             gamma = stiffener.get_i_y_tot() * 12 * (1-0.3**2)/(h*t**3)
 
-            #calculate theta
-            #tbd
+            #assure that there is at least on stiffener in compression zone
+            print("distance")
+            print(distance)
+            print("comp")
+            print(comp)
+            if distance > comp[0] and distance < comp[1]:
+                compression_stiffener = True
+
             theta = 1.0
+            assert gamma <= 1000 and gamma >= 0, "gamma too high or low"
+            assert theta <= 1000 and theta >= 0, "theta too high or low"
+            assert delta <= 1000 and delta >= 0, "theta too high or low"
             stiffeners_ebp.insert(i,(distance, gamma, theta, delta))
 
         #finding critical buckling load
         phi_cr_p = 0
-        if abs(sigma_a) > 0.1 and abs(sigma_b) > 0.1 and 3<=t:
+        if compression_stiffener == True and abs(sigma_a) > 0.1 and abs(sigma_a)<= 1000 and abs(sigma_b) > 0.1 and abs(sigma_b)<= 1000 and 3<=t and 100<b and 100<h:
             phi_cr_p = ebplate.ebplate(b,h,t,sigma_a, sigma_b, stiffeners_ebp)
         elif t<3:
             string = "\n      plate too thin"
             printing.printing(string, terminal = True)
             return 0, 1
+        elif 100>=b:
+            string = "\nplate too short"
+            printing.printing(string)
+            return 0, 1
+        elif 100>=h:
+            string = "\nplate too low"
+            printing.printing(string)
+            return 0, 1
+        elif compression_stiffener == False:
+            string = "\nno compression stiffener"
+            printing.printing(string)
+            return 0, 1
         else:
+            string = "\nstresses too low or too high"
+            printing.printing(string)
 
-            string = "\n      stresses too low"
-            printing.printing(string, terminal = True)
             return 1, 10**9
         sigma_max = max(sigma_a, sigma_b)
         sigma_cr_p = sigma_max * phi_cr_p

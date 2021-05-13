@@ -20,25 +20,30 @@
 
 <div class="row">
   <div class="side">
-    <p>Enter the resulting internal forces.</p>
-    <form action="/results" id="input_opt" method="GET"> </form>
+    <form action="/optimize_step_2" id="input_opt" method="POST"> </form>
+    <p>Enter the cross section geometry. </p>
     <table>
       <tr>
-        <td><label for="M_Ed">M<sub>Ed</sub> [kNm]</label></td>
-        <td> <input type="number" name="M_Ed" form="input_opt" > </td>
+        <td><label for="b_sup">b<sub>sup</sub> [mm]</label></td>
+        <td><input type="number" name="b_sup" value = {{ content["b_sup"] }} form="input_opt" required></td>
       </tr>
       <tr>
-        <td><label for="V_Ed">V<sub>Ed</sub> [kN]</label></td>
-        <td><input type="number" name="V_Ed" form="input_opt"></td>
+        <td><label for="b_inf">b<sub>inf</sub> [mm]</label></td>
+        <td><input type="number" name="b_inf" value = {{ content["b_inf"] }} form="input_opt" required></td>
       </tr>
       <tr>
-        <td><label for="T_Ed">T<sub>Ed</sub> [kNm]</label></td>
-        <td><input type="number" name="T_Ed" form="input_opt"></td>
-      </tr>
-      <tr>
-        <td><input type="submit" name="Calculate" value="Calculate" form="input_opt"></td>
+        <td><label for="h">h [mm]</label></td>
+        <td><input type="number" name="h" value =  {{ content["h"] }}  form="input_opt" required></td>
       </tr>
     </table>
+      <tr>
+        <td><input type="submit" name="Draw" value="Draw" form="input_opt" formaction = "optimize_step_1"></td>
+        <td><input type="submit" name="Next" value="Next" form="input_opt"></td>
+      </tr>
+    </table>
+  </div>
+  <div class="main">
+    {{ image | safe}}
   </div>
 </div>
 </body>

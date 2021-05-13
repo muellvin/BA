@@ -32,7 +32,7 @@ def interaction_web(total_cs, web_plate, eta_3):
         line1 = "\n      eta_3 > 0.5; interaction needed"
         #interaction required
         plastic_cs = copy.deepcopy(total_cs)
-        m_pl_rd = get_m_rd_pl_eff()
+        m_pl_rd = get_m_rd_pl_eff(plastic_cs)
         eta_1 = m_ed / m_pl_rd
         utilisation = eta_1 + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
         line2 = "\n      utilisation: "+str(utilisation)
@@ -191,8 +191,6 @@ def get_m_rd_pl_eff(total_cs):
         else:
             z_min = z
             z = 0.5*(z+z_max)
-        geometry_output.print_cs(top_part)
-        geometry_output.print_cs(bottom_part)
         counter +=1
         if counter > 10:
             continue_iteration = False
