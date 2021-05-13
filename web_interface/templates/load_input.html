@@ -20,38 +20,38 @@
 
 <div class="row">
   <div class="side">
-    <form action="/cs_analysis_step_1" method="POST" id="step_2"> </form>
+    <form action="/optimize_step_1" method="POST" id="opt_step_2"> </form>
     <table>
       <tr>
         <td><p>Enter the resulting internal forces.</p></td>
       </tr>
       <tr>
         <td><label for="M_Ed">M<sub>Ed</sub> [kNm]</label></td>
-        <td><input type="number" name="M_Ed" form = "step_2" required></td>
+        <td><input type="number" name="M_Ed" form = "opt_step_2" required></td>
       </tr>
       <tr>
         <td><label for="V_Ed">V<sub>Ed</sub> [kN]</label></td>
-        <td><input type="number" name="V_Ed" form = "step_2" required></td>
+        <td><input type="number" name="V_Ed" form = "opt_step_2" required></td>
       </tr>
       <tr>
         <td><label for="T_Ed">T<sub>Ed</sub> [kNm]</label></td>
-        <td><input type="number" name="T_Ed" form = "step_2" required></td>
+        <td><input type="number" name="T_Ed" form = "opt_step_2" required></td>
       </tr>
       <tr>
         <td><p>Choose the steel grade.</p> </td>
       </tr>
       <tr>
-        <td><input type="radio" name="fy" id="235" value="235" checked form = "step_2"> S235 </input></td>
+        <td><input type="radio" name="fy" id="235" value="235" checked form = "opt_step_2"> S235 </input></td>
       </tr>
       <tr>
-        <td><input type="radio" name="fy" id="275" value="275" form = "step_2"> S275 </input></td>
+        <td><input type="radio" name="fy" id="275" value="275" form = "opt_step_2"> S275 </input></td>
       </tr>
       <tr>
-        <td><input type="radio" name="fy" id="355" value="355" form = "step_2"> S355 </input></td>
+        <td><input type="radio" name="fy" id="355" value="355" form = "opt_step_2"> S355 </input></td>
       </tr>
       <tr>
-        <td><input type="submit" name="Back" value="Back" form = "step_2" formnovalidate></td>
-        <td><input type="submit" name="Calculate" value="Calculate" formaction="/results_analysis" form = "step_2"></td>
+        <td><input type="submit" name="Back" value="Back" form = "opt_step_2" formnovalidate></td>
+        <td><input type="submit" name="Calculate" value="Calculate" formaction="/results_optimize" form = "opt_step_2"></td>
       </tr>
     </table>
   </div>

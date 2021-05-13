@@ -22,21 +22,64 @@ app.config["DEBUG"] = True
 def index():
     return render_template('index.html')
 
+@app.route('/optimize_step_1', methods = ['GET'])
+def optimize():
+    form_values.values = copy.deepcopy(form_values.default_cs)
+    val = form_values.values
+    initial_cs = cs_to_html.create_initial_cs(val.get("b_sup"), val.get("b_inf"), val.get("h"), val.get("t_side"), val.get("t_deck"), val.get("t_btm"))
+    image = cs_to_html.print_cs(initial_cs)
+    return render_template('optimize_input.html', image = image, content = val)
+
+@app.route('/optimize_step_1', methods = ['POST'])
+def optimize_input_1():
+    val = None
+    try:
+        b_sup = int(request.form['b_sup'])
+        b_inf = int(request.form['b_inf'])
+        h = int(request.form['h'])
+        form_values.values = copy.deepcopy(form_values.default_cs)
+        val = form_values.values
+        val.update({"b_sup":b_sup, "b_inf":b_inf, "h":h})
+    except KeyError:
+        val = form_values.values
+    first_cs = initial_cs.create_initial_cs(val.get("b_sup"), val.get("b_inf"), val.get("h"), 1,1,1)
+    image = cs_to_html.print_cs(first_cs)
+    return render_template('optimize_input.html', image = image, content = val)
+
+@app.route('/optimize_step_2', methods = ['POST'])
+def optimize_input_2():
+    b_sup = int(request.form['b_sup'])
+    b_inf = int(request.form['b_inf'])
+    h = int(request.form['h'])
+    form_values.values = copy.deepcopy(form_values.default_cs)
+    val = form_values.values
+    val.update({"b_sup":b_sup, "b_inf":b_inf, "h":h})
+    return render_template('load_input.html')
+
+
+@app.route('/results_optimize', methods = ['POST'])
+def resultpage_optimize():
+    M_Ed = int(request.form['M_Ed'])
+    V_Ed = int(request.form['V_Ed'])
+    T_Ed = int(request.form['T_Ed'])
+    data.input_data.update({"M_Ed":M_Ed, "V_Ed":V_Ed, "T_Ed":T_Ed})
+    f_y = int(request.form['fy'])
+    data.constants.update({"f_y":f_y})
+    return render_template('resultpage_optimize.html')
+
+
 @app.route('/cs_analysis_step_1', methods = ['GET'])
 def cs_analysis():
     form_values.content = copy.deepcopy(form_values.default_cs)
     cont = form_values.content
-    initial_cs = cs_to_html.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
-    image = cs_to_html.print_cs(initial_cs)
+    first_cs = cs_to_html.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
+    deck_stiffeners = deck.deck(cont.get("b_sup"))
+    form_values.stiffeners = []
+    form_values.stiffeners += deck_stiffeners
+    end_cs = merge.merge(first_cs, form_values.stiffeners)
+    image = cs_to_html.print_cs(end_cs)
     return render_template('geometry_input.html', image = image, content = cont)
 
-@app.route('/optimize', methods = ['GET'])
-def optimize():
-    form_values.content = copy.deepcopy(form_values.default_cs)
-    cont = form_values.content
-    initial_cs = cs_to_html.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
-    image = cs_to_html.print_cs(initial_cs)
-    return render_template('optimize_input.html', image = image, content = cont)
 
 @app.route('/cs_analysis_step_1', methods = ['POST'])
 def cs_analysis_input_1():
@@ -86,7 +129,7 @@ def cs_analysis_input_1():
     rest_stiffeners = stiffener_transform.prop_to_draw(first_cs)
     form_values.stiffeners += rest_stiffeners
     end_cs = merge.merge(first_cs, form_values.stiffeners)
-    image = cs_to_html.print_cs(first_cs)
+    image = cs_to_html.print_cs(end_cs)
     return render_template('geometry_input.html', content = cont, image = image)
 
 @app.route('/cs_analysis_step_2', methods = ['POST'])
@@ -143,15 +186,6 @@ def resultpage_analysis():
     results = cs_analysis_gui.cs_analysis_gui()
     return render_template('resultpage_analysis.html', results = results)
 
-@app.route('/results_optimize', methods = ['POST'])
-def resultpage_optimize():
-    M_Ed = int(request.form['M_Ed'])
-    V_Ed = int(request.form['V_Ed'])
-    T_Ed = int(request.form['T_Ed'])
-    data.input_data.update({"M_Ed":M_Ed, "V_Ed":V_Ed, "T_Ed":T_Ed})
-    f_y = int(request.form['fy'])
-    data.constants.update({"f_y":f_y})
-    return render_template('resultpage_optimize.html')
 
 
 if __name__ == '__main__':
