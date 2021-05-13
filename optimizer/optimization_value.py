@@ -30,7 +30,7 @@ def cost(cs):
     return cost
 
 def ei(cs):
-    ei = cs.get_i_y_red()*data.constants.get("E")
+    ei = cs.get_ei()
     return ei
 
 def target_function(cs):

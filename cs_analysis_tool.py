@@ -3,6 +3,7 @@ from classes import stiffener
 from classes import crosssection
 from classes import substantiate
 from input import input_analysis_tool
+from output import printing
 from proofs import buckling_proof
 from classes import merge
 import initial_cs
@@ -13,28 +14,24 @@ import math
 import os
 import sys
 import defaults
-
+from optimizer import optimization_value
 
 #sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
 #crosssection input and creation (only trapezoid plates)
 
-
-
-
 if defaults.do_print_to_txt == True:
-    os.remove("output\cs_analysis.txt")
-    file = open("output\cs_analysis.txt", "w+")
-    file.write("*************************** cross-section analysis tool ********************************")
+    file = open("output/cs_analysis.txt", "w+")
     file.close()
-if defaults.do_print_to_terminal == True:
-    print("*************************** cross-section analysis tool ********************************")
-
 
 input_analysis_tool.set_defaults()
+printing.printing(data.constants_tostring(), terminal = True)
 
 input_analysis_tool.set_cs_geometry()
 #data.check_input_data_complete()
 cs = initial_cs.create_initial_cs(data.input_data.get("b_sup"), data.input_data.get("b_inf"), data.input_data.get("h"), data.input_data.get("t_side"), data.input_data.get("t_deck"), data.input_data.get("t_bottom"))
+
+printing.printing(data.input_data_tostring(), terminal = True)
+
 
 #add the deck stiffeners
 st_list_deck = deck.deck(data.input_data.get("b_sup"))
@@ -62,7 +59,8 @@ stiffener_list = st_list_deck + st_list_rest
 stiffener_list = sorted(stiffener_list, key = lambda st: st.lines[0].code.st_number)
 cs = merge.merge(cs, stiffener_list)
 #print(cs)
-geometry_output.print_cs_red(cs)
+
+geometry_output.print_cs_to_pdf(cs, input = True)
 
 
 
@@ -72,9 +70,21 @@ input_analysis_tool.set_forces()
 
 #buckling proof
 cs = buckling_proof.buckling_proof(cs)
-print("eta_1", cs.eta_1)
-print("verification 2", cs.interaction_2)
-print("verification 3", cs.interaction_3)
-print("verification 4", cs.interaction_4)
-#print(cs)
-geometry_output.print_cs_red(cs)
+
+ei = round(cs.get_ei() / 1000 / 1000 / 1000)
+interaction_2 = cs.interaction_2
+interaction_3 = cs.interaction_3
+interaction_4 = cs.interaction_4
+cost = optimization_value.cost(cs)
+
+line1 = "\n\nResults:"
+line2 = "\n   EI: "+str(ei)+"Nm^2"
+line3 = "\n   interaction side 2: "+str(interaction_2)
+line4 = "\n   interaction side 3: "+str(interaction_3)
+line5 = "\n   interaction side 4: "+str(interaction_4)
+line6 = "\n   cost: "+str(cost)+"CHF/m"
+
+string = line1 + line2 + line3 + line4 + line5 + line6
+printing.printing(string, terminal = True)
+geometry_output.print_cs_to_pdf(cs, input = False)
+printing.txt_to_pdf()

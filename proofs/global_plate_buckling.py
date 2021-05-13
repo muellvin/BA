@@ -12,8 +12,8 @@ import copy
 from output import printing
 
 def global_plate_buckling(total_cs, plate_glob):
-    string = "\n\n------------------------------ plate_buckling for side "+str(plate_glob.lines[0].code.pl_position)+" ------------------------------"
-    printing.printing(string)
+    string = "\n      4.5.2 Plate type behaviour"
+    printing.printing(string, terminal = True)
 
 
     stiffened_plate = copy.deepcopy(plate_glob)
@@ -279,8 +279,8 @@ def global_plate_buckling(total_cs, plate_glob):
         if compression_stiffener == True and abs(sigma_a) > 0.1 and abs(sigma_a)<= 1000 and abs(sigma_b) > 0.1 and abs(sigma_b)<= 1000 and 3<=t and 100<b and 100<h:
             phi_cr_p = ebplate.ebplate(b,h,t,sigma_a, sigma_b, stiffeners_ebp)
         elif t<3:
-            string = "\nplate too thin"
-            printing.printing(string)
+            string = "\n      plate too thin"
+            printing.printing(string, terminal = True)
             return 0, 1
         elif 100>=b:
             string = "\nplate too short"
@@ -296,19 +296,19 @@ def global_plate_buckling(total_cs, plate_glob):
             return 0, 1
         else:
             string = "\nstresses too low or too high"
-            printing.printing(string)
+            printing.printing(string, terminal = True)
             return 1, 10**9
         sigma_max = max(sigma_a, sigma_b)
         sigma_cr_p = sigma_max * phi_cr_p
 
-        string = "\nsigma_cr = " + str(sigma_cr_p)
-        printing.printing(string)
+        string = "\n         sigma_cr = " + str(sigma_cr_p)
+        printing.printing(string, terminal = True)
 
         #calculating plate slenderness
         beta_a_c = get_beta_ac(plate_glob)
         lambda_p_glob_bar = math.sqrt(beta_a_c * data.constants.get("f_y") / sigma_cr_p)
-        string = "\nLambda: " + str(lambda_p_glob_bar)
-        printing.printing(string)
+        string = "\n         Lambda: " + str(lambda_p_glob_bar)
+        printing.printing(string, terminal = True)
 
         #calculate rho_glob for plate buckling
         #assumption: cross section parts always supported on both sides
@@ -321,12 +321,12 @@ def global_plate_buckling(total_cs, plate_glob):
             if rho_glob > 1.0:
                 rho_glob = 1.0
         else:
-            string = "\nplate slenderness or stress ratio out of range"
-            printing.printing(string)
+            string = "\n         plate slenderness or stress ratio out of range"
+            printing.printing(string, terminal = True)
             pass
 
-        string = "\n    Rho_Global: " + str(rho_glob)
-        printing.printing(string)
+        string = "\n         Rho_Global: " + str(rho_glob)
+        printing.printing(string, terminal = True)
 
 
     return rho_glob, sigma_cr_p

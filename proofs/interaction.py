@@ -5,35 +5,72 @@ from classes import crosssection
 from classes import line
 from classes import point
 from classes import plate_code
+from output import geometry_output
+from output import printing
 import data
 import copy
 
 def interaction_web(total_cs, web_plate, eta_3):
+    line1 = "\n   7.1 Interaction between shear force, bending moment and axial force"
+    line2 = "\n   Web -> (7.1) without iterating"
+    string = line1 + line2
+    printing.printing(string, terminal = True)
+
     m_ed = data.input_data.get("M_Ed")
     m_f_rd = total_cs.get_m_f_rd_eff()
     if eta_3 <= 0.5 and m_ed < m_f_rd:
         #no interaction needed
         #what is a reasonable return value, -1?
         utilisation = -1
+        line1 = "\n      eta_3 <= 0.5; no interaction needed"
+        line2 = "\n      utilisation: -1"
+        string = line1 + line2
+        printing.printing(string, terminal = True)
+
         return utilisation
     else:
+        line1 = "\n      eta_3 > 0.5; interaction needed"
         #interaction required
         plastic_cs = copy.deepcopy(total_cs)
         m_pl_rd = get_m_rd_pl_eff(plastic_cs)
         eta_1 = m_ed / m_pl_rd
         utilisation = eta_1 + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
+        line2 = "\n      utilisation: "+str(utilisation)
+        printing.printing(string, terminal = True)
         return utilisation
 
+
+
+
+
+
 def interaction_flange(total_cs, flange_plate, eta_3):
+    line1 = "\n   7.1 Interaction between shear force, bending moment and axial force"
+    line2 = "\n   Flange -> (7.1), comment (5)"
+    string = line1 + line2
+    printing.printing(string, terminal = True)
+
+
     #choose correct shear stresses for calculation
     if eta_3 <= 0.5:
+        line1 = "\n      eta_3 <= 0.5; no interaction needed"
         #no interaction needed
         #what is a resonable return value, -1?
         utilisation = -1
+        line2 = "\n      utilisation: -1"
+        string = line1 + line2
     else:
+        line1 = "\n      eta_3 > 0.5; interaction needed"
         eta_1 = abs(data.input_data.get("M_Ed") / total_cs.get_m_rd_el_eff())
+        line2 = "\n      eta_1: "+str(eta_1)
         utilisation = eta_1 + (2*eta_3-1)**2
+        line3 = "\n      utilisation: "+str(utilisation)
+        string = line1 + line2 + line3
+    printing.printing(string, terminal = True)
+
     #prove shear resistance for each subpanel
+    string = "\n   Proofing Resistance to shear for each subpanel"
+    printing.printing(string, terminal = True)
     for plate in flange_plate.lines:
         if plate.code.tpl_number != 0:
             v_ed_panel = stress_cal.get_tau_int_subpanel(total_cs, plate, data.input_data.get("V_Ed"),\
@@ -42,8 +79,13 @@ def interaction_flange(total_cs, flange_plate, eta_3):
             panel_cs.addline(plate)
             eta_3_panel = resistance_to_shear.resistance_to_shear(panel_cs, v_ed_panel)
             if eta_3_panel < 1:
-                print("pass subpanel")
+                string = "\n      eta_3_panel < 1: pass subpanel"
+                printing.printing(string, terminal = True)
+
             elif eta_3_panel > 1:
+                string = "\n      eta_3_panel > 1: subpanel not passed"
+                string += "\n      utilisation: 10"
+                printing.printing(string, terminal = True)
                 utilisation = 10
             else:
                 assert True, "This is not possible"
