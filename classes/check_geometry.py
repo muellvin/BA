@@ -324,7 +324,7 @@ def distances_betw_st_inc_top(cs, stiffeners, propositions, do_height):
         if dis > 500 and right_top_4a.z > top_right_2b.z:
             return propositions, ok3
 
-        st_angle_y = right_top.get_line(st_pl_position == 3).get_angle_y
+        st_angle_y = right_top.get_line(st_pl_position = 3).get_angle_y()
         #n: a line normal to the st bottom line points to positive y and negative z
         #parallel to height of stiffener right top
         n_dy = math.cos(st_angle_y)
@@ -336,8 +336,8 @@ def distances_betw_st_inc_top(cs, stiffeners, propositions, do_height):
 
 
         #dis_line projected onto n t coordinate system
-        dis_n = (n_dy * dis_line_dy) + (n_dz * dis_line_dz)
-        dis_t = (t_dy * dis_line_dy) + (t_dy * dis_line_dy)
+        dis_n = (n_dy * dis_dy) + (n_dz * dis_dz)
+        dis_t = (t_dy * dis_dy) + (t_dy * dis_dy)
 
         if dis > defaults.mindis_across_top and dis_n > 0 and dis_t > 0:
             ok3 = True
@@ -349,12 +349,12 @@ def distances_betw_st_inc_top(cs, stiffeners, propositions, do_height):
             ok3 = False
         #if we get here, changes have to be made
             h_corr = defaults.mindis_across_top - dis_n
-            st_left_top.h = left_top.h - corr_h
+            st_left_top.h = left_top.h - h_corr
             st_left_top.h_corr = True
-            st_left_top.h_corr_val = corr_h
-            st_right_top.h = right_top.h - corr_h
+            st_left_top.h_corr_val = h_corr
+            st_right_top.h = right_top.h - h_corr
             st_right_top.h_corr = True
-            st_right_top.h_corr_val = corr_h
+            st_right_top.h_corr_val = h_corr
         elif do_height == False:
             ok3 = False
             """correction for width"""

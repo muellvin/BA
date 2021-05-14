@@ -62,7 +62,7 @@ print(cs)
 geometry_output.print_cs(cs)
 
 geometry_output.print_cs_to_pdf(cs, input = True)
-
+geometry_output.print_cs_red(cs)
 
 
 #set the cross-sectional forces
@@ -87,5 +87,6 @@ line6 = "\n   cost: "+str(cost)+"CHF/m"
 
 string = line1 + line2 + line3 + line4 + line5 + line6
 printing.printing(string, terminal = True)
+geometry_output.print_cs_red(cs)
 geometry_output.print_cs_to_pdf(cs, input = False)
-printing.txt_to_pdf()
+printing.txt_to_pdf("cs_analysis")
