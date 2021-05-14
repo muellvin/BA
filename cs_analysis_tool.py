@@ -22,7 +22,7 @@ from optimizer import optimization_value
 if defaults.do_print_to_txt == True:
     file = open("output/cs_analysis.txt", "w+")
     file.close()
-
+defaults.do_deck_as_prop = True
 input_analysis_tool.set_defaults()
 printing.printing(data.constants_tostring(), terminal = True)
 
@@ -58,7 +58,8 @@ for st in data.stiffener_data.stiffeners:
 stiffener_list = st_list_deck + st_list_rest
 stiffener_list = sorted(stiffener_list, key = lambda st: st.lines[0].code.st_number)
 cs = merge.merge(cs, stiffener_list)
-#print(cs)
+print(cs)
+geometry_output.print_cs(cs)
 
 geometry_output.print_cs_to_pdf(cs, input = True)
 geometry_output.print_cs_red(cs)

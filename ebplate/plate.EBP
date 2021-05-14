@@ -1,125 +1,125 @@
 	EBPlate - v2.01 
-Société       # 
-Affaire       # 
-Référence     # 
-Utilisateur   # 
-Commentaire   # 
-#PLATE 
-   Width           400.0 cm 
+Sociï¿½tï¿½       #
+Affaire       #
+Rï¿½fï¿½rence     #
+Utilisateur   #
+Commentaire   #
+#PLATE
+   Width           400.0 cm
 <<<<<<< HEAD
-   Height          300.00000000000006 cm 
-   Thickness         0.5 cm 
+   Height          300.00000000000006 cm
+   Thickness         0.5 cm
 =======
-   Height          206.15528128088303 cm 
-   Thickness         1.0 cm 
->>>>>>> 54cfd80a25faa30a1ac68567c860f29dfcd027aa
-   Module Young    210000.000 MPa 
-   Poisson Coefficient         0.300 
-   Boundary Conditions 
-      Bord 1 0 
-      Bord 2 0 
-      Bord 3 0 
-      Bord 4 0 
-#STIFFENING 
-   Orthotropic Plate =  0 
-   Referentiel 2 
-   Nombre de raidisseurs  5 
-   - Raidisseur n° 1 Active=1 
-      Orientation = 0 
+   Height          158.11388300841895 cm
+   Thickness         0.5 cm
+>>>>>>> master
+   Module Young    210000.000 MPa
+   Poisson Coefficient         0.300
+   Boundary Conditions
+      Bord 1 0
+      Bord 2 0
+      Bord 3 0
+      Bord 4 0
+#STIFFENING
+   Orthotropic Plate =  0
+   Referentiel 2
+   Nombre de raidisseurs  5
+   - Raidisseur nï¿½ 1 Active=1
+      Orientation = 0
 <<<<<<< HEAD
-      Position    = 40.9090909090909 
+      Position    = 40.9090909090909
 =======
-      Position    = 20.615528128088307 
->>>>>>> 54cfd80a25faa30a1ac68567c860f29dfcd027aa
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
+      Position    = 47.43416490252569
+>>>>>>> master
+      Gamma       = 0
+      Teta        = 0
+      Delta       = 0
+      Type        = 3
 <<<<<<< HEAD
-      Dimension 1 = 7.999999999999993 
-      Dimension 2 = 27.272727272727288 
-      Dimension 3 = 1.0 
-      Dimension 4 = 0.5 
-   - Raidisseur n° 2 Active=1 
-      Orientation = 0 
-      Position    = 95.45454545454544 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 8.000000000000004 
-      Dimension 2 = 27.272727272727273 
-      Dimension 3 = 1.0 
-      Dimension 4 = 0.5 
-   - Raidisseur n° 3 Active=1 
-      Orientation = 0 
-      Position    = 150.0 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 8.000000000000004 
-      Dimension 2 = 27.272727272727273 
-      Dimension 3 = 1.0 
-      Dimension 4 = 0.5 
-   - Raidisseur n° 4 Active=1 
-      Orientation = 0 
-      Position    = 204.54545454545456 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 8.000000000000004 
-      Dimension 2 = 27.272727272727273 
-      Dimension 3 = 1.0 
-      Dimension 4 = 0.5 
-   - Raidisseur n° 5 Active=1 
-      Orientation = 0 
-      Position    = 259.0909090909091 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 8.000000000000018 
-      Dimension 2 = 27.272727272727273 
-      Dimension 3 = 1.0 
-      Dimension 4 = 0.5 
+      Dimension 1 = 7.999999999999993
+      Dimension 2 = 27.272727272727288
+      Dimension 3 = 1.0
+      Dimension 4 = 0.5
+   - Raidisseur nï¿½ 2 Active=1
+      Orientation = 0
+      Position    = 95.45454545454544
+      Gamma       = 0
+      Teta        = 0
+      Delta       = 0
+      Type        = 3
+      Dimension 1 = 8.000000000000004
+      Dimension 2 = 27.272727272727273
+      Dimension 3 = 1.0
+      Dimension 4 = 0.5
+   - Raidisseur nï¿½ 3 Active=1
+      Orientation = 0
+      Position    = 150.0
+      Gamma       = 0
+      Teta        = 0
+      Delta       = 0
+      Type        = 3
+      Dimension 1 = 8.000000000000004
+      Dimension 2 = 27.272727272727273
+      Dimension 3 = 1.0
+      Dimension 4 = 0.5
+   - Raidisseur nï¿½ 4 Active=1
+      Orientation = 0
+      Position    = 204.54545454545456
+      Gamma       = 0
+      Teta        = 0
+      Delta       = 0
+      Type        = 3
+      Dimension 1 = 8.000000000000004
+      Dimension 2 = 27.272727272727273
+      Dimension 3 = 1.0
+      Dimension 4 = 0.5
+   - Raidisseur nï¿½ 5 Active=1
+      Orientation = 0
+      Position    = 259.0909090909091
+      Gamma       = 0
+      Teta        = 0
+      Delta       = 0
+      Type        = 3
+      Dimension 1 = 8.000000000000018
+      Dimension 2 = 27.272727272727273
+      Dimension 3 = 1.0
+      Dimension 4 = 0.5
 =======
-      Dimension 1 = 9.99999999999999 
-      Dimension 2 = 20.0 
-      Dimension 3 = 10.0 
-      Dimension 4 = 1.0 
->>>>>>> 54cfd80a25faa30a1ac68567c860f29dfcd027aa
-#STRESSES 
- Longitudinal stresses : User's data No 
- Analytical Longitudinal stresses 
-  Imposed values : No 
-   Longitudinal Stress Top Left                0.000 MPa 
-   Longitudinal Stress Bottom Left             0.000 MPa 
-   Longitudinal Stress Top Right               0.000 MPa 
-   Longitudinal Stress Bottom Right            0.000 MPa 
- Transverse stresses : User's data No 
- Analytical Transverse stresses 
-  Imposed values : No 
-   Transverse stress Top                         0.000 MPa 
-   Transverse stress Bottom                      0.000 MPa 
-   Patch Load Stress Bottom                      0.000 MPa 
-   Patch Load Stress Top                         0.000 MPa 
-   Patch Load Width Top                          0.000 cm 
-   Patch Load Width Bottom                       0.000 cm 
-   Local longitudinal stresses under patch load : No 
-   Local shear stresses under patch load : Yes 
-   W Top                      -1.000 
-   W Bot                      -1.000 
-   Shear distribution  1 
-Shear stresses : User's data No 
-Analytical Shear stresses 
-  Imposed values : No 
+      Dimension 1 = 10.0
+      Dimension 2 = 20.000000000000004
+      Dimension 3 = 15.000000000000005
+      Dimension 4 = 0.8
+>>>>>>> master
+#STRESSES
+ Longitudinal stresses : User's data No
+ Analytical Longitudinal stresses
+  Imposed values : No
+   Longitudinal Stress Top Left                0.000 MPa
+   Longitudinal Stress Bottom Left             0.000 MPa
+   Longitudinal Stress Top Right               0.000 MPa
+   Longitudinal Stress Bottom Right            0.000 MPa
+ Transverse stresses : User's data No
+ Analytical Transverse stresses
+  Imposed values : No
+   Transverse stress Top                         0.000 MPa
+   Transverse stress Bottom                      0.000 MPa
+   Patch Load Stress Bottom                      0.000 MPa
+   Patch Load Stress Top                         0.000 MPa
+   Patch Load Width Top                          0.000 cm
+   Patch Load Width Bottom                       0.000 cm
+   Local longitudinal stresses under patch load : No
+   Local shear stresses under patch load : Yes
+   W Top                      -1.000
+   W Bot                      -1.000
+   Shear distribution  1
+Shear stresses : User's data No
+Analytical Shear stresses
+  Imposed values : No
 <<<<<<< HEAD
-   Shear stress                                 1.9753111204065315 MPa 
+   Shear stress                                 1.9753111204065315 MPa
 =======
-   Shear stress                                 7.500000000000001 MPa 
->>>>>>> 54cfd80a25faa30a1ac68567c860f29dfcd027aa
-#PARAMETERS 
-   Complexity : 1 
+   Shear stress                                 6.666666666666667 MPa
+>>>>>>> master
+#PARAMETERS
+   Complexity : 1
    Effective width parameter :  10.000
