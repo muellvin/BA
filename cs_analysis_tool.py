@@ -58,7 +58,8 @@ for st in data.stiffener_data.stiffeners:
 stiffener_list = st_list_deck + st_list_rest
 stiffener_list = sorted(stiffener_list, key = lambda st: st.lines[0].code.st_number)
 cs = merge.merge(cs, stiffener_list)
-#print(cs)
+print(cs)
+geometry_output.print_cs(cs)
 
 geometry_output.print_cs_to_pdf(cs, input = True)
 

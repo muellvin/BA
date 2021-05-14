@@ -25,7 +25,7 @@ Buckling Proof according to EC 1993 Part 1-5
       Beta: 0.6161387625504372
    Shear lag reduction for flange 3
       Shear Lag is not neglectable
-      Beta: 0.9398496240601504
+      Beta: 0.8611379451328055
 
 4.4 Plate elements without longitudinal stiffeners
    Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
@@ -33,58 +33,106 @@ Buckling Proof according to EC 1993 Part 1-5
 4.5 Stiffened plate elements with longitudinal stiffeners
    Side 2
       4.5.2 Plate type behaviour
-         sigma_cr = 541.5512650144816
-         Lambda: 0.5547501678920662
+         sigma_cr = 622.4563627716184
+         Lambda: 0.5190600738877355
          Rho_Global: 1.0
       4.5.3 Column type buckling behaviour
          Column number 8
-            A_sl=6844.54, A_sl_eff=5842.03, I_sl=3126115.66
-            sigma_cr_c=94662.87
-            e1=41.47, e2=29.58
+            A_sl=6064.94, A_sl_eff=5720.9, I_sl=3124491.49
+            sigma_cr_c=106775.53
+            e1=37.67, e2=33.38
             All tension =False
          Buckling Values 8
-            beta_A_c =0.853532440877408
-            lambda_c_bar =0.046031390500844725
-            Phi_c =0.47131488386605425
-            Chi_c =1.063403822546754
+            beta_A_c =0.9432746779846787
+            lambda_c_bar =0.045563505842586165
+            Phi_c =0.4705970761215423
+            Chi_c =1.064981763404818
          Critical buckling values
-            Chi_c: 1.063403822546754
-            sigma_cr_c: 94662.87851294536
+            Chi_c: 1.064981763404818
+            sigma_cr_c: 106775.53893483618
       4.5.4 Interaction between plate and column buckling
            all_tension: False
-           rho_c = 1.063403822546754
+           rho_c = 1.064981763404818
    Side 3
-      4.5.4 Interaction between plate and column buckling
-           all_tension: False
-           rho_c = 1
-   Side 4
       4.5.2 Plate type behaviour
-         sigma_cr = 354.8829454449756
-         Lambda: 0.685290427098525
-         Rho_Global: 1.0
+         sigma_cr = 266.7319668074863
+         Lambda: 0.8617797607577712
+         Rho_Global: 0.8641585603619245
       4.5.3 Column type buckling behaviour
          Column number 9
-            A_sl=6844.54, A_sl_eff=5842.03, I_sl=3126115.66
-            sigma_cr_c=94662.87
-            e1=41.47, e2=29.58
+            A_sl=6099.24, A_sl_eff=5047.06, I_sl=3124562.95
+            sigma_cr_c=106177.48
+            e1=37.86, e2=33.19
             All tension =False
          Buckling Values 9
-            beta_A_c =0.8535324408774083
-            lambda_c_bar =0.04603139050084483
-            Phi_c =0.47131488386605425
-            Chi_c =1.063403822546754
+            beta_A_c =0.8274912013911483
+            lambda_c_bar =0.042795628137715314
+            Phi_c =0.4699622401193241
+            Chi_c =1.0661300199353032
+         Column number 10
+            A_sl=5849.24, A_sl_eff=5024.85, I_sl=3124042.12
+            sigma_cr_c=110697.11
+            e1=36.44, e2=34.61
+            All tension =False
+         Buckling Values 10
+            beta_A_c =0.8590614705380388
+            lambda_c_bar =0.04270491829572704
+            Phi_c =0.46968320116694273
+            Chi_c =1.0667566183478476
+         Column number 11
+            A_sl=5849.24, A_sl_eff=5024.85, I_sl=3124042.12
+            sigma_cr_c=110697.11
+            e1=36.44, e2=34.61
+            All tension =False
+         Buckling Values 11
+            beta_A_c =0.8590614705380387
+            lambda_c_bar =0.042704918295727035
+            Phi_c =0.46968320116694273
+            Chi_c =1.0667566183478476
+         Column number 12
+            A_sl=6099.24, A_sl_eff=5047.06, I_sl=3124562.95
+            sigma_cr_c=106177.48
+            e1=37.86, e2=33.19
+            All tension =False
+         Buckling Values 12
+            beta_A_c =0.8274912013911483
+            lambda_c_bar =0.04279562813771542
+            Phi_c =0.46996224011932414
+            Chi_c =1.0661300199353032
          Critical buckling values
-            Chi_c: 1.063403822546754
-            sigma_cr_c: 94662.87851294501
+            Chi_c: 1.0661300199353032
+            sigma_cr_c: 106177.48561438108
       4.5.4 Interaction between plate and column buckling
            all_tension: False
-           rho_c = 1.063403822546754
+           rho_c = 1.0661300199353032
+   Side 4
+      4.5.2 Plate type behaviour
+         sigma_cr = 392.34007740330185
+         Lambda: 0.6537937172696691
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 13
+            A_sl=6064.94, A_sl_eff=5720.9, I_sl=3124491.49
+            sigma_cr_c=106775.53
+            e1=37.67, e2=33.38
+            All tension =False
+         Buckling Values 13
+            beta_A_c =0.943274677984679
+            lambda_c_bar =0.04556350584258626
+            Phi_c =0.4705970761215423
+            Chi_c =1.064981763404818
+         Critical buckling values
+            Chi_c: 1.064981763404818
+            sigma_cr_c: 106775.53893483577
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.064981763404818
 
 Resistance to shear and interaction shear force and bending moment for side 1
    5. Resistance to shear
       stiffened plate; EBPlate
-      k_tau: 9487.522915434136
-      eta_3: 0.015907026504099895
+      k_tau: 9487.523157149855
+      eta_3: 0.01518249284751341
    7.1 Interaction between shear force, bending moment and axial force
       Deck plate is ignored, as it is dimensioned with EC 3-2
 
@@ -100,9 +148,9 @@ Resistance to shear and interaction shear force and bending moment for side 2
 
 Resistance to shear and interaction shear force and bending moment for side 3
    5. Resistance to shear
-      unstiffened plate; (A.5)
-      k_tau: 7.59
-      eta_3: 0.1431710197647985
+      stiffened plate; EBPlate
+      k_tau: 950.3377325984843
+      eta_3: 0.015212535600357196
    7.1 Interaction between shear force, bending moment and axial force
    Flange -> (7.1), comment (5)
       eta_3 <= 0.5; no interaction needed
@@ -110,8 +158,48 @@ Resistance to shear and interaction shear force and bending moment for side 3
    Proofing Resistance to shear for each subpanel
    5. Resistance to shear
       unstiffened plate; (A.5)
-      k_tau: 7.59
-      eta_3: 0.13455922910225424
+      k_tau: 5.4025
+      eta_3: 0.030249508765667583
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.015720109976581496
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.011640075591667376
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.0052400366588605
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.0019400125986112292
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.0052400366588605
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.011640075591667376
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.015720109976581496
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4025
+      eta_3: 0.030249508765667583
       eta_3_panel < 1: pass subpanel
 
 Resistance to shear and interaction shear force and bending moment for side 4
@@ -125,8 +213,8 @@ Resistance to shear and interaction shear force and bending moment for side 4
       utilisation: -1
 
 Results:
-   EI: 2793899Nm^2
+   EI: 8005418Nm^2
    interaction side 2: -1
    interaction side 3: -1
    interaction side 4: -1
-   cost: 2072CHF/m
+   cost: 2527CHF/m
