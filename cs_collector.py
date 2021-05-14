@@ -1,10 +1,37 @@
 import data
+import defaults
 from optimizer import optimization_value
+from output import geometry_output
 
 def into_collector(new_cs):
     optimization_value.set_value(new_cs)
     data.cs_collection.append(new_cs)
 
+def print_best():
+    i = 1
+    for cs in get_best():
+        cs.reset()
+        name = "cs_"+str(i)
+        geometry_output.print_cs_to_pdf(cs, input = True)
+
+        cs = buckling_proof.buckling_proof(cs)
+
+        ei = round(cs.get_ei() / 1000 / 1000 / 1000)
+        interaction_2 = cs.interaction_2
+        interaction_3 = cs.interaction_3
+        interaction_4 = cs.interaction_4
+        cost = optimization_value.cost(cs)
+        line1 = "\n\nResults:"
+        line2 = "\n   EI: "+str(ei)+"Nm^2"
+        line3 = "\n   interaction side 2: "+str(interaction_2)
+        line4 = "\n   interaction side 3: "+str(interaction_3)
+        line5 = "\n   interaction side 4: "+str(interaction_4)
+        line6 = "\n   cost: "+str(cost)+"CHF/m"
+        string = line1 + line2 + line3 + line4 + line5 + line6
+        printing.printing(string, terminal = True)
+
+        geometry_output.print_cs_to_pdf(cs, input = False)
+        printing.txt_to_pdf(name)
 
 
 def get_best():

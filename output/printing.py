@@ -23,7 +23,7 @@ def printing(string, terminal = False, paragraph = None, pn = 0, sn = 0, cn = 0)
     output_text.append(text)
 
 
-def txt_to_pdf():
+def txt_to_pdf(name):
     # save FPDF() class into
     # a variable pdf
     pdf = PDF()
@@ -48,7 +48,8 @@ def txt_to_pdf():
 
     pdf.image("output/cs_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
     # save the pdf with name .pdf
-    pdf.output("output/cs_analysis.pdf", "F")
+    pdf.output("output/"+str(name)+".pdf", "F")
+
 
 
 

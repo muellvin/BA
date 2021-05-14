@@ -29,6 +29,27 @@ class crosssection():
             string += str(line)
         return string
 
+    def reset(self):
+        self.eta_1 = -2
+        self.interaction_2 = -2
+        self.interaction_3 = -2
+        self.interaction_4 = -2
+        for plate in self.lines:
+            plate.t_stress = plate.t
+            plate.beta = 1
+            plate.rho_c_a = 1
+            plate.rho_c_b = 1
+            plate.sigma_a_red = 0
+            plate.sigma_b_red = 0
+            plate.sigma_p1_red = 0
+            plate.sigma_p2_red = 0
+            plate.psi = 1
+            plate.rho_loc = 1
+            plate.chi_c = 1
+            plate.sigma_cr_c = 0
+            plate.rho_p = 1
+            plate.sigma_cr_p = 0
+
     def addline(self, line):
         self.lines.append(line)
 
