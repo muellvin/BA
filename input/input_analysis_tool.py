@@ -150,11 +150,11 @@ def set_stiffeners(number_st_top):
             st_list.add(stiffener_bottom_left_i)
         elif number_bottom%2 == 0:
             print("right", i)
-            stiffener_bottom_right_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side + i), -location, \
+            stiffener_bottom_right_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side + iterations + 1 - i), -location, \
             i_along, b_sup, b_inf, h, t)
             st_list.add(stiffener_bottom_right_i)
             print("left",number_bottom+ 1-i)
-            stiffener_bottom_left_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side+ number_bottom + 1 - i), location, \
+            stiffener_bottom_left_i = proposed_stiffener.proposed_stiffener(3, int(number_st_top + number_side+ iterations + i), location, \
             i_along, b_sup, b_inf, h, t)
             st_list.add(stiffener_bottom_left_i)
         i+=1

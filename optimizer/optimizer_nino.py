@@ -13,7 +13,7 @@ from proofs import buckling_proof
 import defaults
 import data
 from proofs import stress_cal
-from optimizer import cost_estimate
+from optimizer import optimization_value
 
 #optimization step 1
 #the goal of this method is to create
@@ -22,8 +22,8 @@ def optimize():
     b_inf = data.input_data["b_inf"]
     h = data.input_data["h"]
     t_deck = data.input_data["t_deck"]
-    t_range = [16]
-    I_range = [3*10**7]
+    t_range = [10, 12, 14, 15, 16, 18, 20]
+    I_range = [3*10**7, 4*10**7, 5*10**7, 6*10**7, 7*10**7, 8*10**7, 9*10**7]
     counter = 1
     st_list_deck = deck.deck(b_sup)
     cs_collection = set()
@@ -33,8 +33,8 @@ def optimize():
     for t_side in t_range:
         for t_bottom in t_range:
             base_cs = ics.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
-            for num_side_stiffeners in range(1):
-                for num_btm_stiffeners in range(2):
+            for num_side_stiffeners in range(2):
+                for num_btm_stiffeners in range(4):
                     strong_enough = False
                     #no side stiffeners cs
                     if num_side_stiffeners == 0:
@@ -48,11 +48,11 @@ def optimize():
                             test_cs = copy.deepcopy(base_cs)
                             end_cs = buckling_proof.buckling_proof(test_cs)
                             print(end_cs)
-                            go.print_cs_red(end_cs)
+                            #go.print_cs_red(end_cs)
                             prop = stiffeners_proposition.stiffeners_proposition()
                             proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
                             if proven:
-                                print(str(cost_estimate.cost(end_cs)) + " CHF")
+                                print(str(optimization_value.cost(end_cs)) + " CHF")
                                 print("PASS!")
                                 cs_collection.add(end_cs)
                             else:
@@ -79,13 +79,13 @@ def optimize():
                                     test_cs = merge.merge(base_cs_copy, st_list)
                                     end_cs = buckling_proof.buckling_proof(test_cs)
                                     print(end_cs)
-                                    go.print_cs_red(end_cs)
+                                    #go.print_cs_red(end_cs)
                                     prop = stiffeners_proposition.stiffeners_proposition()
                                     proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
                                     if proven:
                                         strong_enough = True
                                         cs_collection.add(end_cs)
-                                        print(str(cost_estimate.cost(end_cs)) + " CHF")
+                                        print(str(optimization_value.cost(end_cs)) + " CHF")
                                         print("PASS!")
                                     else:
                                         print("FAIl!")
@@ -127,7 +127,7 @@ def optimize():
                                         if proven:
                                             strong_enough = True
                                             cs_collection.add(end_cs)
-                                            print(str(cost_estimate.cost(end_cs)) + " CHF")
+                                            print(str(optimization_value.cost(end_cs)) + " CHF")
                                             print("PASS!")
                                         else:
                                             print("FAIL!")
@@ -174,15 +174,16 @@ def optimize():
                                             if proven:
                                                 strong_enough = True
                                                 cs_collection.add(end_cs)
-                                                print(str(cost_estimate.cost(end_cs)) + " CHF")
+                                                print(str(optimization_value.cost(end_cs)) + " CHF")
                                                 print("PASS!")
                                             else:
                                                 print("FAIL!")
     print("# of passed CS")
     print(len(cs_collection))
     for cs in cs_collection:
-        go.print_cs_red(cs)
-
+        #go.print_cs_red(cs)
+        pass
+    return
 
 def get_locations_side(num_side_stiffeners, sign):
     if num_side_stiffeners == 0:

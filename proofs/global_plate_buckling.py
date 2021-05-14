@@ -173,6 +173,11 @@ def global_plate_buckling(total_cs, plate_glob):
             t_st = stiffener.get_line(st_pl_position = 3).t
             diag = stiffener.get_line(st_pl_position = 3).get_length_tot()
             diff = (b_sup_st-b_inf_st)/2
+            print("Error here:")
+            print("diag")
+            print(diag)
+            print("diff")
+            print(diff)
             h_st = math.sqrt(diag**2 - diff**2)
             A_0 = 0.5*(b_sup_st + b_inf_st)*h_st
             integral = b_sup_st / t + (2*diag + b_inf_st) / t_st
@@ -268,6 +273,9 @@ def global_plate_buckling(total_cs, plate_glob):
             if distance > comp[0] and distance < comp[1]:
                 compression_stiffener = True
 
+            #just as a test
+            #distance = h - distance
+
             theta = 1.0
             assert gamma <= 1000 and gamma >= 0, "gamma too high or low"
             assert theta <= 1000 and theta >= 0, "theta too high or low"
@@ -296,14 +304,15 @@ def global_plate_buckling(total_cs, plate_glob):
             return 0, 1
         else:
             string = "\nstresses too low or too high"
-            printing.printing(string)
-
+            printing.printing(string, terminal = True)
             return 1, 10**9
         sigma_max = max(sigma_a, sigma_b)
         sigma_cr_p = sigma_max * phi_cr_p
 
         string = "\n         sigma_cr = " + str(sigma_cr_p)
         printing.printing(string, terminal = True)
+
+        go.print_cs(plate_glob)
 
         #calculating plate slenderness
         beta_a_c = get_beta_ac(plate_glob)
