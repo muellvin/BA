@@ -119,10 +119,6 @@ do_deck_as_prop = False
 
 
 
-do_deck_as_prop = True
-
-
-
 def cs_defaults_tostring():
     line1 = "\ndefaults for crosssection geometry:"
     line2 = "\nb_sup ="+str(cs_b_sup)

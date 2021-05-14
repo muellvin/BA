@@ -27,23 +27,23 @@
     <table>
       <tr>
         <td><label for="b_sup">b<sub>sup</sub> [mm]</label></td>
-        <td><input type="number" name="b_sup" value = {{ content["b_sup"] }} form="step_1"></td>
+        <td><input type="number" name="b_sup" value = {{ content["b_sup"] }} form="step_1" required></td>
       </tr>
       <tr>
         <td><label for="b_inf">b<sub>inf</sub> [mm]</label></td>
-        <td><input type="number" name="b_inf" value = {{ content["b_inf"] }} form="step_1"></td>
+        <td><input type="number" name="b_inf" value = {{ content["b_inf"] }} form="step_1"required></td>
       </tr>
       <tr>
         <td><label for="h">h [mm]</label></td>
-        <td><input type="number" name="h" value =  {{ content["h"] }}  form="step_1"></td>
+        <td><input type="number" name="h" value =  {{ content["h"] }}  form="step_1" required></td>
       </tr>
       <tr>
         <td><label for="t_side">t<sub>side</sub> [mm]</label></td>
-        <td><input type="number" name="t_side" value =  {{ content["t_side"] }}  form="step_1"></td>
+        <td><input type="number" name="t_side" value =  {{ content["t_side"] }}  form="step_1" required></td>
       </tr>
       <tr>
         <td><label for="t_btm">t<sub>bottom</sub> [mm]</label></td>
-        <td><input type="number" name="t_btm" value =  {{ content["t_btm"] }}  form="step_1"></td>
+        <td><input type="number" name="t_btm" value =  {{ content["t_btm"] }}  form="step_1" required></td>
       </tr>
     </table>
     <br>
@@ -122,9 +122,15 @@
           var td2 = document.createElement("td")
           var box = document.createElement("input");
           box.setAttribute("type", "number");
+          if (normal[j] == "location") {
+            box.setAttribute("min", "0")
+            box.setAttribute("step", "0.01")
+            box.setAttribute("max", "1")
+          }
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i)
           box.setAttribute("form", "step_1")
+          box.setAttribute("required", "")
           box.setAttribute("value", {{ content[input_data[j]~(i+1)] }})
           var text = document.createTextNode(normal[j]);
           var sub = document.createElement("sub")
@@ -177,9 +183,15 @@
           var td2 = document.createElement("td")
           var box = document.createElement("input");
           box.setAttribute("type", "number");
+          if (normal[j] == "location") {
+            box.setAttribute("min", "0");
+            box.setAttribute("step", "0.01");
+            box.setAttribute("max", "1");
+          }
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i)
           box.setAttribute("form", "step_1")
+          box.setAttribute("required", "")
           var text = document.createTextNode(normal[j]);
           var sub = document.createElement("sub")
           var sub_text = document.createTextNode(subscripts[j])
@@ -316,9 +328,15 @@
           var td2 = document.createElement("td")
           var box = document.createElement("input");
           box.setAttribute("type", "number");
+          if (normal[j] == "location") {
+            box.setAttribute("min", "0")
+            box.setAttribute("step", "0.01")
+            box.setAttribute("max", "1")
+          }
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i)
           box.setAttribute("form", "step_1")
+          box.setAttribute("required", "")
           box.setAttribute("value", {{ content[input_data[j]~(i+31)] }})
           {% if first == true and i == 0 and j == 0%}
             box.setAttribute("disabled", "disabled")
@@ -387,9 +405,15 @@
           var td2 = document.createElement("td");
           var box = document.createElement("input");
           box.setAttribute("type", "number");
+          if (normal[j] == "location") {
+            box.setAttribute("min", "0")
+            box.setAttribute("step", "0.01")
+            box.setAttribute("max", "1")
+          }
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i);
           box.setAttribute("form", "step_1");
+          box.setAttribute("required", "")
           if (first_field == true) {
             box.setAttribute("disabled", "disabled")
             box.setAttribute("value", "0")

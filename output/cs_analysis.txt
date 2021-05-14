@@ -5,17 +5,168 @@ CONSTANTS
     f_y: 235
     G: 81000
     gamma_M1: 1.05
-INPUT DATA
-    b_sup: 4000
-    t_deck: 5
-    b_inf: 3000
-    t_bottom: 5
-    h: 1500
-    t_side: 5
-    a: 10000
-    L_e: 15000
-    bending type: sagging bending
-    cs position: neither
+
+------------------------ reduction_global_buckling for side 2 ---------------------------------
+
+Values for side 2
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 3 ---------------------------------
+
+Values for side 3
+     all_tension: True
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 4 ---------------------------------
+
+Values for side 4
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 2 ---------------------------------
+
+Values for side 2
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 3 ---------------------------------
+
+Values for side 3
+     all_tension: True
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 4 ---------------------------------
+
+Values for side 4
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 2 ---------------------------------
+
+Values for side 2
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 3 ---------------------------------
+
+Values for side 3
+     all_tension: True
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 4 ---------------------------------
+
+Values for side 4
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 2 ---------------------------------
+
+Values for side 2
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 3 ---------------------------------
+
+Values for side 3
+     all_tension: True
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 4 ---------------------------------
+
+Values for side 4
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 2 ---------------------------------
+
+Values for side 2
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 3 ---------------------------------
+
+Values for side 3
+     all_tension: True
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 4 ---------------------------------
+
+Values for side 4
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 2 ---------------------------------
+
+Values for side 2
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 3 ---------------------------------
+
+Values for side 3
+     all_tension: True
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 4 ---------------------------------
+
+Values for side 4
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 2 ---------------------------------
+
+Values for side 2
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 3 ---------------------------------
+
+Values for side 3
+     all_tension: True
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 4 ---------------------------------
+
+Values for side 4
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 2 ---------------------------------
+
+Values for side 2
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 3 ---------------------------------
+
+Values for side 3
+     all_tension: True
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 4 ---------------------------------
+
+Values for side 4
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 2 ---------------------------------
+
+Values for side 2
+     all_tension: False
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 3 ---------------------------------
+
+Values for side 3
+     all_tension: True
+     rho_c = 1
+
+------------------------ reduction_global_buckling for side 4 ---------------------------------
+
+Values for side 4
+     all_tension: False
+     rho_c = 1
 
 Buckling Proof according to EC 1993 Part 1-5
 
