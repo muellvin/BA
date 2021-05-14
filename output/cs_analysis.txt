@@ -5,577 +5,128 @@ CONSTANTS
     f_y: 235
     G: 81000
     gamma_M1: 1.05
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
------------------------------- column_buckling for side 2 ------------------------------
-there are 1 stiffeners on side 2
-''''''''''''''''''''''''''Column number 7'''''''''''''''''''''''''
-A_sl=1803000.24, A_sl_eff=1538512.56, I_sl=18600942.43
-sigma_cr_c=677128.45
-e1=65.33, e2=0.11
-All tension =False
-beta_A_c =0.8533069082715707
-lambda_c_bar =0.017208817585643826
-Phi_c =0.4686691789935122
-
------------------------------- plate_buckling for side 2 ------------------------------
-sigma_cr = 0.0
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
-Values for side 2
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
-Values for side 4
-     all_tension: False
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
------------------------------- column_buckling for side 2 ------------------------------
-there are 1 stiffeners on side 2
-''''''''''''''''''''''''''Column number 7'''''''''''''''''''''''''
-A_sl=1924309.28, A_sl_eff=1773911.7, I_sl=19611851.08
-sigma_cr_c=1574145.99
-e1=65.34, e2=0.11
-All tension =False
-beta_A_c =0.921843343816687
-lambda_c_bar =0.011731133824496148
-Phi_c =0.46764917093541264
-
------------------------------- plate_buckling for side 2 ------------------------------
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
------------------------------- column_buckling for side 2 ------------------------------
-there are 1 stiffeners on side 2
-''''''''''''''''''''''''''Column number 7'''''''''''''''''''''''''
-A_sl=1819450.86, A_sl_eff=1719179.11, I_sl=16945538.22
-sigma_cr_c=1360577.08
-e1=65.39, e2=0.05
-All tension =False
-beta_A_c =0.9448889992297669
-lambda_c_bar =0.012775054224507375
-Phi_c =0.4678601680681552
-
------------------------------- plate_buckling for side 2 ------------------------------
-no compression stiffener
-
-Values for side 2
-     all_tension: False
-     rho_c = 1.0
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
------------------------------- column_buckling for side 4 ------------------------------
-there are 1 stiffeners on side 4
-''''''''''''''''''''''''''Column number 8'''''''''''''''''''''''''
-A_sl=1819450.86, A_sl_eff=1719179.11, I_sl=16945538.22
-sigma_cr_c=5.51
-e1=65.39, e2=0.05
-All tension =False
-beta_A_c =0.9448889992297672
-lambda_c_bar =6.344332541645565
-Phi_c =21.68271797868935
-
------------------------------- plate_buckling for side 4 ------------------------------
-sigma_cr = 1240.9076100652717
-Lambda: 0.5096104990452578
-    Rho_Global: 1.0
-
-Values for side 4
-     all_tension: False
-     rho_c = 1.0
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
------------------------------- column_buckling for side 2 ------------------------------
-there are 1 stiffeners on side 2
-''''''''''''''''''''''''''Column number 7'''''''''''''''''''''''''
-A_sl=1837710.01, A_sl_eff=1764326.17, I_sl=17097697.78
-sigma_cr_c=2296129.28
-e1=65.39, e2=0.05
-All tension =False
-beta_A_c =0.9600677807053722
-lambda_c_bar =0.009912580095063059
-Phi_c =0.46733527689256665
-
------------------------------- plate_buckling for side 2 ------------------------------
-no compression stiffener
-
-Values for side 2
-     all_tension: False
-     rho_c = 1.0
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
------------------------------- column_buckling for side 4 ------------------------------
-there are 1 stiffeners on side 4
-''''''''''''''''''''''''''Column number 8'''''''''''''''''''''''''
-A_sl=1837710.01, A_sl_eff=1764326.17, I_sl=17097697.78
-sigma_cr_c=6.56
-e1=65.39, e2=0.05
-All tension =False
-beta_A_c =0.9600677807053722
-lambda_c_bar =5.860271326958159
-Phi_c =18.64551698389938
-
------------------------------- plate_buckling for side 4 ------------------------------
-stresses too low or too high
-
-Values for side 4
-     all_tension: False
-     rho_c = 1.0
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
------------------------------- column_buckling for side 2 ------------------------------
-there are 1 stiffeners on side 2
-''''''''''''''''''''''''''Column number 7'''''''''''''''''''''''''
-A_sl=2030670.87, A_sl_eff=1867450.4, I_sl=21161936.43
-sigma_cr_c=2626533.25
-e1=74.47, e2=0.14
-All tension =False
-beta_A_c =0.9196223919061884
-lambda_c_bar =0.00907083459256402
-Phi_c =0.46721074694893616
-
------------------------------- plate_buckling for side 2 ------------------------------
-no compression stiffener
-
-Values for side 2
-     all_tension: False
-     rho_c = 1.0
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
------------------------------- column_buckling for side 4 ------------------------------
-there are 1 stiffeners on side 4
-''''''''''''''''''''''''''Column number 8'''''''''''''''''''''''''
-A_sl=2030670.87, A_sl_eff=1867450.4, I_sl=21161936.43
-sigma_cr_c=7.16
-e1=74.47, e2=0.14
-All tension =False
-beta_A_c =0.9196223919061884
-lambda_c_bar =5.491705415621711
-Phi_c =16.489326343411758
-
------------------------------- plate_buckling for side 4 ------------------------------
-sigma_cr = 1172.8577105288437
-Lambda: 0.5191804881735818
-    Rho_Global: 1.0
-
-Values for side 4
-     all_tension: False
-     rho_c = 1.0
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
------------------------------- column_buckling for side 2 ------------------------------
-there are 1 stiffeners on side 2
-''''''''''''''''''''''''''Column number 7'''''''''''''''''''''''''
-A_sl=1965574.93, A_sl_eff=1836803.38, I_sl=19955731.51
-sigma_cr_c=2679471.58
-e1=65.34, e2=0.1
-All tension =False
-beta_A_c =0.934486573297168
-lambda_c_bar =0.009053070168515994
-Phi_c =0.46716100048175246
-
------------------------------- plate_buckling for side 2 ------------------------------
-no compression stiffener
-
-Values for side 2
-     all_tension: False
-     rho_c = 1.0
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
------------------------------- column_buckling for side 4 ------------------------------
-there are 1 stiffeners on side 4
-''''''''''''''''''''''''''Column number 8'''''''''''''''''''''''''
-A_sl=1965574.93, A_sl_eff=1836803.38, I_sl=19955731.51
-sigma_cr_c=6.95
-e1=65.34, e2=0.1
-All tension =False
-beta_A_c =0.934486573297168
-lambda_c_bar =5.619993855052072
-Phi_c =17.225457673334407
-
------------------------------- plate_buckling for side 4 ------------------------------
-no compression stiffener
-
-Values for side 4
-     all_tension: False
-     rho_c = 0.029843321972249565
-
------------------------- reduction_global_buckling for side 2 ---------------------------------
-
------------------------------- column_buckling for side 2 ------------------------------
-there are 1 stiffeners on side 2
-''''''''''''''''''''''''''Column number 7'''''''''''''''''''''''''
-A_sl=1565440.83, A_sl_eff=1565440.83, I_sl=16621280.68
-sigma_cr_c=2225874.37
-e1=65.31, e2=0.13
-All tension =False
-beta_A_c =1.0000000000000004
-lambda_c_bar =0.010275042020225594
-Phi_c =0.46737361924048226
-
------------------------------- plate_buckling for side 2 ------------------------------
-no compression stiffener
-
-Values for side 2
-     all_tension: False
-     rho_c = 1.0
-
------------------------- reduction_global_buckling for side 3 ---------------------------------
-
-Values for side 3
-     all_tension: True
-     rho_c = 1
-
------------------------- reduction_global_buckling for side 4 ---------------------------------
-
------------------------------- column_buckling for side 4 ------------------------------
-there are 1 stiffeners on side 4
+INPUT DATA
+    b_sup: 4000
+    t_deck: 5
+    b_inf: 3000
+    t_bottom: 5
+    h: 1500
+    t_side: 5
+    a: 10000
+    L_e: 15000
+    bending type: sagging bending
+    cs position: neither
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      Beta: 0.6161387625504372
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      Beta: 0.9398496240601504
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+         sigma_cr = 541.5512650144816
+         Lambda: 0.5547501678920662
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=6844.54, A_sl_eff=5842.03, I_sl=3126115.66
+            sigma_cr_c=94662.87
+            e1=41.47, e2=29.58
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.853532440877408
+            lambda_c_bar =0.046031390500844725
+            Phi_c =0.47131488386605425
+            Chi_c =1.063403822546754
+         Critical buckling values
+            Chi_c: 1.063403822546754
+            sigma_cr_c: 94662.87851294536
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.063403822546754
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 4
+      4.5.2 Plate type behaviour
+         sigma_cr = 354.8829454449756
+         Lambda: 0.685290427098525
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=6844.54, A_sl_eff=5842.03, I_sl=3126115.66
+            sigma_cr_c=94662.87
+            e1=41.47, e2=29.58
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.8535324408774083
+            lambda_c_bar =0.04603139050084483
+            Phi_c =0.47131488386605425
+            Chi_c =1.063403822546754
+         Critical buckling values
+            Chi_c: 1.063403822546754
+            sigma_cr_c: 94662.87851294501
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.063403822546754
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 9487.522915434136
+      eta_3: 0.015907026504099895
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 18.262807017543867
+      eta_3: 0.12294182924697888
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.1431710197647985
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.13455922910225424
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 18.262807017543857
+      eta_3: 0.1229418292469789
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Results:
+   EI: 2793899Nm^2
+   interaction side 2: -1
+   interaction side 3: -1
+   interaction side 4: -1
+   cost: 2072CHF/m

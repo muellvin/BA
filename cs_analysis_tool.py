@@ -22,7 +22,7 @@ from optimizer import optimization_value
 if defaults.do_print_to_txt == True:
     file = open("output/cs_analysis.txt", "w+")
     file.close()
-
+defaults.do_deck_as_prop = True
 input_analysis_tool.set_defaults()
 printing.printing(data.constants_tostring(), terminal = True)
 

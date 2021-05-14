@@ -14,6 +14,7 @@ import deck
 import data
 from classes import merge
 from optimizer import cs_analysis_gui
+from optimizer import optimizer_nino
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -59,12 +60,25 @@ def optimize_input_2():
 
 @app.route('/results_optimize', methods = ['POST'])
 def resultpage_optimize():
+    #set defaults
+    cs_a = 10000
+    cs_L_e = 15000
+    cs_bending_type = "sagging bending"
+    cs_cs_position = "neither"
+    data.input_data.update({"a": cs_a})
+    data.input_data.update({"L_e": cs_L_e})
+    data.input_data.update({"bending type": cs_bending_type})
+    data.input_data.update({"cs position": cs_cs_position})
+    #read input 
+    val = form_values.values
     M_Ed = int(request.form['M_Ed'])
     V_Ed = int(request.form['V_Ed'])
     T_Ed = int(request.form['T_Ed'])
     data.input_data.update({"M_Ed":M_Ed, "V_Ed":V_Ed, "T_Ed":T_Ed})
     f_y = int(request.form['fy'])
     data.constants.update({"f_y":f_y})
+    data.input_data.update({"b_sup":val.get("b_sup"), "b_inf":val.get("b_inf"), "h":val.get("h"), "t_deck":14})
+    optimizer_nino.optimize()
     return render_template('resultpage_optimize.html')
 
 
