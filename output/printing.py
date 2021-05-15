@@ -2,8 +2,7 @@ import defaults
 from fpdf import FPDF
 
 
-
-def printing(string, terminal = False, paragraph = None, pn = 0, sn = 0, cn = 0):
+def printing(string, terminal = False):
     if terminal == True and defaults.do_print_to_txt == True:
         file = open("output\cs_analysis.txt", "a+")
         file.write(string)
@@ -11,16 +10,6 @@ def printing(string, terminal = False, paragraph = None, pn = 0, sn = 0, cn = 0)
     if terminal == True and defaults.do_print_to_terminal == True:
         print(string, end = "")
 
-    """
-        string is the text
-        paragraph is a string saying what it is
-        pn is the proof number
-        sn is the side number
-        cn is the column number
-    """
-
-    text = paragraph_class(string, paragraph, pn, sn, cn)
-    output_text.append(text)
 
 
 def txt_to_pdf(name):
@@ -49,22 +38,6 @@ def txt_to_pdf(name):
     pdf.image("output/cs_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
     # save the pdf with name .pdf
     pdf.output("output/"+str(name)+".pdf", "F")
-
-
-
-
-output_text = []
-#list of output objects paragraph class
-
-class paragraph_class():
-    def __init__(self, string, paragraph = None, pn = 0, sn = 0, cn = 0):
-        self.string = string
-        self.paragraph = paragraph
-        self.pn = pn
-        self.sn = sn
-        self.cn = cn
-
-
 
 
 
