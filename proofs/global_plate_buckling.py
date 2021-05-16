@@ -273,9 +273,6 @@ def global_plate_buckling(total_cs, plate_glob):
             if distance > comp[0] and distance < comp[1]:
                 compression_stiffener = True
 
-            #just as a test
-            #distance = h - distance
-
             theta = 1.0
             assert gamma <= 1000 and gamma >= 0, "gamma too high or low"
             assert theta <= 1000 and theta >= 0, "theta too high or low"
