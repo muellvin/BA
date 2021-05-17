@@ -14,7 +14,7 @@
   <a href="{{ url_for('optimize') }}">CS Optimization Tool</a>
 </div>
 
-<h1>CS Analysis Tool</h1>
+<h1>CS Optimization Tool</h1>
 <p>Please fill the following form.</p>
 
 
@@ -27,15 +27,15 @@
       </tr>
       <tr>
         <td><label for="M_Ed">M<sub>Ed</sub> [kNm]</label></td>
-        <td><input type="number" name="M_Ed" form = "opt_step_2" required></td>
+        <td><input type="number" name="M_Ed" value = 9000 form = "opt_step_2" required></td>
       </tr>
       <tr>
         <td><label for="V_Ed">V<sub>Ed</sub> [kN]</label></td>
-        <td><input type="number" name="V_Ed" form = "opt_step_2" required></td>
+        <td><input type="number" name="V_Ed" value = 500 form = "opt_step_2" required></td>
       </tr>
       <tr>
         <td><label for="T_Ed">T<sub>Ed</sub> [kNm]</label></td>
-        <td><input type="number" name="T_Ed" form = "opt_step_2" required></td>
+        <td><input type="number" name="T_Ed" value = 0 form = "opt_step_2" required></td>
       </tr>
       <tr>
         <td><p>Choose the steel grade.</p> </td>
@@ -48,6 +48,15 @@
       </tr>
       <tr>
         <td><input type="radio" name="fy" id="355" value="355" form = "opt_step_2"> S355 </input></td>
+      </tr>
+      <tr>
+        <td><p>Choose the optimization algorithm.</p></td>
+      </tr>
+      <tr>
+        <td><input type="radio" name ="opt" value="0" form = "opt_step_2"> Optimizer A </input> </td>
+      </tr>
+      <tr>
+        <td><input type="radio" name ="opt" value="1" form = "opt_step_2"> Optimizer B </input> </td>
       </tr>
       <tr>
         <td><input type="submit" name="Back" value="Back" form = "opt_step_2" formnovalidate></td>
