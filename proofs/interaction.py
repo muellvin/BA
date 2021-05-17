@@ -104,7 +104,7 @@ def get_m_rd_pl_eff(total_cs):
     total_area = cs.get_area_red()
     convergence = 0.05* total_area
     continue_iteration = True
-    area_top = 0
+    area_top = 10**12
     area_btm = 0
     start = True
     z_min = 0
@@ -113,7 +113,8 @@ def get_m_rd_pl_eff(total_cs):
     code = plate_code.plate_code(-1,-1,-1,-1,-1)
     counter = 0
 
-    while abs(area_top - area_btm)>convergence or start==True or continue_iteration == True:
+    while abs(area_top - area_btm)>convergence and continue_iteration == True:
+        counter += 1
         start = False
         top_part = crosssection.crosssection(0,0,0)
         bottom_part = crosssection.crosssection(0,0,0)

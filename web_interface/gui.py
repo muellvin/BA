@@ -69,16 +69,21 @@ def resultpage_optimize():
     data.input_data.update({"L_e": cs_L_e})
     data.input_data.update({"bending type": cs_bending_type})
     data.input_data.update({"cs position": cs_cs_position})
-    #read input 
+    #read input
     val = form_values.values
-    M_Ed = int(request.form['M_Ed'])
-    V_Ed = int(request.form['V_Ed'])
-    T_Ed = int(request.form['T_Ed'])
+    M_Ed = int(request.form['M_Ed'])*10**6
+    V_Ed = int(request.form['V_Ed'])*10**3
+    T_Ed = int(request.form['T_Ed'])*10**6
     data.input_data.update({"M_Ed":M_Ed, "V_Ed":V_Ed, "T_Ed":T_Ed})
     f_y = int(request.form['fy'])
     data.constants.update({"f_y":f_y})
     data.input_data.update({"b_sup":val.get("b_sup"), "b_inf":val.get("b_inf"), "h":val.get("h"), "t_deck":14})
-    optimizer_nino.optimize()
+    optimizer_num = int(request.form['opt'])
+    if optimizer_num == 0:
+        optimizer_nino.optimize()
+    else:
+        #put your optimizer here 
+        pass
     return render_template('resultpage_optimize.html')
 
 
@@ -191,9 +196,9 @@ def cs_analysis_input_2():
 
 @app.route('/results_analysis', methods = ['POST'])
 def resultpage_analysis():
-    M_Ed = int(request.form['M_Ed'])
-    V_Ed = int(request.form['V_Ed'])
-    T_Ed = int(request.form['T_Ed'])
+    M_Ed = int(request.form['M_Ed'])*10**6
+    V_Ed = int(request.form['V_Ed'])*10**3
+    T_Ed = int(request.form['T_Ed'])*10**6
     data.input_data.update({"M_Ed":M_Ed, "V_Ed":V_Ed, "T_Ed":T_Ed})
     f_y = int(request.form['fy'])
     data.constants.update({"f_y":f_y})
