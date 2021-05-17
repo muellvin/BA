@@ -152,5 +152,8 @@ Thumbs.db #thumbnail cache on Windows
 .EBP
 .EBR
 
+# Text files
+.txt
+
 
 # End of https://www.toptal.com/developers/gitignore/api/python
