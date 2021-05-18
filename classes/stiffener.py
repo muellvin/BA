@@ -23,7 +23,7 @@ def add_stiffener_set(initial_cs, propositions):
     if propositions.stiffeners == []:
         return initial_cs
 
-    while geometry_ok == False and iterations < 1:
+    while geometry_ok == False and iterations <= 1:
         iterations += 1
         stiffener_list = ss.substantiate(initial_cs, propositions)
         proposition, geometry_ok = check_geometry.check_geometry(initial_cs, stiffener_list, propositions)
@@ -31,6 +31,7 @@ def add_stiffener_set(initial_cs, propositions):
         #go.print_cs(cs)
 
     next_cs = merge.merge(copy.deepcopy(initial_cs), stiffener_list)
+    go.print_cs(next_cs)
     return next_cs
 
 
