@@ -92,7 +92,7 @@ def print_cs_red(crosssection):
     plt.axis('scaled')
     plt.show()
 
-def print_cs_to_pdf(crosssection, input = True):
+def print_cs_to_png(crosssection, input = True):
 
     figure = plt.figure()
 
