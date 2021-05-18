@@ -123,6 +123,6 @@ def print_cs_to_png(crosssection, name, input = True):
 
     plt.axis('scaled')
     if input:
-        figure.savefig("output/"+name+".png")
+        figure.savefig("output/"+name+"_in.png")
     else:
-        figure.savefig("output/"+name+".png")
+        figure.savefig("output/"+name+"_out.png")

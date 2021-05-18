@@ -1,7 +1,11 @@
 import defaults
 from fpdf import FPDF
+from output import geometry_output
+from optimizer import optimization_value
 import cs_collector
 import sys
+import os
+from proofs import buckling_proof
 sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
 
 
@@ -15,7 +19,7 @@ def printing(string, terminal = False):
 
 
 
-def txt_to_pdf(name, location = None):
+def txt_to_pdf(cs, name, location = None):
     # save FPDF() class into
     # a variable pdf
     pdf = PDF()
@@ -23,23 +27,39 @@ def txt_to_pdf(name, location = None):
     # Add a page
     pdf.add_page()
 
-    if os.path.isfile("output/"+name+"_in.png"):
-        pdf.image("output/"+name+"_in.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
+    name_in = name + "_in"
+    name_out = name+ "_out"
+    geometry_output.print_cs_to_png(cs, name, input = True)
+    geometry_output.print_cs_to_png(cs, name, input = False)
+
+
+
+    pdf.image("output/"+name+"_in.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
     # set style and size of font
     # that you want in the pdf
-    pdf.set_font("Arial", size = 11)
+    pdf.set_font("Arial", size = 10)
+    pdf.set_fill_color(255, 0, 10)
 
     # open the text file in read mode
     txt_file = open("output/cs_analysis.txt", "r")
 
     # insert the texts in pdf
     for line in txt_file:
+        number_of_dots = 0
+        for char in line:
+            if char == ".":
+                number_of_dots += 1
+
         if line[0]!= " " and line != "\n":
-            pdf.cell(200, 10, txt = line, border = 1, ln = 1, align = 'C')
+            pdf.set_font("Arial", size = 12)
+            pdf.set_text_color(0, 0, 0)
+            pdf.cell(180, 10, txt = line, border = 1, ln = 1, fill = True, align = 'C')
+        elif number_of_dots == 0 and "Side" in line:
+            pdf.cell(180, 10, txt = line, border = 1, ln = 1, fill = False, align = 'L')
         else:
             pdf.cell(200, 10, txt = line, border = 0, ln = 1, align = 'L')
 
-    pdf.image("output/"+name+"_in.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
+    pdf.image("output/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
 
     if location != None:
         pdf.output(location+str(name)+".pdf", "F")
@@ -50,13 +70,13 @@ def txt_to_pdf(name, location = None):
 
 
 def print_best_proof():
+    defaults.do_print_to_txt = False
     i = 1
-    for cs in cs_cllector.get_best():
+    for cs in cs_collector.get_best():
+        print("\nI am printing one")
         cs.reset()
         name = "cs_"+str(i)
-        name_in = name + "_in"
-        name_out = name+ "_out"
-        geometry_output.print_cs_to_pdf(cs, name_in, input = True)
+
 
         cs = buckling_proof.buckling_proof(cs)
 
@@ -72,14 +92,14 @@ def print_best_proof():
         line5 = "\n   interaction side 4: "+str(interaction_4)
         line6 = "\n   cost: "+str(cost)+"CHF/m"
         string = line1 + line2 + line3 + line4 + line5 + line6
-        printing.printing(string, terminal = True)
+        printing(string, terminal = True)
 
-        geometry_output.print_cs_to_png(cs, name_out, input = False)
-        printing.txt_to_pdf(name, location = "best_crosssections/")
+        txt_to_pdf(cs, name, location = "best_crosssections/")
 
 def print_best():
+    defaults.do_print_to_txt = False
     i = 1
-    for cs in cs_cllector.get_best():
+    for cs in cs_collector.get_best():
         name = "cs_"+str(i)
         name_in = name + "_in"
         name_out = name+ "_out"
@@ -98,7 +118,7 @@ def print_best():
         string = line1 + line2 + line3 + line4 + line5 + line6
         cs.print_cs_as_list()
 
-    printing.txt_to_pdf(name, location = "best_crosssections/")
+    txt_to_pdf(cs, name, location = "best_crosssections/")
 
 
 
@@ -122,4 +142,4 @@ class PDF(FPDF):
         # Arial italic 8
         self.set_font('Arial', 'I', 8)
         # Page number
-        self.cell(0, 10, 'Page ' + str(self.page_no()) + '\{nb}', 0, 0, 'C')
+        self.cell(0, 10, 'Page ' + str(self.page_no()), 0, 0, 'C')
