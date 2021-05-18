@@ -285,7 +285,7 @@ def global_plate_buckling(total_cs, plate_glob):
             h = 100
         #finding critical buckling load
         phi_cr_p = 0
-        if compression_stiffener == True and abs(sigma_a) > 0.1 and abs(sigma_a)<= 1000 and abs(sigma_b) > 0.1 and abs(sigma_b)<= 1000 and 3<=t and 100<b and 100<h:
+        if compression_stiffener == True and abs(sigma_a) >= 0.1 and abs(sigma_a)<= 1000 and abs(sigma_b) >= 0.1 and abs(sigma_b)<= 1000 and 3<=t and 100<=b and 100<=h:
             phi_cr_p = ebplate.ebplate(b,h,t,sigma_a, sigma_b, stiffeners_ebp)
 
         elif compression_stiffener == False:
