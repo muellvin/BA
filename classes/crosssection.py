@@ -5,6 +5,7 @@ import copy
 from classes import plate_code
 from classes import point
 from output import geometry_output
+from output import printing
 
 #crosssection calculation
 class crosssection():
@@ -29,6 +30,19 @@ class crosssection():
         for line in self.lines:
             string += str(line)
         return string
+
+    def print_cs_as_list(self):
+        string = "\n\n      b_sup: "+str(self.b_sup)+"   b_inf: "+str(self.b_inf)+"   h: "+str(self.h)
+        t_deck = self.get_line(pl_position =1, pl_type = 0).t
+        t_sides = self.get_line(pl_position = 2, pl_type = 0).t
+        t_bottom = self.get_line(pl_position = 3, pl_type = 0).t
+        string += "\n      t_deck: "+str(t_deck)+"   t_sides: "+str(t_sides)+"   t_bottom: "+str(t_bottom)
+        for st in self.st_props:
+            line1 = "\nStiffener Number "+str(st.st_number)+" on side "+str(st.pl_position)+" with location: "+str(st.location)
+            line2 = "\n      b_sup: "+str(st.b_sup)+"   b_inf: "+str(st.b_inf)+"   h: "+str(st.h)+"   t: "+str(st.t)
+            string += line1 + line2
+        printing.printing(string, terminal = True)
+
 
     def reset(self):
         self.eta_1 = -2
