@@ -68,6 +68,8 @@ def txt_to_pdf(cs, name, location = None):
 
 
 def print_best_proof():
+    file = open("output/cs_analysis.txt", "w+")
+    file.close()
     defaults.do_print_to_txt = True
     i = 1
     for cs in cs_collector.get_best():
@@ -108,25 +110,21 @@ def print_best():
 
         geometry_output.print_cs_to_png(cs, name, input = False, location = "best_crosssections/")
 
-        ei = round(cs.get_ei() / 1000 / 1000 / 1000)
-        interaction_2 = cs.interaction_2
-        interaction_3 = cs.interaction_3
-        interaction_4 = cs.interaction_4
-        cost = optimization_value.cost(cs)
-        line0 = "\n"+name
-        line1 = "\n\nResults:"
-        line2 = "\n   EI: "+str(ei)+"Nm^2"
-        line3 = "\n   interaction side 2: "+str(interaction_2)
-        line4 = "\n   interaction side 3: "+str(interaction_3)
-        line5 = "\n   interaction side 4: "+str(interaction_4)
-        line6 = "\n   cost: "+str(cost)+"CHF/m"
-        string = line0+ line1 + line2 + line3 + line4 + line5 + line6
+
+        line1 = "\n"+name
+        line2 = cs.print_cs_as_list()
+        line3 = "\n\nResults:"
+        line4 = "\n   EI: "+str(round(cs.get_ei() / 1000 / 1000 / 1000))+"Nm^2"
+        line5 = "\n   interaction side 2: "+str(cs.interaction_2)
+        line6 = "\n   interaction side 3: "+str(cs.interaction_3)
+        line7 = "\n   interaction side 4: "+str(cs.interaction_4)
+        line8 = "\n   cost: "+str(optimization_value.cost(cs))+"CHF/m"
+        string = line1 + line2 + line3 + line4 + line5 + line6 + line7 + line8
         file = open("best_crosssections/all.txt", "a+")
         file.write(string)
         file.close()
         i += 1
 
-        cs.print_cs_as_list()
     pdf = PDF()
     pdf.add_page()
     pdf.set_font("Arial", size = 10)

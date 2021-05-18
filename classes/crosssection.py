@@ -36,12 +36,12 @@ class crosssection():
         t_deck = self.get_line(pl_position =1, pl_type = 0).t
         t_sides = self.get_line(pl_position = 2, pl_type = 0).t
         t_bottom = self.get_line(pl_position = 3, pl_type = 0).t
-        string += "\n      t_deck: "+str(t_deck)+"   t_sides: "+str(t_sides)+"   t_bottom: "+str(t_bottom)
+        string += "\n      t_deck: "+str(t_deck)+"   t_sides: "+str(t_sides)+"   t_bottom: "+str(t_bottom)+"\n"
         for st in self.st_props.stiffeners:
-            line1 = "\nStiffener Number "+str(st.st_number)+" on side "+str(st.pl_position)+" with location: "+str(st.location)
-            line2 = "\n      b_sup: "+str(st.b_sup)+"   b_inf: "+str(st.b_inf)+"   h: "+str(st.h)+"   t: "+str(st.t)
+            line1 = "\n Stiffener Number "+str(round(10*st.st_number)/10)+" on side "+str(round(10*st.pl_position)/10)+" with location: "+str(round(10*st.location)/10)
+            line2 = "\n      b_sup: "+str(round(10*st.b_sup)/10)+"   b_inf: "+str(round(10*st.b_inf)/10)+"   h: "+str(round(10*st.h)/10)+"   t: "+str(round(10*st.t)/10)
             string += line1 + line2
-        printing.printing(string, terminal = True)
+        return string
 
 
     def reset(self):
