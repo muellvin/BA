@@ -1,7 +1,7 @@
 	EBPlate - v2.01 
-Société       # 
+SociÃ©tÃ©       # 
 Affaire       # 
-Référence     # 
+RÃ©fÃ©rence     # 
 Utilisateur   # 
 Commentaire   # 
 #PLATE 
@@ -16,10 +16,17 @@ Commentaire   #
       Bord 3 0 
       Bord 4 0 
 #STIFFENING 
-   Orthotropic Plate =  0 
+   Orthotropic Plate =  1 
+   Coefficients d'orthotropie : 
+      Direction X : Beta =  0.000 
+                     Eta =  -1.000 
+        Smearing : No 
+      Direction Y : Beta =  0.000 
+                     Eta =  0.000 
+        Smearing : No 
    Referentiel 2 
    Nombre de raidisseurs  1 
-   - Raidisseur n° 1 Active=1 
+   - Raidisseur nÂ° 1 Active=1 
       Orientation = 0 
       Position    = 31.622776601683785 
       Gamma       = 0 
@@ -34,10 +41,10 @@ Commentaire   #
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
   Imposed values : No 
-   Longitudinal Stress Top Left                0.000 MPa 
-   Longitudinal Stress Bottom Left             0.000 MPa 
-   Longitudinal Stress Top Right               0.000 MPa 
-   Longitudinal Stress Bottom Right            0.000 MPa 
+   Longitudinal Stress Top Left                0.1 MPa 
+   Longitudinal Stress Bottom Left             0.1 MPa 
+   Longitudinal Stress Top Right               0.1 MPa 
+   Longitudinal Stress Bottom Right            0.1 MPa 
  Transverse stresses : User's data No 
  Analytical Transverse stresses 
   Imposed values : No 
