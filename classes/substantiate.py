@@ -27,9 +27,6 @@ def substantiate(crosssection, propositions):
         if stiffener.pl_position == 1:
             assert stiffener.deck_st == True, "stiffener at side 1 without beeing a deck stiffener from file deck"
             b_sup, b_inf, h, t = stiffener.b_sup, stiffener.b_inf, stiffener.h, stiffener.t
-            #trackplate should not be called within the for loop
-            #I_min = min_inertial_mom()
-            #b_sup, b_inf, h, t = trackplate(I_min)
             side = 1
             angle = 0
         elif stiffener.pl_position == 2:
@@ -94,7 +91,8 @@ def find_dimensions(stiffener):
     #set new default values, if corrections need to be made
     if stiffener.b_sup_corr == True:
         b_sup_max_geo = stiffener.b_sup
-        assert b_sup_max_geo > b_sup_minimal, "Error, nothing could be found"
+        if b_sup_minimal > b_sup_max_geo:
+            b_sup_max_geo = b_sup_minimal
 
     if stiffener.h_corr == True:
         h_max_geo = stiffener.h
@@ -138,7 +136,7 @@ def find_dimensions(stiffener):
 
     else:
         assert b_sup_max_geo >= b_sup_minimal
-        for b_sup in range(b_sup_minimal, b_sup_max_geo, b_sup_step):
+        for b_sup in range(b_sup_minimal, 10*math.floor(b_sup_max_geo/10), b_sup_step):
             h_min = h_minimal
             h_max = 10*math.floor(min(h_max_geo, math.sin(max_angle)*b_sup/2)/10)
             if h_max > h_min:

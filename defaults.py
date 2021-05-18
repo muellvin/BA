@@ -65,7 +65,7 @@ mindis_top_corner = 100
 mindis_side_top_corner = 100
 mindis_side_bottom_corner = 100
 mindis_bottom_corner = 100
-mindis_between = 30
+mindis_between = 150
 mindis_across_top = 500
 mindis_across_bottom = 100
 cutoffangle = math.pi/3
@@ -115,7 +115,7 @@ do_print_to_pdf = True
 do_print_to_txt = True
 do_print_to_terminal = True
 
-do_deck_as_prop = False
+do_deck_as_prop = True
 
 
 

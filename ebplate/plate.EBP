@@ -1,13 +1,13 @@
 	EBPlate - v2.01 
-Sociï¿½tï¿½       # 
+Société       # 
 Affaire       # 
-Rï¿½fï¿½rence     # 
+Référence     # 
 Utilisateur   # 
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
-   Height          400.0 cm 
-   Thickness         1.4 cm 
+   Height          158.11388300841895 cm 
+   Thickness         1.0 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
    Boundary Conditions 
@@ -18,83 +18,17 @@ Commentaire   #
 #STIFFENING 
    Orthotropic Plate =  0 
    Referentiel 2 
-   Nombre de raidisseurs  7 
-   - Raidisseur nï¿½ 1 Active=1 
+   Nombre de raidisseurs  1 
+   - Raidisseur n° 1 Active=1 
       Orientation = 0 
-      Position    = 40.0 
+      Position    = 31.622776601683785 
       Gamma       = 0 
       Teta        = 0 
       Delta       = 0 
       Type        = 3 
-      Dimension 1 = 19.500000000000004 
-      Dimension 2 = 26.666666666666675 
-      Dimension 3 = 4.150006168271261 
-      Dimension 4 = 1.3 
-   - Raidisseur nï¿½ 2 Active=1 
-      Orientation = 0 
-      Position    = 93.33333333333334 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 19.499999999999996 
-      Dimension 2 = 26.666666666666664 
-      Dimension 3 = 4.150006168271261 
-      Dimension 4 = 1.3 
-   - Raidisseur nï¿½ 3 Active=1 
-      Orientation = 0 
-      Position    = 146.66666666666669 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 19.500000000000004 
-      Dimension 2 = 26.666666666666664 
-      Dimension 3 = 4.15000616827125 
-      Dimension 4 = 1.3 
-   - Raidisseur nï¿½ 4 Active=1 
-      Orientation = 0 
-      Position    = 200.00000000000003 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 19.500000000000004 
-      Dimension 2 = 26.666666666666668 
-      Dimension 3 = 4.150006168271256 
-      Dimension 4 = 1.3 
-   - Raidisseur nï¿½ 5 Active=1 
-      Orientation = 0 
-      Position    = 253.33333333333334 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 19.5 
-      Dimension 2 = 26.666666666666668 
-      Dimension 3 = 4.15000616827125 
-      Dimension 4 = 1.3 
-   - Raidisseur nï¿½ 6 Active=1 
-      Orientation = 0 
-      Position    = 306.6666666666667 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 19.500000000000004 
-      Dimension 2 = 26.666666666666675 
-      Dimension 3 = 4.150006168271261 
-      Dimension 4 = 1.3 
-   - Raidisseur nï¿½ 7 Active=1 
-      Orientation = 0 
-      Position    = 360.00000000000006 
-      Gamma       = 0 
-      Teta        = 0 
-      Delta       = 0 
-      Type        = 3 
-      Dimension 1 = 19.500000000000004 
-      Dimension 2 = 26.666666666666675 
-      Dimension 3 = 4.150006168271261 
+      Dimension 1 = 18.099999999999994 
+      Dimension 2 = 40.000000000000014 
+      Dimension 3 = 21.00000000000001 
       Dimension 4 = 1.3 
 #STRESSES 
  Longitudinal stresses : User's data No 
@@ -121,7 +55,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 3.4894644389278366 MPa 
+   Shear stress                                 4.285714285714285 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000
