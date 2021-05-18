@@ -90,8 +90,8 @@ def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
     file.write("   Effective width parameter :  10.000")
     file.close()
     #run ebplate calculation from your own directory
-    os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Nino\Google Drive\Studium\FS 2021\Bachelorarbeit\BA\ebplate\plate.EBP')
-    #os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Vinzenz Müller\Dropbox\ETH\6. Semester\BA\ebplate\plate.EBP')
+    #os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Nino\Google Drive\Studium\FS 2021\Bachelorarbeit\BA\ebplate\plate.EBP')
+    os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Vinzenz Müller\Dropbox\ETH\6. Semester\BA\ebplate\plate.EBP')
 
     #get phi_cr from the ebplate.EBR
     result_file = open('ebplate\plate.EBR', 'r', encoding = 'cp1252')
@@ -173,8 +173,8 @@ def ebplate_shear(b, h, t, tau, stiffeners_ebp):
         file.write("   Effective width parameter :  10.000")
         file.close()
         #run ebplate calculation from your own directory
-        os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Nino\Google Drive\Studium\FS 2021\Bachelorarbeit\BA\ebplate\plate.EBP')
-        #os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Vinzenz Müller\Dropbox\ETH\6. Semester\BA\ebplate\plate.EBP')
+        #os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Nino\Google Drive\Studium\FS 2021\Bachelorarbeit\BA\ebplate\plate.EBP')
+        os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Vinzenz Müller\Dropbox\ETH\6. Semester\BA\ebplate\plate.EBP')
 
         #get phi_cr from the ebplate.EBR
         result_file = open('ebplate\plate.EBR', 'r', encoding = 'cp1252')

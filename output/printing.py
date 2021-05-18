@@ -37,7 +37,7 @@ def txt_to_pdf(name):
 
     pdf.image("output/cs_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
     # save the pdf with name .pdf
-    pdf.output("output/"+str(name)+".pdf", "F")
+    pdf.output("web_interface/templates/"+str(name)+".pdf", "F")
 
 
 
