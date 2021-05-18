@@ -60,7 +60,7 @@ def reduction_global_buckling(cs, side):
             rho_p, sigma_cr_p = global_plate_buckling.global_plate_buckling(cs, plate_glob)
         else:
             rho_p = 1
-            sigma_cr_p = 1
+            sigma_cr_p = 0
         if defaults.do_column_plate_buckling == True:
             height_zero_pressure = cs.get_center_z_red()
             if data.input_data.get("M_Ed") < 0:

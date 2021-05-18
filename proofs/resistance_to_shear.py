@@ -178,7 +178,7 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         else:
             chi_w = 0.83/lambda_w_bar
 
-        assert chi_w < eta, "value for chi_w too high"
+        assert chi_w <= eta, "value for chi_w too high"
         #calculate resistance
         V_Rd = chi_w*f_y*h_w*t/(math.sqrt(3)*gamma_M1)
 
