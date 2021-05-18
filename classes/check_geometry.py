@@ -382,8 +382,8 @@ def distances_betw_st_inc_top(cs, stiffeners, propositions, do_height):
 
 
         #dis_line projected onto n t coordinate system
-        dis_n = (n_dy * dis_line_dy) + (n_dz * dis_line_dz)
-        dis_t = (t_dy * dis_line_dy) + (t_dy * dis_line_dy)
+        dis_n = (n_dy * dis_dy) + (n_dz * dis_dz)
+        dis_t = (t_dy * dis_dy) + (t_dy * dis_dy)
 
         if dis > defaults.mindis_across_top and dis_n > 0 and dis_t > 0:
             ok3 = True
@@ -395,12 +395,12 @@ def distances_betw_st_inc_top(cs, stiffeners, propositions, do_height):
             ok3 = False
         #if we get here, changes have to be made
             h_corr = defaults.mindis_across_top - dis_n
-            st_left_top.h = left_top.h - corr_h
+            st_left_top.h = left_top.h - h_corr
             st_left_top.h_corr = True
-            st_left_top.h_corr_val = corr_h
-            st_right_top.h = right_top.h - corr_h
+            st_left_top.h_corr_val = h_corr
+            st_right_top.h = right_top.h - h_corr
             st_right_top.h_corr = True
-            st_right_top.h_corr_val = corr_h
+            st_right_top.h_corr_val = h_corr
         elif do_height == False:
             ok3 = False
             """correction for width"""
