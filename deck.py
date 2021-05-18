@@ -37,7 +37,7 @@ def deck(b_deck):
 
         #assume the stiffener angle to be pi/3
         for h in range(30, h_max, h_step):
-            b_inf = b_sup - 2*h / math.tan(math.pi/3)
+            b_inf = b_sup - 2*h / math.tan(defaults.max_angle)
             #arbitrary value for evaluation
             if b_inf > 3*t:
                 deck_stiffener = create_deck_stiffener_local(b_sup, b_inf, h, t, t_deck)
