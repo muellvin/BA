@@ -68,6 +68,8 @@ def txt_to_pdf(cs, name, location = None):
 
 
 def print_best_proof():
+    file = open("output/cs_analysis.txt", "w+")
+    file.close()
     defaults.do_print_to_txt = True
     i = 1
     for cs in cs_collector.get_best():
