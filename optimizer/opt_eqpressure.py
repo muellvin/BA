@@ -11,6 +11,7 @@ import copy
 import math
 from output import geometry_output
 import defaults
+from output import printing
 
 #an optimizer that puts the stiffeners in place, such that the single plates inbetween each have the same total pressure
 def opt_eqpressure(cs_fresh, st_prop_deck):
@@ -20,9 +21,9 @@ def opt_eqpressure(cs_fresh, st_prop_deck):
     set_defaults_for_opt_eqpressure()
 
     t_values = [5]
-    i_along_values = range(10**6, 10**8, 10*10**6)
+    i_along_values = range(10**7) # range(10**6, 10**8, 10*10**6)
     #i_along_values = [3*10**7, 6*10**7, 9*10**7]
-    n_st_side_max = 3
+    n_st_side_max = 2
     n_st_bottom_max = 5
 
     """TILL NOW: ONLY ONE I_ALONG FOR ALL"""
@@ -106,8 +107,7 @@ def opt_eqpressure(cs_fresh, st_prop_deck):
             #terminate n_st_side
                 n_st_side += 1
 
-                for opt_cs in cs_collector.get_best():
-                    cs_collector.print_best()
+                printing.print_best_proof()
 
 
 def set_defaults_for_opt_eqpressure():

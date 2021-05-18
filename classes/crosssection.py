@@ -22,6 +22,7 @@ class crosssection():
         self.cost = 0
         self.ei = 0
         self.target_value = 0
+        self.st_props
 
     def __str__(self):
         string = "\n cross-section with b_sup=" + str(self.b_sup) + ", b_inf=" + str(self.b_inf) + ", h=" + str(self.h) + "\n"

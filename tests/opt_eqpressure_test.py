@@ -13,8 +13,10 @@ import deck
 from output import geometry_output
 import math
 from optimizer import opt_eqpressure
+import defaults
 
 
+defaults.do_deck_as_prop = True
 #crosssection input and creation (only trapezoid plates)
 input_analysis_tool.set_cs_geometry()
 #set forces

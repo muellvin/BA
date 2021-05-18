@@ -1,5 +1,6 @@
 import defaults
 from fpdf import FPDF
+import cs_collector
 
 
 def printing(string, terminal = False):
@@ -12,7 +13,7 @@ def printing(string, terminal = False):
 
 
 
-def txt_to_pdf(name):
+def txt_to_pdf(name, location = None):
     # save FPDF() class into
     # a variable pdf
     pdf = PDF()
@@ -36,9 +37,43 @@ def txt_to_pdf(name):
             pdf.cell(200, 10, txt = line, border = 0, ln = 1, align = 'L')
 
     pdf.image("output/cs_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
-    # save the pdf with name .pdf
-    pdf.output("web_interface/templates/"+str(name)+".pdf", "F")
 
+    if location != None:
+        pdf.output(location+str(name)+".pdf", "F")
+    else:
+        # save the pdf with name .pdf
+        pdf.output("web_interface/templates/"+str(name)+".pdf", "F")
+
+
+
+def print_best_proof():
+    i = 1
+    for cs in cs_cllector.get_best():
+        cs.reset()
+        name = "cs_"+str(i)
+        geometry_output.print_cs_to_pdf(cs, input = True)
+
+        cs = buckling_proof.buckling_proof(cs)
+
+        ei = round(cs.get_ei() / 1000 / 1000 / 1000)
+        interaction_2 = cs.interaction_2
+        interaction_3 = cs.interaction_3
+        interaction_4 = cs.interaction_4
+        cost = optimization_value.cost(cs)
+        line1 = "\n\nResults:"
+        line2 = "\n   EI: "+str(ei)+"Nm^2"
+        line3 = "\n   interaction side 2: "+str(interaction_2)
+        line4 = "\n   interaction side 3: "+str(interaction_3)
+        line5 = "\n   interaction side 4: "+str(interaction_4)
+        line6 = "\n   cost: "+str(cost)+"CHF/m"
+        string = line1 + line2 + line3 + line4 + line5 + line6
+        printing.printing(string, terminal = True)
+
+        geometry_output.print_cs_to_png(cs, input = False)
+        printing.txt_to_pdf(name, location = "best_crosssections/")
+
+def print_best():
+        pass
 
 
 
