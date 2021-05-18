@@ -27,8 +27,6 @@ def txt_to_pdf(cs, name, location = None):
     # Add a page
     pdf.add_page()
 
-    name_in = name + "_in"
-    name_out = name+ "_out"
     geometry_output.print_cs_to_png(cs, name, input = True)
     geometry_output.print_cs_to_png(cs, name, input = False)
 
@@ -70,10 +68,9 @@ def txt_to_pdf(cs, name, location = None):
 
 
 def print_best_proof():
-    defaults.do_print_to_txt = False
+    defaults.do_print_to_txt = True
     i = 1
     for cs in cs_collector.get_best():
-        print("\nI am printing one")
         cs.reset()
         name = "cs_"+str(i)
 
@@ -96,29 +93,72 @@ def print_best_proof():
 
         txt_to_pdf(cs, name, location = "best_crosssections/")
 
+
+
+
+
+
 def print_best():
-    defaults.do_print_to_txt = False
+    file = open("best_crosssections/all.txt", "w+")
+    file.close()
     i = 1
+    file_name = "all"
     for cs in cs_collector.get_best():
         name = "cs_"+str(i)
-        name_in = name + "_in"
-        name_out = name+ "_out"
-        geometry_output.print_cs_to_png(cs, name_out, input = False)
+
+        geometry_output.print_cs_to_png(cs, name, input = False, location = "best_crosssections/")
+
         ei = round(cs.get_ei() / 1000 / 1000 / 1000)
         interaction_2 = cs.interaction_2
         interaction_3 = cs.interaction_3
         interaction_4 = cs.interaction_4
         cost = optimization_value.cost(cs)
+        line0 = "\n"+name
         line1 = "\n\nResults:"
         line2 = "\n   EI: "+str(ei)+"Nm^2"
         line3 = "\n   interaction side 2: "+str(interaction_2)
         line4 = "\n   interaction side 3: "+str(interaction_3)
         line5 = "\n   interaction side 4: "+str(interaction_4)
         line6 = "\n   cost: "+str(cost)+"CHF/m"
-        string = line1 + line2 + line3 + line4 + line5 + line6
-        cs.print_cs_as_list()
+        string = line0+ line1 + line2 + line3 + line4 + line5 + line6
+        file = open("best_crosssections/all.txt", "a+")
+        file.write(string)
+        file.close()
+        i += 1
 
-    txt_to_pdf(cs, name, location = "best_crosssections/")
+        cs.print_cs_as_list()
+    pdf = PDF()
+    pdf.add_page()
+    pdf.set_font("Arial", size = 10)
+    pdf.set_fill_color(255, 0, 10)
+    txt_file = open("best_crosssections/all.txt", "r")
+    # insert the texts in pdf
+    for line in txt_file:
+        number_of_dots = 0
+        for char in line:
+            if char == ".":
+                number_of_dots += 1
+
+        if line[0]!= " " and line != "\n":
+            pdf.set_font("Arial", size = 12)
+            pdf.set_text_color(0, 0, 0)
+            pdf.cell(180, 10, txt = line, border = 1, ln = 1, fill = True, align = 'C')
+        elif number_of_dots == 0 and "Side" in line:
+            pdf.cell(180, 10, txt = line, border = 1, ln = 1, fill = False, align = 'L')
+        else:
+            pdf.cell(200, 10, txt = line, border = 0, ln = 1, align = 'L')
+        if "cs_" in line:
+            pdf.image("output/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
+
+    pdf.output("best_crosssections/all.pdf", "F")
+
+
+
+
+
+
+
+
 
 
 

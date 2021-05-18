@@ -141,8 +141,18 @@ def find_dimensions(stiffener):
             h = min(10*math.floor(b_sup/math.tan(max_angle)/10),h_max)
             b_inf = b_sup - 2*1/math.sin(h)
             best = [b_sup, b_inf, h ,5]
+        stiffener.b_inf = 0
+        #stiffener.b_sup = 0
+        stiffener.h = 0
+        stiffener.b_inf_corr = False
+        stiffener.b_sup_corr = True
+        stiffener.h_corr = False
+        stiffener.b_inf_corr_val = False
+        stiffener.b_sup_corr_val = False
+        stiffener.h_corr_val = False
 
     else:
+        print("first case in check_geometry")
         assert b_sup_max_geo >= b_sup_minimal
         for b_sup in range(b_sup_minimal, 10*math.floor(b_sup_max_geo/10), b_sup_step):
             h_min = h_minimal
@@ -160,9 +170,17 @@ def find_dimensions(stiffener):
                                     if m < best[4]:
                                         #print("b_sup: ",b_sup," b_inf: ",b_inf," h: ",h," t: ",t)
                                         best = [b_sup, b_inf, h, t, m]
-
         if best == best_default:
             success = False
+        stiffener.b_inf = 0
+        stiffener.b_sup = 0
+        stiffener.h = 0
+        stiffener.b_inf_corr = False
+        stiffener.b_sup_corr = False
+        stiffener.h_corr = False
+        stiffener.b_inf_corr_val = False
+        stiffener.b_sup_corr_val = False
+        stiffener.h_corr_val = False
 
     b_sup = best[0]
     b_inf = best[1]
@@ -179,13 +197,5 @@ def find_dimensions(stiffener):
         #print(f"{Fore.GREEN}No corrections were needed {Style.RESET_ALL}")
 
 
-    stiffener.b_inf = 0
-    stiffener.b_sup = 0
-    stiffener.h = 0
-    stiffener.b_inf_corr = False
-    stiffener.b_sup_corr = False
-    stiffener.h_corr = False
-    stiffener.b_inf_corr_val = False
-    stiffener.b_sup_corr_val = False
-    stiffener.h_corr_val = False
+
     return b_sup, b_inf, h, t, success

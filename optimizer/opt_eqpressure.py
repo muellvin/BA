@@ -69,7 +69,7 @@ def opt_eqpressure(cs_fresh, st_prop_deck):
                             sigma_top_red = get_sigma_top_red(stiffened_cs)
                             sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
 
-                            geometry_output.print_cs_red(stiffened_cs)
+                            #geometry_output.print_cs_red(stiffened_cs)
 
                         if stiffened_cs.eta_1 <= 1 and stiffened_cs.interaction_2 < 1 and stiffened_cs.interaction_3 < 1 and stiffened_cs.interaction_4 < 1:
                             print("\n\n GOT ONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")

@@ -37,7 +37,7 @@ class crosssection():
         t_sides = self.get_line(pl_position = 2, pl_type = 0).t
         t_bottom = self.get_line(pl_position = 3, pl_type = 0).t
         string += "\n      t_deck: "+str(t_deck)+"   t_sides: "+str(t_sides)+"   t_bottom: "+str(t_bottom)
-        for st in self.st_props:
+        for st in self.st_props.stiffeners:
             line1 = "\nStiffener Number "+str(st.st_number)+" on side "+str(st.pl_position)+" with location: "+str(st.location)
             line2 = "\n      b_sup: "+str(st.b_sup)+"   b_inf: "+str(st.b_inf)+"   h: "+str(st.h)+"   t: "+str(st.t)
             string += line1 + line2
