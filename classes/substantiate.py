@@ -19,6 +19,7 @@ cs_h = 1500 #data.input_data["h"]
 def substantiate(crosssection, propositions):
     #initialize list for stiffeners
     stiffener_list =[]
+    success = True
 
     if propositions.stiffeners == []:
         return []
@@ -30,29 +31,34 @@ def substantiate(crosssection, propositions):
             side = 1
             angle = 0
         elif stiffener.pl_position == 2:
-            b_sup, b_inf, h, t = find_dimensions(stiffener)
+            b_sup, b_inf, h, t, success = find_dimensions(stiffener)
             side = 2
             angle = math.pi + crosssection.get_angle(side)
             #sidplate right side
         elif stiffener.pl_position == 3:
-            b_sup, b_inf, h, t = find_dimensions(stiffener)
+            b_sup, b_inf, h, t, success = find_dimensions(stiffener)
             side = 3
             angle = math.pi
             #bottom plate
             #make use of symmetry and equal stiffeners
         else:
             assert stiffener.pl_position == 4, "Plate not found."
-            b_sup, b_inf, h, t = find_dimensions(stiffener)
+            b_sup, b_inf, h, t, success = find_dimensions(stiffener)
             side = 4
             angle = math.pi - crosssection.get_angle(side)
             #make us of symmetry tbd
-        y,z = crosssection.get_coordinates(stiffener.location, side)
-        global_st = st.create_stiffener_global(stiffener.pl_position, stiffener.st_number, \
-        y, z, angle, b_sup, b_inf, h, t)
 
-        #check if code correct
-        test = global_st.lines[0].code.pl_position
-        stiffener_list.append(global_st)
+        if success == True:
+            y,z = crosssection.get_coordinates(stiffener.location, side)
+            global_st = st.create_stiffener_global(stiffener.pl_position, stiffener.st_number, \
+            y, z, angle, b_sup, b_inf, h, t)
+
+            #check if code correct
+            test = global_st.lines[0].code.pl_position
+            stiffener_list.append(global_st)
+
+        if success == False:
+            return False
 
     print(" ")
     print(" ")
@@ -65,6 +71,7 @@ def substantiate(crosssection, propositions):
 def find_dimensions(stiffener):
     print("------------------- find_dimensions for stiffener ", stiffener.st_number,"------------------------------------------")
 
+    success = True
     #initialize dimensions container
     #b_sup, b_inf, h, t, mass
     best = [0,0,0,0,0]
@@ -96,7 +103,8 @@ def find_dimensions(stiffener):
 
     if stiffener.h_corr == True:
         h_max_geo = stiffener.h
-        assert h_max_geo > h_step, "Error, nothing could be found."
+        if h_max_geo < h_step:
+            h_max_geo = h_step
 
 
     best = [0,0,0,0,10**10]
@@ -154,7 +162,7 @@ def find_dimensions(stiffener):
                                         best = [b_sup, b_inf, h, t, m]
 
         if best == best_default:
-            best = [b_sup_minimal, b_inf_minimal, 10*math.floor(b_sup_minimal*math.tan(max_angle)/10) ,5]
+            success = False
 
     b_sup = best[0]
     b_inf = best[1]
@@ -180,4 +188,4 @@ def find_dimensions(stiffener):
     stiffener.b_inf_corr_val = False
     stiffener.b_sup_corr_val = False
     stiffener.h_corr_val = False
-    return b_sup, b_inf, h, t
+    return b_sup, b_inf, h, t, success
