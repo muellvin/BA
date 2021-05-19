@@ -11,6 +11,7 @@ from web_interface import form_values
 from web_interface import stiffener_transform
 import initial_cs
 import deck
+import defaults
 import data
 from classes import merge
 from optimizer import cs_analysis_gui
@@ -25,6 +26,7 @@ def index():
 
 @app.route('/optimize_step_1', methods = ['GET'])
 def optimize():
+    defaults.do_deck_as_prop=False
     form_values.values = copy.deepcopy(form_values.default_cs)
     val = form_values.values
     initial_cs = cs_to_html.create_initial_cs(val.get("b_sup"), val.get("b_inf"), val.get("h"), val.get("t_side"), val.get("t_deck"), val.get("t_btm"))
@@ -33,6 +35,7 @@ def optimize():
 
 @app.route('/optimize_step_1', methods = ['POST'])
 def optimize_input_1():
+    defaults.do_deck_as_prop=False
     val = None
     try:
         b_sup = int(request.form['b_sup'])
@@ -49,6 +52,7 @@ def optimize_input_1():
 
 @app.route('/optimize_step_2', methods = ['POST'])
 def optimize_input_2():
+    defaults.do_deck_as_prop=False
     b_sup = int(request.form['b_sup'])
     b_inf = int(request.form['b_inf'])
     h = int(request.form['h'])
@@ -60,6 +64,7 @@ def optimize_input_2():
 
 @app.route('/results_optimize', methods = ['POST'])
 def resultpage_optimize():
+    defaults.do_deck_as_prop=True
     #set defaults
     cs_a = 10000
     cs_L_e = 15000
@@ -82,13 +87,14 @@ def resultpage_optimize():
     if optimizer_num == 0:
         optimizer_nino.optimize()
     else:
-        #put your optimizer here 
+        #put your optimizer here
         pass
     return render_template('resultpage_optimize.html')
 
 
 @app.route('/cs_analysis_step_1', methods = ['GET'])
 def cs_analysis():
+    defaults.do_deck_as_prop=False
     form_values.content = copy.deepcopy(form_values.default_cs)
     cont = form_values.content
     first_cs = cs_to_html.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
@@ -102,6 +108,7 @@ def cs_analysis():
 
 @app.route('/cs_analysis_step_1', methods = ['POST'])
 def cs_analysis_input_1():
+    defaults.do_deck_as_prop=False
     cont = None
     try:
         b_sup = int(request.form['b_sup'])
@@ -153,6 +160,7 @@ def cs_analysis_input_1():
 
 @app.route('/cs_analysis_step_2', methods = ['POST'])
 def cs_analysis_input_2():
+    defaults.do_deck_as_prop=False
     b_sup = int(request.form['b_sup'])
     b_inf = int(request.form['b_inf'])
     h = int(request.form['h'])
@@ -196,6 +204,7 @@ def cs_analysis_input_2():
 
 @app.route('/results_analysis', methods = ['POST'])
 def resultpage_analysis():
+    defaults.do_deck_as_prop=False
     M_Ed = int(request.form['M_Ed'])*10**6
     V_Ed = int(request.form['V_Ed'])*10**3
     T_Ed = int(request.form['T_Ed'])*10**6

@@ -7,11 +7,7 @@ Commentaire   #
 #PLATE 
    Width           400.0 cm 
    Height          300.0 cm 
-<<<<<<< HEAD
-   Thickness         0.5 cm 
-=======
    Thickness         1.0 cm 
->>>>>>> f1c9d3bf588acf7c2efcb209127237b03ed94e46
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
    Boundary Conditions 
@@ -22,29 +18,40 @@ Commentaire   #
 #STIFFENING 
    Orthotropic Plate =  0 
    Referentiel 2 
-   Nombre de raidisseurs  1 
+   Nombre de raidisseurs  3 
    - Raidisseur n° 1 Active=1 
       Orientation = 0 
-      Position    = 150.0 
-<<<<<<< HEAD
-      Gamma       = 782.6367499439365 
-      Teta        = 306.91303103381875 
-      Delta       = 0.6262779800852416 
-      Dimension 1 = 0 
-      Type        = 0 
-      Dimension 2 = 0 
-      Dimension 3 = 0 
-      Dimension 4 = 0 
-=======
+      Position    = 75.0 
       Gamma       = 0 
       Teta        = 0 
       Delta       = 0 
       Type        = 3 
-      Dimension 1 = 17.1 
-      Dimension 2 = 40.0 
-      Dimension 3 = 16.0 
-      Dimension 4 = 0.5 
->>>>>>> f1c9d3bf588acf7c2efcb209127237b03ed94e46
+      Dimension 1 = 10.0 
+      Dimension 2 = 20.0 
+      Dimension 3 = 15.0 
+      Dimension 4 = 1.0 
+   - Raidisseur n° 2 Active=1 
+      Orientation = 0 
+      Position    = 150.0 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 10.0 
+      Dimension 2 = 20.0 
+      Dimension 3 = 15.0 
+      Dimension 4 = 1.0 
+   - Raidisseur n° 3 Active=1 
+      Orientation = 0 
+      Position    = 225.0 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 10.0 
+      Dimension 2 = 20.0 
+      Dimension 3 = 15.0 
+      Dimension 4 = 1.0 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
@@ -70,11 +77,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-<<<<<<< HEAD
-   Shear stress                                 0.000 MPa 
-=======
-   Shear stress                                 7.301158833561605 MPa 
->>>>>>> f1c9d3bf588acf7c2efcb209127237b03ed94e46
+   Shear stress                                 4.226138990980387 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000
