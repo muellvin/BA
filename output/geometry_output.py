@@ -92,7 +92,7 @@ def print_cs_red(crosssection):
     plt.axis('scaled')
     plt.show()
 
-def print_cs_to_png(crosssection, input = True):
+def print_cs_to_png(crosssection, name, input = True, location = None):
 
     figure = plt.figure()
 
@@ -122,7 +122,13 @@ def print_cs_to_png(crosssection, input = True):
         plt.plot(y_list, z_list, 'k')
 
     plt.axis('scaled')
-    if input:
-        figure.savefig("output/cs_in.png")
+    if location == None:
+        if input:
+            figure.savefig("output/"+name+"_in.png")
+        else:
+            figure.savefig("output/"+name+"_out.png")
     else:
-        figure.savefig("output/cs_out.png")
+        if input:
+            figure.savefig(location+name+"_in.png")
+        else:
+            figure.savefig(location+name+"_out.png")

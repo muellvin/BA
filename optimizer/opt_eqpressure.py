@@ -21,10 +21,10 @@ def opt_eqpressure(cs_fresh, st_prop_deck):
     set_defaults_for_opt_eqpressure()
 
     t_values = [5]
-    i_along_values = range(10**7) # range(10**6, 10**8, 10*10**6)
+    i_along_values = [10**7] # range(10**6, 10**8, 10*10**6)
     #i_along_values = [3*10**7, 6*10**7, 9*10**7]
-    n_st_side_max = 2
-    n_st_bottom_max = 5
+    n_st_side_max = 1
+    n_st_bottom_max = 4
 
     """TILL NOW: ONLY ONE I_ALONG FOR ALL"""
 
@@ -57,6 +57,7 @@ def opt_eqpressure(cs_fresh, st_prop_deck):
                     if tension_bottom == True:
                         #do it twice; the stresses now are the ones calculated for the same amount of stiffeners (but different place (could do more))
                         for times in range(2):
+                            n_st_bottom = 0
                             st_prop_side = set_stiffeners_side(copy.deepcopy(empty_cs), n_st_side, n_st_bottom, sigma_top_red, sigma_bottom_red, i_along_side)
                             st_prop = stiffeners_proposition.stiffeners_proposition()
                             st_prop.stiffeners = copy.deepcopy(st_prop_deck.stiffeners) + copy.deepcopy(st_prop_side.stiffeners)
@@ -68,7 +69,10 @@ def opt_eqpressure(cs_fresh, st_prop_deck):
                             sigma_top_red = get_sigma_top_red(stiffened_cs)
                             sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
 
+                            #geometry_output.print_cs_red(stiffened_cs)
+
                         if stiffened_cs.eta_1 <= 1 and stiffened_cs.interaction_2 < 1 and stiffened_cs.interaction_3 < 1 and stiffened_cs.interaction_4 < 1:
+                            print("\n\n GOT ONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                             cs_collector.into_collector(stiffened_cs)
 
                     else:
@@ -93,6 +97,7 @@ def opt_eqpressure(cs_fresh, st_prop_deck):
                                     sigma_top_red = get_sigma_top_red(stiffened_cs)
                                     sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
 
+                                    #geometry_output.print_cs_red(stiffened_cs)
                                 if stiffened_cs.eta_1 <= 1 and stiffened_cs.interaction_2 < 1 and stiffened_cs.interaction_3 < 1 and stiffened_cs.interaction_4 < 1:
 
                                     cs_collector.into_collector(stiffened_cs)
@@ -106,8 +111,10 @@ def opt_eqpressure(cs_fresh, st_prop_deck):
                 #terminate i_along _side
             #terminate n_st_side
                 n_st_side += 1
+        #terminate t bottom
+    #terminate t_side
+    printing.print_best()
 
-                printing.print_best_proof()
 
 
 def set_defaults_for_opt_eqpressure():

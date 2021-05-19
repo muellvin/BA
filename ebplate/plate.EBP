@@ -1,7 +1,7 @@
 	EBPlate - v2.01 
-Société       # 
+SociÃ©tÃ©       # 
 Affaire       # 
-Référence     # 
+RÃ©fÃ©rence     # 
 Utilisateur   # 
 Commentaire   # 
 #PLATE 
@@ -26,7 +26,7 @@ Commentaire   #
         Smearing : No 
    Referentiel 2 
    Nombre de raidisseurs  2 
-   - Raidisseur n° 1 Active=1 
+   - Raidisseur nÂ° 1 Active=1 
       Orientation = 0 
       Position    = 63.24555320336758 
       Gamma       = 13.034666530274427 
@@ -37,7 +37,7 @@ Commentaire   #
       Dimension 2 = 0 
       Dimension 3 = 0 
       Dimension 4 = 0 
-   - Raidisseur n° 2 Active=1 
+   - Raidisseur nÂ° 2 Active=1 
       Orientation = 0 
       Position    = 110.67971810589327 
       Gamma       = 33.13870939135901 
@@ -49,3 +49,31 @@ Commentaire   #
       Dimension 3 = 0 
       Dimension 4 = 0 
 #STRESSES 
+ Longitudinal stresses : User's data No 
+ Analytical Longitudinal stresses 
+  Imposed values : No 
+   Longitudinal Stress Top Left                0.000 MPa 
+   Longitudinal Stress Bottom Left             0.000 MPa 
+   Longitudinal Stress Top Right               0.000 MPa 
+   Longitudinal Stress Bottom Right            0.000 MPa 
+ Transverse stresses : User's data No 
+ Analytical Transverse stresses 
+  Imposed values : No 
+   Transverse stress Top                         0.000 MPa 
+   Transverse stress Bottom                      0.000 MPa 
+   Patch Load Stress Bottom                      0.000 MPa 
+   Patch Load Stress Top                         0.000 MPa 
+   Patch Load Width Top                          0.000 cm 
+   Patch Load Width Bottom                       0.000 cm 
+   Local longitudinal stresses under patch load : No 
+   Local shear stresses under patch load : Yes 
+   W Top                      -1.000 
+   W Bot                      -1.000 
+   Shear distribution  1 
+Shear stresses : User's data No 
+Analytical Shear stresses 
+  Imposed values : No 
+   Shear stress                                 0.000 MPa 
+#PARAMETERS 
+   Complexity : 1 
+   Effective width parameter :  10.000
