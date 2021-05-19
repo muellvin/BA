@@ -114,6 +114,7 @@ def opt_eqpressure(cs_fresh, st_prop_deck):
         #terminate t bottom
     #terminate t_side
     printing.print_best()
+    printing.print_best_proof()
 
 
 
