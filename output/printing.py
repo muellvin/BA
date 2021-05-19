@@ -151,7 +151,7 @@ def print_best():
         else:
             pdf.cell(200, 10, txt = line, border = 0, ln = 1, align = 'L')
         if "cs_" in line:
-            pdf.image("output/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
+            pdf.image("best_crosssections/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
 
     pdf.output("best_crosssections/all.pdf", "F")
 
