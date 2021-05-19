@@ -14,6 +14,7 @@ import defaults
 import data
 from proofs import stress_cal
 from optimizer import optimization_value
+import cs_collector
 
 
 def optimize():
@@ -23,7 +24,7 @@ def optimize():
     t_deck = data.input_data["t_deck"]
     t_range = [10, 20]
     t_max_min = 20
-    I_range = [1*10**7, 3*10**7, 5*10**7]
+    I_range = [0.5*10**6, 1*10**6, 1.5*10**6]
     counter = 1
     st_prop_deck = deck.deck(b_sup)
     cs_collection = set()
@@ -61,7 +62,7 @@ def optimize():
                                     t_max_min = max(t_side, t_bottom)
                                 print(str(optimization_value.cost(end_cs)) + " CHF")
                                 print("PASS!")
-                                cs_collection.add(end_cs)
+                                cs_collector.into_collector(end_cs)
                             else:
                                 print("FAIL!")
                     #with bottom stiffeners
@@ -81,9 +82,8 @@ def optimize():
                                     st_number = num_top_stiffeners + num_side_stiffeners + num + 1
                                     st = proposed_stiffener.proposed_stiffener(pl_position = 3, st_number = st_number, location = loc_btm, i_along = I_btm)
                                     st_prop_rest.stiffeners.append(st)
-                                #change the following line everywhere
                                 st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
-                                #until here
+                                st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                 test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
                                 if test_cs != False:
                                     end_cs = buckling_proof.buckling_proof(test_cs)
@@ -96,7 +96,7 @@ def optimize():
                                         if max(t_side, t_bottom) < t_max_min:
                                             t_max_min = max(t_side, t_bottom)
                                         strong_enough = True
-                                        cs_collection.add(end_cs)
+                                        cs_collector.into_collector(end_cs)
                                         print(str(optimization_value.cost(end_cs)) + " CHF")
                                         print("PASS!")
                                     else:
@@ -106,6 +106,7 @@ def optimize():
         if t <= t_max_min:
             t_collection.append(t)
     t_range = t_collection
+
 
     #one side stiffener block
     num_side_stiffeners = 1
@@ -141,6 +142,7 @@ def optimize():
                                         st_prop_rest.stiffeners.append(st_right)
                                         st_prop_rest.stiffeners.append(st_left)
                                     st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
+                                    st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                     test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
                                     if test_cs != False:
                                         end_cs = buckling_proof.buckling_proof(test_cs)
@@ -150,7 +152,7 @@ def optimize():
                                             if max(t_side, t_bottom) < t_max_min:
                                                 t_max_min = max(t_side, t_bottom)
                                             strong_enough = True
-                                            cs_collection.add(end_cs)
+                                            cs_collector.into_collector(end_cs)
                                             print(str(optimization_value.cost(end_cs)) + " CHF")
                                             print("PASS!")
                                         else:
@@ -190,6 +192,7 @@ def optimize():
                                             st = proposed_stiffener.proposed_stiffener(pl_position = 3, st_number = st_number, location = loc_btm, i_along = I_btm)
                                             st_prop_rest.stiffeners.append(st)
                                         st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
+                                        st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                         test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
                                         if test_cs != False:
                                             end_cs = buckling_proof.buckling_proof(test_cs)
@@ -199,7 +202,7 @@ def optimize():
                                                 if max(t_side, t_bottom) < t_max_min:
                                                     t_max_min = max(t_side, t_bottom)
                                                 strong_enough = True
-                                                cs_collection.add(end_cs)
+                                                cs_collector.into_collector(end_cs)
                                                 print(str(optimization_value.cost(end_cs)) + " CHF")
                                                 print("PASS!")
                                             else:
@@ -215,7 +218,7 @@ def optimize():
     for t_side in t_range:
         for t_bottom in t_range:
             base_cs = ics.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
-            for num_btm_stiffeners in range(4):
+            for num_btm_stiffeners in range(1,4):
                 if num_side_stiffeners == 2:
                     #without bottom stiffeners
                     if num_btm_stiffeners == 0:
@@ -245,6 +248,7 @@ def optimize():
                                         st_prop_rest.stiffeners.append(st_right)
                                         st_prop_rest.stiffeners.append(st_left)
                                     st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
+                                    st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                     test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
                                     if test_cs != False:
                                         end_cs = buckling_proof.buckling_proof(test_cs)
@@ -253,7 +257,7 @@ def optimize():
                                         if proven:
                                             if max(t_side, t_bottom) < t_max_min:
                                                 t_max_min = max(t_side, t_bottom)
-                                            cs_collection.add(end_cs)
+                                            cs_collector.into_collector(end_cs)
                                             print(str(optimization_value.cost(end_cs)) + " CHF")
                                             print("PASS!")
                                         else:
@@ -296,6 +300,7 @@ def optimize():
                                                 st = proposed_stiffener.proposed_stiffener(pl_position = 3, st_number = st_number, location = loc_btm, i_along = I_btm)
                                                 st_prop_rest.stiffeners.append(st)
                                             st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
+                                            st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                             test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
                                             if test_cs != False:
                                                 end_cs = buckling_proof.buckling_proof(test_cs)
@@ -305,7 +310,7 @@ def optimize():
                                                     if max(t_side, t_bottom) < t_max_min:
                                                         t_max_min = max(t_side, t_bottom)
                                                     strong_enough = True
-                                                    cs_collection.add(end_cs)
+                                                    cs_collector.into_collector(end_cs)
                                                     print(str(optimization_value.cost(end_cs)) + " CHF")
                                                     print("PASS!")
                                                 else:
@@ -354,6 +359,7 @@ def optimize():
                                             st_prop_rest.stiffeners.append(st_right)
                                             st_prop_rest.stiffeners.append(st_left)
                                         st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
+                                        st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                         test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
                                         if test_cs != False:
                                             end_cs = buckling_proof.buckling_proof(test_cs)
@@ -363,7 +369,7 @@ def optimize():
                                                 if max(t_side, t_bottom) < t_max_min:
                                                     t_max_min = max(t_side, t_bottom)
                                                 strong_enough = True
-                                                cs_collection.add(end_cs)
+                                                cs_collector.into_collector(end_cs)
                                                 print(str(optimization_value.cost(end_cs)) + " CHF")
                                                 print("PASS!")
                                             else:
@@ -408,6 +414,7 @@ def optimize():
                                                     st = proposed_stiffener.proposed_stiffener(pl_position = 3, st_number = st_number, location = loc_btm, i_along = I_btm)
                                                     st_prop_rest.stiffeners.append(st)
                                                 st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
+                                                st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                                 test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
                                                 if test_cs != False:
                                                     end_cs = buckling_proof.buckling_proof(test_cs)
@@ -417,7 +424,7 @@ def optimize():
                                                         if max(t_side, t_bottom) < t_max_min:
                                                             t_max_min = max(t_side, t_bottom)
                                                         strong_enough = True
-                                                        cs_collection.add(end_cs)
+                                                        cs_collector.into_collector(end_cs)
                                                         print(str(optimization_value.cost(end_cs)) + " CHF")
                                                         print("PASS!")
                                                     else:
@@ -436,16 +443,38 @@ def get_locations_side(num_side_stiffeners, sign):
         return [(-1, -1, -1)]
     if num_side_stiffeners == 1:
         if sign == -1:
-            return [(0.4, -1, -1), (0.3, -1, -1), (0.2, -1, -1), (0.1, -1, -1)]
+            return [(0.6, -1, -1), (0.5, -1, -1), (0.4, -1, -1), (0.3, -1, -1), (0.2, -1, -1)]
         if sign == 1:
-            return [(0.9, -1, -1), (0.8, -1, -1), (0.7, -1, -1), (0.6, -1, -1)]
+            return [(0.8, -1, -1), (0.7, -1, -1), (0.6, -1, -1), (0.5, -1, -1), (0.4, -1, -1)]
     if num_side_stiffeners == 2:
         if sign == -1:
-            return [(0.4, 0.3, -1), (0.4, 0.2, -1), (0.4, 0.1, -1), (0.3, 0.2, -1), (0.3, 0.1, -1), (0.2, 0.1, -1)]
+            locations = []
+            for i in reversed(range(20, 70, 10)):
+                for j in reversed(range(20, i, 10)):
+                    combination = (i/100, j/100, -1)
+                    locations.append(combination)
+            return locations
         if sign == 1:
-            return [(0.9, 0.8, -1), (0.9, 0.7, -1), (0.9, 0.6, -1),  (0.8, 0.7, -1), (0.8, 0.6, -1), (0.7, 0.6, -1)]
+            locations = []
+            for i in reversed(range(40, 90, 10)):
+                for j in reversed(range(40, i, 10)):
+                    combination = (i/100, j/100, -1)
+                    locations.append(combination)
+            return locations
     if num_side_stiffeners == 3:
         if sign == -1:
-            return [(0.4, 0.3, 0.2), (0.4, 0.3, 0.1), (0.4, 0.2, 0.1), (0.3, 0.2, 0.1)]
+            locations = []
+            for i in reversed(range(20, 70, 10)):
+                for j in reversed(range(20, i, 10)):
+                    for k in reversed(range(20, j, 10)):
+                        combination = (i/100, j/100, k/100)
+                        locations.append(combination)
+            return locations
         if sign == 1:
-            return [(0.9, 0.8, 0.7), (0.9, 0.8, 0.6),  (0.9, 0.7, 0.6), (0.8, 0.7, 0.6)]
+            locations = []
+            for i in reversed(range(40, 90, 10)):
+                for j in reversed(range(40, i, 10)):
+                    for k in reversed(range(40, j, 10)):
+                        combination = (i/100, j/100, k/100)
+                        locations.append(combination)
+            return locations
