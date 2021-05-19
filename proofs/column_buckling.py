@@ -203,7 +203,7 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
             if sigma_border_before_gross<0 and sigma_border_after_gross<0:
                 #all tension
                 b_c = 0
-                sigma_cr_c = 0
+                sigma_cr_c = 10**8
                 all_tension = True
             elif abs(sigma_border_before_gross - sigma_border_before_gross) < 0.5:
                 #same pressure; bottom stiffener; no extrapolation required
