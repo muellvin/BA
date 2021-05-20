@@ -48,6 +48,7 @@ def txt_to_pdf(cs, name, location = None):
             if char == ".":
                 number_of_dots += 1
 
+        #reading the lines and deciding on how to format them
         if line[0]!= " " and line != "\n":
             pdf.set_font("Arial", size = 12)
             pdf.set_text_color(0, 0, 0)
@@ -68,6 +69,8 @@ def txt_to_pdf(cs, name, location = None):
 
 
 def print_best_proof():
+    #a function that prints a proof pdf per cs in best_cs
+    #uses the txt_to_pdf function
     file = open("output/cs_analysis.txt", "w+")
     file.close()
     defaults.do_print_to_txt = True
@@ -101,6 +104,7 @@ def print_best_proof():
 
 
 def print_best():
+
     file = open("best_crosssections/all.txt", "w+")
     file.close()
     i = 1
@@ -137,6 +141,7 @@ def print_best():
             if char == ".":
                 number_of_dots += 1
 
+        #reading the lines and deciding on how to format them
         if line[0]!= " " and line != "\n":
             pdf.set_font("Arial", size = 12)
             pdf.set_text_color(0, 0, 0)
@@ -146,7 +151,7 @@ def print_best():
         else:
             pdf.cell(200, 10, txt = line, border = 0, ln = 1, align = 'L')
         if "cs_" in line:
-            pdf.image("output/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
+            pdf.image("best_crosssections/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
 
     pdf.output("best_crosssections/all.pdf", "F")
 
@@ -169,7 +174,10 @@ class PDF(FPDF):
         # Move to the right
         self.cell(80)
         # Title
-        self.cell(30, 10, 'CS Analysis Tool', 0, 0, 'C')
+        self.cell(30, 10, 'Title of the program', 0, 0, 'C')
+        self.cell(50)
+        self.set_font('Arial', 'B', 10)
+        self.cell(30, 10, 'N. Hasler, V. Müller', 0, 0, 'R')
         # Line break
         self.ln(20)
 
