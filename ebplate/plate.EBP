@@ -6,7 +6,7 @@ Utilisateur   #
 Commentaire   # 
 #PLATE 
    Width           400.0 cm 
-   Height          158.11388300841895 cm 
+   Height          206.15528128088303 cm 
    Thickness         1.0 cm 
    Module Young    210000.000 MPa 
    Poisson Coefficient         0.300 
@@ -26,28 +26,28 @@ Commentaire   #
         Smearing : No 
    Referentiel 2 
    Nombre de raidisseurs  2 
-   - Raidisseur n° 1 Active=1 
+   - Raidisseur n� 1 Active=1 
       Orientation = 0 
-      Position    = 63.24555320336758 
-      Gamma       = 13.034666530274427 
-      Teta        = 4.832011270694609 
-      Delta       = 0.17305941654632978 
-      Dimension 1 = 0 
-      Type        = 0 
-      Dimension 2 = 0 
-      Dimension 3 = 0 
-      Dimension 4 = 0 
-   - Raidisseur n° 2 Active=1 
+      Position    = 61.84658438426489 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 9.99999999999999 
+      Dimension 2 = 30.0 
+      Dimension 3 = 20.00000000000001 
+      Dimension 4 = 1.0 
+   - Raidisseur n� 2 Active=1 
       Orientation = 0 
-      Position    = 110.67971810589327 
-      Gamma       = 33.13870939135901 
-      Teta        = 11.79359259385096 
-      Delta       = 0.2613545293467396 
-      Dimension 1 = 0 
-      Type        = 0 
-      Dimension 2 = 0 
-      Dimension 3 = 0 
-      Dimension 4 = 0 
+      Position    = 123.69316876852979 
+      Gamma       = 0 
+      Teta        = 0 
+      Delta       = 0 
+      Type        = 3 
+      Dimension 1 = 9.999999999999982 
+      Dimension 2 = 20.0 
+      Dimension 3 = 10.0 
+      Dimension 4 = 1.0 
 #STRESSES 
  Longitudinal stresses : User's data No 
  Analytical Longitudinal stresses 
@@ -73,7 +73,7 @@ Commentaire   #
 Shear stresses : User's data No 
 Analytical Shear stresses 
   Imposed values : No 
-   Shear stress                                 0.000 MPa 
+   Shear stress                                 12.499999999999998 MPa 
 #PARAMETERS 
    Complexity : 1 
    Effective width parameter :  10.000
