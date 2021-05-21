@@ -1,12 +1,10 @@
-#einfach ein skript
-import data
-import defaults
+import math
+from data_and_defaults import data
+from data_and_defaults import defaults
 from classes import stiffeners_proposition
 from classes import proposed_stiffener
-from classes import stiffener
-import math
-
-from web_interface import form_values
+from assembly import add_stiffeners
+from user_interface import form_values
 
 def input_to_prop(num_top, num_side, num_btm):
     cont = form_values.content
@@ -32,7 +30,7 @@ def input_to_prop(num_top, num_side, num_btm):
         b_inf = side_st_data[i][2]
         h = side_st_data[i][3]
         t = side_st_data[i][4]
-        i_along = stiffener.get_i_along_stiffener(b_sup, b_inf, h, t)
+        i_along = add_stiffeners.get_i_along_stiffener(b_sup, b_inf, h, t)
         stiffener_right_i = proposed_stiffener.proposed_stiffener(2, int(num_top + num_side + 1 - i), location, \
         i_along, b_sup, b_inf, h, t)
         st_list.add(stiffener_right_i)
@@ -59,7 +57,7 @@ def input_to_prop(num_top, num_side, num_btm):
         b_inf = btm_st_data[i][2]
         h = btm_st_data[i][3]
         t = btm_st_data[i][4]
-        i_along = stiffener.get_i_along_stiffener(b_sup, b_inf, h, t)
+        i_along = add_stiffeners.get_i_along_stiffener(b_sup, b_inf, h, t)
         if num_btm%2 == 1 and i == 0:
             stiffener_bottom_middle = proposed_stiffener.proposed_stiffener(3, int(num_top +num_side + middle_value), location, \
             i_along, b_sup, b_inf, h, t)
@@ -96,7 +94,7 @@ def prop_to_draw(cs):
             angle = math.pi
         if st.pl_position == 4:
             angle = math.pi - cs.get_angle(2)
-        stiffener_i = stiffener.create_stiffener_global(st.pl_position, st.st_number, y, z, angle, \
+        stiffener_i = add_stiffenerscreate_stiffener_global(st.pl_position, st.st_number, y, z, angle, \
         st.b_sup, st.b_inf, st.h, st.t)
         st_list_rest.append(stiffener_i)
     return st_list_rest
