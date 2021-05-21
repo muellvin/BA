@@ -1,14 +1,12 @@
-import data
-from proofs import resistance_to_shear
-from proofs import stress_cal
+import copy
+from data_and_defaults import data
+from proofs_and_stress_calculation import resistance_to_shear
+from proofs_and_stress_calculation import stress_cal
 from classes import crosssection
 from classes import line
 from classes import point
 from classes import plate_code
-from output import geometry_output
-from output import printing
-import data
-import copy
+from user_interface/output import printing
 
 def interaction_web(total_cs, web_plate, eta_3):
     line1 = "\n   7.1 Interaction between shear force, bending moment and axial force"

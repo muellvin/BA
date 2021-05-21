@@ -1,7 +1,7 @@
 import math
-import data
-import defaults
-from output import printing
+from data_and_defaults import data
+from data_and_defaults import defaults
+from user_interface/output import printing
 
 
 #EC 1993 1-5 3.3 shear lag at ULS

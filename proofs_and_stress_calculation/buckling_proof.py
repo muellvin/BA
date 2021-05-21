@@ -1,14 +1,13 @@
-#buckling proof
-from proofs import local_buckling
-from proofs import column_buckling
-from proofs import shear_lag
-from proofs import resistance_to_shear
-from proofs import global_buckling
-from proofs import interaction
-import defaults
-import data
-from proofs import stress_cal
-from output import printing
+from proofs_and_stress_calculation import local_buckling
+from proofs_and_stress_calculation import column_buckling
+from proofs_and_stress_calculation import shear_lag
+from proofs_and_stress_calculation import resistance_to_shear
+from proofs_and_stress_calculation import global_buckling
+from proofs_and_stress_calculation import interaction
+from proofs_and_stress_calculation import stress_cal
+from data_and_defaults import defaults
+from data_and_defaults import data
+from user_interface/output import printing
 
 
 
