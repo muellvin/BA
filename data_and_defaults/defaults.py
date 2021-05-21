@@ -51,13 +51,13 @@ st_t = 5
 welding_cost = 40 #[CHF/m]
 steel_cost = 1.5 #[CHF/kg]
 
-optimize_for_cost_only = False
+optimize_for_cost_only = True
 optimize_for_spec_ei = False
 
 weight_cost = -1000
 weight_ei = 1
 # target value will be maximized
-optimize_for_target_function = True
+optimize_for_target_function = False
 
 
 """check_geometry defaults"""
@@ -89,7 +89,7 @@ max_angle = math.pi/12*5 #75 grad
 
 """buckling defaults"""
 #convergence limit for m_rd_el in effective width iterations of local buckling
-convergence_limit_local_buckling = 0.005
+convergence_limit_local_buckling = 0.02
 plate_length = 4000
 effective_width_parameter = 10
 #eta should be changed if fy > 460 MPa
