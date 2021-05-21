@@ -33,10 +33,10 @@ def input_to_prop(num_top, num_side, num_btm):
         h = side_st_data[i][3]
         t = side_st_data[i][4]
         i_along = stiffener.get_i_along_stiffener(b_sup, b_inf, h, t)
-        stiffener_right_i = proposed_stiffener.proposed_stiffener(2, int(num_top + i), location, \
+        stiffener_right_i = proposed_stiffener.proposed_stiffener(2, int(num_top + num_side + 1 - i), location, \
         i_along, b_sup, b_inf, h, t)
         st_list.add(stiffener_right_i)
-        stiffener_left_i = proposed_stiffener.proposed_stiffener(4, int(num_top + num_side + num_btm + i), location, \
+        stiffener_left_i = proposed_stiffener.proposed_stiffener(4, int(num_top + num_side + num_btm + i + 1), location, \
         i_along, b_sup, b_inf, h, t)
         st_list.add(stiffener_left_i)
 

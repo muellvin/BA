@@ -21,20 +21,19 @@ from output import geometry_output as go
 def check_geometry(cs, stiffeners, propositions):
     geometry_ok = True
     if defaults.do_check_geometry == True:
-        if defaults.do_height_only == True and defaults.do_width_only == True:
-            conflict = True
-            assert conflict == True, "cannot do only height and only width"
+      if defaults.do_height_only == True and defaults.do_width_only == True:
+          conflict = True
+          assert conflict == True, "cannot do only height and only width"
 
-        if defaults.do_width_only == True:
-            propositions, ok1 = distances_to_corners(cs, stiffeners, propositions)
-            propositions, ok2 = distances_betw_stiffeners(cs, stiffeners, propositions)
-            propositions, ok3 = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
-            """distances across on bottom side are not done, maybe not needed"""
-            geometry_ok = ( ok1 == ok2  == ok3 == True )
+      if defaults.do_width_only == True:
+          propositions, ok1 = distances_to_corners(cs, stiffeners, propositions)
+          propositions, ok2 = distances_betw_stiffeners(cs, stiffeners, propositions)
+          #propositions, ok3 = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
+          """distances across on bottom side are not done, maybe not needed"""
+          geometry_ok = ( ok1 == ok2  == True )
 
-        elif defaults.do_height_only == True:
-            propositions, geometry_ok = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
-
+      elif defaults.do_height_only == True:
+          propositions, geometry_ok = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
 
     return propositions, geometry_ok
 
@@ -43,6 +42,15 @@ def check_geometry(cs, stiffeners, propositions):
 
 def distances_to_corners(cs, stiffeners, propositions):
     ok1 = True
+
+    #get original values for minimal distances
+    mindis_side_top_corner = copy.deepcopy(defaults.mindis_side_top_corner)
+    mindis_side_bottom_corner = copy.deepcopy(defaults.mindis_side_bottom_corner)
+    mindis_bottom_corner = copy.deepcopy(defaults.mindis_bottom_corner)
+
+    top_right = get_top_right_stiffener(stiffeners)
+    if top_right != None:
+        defaults.mindis_side_top_corner = top_right.h/math.sin(cs.get_line(pl_position = 2).get_angle_y())
 
     right_top = get_right_top_stiffener(stiffeners)
     if right_top != None:
@@ -55,12 +63,14 @@ def distances_to_corners(cs, stiffeners, propositions):
         right_bottom_2b = right_bottom.get_line(st_pl_position = 2).b
         right_bottom_2a = right_bottom.get_line(st_pl_position = 2).a
         st_num_right_bottom = right_bottom.get_line(st_pl_position = 2).code.st_number
+        defaults.mindis_bottom_corner = right_bottom.h/math.sin(cs.get_line(pl_position = 2).get_angle_y())
 
     bottom_right = get_bottom_right_stiffener(stiffeners)
     if bottom_right != None:
         bottom_right_4b = bottom_right.get_line(st_pl_position = 4).b
         bottom_right_4a = bottom_right.get_line(st_pl_position = 4).a
         st_num_bottom_right = bottom_right.get_line(st_pl_position = 4).code.st_number
+        defaults.mindis_side_bottom_corner = bottom_right.h/math.sin(cs.get_line(pl_position = 2).get_angle_y())
 
     bottom_left = get_bottom_left_stiffener(stiffeners)
     if bottom_left != None:
@@ -134,6 +144,11 @@ def distances_to_corners(cs, stiffeners, propositions):
             print("bottom stiffeners too close to the corners: ", dis_bottom_right_corner)
             ok1 = False
 
+    #reset original values
+    defaults.mindis_side_top_corner = mindis_side_top_corner
+    defaults.mindis_side_bottom_corner = mindis_side_bottom_corner
+    defaults.mindis_bottom_corner = mindis_bottom_corner
+
     return propositions, ok1
 
 
@@ -164,7 +179,6 @@ def distances_betw_stiffeners(cs, stiffeners, propositions):
     stiffeners2 = sorted(stiffeners2, key = lambda stiffener: stiffener.lines[0].code.st_number)
     stiffeners3 = sorted(stiffeners3, key = lambda stiffener: stiffener.lines[0].code.st_number)
     stiffeners4 = sorted(stiffeners4, key = lambda stiffener: stiffener.lines[0].code.st_number)
-
 
     right_top = get_right_top_stiffener(stiffeners)
     if right_top != None:
@@ -210,6 +224,7 @@ def distances_betw_stiffeners(cs, stiffeners, propositions):
             upper = stiffeners2[i-st_number_min].get_line(pl_position = 2, st_number = i, st_pl_position = 2).a
             lower = stiffeners2[i+1-st_number_min].get_line(pl_position = 2,st_number = i+1,st_pl_position = 4).b
             overlap = lower.z < upper.z
+            print(overlap)
             distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
             corr = 0
             if overlap == True:
@@ -217,7 +232,7 @@ def distances_betw_stiffeners(cs, stiffeners, propositions):
             else:
                 corr = (defaults.mindis_between-distance)/2
             #needs correction
-            if distance < defaults.mindis_between:
+            if distance < defaults.mindis_between or overlap == True:
                 st_1 = propositions.get_proposed_stiffener(2,i)
                 st_2 = propositions.get_proposed_stiffener(2,i+1)
                 corr_old_1 = st_1.b_sup_corr_val
@@ -260,7 +275,7 @@ def distances_betw_stiffeners(cs, stiffeners, propositions):
                 corr = (defaults.mindis_between+distance)/2
             else:
                 corr = (defaults.mindis_between-distance)/2
-            if distance < defaults.mindis_between:
+            if distance < defaults.mindis_between or overlap == True:
                 st_1 = propositions.get_proposed_stiffener(4,i)
                 st_2 = propositions.get_proposed_stiffener(4,i+1)
                 corr_old_1 = st_1.b_sup_corr_val
@@ -302,7 +317,7 @@ def distances_betw_stiffeners(cs, stiffeners, propositions):
                 corr = (defaults.mindis_between-distance)/2
             elif overlap == True:
                 corr = (defaults.mindis_between+distance)/2
-            if distance < defaults.mindis_between:
+            if distance < defaults.mindis_between or overlap == True:
                 st_1 = propositions.get_proposed_stiffener(3,i)
                 st_2 = propositions.get_proposed_stiffener(3,i+1)
                 corr_old_1 = st_1.b_sup_corr_val
