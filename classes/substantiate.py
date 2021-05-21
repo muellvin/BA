@@ -139,7 +139,7 @@ def find_dimensions(stiffener):
                             best = [b_sup, b_inf, h, t, m]
         if best == best_default:
             h = min(10*math.floor(b_sup/math.tan(max_angle)/10),h_max)
-            b_inf = b_sup - 2*1/math.sin(h)
+            b_inf = b_sup - 2*1/math.sin(max_angle)*h
             best = [b_sup, b_inf, h ,5]
         stiffener.b_inf = 0
         #stiffener.b_sup = 0

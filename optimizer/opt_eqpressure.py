@@ -132,25 +132,25 @@ def set_defaults_for_opt_eqpressure():
     defaults.t_range = [5,7,9,11,13,15,17,20]
     defaults.max_angle = math.pi/12*5 #75 grad
     #check_geometry
-    defaults.do_check_geometry = True
+    defaults.do_check_geometry = False
     defaults.do_check_stiffeners_in_corners_top = False
     defaults.do_check_stiffeners_in_corners_bottom = False
     defaults.do_height_only = True
     defaults.do_width_only = False
 
     defaults.do_shear_lag_plastically = False
-    defaults.do_shear_lag = False
-    defaults.do_global_plate_buckling = False
-    defaults.do_column_plate_buckling = False
+    defaults.do_shear_lag = True
+    defaults.do_global_plate_buckling = True
+    defaults.do_column_plate_buckling = True
 
     defaults.do_print = True
     defaults.do_print_to_txt = False
 
     defaults.do_deck_as_prop = True
 
-    defaults.optimize_for_cost_only = False
+    defaults.optimize_for_cost_only = True
     defaults.optimize_for_spec_ei = False
-    defaults.optimize_for_target_function = True
+    defaults.optimize_for_target_function = False
 
 
 
