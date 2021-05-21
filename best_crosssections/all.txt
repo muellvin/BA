@@ -1,0 +1,27 @@
+
+cs_1
+
+      b_sup: 4000   b_inf: 3000   h: 1500
+      t_deck: 5.0   t_sides: 5   t_bottom: 5
+
+ Stiffener Number 1.0 on side 1.0 with location: 0.8
+      b_sup: 266.7   b_inf: 175.6   h: 170.0   t: 11.0
+ Stiffener Number 2.0 on side 1.0 with location: 0.5
+      b_sup: 266.7   b_inf: 175.6   h: 170.0   t: 11.0
+ Stiffener Number 3.0 on side 1.0 with location: 0.3
+      b_sup: 266.7   b_inf: 175.6   h: 170.0   t: 11.0
+ Stiffener Number 4.0 on side 1.0 with location: 0.0
+      b_sup: 266.7   b_inf: 175.6   h: 170.0   t: 11.0
+ Stiffener Number 5.0 on side 1.0 with location: -0.3
+      b_sup: 266.7   b_inf: 175.6   h: 170.0   t: 11.0
+ Stiffener Number 6.0 on side 1.0 with location: -0.5
+      b_sup: 266.7   b_inf: 175.6   h: 170.0   t: 11.0
+ Stiffener Number 7.0 on side 1.0 with location: -0.8
+      b_sup: 266.7   b_inf: 175.6   h: 170.0   t: 11.0
+
+Results:
+   EI: 6214311Nm^2
+   interaction side 2: -1
+   interaction side 3: -1
+   interaction side 4: -1
+   cost: 1797CHF/m

@@ -1,5 +1,3 @@
-#classes
-
 import math
 
 class point():

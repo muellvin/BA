@@ -1,11 +1,11 @@
-from classes import line
 import math
 import data
 import copy
+from classes import line
 from classes import plate_code
 from classes import point
-from output import geometry_output
-from output import printing
+from user_interface/output import geometry_output
+from user_interface/output import printing
 
 #crosssection calculation
 class crosssection():
