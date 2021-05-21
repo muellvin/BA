@@ -1,17 +1,26 @@
-import defaults
-from fpdf import FPDF
-from output import geometry_output
-from optimizer import optimization_value
-import cs_collector
 import sys
 import os
+from fpdf import FPDF
+from data_and_defaults import defaults
+from user_interface/output import geometry_output
+from cs_optimization_tool import optimization_value
+from cs_optimization_tool import cs_collector
+
 from proofs import buckling_proof
 sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
 
 
+"""
+CONVENTION:
+txt files in user_interface/output
+png and single proofs from print_best_proof in user_interface/output/best_crosssections
+cs_analysis_tool.pdf and all.pdf in user_interface/static
+"""
+
+
 def printing(string, terminal = False):
     if terminal == True and defaults.do_print_to_txt == True:
-        file = open("output\cs_analysis.txt", "a+")
+        file = open("user_interface\output\cs_analysis.txt", "a+")
         file.write(string)
         file.close()
     if terminal == True and defaults.do_print_to_terminal == True:
@@ -27,19 +36,19 @@ def txt_to_pdf(cs, name, location = None):
     # Add a page
     pdf.add_page()
 
-    geometry_output.print_cs_to_png(cs, name, input = True)
-    geometry_output.print_cs_to_png(cs, name, input = False)
+    geometry_output.print_cs_to_png(cs, name, input = True, location = "user_interface/output/best_crosssections/")
+    geometry_output.print_cs_to_png(cs, name, input = False, location = "user_interface/output/best_crosssections/")
 
 
 
-    pdf.image("output/"+name+"_in.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
+    pdf.image("user_interface/output/best_crosssections/"+name+"_in.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
     # set style and size of font
     # that you want in the pdf
     pdf.set_font("Arial", size = 10)
     pdf.set_fill_color(255, 0, 10)
 
     # open the text file in read mode
-    txt_file = open("output/cs_analysis.txt", "r")
+    txt_file = open("user_interface/output/cs_analysis.txt", "r")
 
     # insert the texts in pdf
     for line in txt_file:
@@ -58,20 +67,20 @@ def txt_to_pdf(cs, name, location = None):
         else:
             pdf.cell(200, 10, txt = line, border = 0, ln = 1, align = 'L')
 
-    pdf.image("output/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
+    pdf.image("user_interface/output/best_crosssections/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
 
     if location != None:
         pdf.output(location+str(name)+".pdf", "F")
     else:
         # save the pdf with name .pdf
-        pdf.output("web_interface/templates/"+str(name)+".pdf", "F")
+        pdf.output("user_interface/static/"+str(name)+".pdf", "F")
 
 
 
 def print_best_proof():
-    #a function that prints a proof pdf per cs in best_cs
+    #a function that prints a proof pdf per cs in best_crosssections
     #uses the txt_to_pdf function
-    file = open("output/cs_analysis.txt", "w+")
+    file = open("user_interface/output/cs_analysis.txt", "w+")
     file.close()
     defaults.do_print_to_txt = True
     i = 1
@@ -96,7 +105,7 @@ def print_best_proof():
         string = line1 + line2 + line3 + line4 + line5 + line6
         printing(string, terminal = True)
 
-        txt_to_pdf(cs, name, location = "best_crosssections/")
+        txt_to_pdf(cs, name, location = "user_interface/output/best_crosssections/")
 
 
 
@@ -105,7 +114,7 @@ def print_best_proof():
 
 def print_best():
 
-    file = open("best_crosssections/all.txt", "w+")
+    file = open("user_interface/output/all.txt", "w+")
     file.close()
     i = 1
     file_name = "all"
@@ -124,7 +133,7 @@ def print_best():
         line7 = "\n   interaction side 4: "+str(cs.interaction_4)
         line8 = "\n   cost: "+str(optimization_value.cost(cs))+"CHF/m"
         string = line1 + line2 + line3 + line4 + line5 + line6 + line7 + line8
-        file = open("best_crosssections/all.txt", "a+")
+        file = open("user_interface/output/all.txt", "a+")
         file.write(string)
         file.close()
         i += 1
@@ -133,7 +142,7 @@ def print_best():
     pdf.add_page()
     pdf.set_font("Arial", size = 10)
     pdf.set_fill_color(255, 0, 10)
-    txt_file = open("best_crosssections/all.txt", "r")
+    txt_file = open("user_interface/output/all.txt", "r")
     # insert the texts in pdf
     for line in txt_file:
         number_of_dots = 0
@@ -151,9 +160,9 @@ def print_best():
         else:
             pdf.cell(200, 10, txt = line, border = 0, ln = 1, align = 'L')
         if "cs_" in line:
-            pdf.image("best_crosssections/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
+            pdf.image("user_interface/output/best_crosssections/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
 
-    pdf.output("best_crosssections/all.pdf", "F")
+    pdf.output("user_interface/static/all.pdf", "F")
 
 
 
