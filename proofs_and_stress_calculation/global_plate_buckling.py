@@ -1,5 +1,7 @@
 import math
 import copy
+import sys
+sys.path.insert(0, './proofs_and_stress_calculation')
 from proofs_and_stress_calculation import stress_cal
 from ebplate_batch_mode import ebplate
 from classes import line

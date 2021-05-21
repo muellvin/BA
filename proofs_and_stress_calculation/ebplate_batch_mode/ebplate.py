@@ -1,10 +1,9 @@
 import os
-import sys
 
 def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
     #write the input for ebplate to ebplate.EBP
-    os.remove("ebplate\plate.EBP")
-    file = open("ebplate\plate.EBP", 'a+', encoding ='cp1252')
+    os.remove("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP")
+    file = open("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP", 'a+', encoding ='cp1252')
     file.write("	EBPlate - v2.01 \n")
     file.write("Société       # \n")
     file.write("Affaire       # \n")
@@ -24,7 +23,7 @@ def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
     file.write("      Bord 4 0 \n")
     file.close()
     if len(stiffeners_ebp) > 0 :
-        file = open("ebplate\plate.EBP", 'a+', encoding ='cp1252')
+        file = open("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP", 'a+', encoding ='cp1252')
         file.write("#STIFFENING \n")
         file.write("   Orthotropic Plate =  1 \n")
         file.write("   Coefficients d'orthotropie : \n")
@@ -38,7 +37,7 @@ def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
         file.write("   Nombre de raidisseurs  " + str(len(stiffeners_ebp)) + " \n")
         file.close()
         for i in range(len(stiffeners_ebp)):
-            file = open("ebplate\plate.EBP", 'a+', encoding ='cp1252')
+            file = open("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP", 'a+', encoding ='cp1252')
             file.write("   - Raidisseur n° " + str(i+1) + " Active=1 \n")
             file.write("      Orientation = 0 \n")
             file.write("      Position    = " + str(stiffeners_ebp[i][0]/10) + " \n")
@@ -52,13 +51,13 @@ def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
             file.write("      Dimension 4 = 0 \n")
             file.close()
     else:
-        file = open("ebplate\plate.EBP", 'a+', encoding ='cp1252')
+        file = open("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP", 'a+', encoding ='cp1252')
         file.write("#STIFFENING \n")
         file.write("   Orthotropic Plate =  0 \n")
         file.write("   Referentiel 2 \n")
         file.write("   Nombre de raidisseurs  " + str(len(stiffeners_ebp)) + " \n")
         file.close()
-    file = open("ebplate\plate.EBP", 'a+', encoding ='cp1252')
+    file = open("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP", 'a+', encoding ='cp1252')
     file.write("#STRESSES \n")
     file.write(" Longitudinal stresses : User's data No \n")
     file.write(" Analytical Longitudinal stresses \n")
@@ -90,11 +89,11 @@ def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
     file.write("   Effective width parameter :  10.000")
     file.close()
     #run ebplate calculation from your own directory
-    os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Nino\Google Drive\Studium\FS 2021\Bachelorarbeit\BA\ebplate\plate.EBP')
+    os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Nino\Google Drive\Studium\FS 2021\Bachelorarbeit\BA\proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP')
     #os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Vinzenz Müller\Dropbox\ETH\6. Semester\BA\ebplate\plate.EBP')
 
     #get phi_cr from the ebplate.EBR
-    result_file = open('ebplate\plate.EBR', 'r', encoding = 'cp1252')
+    result_file = open('proofs_and_stress_calculation\ebplate_batch_mode\plate.EBR', 'r', encoding = 'cp1252')
     results_text = result_file.readlines()
     phi_cr_line = results_text[1]
     phi_cr = float(phi_cr_line[7:])
@@ -103,8 +102,8 @@ def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
 
 def ebplate_shear(b, h, t, tau, stiffeners_ebp):
         #write the input for ebplate to ebplate.EBP
-        os.remove("ebplate\plate.EBP")
-        file = open("ebplate\plate.EBP", 'a+', encoding ='cp1252')
+        os.remove("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP")
+        file = open("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP", 'a+', encoding ='cp1252')
         file.write("	EBPlate - v2.01 \n")
         file.write("Société       # \n")
         file.write("Affaire       # \n")
@@ -128,7 +127,7 @@ def ebplate_shear(b, h, t, tau, stiffeners_ebp):
         file.write("   Nombre de raidisseurs  " + str(len(stiffeners_ebp)) + " \n")
         file.close()
         for i in range(len(stiffeners_ebp)):
-            file = open("ebplate\plate.EBP", 'a+', encoding ='cp1252')
+            file = open("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP", 'a+', encoding ='cp1252')
             file.write("   - Raidisseur n° " + str(i+1) + " Active=1 \n")
             file.write("      Orientation = 0 \n")
             file.write("      Position    = " + str(stiffeners_ebp[i][0]/10) + " \n")
@@ -141,7 +140,7 @@ def ebplate_shear(b, h, t, tau, stiffeners_ebp):
             file.write("      Dimension 3 = " + str(stiffeners_ebp[i][3]/10) + " \n")
             file.write("      Dimension 4 = " + str(stiffeners_ebp[i][4]/10) + " \n")
             file.close()
-        file = open("ebplate\plate.EBP", 'a+', encoding ='cp1252')
+        file = open("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP", 'a+', encoding ='cp1252')
         file.write("#STRESSES \n")
         file.write(" Longitudinal stresses : User's data No \n")
         file.write(" Analytical Longitudinal stresses \n")
@@ -173,11 +172,11 @@ def ebplate_shear(b, h, t, tau, stiffeners_ebp):
         file.write("   Effective width parameter :  10.000")
         file.close()
         #run ebplate calculation from your own directory
-        os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Nino\Google Drive\Studium\FS 2021\Bachelorarbeit\BA\ebplate\plate.EBP')
+        os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Nino\Google Drive\Studium\FS 2021\Bachelorarbeit\BA\proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP')
         #os.system(r'"C:\Program Files (x86)\EBPlate\EBPlate.exe" /BATCH C:\Users\Vinzenz Müller\Dropbox\ETH\6. Semester\BA\ebplate\plate.EBP')
 
         #get phi_cr from the ebplate.EBR
-        result_file = open('ebplate\plate.EBR', 'r', encoding = 'cp1252')
+        result_file = open('proofs_and_stress_calculation\ebplate_batch_mode\plate.EBR', 'r', encoding = 'cp1252')
         results_text = result_file.readlines()
         phi_cr_line = results_text[1]
         phi_cr = float(phi_cr_line[7:])

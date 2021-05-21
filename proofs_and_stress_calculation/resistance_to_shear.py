@@ -1,5 +1,7 @@
 import math
 import copy
+import sys
+sys.path.insert(0, './proofs_and_stress_calculation')
 from data_and_defaults import defaults
 from data_and_defaults import data
 from proofs_and_stress_calculation import stress_cal

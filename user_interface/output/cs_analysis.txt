@@ -75163,3 +75163,3865 @@ Iteration number 1
 
 Resistance to shear and interaction shear force and bending moment for side 1
    5. Resistance to shear
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 17732145709.27707
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 17732145709.27707
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 17732145709.27707
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 17732145709.27707
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 17732145709.27707
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 17732145709.27707
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 17732145709.27707
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 26.517370279944302
+      eta_3: 0.04295934922733418
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.13016247640073458
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.12796410952019188
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 17732145709.27707
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.4302416992188
+      eta_3: 0.02404353577139176
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.13016247640073458
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.12796410952019188
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 18985918717.176212
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 18693303618.292885
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 18985918717.176212
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=2065837.15, A_sl_eff=1754283.45, I_sl=21703112.68
+            sigma_cr_c=2177.43
+            e1=73.45, e2=0.15
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.8491876774684973
+            lambda_c_bar =0.30273545176814787
+            Phi_c =0.5634933985957417
+            Chi_c =0.9626885085528893
+         Critical buckling values
+            Chi_c: 0.9626885085528893
+            sigma_cr_c: 2177.433909615805
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 0.9626885085528893
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.2 Plate type behaviour
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=2065837.15, A_sl_eff=1754283.45, I_sl=21703112.68
+            sigma_cr_c=100000000.0
+            e1=73.45, e2=0.15
+            All tension =True
+         Buckling Values 9
+            beta_A_c =0.8491876774684977
+            lambda_c_bar =0
+            Phi_c =0
+            Chi_c =1
+         Critical buckling values
+            Chi_c: 1
+            sigma_cr_c: 100000000
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.430342434506
+      eta_3: 0.02438504783049959
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 17.701250000000005
+      eta_3: 0.15264310963190877
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.12159425554087129
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.11954060081919617
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 17.701250000000005
+      eta_3: 0.15264310963190877
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 19853015046.839233
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+         sigma_cr = 776.4365273023834
+         Lambda: 0.512056353447123
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=9716.24, A_sl_eff=9716.24, I_sl=3656909.06
+            sigma_cr_c=78007.22
+            e1=43.65, e2=21.79
+            All tension =False
+         Buckling Values 9
+            beta_A_c =1.0
+            lambda_c_bar =0.05488662211647601
+            Phi_c =0.47393481719758934
+            Chi_c =1.0585587474832874
+         Column number 10
+            A_sl=10494.84, A_sl_eff=10494.84, I_sl=4575260.13
+            sigma_cr_c=90356.37
+            e1=43.89, e2=29.71
+            All tension =False
+         Buckling Values 10
+            beta_A_c =1.0
+            lambda_c_bar =0.05099816411748193
+            Phi_c =0.472780814559346
+            Chi_c =1.0606669314248598
+         Critical buckling values
+            Chi_c: 1.0585587474832874
+            sigma_cr_c: 90356.37056168023
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0585587474832874
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 4
+      4.5.2 Plate type behaviour
+         sigma_cr = 715.3237639305376
+         Lambda: 0.5334815592105498
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 10
+            A_sl=10494.84, A_sl_eff=10494.84, I_sl=4575260.13
+            sigma_cr_c=90356.37
+            e1=43.89, e2=29.71
+            All tension =False
+         Buckling Values 10
+            beta_A_c =0.9999999999999997
+            lambda_c_bar =0.050998164117481926
+            Phi_c =0.472780814559346
+            Chi_c =1.0606669314248598
+         Column number 11
+            A_sl=9716.24, A_sl_eff=9716.24, I_sl=3656909.06
+            sigma_cr_c=78007.22
+            e1=43.65, e2=21.79
+            All tension =False
+         Buckling Values 11
+            beta_A_c =1.0
+            lambda_c_bar =0.054886622116476075
+            Phi_c =0.4739348171975894
+            Chi_c =1.0585587474832872
+         Critical buckling values
+            Chi_c: 1.0585587474832872
+            sigma_cr_c: 78007.22963906183
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0585587474832872
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.4303261389771
+      eta_3: 0.024400682415509637
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 33.84286184210524
+      eta_3: 0.11039404129556407
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.11629554927068741
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.11433138654928916
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 33.842861842105265
+      eta_3: 0.11039404129556404
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+Convergence of M_Rd_eff: 0.9433589243333773
+Iteration number 2
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 0.6
+      Beta_ult: 0.9772874921386521
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+         sigma_cr = 777.9620419307053
+         Lambda: 0.5256035391344414
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 22454787528.142162
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.7
+      Beta_ult: 0.8458650566820226
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 260.23489685876103
+         Lambda: 0.9201366675614021
+         Rho_Global: 0.8269478980656924
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=12486.06, A_sl_eff=11537.94, I_sl=4591853.65
+            sigma_cr_c=76222.18
+            e1=48.63, e2=24.97
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.9240654303543393
+            lambda_c_bar =0.05337582505740167
+            Phi_c =0.47389670433937103
+            Chi_c =1.0584498132783762
+         Column number 9
+            A_sl=11736.06, A_sl_eff=11340.51, I_sl=4585603.65
+            sigma_cr_c=80982.82
+            e1=47.03, e2=26.56
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.9662960215282376
+            lambda_c_bar =0.052953242391821274
+            Phi_c =0.4736234112344566
+            Chi_c =1.0590109413546827
+         Column number 10
+            A_sl=12486.06, A_sl_eff=11537.94, I_sl=4591853.65
+            sigma_cr_c=76222.18
+            e1=48.63, e2=24.97
+            All tension =False
+         Buckling Values 10
+            beta_A_c =0.9240654303543393
+            lambda_c_bar =0.05337582505740167
+            Phi_c =0.47389670433937103
+            Chi_c =1.0584498132783762
+         Critical buckling values
+            Chi_c: 1.0584498132783762
+            sigma_cr_c: 76222.18308993017
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0584498132783762
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.4302036261171
+      eta_3: 0.023312851801261022
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 181.22285779388935
+      eta_3: 0.029587945939703895
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.43
+      eta_3: 0.04602224612650728
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.028763903829067048
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.390625
+      eta_3: 0.014381951914533526
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.002876390382906705
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.390625
+      eta_3: 0.014381951914533526
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.028763903829067048
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.43
+      eta_3: 0.04602224612650728
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+Convergence of M_Rd_eff: 0.19150616692786993
+Iteration number 2
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.7
+      Beta_ult: 0.851336753750434
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 260.2401495900831
+         Lambda: 0.9466361605780235
+         Rho_Global: 0.8108692406641207
+      4.5.3 Column type buckling behaviour
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9398496240601504
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+         sigma_cr = 876.0315239282274
+         Lambda: 0.48229353383971596
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=10900.45, A_sl_eff=10900.45, I_sl=4578640.23
+            sigma_cr_c=87058.43
+            e1=45.0, e2=28.6
+            All tension =False
+         Buckling Values 9
+            beta_A_c =1.0
+            lambda_c_bar =0.051955138956897684
+            Phi_c =0.4731480236386125
+            Chi_c =1.0599565842969378
+         Column number 10
+            A_sl=10210.38, A_sl_eff=10210.38, I_sl=4572889.63
+            sigma_cr_c=92825.56
+            e1=43.06, e2=30.53
+            All tension =False
+         Buckling Values 10
+            beta_A_c =1.0
+            lambda_c_bar =0.05031530611627984
+            Phi_c =0.472509629519292
+            Chi_c =1.061196324064946
+         Critical buckling values
+            Chi_c: 1.0599565842969378
+            sigma_cr_c: 92825.56979285624
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0599565842969378
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 4
+      4.5.2 Plate type behaviour
+         sigma_cr = 829.3372092833489
+         Lambda: 0.4956849477579009
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 10
+            A_sl=10210.38, A_sl_eff=10210.38, I_sl=4572889.63
+            sigma_cr_c=92825.56
+            e1=43.06, e2=30.53
+            All tension =False
+         Buckling Values 10
+            beta_A_c =1.0
+            lambda_c_bar =0.05031530611627983
+            Phi_c =0.472509629519292
+            Chi_c =1.061196324064946
+         Column number 11
+            A_sl=10900.45, A_sl_eff=10900.45, I_sl=4578640.23
+            sigma_cr_c=87058.43
+            e1=45.0, e2=28.6
+            All tension =False
+         Buckling Values 11
+            beta_A_c =0.9999999999999998
+            lambda_c_bar =0.05195513895689772
+            Phi_c =0.4731480236386125
+            Chi_c =1.0599565842969378
+         Critical buckling values
+            Chi_c: 1.0599565842969378
+            sigma_cr_c: 87058.43200039855
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0599565842969378
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.2773839193165
+      eta_3: 0.02812644726743719
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 37.24593749999999
+      eta_3: 0.10523003568413797
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.12087742379752321
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.11360660131346166
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 37.245937500000004
+      eta_3: 0.10523003568413797
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.8978451715881883
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9398496240601504
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 9.34
+      eta_3: 0.10777960081972553
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.13675290592564907
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.1285271672233544
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.8978451715881883
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9398496240601504
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 9.34
+      eta_3: 0.10777960081972553
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.13675290592564907
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.1285271672233544
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9352423496459503
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 22.809451846620018
+         Lambda: 2.2418873535232167
+         Rho_Global: 0.40228087083397596
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=17228.49, A_sl_eff=8404.69, I_sl=633892.56
+            sigma_cr_c=7625.83
+            e1=35.24, e2=2.7
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.487836802519629
+            lambda_c_bar =0.1226104574658545
+            Phi_c =0.4937610413278414
+            Chi_c =1.0287466797475382
+         Critical buckling values
+            Chi_c: 1.0287466797475382
+            sigma_cr_c: 7625.834875705794
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0287466797475382
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.2773545387753
+      eta_3: 0.027576242585601082
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 17.006584274610955
+      eta_3: 0.08863285684861442
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.83
+      eta_3: 0.0704739618714982
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.002358969444913562
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.83
+      eta_3: 0.0704739618714982
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9347124608643851
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 35.241026396242134
+         Lambda: 1.8113546996635743
+         Rho_Global: 0.48502037892948474
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=17370.56, A_sl_eff=8546.76, I_sl=1104606.31
+            sigma_cr_c=13179.91
+            e1=45.47, e2=3.89
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.4920255901930098
+            lambda_c_bar =0.09366372219336049
+            Phi_c =0.485470078864191
+            Chi_c =1.0396966468133184
+         Critical buckling values
+            Chi_c: 1.0396966468133184
+            sigma_cr_c: 13179.918597540138
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0396966468133184
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.2774337968151
+      eta_3: 0.027570725414624762
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 20.466400158826517
+      eta_3: 0.08062060080606774
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.83
+      eta_3: 0.07028230891282987
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.0023525542603330465
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.83
+      eta_3: 0.07028230891282987
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.1
+      Beta: 0.9338001987867433
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 44.51490343572843
+         Lambda: 1.6561727796667505
+         Rho_Global: 0.5235948982238702
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=17865.52, A_sl_eff=9282.49, I_sl=1551033.57
+            sigma_cr_c=17993.86
+            e1=49.07, e2=4.87
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.5195757321023681
+            lambda_c_bar =0.08237512846907975
+            Phi_c =0.4823915447027583
+            Chi_c =1.0441708283493847
+         Critical buckling values
+            Chi_c: 1.0441708283493847
+            sigma_cr_c: 17993.867188996057
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0441708283493847
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.2774348270494
+      eta_3: 0.02755470033610642
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 22.89587073942339
+      eta_3: 0.07590591800777194
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.81265625
+      eta_3: 0.06984967839878807
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.355625
+      eta_3: 0.00292558721880668
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.81265625
+      eta_3: 0.06984967839878807
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.1
+      Beta: 0.9306800258855324
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 33.7173750504781
+         Lambda: 2.190339226788437
+         Rho_Global: 0.4106938898418423
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=11728.49, A_sl_eff=8073.29, I_sl=588059.23
+            sigma_cr_c=10391.97
+            e1=33.97, e2=3.97
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.6883489535533374
+            lambda_c_bar =0.12476400780698031
+            Phi_c =0.49428725918683597
+            Chi_c =1.0282042258054005
+         Column number 9
+            A_sl=11728.49, A_sl_eff=8073.29, I_sl=588059.23
+            sigma_cr_c=10391.97
+            e1=33.97, e2=3.97
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.6883489535533374
+            lambda_c_bar =0.12476400780698033
+            Phi_c =0.49428725918683597
+            Chi_c =1.0282042258054005
+         Critical buckling values
+            Chi_c: 1.0282042258054005
+            sigma_cr_c: 10391.970001907323
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0282042258054005
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.2774501885625
+      eta_3: 0.027477938950040828
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 32.42568706822292
+      eta_3: 0.0627830022349551
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5424999999999995
+      eta_3: 0.05935858037986734
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.02296053070110048
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5
+      eta_3: 4.301150512026638e-18
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.022960530701100473
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5424999999999995
+      eta_3: 0.05935858037986734
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.1
+      Beta: 0.9261619981340276
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 45.65012096535794
+         Lambda: 2.089613558515352
+         Rho_Global: 0.42817360735313836
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=9228.49, A_sl_eff=7719.51, I_sl=567225.89
+            sigma_cr_c=12739.26
+            e1=32.89, e2=5.05
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.8364868630112373
+            lambda_c_bar =0.12421995017024375
+            Phi_c =0.49401998953325305
+            Chi_c =1.0286292014854677
+         Column number 9
+            A_sl=8728.49, A_sl_eff=7620.1, I_sl=563059.23
+            sigma_cr_c=13370.07
+            e1=32.6, e2=5.34
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.8730154043215447
+            lambda_c_bar =0.12387337399164218
+            Phi_c =0.49388697138732285
+            Chi_c =1.028820244277593
+         Column number 10
+            A_sl=9228.49, A_sl_eff=7719.51, I_sl=567225.89
+            sigma_cr_c=12739.26
+            e1=32.89, e2=5.05
+            All tension =False
+         Buckling Values 10
+            beta_A_c =0.8364868630112373
+            lambda_c_bar =0.12421995017024375
+            Phi_c =0.49401998953325305
+            Chi_c =1.0286292014854677
+         Critical buckling values
+            Chi_c: 1.0286292014854677
+            sigma_cr_c: 12739.262472367318
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0286292014854677
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.2773439447363
+      eta_3: 0.027384783486534787
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 48.723697330797414
+      eta_3: 0.050130590786057694
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.445625
+      eta_3: 0.0525560377989764
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.03354640710572963
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4156249999999995
+      eta_3: 0.016773203552864817
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.002236427140381975
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4156249999999995
+      eta_3: 0.016773203552864817
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.03354640710572963
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.445625
+      eta_3: 0.0525560377989764
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.8978451715881883
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9398496240601504
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 9.34
+      eta_3: 0.10095198094961536
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.04059525571643522
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.03815343582371731
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9375403266033598
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 42.656595819720465
+         Lambda: 1.9907105661628317
+         Rho_Global: 0.44681869484739195
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=33228.49, A_sl_eff=23902.6, I_sl=1567225.89
+            sigma_cr_c=9775.52
+            e1=36.54, e2=1.4
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.7193406032806152
+            lambda_c_bar =0.1315016565947484
+            Phi_c =0.4964223649850746
+            Chi_c =1.0255246367330224
+         Critical buckling values
+            Chi_c: 1.0255246367330224
+            sigma_cr_c: 9775.522716892474
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0255246367330224
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.4304538526985
+      eta_3: 0.025559026712933915
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 10.512519735120895
+      eta_3: 0.03378197902700432
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.83
+      eta_3: 0.022676357292515558
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.0014172723307822224
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.83
+      eta_3: 0.022676357292515558
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9352423496459503
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 51.896060369918345
+         Lambda: 2.080682374037992
+         Rho_Global: 0.4297943156211063
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=22228.49, A_sl_eff=21251.42, I_sl=1200559.23
+            sigma_cr_c=11194.18
+            e1=35.85, e2=2.09
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.9560444929785837
+            lambda_c_bar =0.14166960449646632
+            Phi_c =0.49958089425514035
+            Chi_c =1.0218118599959585
+         Column number 9
+            A_sl=22228.49, A_sl_eff=21251.42, I_sl=1200559.23
+            sigma_cr_c=11194.18
+            e1=35.85, e2=2.09
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.9560444929785837
+            lambda_c_bar =0.14166960449646634
+            Phi_c =0.49958089425514035
+            Chi_c =1.0218118599959585
+         Critical buckling values
+            Chi_c: 1.0218118599959585
+            sigma_cr_c: 11194.188184914066
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0218118599959585
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.4301936163984
+      eta_3: 0.02552627141356538
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 13.781005021464276
+      eta_3: 0.029114217592575643
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5424999999999995
+      eta_3: 0.029296374547849027
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.013950654546594773
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5
+      eta_3: 2.379008699323568e-18
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.013950654546594773
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5424999999999995
+      eta_3: 0.029296374547849013
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.1
+      Beta: 0.9329556101494461
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 60.863892222469964
+         Lambda: 1.964961611519061
+         Rho_Global: 0.45193683172699417
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=17228.49, A_sl_eff=17228.49, I_sl=1033892.56
+            sigma_cr_c=12437.9
+            e1=35.24, e2=2.7
+            All tension =False
+         Buckling Values 8
+            beta_A_c =1.0
+            lambda_c_bar =0.1374549408970483
+            Phi_c =0.4981956042463012
+            Chi_c =1.0234852821424505
+         Column number 9
+            A_sl=16228.49, A_sl_eff=16228.49, I_sl=1000559.23
+            sigma_cr_c=12778.61
+            e1=35.07, e2=2.87
+            All tension =False
+         Buckling Values 9
+            beta_A_c =1.0
+            lambda_c_bar =0.13561012336477743
+            Phi_c =0.4976001262168615
+            Chi_c =1.024207162290576
+         Column number 10
+            A_sl=17228.49, A_sl_eff=17228.49, I_sl=1033892.56
+            sigma_cr_c=12437.9
+            e1=35.24, e2=2.7
+            All tension =False
+         Buckling Values 10
+            beta_A_c =1.0
+            lambda_c_bar =0.1374549408970483
+            Phi_c =0.4981956042463012
+            Chi_c =1.0234852821424505
+         Critical buckling values
+            Chi_c: 1.0234852821424505
+            sigma_cr_c: 12437.902595637544
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0234852821424505
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.4302536396647
+      eta_3: 0.025494540663360682
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 16.811436582766596
+      eta_3: 0.026016977444469083
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.445625
+      eta_3: 0.03227847051923236
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.02060327905482917
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4156249999999995
+      eta_3: 0.010301639527414586
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.0013735519369886117
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4156249999999995
+      eta_3: 0.010301639527414586
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.02060327905482917
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.445625
+      eta_3: 0.03227847051923236
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.2538074578374027
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.8978451715881883
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9398496240601504
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 9.34
+      eta_3: 0.09764477019312125
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.11243381158938393
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.10567087555393224
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9352423496459503
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 22.81283534542212
+         Lambda: 2.2417210939517918
+         Rho_Global: 0.4023074597852736
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=17228.49, A_sl_eff=8404.69, I_sl=633892.56
+            sigma_cr_c=7625.83
+            e1=35.24, e2=2.7
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.487836802519629
+            lambda_c_bar =0.1226104574658545
+            Phi_c =0.4937610413278414
+            Chi_c =1.0287466797475382
+         Critical buckling values
+            Chi_c: 1.0287466797475382
+            sigma_cr_c: 7625.834875705794
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0287466797475382
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.4303403693862
+      eta_3: 0.025800922770330144
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 17.00644738419657
+      eta_3: 0.0721946066926264
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.83
+      eta_3: 0.05740331140809412
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.0019214565784659977
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.83
+      eta_3: 0.05740331140809412
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.1
+      Beta: 0.9306800258855324
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 33.71673441913767
+         Lambda: 2.1903600353470614
+         Rho_Global: 0.41069042385847787
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=11728.49, A_sl_eff=8073.29, I_sl=588059.23
+            sigma_cr_c=10391.97
+            e1=33.97, e2=3.97
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.6883489535533375
+            lambda_c_bar =0.12476400780698033
+            Phi_c =0.49428725918683597
+            Chi_c =1.0282042258054005
+         Column number 9
+            A_sl=11728.49, A_sl_eff=8073.29, I_sl=588059.23
+            sigma_cr_c=10391.97
+            e1=33.97, e2=3.97
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.6883489535533374
+            lambda_c_bar =0.12476400780698033
+            Phi_c =0.49428725918683597
+            Chi_c =1.0282042258054005
+         Critical buckling values
+            Chi_c: 1.0282042258054005
+            sigma_cr_c: 10391.970001907323
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0282042258054005
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.4303268106679
+      eta_3: 0.025700917803234045
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 32.425551750694964
+      eta_3: 0.0513940765572048
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5424999999999995
+      eta_3: 0.04859074829620918
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.018795418638801516
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5
+      eta_3: 3.520908360282868e-18
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.018795418638801513
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5424999999999995
+      eta_3: 0.04859074829620918
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.1
+      Beta: 0.9261619981340276
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 45.65822676617361
+         Lambda: 2.0894280635420164
+         Rho_Global: 0.42820714633249746
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=9228.49, A_sl_eff=7719.51, I_sl=567225.89
+            sigma_cr_c=12739.26
+            e1=32.89, e2=5.05
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.8364868630112373
+            lambda_c_bar =0.12421995017024375
+            Phi_c =0.49401998953325305
+            Chi_c =1.0286292014854677
+         Column number 9
+            A_sl=8728.49, A_sl_eff=7620.1, I_sl=563059.23
+            sigma_cr_c=13370.07
+            e1=32.6, e2=5.34
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.8730154043215447
+            lambda_c_bar =0.12387337399164218
+            Phi_c =0.49388697138732285
+            Chi_c =1.028820244277593
+         Column number 10
+            A_sl=9228.49, A_sl_eff=7719.51, I_sl=567225.89
+            sigma_cr_c=12739.26
+            e1=32.89, e2=5.05
+            All tension =False
+         Buckling Values 10
+            beta_A_c =0.8364868630112373
+            lambda_c_bar =0.12421995017024375
+            Phi_c =0.49401998953325305
+            Chi_c =1.0286292014854677
+         Critical buckling values
+            Chi_c: 1.0286292014854677
+            sigma_cr_c: 12739.262472367318
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0286292014854677
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.4302448698973
+      eta_3: 0.02560521734240626
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 48.72405478978141
+      eta_3: 0.04123151530969023
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.445625
+      eta_3: 0.043226560709694446
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.02759142172959221
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4156249999999995
+      eta_3: 0.013795710864796105
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.0018394281153061472
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4156249999999995
+      eta_3: 0.013795710864796105
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.02759142172959221
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.445625
+      eta_3: 0.043226560709694446
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.8978451715881883
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9398496240601504
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 9.34
+      eta_3: 0.08977001371297035
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.036755890098352235
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.034545009490932546
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9375403266033598
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 42.6593053149002
+         Lambda: 1.9906473454154126
+         Rho_Global: 0.4468311221777373
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=33228.49, A_sl_eff=23902.6, I_sl=1567225.89
+            sigma_cr_c=9775.52
+            e1=36.54, e2=1.4
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.7193406032806152
+            lambda_c_bar =0.1315016565947484
+            Phi_c =0.4964223649850746
+            Chi_c =1.0255246367330224
+         Critical buckling values
+            Chi_c: 1.0255246367330224
+            sigma_cr_c: 9775.522716892474
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0255246367330224
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.430378990035
+      eta_3: 0.023625611211454144
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 10.512605646521886
+      eta_3: 0.030235123008908776
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.83
+      eta_3: 0.02029559171573328
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.0012684744822333298
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.83
+      eta_3: 0.02029559171573328
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.9352423496459503
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 51.89738214635784
+         Lambda: 2.0806558773792223
+         Rho_Global: 0.42979914179592993
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=22228.49, A_sl_eff=21251.42, I_sl=1200559.23
+            sigma_cr_c=11194.18
+            e1=35.85, e2=2.09
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.9560444929785837
+            lambda_c_bar =0.14166960449646632
+            Phi_c =0.49958089425514035
+            Chi_c =1.0218118599959585
+         Column number 9
+            A_sl=22228.49, A_sl_eff=21251.42, I_sl=1200559.23
+            sigma_cr_c=11194.18
+            e1=35.85, e2=2.09
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.9560444929785837
+            lambda_c_bar =0.14166960449646634
+            Phi_c =0.49958089425514035
+            Chi_c =1.0218118599959585
+         Critical buckling values
+            Chi_c: 1.0218118599959585
+            sigma_cr_c: 11194.188184914066
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0218118599959585
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.4303308728696
+      eta_3: 0.023583810394536248
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 13.781004959954844
+      eta_3: 0.026109206206698828
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5424999999999995
+      eta_3: 0.026272561851928698
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.012510743739013664
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5
+      eta_3: 2.133460339850956e-18
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.012510743739013662
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5424999999999995
+      eta_3: 0.026272561851928687
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.1
+      Beta: 0.9329556101494461
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 60.865013244887564
+         Lambda: 1.9649435159330941
+         Rho_Global: 0.45194046897382323
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=17228.49, A_sl_eff=17228.49, I_sl=1033892.56
+            sigma_cr_c=12437.9
+            e1=35.24, e2=2.7
+            All tension =False
+         Buckling Values 8
+            beta_A_c =1.0
+            lambda_c_bar =0.1374549408970483
+            Phi_c =0.4981956042463012
+            Chi_c =1.0234852821424505
+         Column number 9
+            A_sl=16228.49, A_sl_eff=16228.49, I_sl=1000559.23
+            sigma_cr_c=12778.61
+            e1=35.07, e2=2.87
+            All tension =False
+         Buckling Values 9
+            beta_A_c =1.0
+            lambda_c_bar =0.13561012336477743
+            Phi_c =0.4976001262168615
+            Chi_c =1.024207162290576
+         Column number 10
+            A_sl=17228.49, A_sl_eff=17228.49, I_sl=1033892.56
+            sigma_cr_c=12437.9
+            e1=35.24, e2=2.7
+            All tension =False
+         Buckling Values 10
+            beta_A_c =1.0
+            lambda_c_bar =0.1374549408970483
+            Phi_c =0.4981956042463012
+            Chi_c =1.0234852821424505
+         Critical buckling values
+            Chi_c: 1.0234852821424505
+            sigma_cr_c: 12437.902595637544
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0234852821424505
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.4303807847963
+      eta_3: 0.023543155691264955
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 16.811436133348188
+      eta_3: 0.023376518070676623
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.445625
+      eta_3: 0.029002532708167623
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.018512254920106996
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4156249999999995
+      eta_3: 0.009256127460053496
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.0012341503280071332
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4156249999999995
+      eta_3: 0.009256127460053496
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.018512254920106996
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.445625
+      eta_3: 0.029002532708167623
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 0.06345186445935068
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.2
+      Beta: 0.9172562750271596
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+         sigma_cr = 3825.7496141566376
+         Lambda: 0.22901493261780007
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=8077.73, A_sl_eff=6092.38, I_sl=557636.27
+            sigma_cr_c=14308.04
+            e1=32.17, e2=5.77
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.7542186497782348
+            lambda_c_bar =0.11129930005187551
+            Phi_c =0.4900839613993376
+            Chi_c =1.0337386991878745
+         Critical buckling values
+            Chi_c: 1.0337386991878745
+            sigma_cr_c: 14308.043872994043
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0337386991878745
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 71.62311620829259
+         Lambda: 1.808748823220997
+         Rho_Global: 0.48562240869579776
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=6728.49, A_sl_eff=6682.0, I_sl=546392.56
+            sigma_cr_c=16830.84
+            e1=31.01, e2=6.92
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.9930905656807318
+            lambda_c_bar =0.1177539174104392
+            Phi_c =0.49187596711592246
+            Chi_c =1.0315137994455172
+         Column number 10
+            A_sl=6228.49, A_sl_eff=6228.49, I_sl=542225.89
+            sigma_cr_c=18043.31
+            e1=30.46, e2=7.48
+            All tension =False
+         Buckling Values 10
+            beta_A_c =1.0
+            lambda_c_bar =0.11412368515944986
+            Phi_c =0.4907295287669839
+            Chi_c =1.0330532090080022
+         Column number 11
+            A_sl=6228.49, A_sl_eff=6228.49, I_sl=542225.89
+            sigma_cr_c=18043.31
+            e1=30.46, e2=7.48
+            All tension =False
+         Buckling Values 11
+            beta_A_c =1.0
+            lambda_c_bar =0.11412368515944984
+            Phi_c =0.4907295287669839
+            Chi_c =1.0330532090080022
+         Column number 12
+            A_sl=6228.49, A_sl_eff=6228.49, I_sl=542225.89
+            sigma_cr_c=18043.31
+            e1=30.46, e2=7.48
+            All tension =False
+         Buckling Values 12
+            beta_A_c =1.0
+            lambda_c_bar =0.11412368515944984
+            Phi_c =0.4907295287669839
+            Chi_c =1.0330532090080022
+         Column number 13
+            A_sl=6728.49, A_sl_eff=6682.0, I_sl=546392.56
+            sigma_cr_c=16830.84
+            e1=31.01, e2=6.92
+            All tension =False
+         Buckling Values 13
+            beta_A_c =0.9930905656807314
+            lambda_c_bar =0.11775391741043857
+            Phi_c =0.4918759671159223
+            Chi_c =1.0315137994455175
+         Critical buckling values
+            Chi_c: 1.0315137994455172
+            sigma_cr_c: 16830.847706273842
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0315137994455172
+   Side 4
+      4.5.2 Plate type behaviour
+         sigma_cr = 956.989552261433
+         Lambda: 0.4578977127510553
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 14
+            A_sl=8077.73, A_sl_eff=6092.38, I_sl=557636.27
+            sigma_cr_c=14308.04
+            e1=32.17, e2=5.77
+            All tension =False
+         Buckling Values 14
+            beta_A_c =0.7542186497782349
+            lambda_c_bar =0.11129930005187591
+            Phi_c =0.49008396139933774
+            Chi_c =1.0337386991878743
+         Critical buckling values
+            Chi_c: 1.0337386991878743
+            sigma_cr_c: 14308.043872993943
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0337386991878743
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.2773427595059
+      eta_3: 0.02723885315614525
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 13.957894736842105
+      eta_3: 0.17189736258174593
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 86.16220563786581
+      eta_3: 0.036156676671450484
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.05523391211995239
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.04248762470765568
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.03186571853074177
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.02124381235382784
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.010621906176913921
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.002124381235382784
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.010621906176913918
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.021243812353827836
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.03186571853074175
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.04248762470765567
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.05523391211995239
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 13.957894736842105
+      eta_3: 0.17189736258174593
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.2
+      Beta: 0.9172562750271596
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+         sigma_cr = 690.3351445125247
+         Lambda: 0.5551949514683572
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=8760.36, A_sl_eff=7369.52, I_sl=563324.84
+            sigma_cr_c=13327.71
+            e1=32.62, e2=5.32
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.8412342740282388
+            lambda_c_bar =0.12179082996837545
+            Phi_c =0.49325594207330825
+            Chi_c =1.0296120091987382
+         Critical buckling values
+            Chi_c: 1.0296120091987382
+            sigma_cr_c: 13327.71326816552
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0296120091987382
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 71.61972259407104
+         Lambda: 1.8087916754046995
+         Rho_Global: 0.4856124968783031
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=6728.49, A_sl_eff=6682.0, I_sl=546392.56
+            sigma_cr_c=16830.84
+            e1=31.01, e2=6.92
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.9930905656807318
+            lambda_c_bar =0.1177539174104392
+            Phi_c =0.49187596711592246
+            Chi_c =1.0315137994455172
+         Column number 10
+            A_sl=6228.49, A_sl_eff=6228.49, I_sl=542225.89
+            sigma_cr_c=18043.31
+            e1=30.46, e2=7.48
+            All tension =False
+         Buckling Values 10
+            beta_A_c =1.0
+            lambda_c_bar =0.11412368515944986
+            Phi_c =0.4907295287669839
+            Chi_c =1.0330532090080022
+         Column number 11
+            A_sl=6228.49, A_sl_eff=6228.49, I_sl=542225.89
+            sigma_cr_c=18043.31
+            e1=30.46, e2=7.48
+            All tension =False
+         Buckling Values 11
+            beta_A_c =1.0
+            lambda_c_bar =0.11412368515944984
+            Phi_c =0.4907295287669839
+            Chi_c =1.0330532090080022
+         Column number 12
+            A_sl=6228.49, A_sl_eff=6228.49, I_sl=542225.89
+            sigma_cr_c=18043.31
+            e1=30.46, e2=7.48
+            All tension =False
+         Buckling Values 12
+            beta_A_c =1.0
+            lambda_c_bar =0.11412368515944984
+            Phi_c =0.4907295287669839
+            Chi_c =1.0330532090080022
+         Column number 13
+            A_sl=6728.49, A_sl_eff=6682.0, I_sl=546392.56
+            sigma_cr_c=16830.84
+            e1=31.01, e2=6.92
+            All tension =False
+         Buckling Values 13
+            beta_A_c =0.9930905656807314
+            lambda_c_bar =0.11775391741043857
+            Phi_c =0.4918759671159223
+            Chi_c =1.0315137994455175
+         Critical buckling values
+            Chi_c: 1.0315137994455172
+            sigma_cr_c: 16830.847706273842
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0315137994455172
+   Side 4
+      4.5.2 Plate type behaviour
+         sigma_cr = 213.92555737380974
+         Lambda: 0.9973421277010571
+         Rho_Global: 0.8695253213758755
+      4.5.3 Column type buckling behaviour
+         Column number 14
+            A_sl=8760.36, A_sl_eff=7369.52, I_sl=563324.84
+            sigma_cr_c=13327.71
+            e1=32.62, e2=5.32
+            All tension =False
+         Buckling Values 14
+            beta_A_c =0.8412342740282387
+            lambda_c_bar =0.12179082996837515
+            Phi_c =0.49325594207330814
+            Chi_c =1.0296120091987384
+         Critical buckling values
+            Chi_c: 1.0296120091987384
+            sigma_cr_c: 13327.713268165588
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0296120091987384
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.2773180512229
+      eta_3: 0.0273195293056681
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 14.693256578947368
+      eta_3: 0.16754062897436747
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 86.16220141855463
+      eta_3: 0.03601411497055052
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.05501612968281898
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.042320099756014605
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.03174007481701095
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.021160049878007302
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.010580024939003651
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.00211600498780073
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.010580024939003644
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.021160049878007292
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.03174007481701094
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.042320099756014584
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.05501612968281898
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 14.693256578947368
+      eta_3: 0.16754062897436747
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.2
+      Beta: 0.9172562750271596
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+         sigma_cr = 343.16525918451697
+         Lambda: 0.655640403176191
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 8
+            A_sl=9191.69, A_sl_eff=8419.86, I_sl=566919.25
+            sigma_cr_c=12783.34
+            e1=32.87, e2=5.07
+            All tension =False
+         Buckling Values 8
+            beta_A_c =0.9160297011475177
+            lambda_c_bar =0.12976764042006284
+            Phi_c =0.49572534882764924
+            Chi_c =1.0265207193909092
+         Critical buckling values
+            Chi_c: 1.0265207193909092
+            sigma_cr_c: 12783.347706694123
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0265207193909092
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 71.62257135013252
+         Lambda: 1.808755703103016
+         Rho_Global: 0.48562081733528173
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=6728.49, A_sl_eff=6682.0, I_sl=546392.56
+            sigma_cr_c=16830.84
+            e1=31.01, e2=6.92
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.9930905656807318
+            lambda_c_bar =0.1177539174104392
+            Phi_c =0.49187596711592246
+            Chi_c =1.0315137994455172
+         Column number 10
+            A_sl=6228.49, A_sl_eff=6228.49, I_sl=542225.89
+            sigma_cr_c=18043.31
+            e1=30.46, e2=7.48
+            All tension =False
+         Buckling Values 10
+            beta_A_c =1.0
+            lambda_c_bar =0.11412368515944986
+            Phi_c =0.4907295287669839
+            Chi_c =1.0330532090080022
+         Column number 11
+            A_sl=6228.49, A_sl_eff=6228.49, I_sl=542225.89
+            sigma_cr_c=18043.31
+            e1=30.46, e2=7.48
+            All tension =False
+         Buckling Values 11
+            beta_A_c =1.0
+            lambda_c_bar =0.11412368515944984
+            Phi_c =0.4907295287669839
+            Chi_c =1.0330532090080022
+         Column number 12
+            A_sl=6228.49, A_sl_eff=6228.49, I_sl=542225.89
+            sigma_cr_c=18043.31
+            e1=30.46, e2=7.48
+            All tension =False
+         Buckling Values 12
+            beta_A_c =1.0
+            lambda_c_bar =0.11412368515944984
+            Phi_c =0.4907295287669839
+            Chi_c =1.0330532090080022
+         Column number 13
+            A_sl=6728.49, A_sl_eff=6682.0, I_sl=546392.56
+            sigma_cr_c=16830.84
+            e1=31.01, e2=6.92
+            All tension =False
+         Buckling Values 13
+            beta_A_c =0.9930905656807314
+            lambda_c_bar =0.11775391741043857
+            Phi_c =0.4918759671159223
+            Chi_c =1.0315137994455175
+         Critical buckling values
+            Chi_c: 1.0315137994455172
+            sigma_cr_c: 16830.847706273842
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0315137994455172
+   Side 4
+      4.5.2 Plate type behaviour
+         sigma_cr = 131.21024615878588
+         Lambda: 1.0603115471559548
+         Rho_Global: 0.8255239797397363
+      4.5.3 Column type buckling behaviour
+         Column number 14
+            A_sl=9191.69, A_sl_eff=8419.86, I_sl=566919.25
+            sigma_cr_c=12783.34
+            e1=32.87, e2=5.07
+            All tension =False
+         Buckling Values 14
+            beta_A_c =0.9160297011475177
+            lambda_c_bar =0.12976764042006336
+            Phi_c =0.49572534882764935
+            Chi_c =1.026520719390909
+         Critical buckling values
+            Chi_c: 1.026520719390909
+            sigma_cr_c: 12783.347706694023
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.026520719390909
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.2774290575289
+      eta_3: 0.027349847270820373
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 13.957894736842107
+      eta_3: 0.1718973625817459
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 86.16221108045393
+      eta_3: 0.03580630870815855
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.05469868231974719
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.04207590947672861
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.031556932107546454
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.021037954738364305
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.010518977369182152
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.0021037954738364305
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.01051897736918215
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.0210379547383643
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.03155693210754644
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.0420759094767286
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.05469868231974719
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 13.957894736842107
+      eta_3: 0.1718973625817459
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.2
+      Beta: 0.9172562750271596
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.7819557364538499
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.4
+      Beta: 0.8942770711104564
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+         sigma_cr = 715.6574692310066
+         Lambda: 0.5735735803398415
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=10616.15, A_sl_eff=10616.15, I_sl=3664408.32
+            sigma_cr_c=71541.11
+            e1=45.49, e2=19.95
+            All tension =False
+         Buckling Values 9
+            beta_A_c =1.0
+            lambda_c_bar =0.05731338767549219
+            Phi_c =0.47476385783095437
+            Chi_c =1.0570203391301356
+         Column number 10
+            A_sl=10015.41, A_sl_eff=9848.18, I_sl=3659402.16
+            sigma_cr_c=75728.65
+            e1=44.3, e2=21.14
+            All tension =False
+         Buckling Values 10
+            beta_A_c =0.9833031236530073
+            lambda_c_bar =0.055239219237649934
+            Phi_c =0.47410574798404587
+            Chi_c =1.0582206865805162
+         Critical buckling values
+            Chi_c: 1.0570203391301356
+            sigma_cr_c: 75728.65055097609
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0570203391301356
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 260.2373552549249
+         Lambda: 0.9201323214025007
+         Rho_Global: 0.8269505767070672
+      4.5.3 Column type buckling behaviour
+         Column number 10
+            A_sl=12486.06, A_sl_eff=11537.94, I_sl=4591853.65
+            sigma_cr_c=76222.18
+            e1=48.63, e2=24.97
+            All tension =False
+         Buckling Values 10
+            beta_A_c =0.9240654303543393
+            lambda_c_bar =0.05337582505740167
+            Phi_c =0.47389670433937103
+            Chi_c =1.0584498132783762
+         Column number 11
+            A_sl=11736.06, A_sl_eff=11340.51, I_sl=4585603.65
+            sigma_cr_c=80982.82
+            e1=47.03, e2=26.56
+            All tension =False
+         Buckling Values 11
+            beta_A_c =0.9662960215282376
+            lambda_c_bar =0.052953242391821274
+            Phi_c =0.4736234112344566
+            Chi_c =1.0590109413546827
+         Column number 12
+            A_sl=12486.06, A_sl_eff=11537.94, I_sl=4591853.65
+            sigma_cr_c=76222.18
+            e1=48.63, e2=24.97
+            All tension =False
+         Buckling Values 12
+            beta_A_c =0.9240654303543393
+            lambda_c_bar =0.05337582505740167
+            Phi_c =0.47389670433937103
+            Chi_c =1.0584498132783762
+         Critical buckling values
+            Chi_c: 1.0584498132783762
+            sigma_cr_c: 76222.18308993017
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0584498132783762
+   Side 4
+      4.5.2 Plate type behaviour
+         sigma_cr = 718.351084250046
+         Lambda: 0.5724972003617255
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 13
+            A_sl=10015.41, A_sl_eff=9848.18, I_sl=3659402.16
+            sigma_cr_c=75728.65
+            e1=44.3, e2=21.14
+            All tension =False
+         Buckling Values 13
+            beta_A_c =0.9833031236530071
+            lambda_c_bar =0.055239219237649975
+            Phi_c =0.47410574798404587
+            Chi_c =1.0582206865805162
+         Column number 14
+            A_sl=10616.15, A_sl_eff=10616.15, I_sl=3664408.32
+            sigma_cr_c=71541.11
+            e1=45.49, e2=19.95
+            All tension =False
+         Buckling Values 14
+            beta_A_c =1.0
+            lambda_c_bar =0.0573133876754923
+            Phi_c =0.4747638578309544
+            Chi_c =1.0570203391301356
+         Critical buckling values
+            Chi_c: 1.0570203391301356
+            sigma_cr_c: 71541.11480375259
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0570203391301356
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.2774470427106
+      eta_3: 0.027210451240467337
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 52.757878289473666
+      eta_3: 0.0967368802099639
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 181.22298407189206
+      eta_3: 0.030583557914150076
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.43
+      eta_3: 0.043760279352965024
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.027350174595603148
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.390625
+      eta_3: 0.013675087297801576
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.002735017459560314
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.390625
+      eta_3: 0.013675087297801576
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.027350174595603148
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.43
+      eta_3: 0.043760279352965024
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 52.75787828947369
+      eta_3: 0.09673688020996386
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
