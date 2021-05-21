@@ -15,7 +15,7 @@ cs_h = 1500
 cs_t_side = 5
 cs_a = 10000
 cs_L_e = 15000
-cs_bending_type = "sagging bending" if data.input_data.get("M_Ed")>0 else "hogging bending"
+cs_bending_type = "sagging bending" if data.input_data.get("M_Ed")>0 or data.input_data.get("M_Ed") == None else "hogging bending"
 cs_cs_position = "neither"
 def set_cs_defaults():
     data.input_data.update({"b_sup": cs_b_sup})
