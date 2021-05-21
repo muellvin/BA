@@ -1,5 +1,5 @@
 import math
-import data
+from data_and_defaults import data
 
 """path defaults"""
 sys_path = None
