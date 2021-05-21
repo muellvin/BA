@@ -9,7 +9,7 @@ sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
 from user_interface import cs_to_html
 from user_interface import form_values
 from user_interface import stiffener_transform
-from deck_and_inital_cs import initial_cs
+from deck_and_initial_cs import initial_cs
 from deck_and_initial_cs import deck
 from data_and_defaults import defaults
 from data_and_defaults import data
@@ -88,6 +88,7 @@ def resultpage_optimize():
     if optimizer_num == 0:
         opt_iterative_steps.optimize()
     else:
+        pass
         #put your optimizer here
     return render_template('resultpage_optimize.html')
 

@@ -1,5 +1,5 @@
-import defaults
 import math
+from data_and_defaults import defaults
 from assembly import add_stiffeners
 from classes import crosssection
 from classes import plate_code

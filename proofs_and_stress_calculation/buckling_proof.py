@@ -7,7 +7,7 @@ from proofs_and_stress_calculation import interaction
 from proofs_and_stress_calculation import stress_cal
 from data_and_defaults import defaults
 from data_and_defaults import data
-from user_interface/output import printing
+from output import printing
 
 
 

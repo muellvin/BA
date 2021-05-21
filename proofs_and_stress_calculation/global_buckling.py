@@ -7,7 +7,7 @@ from classes import crosssection
 from classes import point
 from data_and_defaults import data
 from data_and_defaults import defaults
-from user_interface/output import printing
+from output import printing
 
 
 

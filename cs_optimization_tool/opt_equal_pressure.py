@@ -10,7 +10,7 @@ from classes import stiffeners_proposition
 from assembly import add_stiffeners
 from assembly import merge
 from assembly import substantiate
-from user_interface/output import printing
+from output import printing
 
 
 #an optimizer that puts the stiffeners in place, such that the single plates inbetween each have the same total pressure

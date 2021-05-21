@@ -10,7 +10,7 @@ from deck_and_initial_cs import deck
 from deck_and_initial_cs import initial_cs
 from data_and_defaults import data
 from data_and_defaults import defaults
-from user_interface/output import geometry_output
+from output import geometry_output
 from user_interface import cs_to_html
 
 

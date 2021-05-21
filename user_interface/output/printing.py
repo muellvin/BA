@@ -2,11 +2,11 @@ import sys
 import os
 from fpdf import FPDF
 from data_and_defaults import defaults
-from user_interface/output import geometry_output
+from output import geometry_output
 from cs_optimization_tool import optimization_value
 from cs_optimization_tool import cs_collector
+from proofs_and_stress_calculation import buckling_proof
 
-from proofs import buckling_proof
 sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
 
 

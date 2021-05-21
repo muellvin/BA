@@ -6,7 +6,7 @@ from classes import crosssection
 from classes import line
 from classes import point
 from classes import plate_code
-from user_interface/output import printing
+from output import printing
 
 def interaction_web(total_cs, web_plate, eta_3):
     line1 = "\n   7.1 Interaction between shear force, bending moment and axial force"

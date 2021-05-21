@@ -94,7 +94,7 @@ def prop_to_draw(cs):
             angle = math.pi
         if st.pl_position == 4:
             angle = math.pi - cs.get_angle(2)
-        stiffener_i = add_stiffenerscreate_stiffener_global(st.pl_position, st.st_number, y, z, angle, \
+        stiffener_i = add_stiffeners.create_stiffener_global(st.pl_position, st.st_number, y, z, angle, \
         st.b_sup, st.b_inf, st.h, st.t)
         st_list_rest.append(stiffener_i)
     return st_list_rest
