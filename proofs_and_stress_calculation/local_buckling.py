@@ -2,7 +2,7 @@ import math
 from data_and_defaults import data
 from data_and_defaults import defaults
 from proofs_and_stress_calculation import stress_cal
-from user_interface/output import printing
+from output import printing
 
 
 def local_buckling(cs):

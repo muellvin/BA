@@ -3,9 +3,9 @@ import copy
 from data_and_defaults import defaults
 from data_and_defaults import data
 from proofs_and_stress_calculation import stress_cal
-from ebplate import ebplate
+from ebplate_batch_mode import ebplate
 from classes import crosssection
-from user_interface/output import printing
+from output import printing
 
 def resistance_to_shear(plate_glob, V_Ed_plate):
     string = "\n   5. Resistance to shear"

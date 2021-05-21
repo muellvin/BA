@@ -1,4 +1,4 @@
-import defaults
+from data_and_defaults import defaults
 
 class stiffeners_proposition():
 

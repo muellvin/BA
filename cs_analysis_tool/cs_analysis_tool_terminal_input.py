@@ -1,6 +1,6 @@
 #einfach ein skript
-import data
-import defaults
+from data_and_defaults import data
+from data_and_defaults import defaults
 from classes import stiffeners_proposition
 from classes import proposed_stiffener
 from classes import stiffener

@@ -1,13 +1,13 @@
 import math
 import copy
 from proofs_and_stress_calculation import stress_cal
-from proofs_and_stress_calculation/ebplate import ebplate
+from ebplate_batch_mode import ebplate
 from classes import line
 from classes import crosssection
 from classes import point
 from data_and_defaults import data
 from data_and_defaults import defaults
-from user_interface/output import printing
+from output import printing
 
 def global_plate_buckling(total_cs, plate_glob):
     string = "\n      4.5.2 Plate type behaviour"

@@ -75097,3 +75097,69 @@ Resistance to shear and interaction shear force and bending moment for side 4
    Web -> (7.1) without iterating
       eta_3 <= 0.5; no interaction needed
       utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 18985918717.176212
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8865248226950354
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=2065837.15, A_sl_eff=1754283.45, I_sl=21703112.68
+            sigma_cr_c=2177.43
+            e1=73.45, e2=0.15
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.8491876774684973
+            lambda_c_bar =0.30273545176814787
+            Phi_c =0.5634933985957417
+            Chi_c =0.9626885085528893
+         Critical buckling values
+            Chi_c: 0.9626885085528893
+            sigma_cr_c: 2177.433909615805
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 0.9626885085528893
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.2 Plate type behaviour
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=2065837.15, A_sl_eff=1754283.45, I_sl=21703112.68
+            sigma_cr_c=100000000.0
+            e1=73.45, e2=0.15
+            All tension =True
+         Buckling Values 9
+            beta_A_c =0.8491876774684977
+            lambda_c_bar =0
+            Phi_c =0
+            Chi_c =1
+         Critical buckling values
+            Chi_c: 1
+            sigma_cr_c: 100000000
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear

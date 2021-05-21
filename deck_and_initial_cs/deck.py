@@ -1,13 +1,13 @@
-import defaults
 import math
-import data
+from data_and_defaults import defaults
+from data_and_defaults import data
 from classes import point
 from classes import line
 from classes import crosssection
 from classes import plate_code
 from classes import stiffeners_proposition
 from classes import proposed_stiffener
-from assembly import stiffener
+from assembly import add_stiffeners 
 
 
 
@@ -74,7 +74,7 @@ def deck(b_deck):
         num_of_stiffeners = (num_of_plates-1)/2
         for i in range(int(num_of_stiffeners)):
             center_y = (0.5*b_deck - (2*i+1.5)*b_sup)
-            stiffener_cs = stiffener.create_stiffener_global(1, i+1, center_y, 0, 0, b_sup, b_inf, h, t)
+            stiffener_cs = add_stiffeners.create_stiffener_global(1, i+1, center_y, 0, 0, b_sup, b_inf, h, t)
             deck_stiffener_list.append(stiffener_cs)
         return deck_stiffener_list
 
