@@ -1,8 +1,5 @@
-#class containing the orientation code for each plate of the crosssections
-
 class plate_code():
-    """This code reveals, where the specified plate of the crosssection is."""
-
+    
     def __init__(self, pl_position, pl_type, tpl_number, st_number, st_pl_position):
         self.pl_position = pl_position
         self.pl_type = pl_type

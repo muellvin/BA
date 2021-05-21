@@ -1,4 +1,3 @@
-
 class proposed_stiffener():
 
     def __init__(self, pl_position, st_number, location, i_along, b_sup = None, b_inf = None, h = None, t = None):
