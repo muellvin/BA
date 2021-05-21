@@ -20,19 +20,21 @@ from output import geometry_output as go
 #propositions is the only file that is changed and given back
 def check_geometry(cs, stiffeners, propositions):
     geometry_ok = True
-    if defaults.do_height_only == True and defaults.do_width_only == True:
-        conflict = True
-        assert conflict == True, "cannot do only height and only width"
+    if defaults.do_check_geometry == True:
+        if defaults.do_height_only == True and defaults.do_width_only == True:
+            conflict = True
+            assert conflict == True, "cannot do only height and only width"
 
-    if defaults.do_width_only == True:
-        propositions, ok1 = distances_to_corners(cs, stiffeners, propositions)
-        propositions, ok2 = distances_betw_stiffeners(cs, stiffeners, propositions)
-        propositions, ok3 = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
-        """distances across on bottom side are not done, maybe not needed"""
-        geometry_ok = ( ok1 == ok2  == ok3 == True )
+        if defaults.do_width_only == True:
+            propositions, ok1 = distances_to_corners(cs, stiffeners, propositions)
+            propositions, ok2 = distances_betw_stiffeners(cs, stiffeners, propositions)
+            propositions, ok3 = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
+            """distances across on bottom side are not done, maybe not needed"""
+            geometry_ok = ( ok1 == ok2  == ok3 == True )
 
-    elif defaults.do_height_only == True:
-        propositions, geometry_ok = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
+        elif defaults.do_height_only == True:
+            propositions, geometry_ok = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
+
 
     return propositions, geometry_ok
 
