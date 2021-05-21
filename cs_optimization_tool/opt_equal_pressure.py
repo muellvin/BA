@@ -47,7 +47,7 @@ def opt_eqpressure():
             empty_cs = set_t_side(copy.deepcopy(cs_fresh), t_side)
             empty_cs = set_t_bottom(empty_cs, t_bottom)
 
-            cs_temp = add_stiffenersadd_stiffener_set(copy.deepcopy(empty_cs), st_prop_deck)
+            cs_temp = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop_deck)
             cs_temp = buckling_proof.buckling_proof(copy.deepcopy(empty_cs))
             sigma_top_red = get_sigma_top_red(cs_temp)
             sigma_bottom_red = get_sigma_bottom_red(cs_temp)
@@ -68,7 +68,7 @@ def opt_eqpressure():
                             st_prop = stiffeners_proposition.stiffeners_proposition()
                             st_prop.stiffeners = copy.deepcopy(st_prop_deck.stiffeners) + copy.deepcopy(st_prop_side.stiffeners)
                             st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda st: st.st_number)
-                            stiffened_cs = add_stiffenersadd_stiffener_set(copy.deepcopy(empty_cs), st_prop)
+                            stiffened_cs = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop)
                             stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
 
                             #stresses at the top and bottom corner
@@ -95,7 +95,7 @@ def opt_eqpressure():
                                     st_prop.stiffeners = copy.deepcopy(st_prop_deck.stiffeners) + copy.deepcopy(st_prop_side.stiffeners) + copy.deepcopy(st_prop_bottom.stiffeners)
                                     st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda st: st.st_number)
 
-                                    stiffened_cs = add_stiffenersadd_stiffener_set(copy.deepcopy(empty_cs), st_prop)
+                                    stiffened_cs = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop)
                                     #geometry_output.print_cs_red(stiffened_cs)
                                     stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
 
