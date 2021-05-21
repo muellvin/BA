@@ -4,8 +4,8 @@ import sys
 import defaults
 from assembly import stiffener
 from assembly import substantiate
-from classes import crosssection
 from assembly import merge
+from classes import crosssection
 from cs_analysis_tool import cs_analysis_tool_terminal_input
 from user_interface/output import printing
 from user_interface/output import geometry_output
