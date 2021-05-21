@@ -1,22 +1,12 @@
-from classes import stiffener as st
-from classes import crosssection as cs
-from classes import plate_code as plcd
-from classes import line as ln
 import defaults
 import math
-import numpy
+from assembly import add_stiffeners
+from classes import crosssection
+from classes import plate_code
+from classes import line
 
 
-from colorama import Fore
-from colorama import Style
-
-
-"""crossection values are needed"""
-cs_b_sup = 4000 #data.input_data["b_sup"]
-cs_b_inf = 2000 #data.input_data["b_inf"]
-cs_h = 1500 #data.input_data["h"]
-
-def substantiate(crosssection, propositions):
+def substantiate(cs, propositions):
     #initialize list for stiffeners
     stiffener_list =[]
     success = True
@@ -33,7 +23,7 @@ def substantiate(crosssection, propositions):
         elif stiffener.pl_position == 2:
             b_sup, b_inf, h, t, success = find_dimensions(stiffener)
             side = 2
-            angle = math.pi + crosssection.get_angle(side)
+            angle = math.pi + cs.get_angle(side)
             #sidplate right side
         elif stiffener.pl_position == 3:
             b_sup, b_inf, h, t, success = find_dimensions(stiffener)
@@ -45,12 +35,12 @@ def substantiate(crosssection, propositions):
             assert stiffener.pl_position == 4, "Plate not found."
             b_sup, b_inf, h, t, success = find_dimensions(stiffener)
             side = 4
-            angle = math.pi - crosssection.get_angle(side)
+            angle = math.pi - cs.get_angle(side)
             #make us of symmetry tbd
 
         if success == True:
-            y,z = crosssection.get_coordinates(stiffener.location, side)
-            global_st = st.create_stiffener_global(stiffener.pl_position, stiffener.st_number, \
+            y,z = cs.get_coordinates(stiffener.location, side)
+            global_st = add_stiffeners.create_stiffener_global(stiffener.pl_position, stiffener.st_number, \
             y, z, angle, b_sup, b_inf, h, t)
 
             #check if code correct
@@ -127,8 +117,8 @@ def find_dimensions(stiffener):
             if b_inf_min < b_inf_max:
                 for b_inf in range(b_inf_min, b_inf_max, b_inf_step):
                     for t in t_range:
-                        I_a = st.get_i_along_stiffener(b_sup, b_inf, h, t)
-                        m = st.get_area_stiffener(b_sup, b_inf, h, t) #get_area to be implemented
+                        I_a = add_stiffeners.get_i_along_stiffener(b_sup, b_inf, h, t)
+                        m = add_stiffeners.get_area_stiffener(b_sup, b_inf, h, t) #get_area to be implemented
                         if I_a > stiffener.i_along:
                             if m < best[4]:
                                 print("b_sup: ",b_sup," b_inf: ",b_inf," h: ",h," t: ",t)
@@ -164,9 +154,9 @@ def find_dimensions(stiffener):
                     if b_inf_min < b_inf_max:
                         for b_inf in range(b_inf_min, b_inf_max, b_inf_step):
                             for t in t_range:
-                                I_a = st.get_i_along_stiffener(b_sup, b_inf, h, t)
+                                I_a = add_stiffeners.get_i_along_stiffener(b_sup, b_inf, h, t)
                                 if I_a > stiffener.i_along:
-                                    m = st.get_area_stiffener(b_sup, b_inf, h, t) #get_area to be implemented
+                                    m = add_stiffeners.get_area_stiffener(b_sup, b_inf, h, t) #get_area to be implemented
                                     if m < best[4]:
                                         #print("b_sup: ",b_sup," b_inf: ",b_inf," h: ",h," t: ",t)
                                         best = [b_sup, b_inf, h, t, m]
@@ -194,7 +184,6 @@ def find_dimensions(stiffener):
         print("correction h:", stiffener.h_corr_val)
     print("chosen dimensions:         b_sup: ",math.floor(b_sup),"        b_inf: ",b_inf,"         h: ",h,"          t:",t)
     print(" ")
-        #print(f"{Fore.GREEN}No corrections were needed {Style.RESET_ALL}")
 
 
 

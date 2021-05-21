@@ -1,18 +1,15 @@
 import math
 import shapely
 import random
+import copy
 from classes import point
 from classes import line
 from classes import crosssection
 from classes import plate_code
-from shapely.geometry import LineString, Point
-from classes import substantiate as ss
-from classes import merge
-from output import geometry_output as go
-import defaults
-from output import geometry_output as go
-import copy
-from classes import check_geometry
+from assembly import substantiate
+from assembly import merge
+from assembly import check_geometry
+from data_and_defaults import defaults
 
 
 #initial cs is empty (only four lines)
@@ -25,19 +22,17 @@ def add_stiffener_set(initial_cs, propositions):
 
     while geometry_ok == False and iterations <= 1:
         iterations += 1
-        stiffener_list = ss.substantiate(initial_cs, propositions)
+        stiffener_list = substantiate.substantiate(initial_cs, propositions)
         if stiffener_list == False:
             print("\n\n Substantiate finished with FALSE")
             return False
         proposition, geometry_ok = check_geometry.check_geometry(initial_cs, stiffener_list, propositions)
         print(geometry_ok)
-        #cs = merge.merge(initial_cs, stiffener_list)
-        #go.print_cs(cs)
 
     print("\n\n Substantiate finished with success")
     if geometry_ok == False:
         return False
-      
+
     next_cs = merge.merge(copy.deepcopy(initial_cs), stiffener_list)
     next_cs.st_props = proposition
     return next_cs

@@ -1,17 +1,13 @@
-import defaults
 import math
 import shapely
 import random
 import copy
+from data_and_defaults import defaults
 from classes import point
 from classes import line
 from classes import crosssection
 from classes import plate_code
-from classes import substantiate
-from output import geometry_output
-import defaults
-from output import geometry_output as go
-
+from assembly import substantiate
 
 
 
