@@ -1,12 +1,11 @@
+import math
+import copy
 from classes import crosssection
 from classes import point
 from classes import line
-from output import geometry_output
-import math
-import data
-import copy
-import defaults
-from output import printing
+from data_and_defaults import data
+from data_and_defaults import defaults
+from user_interface/output import printing
 
 
 

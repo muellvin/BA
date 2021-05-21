@@ -1,12 +1,11 @@
-import defaults
 import math
-import data
-from proofs import stress_cal
-from ebplate import ebplate
 import copy
-from classes import crosssection as cs
-from output import geometry_output as go
-from output import printing
+from data_and_defaults import defaults
+from data_and_defaults import data
+from proofs_and_stress_calculation import stress_cal
+from ebplate import ebplate
+from classes import crosssection
+from user_interface/output import printing
 
 def resistance_to_shear(plate_glob, V_Ed_plate):
     string = "\n   5. Resistance to shear"
@@ -106,7 +105,7 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         stiffeners_ebp = []
         for st_number in range(min_stn, max_stn+1, 1):
             i = st_number - min_stn
-            stiffener_list.insert(i, cs.crosssection(0,0,0))
+            stiffener_list.insert(i, crosssection.crosssection(0,0,0))
             #find three plates of stiffener
             for plate in stiffened_plate.lines:
                 if plate.code.st_number == st_number:

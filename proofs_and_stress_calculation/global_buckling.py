@@ -1,21 +1,13 @@
 import math
-import defaults
-from proofs import stress_cal
-from proofs import column_buckling
-from proofs import global_plate_buckling
-
-from ebplate import ebplate as ebp
-from classes import line as ln
+from proofs_and_stress_calculation import stress_cal
+from proofs_and_stress_calculation import column_buckling
+from proofs_and_stress_calculation import global_plate_buckling
+from classes import line
 from classes import crosssection
-from classes import point as pt
-from output import geometry_output as go
-from proofs import column_buckling as column
-from proofs import global_plate_buckling as plate_global
-import random
-import data
-import defaults
-from output import geometry_output as go
-from output import printing
+from classes import point
+from data_and_defaults import data
+from data_and_defaults import defaults
+from user_interface/output import printing
 
 
 

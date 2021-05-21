@@ -1,15 +1,13 @@
 import math
-import defaults
-from proofs import stress_cal as stc
-from ebplate import ebplate
-from classes import line as ln
-from classes import crosssection as cs
-from classes import point as pt
-from output import geometry_output as go
-import random
-import data
 import copy
-from output import printing
+from proofs_and_stress_calculation import stress_cal
+from proofs_and_stress_calculation/ebplate import ebplate
+from classes import line
+from classes import crosssection
+from classes import point
+from data_and_defaults import data
+from data_and_defaults import defaults
+from user_interface/output import printing
 
 def global_plate_buckling(total_cs, plate_glob):
     string = "\n      4.5.2 Plate type behaviour"
@@ -43,8 +41,8 @@ def global_plate_buckling(total_cs, plate_glob):
 
     assert plate_a != None and plate_b != None, "For-Loop failed."
 
-    sigma_a = stc.get_sigma_a(total_cs, plate_a, data.input_data.get("M_Ed"))
-    sigma_b = stc.get_sigma_b(total_cs, plate_b, data.input_data.get("M_Ed"))
+    sigma_a = stress_cal.get_sigma_a(total_cs, plate_a, data.input_data.get("M_Ed"))
+    sigma_b = stress_cal.get_sigma_b(total_cs, plate_b, data.input_data.get("M_Ed"))
     if abs(sigma_a) <= 0.1:
         sigma_a = sigma_a/abs(sigma_a)*0.1
     if abs(sigma_b) <= 0.1:
@@ -134,7 +132,7 @@ def global_plate_buckling(total_cs, plate_glob):
         plate_num_list = []
         corresp_tpl = -2
         for st_number in range(min_stn, max_stn+1, 1):
-            stiffener_list.insert(st_number - min_stn, cs.crosssection(0,0,0))
+            stiffener_list.insert(st_number - min_stn, crosssection.crosssection(0,0,0))
             #find three plates of stiffener
             for plate in stiffened_plate.lines:
                 if plate.code.st_number == st_number:
@@ -199,8 +197,8 @@ def global_plate_buckling(total_cs, plate_glob):
             unit_vec_to_b = (bottom_plate.b.y - bottom_plate.a.y) / bottom_plate.get_length_tot()
             #find additional parts of top plate
             top_original = total_cs.get_line(tpl_number = top_plate_tpl)
-            sigma_a_top = stc.get_sigma_a(total_cs, top_original, data.input_data.get("M_Ed"))
-            sigma_b_top = stc.get_sigma_b(total_cs, top_original, data.input_data.get("M_Ed"))
+            sigma_a_top = stress_cal.get_sigma_a(total_cs, top_original, data.input_data.get("M_Ed"))
+            sigma_b_top = stress_cal.get_sigma_b(total_cs, top_original, data.input_data.get("M_Ed"))
             psi_top =  min(sigma_a_top, sigma_b_top) / max(sigma_a_top, sigma_b_top)
             length_top = 0
             if sigma_a_top > 0 or sigma_b_top > 0:
@@ -225,8 +223,8 @@ def global_plate_buckling(total_cs, plate_glob):
 
             #find additional parts of bottom plate
             bottom_original = total_cs.get_line(tpl_number = top_plate_tpl)
-            sigma_a_bottom = stc.get_sigma_a(total_cs, bottom_original, data.input_data.get("M_Ed"))
-            sigma_b_bottom = stc.get_sigma_b(total_cs, bottom_original, data.input_data.get("M_Ed"))
+            sigma_a_bottom = stress_cal.get_sigma_a(total_cs, bottom_original, data.input_data.get("M_Ed"))
+            sigma_b_bottom = stress_cal.get_sigma_b(total_cs, bottom_original, data.input_data.get("M_Ed"))
             psi_bottom = min(sigma_a_bottom, sigma_b_bottom) / max(sigma_a_bottom, sigma_b_bottom)
             length_bottom = 0
             if sigma_a_bottom > 0 or sigma_b_bottom > 0:
@@ -250,10 +248,10 @@ def global_plate_buckling(total_cs, plate_glob):
                 #stiffener is in tension zone
                 pass
             #add additional parts of plate to stiffener
-            new_top_point = pt.point(top_plate.b.y + unit_vec_to_a * length_top, top_plate.b.z)
-            new_top_plate = ln.line(top_plate.code, new_top_point, top_plate.b, top_plate.t)
-            new_bottom_point = pt.point(bottom_plate.a.y + unit_vec_to_b * length_bottom, bottom_plate.a.z)
-            new_bottom_plate = ln.line(bottom_plate.code, bottom_plate.a, new_bottom_point, top_plate.t)
+            new_top_point = point.point(top_plate.b.y + unit_vec_to_a * length_top, top_plate.b.z)
+            new_top_plate = line.line(top_plate.code, new_top_point, top_plate.b, top_plate.t)
+            new_bottom_point = point.point(bottom_plate.a.y + unit_vec_to_b * length_bottom, bottom_plate.a.z)
+            new_bottom_plate = line.line(bottom_plate.code, bottom_plate.a, new_bottom_point, top_plate.t)
             stiffener.lines.append(new_top_plate)
             stiffener.lines.append(new_bottom_plate)
 
@@ -263,14 +261,14 @@ def global_plate_buckling(total_cs, plate_glob):
             #calculate gamma
             length_gamma = defaults.effective_width_parameter*center_plate.t
             if length_gamma > 0.5*center_plate.get_length_tot():
-                new_top_plate.a = pt.point(new_top_plate.b.y + unit_vec_to_a*length_gamma, new_top_plate.b.z)
-                new_bottom_plate.b = pt.point(new_bottom_plate.a.y + unit_vec_to_b*length_gamma, new_bottom_plate.a.z)
+                new_top_plate.a = point.point(new_top_plate.b.y + unit_vec_to_a*length_gamma, new_top_plate.b.z)
+                new_bottom_plate.b = point.point(new_bottom_plate.a.y + unit_vec_to_b*length_gamma, new_bottom_plate.a.z)
             else:
                 stiffener.lines.remove(center_plate)
-                new_top_plate.a = pt.point(new_top_plate.b.y + unit_vec_to_a*length_gamma, new_top_plate.b.z)
-                new_top_plate.b = pt.point(new_top_plate.b.y + unit_vec_to_b*length_gamma, new_top_plate.b.z)
-                new_bottom_plate.b = pt.point(new_bottom_plate.a.y + unit_vec_to_b*length_gamma, new_bottom_plate.a.z)
-                new_bottom_plate.a = pt.point(new_bottom_plate.a.y + unit_vec_to_a*length_gamma, new_bottom_plate.a.z)
+                new_top_plate.a = point.point(new_top_plate.b.y + unit_vec_to_a*length_gamma, new_top_plate.b.z)
+                new_top_plate.b = point.point(new_top_plate.b.y + unit_vec_to_b*length_gamma, new_top_plate.b.z)
+                new_bottom_plate.b = point.point(new_bottom_plate.a.y + unit_vec_to_b*length_gamma, new_bottom_plate.a.z)
+                new_bottom_plate.a = point.point(new_bottom_plate.a.y + unit_vec_to_a*length_gamma, new_bottom_plate.a.z)
             gamma = stiffener.get_i_y_tot() * 12 * (1-0.3**2)/(h*t**3)
 
             #assure that there is at least on stiffener in compression zone
