@@ -15,7 +15,7 @@ cs_h = 1500
 cs_t_side = 5
 cs_a = 10000
 cs_L_e = 15000
-cs_bending_type = "sagging bending"
+cs_bending_type = "sagging bending" if data.input_data.get("M_Ed")>0 else "hogging bending"
 cs_cs_position = "neither"
 def set_cs_defaults():
     data.input_data.update({"b_sup": cs_b_sup})
@@ -106,7 +106,7 @@ do_check_stiffeners_in_corners_bottom = False
 do_height_only = True
 do_width_only = False
 
-do_shear_lag_plastically = False 
+do_shear_lag_plastically = False
 do_shear_lag = True
 do_global_plate_buckling = True
 do_column_plate_buckling = True
