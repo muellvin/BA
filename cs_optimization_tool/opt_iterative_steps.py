@@ -1,20 +1,19 @@
 import math
-from classes import crosssection
-import initial_cs as ics
-import deck
 import copy
-from classes import stiffener
+from classes import crosssection
 from classes import proposed_stiffener
 from classes import stiffeners_proposition
-from classes import substantiate
-from classes import merge
-from output import geometry_output as go
-from proofs import buckling_proof
-import defaults
-import data
-from proofs import stress_cal
-from optimizer import optimization_value
-import cs_collector
+from deck_and_initial_cs import initial_cs
+from deck_and_initial_cs import deck
+from assembly import add_stiffeners
+from assembly import substantiate
+from assembly import merge
+from proofs_and_stress_calculation import buckling_proof
+from proofs_and_stress_calculation import stress_cal
+from data_and_defaults import defaults
+from data_and_defaults import data
+from cs_optimization_tool import optimization_value
+from cs_optimization_tool import cs_collector
 
 
 def optimize():
