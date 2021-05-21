@@ -1,7 +1,6 @@
-import data
-import defaults
-from optimizer import optimization_value
-from output import geometry_output
+from data_and_defaults import data
+from data_and_defaults import defaults
+from cs_optimization_tool import optimization_value
 
 def into_collector(new_cs):
     optimization_value.set_value(new_cs)

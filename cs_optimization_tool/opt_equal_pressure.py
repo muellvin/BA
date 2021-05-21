@@ -1,17 +1,17 @@
-from proofs import buckling_proof
-from proofs import local_buckling
-import cs_collector
-import data
-from classes import proposed_stiffener
-from classes import stiffeners_proposition
-from classes import stiffener
-from classes import merge
-from classes import substantiate
 import copy
 import math
-from output import geometry_output
-import defaults
-from output import printing
+from proofs_and_stress_calculation import buckling_proof
+from proofs_and_stress_calculation import local_buckling
+from cs_optimization_tool import cs_collector
+from data_and_defaults import data
+from data_and_defaults import defaults
+from classes import proposed_stiffener
+from classes import stiffeners_proposition
+from assembly import add_stiffeners
+from assembly import merge
+from assembly import substantiate
+from user_interface/output import printing
+
 
 #an optimizer that puts the stiffeners in place, such that the single plates inbetween each have the same total pressure
 def opt_eqpressure(cs_fresh, st_prop_deck):
