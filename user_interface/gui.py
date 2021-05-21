@@ -86,10 +86,9 @@ def resultpage_optimize():
     data.input_data.update({"b_sup":val.get("b_sup"), "b_inf":val.get("b_inf"), "h":val.get("h"), "t_deck":14})
     optimizer_num = int(request.form['opt'])
     if optimizer_num == 0:
-        opt_iterative_steps.optimize()
+        opt_equal_pressure.opt_eqpressure()
     else:
-        pass
-        #put your optimizer here
+        opt_iterative_steps.optimize()
     return render_template('resultpage_optimize.html')
 
 

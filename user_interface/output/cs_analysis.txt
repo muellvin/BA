@@ -79025,3 +79025,187 @@ Resistance to shear and interaction shear force and bending moment for side 4
    Web -> (7.1) without iterating
       eta_3 <= 0.5; no interaction needed
       utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+Shear Lag calculated plastically; iteratively
+Convergence of M_Rd_eff: 22271205585.42678
+Iteration number 1
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.6
+      Beta_ult: 0.8589974718981666
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+         sigma_cr = 578.6523890922979
+         Lambda: 0.5116058450840496
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=12393.52, A_sl_eff=11496.05, I_sl=3679219.77
+            sigma_cr_c=61528.99
+            e1=48.36, e2=17.08
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.9275854938945091
+            lambda_c_bar =0.05952110744213189
+            Phi_c =0.4756377608590748
+            Chi_c =1.055368200775513
+         Critical buckling values
+            Chi_c: 1.055368200775513
+            sigma_cr_c: 61528.992589265974
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.055368200775513
+   Side 3
+      4.5.2 Plate type behaviour
+         sigma_cr = 189.0692037613187
+         Lambda: 1.0032378334556344
+         Rho_Global: 0.7781903735929482
+      4.5.3 Column type buckling behaviour
+         Column number 9
+            A_sl=14736.06, A_sl_eff=11932.79, I_sl=4610603.65
+            sigma_cr_c=64847.79
+            e1=52.44, e2=21.15
+            All tension =False
+         Buckling Values 9
+            beta_A_c =0.8097682343295102
+            lambda_c_bar =0.05417097998509417
+            Phi_c =0.4744631228512606
+            Chi_c =1.0572795309803968
+         Column number 10
+            A_sl=14736.06, A_sl_eff=11932.79, I_sl=4610603.65
+            sigma_cr_c=64847.79
+            e1=52.44, e2=21.15
+            All tension =False
+         Buckling Values 10
+            beta_A_c =0.8097682343295102
+            lambda_c_bar =0.05417097998509417
+            Phi_c =0.4744631228512606
+            Chi_c =1.0572795309803968
+         Critical buckling values
+            Chi_c: 1.0572795309803968
+            sigma_cr_c: 64847.7950594637
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.0572795309803968
+   Side 4
+      4.5.2 Plate type behaviour
+         sigma_cr = 340.56968036916743
+         Lambda: 0.666870309359716
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour
+         Column number 11
+            A_sl=12393.52, A_sl_eff=11496.05, I_sl=3679219.77
+            sigma_cr_c=61528.99
+            e1=48.36, e2=17.08
+            All tension =False
+         Buckling Values 11
+            beta_A_c =0.9275854938945087
+            lambda_c_bar =0.059521107442131765
+            Phi_c =0.4756377608590747
+            Chi_c =1.055368200775513
+         Critical buckling values
+            Chi_c: 1.055368200775513
+            sigma_cr_c: 61528.99258926622
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1.055368200775513
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 948.4302943772834
+      eta_3: 0.02362915792324797
+   7.1 Interaction between shear force, bending moment and axial force
+      Deck plate is ignored, as it is dimensioned with EC 3-2
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 12.744407894736844
+      eta_3: 0.17989510295283434
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 76.75919794597152
+      eta_3: 0.032764629655020625
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5424999999999995
+      eta_3: 0.04997993689384023
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.017399494417345812
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.43
+      eta_3: 0.005799831472448605
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      eta_3: 0.017399494417345812
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5424999999999995
+      eta_3: 0.04997993689384023
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 12.744407894736844
+      eta_3: 0.17989510295283434
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+Convergence of M_Rd_eff: 0.21595611683828508
+Iteration number 2
+
+3.3 Shear lag at ultimate limit state
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0_star: 1.9
+      Beta_ult: 0.7180696630323
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0_star: 1.4
+      Beta_ult: 0.8860999318086902
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.005
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.2 Plate type behaviour
+         sigma_cr = 579.6267673249641
+         Lambda: 0.5251852004930394
+         Rho_Global: 1.0
+      4.5.3 Column type buckling behaviour

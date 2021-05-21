@@ -11,14 +11,20 @@ from assembly import add_stiffeners
 from assembly import merge
 from assembly import substantiate
 from output import printing
+from deck_and_initial_cs import deck
+from deck_and_initial_cs import initial_cs
 
 
 #an optimizer that puts the stiffeners in place, such that the single plates inbetween each have the same total pressure
-def opt_eqpressure(cs_fresh, st_prop_deck):
-
-
+def opt_eqpressure():
 
     set_defaults_for_opt_eqpressure()
+    b_sup = data.input_data["b_sup"]
+    b_inf = data.input_data["b_inf"]
+    h = data.input_data["h"]
+    t_deck = data.input_data["t_deck"]
+    cs_fresh = initial_cs.create_initial_cs(b_sup, b_inf, h, 1, t_deck, 1)
+    st_prop_deck = deck.deck(b_sup)
 
     t_values = [5]
     i_along_values = [10**7] # range(10**6, 10**8, 10*10**6)
