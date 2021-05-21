@@ -6,16 +6,17 @@ import sys
 import copy
 
 sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
-from web_interface import cs_to_html
-from web_interface import form_values
-from web_interface import stiffener_transform
-import initial_cs
-import deck
-import defaults
-import data
-from classes import merge
-from optimizer import cs_analysis_gui
-from optimizer import optimizer_nino
+from user_interface import cs_to_html
+from user_interface import form_values
+from user_interface import stiffener_transform
+from deck_and_inital_cs import initial_cs
+from deck_and_initial_cs import deck
+from data_and_defaults import defaults
+from data_and_defaults import data
+from assembly import merge
+from cs_analysis_tool import cs_analysis_tool
+from cs_optimization_tool import opt_iterative_steps
+from cs_optimization_tool import opt_equal_pressure
 
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
@@ -85,10 +86,9 @@ def resultpage_optimize():
     data.input_data.update({"b_sup":val.get("b_sup"), "b_inf":val.get("b_inf"), "h":val.get("h"), "t_deck":14})
     optimizer_num = int(request.form['opt'])
     if optimizer_num == 0:
-        optimizer_nino.optimize()
+        opt_iterative_steps.optimize()
     else:
         #put your optimizer here
-        pass
     return render_template('resultpage_optimize.html')
 
 
@@ -211,7 +211,7 @@ def resultpage_analysis():
     data.input_data.update({"M_Ed":M_Ed, "V_Ed":V_Ed, "T_Ed":T_Ed})
     f_y = int(request.form['fy'])
     data.constants.update({"f_y":f_y})
-    results = cs_analysis_gui.cs_analysis_gui()
+    results = cs_analysis_tool.cs_analysis_gui()
     return render_template('resultpage_analysis.html', results = results)
 
 
