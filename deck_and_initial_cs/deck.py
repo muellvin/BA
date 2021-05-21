@@ -1,13 +1,14 @@
-from classes import point as pt
-from classes import line as ln
-from classes import crosssection as cs
-from classes import stiffener as st
-from classes import plate_code as plcd
-from classes import stiffeners_proposition
-from classes import proposed_stiffener
 import defaults
 import math
 import data
+from classes import point
+from classes import line
+from classes import crosssection
+from classes import plate_code
+from classes import stiffeners_proposition
+from classes import proposed_stiffener
+from assembly import stiffener
+
 
 
 def deck(b_deck):
@@ -73,8 +74,8 @@ def deck(b_deck):
         num_of_stiffeners = (num_of_plates-1)/2
         for i in range(int(num_of_stiffeners)):
             center_y = (0.5*b_deck - (2*i+1.5)*b_sup)
-            stiffener = st.create_stiffener_global(1, i+1, center_y, 0, 0, b_sup, b_inf, h, t)
-            deck_stiffener_list.append(stiffener)
+            stiffener_cs = stiffener.create_stiffener_global(1, i+1, center_y, 0, 0, b_sup, b_inf, h, t)
+            deck_stiffener_list.append(stiffener_cs)
         return deck_stiffener_list
 
 
@@ -92,24 +93,24 @@ def create_deck_stiffener_local(b_sup, b_inf, h, t, t_deck):
 
     #assumption: b_sup is equal to distance between stiffeners
     #create points
-    a = pt.point(b_sup,0)
-    b = pt.point(-b_sup, 0)
-    c = pt.point(0.5*b_sup, 0)
-    d = pt.point(-0.5*b_sup, 0)
-    e = pt.point(-0.5*b_inf, h)
-    f = pt.point(0.5*b_inf, h)
+    a = point.point(b_sup,0)
+    b = point.point(-b_sup, 0)
+    c = point.point(0.5*b_sup, 0)
+    d = point.point(-0.5*b_sup, 0)
+    e = point.point(-0.5*b_inf, h)
+    f = point.point(0.5*b_inf, h)
 
     #create plates
-    code_1 = plcd.plate_code(1,0,0,0,0)
-    line_1 = ln.line(code_1, a, b, t_deck)
-    code_2 = plcd.plate_code(2,0,0,0,0)
-    line_2 = ln.line(code_2, d, e, t)
-    code_3 = plcd.plate_code(3,0,0,0,0)
-    line_3 = ln.line(code_3, e, f, t)
-    code_4 = plcd.plate_code(4,0,0,0,0)
-    line_4 = ln.line(code_4, f, c, t)
+    code_1 = plate_code.plate_code(1,0,0,0,0)
+    line_1 = line.line(code_1, a, b, t_deck)
+    code_2 = plate_code.plate_code(2,0,0,0,0)
+    line_2 = line.line(code_2, d, e, t)
+    code_3 = plate_code.plate_code(3,0,0,0,0)
+    line_3 = line.line(code_3, e, f, t)
+    code_4 = plate_code.plate_code(4,0,0,0,0)
+    line_4 = line.line(code_4, f, c, t)
 
-    deck_stiffener = cs.crosssection(b_sup, b_inf, h)
+    deck_stiffener = crosssection.crosssection(b_sup, b_inf, h)
     #add the lines to itself
     deck_stiffener.addline(line_1)
     deck_stiffener.addline(line_2)
