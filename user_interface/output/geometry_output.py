@@ -124,9 +124,9 @@ def print_cs_to_png(crosssection, name, input = True, location = None):
     plt.axis('scaled')
     if location == None:
         if input:
-            figure.savefig("output/"+name+"_in.png")
+            figure.savefig("user_interface/output/best_crosssections"+name+"_in.png")
         else:
-            figure.savefig("output/"+name+"_out.png")
+            figure.savefig("user_interface/output/best_crosssections"+name+"_out.png")
     else:
         if input:
             figure.savefig(location+name+"_in.png")

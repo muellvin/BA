@@ -7,8 +7,8 @@ from cs_optimization_tool import optimization_value
 from cs_optimization_tool import cs_collector
 from proofs_and_stress_calculation import buckling_proof
 
-sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
-
+#sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
+sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
 
 """
 CONVENTION:
@@ -105,8 +105,8 @@ def print_best_proof():
         string = line1 + line2 + line3 + line4 + line5 + line6
         printing(string, terminal = True)
 
-        geometry_output.print_cs_to_png(cs, name, input = False, location = "best_crosssections/")
-        geometry_output.print_cs_to_png(cs, name, input = True, location = "best_crosssections/")
+        geometry_output.print_cs_to_png(cs, name, input = False, location = "user_interface/output/best_crosssections/")
+        geometry_output.print_cs_to_png(cs, name, input = True, location = "user_interface/output/best_crosssections/")
         txt_to_pdf(cs, name, location = "user_interface/output/best_crosssections/")
 
 
@@ -123,7 +123,7 @@ def print_best():
     for cs in cs_collector.get_best():
         name = "cs_"+str(i)
 
-        geometry_output.print_cs_to_png(cs, name, input = False, location = "best_crosssections/")
+        geometry_output.print_cs_to_png(cs, name, input = False, location = "user_interface/output/best_crosssections/")
 
 
         line1 = "\n"+name

@@ -21,9 +21,9 @@ def optimize():
     b_inf = data.input_data["b_inf"]
     h = data.input_data["h"]
     t_deck = data.input_data["t_deck"]
-    t_range = [10, 20]
+    t_range = [10]
     t_max_min = 20
-    I_range = [0.5*10**6, 1*10**6, 1.5*10**6]
+    I_range = [0.5*10**6]
     counter = 1
     st_prop_deck = deck.deck(b_sup)
     cs_collection = set()
@@ -38,7 +38,7 @@ def optimize():
     for t_side in t_range:
         for t_bottom in t_range:
             base_cs = initial_cs.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
-            for num_btm_stiffeners in range(4):
+            for num_btm_stiffeners in range(3):
                 strong_enough = False
                 #no side stiffeners cs
                 if num_side_stiffeners == 0:
@@ -112,7 +112,7 @@ def optimize():
     for t_side in t_range:
         for t_bottom in t_range:
             base_cs = initial_cs.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
-            for num_btm_stiffeners in range(5,6):
+            for num_btm_stiffeners in range(3):
                 if num_side_stiffeners == 1:
                     #without bottom stiffeners
                     if num_btm_stiffeners == 0:
@@ -212,229 +212,231 @@ def optimize():
             t_collection.append(t)
     t_range = t_collection
 
-    #two side stiffeners block
-    num_side_stiffeners = 2
-    for t_side in t_range:
-        for t_bottom in t_range:
-            base_cs = initial_cs.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
-            for num_btm_stiffeners in range(1,4):
-                if num_side_stiffeners == 2:
-                    #without bottom stiffeners
-                    if num_btm_stiffeners == 0:
-                        for I_side_btm in I_range:
-                            for I_side_top in I_range:
-                                I_collection = [I_side_top, I_side_btm]
-                                locations_side = get_locations_side(num_side_stiffeners, sign)
-                                for loc_side in range(len(locations_side)):
-                                    print("\n-------------------------------------------------------------------------------------------------------")
-                                    print("------------------------------------ CS" +str(counter) + "---------------------------------------------------------------")
-                                    counter += 1
-                                    print("#Side Stiffeners " + str(num_side_stiffeners))
-                                    print("#Btm Stiffeners " + str(num_btm_stiffeners))
-                                    print("I_Side_Top " + str(I_side_top))
-                                    print("I_Side_Bottom " + str(I_side_btm))
-                                    st_prop = stiffeners_proposition.stiffeners_proposition()
-                                    st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                    for num in range(num_side_stiffeners):
-                                        #create side stiffeners
-                                        loc = locations_side[loc_side][num]
-                                        print("Location Side" + str(loc))
-                                        assert loc != -1, "Error!"
-                                        st_number_right = num_top_stiffeners + num + 1
-                                        st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
-                                        st_right = proposed_stiffener.proposed_stiffener(pl_position = 2, st_number = st_number_right, location = loc, i_along = I_collection[num])
-                                        st_left = proposed_stiffener.proposed_stiffener(pl_position = 4, st_number = st_number_left, location = loc, i_along = I_collection[num])
-                                        st_prop_rest.stiffeners.append(st_right)
-                                        st_prop_rest.stiffeners.append(st_left)
-                                    st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
-                                    st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
-                                    test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop)
-                                    if test_cs != False:
-                                        end_cs = buckling_proof.buckling_proof(test_cs)
-                                        st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                        proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
-                                        if proven:
-                                            if max(t_side, t_bottom) < t_max_min:
-                                                t_max_min = max(t_side, t_bottom)
-                                            cs_collector.into_collector(end_cs)
-                                            print(str(optimization_value.cost(end_cs)) + " CHF")
-                                            print("PASS!")
-                                        else:
-                                            print("FAIL!")
-                    #with bottom stiffeners
-                    else:
-                        for I_side_btm in I_range:
-                            for I_side_top in I_range:
-                                I_collection = [I_side_top, I_side_btm]
-                                locations_side = get_locations_side(num_side_stiffeners, sign)
-                                for loc_side in range(len(locations_side)):
-                                    strong_enough = False
-                                    for I_btm in I_range:
-                                        if strong_enough == False:
-                                            print("\n-------------------------------------------------------------------------------------------------------")
-                                            print("------------------------------------ CS" +str(counter) + "---------------------------------------------------------------")
-                                            counter += 1
-                                            print("#Side Stiffeners " + str(num_side_stiffeners))
-                                            print("#Btm Stiffeners " + str(num_btm_stiffeners))
-                                            print("I_Side_Top " + str(I_side_top))
-                                            print("I_Side_Bottom " + str(I_side_btm))
-                                            print("I_Btm " + str(I_btm))
-                                            st_prop = stiffeners_proposition.stiffeners_proposition()
-                                            st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                            for num in range(num_side_stiffeners):
-                                                #create side stiffeners
-                                                loc = locations_side[loc_side][num]
-                                                print("Location Side" + str(loc))
-                                                assert loc != -1, "Error!"
-                                                st_number_right = num_top_stiffeners + num + 1
-                                                st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
-                                                st_right = proposed_stiffener.proposed_stiffener(pl_position = 2, st_number = st_number_right, location = loc, i_along = I_collection[num])
-                                                st_left = proposed_stiffener.proposed_stiffener(pl_position = 4, st_number = st_number_left, location = loc, i_along = I_collection[num])
-                                                st_prop_rest.stiffeners.append(st_right)
-                                                st_prop_rest.stiffeners.append(st_left)
-                                                #create bottom siffeners
-                                            for num in range(num_btm_stiffeners):
-                                                loc_btm = -1 + 2/(num_btm_stiffeners+1)*(num+1)
-                                                st_number = num_top_stiffeners + num_side_stiffeners + num + 1
-                                                st = proposed_stiffener.proposed_stiffener(pl_position = 3, st_number = st_number, location = loc_btm, i_along = I_btm)
-                                                st_prop_rest.stiffeners.append(st)
-                                            st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
-                                            st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
-                                            test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop)
-                                            if test_cs != False:
-                                                end_cs = buckling_proof.buckling_proof(test_cs)
-                                                st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                                proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
-                                                if proven:
-                                                    if max(t_side, t_bottom) < t_max_min:
-                                                        t_max_min = max(t_side, t_bottom)
-                                                    strong_enough = True
-                                                    cs_collector.into_collector(end_cs)
-                                                    print(str(optimization_value.cost(end_cs)) + " CHF")
-                                                    print("PASS!")
-                                                else:
-                                                    print("FAIL!")
+    ##two side stiffeners block
+    #num_side_stiffeners = 2
+    #for t_side in t_range:
+    #    for t_bottom in t_range:
+    #        base_cs = initial_cs.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
+    #        for num_btm_stiffeners in range(1,4):
+    #            if num_side_stiffeners == 2:
+    #                #without bottom stiffeners
+    #                if num_btm_stiffeners == 0:
+    #                    for I_side_btm in I_range:
+    #                        for I_side_top in I_range:
+    #                            I_collection = [I_side_top, I_side_btm]
+    #                            locations_side = get_locations_side(num_side_stiffeners, sign)
+    #                            for loc_side in range(len(locations_side)):
+    #                                print("\n-------------------------------------------------------------------------------------------------------")
+    #                                print("------------------------------------ CS" +str(counter) + "---------------------------------------------------------------")
+    #                                counter += 1
+    #                                print("#Side Stiffeners " + str(num_side_stiffeners))
+    #                                print("#Btm Stiffeners " + str(num_btm_stiffeners))
+    #                                print("I_Side_Top " + str(I_side_top))
+    #                                print("I_Side_Bottom " + str(I_side_btm))
+    #                                st_prop = stiffeners_proposition.stiffeners_proposition()
+    #                                st_prop_rest = stiffeners_proposition.stiffeners_proposition()
+    #                                for num in range(num_side_stiffeners):
+    #                                    #create side stiffeners
+    #                                    loc = locations_side[loc_side][num]
+    #                                    print("Location Side" + str(loc))
+    #                                    assert loc != -1, "Error!"
+    #                                    st_number_right = num_top_stiffeners + num + 1
+    #                                    st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
+    #                                    st_right = proposed_stiffener.proposed_stiffener(pl_position = 2, st_number = st_number_right, location = loc, i_along = I_collection[num])
+    #                                    st_left = proposed_stiffener.proposed_stiffener(pl_position = 4, st_number = st_number_left, location = loc, i_along = I_collection[num])
+    #                                    st_prop_rest.stiffeners.append(st_right)
+    #                                    st_prop_rest.stiffeners.append(st_left)
+    #                                st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
+    #                                st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
+    #                                test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop)
+    #                                if test_cs != False:
+    #                                    end_cs = buckling_proof.buckling_proof(test_cs)
+    #                                    st_prop_rest = stiffeners_proposition.stiffeners_proposition()
+    #                                    proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
+    #                                    if proven:
+    #                                        if max(t_side, t_bottom) < t_max_min:
+    #                                            t_max_min = max(t_side, t_bottom)
+    #                                        cs_collector.into_collector(end_cs)
+    #                                        print(str(optimization_value.cost(end_cs)) + " CHF")
+    #                                        print("PASS!")
+    #                                    else:
+    #                                        print("FAIL!")
+    #                #with bottom stiffeners
+    #                else:
+    #                    for I_side_btm in I_range:
+    #                        for I_side_top in I_range:
+    #                            I_collection = [I_side_top, I_side_btm]
+    #                            locations_side = get_locations_side(num_side_stiffeners, sign)
+    #                            for loc_side in range(len(locations_side)):
+    #                                strong_enough = False
+    #                                for I_btm in I_range:
+    #                                    if strong_enough == False:
+    #                                        print("\n-------------------------------------------------------------------------------------------------------")
+    #                                        print("------------------------------------ CS" +str(counter) + "---------------------------------------------------------------")
+    #                                        counter += 1
+    #                                        print("#Side Stiffeners " + str(num_side_stiffeners))
+    #                                        print("#Btm Stiffeners " + str(num_btm_stiffeners))
+    #                                        print("I_Side_Top " + str(I_side_top))
+    #                                        print("I_Side_Bottom " + str(I_side_btm))
+    #                                        print("I_Btm " + str(I_btm))
+    #                                        st_prop = stiffeners_proposition.stiffeners_proposition()
+    #                                        st_prop_rest = stiffeners_proposition.stiffeners_proposition()
+    #                                        for num in range(num_side_stiffeners):
+    #                                            #create side stiffeners
+    #                                            loc = locations_side[loc_side][num]
+    #                                            print("Location Side" + str(loc))
+    #                                            assert loc != -1, "Error!"
+    #                                            st_number_right = num_top_stiffeners + num + 1
+    #                                            st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
+    #                                            st_right = proposed_stiffener.proposed_stiffener(pl_position = 2, st_number = st_number_right, location = loc, i_along = I_collection[num])
+    #                                            st_left = proposed_stiffener.proposed_stiffener(pl_position = 4, st_number = st_number_left, location = loc, i_along = I_collection[num])
+    #                                            st_prop_rest.stiffeners.append(st_right)
+    #                                            st_prop_rest.stiffeners.append(st_left)
+    #                                            #create bottom siffeners
+    #                                        for num in range(num_btm_stiffeners):
+    #                                            loc_btm = -1 + 2/(num_btm_stiffeners+1)*(num+1)
+    #                                            st_number = num_top_stiffeners + num_side_stiffeners + num + 1
+    #                                            st = proposed_stiffener.proposed_stiffener(pl_position = 3, st_number = st_number, location = loc_btm, i_along = I_btm)
+    #                                            st_prop_rest.stiffeners.append(st)
+    #                                        st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
+    #                                        st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
+    #                                        test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop)
+    #                                        if test_cs != False:
+    #                                            end_cs = buckling_proof.buckling_proof(test_cs)
+    #                                            st_prop_rest = stiffeners_proposition.stiffeners_proposition()
+    #                                            proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
+    #                                            if proven:
+    #                                                if max(t_side, t_bottom) < t_max_min:
+    #                                                    t_max_min = max(t_side, t_bottom)
+    #                                                strong_enough = True
+    #                                                cs_collector.into_collector(end_cs)
+    #                                                print(str(optimization_value.cost(end_cs)) + " CHF")
+    #                                                print("PASS!")
+    #                                            else:
+    #                                                print("FAIL!")
 
-    t_collection = []
-    for t in t_range:
-        if t <= t_max_min:
-            t_collection.append(t)
-    t_range = t_collection
+    #t_collection = []
+    #for t in t_range:
+    #    if t <= t_max_min:
+    #        t_collection.append(t)
+    #t_range = t_collection
 
-    #three side stiffeners block
-    num_side_stiffeners = 3
-    for t_side in t_range:
-        for t_bottom in t_range:
-            base_cs = initial_cs.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
-            for num_btm_stiffeners in range(4):
-                if num_side_stiffeners == 3:
-                    #without bottom stiffeners
-                    if num_btm_stiffeners == 0:
-                        for I_side_btm in I_range:
-                            for I_side_middle in I_range:
-                                for I_side_top in I_range:
-                                    I_collection = [I_side_top, I_side_middle, I_side_btm]
-                                    locations_side = get_locations_side(num_side_stiffeners, sign)
-                                    for loc_side in range(len(locations_side)):
-                                        print("\n-------------------------------------------------------------------------------------------------------")
-                                        print("------------------------------------ CS" +str(counter) + "---------------------------------------------------------------")
-                                        counter += 1
-                                        print("#Side Stiffeners " + str(num_side_stiffeners))
-                                        print("#Btm Stiffeners " + str(num_btm_stiffeners))
-                                        print("I_Side_Top " + str(I_side_top))
-                                        print("I_Side_Bottom " + str(I_side_btm))
-                                        print("I_Side_Middle" + str(I_side_middle))
-                                        st_prop = stiffeners_proposition.stiffeners_proposition()
-                                        st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                        for num in range(num_side_stiffeners):
-                                            #create side stiffeners
-                                            loc = locations_side[loc_side][num]
-                                            print("Location Side" + str(loc))
-                                            assert loc != -1, "Error!"
-                                            st_number_right = num_top_stiffeners + num + 1
-                                            st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
-                                            st_right = proposed_stiffener.proposed_stiffener(pl_position = 2, st_number = st_number_right, location = loc, i_along = I_collection[num])
-                                            st_left = proposed_stiffener.proposed_stiffener(pl_position = 4, st_number = st_number_left, location = loc, i_along = I_collection[num])
-                                            st_prop_rest.stiffeners.append(st_right)
-                                            st_prop_rest.stiffeners.append(st_left)
-                                        st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
-                                        st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
-                                        test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop)
-                                        if test_cs != False:
-                                            end_cs = buckling_proof.buckling_proof(test_cs)
-                                            st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                            proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
-                                            if proven:
-                                                if max(t_side, t_bottom) < t_max_min:
-                                                    t_max_min = max(t_side, t_bottom)
-                                                strong_enough = True
-                                                cs_collector.into_collector(end_cs)
-                                                print(str(optimization_value.cost(end_cs)) + " CHF")
-                                                print("PASS!")
-                                            else:
-                                                print("FAIL!")
-                    #with bottom stiffeners
-                    else:
-                        for I_side_btm in I_range:
-                            for I_side_top in I_range:
-                                for I_side_middle in I_range:
-                                    I_collection = [I_side_top, I_side_middle, I_side_btm]
-                                    locations_side = get_locations_side(num_side_stiffeners, sign)
-                                    for loc_side in range(len(locations_side)):
-                                        strong_enough = False
-                                        for I_btm in I_range:
-                                            if strong_enough == False:
-                                                print("\n-------------------------------------------------------------------------------------------------------")
-                                                print("------------------------------------ CS" +str(counter) + "---------------------------------------------------------------")
-                                                counter += 1
-                                                print("#Side Stiffeners " + str(num_side_stiffeners))
-                                                print("#Btm Stiffeners " + str(num_btm_stiffeners))
-                                                print("I_Side_Top " + str(I_side_top))
-                                                print("I_Side_Middle " + str(I_side_middle))
-                                                print("I_Side_Bottom " + str(I_side_btm))
-                                                print("I_Btm " + str(I_btm))
-                                                st_prop = stiffeners_proposition.stiffeners_proposition()
-                                                st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                                for num in range(num_side_stiffeners):
-                                                    #create side stiffeners
-                                                    loc = locations_side[loc_side][num]
-                                                    print("Location Side" + str(loc))
-                                                    assert loc != -1, "Error!"
-                                                    st_number_right = num_top_stiffeners + num + 1
-                                                    st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
-                                                    st_right = proposed_stiffener.proposed_stiffener(pl_position = 2, st_number = st_number_right, location = loc, i_along = I_collection[num])
-                                                    st_left = proposed_stiffener.proposed_stiffener(pl_position = 4, st_number = st_number_left, location = loc, i_along = I_collection[num])
-                                                    st_prop_rest.stiffeners.append(st_right)
-                                                    st_prop_rest.stiffeners.append(st_left)
-                                                    #create bottom siffeners
-                                                for num in range(num_btm_stiffeners):
-                                                    loc_btm = -1 + 2/(num_btm_stiffeners+1)*(num+1)
-                                                    st_number = num_top_stiffeners + num_side_stiffeners + num + 1
-                                                    st = proposed_stiffener.proposed_stiffener(pl_position = 3, st_number = st_number, location = loc_btm, i_along = I_btm)
-                                                    st_prop_rest.stiffeners.append(st)
-                                                st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
-                                                st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
-                                                test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop)
-                                                if test_cs != False:
-                                                    end_cs = buckling_proof.buckling_proof(test_cs)
-                                                    st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                                    proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
-                                                    if proven:
-                                                        if max(t_side, t_bottom) < t_max_min:
-                                                            t_max_min = max(t_side, t_bottom)
-                                                        strong_enough = True
-                                                        cs_collector.into_collector(end_cs)
-                                                        print(str(optimization_value.cost(end_cs)) + " CHF")
-                                                        print("PASS!")
-                                                    else:
-                                                        print("FAIL!")
+    ##three side stiffeners block
+    #num_side_stiffeners = 3
+    #for t_side in t_range:
+    #    for t_bottom in t_range:
+    #        base_cs = initial_cs.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
+    #        for num_btm_stiffeners in range(4):
+    #            if num_side_stiffeners == 3:
+    #                #without bottom stiffeners
+    #                if num_btm_stiffeners == 0:
+    #                    for I_side_btm in I_range:
+    #                        for I_side_middle in I_range:
+    #                            for I_side_top in I_range:
+    #                                I_collection = [I_side_top, I_side_middle, I_side_btm]
+    #                                locations_side = get_locations_side(num_side_stiffeners, sign)
+    #                                for loc_side in range(len(locations_side)):
+    #                                    print("\n-------------------------------------------------------------------------------------------------------")
+    #                                    print("------------------------------------ CS" +str(counter) + "---------------------------------------------------------------")
+    #                                    counter += 1
+    #                                    print("#Side Stiffeners " + str(num_side_stiffeners))
+    #                                    print("#Btm Stiffeners " + str(num_btm_stiffeners))
+    #                                    print("I_Side_Top " + str(I_side_top))
+    #                                    print("I_Side_Bottom " + str(I_side_btm))
+    #                                    print("I_Side_Middle" + str(I_side_middle))
+    #                                    st_prop = stiffeners_proposition.stiffeners_proposition()
+    #                                    st_prop_rest = stiffeners_proposition.stiffeners_proposition()
+    #                                    for num in range(num_side_stiffeners):
+    #                                        #create side stiffeners
+    #                                        loc = locations_side[loc_side][num]
+    #                                        print("Location Side" + str(loc))
+    #                                        assert loc != -1, "Error!"
+    #                                        st_number_right = num_top_stiffeners + num + 1
+    #                                        st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
+    #                                        st_right = proposed_stiffener.proposed_stiffener(pl_position = 2, st_number = st_number_right, location = loc, i_along = I_collection[num])
+    #                                        st_left = proposed_stiffener.proposed_stiffener(pl_position = 4, st_number = st_number_left, location = loc, i_along = I_collection[num])
+    #                                        st_prop_rest.stiffeners.append(st_right)
+    #                                        st_prop_rest.stiffeners.append(st_left)
+    #                                    st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
+    #                                    st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
+    #                                    test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop)
+    #                                    if test_cs != False:
+    #                                        end_cs = buckling_proof.buckling_proof(test_cs)
+    #                                        st_prop_rest = stiffeners_proposition.stiffeners_proposition()
+    #                                        proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
+    #                                        if proven:
+    #                                            if max(t_side, t_bottom) < t_max_min:
+    #                                                t_max_min = max(t_side, t_bottom)
+    #                                            strong_enough = True
+    #                                            cs_collector.into_collector(end_cs)
+    #                                            print(str(optimization_value.cost(end_cs)) + " CHF")
+    #                                            print("PASS!")
+    #                                        else:
+    #                                            print("FAIL!")
+    #                #with bottom stiffeners
+    #                else:
+    #                    for I_side_btm in I_range:
+    #                        for I_side_top in I_range:
+    #                            for I_side_middle in I_range:
+    #                                I_collection = [I_side_top, I_side_middle, I_side_btm]
+    #                                locations_side = get_locations_side(num_side_stiffeners, sign)
+    #                                for loc_side in range(len(locations_side)):
+    #                                    strong_enough = False
+    #                                    for I_btm in I_range:
+    #                                        if strong_enough == False:
+    #                                            print("\n-------------------------------------------------------------------------------------------------------")
+    #                                            print("------------------------------------ CS" +str(counter) + "---------------------------------------------------------------")
+    #                                            counter += 1
+    #                                            print("#Side Stiffeners " + str(num_side_stiffeners))
+    #                                            print("#Btm Stiffeners " + str(num_btm_stiffeners))
+    #                                            print("I_Side_Top " + str(I_side_top))
+    #                                            print("I_Side_Middle " + str(I_side_middle))
+    #                                            print("I_Side_Bottom " + str(I_side_btm))
+    #                                            print("I_Btm " + str(I_btm))
+    #                                            st_prop = stiffeners_proposition.stiffeners_proposition()
+    #                                            st_prop_rest = stiffeners_proposition.stiffeners_proposition()
+    #                                            for num in range(num_side_stiffeners):
+    #                                                #create side stiffeners
+    #                                                loc = locations_side[loc_side][num]
+    #                                                print("Location Side" + str(loc))
+    #                                                assert loc != -1, "Error!"
+    #                                                st_number_right = num_top_stiffeners + num + 1
+    #                                                st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
+    #                                                st_right = proposed_stiffener.proposed_stiffener(pl_position = 2, st_number = st_number_right, location = loc, i_along = I_collection[num])
+    #                                                st_left = proposed_stiffener.proposed_stiffener(pl_position = 4, st_number = st_number_left, location = loc, i_along = I_collection[num])
+    #                                                st_prop_rest.stiffeners.append(st_right)
+    #                                                st_prop_rest.stiffeners.append(st_left)
+    #                                                #create bottom siffeners
+    #                                            for num in range(num_btm_stiffeners):
+    #                                                loc_btm = -1 + 2/(num_btm_stiffeners+1)*(num+1)
+    #                                                st_number = num_top_stiffeners + num_side_stiffeners + num + 1
+    #                                                st = proposed_stiffener.proposed_stiffener(pl_position = 3, st_number = st_number, location = loc_btm, i_along = I_btm)
+    #                                                st_prop_rest.stiffeners.append(st)
+    #                                            st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
+    #                                            st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
+    #                                            test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop)
+    #                                            if test_cs != False:
+    #                                                end_cs = buckling_proof.buckling_proof(test_cs)
+    #                                                st_prop_rest = stiffeners_proposition.stiffeners_proposition()
+    #                                                proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
+    #                                                if proven:
+    #                                                    if max(t_side, t_bottom) < t_max_min:
+    #                                                        t_max_min = max(t_side, t_bottom)
+    #                                                    strong_enough = True
+    #                                                    cs_collector.into_collector(end_cs)
+    #                                                    print(str(optimization_value.cost(end_cs)) + " CHF")
+    #                                                    print("PASS!")
+    #                                                else:
+    #                                                    print("FAIL!")
 
-    print("# of passed CS")
-    print(len(cs_collection))
-    for cs in cs_collection:
-        #go.print_cs_red(cs)
-        pass
-    return
+    #print("# of passed CS")
+    #print(len(cs_collection))
+    #for cs in cs_collection:
+    #    #go.print_cs_red(cs)
+    #    pass
+    #return
+    printing.print_best()
+    return 
 
 def get_locations_side(num_side_stiffeners, sign):
     #always return locations in descending order

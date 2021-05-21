@@ -6,7 +6,7 @@ import sys
 import copy
 
 sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
-sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
+#sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
 from user_interface import cs_to_html
 from user_interface import form_values
 from user_interface import stiffener_transform
