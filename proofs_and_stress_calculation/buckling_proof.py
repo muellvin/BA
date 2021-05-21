@@ -106,6 +106,9 @@ def buckling_proof(cs):
             string = "\n\n3.3 Shear lag at ultimate limit state"
             printing.printing(string, terminal = True)
             if defaults.do_shear_lag == True:
+                for plate in cs.lines:
+                    rho_c_a = 1
+                    rho_c_b = 1
                 cs = shear_lag.shear_lag(cs)
 
             #4.4 plate elements without longitudinal stiffeners
