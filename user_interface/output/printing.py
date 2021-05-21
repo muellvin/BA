@@ -105,6 +105,8 @@ def print_best_proof():
         string = line1 + line2 + line3 + line4 + line5 + line6
         printing(string, terminal = True)
 
+        geometry_output.print_cs_to_png(cs, name, input = False, location = "best_crosssections/")
+        geometry_output.print_cs_to_png(cs, name, input = True, location = "best_crosssections/")
         txt_to_pdf(cs, name, location = "user_interface/output/best_crosssections/")
 
 
