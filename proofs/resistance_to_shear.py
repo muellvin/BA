@@ -32,7 +32,6 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         stiffened = False
 
     #calculate k_tau
-    #still needs to be implemented
     k_tau = 0
     if stiffened == False:
         line1 = "\n      unstiffened plate; (A.5)"
@@ -153,8 +152,6 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         if h_w/t < eval:
             proof_required = False
 
-    #Does V_Rd have to be multiplied with eta? --> rather not, but I'm not sure...
-    #Does V_Rd have to be calculated with the reduced cs?
     V_Rd = f_y*h_w*t/(math.sqrt(3)*gamma_M1)
     #calculate reduction factor chi_w if required
     if proof_required == True:
