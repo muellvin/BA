@@ -1,8 +1,7 @@
 import math
 import os
 import sys
-import defaults
-from assembly import stiffener
+from assembly import add_stiffeners
 from assembly import substantiate
 from assembly import merge
 from classes import crosssection
@@ -13,6 +12,7 @@ from proofs_and_stress_calculation import buckling_proof
 from deck_and_initial_cs import initial_cs
 from deck_and_initial_cs import deck
 from data_and_defaults import data
+from data_and_defaults import defaults
 from cs_optimization_tool import optimization_value
 
 #sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
@@ -51,7 +51,7 @@ for st in data.stiffener_data.stiffeners:
         angle = math.pi
     if st.pl_position == 4:
         angle = math.pi - cs.get_angle(2)
-    stiffener_i = stiffener.create_stiffener_global(st.pl_position, st.st_number, y, z, angle, \
+    stiffener_i = add_stiffener.create_stiffener_global(st.pl_position, st.st_number, y, z, angle, \
     st.b_sup, st.b_inf, st.h, st.t)
     st_list_rest.append(stiffener_i)
 stiffener_list = st_list_deck + st_list_rest

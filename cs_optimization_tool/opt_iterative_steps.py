@@ -83,7 +83,7 @@ def optimize():
                                     st_prop_rest.stiffeners.append(st)
                                 st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
                                 st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
-                                test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
+                                test_cs = add_stiffenersadd_stiffener_set(base_cs, st_prop)
                                 if test_cs != False:
                                     end_cs = buckling_proof.buckling_proof(test_cs)
                                     st_prop_rest = stiffeners_proposition.stiffeners_proposition()
@@ -142,7 +142,7 @@ def optimize():
                                         st_prop_rest.stiffeners.append(st_left)
                                     st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
                                     st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
-                                    test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
+                                    test_cs = add_stiffenersadd_stiffener_set(base_cs, st_prop)
                                     if test_cs != False:
                                         end_cs = buckling_proof.buckling_proof(test_cs)
                                         st_prop_rest = stiffeners_proposition.stiffeners_proposition()
@@ -192,7 +192,7 @@ def optimize():
                                             st_prop_rest.stiffeners.append(st)
                                         st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
                                         st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
-                                        test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
+                                        test_cs = add_stiffenersadd_stiffener_set(base_cs, st_prop)
                                         if test_cs != False:
                                             end_cs = buckling_proof.buckling_proof(test_cs)
                                             st_prop_rest = stiffeners_proposition.stiffeners_proposition()
@@ -248,7 +248,7 @@ def optimize():
                                         st_prop_rest.stiffeners.append(st_left)
                                     st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
                                     st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
-                                    test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
+                                    test_cs = add_stiffenersadd_stiffener_set(base_cs, st_prop)
                                     if test_cs != False:
                                         end_cs = buckling_proof.buckling_proof(test_cs)
                                         st_prop_rest = stiffeners_proposition.stiffeners_proposition()
@@ -300,7 +300,7 @@ def optimize():
                                                 st_prop_rest.stiffeners.append(st)
                                             st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
                                             st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
-                                            test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
+                                            test_cs = add_stiffenersadd_stiffener_set(base_cs, st_prop)
                                             if test_cs != False:
                                                 end_cs = buckling_proof.buckling_proof(test_cs)
                                                 st_prop_rest = stiffeners_proposition.stiffeners_proposition()
@@ -359,7 +359,7 @@ def optimize():
                                             st_prop_rest.stiffeners.append(st_left)
                                         st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
                                         st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
-                                        test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
+                                        test_cs = add_stiffenersadd_stiffener_set(base_cs, st_prop)
                                         if test_cs != False:
                                             end_cs = buckling_proof.buckling_proof(test_cs)
                                             st_prop_rest = stiffeners_proposition.stiffeners_proposition()
@@ -414,7 +414,7 @@ def optimize():
                                                     st_prop_rest.stiffeners.append(st)
                                                 st_prop.stiffeners = st_prop_deck.stiffeners + st_prop_rest.stiffeners
                                                 st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
-                                                test_cs = stiffener.add_stiffener_set(base_cs, st_prop)
+                                                test_cs = add_stiffenersadd_stiffener_set(base_cs, st_prop)
                                                 if test_cs != False:
                                                     end_cs = buckling_proof.buckling_proof(test_cs)
                                                     st_prop_rest = stiffeners_proposition.stiffeners_proposition()

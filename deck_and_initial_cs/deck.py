@@ -1,6 +1,6 @@
-import defaults
 import math
-import data
+from data_and_defaults import defaults
+from data_and_defaults import data
 from classes import point
 from classes import line
 from classes import crosssection
