@@ -1,4 +1,4 @@
-import defaults
+from data_and_defaults import defaults
 
 sys_paths = {"vinz": 'C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA', "nino": 'C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA'}
 
@@ -19,7 +19,7 @@ def constants_tostring():
         next_line = "\n    "+ str(key) +": " +str(value)
         string += next_line
     return string
-    
+
 
 def input_data_tostring():
     string = "\nINPUT DATA"
