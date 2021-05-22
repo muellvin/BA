@@ -20,6 +20,18 @@
 
 <div class="row">
   <div class="side">
+    <script>
+      function grey() {
+        var ei = document.getElementById("EI")
+        ei.setAttribute("disabled", "disabled")
+      }
+    </script>
+    <script>
+      function white() {
+        var ei = document.getElementById("EI")
+        ei.removeAttribute("disabled")
+      }
+    </script>
     <form action="/optimize_step_1" method="POST" id="opt_step_2"> </form>
     <table>
       <tr>
@@ -53,11 +65,36 @@
         <td><p>Choose the optimization algorithm.</p></td>
       </tr>
       <tr>
-        <td><input type="radio" name ="opt" value="0" form = "opt_step_2"> Optimizer A </input> </td>
+        <td><input type="radio" name ="opt" value="0" form = "opt_step_2" required> Optimizer A </input> </td>
       </tr>
       <tr>
-        <td><input type="radio" name ="opt" value="1" form = "opt_step_2"> Optimizer B </input> </td>
+        <td><input type="radio" name ="opt" value="1" form = "opt_step_2" required> Optimizer B </input> </td>
       </tr>
+      <tr>
+        <td><p>Choose the optimization goal.</p></td>
+      </tr>
+      <tr>
+        <td><input type="radio" name="goal" value="0" checked form ="opt_step_2" onchange ="grey()">Lowest Price</input></td>
+      </tr>
+      <tr>
+        <td><input type="radio" name="goal" value="1" form ="opt_step_2" onchange ="white()">Lowest Price for given EI</input></td>
+      </tr>
+      <tr>
+        <td><input type="radio" name="goal" value="2" form ="opt_step_2" onchange ="grey()">Best Price/EI-Ratio</input></td>
+      </tr>
+      <tr>
+        <td><p>Enter Values for EI and Prices. </p></td>
+      </tr>
+        <td><label for="material_cost"> Material Cost [CHF/kg]</label></td>
+        <td><input type="number" name="material_cost" value = 2 form = "opt_step_2" required></td>
+      <tr>
+      </tr>
+        <td><label for="welding_cost"> Welding Cost [CHF/m]</label></td>
+        <td><input type="number" name="welding_cost" value = 40 form = "opt_step_2" required></td>
+      <tr>
+      </tr>
+        <td><label for="EI"> EI [kNmm<sup>2</sup>]</label></td>
+        <td><input type="number" name="EI" id="EI" value = 0 form = "opt_step_2" required disabled></td>
       <tr>
         <td><input type="submit" name="Back" value="Back" form = "opt_step_2" formnovalidate></td>
         <td><input type="submit" name="Calculate" value="Calculate" formaction="/results_optimize" form = "opt_step_2"></td>
