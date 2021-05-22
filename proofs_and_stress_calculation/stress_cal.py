@@ -1,8 +1,8 @@
 import math
 
-stress = True
 
 def get_sigma_a(cs, line, m_y):
+    stress = True
     i_y = cs.get_i_y_tot(stress)
     z_center = cs.get_center_z_tot(stress)
     z = line.a.z
@@ -10,6 +10,7 @@ def get_sigma_a(cs, line, m_y):
     return sigma_a
 
 def get_sigma_b(cs, line, m_y):
+    stress = True
     i_y = cs.get_i_y_tot(stress)
     z_center = cs.get_center_z_tot(stress)
     z = line.b.z
@@ -17,6 +18,7 @@ def get_sigma_b(cs, line, m_y):
     return sigma_b
 
 def get_sigma_a_red(cs, line, m_y):
+    stress = True
     i_y = cs.get_i_y_red(stress)
     z_center = cs.get_center_z_red(stress)
     z = line.a.z
@@ -24,6 +26,7 @@ def get_sigma_a_red(cs, line, m_y):
     return sigma_a_red
 
 def get_sigma_b_red(cs, line, m_y):
+    stress = True
     i_y = cs.get_i_y_red(stress)
     z_center = cs.get_center_z_red(stress)
     z = line.b.z
@@ -31,6 +34,7 @@ def get_sigma_b_red(cs, line, m_y):
     return sigma_b_red
 
 def get_sigma_p1_red(cs, line, m_y):
+    stress = True
     i_y = cs.get_i_y_red(stress)
     z_center = cs.get_center_z_red(stress)
     z = line.p1.z
@@ -38,6 +42,7 @@ def get_sigma_p1_red(cs, line, m_y):
     return sigma_a_red
 
 def get_sigma_p2_red(cs, line, m_y):
+    stress = True
     i_y = cs.get_i_y_red(stress)
     z_center = cs.get_center_z_red(stress)
     z = line.p2.z
@@ -46,6 +51,7 @@ def get_sigma_p2_red(cs, line, m_y):
 
 
 def get_sigma_sup(cs, line, m_y):
+    stress = True
     i_y = cs.get_i_y_tot(stress)
     z_center = cs.get_center_z_tot(stress)
     if line.a.z <= line.b.z:
@@ -56,6 +62,7 @@ def get_sigma_sup(cs, line, m_y):
     return sigma_sup
 
 def get_sigma_inf(cs, line, m_y):
+    stress = True
     i_y = cs.get_i_y_tot(stress)
     z_center = cs.get_center_z_tot(stress)
     if line.a.z >= line.b.z:
@@ -66,6 +73,7 @@ def get_sigma_inf(cs, line, m_y):
     return sigma_inf
 
 def get_sigma_sup_red(cs, line, m_y):
+    stress = True
     i_y = cs.get_i_y_red(stress)
     z_center = cs.get_center_z_red(stress)
     if line.p1.z <= line.p2.z:
@@ -76,6 +84,7 @@ def get_sigma_sup_red(cs, line, m_y):
     return sigma_sup_red
 
 def get_sigma_inf_red(cs, line, m_y):
+    stress = True
     i_y = cs.get_i_y_red(stress)
     z_center = cs.get_center_z_red(stress)
     if line.p1.z >= line.p2.z:
@@ -104,6 +113,7 @@ def get_tau_int_qy(cs, side, v_ed):
 
 #shear stresses positive in counterclokwise direction
 def get_tau_int_t(cs, side, t_ed):
+    stress = True
     azero = cs.get_azero(stress)
     length = 0
     for plate in cs.lines:
@@ -115,6 +125,7 @@ def get_tau_int_t(cs, side, t_ed):
     return tau_int
 
 def get_tau_int_flange(cs, side, v_ed, t_ed):
+    stress = True
     area = 0
     t = cs.get_line(pl_position = side, pl_type = 0).t_stress
     for plate in cs.lines:
@@ -135,6 +146,7 @@ def get_tau_int_flange(cs, side, v_ed, t_ed):
     return tau_int_flange
 
 def get_tau_int_subpanel(cs, panel, v_ed, t_ed):
+    stress = True
     #check if subpanel is really a part of cs
     #tbd
     #check if plate is flange plate
