@@ -293,6 +293,8 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
         Phi_c = 0.5*(1+alpha*(lambda_c_bar - 0.2) + lambda_c_bar**2)
 
         Chi_c = 1 / (Phi_c + math.sqrt(Phi_c**2 - lambda_c_bar**2))
+        if Chi_c > 1:
+            Chi_c = 1
 
         line1 = "\n         Unstiffened Plate"
         line2 = "\n            sigma_cr_c: "+str(sigma_cr_c)
@@ -343,6 +345,8 @@ def column_buckling_Chi_c(column):
 
         Phi_c = 0.5*(1+alpha_e*(lambda_c_bar - 0.2) + lambda_c_bar**2)
         Chi_c = 1 / (Phi_c + math.sqrt(Phi_c**2 - lambda_c_bar**2))
+        if Chi_c > 1:
+            Chi_c = 1
 
         line1 = str(column)
         line2 = "\n         Buckling Values "+str(column.st_number)
