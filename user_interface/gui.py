@@ -95,7 +95,8 @@ def resultpage_optimize():
         optimize_for_cost_only = False
         optimize_for_spec_ei = True
         optimize_for_ratio = False
-        defaults.ei = int(request.form['EI'])
+        ei = int(request.form['EI'])
+        data.input_data.update({"ei":ei})
     else:
         assert goal ==2, "Goal not Found"
         optimize_for_cost_only = False
