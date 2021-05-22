@@ -12,6 +12,8 @@ from data_and_defaults import data
 from data_and_defaults import defaults
 from output import geometry_output
 from user_interface import cs_to_html
+sys.path.insert(0, './user_interface')
+from output import printing
 
 
 #sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
@@ -28,6 +30,9 @@ from user_interface import cs_to_html
 
 def cs_analysis_gui():
 
+    file = open("user_interface\output\cs_analysis.txt", "w+")
+    file.close()
+
     cs_a = 10000
     cs_L_e = 15000
     cs_bending_type = "sagging bending"
@@ -41,8 +46,6 @@ def cs_analysis_gui():
 
     #add the deck stiffeners
     st_list_deck = deck.deck(data.input_data.get("b_sup"))
-
-
 
 
     #add all other stiffeners
@@ -64,12 +67,10 @@ def cs_analysis_gui():
     print(cs)
 
 
-
-    #set the cross-sectional forces
-
     #buckling proof
     cs = buckling_proof.buckling_proof(cs)
     results = {"eta_1": cs.eta_1, "verification_2": cs.interaction_2, "verification_3": cs.interaction_3, "verification_4": cs.interaction_4}
     image = cs_to_html.print_cs_red(cs)
     results.update({"image": image})
+    printing.txt_to_pdf(cs, "cs")
     return results

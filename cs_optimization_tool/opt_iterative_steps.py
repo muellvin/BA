@@ -220,7 +220,7 @@ def optimize():
     for t_side in t_range:
         for t_bottom in t_range:
             base_cs = initial_cs.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
-            for num_btm_stiffeners in range(1,4):
+            for num_btm_stiffeners in range(3):
                 if num_side_stiffeners == 2:
                     #without bottom stiffeners
                     if num_btm_stiffeners == 0:
