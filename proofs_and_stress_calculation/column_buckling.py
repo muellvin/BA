@@ -174,7 +174,7 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
             A_sl = stiffener_i.get_area_tot() + plate_before_gross_A + plate_after_gross_A + plate_between_A_tot
             A_sl_eff = stiffener_i.get_area_red() + plate_before_eff_A + plate_after_eff_A + plate_between_A_red
             I_sl = stiffener_i.get_i_along_tot(plate_between) + plate_before_gross_I + plate_after_gross_I + plate_between_I_tot
-            sigma_cr_sl = (math.pi**2 * data.constants.get("E") * I_sl) / (A_sl * data.input_data.get("a"))
+            sigma_cr_sl = (math.pi**2 * data.constants.get("E") * I_sl) / (A_sl * data.input_data.get("a")**2)
 
 
             ######calculation of sigma_cr_c################
