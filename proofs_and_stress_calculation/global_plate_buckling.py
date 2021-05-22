@@ -9,6 +9,7 @@ from classes import crosssection
 from classes import point
 from data_and_defaults import data
 from data_and_defaults import defaults
+sys.path.insert(0, './user_interface')
 from output import printing
 
 def global_plate_buckling(total_cs, plate_glob):

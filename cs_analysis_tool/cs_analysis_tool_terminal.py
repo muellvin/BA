@@ -6,8 +6,9 @@ from assembly import substantiate
 from assembly import merge
 from classes import crosssection
 from cs_analysis_tool import cs_analysis_tool_terminal_input
-from user_interface/output import printing
-from user_interface/output import geometry_output
+sys.path.insert(0, './user_interface')
+from output import printing
+from output import geometry_output
 from proofs_and_stress_calculation import buckling_proof
 from deck_and_initial_cs import initial_cs
 from deck_and_initial_cs import deck

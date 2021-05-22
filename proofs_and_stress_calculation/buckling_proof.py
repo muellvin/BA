@@ -1,3 +1,4 @@
+import sys
 from proofs_and_stress_calculation import local_buckling
 from proofs_and_stress_calculation import column_buckling
 from proofs_and_stress_calculation import shear_lag
@@ -7,6 +8,7 @@ from proofs_and_stress_calculation import interaction
 from proofs_and_stress_calculation import stress_cal
 from data_and_defaults import defaults
 from data_and_defaults import data
+sys.path.insert(0, './user_interface')
 from output import printing
 
 

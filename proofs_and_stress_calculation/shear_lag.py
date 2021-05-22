@@ -1,6 +1,8 @@
 import math
+import sys 
 from data_and_defaults import data
 from data_and_defaults import defaults
+sys.path.insert(0, './user_interface')
 from output import printing
 
 

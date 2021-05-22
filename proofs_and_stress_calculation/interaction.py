@@ -1,4 +1,5 @@
 import copy
+import sys 
 from data_and_defaults import data
 from proofs_and_stress_calculation import resistance_to_shear
 from proofs_and_stress_calculation import stress_cal
@@ -6,6 +7,7 @@ from classes import crosssection
 from classes import line
 from classes import point
 from classes import plate_code
+sys.path.insert(0, './user_interface')
 from output import printing
 
 def interaction_web(total_cs, web_plate, eta_3):
