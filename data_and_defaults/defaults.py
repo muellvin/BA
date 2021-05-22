@@ -13,9 +13,9 @@ cs_b_inf = 3000
 cs_t_bottom = 5
 cs_h = 1500
 cs_t_side = 5
-cs_a = 10000
-cs_L_e = 15000
-cs_bending_type = "sagging bending"
+cs_a = 5000
+cs_L_e = 10000
+#cs_bending_type = "sagging bending"
 cs_cs_position = "neither"
 def set_cs_defaults():
     data.input_data.update({"b_sup": cs_b_sup})
@@ -26,7 +26,7 @@ def set_cs_defaults():
     data.input_data.update({"t_side": cs_t_side})
     data.input_data.update({"a": cs_a})
     data.input_data.update({"L_e": cs_L_e})
-    data.input_data.update({"bending type": cs_bending_type})
+    #data.input_data.update({"bending type": cs_bending_type})
     data.input_data.update({"cs position": cs_cs_position})
 
 
@@ -51,13 +51,10 @@ st_t = 5
 welding_cost = 40 #[CHF/m]
 steel_cost = 1.5 #[CHF/kg]
 
-optimize_for_cost_only = True
+optimize_for_cost_only = False
 optimize_for_spec_ei = False
+optimize_for_ratio = True
 
-weight_cost = -1000
-weight_ei = 1
-# target value will be maximized
-optimize_for_target_function = False
 
 
 """check_geometry defaults"""

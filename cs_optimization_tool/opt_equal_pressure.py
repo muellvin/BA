@@ -157,9 +157,7 @@ def set_defaults_for_opt_eqpressure():
 
     defaults.do_deck_as_prop = True
 
-    defaults.optimize_for_cost_only = True
-    defaults.optimize_for_spec_ei = False
-    defaults.optimize_for_target_function = False
+
 
 
 

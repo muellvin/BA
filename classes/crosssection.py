@@ -26,7 +26,7 @@ class crosssection():
 
         self.cost = 0
         self.ei = 0
-        self.target_value = 0
+        self.ratio = 0
         self.st_props = None
 
     def __str__(self):
