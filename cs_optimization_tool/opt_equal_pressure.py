@@ -1,5 +1,6 @@
 import copy
 import math
+import sys 
 from proofs_and_stress_calculation import buckling_proof
 from proofs_and_stress_calculation import local_buckling
 from cs_optimization_tool import cs_collector
@@ -10,6 +11,7 @@ from classes import stiffeners_proposition
 from assembly import add_stiffeners
 from assembly import merge
 from assembly import substantiate
+sys.path.insert(0, './user_interface')
 from output import printing
 from deck_and_initial_cs import deck
 from deck_and_initial_cs import initial_cs

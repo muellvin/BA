@@ -1,9 +1,12 @@
 import math
 import copy
+import sys
 from data_and_defaults import data
 from classes import line
 from classes import plate_code
 from classes import point
+sys.path.insert(0, './user_interface')
+from output import printing
 from output import geometry_output
 from output import printing
 

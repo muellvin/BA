@@ -7,6 +7,7 @@ from data_and_defaults import data
 from proofs_and_stress_calculation import stress_cal
 from ebplate_batch_mode import ebplate
 from classes import crosssection
+sys.path.insert(0, './user_interface')
 from output import printing
 
 def resistance_to_shear(plate_glob, V_Ed_plate):

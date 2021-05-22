@@ -1,5 +1,6 @@
 import math
 import copy
+import sys
 from classes import crosssection
 from classes import proposed_stiffener
 from classes import stiffeners_proposition
@@ -14,7 +15,6 @@ from data_and_defaults import defaults
 from data_and_defaults import data
 from cs_optimization_tool import optimization_value
 from cs_optimization_tool import cs_collector
-import sys
 sys.path.insert(0, './user_interface')
 from output import printing
 

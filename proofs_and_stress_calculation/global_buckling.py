@@ -1,4 +1,5 @@
 import math
+import sys
 from proofs_and_stress_calculation import stress_cal
 from proofs_and_stress_calculation import column_buckling
 from proofs_and_stress_calculation import global_plate_buckling
@@ -7,6 +8,7 @@ from classes import crosssection
 from classes import point
 from data_and_defaults import data
 from data_and_defaults import defaults
+sys.path.insert(0, './user_interface')
 from output import printing
 
 

@@ -1,3 +1,4 @@
+import sys
 import math
 import copy
 from classes import crosssection
@@ -5,6 +6,7 @@ from classes import point
 from classes import line
 from data_and_defaults import data
 from data_and_defaults import defaults
+sys.path.insert(0, './user_interface')
 from output import printing
 
 
