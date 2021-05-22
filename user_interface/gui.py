@@ -5,8 +5,8 @@ import os
 import sys
 import copy
 
-#sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
-sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
+sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
+#sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
 from user_interface import cs_to_html
 from user_interface import form_values
 from user_interface import stiffener_transform
@@ -86,6 +86,23 @@ def resultpage_optimize():
     data.constants.update({"f_y":f_y})
     data.input_data.update({"b_sup":val.get("b_sup"), "b_inf":val.get("b_inf"), "h":val.get("h"), "t_deck":14})
     optimizer_num = int(request.form['opt'])
+    goal = int(request.form['goal'])
+    if goal == 0:
+        optimize_for_cost_only = True
+        optimize_for_spec_ei = False
+        optimize_for_ratio = False
+    elif goal == 1:
+        optimize_for_cost_only = False
+        optimize_for_spec_ei = True
+        optimize_for_ratio = False
+        defaults.ei = int(request.form['EI'])
+    else:
+        assert goal ==2, "Goal not Found"
+        optimize_for_cost_only = False
+        optimize_for_spec_ei = False
+        optimize_for_ratio = True
+    defaults.welding_cost = int(request.form['welding_cost'])
+    defaults.steel_cost = int(request.form['material_cost'])
     if optimizer_num == 0:
         opt_equal_pressure.opt_eqpressure()
     else:

@@ -49,7 +49,7 @@ st_t = 5
 
 """defaults cost"""
 welding_cost = 40 #[CHF/m]
-steel_cost = 1.5 #[CHF/kg]
+steel_cost = 2 #[CHF/kg]
 
 optimize_for_cost_only = False
 optimize_for_spec_ei = False
