@@ -15,9 +15,9 @@ def get_best():
     elif defaults.optimize_for_spec_ei == True:
         forgot_default = False
         return get_best_spec_ei()
-    elif defaults.optimize_for_target_function == True:
+    elif defaults.optimize_for_ratio == True:
         forgot_default = False
-        return get_best_target_value()
+        return get_best_ratio()
 
 
 
@@ -66,7 +66,7 @@ def get_best_spec_ei():
                     best_cs.append(cs_fromall)
         return best_cs
 
-def get_best_target_value():
+def get_best_ratio():
     best_cs = []
     if data.cs_collection == []:
         return best_cs
@@ -77,10 +77,10 @@ def get_best_target_value():
                 add = True
             else:
                 for cs_frombest in best_cs:
-                    if cs_fromall.target_value < cs_frombest.target_value:
+                    if cs_fromall.ratio > cs_frombest.ratio:
                         add = True
                         best_cs.remove(cs_frombest)
-                    elif cs_fromall.target_value == cs_frombest.target_value:
+                    elif cs_fromall.ratio == cs_frombest.ratio:
                         add = True
                     else:
                         add = False

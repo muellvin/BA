@@ -13,19 +13,20 @@ from output import printing
 #crosssection calculation
 class crosssection():
 #a crosssection is defined as a list of lines
-    def __init__(self, b_sup, b_inf, h, eta_1 = -2, interaction_2 = -2, interaction_3 = -2, interaction_4 = -2):
+    def __init__(self, b_sup, b_inf, h, eta_1 = -2, eta_3 = -2, interaction_2 = -2, interaction_3 = -2, interaction_4 = -2):
         self.lines = []
         self.b_sup = b_sup
         self.b_inf = b_inf
         self.h = h
         self.eta_1 = eta_1
+        self.eta_3 = eta_3
         self.interaction_2 = interaction_2
         self.interaction_3 = interaction_3
         self.interaction_4 = interaction_4
 
         self.cost = 0
         self.ei = 0
-        self.target_value = 0
+        self.ratio = 0
         self.st_props = None
 
     def __str__(self):
@@ -40,6 +41,7 @@ class crosssection():
         t_sides = self.get_line(pl_position = 2, pl_type = 0).t
         t_bottom = self.get_line(pl_position = 3, pl_type = 0).t
         string += "\n      t_deck: "+str(t_deck)+"   t_sides: "+str(t_sides)+"   t_bottom: "+str(t_bottom)+"\n"
+        self.st_props.stiffeners = sorted(self.st_props.stiffeners, key = lambda st: st.st_number)
         if self.st_props != None:
             for st in self.st_props.stiffeners:
                 line1 = "\n Stiffener Number "+str(round(10*st.st_number)/10)+" on side "+str(round(10*st.pl_position)/10)+" with location: "+str(round(10*st.location)/10)

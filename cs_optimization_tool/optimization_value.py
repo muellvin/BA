@@ -7,8 +7,8 @@ def set_value(cs):
     elif defaults.optimize_for_spec_ei == True:
         cs.cost = cost(cs)
         cs.ei = ei(cs)
-    elif defaults.optimize_for_target_function == True:
-        cs.target_value = target_function(cs)
+    elif defaults.optimize_for_ratio == True:
+        cs.ratio = ratio(cs)
 
 
 
@@ -33,6 +33,6 @@ def ei(cs):
     ei = cs.get_ei()
     return ei
 
-def target_function(cs):
-    target_value = defaults.weight_cost*cost(cs) + defaults.weight_ei*ei(cs)
+def ratio(cs):
+    target_value =  ei(cs)/cost(cs)
     return target_value

@@ -1,5 +1,5 @@
 import math
-import sys 
+import sys
 from data_and_defaults import data
 from data_and_defaults import defaults
 sys.path.insert(0, './user_interface')
@@ -106,17 +106,17 @@ def beta_from_kappa(kappa):
     if kappa <= 0.02:
         beta = 1.0
     elif 0.02 < kappa <= 0.7:
-        if data.input_data.get("bending type") == "sagging bending":
+        if data.input_data.get("M_Ed") >= 0: #if data.input_data.get("bending type") == "sagging bending":
             beta_1 = 1 / (1 + 6.4 * kappa**2)
             beta = beta_1
-        elif data.input_data.get("bending type") == "hogging bending":
+        elif data.input_data.get("M_Ed") < 0: #elif data.input_data.get("bending type") == "hogging bending":
             beta = beta_2 = 1 / (1 + 6.0 * (kappa - 1 / (2500 * kappa) + 1.6 * kappa**2))
         else:
             print("bending type is not defined")
     elif 0.7 < kappa:
-        if data.input_data.get("bending type") == "sagging bending":
+        if data.input_data.get("M_Ed") >= 0: #if data.input_data.get("bending type") == "sagging bending":
             beta = beta_1 = 1 / (5.9 * kappa)
-        elif data.input_data.get("bending type") == "hogging bending":
+        elif data.input_data.get("M_Ed") < 0: #elif data.input_data.get("bending type") == "hogging bending":
             beta = beta_2 = 1 / (8.6 * kappa)
         else:
             print("bending type is not defined")

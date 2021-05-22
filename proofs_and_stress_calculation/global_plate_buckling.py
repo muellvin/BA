@@ -278,6 +278,12 @@ def global_plate_buckling(total_cs, plate_glob):
             if distance > comp[0] and distance < comp[1]:
                 compression_stiffener = True
 
+            if gamma > 1000:
+                gamma = 1000
+            if theta > 1000:
+                theta = 1000
+            if delta > 1000:
+                delta = 1000
             assert gamma <= 1000 and gamma >= 0, "gamma too high or low"
             assert theta <= 1000 and theta >= 0, "theta too high or low"
             assert delta <= 1000 and delta >= 0, "theta too high or low"
