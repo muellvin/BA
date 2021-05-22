@@ -80,7 +80,7 @@ def opt_eqpressure():
 
                             #geometry_output.print_cs_red(stiffened_cs)
 
-                        if stiffened_cs.eta_1 <= 1 and stiffened_cs.eta_3 <= 1 and stiffened_cs.interaction_2 < 1 and stiffened_cs.interaction_3 < 1 and stiffened_cs.interaction_4 < 1:
+                        if stiffened_cs.proven():
                             print("\n\n GOT ONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                             cs_collector.into_collector(stiffened_cs)
 
@@ -107,7 +107,7 @@ def opt_eqpressure():
                                     sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
 
                                     #geometry_output.print_cs_red(stiffened_cs)
-                                if stiffened_cs.eta_1 <= 1 and stiffened_cs.eta_3 <= 1 and stiffened_cs.interaction_2 < 1 and stiffened_cs.interaction_3 < 1 and stiffened_cs.interaction_4 < 1:
+                                if stiffened_cs.proven():
 
                                     cs_collector.into_collector(stiffened_cs)
 

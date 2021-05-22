@@ -58,8 +58,7 @@ def optimize():
                             print(end_cs)
                             #go.print_cs_red(end_cs)
                             st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                            proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
-                            if proven:
+                            if end_cs.proven():
                                 if max(t_side, t_bottom) < t_max_min:
                                     t_max_min = max(t_side, t_bottom)
                                 print(str(optimization_value.cost(end_cs)) + " CHF")
@@ -93,8 +92,7 @@ def optimize():
                                     print(end_cs)
                                     #go.print_cs_red(end_cs)
                                     st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                    proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
-                                    if proven:
+                                    if end_cs.proven():
                                         if max(t_side, t_bottom) < t_max_min:
                                             t_max_min = max(t_side, t_bottom)
                                         strong_enough = True
@@ -149,8 +147,7 @@ def optimize():
                                     if test_cs != False:
                                         end_cs = buckling_proof.buckling_proof(test_cs)
                                         st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                        proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
-                                        if proven:
+                                        if end_cs.proven():
                                             if max(t_side, t_bottom) < t_max_min:
                                                 t_max_min = max(t_side, t_bottom)
                                             strong_enough = True
@@ -199,8 +196,7 @@ def optimize():
                                         if test_cs != False:
                                             end_cs = buckling_proof.buckling_proof(test_cs)
                                             st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                            proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
-                                            if proven:
+                                            if end_cs.proven():
                                                 if max(t_side, t_bottom) < t_max_min:
                                                     t_max_min = max(t_side, t_bottom)
                                                 strong_enough = True
@@ -255,8 +251,7 @@ def optimize():
                                     if test_cs != False:
                                         end_cs = buckling_proof.buckling_proof(test_cs)
                                         st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                        proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
-                                        if proven:
+                                        if end_cs.proven():
                                             if max(t_side, t_bottom) < t_max_min:
                                                 t_max_min = max(t_side, t_bottom)
                                             cs_collector.into_collector(end_cs)
@@ -307,8 +302,7 @@ def optimize():
                                             if test_cs != False:
                                                 end_cs = buckling_proof.buckling_proof(test_cs)
                                                 st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                                proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
-                                                if proven:
+                                                if end_cs.proven():
                                                     if max(t_side, t_bottom) < t_max_min:
                                                         t_max_min = max(t_side, t_bottom)
                                                     strong_enough = True
@@ -366,8 +360,7 @@ def optimize():
     #                                    if test_cs != False:
     #                                        end_cs = buckling_proof.buckling_proof(test_cs)
     #                                        st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-    #                                        proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
-    #                                        if proven:
+    #                                        if end_cs.proven():
     #                                            if max(t_side, t_bottom) < t_max_min:
     #                                                t_max_min = max(t_side, t_bottom)
     #                                            strong_enough = True
@@ -421,8 +414,7 @@ def optimize():
     #                                            if test_cs != False:
     #                                                end_cs = buckling_proof.buckling_proof(test_cs)
     #                                                st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-    #                                                proven = end_cs.eta_1 < 1 and end_cs.interaction_2 < 1 and end_cs.interaction_3 < 1 and end_cs.interaction_4 < 1
-    #                                                if proven:
+    #                                                if end_cs.proven():
     #                                                    if max(t_side, t_bottom) < t_max_min:
     #                                                        t_max_min = max(t_side, t_bottom)
     #                                                    strong_enough = True

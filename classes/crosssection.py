@@ -39,6 +39,11 @@ class crosssection():
             string += str(line)
         return string
 
+    def proven(self):
+        proven = self.eta_1 < 1 and self.interaction_1 < 1 and self.interaction_2 < 1 and self.interaction_3 < 1 and \
+        self.interaction_4 < 1 and self.eta_3_side_1 < 1 and self.eta_3_side_2 < 1 and self.eta_3_side_3 < 1 and self.eta_3_side_4 <1
+        return proven
+
     def print_cs_as_list(self):
         string = "\n\n      b_sup: "+str(self.b_sup)+"   b_inf: "+str(self.b_inf)+"   h: "+str(self.h)
         t_deck = self.get_line(pl_position =1, pl_type = 0).t
