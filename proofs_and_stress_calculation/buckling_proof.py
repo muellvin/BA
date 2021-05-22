@@ -51,6 +51,7 @@ def buckling_proof(cs):
                 V_Ed_plate = stress_cal.get_tau_int_flange(cs, side, data.input_data.get("V_Ed"),\
                 data.input_data.get("T_Ed"))
                 eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
+                cs.eta_3 = eta_3
 
                 if side == 1:
                     #7.1 Interaction between shear forces, bending moment and axial force
@@ -138,6 +139,7 @@ def buckling_proof(cs):
                     V_Ed_plate = stress_cal.get_tau_int_flange(cs, side, data.input_data.get("V_Ed"),\
                     data.input_data.get("T_Ed"))
                     eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
+                    cs.eta_3 = eta_3
 
                     if side == 1:
                         #7.1 Interaction between shear forces, bending moment and axial force
