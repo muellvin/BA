@@ -1,6 +1,6 @@
 import copy
 import math
-import sys 
+import sys
 from proofs_and_stress_calculation import buckling_proof
 from proofs_and_stress_calculation import local_buckling
 from cs_optimization_tool import cs_collector
@@ -177,7 +177,7 @@ def set_t_bottom(cs, t_bottom):
     return cs
 
 
-def set_stiffeners_side(cs, amount, n_st_deck, n_st_bottom, sigma_top_red, sigma_bottom_red, i_along_side):
+def set_stiffeners_side(cs, n_st_deck, amount, n_st_bottom, sigma_top_red, sigma_bottom_red, i_along_side):
     if amount == 0:
         propositions = stiffeners_proposition.stiffeners_proposition()
         return propositions
