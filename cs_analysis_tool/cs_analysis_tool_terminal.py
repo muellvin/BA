@@ -1,11 +1,12 @@
 import math
 import os
 import sys
+sys.path.insert(0, './')
 from assembly import add_stiffeners
 from assembly import substantiate
 from assembly import merge
 from classes import crosssection
-from cs_analysis_tool import cs_analysis_tool_terminal_input
+import cs_analysis_tool_terminal_input
 sys.path.insert(0, './user_interface')
 from output import printing
 from output import geometry_output
@@ -20,7 +21,7 @@ from cs_optimization_tool import optimization_value
 #crosssection input and creation (only trapezoid plates)
 
 if defaults.do_print_to_txt == True:
-    file = open("output/cs_analysis.txt", "w+")
+    file = open("user_interface/output/cs_analysis.txt", "w+")
     file.close()
 defaults.do_deck_as_prop = True
 cs_analysis_tool_terminal_input.set_defaults()
