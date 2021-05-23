@@ -1,6 +1,11 @@
 import os
 
 def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
+    print("\n EBPLATE DATA")
+    print(stiffeners_ebp[0][0])
+    print(stiffeners_ebp[0][1])
+    print(stiffeners_ebp[0][2])
+    print(stiffeners_ebp[0][3])
     setup = open("setup.txt", 'r')
     setup_data = setup.readlines()
     ebp_path = setup_data[-1]

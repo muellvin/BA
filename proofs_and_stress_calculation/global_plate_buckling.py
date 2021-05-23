@@ -168,7 +168,7 @@ def global_plate_buckling(total_cs, plate_glob):
                     center_plate = plate
                 if plate.code.tpl_number == corresp_tpl+1:
                     bottom_plate = plate
-                    bottom_plate_top = plate.code.tpl_number
+                    bottom_plate_tpl = plate.code.tpl_number
                 elif plate.code.tpl_number == corresp_tpl-1:
                     top_plate = plate
                     top_plate_tpl = plate.code.tpl_number
@@ -204,51 +204,43 @@ def global_plate_buckling(total_cs, plate_glob):
             sigma_b_top = stress_cal.get_sigma_b(total_cs, top_original, data.input_data.get("M_Ed"))
             psi_top =  min(sigma_a_top, sigma_b_top) / max(sigma_a_top, sigma_b_top)
             length_top = 0
-            if sigma_a_top > 0 or sigma_b_top > 0:
-                #stiffener is at least partly in compression zone
-                if sigma_a_top > sigma_b_top:
-                    if psi_top > 0:
-                        #low stress side
-                        length_top = top_plate.get_length_tot()*(3-psi_top)/(5-psi_top)
-                    else:
-                        #tension zone
-                        pass
-                else:
-                    if psi_top > 0:
+            if sigma_b_top > 0:
+                if sigma_a_top > 0:
+                    if sigma_a_top < sigma_b_top:
                         #high stress side
                         length_top = top_plate.get_length_tot()*2/(5-psi_top)
                     else:
-                        b_comp = top_plate.get_length_tot()/(1-psi_top)
-                        length_top = 0.4*b_comp
+                        #low stress side
+                        length_top = top_plate.get_length_tot()*(3-psi_top)/(5-psi_top)
+                else:
+                    #point a in tension zone
+                    b_comp = top_plate.get_length_tot()/(1-psi_top)
+                    length_top = 0.4*b_comp
             else:
-                #stiffener is in tension zone
+                #tension zone
                 pass
 
             #find additional parts of bottom plate
-            bottom_original = total_cs.get_line(tpl_number = top_plate_tpl)
+            bottom_original = total_cs.get_line(tpl_number = bottom_plate_tpl)
             sigma_a_bottom = stress_cal.get_sigma_a(total_cs, bottom_original, data.input_data.get("M_Ed"))
             sigma_b_bottom = stress_cal.get_sigma_b(total_cs, bottom_original, data.input_data.get("M_Ed"))
             psi_bottom = min(sigma_a_bottom, sigma_b_bottom) / max(sigma_a_bottom, sigma_b_bottom)
             length_bottom = 0
-            if sigma_a_bottom > 0 or sigma_b_bottom > 0:
-                #stiffener is at least partly in compression zone
-                if sigma_b_bottom > sigma_a_bottom:
-                    if psi_bottom > 0:
-                        #low stress side
-                        length_bottom = bottom_plate.get_length_tot()*(3-psi_bottom)/(5-psi_bottom)
-                    else:
-                        #tension zone
-                        pass
-                else:
-                    if psi_bottom > 0:
+            if sigma_a_bottom > 0:
+                if sigma_b_bottom > 0:
+                    if sigma_b_bottom < sigma_a_bottom:
                         #high stress side
                         length_bottom = bottom_plate.get_length_tot()*2/(5-psi_bottom)
                     else:
-                        b_comp = bottom_plate.get_length_tot()/(1-psi_bottom)
-                        length_bottom = 0.4*b_comp
-                        pass
+                        #low stress side
+                        length_bottom = bottom_plate.get_length_tot()*(3-psi_bottom)/(5-psi_bottom)
+                else:
+                    #point a in tension zone
+                    b_comp = bottom_plate.get_length_tot()/(1-psi_bottom)
+                    length_bottom = 0.4*b_comp
+
             else:
-                #stiffener is in tension zone
+                #tension zone
                 pass
             #add additional parts of plate to stiffener
             new_top_point = point.point(top_plate.b.y + unit_vec_to_a * length_top, top_plate.b.z)
