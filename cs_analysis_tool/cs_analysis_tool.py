@@ -69,6 +69,7 @@ def cs_analysis_gui():
 
     #buckling proof
     cs = buckling_proof.buckling_proof(cs)
+    print(cs)
     results = {"eta_1": cs.eta_1, "verification_2": cs.interaction_2, "verification_3": cs.interaction_3, "verification_4": cs.interaction_4}
     image = cs_to_html.print_cs_red(cs)
     results.update({"image": image})
