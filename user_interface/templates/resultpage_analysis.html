@@ -21,20 +21,56 @@
   <div class="side">
   <table>
     <tr>
-      <td> Eta_1</td>
+      <td> &eta;<sub>1</sub></td>
       <td> {{ results["eta_1"] }}</td>
     </tr>
     <tr>
-      <td> Verification for plate 2 </td>
-      <td> {{ results["verification_2"] }} </td>
+      <td> &eta;<sub>3 Deck </td>
+      <td> {{ results["eta_3_side_1"] }}</td>
     </tr>
     <tr>
-      <td> Verification for plate 3 </td>
-      <td> {{ results["verification_3"] }} </td>
+      <td> Interaction Deck Plate </td>
+      {% if results["interaction_1"] == -1 %}
+      <td>  ---- </td>
+      {% else %}
+      <td> {{ results["interaction_1"] }}</td>
+      {% endif %}
     </tr>
     <tr>
-      <td> Verification for plate 4 </td>
-      <td> {{ results["verification_4"] }} </td>
+      <td> &eta;<sub>3 Right Web </td>
+      <td> {{ results["eta_3_side_2"] }}</td>
+    </tr>
+    <tr>
+      <td> Interaction Right Web </td>
+      {% if results["interaction_2"] == -1 %}
+      <td>  ---- </td>
+      {% else %}
+      <td> {{ results["interaction_2"] }}</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <td> &eta;<sub>3 Bottom Plate </td>
+      <td> {{ results["eta_3_side_3"] }}</td>
+    </tr>
+    <tr>
+      <td> Interaction Bottom Plate </td>
+      {% if results["interaction_3"] == -1 %}
+      <td>  ---- </td>
+      {% else %}
+      <td> {{ results["interaction_3"] }}</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <td> &eta;<sub>3 Left Web </td>
+      <td> {{ results["eta_3_side_4"] }}</td>
+    </tr>
+    <tr>
+      <td> Interaction Left Web </td>
+      {% if results["interaction_4"] == -1 %}
+      <td>  ---- </td>
+      {% else %}
+      <td> {{ results["interaction_4"] }}</td>
+      {% endif %}
     </tr>
     </table>
     <p>To see more detailed results, use the following button!</p>

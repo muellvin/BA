@@ -70,7 +70,8 @@ def cs_analysis_gui():
     #buckling proof
     cs = buckling_proof.buckling_proof(cs)
     print(cs)
-    results = {"eta_1": cs.eta_1, "verification_2": cs.interaction_2, "verification_3": cs.interaction_3, "verification_4": cs.interaction_4}
+    results = {"eta_1": round(cs.eta_1,2), "eta_3_side_1":round(cs.eta_3_side_1,2), "interaction_1": round(cs.interaction_1,2),  "eta_3_side_2":round(cs.eta_3_side_2,2), \
+    "interaction_2": round(cs.interaction_2,2), "eta_3_side_3":round(cs.eta_3_side_3,2), "interaction_3": cs.interaction_3, "eta_3_side_4":round(cs.eta_3_side_4,2), "interaction_4": cs.interaction_4}
     image = cs_to_html.print_cs_red(cs)
     results.update({"image": image})
     printing.txt_to_pdf(cs, "cs")
