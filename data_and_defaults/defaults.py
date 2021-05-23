@@ -1,10 +1,6 @@
 import math
 from data_and_defaults import data
 
-"""path defaults"""
-sys_path = None
-ebp_path = None
-
 
 """default cs"""
 cs_b_sup = 4000
