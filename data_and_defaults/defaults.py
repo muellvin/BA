@@ -1,7 +1,6 @@
 import math
 from data_and_defaults import data
 
-
 """default cs"""
 cs_b_sup = 4000
 cs_t_deck = 5
