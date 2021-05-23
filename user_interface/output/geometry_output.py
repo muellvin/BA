@@ -132,4 +132,3 @@ def print_cs_to_png(crosssection, name, input = True, location = None):
             figure.savefig(location+name+"_in.png")
         else:
             figure.savefig(location+name+"_out.png")
-    plt.close(figure)
