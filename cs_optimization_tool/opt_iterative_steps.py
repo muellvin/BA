@@ -324,7 +324,7 @@ def optimize():
 
     #three side stiffeners block
     num_side_stiffeners = 3
-        if num_side_stiffeners <= side_max:
+    if num_side_stiffeners <= side_max:
         for t_side in t_range:
             for t_bottom in t_range:
                 base_cs = initial_cs.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)

@@ -26,17 +26,16 @@ cutoffangle = math.pi/3
 
 
 """substantiate defaults"""
-b_inf_minimal = 10
-b_inf_step = 50
 b_inf_maximal = 500
-b_sup_minimal = 1
-b_sup_step = 50
+b_inf_minimal = 0
+b_inf_step = 50
 b_sup_maximal = 500
 b_sup_minimal = 50
-h_minimal = 1
-h_step = 10
+b_sup_step = 50
 h_maximal = 300
-t_range = [5,7,9,11,13,15,17,20]
+h_minimal = 40
+h_step = 20
+t_range = [5,8,10,12,15,18]
 max_angle = math.pi/12*5 #75 grad
 
 

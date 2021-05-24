@@ -73,14 +73,8 @@ def optimize_input_2():
 def resultpage_optimize():
     defaults.do_deck_as_prop=True
     #set defaults
-    cs_a = 10000
-    cs_L_e = 15000
-    cs_bending_type = "sagging bending"
-    cs_cs_position = "neither"
-    data.input_data.update({"a": cs_a})
-    data.input_data.update({"L_e": cs_L_e})
-    data.input_data.update({"bending type": cs_bending_type})
-    data.input_data.update({"cs position": cs_cs_position})
+    cs_position = request.form["cs_position"]
+    data.input_data.update({"cs_position": cs_position})
     #read input
     val = form_values.values
     M_Ed = int(request.form['M_Ed'])*10**6
@@ -221,6 +215,8 @@ def cs_analysis_input_2():
 @app.route('/results_analysis', methods = ['POST'])
 def resultpage_analysis():
     defaults.do_deck_as_prop=False
+    cs_position = request.form["cs_position"]
+    data.input_data.update({"cs_position": cs_position})
     M_Ed = int(request.form['M_Ed'])*10**6
     V_Ed = int(request.form['V_Ed'])*10**3
     T_Ed = int(request.form['T_Ed'])*10**6
