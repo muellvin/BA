@@ -95,7 +95,6 @@ def find_dimensions(stiffener, optimizer):
         h_max_angle = math.tan(max_angle) * (b_sup/2 - b_inf_minimal/2)
         h_max = 10*math.floor(min(h_max_geo, h_max_angle)/10)
         print("b_sup: ",math.floor(b_sup),"   h: ",math.floor(h_min),"-",math.floor(h_max),"   I: ",math.floor(stiffener.i_along))
-        #assert h_max > h_min, "Error, nothing could be found: subst"
         if h_max < h_min:
             h_max = h_min
 
@@ -106,7 +105,7 @@ def find_dimensions(stiffener, optimizer):
                 for b_inf in range(b_inf_min, b_inf_max, b_inf_step):
                     for t in t_range:
                         I_a = add_stiffeners.get_i_along_stiffener(b_sup, b_inf, h, t)
-                        m = add_stiffeners.get_area_stiffener(b_sup, b_inf, h, t) #get_area to be implemented
+                        m = add_stiffeners.get_area_stiffener(b_sup, b_inf, h, t)
                         if I_a > stiffener.i_along:
                             if m < best[4]:
                                 print("b_sup: ",b_sup," b_inf: ",b_inf," h: ",h," t: ",t)
@@ -148,10 +147,12 @@ def find_dimensions(stiffener, optimizer):
                             for t in t_range:
                                 I_a = add_stiffeners.get_i_along_stiffener(b_sup, b_inf, h, t)
                                 if I_a > stiffener.i_along:
-                                    m = add_stiffeners.get_area_stiffener(b_sup, b_inf, h, t) #get_area to be implemented
+                                    m = add_stiffeners.get_area_stiffener(b_sup, b_inf, h, t)
                                     if m < best[4]:
-                                        #print("b_sup: ",b_sup," b_inf: ",b_inf," h: ",h," t: ",t)
+                                        print("b_sup: ",b_sup," b_inf: ",b_inf," h: ",h," t: ",t)
                                         best = [b_sup, b_inf, h, t, m]
+
+
         if best == best_default:
             success = False
         stiffener.b_sup = best[0]
@@ -165,6 +166,7 @@ def find_dimensions(stiffener, optimizer):
         stiffener.b_sup_corr_val = False
         stiffener.h_corr_val = False
 
+    #set values and return
     b_sup = best[0]
     b_inf = best[1]
     h = best[2]
