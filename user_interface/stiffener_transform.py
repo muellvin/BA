@@ -79,13 +79,11 @@ def input_to_prop(num_top, num_side, num_btm):
             st_list.add(stiffener_bottom_left_i)
 
     st_list.stiffeners = sorted(st_list.stiffeners, key = lambda st: st.st_number)
-    for st in st_list.stiffeners:
-        print(st.st_number)
     data.stiffener_data = {}
     data.stiffener_data = st_list
     return
 
-#function that makes stiffener propositions drawable 
+#function that makes stiffener propositions drawable
 def prop_to_draw(cs):
     st_list_rest = []
     for st in data.stiffener_data.stiffeners:
