@@ -59,7 +59,7 @@ class line():
         else:
             return false
 
-"""Getter Methods for gross line propreties"""
+    """Getter Methods for gross line propreties"""
     #stress is the boolean defining if the attribute t_stress should be used
     #will be called for cross-sectional stresses and moments, to account for shear lag reductions
     #which are represented by reducing the thickness of flange plates -> t_stress set smaller than
@@ -122,7 +122,7 @@ class line():
             return self.cal_i_rot(self.a.y, self.a.z, self.b.y, self.b.z, self.t_stress, angle)
 
 
-"""Getter Methods for effective line propreties"""
+    """Getter Methods for effective line propreties"""
 #they follow the same principle as the getter methods for non-reduced
 #they cal the cal_methods for non-reduced, they on the other hand refer to the self
     def get_center_y_red(self, stress = False):
@@ -153,7 +153,7 @@ class line():
         return self.cal_i_rot_red(angle, stress)
 
 
-"""General Geometry Methods"""
+    """General Geometry Methods"""
     #calculate the smallest angle between the plate and the y axis
     def get_angle_y(self):
         zdis = abs(self.b.z - self.a.z)
@@ -192,7 +192,7 @@ class line():
 
         #horizontal is not 0 degrees but pi (line from positive y to negative)
         angle -= math.pi
-        return angle"""
+        return angle
 
     #get the stress at the point that is the fraction factor of the total length away from point a
     def get_sigma_red_from_a(self, factor):
@@ -201,7 +201,7 @@ class line():
     def get_sigma_red_from_b(self, factor):
         return self.sigma_b_red + factor*(self.sigma_a_red - self.sigma_b_red)
 
-"""Calculation Methods for gross lines"""
+    """Calculation Methods for gross lines"""
 #NON-REDUCED (and also used for reduced, that's why with coordinates as arguments)
 #these functions only use the given arguments and do not refer to self, so that they can also be used from non-reduced methods
     def cal_center_y(self, ay, az, by, bz, t):
@@ -226,7 +226,7 @@ class line():
         return math.cos(angle)**2 * self.cal_i_along(ay, az, by, bz, t) + math.sin(angle)**2 * self.cal_i_perpen(ay, az, by, bz, t)
 
 
-"""Calculation Mehotds for effective lines"""
+    """Calculation Mehotds for effective lines"""
     def cal_center_y_red(self, stress = False):
         if stress:
             t_used = self.t_stress
