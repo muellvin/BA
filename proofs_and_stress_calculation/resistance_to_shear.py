@@ -10,6 +10,7 @@ from classes import crosssection
 sys.path.insert(0, './user_interface')
 from output import printing
 
+#function that returns the shear resistance of a plate according to EC3, 1-5, 5
 def resistance_to_shear(plate_glob, V_Ed_plate):
     string = "\n   5. Resistance to shear"
     printing.printing(string, terminal = True)
@@ -116,11 +117,7 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
             b_inf = stiffener_list[i].get_line(st_pl_position = 3).get_length_tot()
             b_sup = stiffener_list[i].get_line(st_pl_position = 1).get_length_tot()
             diff = (0.5*(b_sup - b_inf))
-            #print("diff")
-            #print(diff)
             diag = stiffener_list[i].get_line(st_pl_position = 2).get_length_tot()
-            #print("diag")
-            #print(diag)
             h = math.sqrt(diag**2-diff**2)
             t_stiff = stiffener_list[i].get_line(st_pl_position = 3).t
             center_y = stiffener_list[i].get_center_y_tot()
@@ -162,8 +159,6 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         print(k_tau)
         print(sigma_E)
         tau_cr = k_tau * sigma_E
-        #can formula 5.6 be used here as well?
-        #and what about formula 5.7? This needs to be considered as well...
         lambda_w_bar_1 = 0.76 * math.sqrt(f_y / tau_cr) # formula 5.3
         lambda_w_bar_2 = h_w /(37.4*t*math.sqrt(235/f_y)*math.sqrt(k_tau)) #formula 5.6
         lambda_w_bar = min(lambda_w_bar_1, lambda_w_bar_2)

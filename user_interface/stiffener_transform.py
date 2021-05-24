@@ -6,6 +6,7 @@ from classes import proposed_stiffener
 from assembly import add_stiffeners
 from user_interface import form_values
 
+#function that transforms stiffener input to proposed stiffeners
 def input_to_prop(num_top, num_side, num_btm):
     cont = form_values.content
     st_list = stiffeners_proposition.stiffeners_proposition()
@@ -84,6 +85,7 @@ def input_to_prop(num_top, num_side, num_btm):
     data.stiffener_data = st_list
     return
 
+#function that makes stiffener propositions drawable 
 def prop_to_draw(cs):
     st_list_rest = []
     for st in data.stiffener_data.stiffeners:

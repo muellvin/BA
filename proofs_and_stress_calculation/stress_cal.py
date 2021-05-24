@@ -1,5 +1,7 @@
+#file with functions to calculate stresses
 import math
 
+"""Calculate normal stresses for gross cross sections"""
 
 def get_sigma_a(cs, line, m_y):
     stress = True
@@ -16,6 +18,8 @@ def get_sigma_b(cs, line, m_y):
     z = line.b.z
     sigma_b = (-1)*m_y * (z-z_center) / i_y
     return sigma_b
+
+"""Calculate normal Stresses For Effective Cross Sections"""
 
 def get_sigma_a_red(cs, line, m_y):
     stress = True
@@ -94,6 +98,9 @@ def get_sigma_inf_red(cs, line, m_y):
     sigma_inf_red = (-1)*m_y / i_y * (z_inf-z_center)
     return sigma_inf_red
 
+
+"""Calculate Shear Stresses due to Applied Shear Forces and Torsional Moments """
+
 #returns the absolute value of the resulting shear force in a plate of the crosssection
 def get_tau_int_web(cs, side, v_ed, t_ed):
     return abs(get_tau_int_t(cs, side, t_ed) + get_tau_int_qy(cs, side, v_ed))
@@ -147,8 +154,6 @@ def get_tau_int_flange(cs, side, v_ed, t_ed):
 
 def get_tau_int_subpanel(cs, panel, v_ed, t_ed):
     stress = True
-    #check if subpanel is really a part of cs
-    #tbd
     #check if plate is flange plate
     assert panel.code.pl_position == 1 or panel.code.pl_position == 3, "ERROR!!"
     #calculate tau_mean from q

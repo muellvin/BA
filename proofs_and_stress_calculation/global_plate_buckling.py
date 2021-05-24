@@ -18,7 +18,7 @@ def global_plate_buckling(total_cs, plate_glob):
 
 
     stiffened_plate = copy.deepcopy(plate_glob)
-    #all methods still to be correctly implemented
+
     #identify the border plates a and b and numbers of end stiffeners
     plate_a = None
     plate_b = None
@@ -44,6 +44,7 @@ def global_plate_buckling(total_cs, plate_glob):
 
     assert plate_a != None and plate_b != None, "For-Loop failed."
 
+    ### Get Stresses ###
     sigma_a = stress_cal.get_sigma_a(total_cs, plate_a, data.input_data.get("M_Ed"))
     sigma_b = stress_cal.get_sigma_b(total_cs, plate_b, data.input_data.get("M_Ed"))
     if abs(sigma_a) <= 0.1:
@@ -60,8 +61,8 @@ def global_plate_buckling(total_cs, plate_glob):
     if sigma_a <= 0 and sigma_b <= 0:
         rho_glob = 1
         sigma_cr_p = 10**10
+    ### Get Plate Geometry ###
     else:
-        #get plate geometry
         h = 0
         for plate in stiffened_plate.lines:
             if plate.code.pl_type == 0:
@@ -127,7 +128,7 @@ def global_plate_buckling(total_cs, plate_glob):
             plate.p2.y = math.cos(angle)*p2y - math.sin(angle)*p2z
             plate.p2.z = math.sin(angle)*p2y + math.cos(angle)*p2z
 
-        #claculate A and I of stiffened plate
+        #claculate A of stiffened plate
         A_tot = stiffened_plate.get_area_tot()
 
         #create a list of all stiffeners
@@ -151,8 +152,7 @@ def global_plate_buckling(total_cs, plate_glob):
                 if plate.code.tpl_number == corresp_tpl -1 or plate.code.tpl_number == corresp_tpl +1:
                     stiffener_list[st_number - min_stn].addline(plate)
 
-        #calculate adimensional parameters for each stiffener
-        #tbd
+        ###calculate adimensional parameters for each stiffener###
         stiffeners_ebp = []
         compression_stiffener = False
         for i in range(len(stiffener_list)):
@@ -242,7 +242,7 @@ def global_plate_buckling(total_cs, plate_glob):
             else:
                 #tension zone
                 pass
-            
+
             #add additional parts of plate to stiffener
             new_top_point = point.point(top_plate.b.y + unit_vec_to_a * length_top, top_plate.b.z)
             new_top_plate = line.line(top_plate.code, new_top_point, top_plate.b, top_plate.t)
@@ -267,6 +267,7 @@ def global_plate_buckling(total_cs, plate_glob):
                 new_bottom_plate.a = point.point(new_bottom_plate.a.y + unit_vec_to_a*length_gamma, new_bottom_plate.a.z)
             gamma = stiffener.get_i_y_tot() * 12 * (1-0.3**2)/(h*t**3)
 
+        ### USE EBPlate ###
             #assure that there is at least on stiffener in compression zone
             if distance > comp[0] and distance < comp[1]:
                 compression_stiffener = True
@@ -303,6 +304,7 @@ def global_plate_buckling(total_cs, plate_glob):
         string = "\n         sigma_cr = " + str(sigma_cr_p)
         printing.printing(string, terminal = True)
 
+        ### Calculation according to EC3, 1-5, 4.5.2 ###
         #calculating plate slenderness
         beta_a_c = get_beta_ac(plate_glob)
         lambda_p_glob_bar = math.sqrt(beta_a_c * data.constants.get("f_y") / sigma_cr_p)
@@ -330,6 +332,7 @@ def global_plate_buckling(total_cs, plate_glob):
 
     return rho_glob, sigma_cr_p
 
+#function that returns beta_ac as requested by EC 3, 1-5, 4.5.2
 def get_beta_ac(plate_glob):
     beta_plate = copy.deepcopy(plate_glob)
     side = beta_plate.lines[0].code.pl_position

@@ -11,6 +11,7 @@ from classes import plate_code
 sys.path.insert(0, './user_interface')
 from output import printing
 
+#function that performs the interaction for web plates according to EC3, 1-5, 7.1
 def interaction_web(total_cs, web_plate, eta_3):
     line1 = "\n   7.1 Interaction between shear force, bending moment and axial force"
     line2 = "\n   Web -> (7.1) without iterating"
@@ -44,7 +45,7 @@ def interaction_web(total_cs, web_plate, eta_3):
 
 
 
-
+#function that performs the interaction for flange plates according to EC 3, 1-5, 7.1
 def interaction_flange(total_cs, flange_plate, eta_3):
     line1 = "\n   7.1 Interaction between shear force, bending moment and axial force"
     line2 = "\n   Flange -> (7.1), comment (5)"
@@ -92,9 +93,9 @@ def interaction_flange(total_cs, flange_plate, eta_3):
                 assert True, "This is not possible"
     return utilisation
 
+#function that returns the value required in EC 1-5, section 7.1 interaction
+#attention: this value is very specific for this section
 def get_m_rd_pl_eff(total_cs):
-    #returns the value required in EC 1-5, section 7.1 interaction
-    #attention: this value is very specific for this section
     #remove side stiffeners
     cs = crosssection.crosssection(total_cs.b_sup, total_cs.b_inf, total_cs.h)
     for plate in total_cs.lines:
@@ -113,7 +114,7 @@ def get_m_rd_pl_eff(total_cs):
     z_max = cs.h
     code = plate_code.plate_code(-1,-1,-1,-1,-1)
     counter = 0
-
+    #interation loop to find position of plastic zero line 
     while abs(area_top - area_btm)>convergence and continue_iteration == True:
         counter += 1
         start = False

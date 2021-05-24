@@ -23,18 +23,21 @@ from cs_optimization_tool import opt_equal_pressure
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
+#Startpage
 @app.route('/', methods = ['GET', 'POST'])
 def index():
     return render_template('index.html')
 
+#Input Page 1 Optimize
 @app.route('/optimize_step_1', methods = ['GET'])
 def optimize():
     form_values.values = copy.deepcopy(form_values.default_cs)
     val = form_values.values
-    initial_cs = cs_to_html.create_initial_cs(val.get("b_sup"), val.get("b_inf"), val.get("h"), val.get("t_side"), val.get("t_deck"), val.get("t_btm"))
+    initial_cs = initial_cs.create_initial_cs(val.get("b_sup"), val.get("b_inf"), val.get("h"), val.get("t_side"), val.get("t_deck"), val.get("t_btm"))
     image = cs_to_html.print_cs(initial_cs)
     return render_template('optimize_input.html', image = image, content = val)
 
+#Input Page 1 Optimize
 @app.route('/optimize_step_1', methods = ['POST'])
 def optimize_input_1():
     val = None
@@ -53,6 +56,7 @@ def optimize_input_1():
     image = cs_to_html.print_cs(first_cs)
     return render_template('optimize_input.html', image = image, content = val)
 
+#Input Page 2 Optimize
 @app.route('/optimize_step_2', methods = ['POST'])
 def optimize_input_2():
     b_sup = int(request.form['b_sup'])
@@ -66,6 +70,7 @@ def optimize_input_2():
     return render_template('load_input.html')
 
 
+#Resultpage Optimize
 @app.route('/results_optimize', methods = ['POST'])
 def resultpage_optimize():
     #set defaults
@@ -93,12 +98,12 @@ def resultpage_optimize():
         opt_iterative_steps.optimize()
     return render_template('resultpage_optimize.html')
 
-
+#Input Page 1 Analysis Tool
 @app.route('/cs_analysis_step_1', methods = ['GET'])
 def cs_analysis():
     form_values.content = copy.deepcopy(form_values.default_cs)
     cont = form_values.content
-    first_cs = cs_to_html.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
+    first_cs = initial_cs.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
     deck_stiffeners = deck.deck(cont.get("b_sup"), False)
     form_values.stiffeners = []
     form_values.stiffeners += deck_stiffeners
@@ -106,7 +111,7 @@ def cs_analysis():
     image = cs_to_html.print_cs(end_cs)
     return render_template('geometry_input.html', image = image, content = cont)
 
-
+#Input Page 1 Analysis Tool
 @app.route('/cs_analysis_step_1', methods = ['POST'])
 def cs_analysis_input_1():
     cont = None
@@ -160,6 +165,7 @@ def cs_analysis_input_1():
     image = cs_to_html.print_cs(end_cs)
     return render_template('geometry_input.html', content = cont, image = image)
 
+#Input Page 2 Analysis Tool
 @app.route('/cs_analysis_step_2', methods = ['POST'])
 def cs_analysis_input_2():
     b_sup = int(request.form['b_sup'])
@@ -205,6 +211,7 @@ def cs_analysis_input_2():
     "t_deck":defaults.t_deck, "t_side":cont.get("t_side"), "t_bottom":cont.get("t_btm"), "a":cont.get("a"), "L_e":cont.get("L_e")})
     return render_template('forces_input.html')
 
+#Resultpage Analysis Tool
 @app.route('/results_analysis', methods = ['POST'])
 def resultpage_analysis():
     cs_position = request.form["cs_position"]
@@ -218,6 +225,6 @@ def resultpage_analysis():
     results = cs_analysis_tool.cs_analysis_gui()
     return render_template('resultpage_analysis.html', results = results)
 
-
+#Run GUI 
 if __name__ == '__main__':
    app.run(debug = True)
