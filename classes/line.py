@@ -166,8 +166,9 @@ class line():
     def get_angle_z(self):
         complangle = math.pi/2 - self.get_angle_y()
         return complangle
-    #
-    """def get_angle_y_true(self):
+
+    #does not give the smallest angle but the true angle from the y-axis increasing angle in counter-clockwise direction
+    def get_angle_y_true(self):
         dy = self.b.y - self.a.y
         dz = self.b.z - self.a.z
 
