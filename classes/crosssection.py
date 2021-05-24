@@ -8,7 +8,7 @@ from classes import point
 #crosssection class
 class crosssection():
 
-    """Constructor and Printing Functions"""
+    """Constructor and Printing Methods"""
 
     #constructor
     def __init__(self, b_sup, b_inf, h, eta_1 = -2, eta_3_side_1 = -2, eta_3_side_2 = -2, eta_3_side_3 = -2, eta_3_side_4 = -2, interaction_1 = -2, interaction_2 = -2, interaction_3 = -2, interaction_4 = -2):
@@ -35,14 +35,14 @@ class crosssection():
         #container for optimization output
         self.st_props = None
 
-    #function that prints the cross section (simple)
+    #method that prints the cross section (simple)
     def __str__(self):
         string = "\n cross-section with b_sup=" + str(self.b_sup) + ", b_inf=" + str(self.b_inf) + ", h=" + str(self.h) + "\n"
         for line in self.lines:
             string += str(line)
         return string
 
-    #function that priints the cross section (more sophisticated)
+    #method that priints the cross section (more sophisticated)
     def print_cs_as_list(self):
         string = "\n\n      b_sup: "+str(self.b_sup)+"   b_inf: "+str(self.b_inf)+"   h: "+str(self.h)
         t_deck = self.get_line(pl_position =1, pl_type = 0).t
@@ -58,22 +58,22 @@ class crosssection():
         return string
 
 
-    """Buckling Proof Verification Function"""
+    """Buckling Proof Verification Method"""
 
-    #function that returns if the cross section passes the buckling proof
+    #method that returns if the cross section passes the buckling proof
     def proven(self):
         proven = self.eta_1 < 1 and self.interaction_1 < 1 and self.interaction_2 < 1 and self.interaction_3 < 1 and \
         self.interaction_4 < 1 and self.eta_3_side_1 < 1 and self.eta_3_side_2 < 1 and self.eta_3_side_3 < 1 and self.eta_3_side_4 <1
         return proven
 
 
-    """Crosssection Manipulation Functions"""
+    """Crosssection Manipulation Methods"""
 
-    #function that adds a line to the cross section
+    #method that adds a line to the cross section
     def addline(self, line):
         self.lines.append(line)
 
-    #function that resets all cross sectional values but does not remove any lines
+    #method that resets all cross sectional values but does not remove any lines
     def reset(self):
         self.eta_1 = -2
         self.interaction_2 = -2
@@ -95,7 +95,7 @@ class crosssection():
             plate.rho_p = 1
             plate.sigma_cr_p = 0
 
-    #function that removes the stiffener with the respective stiffener number
+    #method that removes the stiffener with the respective stiffener number
     def remove_stiffener(self, st_number):
         to_remove = []
 
@@ -130,9 +130,9 @@ class crosssection():
             self.lines.remove(pl)
 
 
-    """Sub-cross-section / Line Getting Functions"""
+    """Sub-cross-section / Line Getter-Methods"""
 
-    #function that returns one side/stiffened plate of the cross section
+    #method that returns one side/stiffened plate of the cross section
     def get_stiffened_plate(self, side):
         plate_glob = crosssection(0,0,0)
         for line in self.lines:
@@ -140,7 +140,7 @@ class crosssection():
                 plate_glob.addline(line)
         return plate_glob
 
-    #function that returns edge plate a of a stiffened plate
+    #method that returns edge plate a of a stiffened plate
     def get_plate_a(self, side):
         plate_a = None
         min_tpl = 10000
@@ -152,7 +152,7 @@ class crosssection():
                     plate_a = line
         return plate_a
 
-    #function that returns edge plate b of a stiffened plate
+    #method that returns edge plate b of a stiffened plate
     def get_plate_b(self, side):
         plate_b = None
         max_tpl = 0
@@ -164,7 +164,7 @@ class crosssection():
                     plate_b = line
         return plate_b
 
-    #function that returns the line corresponding to the given code
+    #method that returns the line corresponding to the given code
     #if more than one line is found, the first to be found is returned
     #if no line is found, an assertion is thrown
     def get_line(self, pl_position = None, pl_type = None, tpl_number = None, st_number = None, st_pl_position = None):
@@ -192,9 +192,9 @@ class crosssection():
         assert found == True, "Line could not be found"
 
 
-    """General Geometry Functions"""
+    """General Geometry Methods"""
 
-    #function that rotates the entire cross section about a given angle
+    #method that rotates the entire cross section about a given angle
     def get_cs_rot(self, angle, stress = False):
         #make a copy of the crosssection
         cs = crosssection(0,0,0)
@@ -221,7 +221,7 @@ class crosssection():
 
         return cs
 
-    #function that returns the coordinates of the position where the stiffener should be placed
+    #method that returns the coordinates of the position where the stiffener should be placed
     def get_coordinates(self, location, side):
         plate = self.get_line(pl_position = side, pl_type = 0)
         #bottom or top plate
@@ -242,40 +242,40 @@ class crosssection():
                 z = plate.b.z + location * (plate.a.z-plate.b.z)
         return y,z
 
-    #function that returns the minimal absolute value of the angle between a plate and the y-axis in rad
+    #method that returns the minimal absolute value of the angle between a plate and the y-axis in rad
     def get_angle(self, side):
         plate = self.get_line(pl_position = side)
         return plate.get_angle_y()
 
 
-""" Functions to Calculate the Properties of the Gross Crossection """
+""" Methods to Calculate the Properties of the Gross Crossection """
 
-    #function that returns the z-coordinate of the center of the gross cross section
+    #method that returns the z-coordinate of the center of the gross cross section
     def get_center_z_tot(self, stress = False):
         weighted_a = 0
         for i in self.lines:
             weighted_a = weighted_a + i.get_area_tot(stress)*i.get_center_z_tot(stress)
         return weighted_a/self.get_area_tot(stress)
-    #function that returns the y coordinate of the center of the gross cross section
+    #method that returns the y coordinate of the center of the gross cross section
     def get_center_y_tot(self, stress = False):
         weighted_a = 0
         for i in self.lines:
             weighted_a = weighted_a + i.get_area_tot(stress)*i.get_center_y_tot(stress)
         return weighted_a/self.get_area_tot(stress)
-    #function that returns the area of the gross cross section
+    #method that returns the area of the gross cross section
     def get_area_tot(self, stress = False):
         a=0
         for i in self.lines:
             a = a + i.get_area_tot(stress)
         return a
-    #function that returns I_y of the gross cross section
+    #method that returns I_y of the gross cross section
     def get_i_y_tot(self, stress = False):
         z_s = self.get_center_z_tot(stress)
         iy_tot = 0
         for i in self.lines:
             iy_tot = iy_tot + i.get_i_y_tot(stress) + (z_s-i.get_center_z_tot(stress))**2 * i.get_area_tot(stress)
         return iy_tot
-    #function that returns A_zero for torsional loading
+    #method that returns A_zero for torsional loading
     def get_azero(self, stress = False):
         azero = 0
         for l in self.lines:
@@ -287,47 +287,47 @@ class crosssection():
         return azero
 
 
-"""Functions to Calculate the Properties of the Effective Crossection """
+"""Methods to Calculate the Properties of the Effective Crossection """
 
-    #function that returns the z-coordinate of the center of the effective cross section
+    #method that returns the z-coordinate of the center of the effective cross section
     def get_center_z_red(self, stress = False):
         weighted_a = 0
         for i in self.lines:
             weighted_a = weighted_a + i.get_area_red(stress)*i.get_center_z_red(stress)
         return weighted_a/self.get_area_red(stress)
-    #function that returns the z-coordinate of the center of the effective cross section
+    #method that returns the z-coordinate of the center of the effective cross section
     def get_center_y_red(self, stress = False):
         weighted_a = 0
         for i in self.lines:
             weighted_a = weighted_a + i.get_area_red(stress)*i.get_center_y_red(stress)
         return weighted_a/self.get_area_red(stress)
-    #function that returns the area of the effective cross section
+    #method that returns the area of the effective cross section
     def get_area_red(self, stress = False):
         a=0
         for i in self.lines:
             a = a + i.get_area_red(stress)
         return a
-    #function that returns I_y of the effective cross section
+    #method that returns I_y of the effective cross section
     def get_i_y_red(self, stress = False):
         z_s = self.get_center_z_red(stress)
         iy_tot = 0
         for i in self.lines:
             iy_tot = iy_tot + i.get_i_y_red(stress) + (z_s-i.get_center_z_red(stress))**2 * i.get_area_red(stress)
         return iy_tot
-    #function that returns M_Rd_el_eff
+    #method that returns M_Rd_el_eff
     def get_m_rd_el_eff(self):
         stress = True
         max_z_dis = max(self.get_center_z_red(stress) + self.get_line(pl_position = 1, pl_type = 0).t_stress/2 ,  data.input_data.get("h") + self.get_line(pl_position = 3, pl_type = 0).t_stress/2 - self.get_center_z_red(stress))
         m_rd_el_eff = (self.get_i_y_red(stress) / max_z_dis) * (data.constants.get("f_y")/data.constants.get("gamma_M1"))
         return m_rd_el_eff
 
-    #function that returns the cross sectional value EI of the effective
+    #method that returns the cross sectional value EI of the effective
     def get_ei(self):
         ei = self.get_i_y_red()*data.constants.get("E")
         self.ei = ei
         return ei
 
-    #function that returns M_f_Rd_eff according to EC 3, 1-5, 7.1
+    #method that returns M_f_Rd_eff according to EC 3, 1-5, 7.1
     def get_m_f_rd_eff(self):
         stress = True
         top_flange = self.get_stiffened_plate(side = 1)
@@ -340,15 +340,15 @@ class crosssection():
             m_f_rd_eff = bottom_flange_area * self.h * data.constants.get("f_y") / data.constants.get("gamma_M1")
         return m_f_rd_eff
 
-    #function that calculates the moment of inertia of the gross cross section along the line given as an argument
-    #when using this function, always make sure line is a principal axis of the cross section
+    #method that calculates the moment of inertia of the gross cross section along the line given as an argument
+    #when using this method, always make sure line is a principal axis of the cross section
     def get_i_along_tot(self, line, stress = False):
         angle = (-1)* line.get_angle_y_true()
         cs_rot = self.get_cs_rot(angle, stress)
         return cs_rot.get_i_y_tot(stress)
 
-    #function that calculates the moment of inertia of the reduced cross section along the line given as an argument
-    #when using this function, always make sure line is a principal axis of the cross section
+    #method that calculates the moment of inertia of the reduced cross section along the line given as an argument
+    #when using this method, always make sure line is a principal axis of the cross section
     def get_i_along_red(self, line, stress = False):
         angle = (-1)*line.get_angle_y_true()
         cs_rot = self.get_cs_rot(angle, stress)
