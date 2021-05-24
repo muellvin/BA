@@ -18,7 +18,7 @@ def add_stiffener_set(initial_cs, propositions, optimizer):
     stiffener_list = None
     geometry_ok = False
 
-    assert optimizer == a or optimizer == b, "Wrong input for optimizer."
+    assert optimizer == "a" or optimizer == "b", "Wrong input for optimizer."
 
     if propositions.stiffeners == []:
         return initial_cs
