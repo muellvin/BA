@@ -26,7 +26,7 @@ def opt_eqpressure():
     h = data.input_data["h"]
     t_deck = data.input_data["t_deck"]
     cs_fresh = initial_cs.create_initial_cs(b_sup, b_inf, h, 1, t_deck, 1)
-    st_prop_deck = deck.deck(b_sup)
+    st_prop_deck = deck.deck(b_sup, True)
     n_st_deck = len(st_prop_deck.stiffeners)
 
     t_values = [5]
@@ -154,8 +154,6 @@ def set_defaults_for_opt_eqpressure():
 
     defaults.do_print = True
     defaults.do_print_to_txt = False
-
-    defaults.do_deck_as_prop = True
 
 
 

@@ -11,11 +11,11 @@ from assembly import add_stiffeners
 
 
 
-def deck(b_deck):
+def deck(b_deck, as_prop):
     #returns the a list of optimal deck stiffeners
     min_Iy = min_inertial_mom()
     #choose correct value according to EC 3-2
-    t_deck = data.input_data.get("t_deck")
+    t_deck = defaults.t_deck
     #set maximum default values and step size for range
     h_max = defaults.h_maximal
     h_step = defaults.h_step
@@ -55,7 +55,7 @@ def deck(b_deck):
     t = best[3]
     assert best[4] != 10**8, "You are Stupid."
 
-    if defaults.do_deck_as_prop == True:
+    if as_prop == True:
         deck_st_prop = stiffeners_proposition.stiffeners_proposition()
         num_of_plates = round(b_deck / b_sup)
         num_of_stiffeners = (num_of_plates-1)/2
@@ -68,7 +68,7 @@ def deck(b_deck):
         return deck_st_prop
 
 
-    elif defaults.do_deck_as_prop == False:
+    elif as_prop == False:
         #create a list of deck stiffeners
         deck_stiffener_list = []
         num_of_plates = round(b_deck / b_sup)

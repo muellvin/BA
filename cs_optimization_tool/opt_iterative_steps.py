@@ -30,7 +30,7 @@ def optimize():
     counter = 1
     bottom_max = defaults.num_bottom_stiffeners_max
     side_max = defaults.num_side_stiffeners_max
-    st_prop_deck = deck.deck(b_sup)
+    st_prop_deck = deck.deck(b_sup, True)
     num_top_stiffeners = len(st_prop_deck.stiffeners)
     m_ed = data.input_data.get("M_Ed")
     sign = math.copysign(1, m_ed)

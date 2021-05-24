@@ -73,5 +73,3 @@ do_column_plate_buckling = True
 do_print_to_pdf = True
 do_print_to_txt = True
 do_print_to_terminal = True
-
-do_deck_as_prop = True

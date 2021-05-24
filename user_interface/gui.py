@@ -29,7 +29,6 @@ def index():
 
 @app.route('/optimize_step_1', methods = ['GET'])
 def optimize():
-    defaults.do_deck_as_prop=False
     form_values.values = copy.deepcopy(form_values.default_cs)
     val = form_values.values
     initial_cs = cs_to_html.create_initial_cs(val.get("b_sup"), val.get("b_inf"), val.get("h"), val.get("t_side"), val.get("t_deck"), val.get("t_btm"))
@@ -38,7 +37,6 @@ def optimize():
 
 @app.route('/optimize_step_1', methods = ['POST'])
 def optimize_input_1():
-    defaults.do_deck_as_prop=False
     val = None
     try:
         b_sup = int(request.form['b_sup'])
@@ -57,7 +55,6 @@ def optimize_input_1():
 
 @app.route('/optimize_step_2', methods = ['POST'])
 def optimize_input_2():
-    defaults.do_deck_as_prop=False
     b_sup = int(request.form['b_sup'])
     b_inf = int(request.form['b_inf'])
     h = int(request.form['h'])
@@ -71,7 +68,6 @@ def optimize_input_2():
 
 @app.route('/results_optimize', methods = ['POST'])
 def resultpage_optimize():
-    defaults.do_deck_as_prop=True
     #set defaults
     cs_position = request.form["cs_position"]
     data.input_data.update({"cs_position": cs_position})
@@ -100,11 +96,10 @@ def resultpage_optimize():
 
 @app.route('/cs_analysis_step_1', methods = ['GET'])
 def cs_analysis():
-    defaults.do_deck_as_prop=False
     form_values.content = copy.deepcopy(form_values.default_cs)
     cont = form_values.content
     first_cs = cs_to_html.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
-    deck_stiffeners = deck.deck(cont.get("b_sup"))
+    deck_stiffeners = deck.deck(cont.get("b_sup"), False)
     form_values.stiffeners = []
     form_values.stiffeners += deck_stiffeners
     end_cs = merge.merge(first_cs, form_values.stiffeners)
@@ -114,7 +109,6 @@ def cs_analysis():
 
 @app.route('/cs_analysis_step_1', methods = ['POST'])
 def cs_analysis_input_1():
-    defaults.do_deck_as_prop=False
     cont = None
     try:
         b_sup = int(request.form['b_sup'])
@@ -154,7 +148,7 @@ def cs_analysis_input_1():
     except KeyError:
         cont = form_values.content
     first_cs = initial_cs.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
-    deck_stiffeners = deck.deck(cont.get("b_sup"))
+    deck_stiffeners = deck.deck(cont.get("b_sup"), False)
     num_top = len(deck_stiffeners)
     cont.update({"num_top":num_top})
     form_values.stiffeners = []
@@ -168,7 +162,6 @@ def cs_analysis_input_1():
 
 @app.route('/cs_analysis_step_2', methods = ['POST'])
 def cs_analysis_input_2():
-    defaults.do_deck_as_prop=False
     b_sup = int(request.form['b_sup'])
     b_inf = int(request.form['b_inf'])
     h = int(request.form['h'])
@@ -204,7 +197,7 @@ def cs_analysis_input_2():
         t_st = float(request.form[code[4]])
         cont.update({code[0]:location_st, code[1]:b_sup_st, code[2]:b_inf_st, code[3]:h_st, code[4]:t_st})
     first_cs = initial_cs.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
-    deck_stiffeners = deck.deck(cont.get("b_sup"))
+    deck_stiffeners = deck.deck(cont.get("b_sup"), False)
     num_top = len(deck_stiffeners)
     cont.update({"num_top":num_top})
     stiffener_transform.input_to_prop(cont.get("num_top"), cont.get("num_side"), cont.get("num_btm"))
@@ -214,7 +207,6 @@ def cs_analysis_input_2():
 
 @app.route('/results_analysis', methods = ['POST'])
 def resultpage_analysis():
-    defaults.do_deck_as_prop=False
     cs_position = request.form["cs_position"]
     data.input_data.update({"cs_position": cs_position})
     M_Ed = int(request.form['M_Ed'])*10**6

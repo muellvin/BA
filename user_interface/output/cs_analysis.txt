@@ -150,3 +150,1362 @@ Resistance to shear and interaction shear force and bending moment for side 4
    Web -> (7.1) without iterating
       eta_3 <= 0.5; no interaction needed
       utilisation: -1
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.7961783439490446
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.8741258741258742
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.02
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 9.34
+      eta_3: 0.13419498834751462
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 9.34
+      eta_3: 0.10684314358878552
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.7961783439490446
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.0
+      Beta: 0.8741258741258742
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.02
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 9.34
+      eta_3: 0.13419498834751462
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 9.34
+      eta_3: 0.10684314358878552
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.5495559003928032
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 > 0.5; interaction needed
+      eta_1: 1.0850078729807384
+      utilisation: 1.0948310220357043
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 7.59
+      eta_3: 0.4803810318118909
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.6051075457633321
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.1
+      Beta: 0.8548071987720094
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.02
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 1198.6503536358841
+      eta_3: 0.03815681897357454
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.0434616076860902
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03802890672532892
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03259620576456765
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.027163504803806377
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.021730803843045102
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.016298102882283828
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010865401921522555
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.00543270096076128
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 5.413883100024242e-18
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.0054327009607612695
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010865401921522544
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.01629810288228382
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.0217308038430451
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.027163504803806377
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.032596205764567655
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03802890672532892
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.04346160768609021
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 30.167828479859082
+      eta_3: 0.2678490042992338
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.83
+      eta_3: 0.2592575779809867
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.004339054372553904
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.83
+      eta_3: 0.2592575779809867
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.6051075457633321
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.2
+      Beta: 0.8343157135734438
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.02
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 1198.65042364873
+      eta_3: 0.03803764056586889
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.0433258603848295
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.037910127836725815
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03249439528862212
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02707866274051845
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.021662930192414755
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.016247197644311068
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010831465096207383
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.005415732548103693
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 5.396973462776644e-18
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.005415732548103683
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010831465096207369
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.016247197644311057
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.021662930192414755
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02707866274051845
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.032494395288622135
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.037910127836725815
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.043325860384829516
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 37.56415626155374
+      eta_3: 0.2323069914309904
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.7625
+      eta_3: 0.24302660138496918
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.009104704566901737
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.7625
+      eta_3: 0.24302660138496918
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.6051075457633321
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.2
+      Beta: 0.8363239669107382
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.02
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 1198.650394231251
+      eta_3: 0.037913767659263846
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.04318476592741331
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.037786670186486654
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03238857444555999
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02699047870463333
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02159238296370666
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.016194287222779997
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010796191481853333
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.005398095740926669
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 5.3793977462032995e-18
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.005398095740926659
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010796191481853321
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.016194287222779987
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.021592382963706656
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02699047870463333
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.032388574445559995
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.037786670186486654
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.04318476592741333
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 78.43137973885273
+      eta_3: 0.16018315826459606
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5424999999999995
+      eta_3: 0.21165706129846207
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.040935602089435495
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5
+      eta_3: 1.5336769709652686e-17
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.04093560208943549
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5424999999999995
+      eta_3: 0.2116570612984621
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.6051075457633321
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.3
+      Beta: 0.797973736401633
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.02
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 1198.6504884493604
+      eta_3: 0.03772452708480886
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.04296921599881605
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03759806399896405
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03222691199911204
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02685575999926004
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02148460799940803
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.016113455999556027
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.01074230399970402
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.005371151999852012
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 5.352547333211845e-18
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.005371151999852001
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010742303999704007
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.016113455999556017
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02148460799940802
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02685575999926004
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.032226911999112054
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03759806399896405
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.04296921599881607
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 102.35047678785784
+      eta_3: 0.13234363305012395
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5
+      eta_3: 0.17817853944053755
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.04094425044901439
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.43
+      eta_3: 1.0425018939764236e-17
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.04094425044901439
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.5
+      eta_3: 0.17817853944053758
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.6051075457633321
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.2
+      Beta: 0.818623131942995
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.02
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 1198.6504967003975
+      eta_3: 0.03769690289826341
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.042937751332982214
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03757053241635944
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03220331349973666
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02683609458311389
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.021468875666491104
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.016101656749868333
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010734437833245557
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.00536721891662278
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 5.348627873447813e-18
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.005367218916622772
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010734437833245547
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.016101656749868326
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.021468875666491107
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02683609458311389
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.032203313499736666
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03757053241635944
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.04293775133298222
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 173.06821854169954
+      eta_3: 0.10426843092731021
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.445625
+      eta_3: 0.1633391727313016
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.05811679169131468
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4156249999999995
+      eta_3: 0.044231600982617615
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.003874452779420979
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4156249999999995
+      eta_3: 0.044231600982617615
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.35
+      eta_3: 0.05811679169131468
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.445625
+      eta_3: 0.1633391727313016
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.6051075457633321
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.5
+      Beta: 0.7646656480216987
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.02
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 1198.6502956638333
+      eta_3: 0.03746943362126807
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.042678657919449574
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03734382567951838
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.032008993439587186
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.026674161199655995
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02133932895972479
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.0160044967197936
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010669664479862399
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.005334832239931203
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 5.316353378151108e-18
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.0053348322399311915
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010669664479862388
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.016004496719793586
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.02133932895972479
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.026674161199655995
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.0320089934395872
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03734382567951838
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.04267865791944959
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 494.4248450753504
+      eta_3: 0.06571532354471707
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4156249999999995
+      eta_3: 0.12493211134699803
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.05581227307863484
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3706249999999995
+      eta_3: 0.025125125231638328
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.007441636410484645
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.3706249999999995
+      eta_3: 0.025125125231638328
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.38
+      eta_3: 0.05581227307863484
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.4156249999999995
+      eta_3: 0.12493211134699803
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Buckling Proof according to EC 1993 Part 1-5
+
+3.2 Effective width for elastic shear lag
+   Shear lag reduction for flange 1
+      Shear Lag is not neglectable
+      alpha_0: 1.6
+      Beta: 0.6051075457633321
+   Shear lag reduction for flange 3
+      Shear Lag is not neglectable
+      alpha_0: 1.3
+      Beta: 0.8016560451237037
+
+4.4 Plate elements without longitudinal stiffeners
+   Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.02
+
+4.5 Stiffened plate elements with longitudinal stiffeners
+   Side 2
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+   Side 3
+      4.5.4 Interaction between plate and column buckling
+           all_tension: True
+           rho_c = 1
+   Side 4
+      4.5.4 Interaction between plate and column buckling
+           all_tension: False
+           rho_c = 1
+
+Resistance to shear and interaction shear force and bending moment for side 1
+   5. Resistance to shear
+      stiffened plate; EBPlate
+      k_tau: 1198.6502784030972
+      eta_3: 0.0375022090438632
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.04271598997691386
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03737649122979963
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03203699248268539
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.026697493735571162
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.021357994988456926
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.0160184962413427
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010678997494228466
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.005339498747114236
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 5.321003721425446e-18
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.005339498747114225
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.010678997494228456
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.016018496241342686
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.021357994988456926
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.026697493735571162
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.0320369924826854
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.03737649122979963
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 5.353840830449827
+      eta_3: 0.04271598997691386
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 2
+   5. Resistance to shear
+      unstiffened plate; (A.5)
+      k_tau: 6.4025
+      eta_3: 1.0152298313496109
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear

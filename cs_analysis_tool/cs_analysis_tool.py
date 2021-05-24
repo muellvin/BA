@@ -36,7 +36,7 @@ def cs_analysis_gui():
 
     #deck and initial_cs block
     cs = initial_cs.create_initial_cs(data.input_data.get("b_sup"), data.input_data.get("b_inf"), data.input_data.get("h"), data.input_data.get("t_side"), data.input_data.get("t_deck"), data.input_data.get("t_bottom"))
-    st_list_deck = deck.deck(data.input_data.get("b_sup"))
+    st_list_deck = deck.deck(data.input_data.get("b_sup"), False)
 
 
     #assembly block

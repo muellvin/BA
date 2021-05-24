@@ -1,6 +1,7 @@
 import copy
 import sys
 from data_and_defaults import data
+from data_and_defaults import defaults
 from proofs_and_stress_calculation import resistance_to_shear
 from proofs_and_stress_calculation import stress_cal
 from classes import crosssection
