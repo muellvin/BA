@@ -57,7 +57,7 @@ class line():
         else:
             return false
 
-#methods to calculate line propreties for non-reduced
+"""getter methods for line propreties for non-reduced"""
     #stress is the boolean defining if the attribute t_stress should be used
     #will be called for cross-sectional stresses and moments, to account for shear lag reductions
     #which are represented by reducing the thickness of flange plates -> t_stress set smaller than
@@ -120,7 +120,7 @@ class line():
             return self.cal_i_rot(self.a.y, self.a.z, self.b.y, self.b.z, self.t_stress, angle)
 
 
-#methods to calculate line propreties for reduced
+"""getter methods for line propreties for reduced"""
 #they follow the same principle as the getter methods for non-reduced
 #they cal the cal_methods for non-reduced, they on the other hand refer to the self
     def get_center_y_red(self, stress = False):
@@ -151,8 +151,7 @@ class line():
         return self.cal_i_rot_red(angle, stress)
 
 
-#GENERAL (independant of reduced or non-reduced)
-
+"""GENERAL (independant of reduced or non-reduced)"""
     #calculate the smallest angle between the plate and the y axis
     def get_angle_y(self):
         zdis = abs(self.b.z - self.a.z)
@@ -200,6 +199,7 @@ class line():
     def get_sigma_red_from_b(self, factor):
         return self.sigma_b_red + factor*(self.sigma_a_red - self.sigma_b_red)
 
+"""calculation functions for non-reduced"""
 #NON-REDUCED (and also used for reduced, that's why with coordinates as arguments)
 #these functions only use the given arguments and do not refer to self, so that they can also be used from non-reduced methods
     def cal_center_y(self, ay, az, by, bz, t):
@@ -224,7 +224,7 @@ class line():
         return math.cos(angle)**2 * self.cal_i_along(ay, az, by, bz, t) + math.sin(angle)**2 * self.cal_i_perpen(ay, az, by, bz, t)
 
 
-#FOR REDUCED
+"""calculation functions for reduced"""
     def cal_center_y_red(self, stress = False):
         if stress:
             t_used = self.t_stress
