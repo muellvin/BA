@@ -203,7 +203,6 @@ def distances_betw_stiffeners(cs, stiffeners, propositions):
             upper = stiffeners2[i-st_number_min].get_line(pl_position = 2, st_number = i, st_pl_position = 2).a
             lower = stiffeners2[i+1-st_number_min].get_line(pl_position = 2,st_number = i+1,st_pl_position = 4).b
             overlap = lower.z < upper.z
-            print(overlap)
             distance = math.sqrt((abs(lower.y) - abs(upper.y))**2 + (abs(lower.z) - abs(upper.z))**2)
             corr = 0
             if overlap == True:

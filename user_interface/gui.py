@@ -103,6 +103,7 @@ def resultpage_optimize():
 def cs_analysis():
     form_values.content = copy.deepcopy(form_values.default_cs)
     cont = form_values.content
+    data.input_data.update({"a":cont.get("a")})
     first_cs = initial_cs.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
     deck_stiffeners = deck.deck(cont.get("b_sup"), False)
     form_values.stiffeners = []
@@ -155,6 +156,7 @@ def cs_analysis_input_1():
     first_cs = initial_cs.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
     deck_stiffeners = deck.deck(cont.get("b_sup"), False)
     num_top = len(deck_stiffeners)
+    data.input_data.update({"a":a})
     cont.update({"num_top":num_top})
     form_values.stiffeners = []
     form_values.stiffeners += deck_stiffeners
@@ -225,6 +227,6 @@ def resultpage_analysis():
     results = cs_analysis_tool.cs_analysis_gui()
     return render_template('resultpage_analysis.html', results = results)
 
-#Run GUI 
+#Run GUI
 if __name__ == '__main__':
    app.run(debug = True)

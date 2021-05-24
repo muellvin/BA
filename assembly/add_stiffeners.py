@@ -36,14 +36,16 @@ def add_stiffener_set(initial_cs, proposition, optimizer):
                 print("\n\n Substantiate finished with FALSE")
                 return False
             proposition, geometry_ok = check_geometry.check_geometry(initial_cs, stiffener_list, proposition)
-            print(geometry_ok)
+
         if geometry_ok == False:
+            print("\n\n Geometry_ok is FALSE")
             return False
 
 
 
     next_cs = merge.merge(copy.deepcopy(initial_cs), stiffener_list)
     next_cs.st_props = proposition
+    print("\n\n Geometry_ok is TRUE")
     return next_cs
 
 

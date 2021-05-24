@@ -8,7 +8,6 @@ def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
     setup_data = setup.readlines()
     ebp_path = setup_data[-1]
     ebp_path = ebp_path[:-1]
-    print(ebp_path)
     #write the input for ebplate to ebplate.EBP
     os.remove("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP")
     file = open("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP", 'a+', encoding ='cp1252')
@@ -112,12 +111,11 @@ def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
 #function that writes text files for ebplate, calls ebplate and retrieves the results
 #this function is used for shear stresses only
 def ebplate_shear(b, h, t, tau, stiffeners_ebp):
-    #set ebplate path 
+    #set ebplate path
     setup = open("setup.txt", 'r')
     setup_data = setup.readlines()
     ebp_path = setup_data[-1]
     ebp_path = ebp_path[:-1]
-    print(ebp_path)
 
     #write the input for ebplate to ebplate.EBP
     os.remove("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP")

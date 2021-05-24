@@ -74,8 +74,6 @@ def opt_eqpressure():
                             sigma_top_red = get_sigma_top_red(stiffened_cs)
                             sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
 
-                            #geometry_output.print_cs_red(stiffened_cs)
-
                         if stiffened_cs.proven():
                             print("\n\n GOT ONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                             cs_collector.into_collector(stiffened_cs)
@@ -95,7 +93,6 @@ def opt_eqpressure():
                                     st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda st: st.st_number)
 
                                     stiffened_cs = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop, "a")
-                                    #geometry_output.print_cs_red(stiffened_cs)
                                     assert stiffened_cs != True, "cs is bool True"
                                     assert stiffened_cs != False, "cs is bool False"
                                     stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
@@ -104,13 +101,10 @@ def opt_eqpressure():
                                     sigma_top_red = get_sigma_top_red(stiffened_cs)
                                     sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
 
-                                    #geometry_output.print_cs_red(stiffened_cs)
                                 if stiffened_cs.proven():
 
                                     cs_collector.into_collector(stiffened_cs)
 
-
-                                    #geometry_output.print_cs_red(stiffened_cs)
                             #terminate i_along_bottom
                             n_st_bottom += 1
                         #terminate n_st_bottom

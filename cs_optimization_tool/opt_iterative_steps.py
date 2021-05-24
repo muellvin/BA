@@ -55,13 +55,10 @@ def optimize():
                             if test_cs != False:
                                 #proof
                                 end_cs = buckling_proof.buckling_proof(test_cs)
-                                print(end_cs)
-                                #go.print_cs_red(end_cs)
                                 st_prop_rest = stiffeners_proposition.stiffeners_proposition()
                                 if end_cs.proven():
                                     if max(t_side, t_bottom) < t_max_min:
                                         t_max_min = max(t_side, t_bottom)
-                                    print(str(optimization_value.cost(end_cs)) + " CHF")
                                     print("PASS!")
                                     cs_collector.into_collector(end_cs)
                                 else:
@@ -90,15 +87,12 @@ def optimize():
                                         #proof
                                         end_cs = buckling_proof.buckling_proof(test_cs)
                                         st_prop_rest = stiffeners_proposition.stiffeners_proposition()
-                                        print(end_cs)
-                                        #go.print_cs_red(end_cs)
                                         st_prop_rest = stiffeners_proposition.stiffeners_proposition()
                                         if end_cs.proven():
                                             if max(t_side, t_bottom) < t_max_min:
                                                 t_max_min = max(t_side, t_bottom)
                                             strong_enough = True
                                             cs_collector.into_collector(end_cs)
-                                            print(str(optimization_value.cost(end_cs)) + " CHF")
                                             print("PASS!")
                                         else:
                                             print("FAIl!")
@@ -136,7 +130,6 @@ def optimize():
                                         for num in range(num_side_stiffeners):
                                             #create side stiffeners
                                             loc = locations_side[loc_side][num]
-                                            print("Location Side" + str(loc))
                                             assert loc != -1, "Error!"
                                             st_number_right = num_top_stiffeners + num + 1
                                             st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
@@ -156,7 +149,6 @@ def optimize():
                                                     t_max_min = max(t_side, t_bottom)
                                                 strong_enough = True
                                                 cs_collector.into_collector(end_cs)
-                                                print(str(optimization_value.cost(end_cs)) + " CHF")
                                                 print("PASS!")
                                             else:
                                                 print("FAIL!")
@@ -180,7 +172,6 @@ def optimize():
                                             for num in range(num_side_stiffeners):
                                                 #create side stiffeners
                                                 loc = locations_side[loc_side][num]
-                                                print("Location Side" + str(loc))
                                                 assert loc != -1, "Error!"
                                                 st_number_right = num_top_stiffeners + num + 1
                                                 st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
@@ -206,7 +197,6 @@ def optimize():
                                                         t_max_min = max(t_side, t_bottom)
                                                     strong_enough = True
                                                     cs_collector.into_collector(end_cs)
-                                                    print(str(optimization_value.cost(end_cs)) + " CHF")
                                                     print("PASS!")
                                                 else:
                                                     print("FAIL!")
@@ -244,7 +234,6 @@ def optimize():
                                         for num in range(num_side_stiffeners):
                                             #create side stiffeners
                                             loc = locations_side[loc_side][num]
-                                            print("Location Side" + str(loc))
                                             assert loc != -1, "Error!"
                                             st_number_right = num_top_stiffeners + num + 1
                                             st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
@@ -263,7 +252,6 @@ def optimize():
                                                 if max(t_side, t_bottom) < t_max_min:
                                                     t_max_min = max(t_side, t_bottom)
                                                 cs_collector.into_collector(end_cs)
-                                                print(str(optimization_value.cost(end_cs)) + " CHF")
                                                 print("PASS!")
                                             else:
                                                 print("FAIL!")
@@ -290,7 +278,6 @@ def optimize():
                                                 for num in range(num_side_stiffeners):
                                                     #create side stiffeners
                                                     loc = locations_side[loc_side][num]
-                                                    print("Location Side" + str(loc))
                                                     assert loc != -1, "Error!"
                                                     st_number_right = num_top_stiffeners + num + 1
                                                     st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
@@ -316,12 +303,11 @@ def optimize():
                                                             t_max_min = max(t_side, t_bottom)
                                                         strong_enough = True
                                                         cs_collector.into_collector(end_cs)
-                                                        print(str(optimization_value.cost(end_cs)) + " CHF")
                                                         print("PASS!")
                                                     else:
                                                         print("FAIL!")
 
-        #set new maximum plate thickness 
+        #set new maximum plate thickness
         t_collection = []
         for t in t_range:
             if t <= t_max_min:
@@ -357,7 +343,6 @@ def optimize():
                                             for num in range(num_side_stiffeners):
                                                 #create side stiffeners
                                                 loc = locations_side[loc_side][num]
-                                                print("Location Side" + str(loc))
                                                 assert loc != -1, "Error!"
                                                 st_number_right = num_top_stiffeners + num + 1
                                                 st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
@@ -377,7 +362,6 @@ def optimize():
                                                         t_max_min = max(t_side, t_bottom)
                                                     strong_enough = True
                                                     cs_collector.into_collector(end_cs)
-                                                    print(str(optimization_value.cost(end_cs)) + " CHF")
                                                     print("PASS!")
                                                 else:
                                                     print("FAIL!")
@@ -406,7 +390,6 @@ def optimize():
                                                     for num in range(num_side_stiffeners):
                                                         #create side stiffeners
                                                         loc = locations_side[loc_side][num]
-                                                        print("Location Side" + str(loc))
                                                         assert loc != -1, "Error!"
                                                         st_number_right = num_top_stiffeners + num + 1
                                                         st_number_left = num_top_stiffeners + num_btm_stiffeners + 2*num_side_stiffeners - num
@@ -432,7 +415,6 @@ def optimize():
                                                                 t_max_min = max(t_side, t_bottom)
                                                             strong_enough = True
                                                             cs_collector.into_collector(end_cs)
-                                                            print(str(optimization_value.cost(end_cs)) + " CHF")
                                                             print("PASS!")
                                                         else:
                                                             print("FAIL!")

@@ -1,5 +1,5 @@
 import math
-import sys 
+import sys
 from data_and_defaults import data
 from data_and_defaults import defaults
 from proofs_and_stress_calculation import stress_cal
@@ -16,13 +16,11 @@ def local_buckling(cs):
     i = 1
     while change > defaults.convergence_limit_local_buckling:
         m_rd_el_eff_old = cs.get_m_rd_el_eff()
-        #print("iteration: ", i)
         for line in cs.lines:
             cs = local_buckling_plate(cs, line)
         cs = cal_sigma_psi_red(cs)
         m_rd_el_eff_new = cs.get_m_rd_el_eff()
         change = abs(abs( m_rd_el_eff_new / m_rd_el_eff_old ) - 1)
-        #print ("change: ", change)
 
         i += 1
     return cs
@@ -36,7 +34,6 @@ def cal_sigma_psi_red(cs):
         line.sigma_b_red = stress_cal.get_sigma_b_red(cs, line, M_Ed)
         line.sigma_p1_red = stress_cal.get_sigma_p1_red(cs, line, M_Ed)
         line.sigma_p2_red = stress_cal.get_sigma_p2_red(cs, line, M_Ed)
-        #print(line)
         #set the stress ratio = sigma min / sigma max
         line.psi = min(line.sigma_a_red, line.sigma_b_red) / max(line.sigma_a_red, line.sigma_b_red)
 
@@ -132,5 +129,4 @@ def local_buckling_plate(cs, line_to_do):
             plate.p2.y = plate.b.y + b_e1/plate.get_length_tot()*(plate.a.y - plate.b.y)
             plate.p2.z = plate.b.z + b_e1/plate.get_length_tot()*(plate.a.z - plate.b.z)
 
-    #print("pl_position: ", plate.code.pl_position," psi: ", int(100*plate.psi)/100, "rho_loc: ", int(100*plate.rho_loc)/100)
     return cs

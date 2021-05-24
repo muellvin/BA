@@ -60,11 +60,6 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
                 st_number_max = plate.code.st_number
         number_of_stiffeners = int(len(stiffener_lines)/3)
 
-
-        #string = "\n      there are "+str(number_of_stiffeners)+" stiffeners on side "+str(side)
-        #printing.printing(string, terminal = True)
-
-
         for i in range(number_of_stiffeners):
             stiffeners_list.append(crosssection.crosssection(0, 0, 0))
             for plate in stiffener_lines:
@@ -97,9 +92,6 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
             st_number = stiffener.lines[0].code.st_number
             stiffeners_set.update({st_number: stiffener})
             stiffeners_set_length += 1
-            #geometry_output.print_cs_red(stiffener)
-
-
 
 
         columns = {}
@@ -107,8 +99,6 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
         #a set of all columns (stiffener + carrying widths) is created -> see column_class
         #they carry the number of the stiffener and they have the stiffener number as a key
         while i < st_number_max+1:
-            #string = "\n      creating column of stiffener "+str(i)
-            #printing.printing(string, terminal = True)
             stiffener_i = copy.deepcopy(stiffeners_set.get(i))
             plate_before = copy.deepcopy(tpl_betw_lines_set.get(i-1))
             plate_between = copy.deepcopy(tpl_st_lines_set.get(i))
@@ -148,7 +138,6 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
             #plate_after
             plate_after_gross_len = figure_Aone(plate_after,True, True)
             factor = plate_after_gross_len/plate_after.get_length_tot()
-            print("\n factor: "+str(factor))
             point_b_y = plate_after.a.y + factor*(plate_after.b.y - plate_after.a.y)
             point_b_z = plate_after.a.z + factor*(plate_after.b.z - plate_after.a.z)
             border_after_gross = point.point(point_b_y, point_b_z)
@@ -189,7 +178,6 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
             column_as_cs.addline(plate_before_gross)
             column_as_cs.addline(plate_after_gross)
             column_as_cs.addline(plate_between)
-            #geometry_output.print_cs_red(column_as_cs)
 
 
             #calculating b_sl_1

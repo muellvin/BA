@@ -39,8 +39,6 @@ def substantiate(cs, propositions, optimizer):
         if success == False:
             return False
 
-    print(" ")
-    print(" ")
     #This function return a list of stiffeners in the global coordinate system
     return stiffener_list
 
@@ -89,7 +87,6 @@ def find_dimensions(stiffener, optimizer):
     #case 1: Optimizer A
     #b_sup is given, b_inf, h and t are free parameters
     if optimizer == "a":
-        print("given b_sup, only correcting heights")
         b_sup = stiffener.b_sup
         h_min = h_minimal
         h_max_angle = math.tan(max_angle) * (b_sup/2 - b_inf_minimal/2)
@@ -133,7 +130,6 @@ def find_dimensions(stiffener, optimizer):
     #b_sup, b_inf, h, t are free parameters, no given parameters
     else:
         assert optimizer == "b", "Wrong Optimizer Input."
-        print("first case in check_geometry")
         assert b_sup_max_geo >= b_sup_minimal
         for b_sup in range(b_sup_minimal, 10*math.floor(b_sup_max_geo/10), b_sup_step):
             h_min = h_minimal

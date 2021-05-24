@@ -179,14 +179,10 @@ def global_plate_buckling(total_cs, plate_glob):
 
             #calculate theta
             b_sup_st = stiffener.get_line(st_pl_position = 1).get_length_tot()
-            print(b_sup_st)
             b_inf_st = stiffener.get_line(st_pl_position = 3).get_length_tot()
-            print(b_inf_st)
             t_st = stiffener.get_line(st_pl_position = 3).t
             diag = stiffener.get_line(st_pl_position = 2).get_length_tot()
-            print(diag)
             diff = (b_sup_st-b_inf_st)/2
-            print(diff)
             h_st = math.sqrt(diag**2 - diff**2)
             A_0 = 0.5*(b_sup_st + b_inf_st)*h_st
             integral = b_sup_st / t + (2*diag + b_inf_st) / t_st
