@@ -46,8 +46,6 @@ effective_width_parameter = 10
 #eta should be changed if fy > 460 MPa
 eta = 1.0
 
-"""optimization_defaults"""
-
 
 """convergence defaults"""
 #convergence limit for when width reduction due to shear lag is calculated plastically
@@ -58,13 +56,6 @@ convergence_limit_local_buckling = 0.02
 convergence_limit_m_rd_pl_eff = 0.05
 
 """do module defaults"""
-#check_geometry
-do_check_geometry = True
-do_check_stiffeners_in_corners_top = False
-do_check_stiffeners_in_corners_bottom = False
-do_height_only = True
-do_width_only = False
-
 do_shear_lag_plastically = False
 do_shear_lag = True
 do_global_plate_buckling = True

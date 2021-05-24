@@ -2,7 +2,6 @@ import math
 import os
 import sys
 from assembly import add_stiffeners
-from assembly import substantiate
 from assembly import merge
 from classes import crosssection
 from proofs_and_stress_calculation import buckling_proof
