@@ -409,10 +409,11 @@ def figure_Aone(plate, a, gross):
 
 
 
-
+#function to calculate the distance between two points
 def dis_points(a, b):
     return math.sqrt((a.y - b.y)**2 + (a.z - b.z)**2)
 
+#function to calculate the distance between a plate and a point using the dot product
 def dis_plate_point(plate, point):
     plate_vector_y = 1/plate.get_length_tot() * (plate.b.y - plate.a.y)
     plate_vector_z = 1/plate.get_length_tot() * (plate.b.z - plate.a.z)
@@ -430,6 +431,7 @@ def dis_plate_point(plate, point):
 
 
 class column_class():
+    #constructor
     def __init__(self,st_number, A_sl, A_sl_eff, I_sl, sigma_cr_c, e1, e2, all_tension, column_as_cs):
         self.st_number = st_number
         self.A_sl = A_sl
@@ -441,7 +443,7 @@ class column_class():
         self.all_tension = all_tension
         self.column_as_cs = column_as_cs
 
-
+    #method to get string output when print()
     def __str__(self):
         line1 = "\n         Column number "+str(self.st_number)
         line2 = "\n            A_sl="+str(int(100*self.A_sl)/100)+", A_sl_eff="+str(int(100*self.A_sl_eff)/100)+", I_sl="+str(int(100*self.I_sl)/100)
