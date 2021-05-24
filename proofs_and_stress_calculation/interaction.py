@@ -1,5 +1,5 @@
 import copy
-import sys 
+import sys
 from data_and_defaults import data
 from proofs_and_stress_calculation import resistance_to_shear
 from proofs_and_stress_calculation import stress_cal
@@ -102,7 +102,7 @@ def get_m_rd_pl_eff(total_cs):
         else:
             cs.addline(plate)
     total_area = cs.get_area_red()
-    convergence = 0.05* total_area
+    convergence = defaults.convergence_limit_m_rd_pl_eff* total_area
     continue_iteration = True
     area_top = 10**12
     area_btm = 0

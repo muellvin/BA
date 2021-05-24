@@ -2,12 +2,13 @@ from data_and_defaults import defaults
 from data_and_defaults import data
 
 def set_value(cs):
-    if defaults.optimize_for_cost_only == True:
+    if data.input_data.get("goal") == 0:
         cs.cost = cost(cs)
-    elif defaults.optimize_for_spec_ei == True:
+    elif data.input_data.get("goal") == 1:
         cs.cost = cost(cs)
         cs.ei = ei(cs)
-    elif defaults.optimize_for_ratio == True:
+    else:
+        assert data.input_data.get("goal") == 2, "Wrong Goal Input."
         cs.ratio = ratio(cs)
 
 
@@ -25,7 +26,7 @@ def cost(cs):
     welding_length = 4 + num_stiffeners * 2
 
     #calculate etsimated costs
-    cost = steel_mass * defaults.steel_cost + welding_length * defaults.welding_cost
+    cost = steel_mass * defaults.data.input_data.get("steel_cost") + welding_length * defaults.data.input_data.get("welding_cost")
     cost = round(cost)
     return cost
 

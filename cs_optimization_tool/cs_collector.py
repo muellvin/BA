@@ -9,13 +9,14 @@ def into_collector(new_cs):
 
 
 def get_best():
-    if defaults.optimize_for_cost_only == True:
+    if data.input_data.get("goal") == 0:
         forgot_default = False
         return get_best_cost()
-    elif defaults.optimize_for_spec_ei == True:
+    elif data.input_data.get("goal") == 1:
         forgot_default = False
         return get_best_spec_ei()
-    elif defaults.optimize_for_ratio == True:
+    else:
+        assert data.input_data.get("goal") == 2, "Wrong Goal Input."
         forgot_default = False
         return get_best_ratio()
 

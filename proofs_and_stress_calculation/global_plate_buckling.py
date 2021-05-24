@@ -67,7 +67,7 @@ def global_plate_buckling(total_cs, plate_glob):
             if plate.code.pl_type == 0:
                 h += plate.get_length_tot()
         t = plate_a.t
-        b = defaults.plate_length
+        b = data.input_data.get("a")
 
         #find borders of compression zone
         comp = None

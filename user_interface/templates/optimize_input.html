@@ -34,7 +34,14 @@
         <td><label for="h">h [mm]</label></td>
         <td><input type="number" name="h" value =  {{ content["h"] }}  form="input_opt" required></td>
       </tr>
-    </table>
+      <tr>
+        <td><label for="a">a</sub> [mm]</label></td>
+        <td><input type="number" name="a" value =  {{ content["a"] }}  form="input_opt" required></td>
+      </tr>
+      <tr>
+        <td><label for="L_e">L<sub>e</sub> [mm]</label></td>
+        <td><input type="number" name="L_e" value =  {{ content["L_e"] }}  form="input_opt" required></td>
+      </tr>
       <tr>
         <td><input type="submit" name="Draw" value="Draw" form="input_opt" formaction = "optimize_step_1"></td>
         <td><input type="submit" name="Next" value="Next" form="input_opt"></td>

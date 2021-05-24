@@ -289,7 +289,7 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
     else:
         t_plate = tpl_lines_list[0].t
         sigma_cr_c = math.pi**2 * data.constants.get("E") * t_plate**2 / \
-        (12 * (1-data.constants.get("nu")**2)*defaults.plate_length**2)
+        (12 * (1-data.constants.get("nu")**2)*data.input_data.get("a")**2)
         lambda_c_bar = math.sqrt(data.constants.get("f_y") / sigma_cr_c)
         alpha = 0.21
         Phi_c = 0.5*(1+alpha*(lambda_c_bar - 0.2) + lambda_c_bar**2)

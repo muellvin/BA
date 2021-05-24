@@ -19,7 +19,7 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
     gamma_M1 = data.constants.get("gamma_M1")
     eta = defaults.eta
     side = plate_glob.lines[0].code.pl_position
-    a = defaults.plate_length
+    a = data.input_data.get("a")
 
     #import important geometry parameters
     h_w = 0

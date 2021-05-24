@@ -33,12 +33,8 @@ def cs_analysis_gui():
     file = open("user_interface\output\cs_analysis.txt", "w+")
     file.close()
 
-    cs_a = 10000
-    cs_L_e = 15000
     cs_bending_type = "sagging bending"
     cs_cs_position = "neither"
-    data.input_data.update({"a": cs_a})
-    data.input_data.update({"L_e": cs_L_e})
     data.input_data.update({"bending type": cs_bending_type})
     data.input_data.update({"cs position": cs_cs_position})
 
