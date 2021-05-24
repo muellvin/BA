@@ -92,7 +92,7 @@ def buckling_proof(cs):
         iteration = 1
         convergence = (m_rd_eff_before / m_rd_eff_after - 1)
 
-        while convergence > 0.05:
+        while convergence > defaults.convergence_limit_shear_lag:
             line1 = "\nConvergence of M_Rd_eff: "+str(convergence)
             line2 = "\nIteration number "+str(iteration)
             string = line1 + line2

@@ -33,9 +33,7 @@ def cs_analysis_gui():
     file = open("user_interface\output\cs_analysis.txt", "w+")
     file.close()
 
-    cs_bending_type = "sagging bending"
     cs_cs_position = "neither"
-    data.input_data.update({"bending type": cs_bending_type})
     data.input_data.update({"cs position": cs_cs_position})
 
     cs = initial_cs.create_initial_cs(data.input_data.get("b_sup"), data.input_data.get("b_inf"), data.input_data.get("h"), data.input_data.get("t_side"), data.input_data.get("t_deck"), data.input_data.get("t_bottom"))
@@ -65,7 +63,6 @@ def cs_analysis_gui():
 
     #buckling proof
     cs = buckling_proof.buckling_proof(cs)
-    print(cs)
     results = {"eta_1": round(cs.eta_1,2), "eta_3_side_1":round(cs.eta_3_side_1,2), "interaction_1": round(cs.interaction_1,2),  "eta_3_side_2":round(cs.eta_3_side_2,2), \
     "interaction_2": round(cs.interaction_2,2), "eta_3_side_3":round(cs.eta_3_side_3,2), "interaction_3": cs.interaction_3, "eta_3_side_4":round(cs.eta_3_side_4,2), "interaction_4": cs.interaction_4}
     image = cs_to_html.print_cs_red(cs)
