@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 
 
 Buckling Proof according to EC 1993 Part 1-5
@@ -1868,6 +1870,9 @@ Resistance to shear and interaction shear force and bending moment for side 2
 
 Resistance to shear and interaction shear force and bending moment for side 3
    5. Resistance to shear
+<<<<<<< HEAD
+>>>>>>> c5f1ffa10e2c92c46a1c9cdb45d90b3b9f0f4deb
+=======
       stiffened plate; EBPlate
       k_tau: 361.2760028483693
       eta_3: 0.1167066154054909
@@ -10202,3 +10207,4 @@ Buckling Proof according to EC 1993 Part 1-5
            all_tension: False
            rho_c = 1
    Side 3
+>>>>>>> 842d3f23f12d3b2d83eaddcaea41a2f5297e18b2
