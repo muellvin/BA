@@ -1,0 +1,12 @@
+### WARNING ###
+### ONLY CHANGE THE LAST LINE OF THIS FILE ###
+### OTHERWISE ERRORS WILL OCCUR ###
+
+
+#This file is used to set up the connection between ebplate and this tool
+#For this purpose, copy the directory where ebplate is installed on the last line of this file
+#Use the following format:
+"C:\Program Files (x86)\EBPlate\EBPlate.exe"
+
+#Wrtie the directory where ebplate is located on the following line and make sure this is the LAST one:
+"C:\Program Files (x86)\EBPlate\EBPlate.exe"

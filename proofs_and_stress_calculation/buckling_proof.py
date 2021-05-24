@@ -53,17 +53,14 @@ def buckling_proof(cs):
                 V_Ed_plate = stress_cal.get_tau_int_flange(cs, side, data.input_data.get("V_Ed"),\
                 data.input_data.get("T_Ed"))
                 eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
-                cs.eta_3 = eta_3
 
                 if side == 1:
+                    cs.eta_3_side_1 = eta_3
                     #7.1 Interaction between shear forces, bending moment and axial force
-                    line1 = "\n   7.1 Interaction between shear force, bending moment and axial force"
-                    line2 = "\n      Deck plate is ignored, as it is dimensioned with EC 3-2"
-                    string = line1 + line2
-                    printing.printing(string, terminal = True)
-                    pass
+                    cs.interaction_1 = interaction.interaction_flange(cs, plate_glob, eta_3)
 
                 if side == 3:
+                    cs.eta_3_side_3 = eta_3
                     #7.1 Interaction between shear forces, bending moment and axial force
                     cs.interaction_3 = interaction.interaction_flange(cs, plate_glob, eta_3)
 
@@ -76,9 +73,11 @@ def buckling_proof(cs):
                 eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
 
                 if side == 2:
+                    cs.eta_3_side_2 = eta_3
                     #7.1 Interaction between shear forces, bending moment and axial force
                     cs.interaction_2 = interaction.interaction_web(cs, plate_glob, eta_3)
                 if side == 4:
+                    cs.eta_3_side_4 = eta_3
                     #7.1 Interaction between shear forces, bending moment and axial force
                     cs.interaction_4 = interaction.interaction_web(cs, plate_glob, eta_3)
 
@@ -141,17 +140,14 @@ def buckling_proof(cs):
                     V_Ed_plate = stress_cal.get_tau_int_flange(cs, side, data.input_data.get("V_Ed"),\
                     data.input_data.get("T_Ed"))
                     eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
-                    cs.eta_3 = eta_3
 
                     if side == 1:
+                        cs.eta_3_side_1 = eta_3
                         #7.1 Interaction between shear forces, bending moment and axial force
-                        line1 = "\n   7.1 Interaction between shear force, bending moment and axial force"
-                        line2 = "\n      Deck plate is ignored, as it is dimensioned with EC 3-2"
-                        string = line1 + line2
-                        printing.printing(string, terminal = True)
-                        pass
+                        cs.interaction_1 = interaction.interaction_flange(cs, plate_glob, eta_3)
 
                     if side == 3:
+                        cs.eta_3_side_3 = eta_3
                         #7.1 Interaction between shear forces, bending moment and axial force
                         cs.interaction_3 = interaction.interaction_flange(cs, plate_glob, eta_3)
 
@@ -164,12 +160,13 @@ def buckling_proof(cs):
                     eta_3 = resistance_to_shear.resistance_to_shear(plate_glob, V_Ed_plate)
 
                     if side == 2:
+                        cs.eta_3_side_2 = eta_3
                         #7.1 Interaction between shear forces, bending moment and axial force
                         cs.interaction_2 = interaction.interaction_web(cs, plate_glob, eta_3)
                     if side == 4:
+                        cs.eta_3_side_4 = eta_3
                         #7.1 Interaction between shear forces, bending moment and axial force
                         cs.interaction_4 = interaction.interaction_web(cs, plate_glob, eta_3)
-
 
             m_rd_eff_after = cs.get_m_rd_el_eff()
             convergence = (m_rd_eff_before / m_rd_eff_after - 1)

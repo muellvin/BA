@@ -13,13 +13,17 @@ from output import printing
 #crosssection calculation
 class crosssection():
 #a crosssection is defined as a list of lines
-    def __init__(self, b_sup, b_inf, h, eta_1 = -2, eta_3 = -2, interaction_2 = -2, interaction_3 = -2, interaction_4 = -2):
+    def __init__(self, b_sup, b_inf, h, eta_1 = -2, eta_3_side_1 = -2, eta_3_side_2 = -2, eta_3_side_3 = -2, eta_3_side_4 = -2, interaction_1 = -2, interaction_2 = -2, interaction_3 = -2, interaction_4 = -2):
         self.lines = []
         self.b_sup = b_sup
         self.b_inf = b_inf
         self.h = h
         self.eta_1 = eta_1
-        self.eta_3 = eta_3
+        self.eta_3_side_1 = eta_3_side_1
+        self.eta_3_side_2 = eta_3_side_2
+        self.eta_3_side_3 = eta_3_side_3
+        self.eta_3_side_4 = eta_3_side_4
+        self.interaction_1 = interaction_1
         self.interaction_2 = interaction_2
         self.interaction_3 = interaction_3
         self.interaction_4 = interaction_4
@@ -34,6 +38,11 @@ class crosssection():
         for line in self.lines:
             string += str(line)
         return string
+
+    def proven(self):
+        proven = self.eta_1 < 1 and self.interaction_1 < 1 and self.interaction_2 < 1 and self.interaction_3 < 1 and \
+        self.interaction_4 < 1 and self.eta_3_side_1 < 1 and self.eta_3_side_2 < 1 and self.eta_3_side_3 < 1 and self.eta_3_side_4 <1
+        return proven
 
     def print_cs_as_list(self):
         string = "\n\n      b_sup: "+str(self.b_sup)+"   b_inf: "+str(self.b_inf)+"   h: "+str(self.h)

@@ -3,7 +3,7 @@ from data_and_defaults import data
 from data_and_defaults import defaults
 from classes import stiffeners_proposition
 from classes import proposed_stiffener
-from classes import stiffener
+from assembly import add_stiffeners
 
 
 def set_defaults():
@@ -86,7 +86,7 @@ def set_stiffeners(number_st_top):
             h = float(input())
             print("\nt [mm] =", end= '')
             t = float(input())
-        i_along = stiffener.get_i_along_stiffener(b_sup, b_inf, h, t)
+        i_along = add_stiffenersget_i_along_stiffener(b_sup, b_inf, h, t)
 
         stiffener_right_i = proposed_stiffener.proposed_stiffener(2, int(number_st_top + number_side + 1 - i), location, \
         i_along, b_sup, b_inf, h, t)
@@ -131,7 +131,7 @@ def set_stiffeners(number_st_top):
             h = float(input())
             print("\nt [mm] =", end= '')
             t = float(input())
-        i_along = stiffener.get_i_along_stiffener(b_sup, b_inf, h, t)
+        i_along = add_stiffenersget_i_along_stiffener(b_sup, b_inf, h, t)
 
 
         if number_bottom%2 == 1 and i == 1:

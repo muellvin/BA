@@ -5,7 +5,8 @@ import os
 import sys
 import copy
 
-sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
+sys.path.insert(0, './')
+#sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
 #sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
 from user_interface import cs_to_html
 from user_interface import form_values
@@ -95,7 +96,8 @@ def resultpage_optimize():
         optimize_for_cost_only = False
         optimize_for_spec_ei = True
         optimize_for_ratio = False
-        defaults.ei = int(request.form['EI'])
+        ei = int(request.form['EI'])
+        data.input_data.update({"ei":ei})
     else:
         assert goal ==2, "Goal not Found"
         optimize_for_cost_only = False
