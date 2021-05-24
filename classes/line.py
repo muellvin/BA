@@ -192,13 +192,15 @@ class line():
         angle -= math.pi
         return angle"""
 
-
+    #get the stress at the point that is the fraction factor of the total length away from point a
     def get_sigma_red_from_a(self, factor):
         return self.sigma_a_red + factor*(self.sigma_b_red - self.sigma_a_red)
+    #get the stress at the point that is the fraction factor of the total length away from point b
     def get_sigma_red_from_b(self, factor):
         return self.sigma_b_red + factor*(self.sigma_a_red - self.sigma_b_red)
 
 #NON-REDUCED (and also used for reduced, that's why with coordinates as arguments)
+#these functions only use the given arguments and do not refer to self, so that they can also be used from non-reduced methods
     def cal_center_y(self, ay, az, by, bz, t):
         return 1/2 * (ay + by)
     def cal_center_z(self, ay, az, by, bz, t):
