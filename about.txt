@@ -1,3 +1,4 @@
 ### ABOUT ###
-This program was written by Vinzenz Müller and Nino Hasler as Bachelor's Thesis at ETH Zurich.
-For more detail about what we did and how our too works, check our Thesis Paper or the Documentation.
+This program was written by Nino Hasler  and Vinzenz Müller as Bachelor's Thesis at ETH Zurich, Chair of Steel and Composite Structures.
+For more detail about what we did and how our tool works, check our Thesis Paper or the Documentation.
+This program works with EBPlate. How EBPlate needs to be set up is written in setup.txt. 
