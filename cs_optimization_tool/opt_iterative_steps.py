@@ -17,7 +17,7 @@ from cs_optimization_tool import cs_collector
 sys.path.insert(0, './user_interface')
 from output import printing
 
-
+#Optimizer Iterative Steps
 def optimize():
     b_sup = data.input_data["b_sup"]
     b_inf = data.input_data["b_inf"]
@@ -53,6 +53,7 @@ def optimize():
                             print("#Btm Stiffeners " + str(num_btm_stiffeners))
                             test_cs = copy.deepcopy(base_cs)
                             if test_cs != False:
+                                #proof
                                 end_cs = buckling_proof.buckling_proof(test_cs)
                                 print(end_cs)
                                 #go.print_cs_red(end_cs)
@@ -86,6 +87,7 @@ def optimize():
                                     st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                     test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop, "b")
                                     if test_cs != False:
+                                        #proof
                                         end_cs = buckling_proof.buckling_proof(test_cs)
                                         st_prop_rest = stiffeners_proposition.stiffeners_proposition()
                                         print(end_cs)
@@ -100,6 +102,7 @@ def optimize():
                                             print("PASS!")
                                         else:
                                             print("FAIl!")
+        #set net maximum plate thickness
         t_collection = []
         for t in t_range:
             if t <= t_max_min:
@@ -145,6 +148,7 @@ def optimize():
                                         st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                         test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop, "b")
                                         if test_cs != False:
+                                            #proof
                                             end_cs = buckling_proof.buckling_proof(test_cs)
                                             st_prop_rest = stiffeners_proposition.stiffeners_proposition()
                                             if end_cs.proven():
@@ -194,6 +198,7 @@ def optimize():
                                             st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                             test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop, "b")
                                             if test_cs != False:
+                                                #proof
                                                 end_cs = buckling_proof.buckling_proof(test_cs)
                                                 st_prop_rest = stiffeners_proposition.stiffeners_proposition()
                                                 if end_cs.proven():
@@ -205,6 +210,7 @@ def optimize():
                                                     print("PASS!")
                                                 else:
                                                     print("FAIL!")
+        #set new maximum plate thickness
         t_collection = []
         for t in t_range:
             if t <= t_max_min:
@@ -250,6 +256,7 @@ def optimize():
                                         st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                         test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop, "b")
                                         if test_cs != False:
+                                            #proof
                                             end_cs = buckling_proof.buckling_proof(test_cs)
                                             st_prop_rest = stiffeners_proposition.stiffeners_proposition()
                                             if end_cs.proven():
@@ -301,6 +308,7 @@ def optimize():
                                                 st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                                 test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop, "b")
                                                 if test_cs != False:
+                                                    #proof
                                                     end_cs = buckling_proof.buckling_proof(test_cs)
                                                     st_prop_rest = stiffeners_proposition.stiffeners_proposition()
                                                     if end_cs.proven():
@@ -313,6 +321,7 @@ def optimize():
                                                     else:
                                                         print("FAIL!")
 
+        #set new maximum plate thickness 
         t_collection = []
         for t in t_range:
             if t <= t_max_min:
@@ -360,6 +369,7 @@ def optimize():
                                             st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                             test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop, "b")
                                             if test_cs != False:
+                                                #proof
                                                 end_cs = buckling_proof.buckling_proof(test_cs)
                                                 st_prop_rest = stiffeners_proposition.stiffeners_proposition()
                                                 if end_cs.proven():
@@ -414,6 +424,7 @@ def optimize():
                                                     st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
                                                     test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop, "b")
                                                     if test_cs != False:
+                                                        #proof
                                                         end_cs = buckling_proof.buckling_proof(test_cs)
                                                         st_prop_rest = stiffeners_proposition.stiffeners_proposition()
                                                         if end_cs.proven():
@@ -429,6 +440,7 @@ def optimize():
     printing.print_best()
     return
 
+#function that returns locations where stiffeners should be placed
 def get_locations_side(num_side_stiffeners, sign):
     #always return locations in descending order
     if num_side_stiffeners == 0:
