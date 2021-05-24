@@ -2,12 +2,13 @@ from data_and_defaults import data
 from data_and_defaults import defaults
 from cs_optimization_tool import optimization_value
 
+#function that adds a cross section to the cs_collection
 def into_collector(new_cs):
     optimization_value.set_value(new_cs)
     data.cs_collection.append(new_cs)
 
 
-
+#function that returns the optimal cross section
 def get_best():
     if data.input_data.get("goal") == 0:
         forgot_default = False
@@ -21,7 +22,7 @@ def get_best():
         return get_best_ratio()
 
 
-
+#function that returns the cheapest cross section that passed
 def get_best_cost():
     best_cs = []
     if data.cs_collection == []:
@@ -44,6 +45,7 @@ def get_best_cost():
                 best_cs.append(cs_fromall)
         return best_cs
 
+#function that returns the cheapest cross section for a specific EI
 def get_best_spec_ei():
     best_cs = []
     if data.cs_collection == []:
@@ -67,6 +69,7 @@ def get_best_spec_ei():
                     best_cs.append(cs_fromall)
         return best_cs
 
+#function that returns the cross section with the best EI/Price-Ratio
 def get_best_ratio():
     best_cs = []
     if data.cs_collection == []:

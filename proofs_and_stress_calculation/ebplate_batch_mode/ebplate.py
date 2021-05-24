@@ -1,11 +1,9 @@
 import os
 
+#function that writes text files for ebplate, calls ebplate and retrieves the results
+#this function is used for longitudinal stresses only
 def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
-    print("\n EBPLATE DATA")
-    print(stiffeners_ebp[0][0])
-    print(stiffeners_ebp[0][1])
-    print(stiffeners_ebp[0][2])
-    print(stiffeners_ebp[0][3])
+    #get path of ebplate
     setup = open("setup.txt", 'r')
     setup_data = setup.readlines()
     ebp_path = setup_data[-1]
@@ -111,14 +109,17 @@ def ebplate(b, h, t, sigma_a, sigma_b, stiffeners_ebp):
 
     return phi_cr
 
+#function that writes text files for ebplate, calls ebplate and retrieves the results
+#this function is used for shear stresses only
 def ebplate_shear(b, h, t, tau, stiffeners_ebp):
-    #write the input for ebplate to ebplate.EBP
+    #set ebplate path 
     setup = open("setup.txt", 'r')
     setup_data = setup.readlines()
     ebp_path = setup_data[-1]
     ebp_path = ebp_path[:-1]
     print(ebp_path)
 
+    #write the input for ebplate to ebplate.EBP
     os.remove("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP")
     file = open("proofs_and_stress_calculation\ebplate_batch_mode\plate.EBP", 'a+', encoding ='cp1252')
     file.write("	EBPlate - v2.01 \n")

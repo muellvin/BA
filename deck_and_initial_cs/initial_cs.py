@@ -3,6 +3,7 @@ from classes import point
 from classes import crosssection
 from classes import plate_code
 
+#function that returns the empty, unstiffened cross section 
 def create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom):
     #create four corner points
     a1 = point.point(0.5*b_sup, 0)
@@ -32,6 +33,3 @@ def create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom):
     x_section.addline(line_4)
 
     return x_section
-
-#nino: track-plate
-#initialer cs erstellen; fahrbahnplatte mit normierten dicken

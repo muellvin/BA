@@ -2,6 +2,7 @@ import math
 from data_and_defaults import data
 
 """"deck defaults"""
+#Value needs to be chosen according to EC 3-2, C.1.2.2.
 t_deck = 14
 
 """optimization defaults"""

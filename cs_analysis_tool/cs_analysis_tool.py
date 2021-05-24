@@ -15,18 +15,6 @@ sys.path.insert(0, './user_interface')
 from output import printing
 
 
-#sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
-#crosssection input and creation (only trapezoid plates)
-
-
-
-
-#if defaults.do_print_to_txt == True:
-#    os.remove("output\cs_analysis.txt")
-#    file = open("output\cs_analysis.txt", "w+")
-#    file.write("*************************** cross-section analysis tool ********************************")
-#    file.close()
-
 def cs_analysis_gui():
 
     #initialize file
