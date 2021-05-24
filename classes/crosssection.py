@@ -7,6 +7,9 @@ from classes import point
 
 #crosssection class
 class crosssection():
+
+    """Constructor and Printing Functions"""
+
     #constructor
     def __init__(self, b_sup, b_inf, h, eta_1 = -2, eta_3_side_1 = -2, eta_3_side_2 = -2, eta_3_side_3 = -2, eta_3_side_4 = -2, interaction_1 = -2, interaction_2 = -2, interaction_3 = -2, interaction_4 = -2):
         #container for all plates
@@ -54,11 +57,21 @@ class crosssection():
                 string += line1 + line2
         return string
 
+
+    """Buckling Proof Verification Function"""
+
     #function that returns if the cross section passes the buckling proof
     def proven(self):
         proven = self.eta_1 < 1 and self.interaction_1 < 1 and self.interaction_2 < 1 and self.interaction_3 < 1 and \
         self.interaction_4 < 1 and self.eta_3_side_1 < 1 and self.eta_3_side_2 < 1 and self.eta_3_side_3 < 1 and self.eta_3_side_4 <1
         return proven
+
+
+    """Crosssection Manipulation Functions"""
+
+    #function that adds a line to the cross section
+    def addline(self, line):
+        self.lines.append(line)
 
     #function that resets all cross sectional values but does not remove any lines
     def reset(self):
@@ -82,9 +95,42 @@ class crosssection():
             plate.rho_p = 1
             plate.sigma_cr_p = 0
 
-    #function that adds a line to the cross section
-    def addline(self, line):
-        self.lines.append(line)
+    #function that removes the stiffener with the respective stiffener number
+    def remove_stiffener(self, st_number):
+        to_remove = []
+
+        #going to the plates of this stiffener (all lines have this number)
+        for line1 in self.lines():
+            if line1.code.st_number is st_number:
+
+                #if the line is a trapezoid line, it has to be removed and the adjecent ones fused
+                if line1.code.pl_type == 0: #trapezoid plate of the stiffener
+                    left_tr_pl = None
+                    right_tr_pl = None
+                    for line_tr in self.lines():
+                        if line_tr.code.pl_type == 0 and line_tr.code.tpl_number == line1.code.tpl_number - 1:
+                            left_tr_pl = line_tr
+                        elif line_tr.code.p1_type == 0 and line_tr.code.tpl_number == line1.tpl_number + 1:
+                            right_tr_pl = line_tr
+                    #creating a new line that spans over the length of all 3
+                    new_code = plate_code.plate_code(line1.code.pl_position, 0, line1.code.tpl_number-1, 0, 0)
+                    new_tr_pl = line.line(new_code, left_tr_pl.a, right_tr_pl.b, line1.t)
+                    new_tr_pl.t_stress = line1.t_stress
+                    self.lines.append(new_tr_pl)
+                    to_remove.append(rigth_tr_pl)
+                    to_remove.append(left_tr_pl)
+                    to_remove.append(line1)
+
+                #if the line is a stiffener line (not trapezoid) it can be removed directly
+            elif line.code.pl_type == 1:
+                    to_remove.append(line)
+
+        #after the trapezoid line is added and all the ones to go are added to to_remove, all in to_removed can be removed
+        for pl in to_remove:
+            self.lines.remove(pl)
+
+
+    """Sub-cross-section / Line Getting Functions"""
 
     #function that returns one side/stiffened plate of the cross section
     def get_stiffened_plate(self, side):
@@ -145,123 +191,10 @@ class crosssection():
 
         assert found == True, "Line could not be found"
 
-    #function that returns the cross sectional value EI
-    def get_ei(self):
-        ei = self.get_i_y_red()*data.constants.get("E")
-        self.ei = ei
-        return ei
 
-    #function that returns the minimal absolute value of the angle between a plate and the y-axis in rad
-    def get_angle(self, side):
-        plate = self.get_line(pl_position = side)
-        return plate.get_angle_y()
+    """General Geometry Functions"""
 
-    #function that returns the coordinates of the position where the stiffener should be placed
-    def get_coordinates(self, location, side):
-        plate = self.get_line(pl_position = side, pl_type = 0)
-        #bottom or top plate
-        if plate.a.z == plate.b.z:
-            if plate.a.y > 0:
-                y = location * plate.a.y
-                z = plate.a.z
-            else:
-                y = location * plate.b.y
-                z = plate.a.z
-        #side plates
-        else:
-            if plate.a.z > plate.b.z:
-                y = plate.a.y + location * (plate.b.y-plate.a.y)
-                z = plate.a.z + location * (plate.b.z-plate.a.z)
-            else:
-                y = plate.b.y + location * (plate.a.y-plate.b.y)
-                z = plate.b.z + location * (plate.a.z-plate.b.z)
-        return y,z
-
-
-### methods to calculate properties of gross crossection ###
-    #function that returns the z-coordinate of the center of the gross cross section
-    def get_center_z_tot(self, stress = False):
-        weighted_a = 0
-        for i in self.lines:
-            weighted_a = weighted_a + i.get_area_tot(stress)*i.get_center_z_tot(stress)
-        return weighted_a/self.get_area_tot(stress)
-    #function that returns the y coordinate of the center of the gross cross section
-    def get_center_y_tot(self, stress = False):
-        weighted_a = 0
-        for i in self.lines:
-            weighted_a = weighted_a + i.get_area_tot(stress)*i.get_center_y_tot(stress)
-        return weighted_a/self.get_area_tot(stress)
-    #function that returns the area of the gross cross section
-    def get_area_tot(self, stress = False):
-        a=0
-        for i in self.lines:
-            a = a + i.get_area_tot(stress)
-        return a
-    #function that returns I_y of the gross cross section
-    def get_i_y_tot(self, stress = False):
-        z_s = self.get_center_z_tot(stress)
-        iy_tot = 0
-        for i in self.lines:
-            iy_tot = iy_tot + i.get_i_y_tot(stress) + (z_s-i.get_center_z_tot(stress))**2 * i.get_area_tot(stress)
-        return iy_tot
-
-
-#### methods to calculate properties of the effective crossection ###
-    #function that returns the z-coordinate of the center of the effective cross section
-    def get_center_z_red(self, stress = False):
-        weighted_a = 0
-        for i in self.lines:
-            weighted_a = weighted_a + i.get_area_red(stress)*i.get_center_z_red(stress)
-        return weighted_a/self.get_area_red(stress)
-    #function that returns the z-coordinate of the center of the effective cross section
-    def get_center_y_red(self, stress = False):
-        weighted_a = 0
-        for i in self.lines:
-            weighted_a = weighted_a + i.get_area_red(stress)*i.get_center_y_red(stress)
-        return weighted_a/self.get_area_red(stress)
-    #function that returns the area of the effective cross section
-    def get_area_red(self, stress = False):
-        a=0
-        for i in self.lines:
-            a = a + i.get_area_red(stress)
-        return a
-    #function that returns I_y of the effective cross section 
-    def get_i_y_red(self, stress = False):
-        z_s = self.get_center_z_red(stress)
-        iy_tot = 0
-        for i in self.lines:
-            iy_tot = iy_tot + i.get_i_y_red(stress) + (z_s-i.get_center_z_red(stress))**2 * i.get_area_red(stress)
-        return iy_tot
-
-    def get_m_rd_el_eff(self):
-        stress = True
-        max_z_dis = max(self.get_center_z_red(stress) + self.get_line(pl_position = 1, pl_type = 0).t_stress/2 ,  data.input_data.get("h") + self.get_line(pl_position = 3, pl_type = 0).t_stress/2 - self.get_center_z_red(stress))
-        m_rd_el_eff = (self.get_i_y_red(stress) / max_z_dis) * (data.constants.get("f_y")/data.constants.get("gamma_M1"))
-        return m_rd_el_eff
-
-    def get_m_f_rd_eff(self):
-        stress = True
-        top_flange = self.get_stiffened_plate(side = 1)
-        top_flange_area = top_flange.get_area_red(stress)
-        bottom_flange = self.get_stiffened_plate(side = 3)
-        bottom_flange_area = bottom_flange.get_area_red(stress)
-        if bottom_flange_area < top_flange_area:
-            m_f_rd_eff = bottom_flange_area * self.h * data.constants.get("f_y") / data.constants.get("gamma_M1")
-        else:
-            m_f_rd_eff = bottom_flange_area * self.h * data.constants.get("f_y") / data.constants.get("gamma_M1")
-        return m_f_rd_eff
-
-
-    def get_azero(self, stress = False):
-        azero = 0
-        for l in self.lines:
-            if l.code.pl_type == 0: #crosssection plate
-                height = abs(abs(l.a.z) - abs(l.b.z))
-                width = 1/2 * (abs(l.a.y) + abs(l.b.y))
-                a_line = height * width
-                azero += a_line
-        return azero
-
+    #function that rotates the entire cross section about a given angle
     def get_cs_rot(self, angle, stress = False):
         #make a copy of the crosssection
         cs = crosssection(0,0,0)
@@ -288,50 +221,135 @@ class crosssection():
 
         return cs
 
-    #calculates the moment of inertia along the line given as an argument
+    #function that returns the coordinates of the position where the stiffener should be placed
+    def get_coordinates(self, location, side):
+        plate = self.get_line(pl_position = side, pl_type = 0)
+        #bottom or top plate
+        if plate.a.z == plate.b.z:
+            if plate.a.y > 0:
+                y = location * plate.a.y
+                z = plate.a.z
+            else:
+                y = location * plate.b.y
+                z = plate.a.z
+        #side plates
+        else:
+            if plate.a.z > plate.b.z:
+                y = plate.a.y + location * (plate.b.y-plate.a.y)
+                z = plate.a.z + location * (plate.b.z-plate.a.z)
+            else:
+                y = plate.b.y + location * (plate.a.y-plate.b.y)
+                z = plate.b.z + location * (plate.a.z-plate.b.z)
+        return y,z
+
+    #function that returns the minimal absolute value of the angle between a plate and the y-axis in rad
+    def get_angle(self, side):
+        plate = self.get_line(pl_position = side)
+        return plate.get_angle_y()
+
+
+""" Functions to Calculate the Properties of the Gross Crossection """
+
+    #function that returns the z-coordinate of the center of the gross cross section
+    def get_center_z_tot(self, stress = False):
+        weighted_a = 0
+        for i in self.lines:
+            weighted_a = weighted_a + i.get_area_tot(stress)*i.get_center_z_tot(stress)
+        return weighted_a/self.get_area_tot(stress)
+    #function that returns the y coordinate of the center of the gross cross section
+    def get_center_y_tot(self, stress = False):
+        weighted_a = 0
+        for i in self.lines:
+            weighted_a = weighted_a + i.get_area_tot(stress)*i.get_center_y_tot(stress)
+        return weighted_a/self.get_area_tot(stress)
+    #function that returns the area of the gross cross section
+    def get_area_tot(self, stress = False):
+        a=0
+        for i in self.lines:
+            a = a + i.get_area_tot(stress)
+        return a
+    #function that returns I_y of the gross cross section
+    def get_i_y_tot(self, stress = False):
+        z_s = self.get_center_z_tot(stress)
+        iy_tot = 0
+        for i in self.lines:
+            iy_tot = iy_tot + i.get_i_y_tot(stress) + (z_s-i.get_center_z_tot(stress))**2 * i.get_area_tot(stress)
+        return iy_tot
+    #function that returns A_zero for torsional loading
+    def get_azero(self, stress = False):
+        azero = 0
+        for l in self.lines:
+            if l.code.pl_type == 0: #crosssection plate
+                height = abs(abs(l.a.z) - abs(l.b.z))
+                width = 1/2 * (abs(l.a.y) + abs(l.b.y))
+                a_line = height * width
+                azero += a_line
+        return azero
+
+
+"""Functions to Calculate the Properties of the Effective Crossection """
+
+    #function that returns the z-coordinate of the center of the effective cross section
+    def get_center_z_red(self, stress = False):
+        weighted_a = 0
+        for i in self.lines:
+            weighted_a = weighted_a + i.get_area_red(stress)*i.get_center_z_red(stress)
+        return weighted_a/self.get_area_red(stress)
+    #function that returns the z-coordinate of the center of the effective cross section
+    def get_center_y_red(self, stress = False):
+        weighted_a = 0
+        for i in self.lines:
+            weighted_a = weighted_a + i.get_area_red(stress)*i.get_center_y_red(stress)
+        return weighted_a/self.get_area_red(stress)
+    #function that returns the area of the effective cross section
+    def get_area_red(self, stress = False):
+        a=0
+        for i in self.lines:
+            a = a + i.get_area_red(stress)
+        return a
+    #function that returns I_y of the effective cross section
+    def get_i_y_red(self, stress = False):
+        z_s = self.get_center_z_red(stress)
+        iy_tot = 0
+        for i in self.lines:
+            iy_tot = iy_tot + i.get_i_y_red(stress) + (z_s-i.get_center_z_red(stress))**2 * i.get_area_red(stress)
+        return iy_tot
+    #function that returns M_Rd_el_eff
+    def get_m_rd_el_eff(self):
+        stress = True
+        max_z_dis = max(self.get_center_z_red(stress) + self.get_line(pl_position = 1, pl_type = 0).t_stress/2 ,  data.input_data.get("h") + self.get_line(pl_position = 3, pl_type = 0).t_stress/2 - self.get_center_z_red(stress))
+        m_rd_el_eff = (self.get_i_y_red(stress) / max_z_dis) * (data.constants.get("f_y")/data.constants.get("gamma_M1"))
+        return m_rd_el_eff
+
+    #function that returns the cross sectional value EI of the effective
+    def get_ei(self):
+        ei = self.get_i_y_red()*data.constants.get("E")
+        self.ei = ei
+        return ei
+
+    #function that returns M_f_Rd_eff according to EC 3, 1-5, 7.1
+    def get_m_f_rd_eff(self):
+        stress = True
+        top_flange = self.get_stiffened_plate(side = 1)
+        top_flange_area = top_flange.get_area_red(stress)
+        bottom_flange = self.get_stiffened_plate(side = 3)
+        bottom_flange_area = bottom_flange.get_area_red(stress)
+        if bottom_flange_area < top_flange_area:
+            m_f_rd_eff = bottom_flange_area * self.h * data.constants.get("f_y") / data.constants.get("gamma_M1")
+        else:
+            m_f_rd_eff = bottom_flange_area * self.h * data.constants.get("f_y") / data.constants.get("gamma_M1")
+        return m_f_rd_eff
+
+    #function that calculates the moment of inertia of the gross cross section along the line given as an argument
+    #when using this function, always make sure line is a principal axis of the cross section
     def get_i_along_tot(self, line, stress = False):
         angle = (-1)* line.get_angle_y_true()
         cs_rot = self.get_cs_rot(angle, stress)
         return cs_rot.get_i_y_tot(stress)
 
-
+    #function that calculates the moment of inertia of the reduced cross section along the line given as an argument
+    #when using this function, always make sure line is a principal axis of the cross section
     def get_i_along_red(self, line, stress = False):
         angle = (-1)*line.get_angle_y_true()
         cs_rot = self.get_cs_rot(angle, stress)
         return cs_rot.get_i_y_red(stress)
-
-
-    """ important convention: the point b of a line is always in clockwise direction of point a"""
-
-    def remove_stiffener(self, st_number):
-        to_remove = []
-
-        #going to the plates of this stiffener (all lines have this number)
-        for line1 in self.lines():
-            if line1.code.st_number is st_number:
-
-                #if the line is a trapezoid line, it has to be removed and the adjecent ones fused
-                if line1.code.pl_type == 0: #trapezoid plate of the stiffener
-                    left_tr_pl = None
-                    right_tr_pl = None
-                    for line_tr in self.lines():
-                        if line_tr.code.pl_type == 0 and line_tr.code.tpl_number == line1.code.tpl_number - 1:
-                            left_tr_pl = line_tr
-                        elif line_tr.code.p1_type == 0 and line_tr.code.tpl_number == line1.tpl_number + 1:
-                            right_tr_pl = line_tr
-                    #creating a new line that spans over the length of all 3
-                    new_code = plate_code.plate_code(line1.code.pl_position, 0, line1.code.tpl_number-1, 0, 0)
-                    new_tr_pl = line.line(new_code, left_tr_pl.a, right_tr_pl.b, line1.t)
-                    new_tr_pl.t_stress = line1.t_stress
-                    self.lines.append(new_tr_pl)
-                    to_remove.append(rigth_tr_pl)
-                    to_remove.append(left_tr_pl)
-                    to_remove.append(line1)
-
-                #if the line is a stiffener line (not trapezoid) it can be removed directly
-            elif line.code.pl_type == 1:
-                    to_remove.append(line)
-
-        #after the trapezoid line is added and all the ones to go are added to to_remove, all in to_removed can be removed
-        for pl in to_remove:
-            self.lines.remove(pl)
