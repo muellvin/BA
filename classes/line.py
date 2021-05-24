@@ -7,6 +7,8 @@ class line():
 #p1 is closer to A and p2 is closer to B
 #t is the thickness of the plate
 #p1 and p2 are optional
+
+    #construcor
     def __init__(self, code, a, b, t, p1 = None, p2 = None):
         self.code = code
         self.a = a
@@ -34,6 +36,7 @@ class line():
         self.rho_p = 1
         self.sigma_cr_p = 0
 
+    #string for print()
     def __str__(self):
         if self.code.pl_type == 0:
             line1 = "   trapezoid plate on side " + str(self.code.pl_position) + "   with the number " + str(self.code.tpl_number) +"\n"
@@ -54,47 +57,62 @@ class line():
         else:
             return false
 
-#methods to calculate line propreties for non-reduced
+"""getter methods for line propreties for non-reduced"""
+    #stress is the boolean defining if the attribute t_stress should be used
+    #will be called for cross-sectional stresses and moments, to account for shear lag reductions
+    #which are represented by reducing the thickness of flange plates -> t_stress set smaller than
+#these getter methods call cal_methods
+#the cal methods for non-reduced do not refer to self, thus take the measurements as arguments
+
+    #getter method for center y total area
     def get_center_y_tot(self, stress = False):
         if stress:
             return self.cal_center_y(self.a.y, self.a.z, self.b.y, self.b.z, self.t_stress)
         else:
             return self.cal_center_y(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    #getter method for center z total area
     def get_center_z_tot(self, stress = False):
         if stress:
             return self.cal_center_z(self.a.y, self.a.z, self.b.y, self.b.z, self.t_stress)
         else:
             return self.cal_center_z(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    #getter method for total length of plate
     def get_length_tot(self, stress = False):
         if stress:
             return self.cal_length(self.a.y, self.a.z, self.b.y, self.b.z, self.t_stress)
         else:
             return self.cal_length(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    #getter method for total area of plate (cross-sectional area)
     def get_area_tot(self, stress = False):
         if stress:
             return self.cal_area(self.a.y, self.a.z, self.b.y, self.b.z, self.t_stress)
         else:
             return self.cal_area(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    #getter method for moment of inertia along the plate (the smaller one of the two)
     def get_i_along_tot(self, stress = False):
         if stress:
             return self.cal_i_along(self.a.y, self.a.z, self.b.y, self.b.z, self.t_stress)
         else:
             return self.cal_i_along(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    #getter method for the moment of inertia perpendicular to the plate (the bigger one)
     def get_i_perpen_tot(self, stress = False):
         if stress:
             return self.cal_i_perpen(self.a.y, self.a.z, self.b.y, self.b.z, self.t_stress)
         else:
             return self.cal_i_perpen(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    #getter function for the moment of inertia along the y axis
     def get_i_y_tot(self, stress = False):
         if stress:
             return self.cal_i_y(self.a.y, self.a.z, self.b.y, self.b.z, self.t_stress)
         else:
             return self.cal_i_y(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    #getter method for the moment of inertia along the z axis
     def get_i_z_tot(self, stress = False):
         if stress:
             return self.cal_i_z(self.a.y, self.a.z, self.b.y, self.b.z, self.t_stress)
         else:
             return self.cal_i_z(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
+    #getter method for the moment of inertia along an axis rotated to the y axis with an angle
     def get_i_rot_tot(self, angle, stress = False):
         if stress:
             return self.cal_i_rot(self.a.y, self.a.z, self.b.y, self.b.z, self.t_stress, angle)
@@ -102,7 +120,9 @@ class line():
             return self.cal_i_rot(self.a.y, self.a.z, self.b.y, self.b.z, self.t_stress, angle)
 
 
-#methods to calculate line propreties for reduced
+"""getter methods for line propreties for reduced"""
+#they follow the same principle as the getter methods for non-reduced
+#they cal the cal_methods for non-reduced, they on the other hand refer to the self
     def get_center_y_red(self, stress = False):
         return self.cal_center_y_red(stress)
     def get_center_z_red(self, stress = False):
@@ -130,7 +150,9 @@ class line():
     def get_i_rot_red(self, angle, stress = False):
         return self.cal_i_rot_red(angle, stress)
 
-#GENERAL
+
+"""GENERAL (independant of reduced or non-reduced)"""
+    #calculate the smallest angle between the plate and the y axis
     def get_angle_y(self):
         zdis = abs(self.b.z - self.a.z)
         ydis = abs(self.b.y - self.a.y)
@@ -139,10 +161,12 @@ class line():
         else:
             angle = math.pi/2
         return angle
+    #calculate the smallest angle between the plate and the z axis
     def get_angle_z(self):
         complangle = math.pi/2 - self.get_angle_y()
         return complangle
 
+    #does not give the smallest angle but the true angle from the y-axis increasing angle in counter-clockwise direction
     def get_angle_y_true(self):
         dy = self.b.y - self.a.y
         dz = self.b.z - self.a.z
@@ -166,15 +190,18 @@ class line():
 
         #horizontal is not 0 degrees but pi (line from positive y to negative)
         angle -= math.pi
-        return angle
+        return angle"""
 
-
+    #get the stress at the point that is the fraction factor of the total length away from point a
     def get_sigma_red_from_a(self, factor):
         return self.sigma_a_red + factor*(self.sigma_b_red - self.sigma_a_red)
+    #get the stress at the point that is the fraction factor of the total length away from point b
     def get_sigma_red_from_b(self, factor):
         return self.sigma_b_red + factor*(self.sigma_a_red - self.sigma_b_red)
 
+"""calculation functions for non-reduced"""
 #NON-REDUCED (and also used for reduced, that's why with coordinates as arguments)
+#these functions only use the given arguments and do not refer to self, so that they can also be used from non-reduced methods
     def cal_center_y(self, ay, az, by, bz, t):
         return 1/2 * (ay + by)
     def cal_center_z(self, ay, az, by, bz, t):
@@ -197,7 +224,7 @@ class line():
         return math.cos(angle)**2 * self.cal_i_along(ay, az, by, bz, t) + math.sin(angle)**2 * self.cal_i_perpen(ay, az, by, bz, t)
 
 
-#FOR REDUCED
+"""calculation functions for reduced"""
     def cal_center_y_red(self, stress = False):
         if stress:
             t_used = self.t_stress
