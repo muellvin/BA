@@ -9,7 +9,7 @@ t_deck = 14
 t_range = [5,10,15]
 I_range = [10**6, 10**7]
 #do not set higher than 3
-num_side_stiffeners_max = 2
+num_side_stiffeners_max = 0
 #do not set higher than 7
 num_bottom_stiffeners_max = 4
 
