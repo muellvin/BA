@@ -85,7 +85,7 @@ def min_inertial_mom():
     #This inertial momenent is calculated with the track plate
     """Lower Inertial moments for stiffeners in the corners should be considered"""
     #Minimal value of track plate thickness should be considered somewhere
-    a = input_data.get("a")/1000
+    a = data.input_data.get("a")/1000
     I = 226410 * a**4.4608
     return I
 
