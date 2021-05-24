@@ -6,7 +6,7 @@ from classes import plate_code
 from classes import line
 
 
-def substantiate(cs, propositions):
+def substantiate(cs, propositions, optimizer):
     #initialize list for stiffeners
     stiffener_list =[]
     success = True
@@ -21,19 +21,19 @@ def substantiate(cs, propositions):
             side = 1
             angle = 0
         elif stiffener.pl_position == 2:
-            b_sup, b_inf, h, t, success = find_dimensions(stiffener)
+            b_sup, b_inf, h, t, success = find_dimensions(stiffener, optimizer)
             side = 2
             angle = math.pi + cs.get_angle(side)
             #sidplate right side
         elif stiffener.pl_position == 3:
-            b_sup, b_inf, h, t, success = find_dimensions(stiffener)
+            b_sup, b_inf, h, t, success = find_dimensions(stiffener, optimizer)
             side = 3
             angle = math.pi
             #bottom plate
             #make use of symmetry and equal stiffeners
         else:
             assert stiffener.pl_position == 4, "Plate not found."
-            b_sup, b_inf, h, t, success = find_dimensions(stiffener)
+            b_sup, b_inf, h, t, success = find_dimensions(stiffener, optimizer)
             side = 4
             angle = math.pi - cs.get_angle(side)
             #make us of symmetry tbd
@@ -58,7 +58,7 @@ def substantiate(cs, propositions):
     #check if values are still set to default
     #idea: always keep one variable free and iterate through the others
 
-def find_dimensions(stiffener):
+def find_dimensions(stiffener, optimizer):
     print("------------------- find_dimensions for stiffener ", stiffener.st_number,"------------------------------------------")
 
     success = True
@@ -100,7 +100,7 @@ def find_dimensions(stiffener):
     best = [0,0,0,0,10**10]
     best_default = best
 
-    if stiffener.b_sup_corr == True and defaults.do_height_only == True:
+    if optimizer == "a":
         print("given b_sup, only correcting heights")
         b_sup = stiffener.b_sup
         h_min = h_minimal
@@ -143,6 +143,7 @@ def find_dimensions(stiffener):
         stiffener.h_corr_val = False
 
     else:
+        assert optimizer == "b", "Wrong Optimizer Input."
         print("first case in check_geometry")
         assert b_sup_max_geo >= b_sup_minimal
         for b_sup in range(b_sup_minimal, 10*math.floor(b_sup_max_geo/10), b_sup_step):

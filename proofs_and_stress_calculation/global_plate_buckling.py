@@ -242,6 +242,7 @@ def global_plate_buckling(total_cs, plate_glob):
             else:
                 #tension zone
                 pass
+            
             #add additional parts of plate to stiffener
             new_top_point = point.point(top_plate.b.y + unit_vec_to_a * length_top, top_plate.b.z)
             new_top_plate = line.line(top_plate.code, new_top_point, top_plate.b, top_plate.t)

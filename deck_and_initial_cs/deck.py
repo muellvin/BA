@@ -7,21 +7,22 @@ from classes import crosssection
 from classes import plate_code
 from classes import stiffeners_proposition
 from classes import proposed_stiffener
-from assembly import add_stiffeners 
+from assembly import add_stiffeners
 
 
 
-def deck(b_deck):
+def deck(b_deck, as_prop):
     #returns the a list of optimal deck stiffeners
     min_Iy = min_inertial_mom()
     #choose correct value according to EC 3-2
-    t_deck = 14
-    data.input_data.update({"t_deck": t_deck})
+    t_deck = defaults.t_deck
     #set maximum default values and step size for range
-    h_max = 300
-    h_step = 5
+    h_max = defaults.h_maximal
+    h_step = defaults.h_step
+    h_min = defaults.h_minimal
+
     #must be >6mm according to EC 3-2
-    t_range = [7,9,11,13,15,17,20]
+    t_range = [8,10,12,15,16,18,20]
 
     #b_sup, b_inf, h, t, mass
     best = [0,0,0,0,10**8]
@@ -36,8 +37,8 @@ def deck(b_deck):
         num_of_stiffeners = (num_of_plates-1)/2
         b_sup = b_deck / num_of_plates
 
-        #assume the stiffener angle to be pi/3
-        for h in range(30, h_max, h_step):
+        #assume the stiffener angle to be 75°
+        for h in range(h_min, h_max, h_step):
             b_inf = b_sup - 2*h / math.tan(defaults.max_angle)
             #arbitrary value for evaluation
             if b_inf > 3*t:
@@ -54,7 +55,7 @@ def deck(b_deck):
     t = best[3]
     assert best[4] != 10**8, "You are Stupid."
 
-    if defaults.do_deck_as_prop == True:
+    if as_prop == True:
         deck_st_prop = stiffeners_proposition.stiffeners_proposition()
         num_of_plates = round(b_deck / b_sup)
         num_of_stiffeners = (num_of_plates-1)/2
@@ -67,7 +68,7 @@ def deck(b_deck):
         return deck_st_prop
 
 
-    elif defaults.do_deck_as_prop == False:
+    elif as_prop == False:
         #create a list of deck stiffeners
         deck_stiffener_list = []
         num_of_plates = round(b_deck / b_sup)

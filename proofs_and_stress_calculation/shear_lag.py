@@ -121,11 +121,11 @@ def beta_from_kappa(kappa):
         else:
             print("bending type is not defined")
 
-    if data.input_data.get("cs position") == "end support":
+    if data.input_data.get("cs_position") == "end_support":
         beta = beta_0 = (0.55 + 0.025 / kappa) * beta_1
         if beta_0 >= beta_1:
             beta = beta_0 = beta_1
-    elif data.input_data.get("cs position") == "Cantilever":
+    elif data.input_data.get("cs_position") == "cantilever":
         beta = beta_2
     #if no cs position is given, it is a sagging or bending moment inbetween the ends of the bridge
     #thus no else clause

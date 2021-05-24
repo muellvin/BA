@@ -13,21 +13,31 @@ from data_and_defaults import defaults
 
 
 #initial cs is empty (only four lines)
-def add_stiffener_set(initial_cs, propositions):
+def add_stiffener_set(initial_cs, propositions, optimizer):
     iterations = 0
+    stiffener_list = None
     geometry_ok = False
+
+    assert optimizer == a or optimizer == b, "Wrong input for optimizer."
 
     if propositions.stiffeners == []:
         return initial_cs
 
-    while geometry_ok == False and iterations <= 1:
-        iterations += 1
-        stiffener_list = substantiate.substantiate(initial_cs, propositions)
+    if optimizer == "a":
+        stiffener_list = substantiate.substantiate(initial_cs, propositions, optimizer)
         if stiffener_list == False:
             print("\n\n Substantiate finished with FALSE")
             return False
-        proposition, geometry_ok = check_geometry.check_geometry(initial_cs, stiffener_list, propositions)
-        print(geometry_ok)
+
+    if optimizer == "b":
+        while geometry_ok == False and iterations <= 1:
+            iterations += 1
+            stiffener_list = substantiate.substantiate(initial_cs, propositions, optimizer)
+            if stiffener_list == False:
+                print("\n\n Substantiate finished with FALSE")
+                return False
+            proposition, geometry_ok = check_geometry.check_geometry(initial_cs, stiffener_list, propositions)
+            print(geometry_ok)
 
     print("\n\n Substantiate finished with success")
     if geometry_ok == False:

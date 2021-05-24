@@ -32,6 +32,18 @@
         ei.removeAttribute("disabled")
       }
     </script>
+    <script>
+      function restrict() {
+        var m_ed = document.getElementById("M_Ed")
+        m_ed.setAttribute("max", 0)
+      }
+    </script>
+    <script>
+      function unrestrict() {
+        var m_ed = document.getElementById("M_Ed")
+        m_ed.removeAttribute("max")
+      }
+    </script>
     <form action="/optimize_step_1" method="POST" id="opt_step_2"> </form>
     <table>
       <tr>
@@ -39,7 +51,7 @@
       </tr>
       <tr>
         <td><label for="M_Ed">M<sub>Ed</sub> [kNm]</label></td>
-        <td><input type="number" name="M_Ed" value = 9000 form = "opt_step_2" required></td>
+        <td><input type="number" name="M_Ed" id="M_Ed" value = 9000 form = "opt_step_2" required></td>
       </tr>
       <tr>
         <td><label for="V_Ed">V<sub>Ed</sub> [kN]</label></td>
@@ -48,6 +60,16 @@
       <tr>
         <td><label for="T_Ed">T<sub>Ed</sub> [kNm]</label></td>
         <td><input type="number" name="T_Ed" value = 0 form = "opt_step_2" required></td>
+      </tr>
+      <tr>
+        <td>Cross Section Position</td>
+        <td>
+          <select name="cs_position" form ="opt_step_2">
+            <option value="else" selected>Else</option>
+            <option value="end_support">End Support</option>
+            <option value="cantilever">Cantilever</option>
+          </select>
+        </td>
       </tr>
       <tr>
         <td><p>Choose the steel grade.</p> </td>
@@ -65,10 +87,10 @@
         <td><p>Choose the optimization algorithm.</p></td>
       </tr>
       <tr>
-        <td><input type="radio" name ="opt" value="0" form = "opt_step_2" required> Optimizer A </input> </td>
+        <td><input type="radio" name ="opt" value="0" form = "opt_step_2" required onchange="restrict()"> Optimizer A </input> </td>
       </tr>
       <tr>
-        <td><input type="radio" name ="opt" value="1" form = "opt_step_2" required> Optimizer B </input> </td>
+        <td><input type="radio" name ="opt" value="1" form = "opt_step_2" required onchange="unrestrict()"> Optimizer B </input> </td>
       </tr>
       <tr>
         <td><p>Choose the optimization goal.</p></td>

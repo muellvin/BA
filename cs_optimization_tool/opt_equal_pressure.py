@@ -10,7 +10,6 @@ from classes import proposed_stiffener
 from classes import stiffeners_proposition
 from assembly import add_stiffeners
 from assembly import merge
-from assembly import substantiate
 sys.path.insert(0, './user_interface')
 from output import printing
 from deck_and_initial_cs import deck
@@ -26,7 +25,7 @@ def opt_eqpressure():
     h = data.input_data["h"]
     t_deck = data.input_data["t_deck"]
     cs_fresh = initial_cs.create_initial_cs(b_sup, b_inf, h, 1, t_deck, 1)
-    st_prop_deck = deck.deck(b_sup)
+    st_prop_deck = deck.deck(b_sup, True)
     n_st_deck = len(st_prop_deck.stiffeners)
 
     t_values = [5]
@@ -50,7 +49,7 @@ def opt_eqpressure():
             empty_cs = set_t_side(copy.deepcopy(cs_fresh), t_side)
             empty_cs = set_t_bottom(empty_cs, t_bottom)
 
-            cs_temp = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop_deck)
+            cs_temp = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop_deck, "a")
             cs_temp = buckling_proof.buckling_proof(copy.deepcopy(empty_cs))
             sigma_top_red = get_sigma_top_red(cs_temp)
             sigma_bottom_red = get_sigma_bottom_red(cs_temp)
@@ -71,7 +70,7 @@ def opt_eqpressure():
                             st_prop = stiffeners_proposition.stiffeners_proposition()
                             st_prop.stiffeners = copy.deepcopy(st_prop_deck.stiffeners) + copy.deepcopy(st_prop_side.stiffeners)
                             st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda st: st.st_number)
-                            stiffened_cs = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop)
+                            stiffened_cs = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop, "a")
                             stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
 
                             #stresses at the top and bottom corner
@@ -98,7 +97,7 @@ def opt_eqpressure():
                                     st_prop.stiffeners = copy.deepcopy(st_prop_deck.stiffeners) + copy.deepcopy(st_prop_side.stiffeners) + copy.deepcopy(st_prop_bottom.stiffeners)
                                     st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda st: st.st_number)
 
-                                    stiffened_cs = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop)
+                                    stiffened_cs = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop, "a")
                                     #geometry_output.print_cs_red(stiffened_cs)
                                     stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
 
@@ -141,11 +140,6 @@ def set_defaults_for_opt_eqpressure():
     defaults.t_range = [5,7,9,11,13,15,17,20]
     defaults.max_angle = math.pi/12*5 #75 grad
     #check_geometry
-    defaults.do_check_geometry = False
-    defaults.do_check_stiffeners_in_corners_top = False
-    defaults.do_check_stiffeners_in_corners_bottom = False
-    defaults.do_height_only = True
-    defaults.do_width_only = False
 
     defaults.do_shear_lag_plastically = False
     defaults.do_shear_lag = True
@@ -154,8 +148,6 @@ def set_defaults_for_opt_eqpressure():
 
     defaults.do_print = True
     defaults.do_print_to_txt = False
-
-    defaults.do_deck_as_prop = True
 
 
 

@@ -7,8 +7,6 @@ from classes import point
 from classes import line
 from classes import crosssection
 from classes import plate_code
-from assembly import substantiate
-
 
 
 #cs ist empty (only 4 lines)
@@ -16,20 +14,9 @@ from assembly import substantiate
 #propositions is the only file that is changed and given back
 def check_geometry(cs, stiffeners, propositions):
     geometry_ok = True
-    if defaults.do_check_geometry == True:
-      if defaults.do_height_only == True and defaults.do_width_only == True:
-          conflict = True
-          assert conflict == True, "cannot do only height and only width"
-
-      if defaults.do_width_only == True:
-          propositions, ok1 = distances_to_corners(cs, stiffeners, propositions)
-          propositions, ok2 = distances_betw_stiffeners(cs, stiffeners, propositions)
-          #propositions, ok3 = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
-          """distances across on bottom side are not done, maybe not needed"""
-          geometry_ok = ( ok1 == ok2  == True )
-
-      elif defaults.do_height_only == True:
-          propositions, geometry_ok = distances_betw_st_inc_top(cs, stiffeners, propositions, True)
+    propositions, ok1 = distances_to_corners(cs, stiffeners, propositions)
+    propositions, ok2 = distances_betw_stiffeners(cs, stiffeners, propositions)
+    geometry_ok = ( ok1 == ok2  == True )
 
     return propositions, geometry_ok
 
@@ -40,13 +27,13 @@ def distances_to_corners(cs, stiffeners, propositions):
     ok1 = True
 
     #get original values for minimal distances
-    mindis_side_top_corner = copy.deepcopy(defaults.mindis_side_top_corner)
-    mindis_side_bottom_corner = copy.deepcopy(defaults.mindis_side_bottom_corner)
-    mindis_bottom_corner = copy.deepcopy(defaults.mindis_bottom_corner)
+    mindis_side_top_corner = 0
+    mindis_side_bottom_corner = 0
+    mindis_bottom_corner = 0
 
     top_right = get_top_right_stiffener(stiffeners)
     if top_right != None:
-        defaults.mindis_side_top_corner = top_right.h/math.sin(cs.get_line(pl_position = 2).get_angle_y())
+        mindis_side_top_corner = top_right.h/math.sin(cs.get_line(pl_position = 2).get_angle_y())
 
     right_top = get_right_top_stiffener(stiffeners)
     if right_top != None:
@@ -59,14 +46,14 @@ def distances_to_corners(cs, stiffeners, propositions):
         right_bottom_2b = right_bottom.get_line(st_pl_position = 2).b
         right_bottom_2a = right_bottom.get_line(st_pl_position = 2).a
         st_num_right_bottom = right_bottom.get_line(st_pl_position = 2).code.st_number
-        defaults.mindis_bottom_corner = right_bottom.h/math.sin(cs.get_line(pl_position = 2).get_angle_y())
+        mindis_bottom_corner = right_bottom.h/math.sin(cs.get_line(pl_position = 2).get_angle_y())
 
     bottom_right = get_bottom_right_stiffener(stiffeners)
     if bottom_right != None:
         bottom_right_4b = bottom_right.get_line(st_pl_position = 4).b
         bottom_right_4a = bottom_right.get_line(st_pl_position = 4).a
         st_num_bottom_right = bottom_right.get_line(st_pl_position = 4).code.st_number
-        defaults.mindis_side_bottom_corner = bottom_right.h/math.sin(cs.get_line(pl_position = 2).get_angle_y())
+        mindis_side_bottom_corner = bottom_right.h/math.sin(cs.get_line(pl_position = 2).get_angle_y())
 
     bottom_left = get_bottom_left_stiffener(stiffeners)
     if bottom_left != None:
@@ -96,8 +83,8 @@ def distances_to_corners(cs, stiffeners, propositions):
         if right_top_4b.z < corner_top_right.z:
             sign = -1
         dis_right_top_corner = sign*math.sqrt((corner_top_right.z - right_top_4b.z)**2 + (corner_top_right.y - right_top_4b.y)**2)
-        if dis_right_top_corner < defaults.mindis_side_top_corner:
-            corr = defaults.mindis_side_top_corner - dis_right_top_corner
+        if dis_right_top_corner < max(mindis_side_top_corner, defaults.mindis_side_top_corner):
+            corr = max(mindis_side_top_corner, defaults.mindis_side_top_corner) - dis_right_top_corner
             propositions.get_proposed_stiffener(2, st_num_right_top).b_sup = right_top.b_sup - corr
             propositions.get_proposed_stiffener(4, st_num_left_top).b_sup = right_top.b_sup - corr
             propositions.get_proposed_stiffener(2, st_num_right_top).b_sup_corr = True
@@ -112,8 +99,8 @@ def distances_to_corners(cs, stiffeners, propositions):
         if right_bottom_2a.z > corner_bottom_right.z:
             sign = -1
         dis_right_bottom_corner = sign*math.sqrt((corner_bottom_right.z - right_bottom_2a.z)**2 +(corner_bottom_right.y - right_bottom_2a.y)**2)
-        if dis_right_bottom_corner < defaults.mindis_side_bottom_corner:
-            corr = defaults.mindis_side_bottom_corner - dis_right_bottom_corner
+        if dis_right_bottom_corner < max(mindis_side_bottom_corner, defaults.mindis_side_bottom_corner):
+            corr = max(mindis_side_bottom_corner, defaults.mindis_side_bottom_corner) - dis_right_bottom_corner
             propositions.get_proposed_stiffener(2, st_num_right_bottom).b_sup = right_bottom.b_sup - corr
             propositions.get_proposed_stiffener(4, st_num_left_bottom).b_sup = left_bottom.b_sup - corr
             propositions.get_proposed_stiffener(2, st_num_right_bottom).b_sup_corr = True
@@ -129,8 +116,8 @@ def distances_to_corners(cs, stiffeners, propositions):
         if bottom_right_4b.y < corner_bottom_right.y:
             sign = -1
         dis_bottom_right_corner = sign*math.sqrt((corner_bottom_right.y - bottom_right_4b.y)**2 +(corner_bottom_right.z - bottom_right_4b.z)**2)
-        if dis_bottom_right_corner < defaults.mindis_bottom_corner:
-            corr = defaults.mindis_bottom_corner - dis_bottom_right_corner
+        if dis_bottom_right_corner < max(mindis_bottom_corner, defaults.mindis_bottom_corner):
+            corr = max(mindis_bottom_corner, defaults.mindis_bottom_corner) - dis_bottom_right_corner
             propositions.get_proposed_stiffener(3, st_num_bottom_left).b_sup = bottom_left.b_sup -corr
             propositions.get_proposed_stiffener(3, st_num_bottom_right).b_sup = bottom_right.b_sup - corr
             propositions.get_proposed_stiffener(3, st_num_bottom_left).b_sup_corr = True
@@ -139,11 +126,6 @@ def distances_to_corners(cs, stiffeners, propositions):
             propositions.get_proposed_stiffener(3, st_num_bottom_right).b_sup_corr_val = corr
             print("bottom stiffeners too close to the corners: ", dis_bottom_right_corner)
             ok1 = False
-
-    #reset original values
-    defaults.mindis_side_top_corner = mindis_side_top_corner
-    defaults.mindis_side_bottom_corner = mindis_side_bottom_corner
-    defaults.mindis_bottom_corner = mindis_bottom_corner
 
     return propositions, ok1
 
