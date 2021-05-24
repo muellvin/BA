@@ -121,7 +121,7 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
             plate_between_I_tot = plate_between.get_i_along_tot()
 
             #plate_before
-            plate_before_gross_len = figure_Aone(plate_before, True, True)
+            plate_before_gross_len = figure_Aone(plate_before, False, True)
             factor = plate_before_gross_len/plate_before.get_length_tot()
             point_a_y = plate_before.b.y + factor*(plate_before.a.y - plate_before.b.y)
             point_a_z = plate_before.b.z + factor*(plate_before.a.z - plate_before.b.z)
@@ -133,7 +133,7 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
             plate_before_gross.sigma_a_red = sigma_border_before_gross
             plate_before_gross.sigma_b_red = plate_before.sigma_b_red
 
-            plate_before_eff_len = figure_Aone(plate_before, True, False)
+            plate_before_eff_len = figure_Aone(plate_before, False, False)
             factor = plate_before_eff_len/plate_before.get_length_tot()
             point_a_y = plate_before.b.y + factor*(plate_before.a.y - plate_before.b.y)
             point_a_z = plate_before.b.z + factor*(plate_before.a.z - plate_before.b.z)
@@ -146,7 +146,7 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
             plate_before_eff.sigma_b_red = plate_before.sigma_b_red
 
             #plate_after
-            plate_after_gross_len = figure_Aone(plate_after,False, True)
+            plate_after_gross_len = figure_Aone(plate_after,True, True)
             factor = plate_after_gross_len/plate_after.get_length_tot()
             print("\n factor: "+str(factor))
             point_b_y = plate_after.a.y + factor*(plate_after.b.y - plate_after.a.y)
@@ -159,7 +159,7 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
             plate_after_gross.sigma_a_red = plate_after.sigma_a_red
             plate_after_gross.sigma_b_red = sigma_border_after_gross
 
-            plate_after_eff_len = figure_Aone(plate_after, False, False)
+            plate_after_eff_len = figure_Aone(plate_after, True, False)
             factor = plate_after_eff_len/plate_after.get_length_tot()
             point_b_y = plate_after.a.y + factor*(plate_after.b.y - plate_after.a.y)
             point_b_z = plate_after.a.z + factor*(plate_after.b.z - plate_after.a.z)
@@ -398,12 +398,12 @@ def figure_Aone(plate, a, gross):
         if gross:
             b_c = 1 / (1-plate.psi) * plate.get_length_tot()
         else:
-            b_c = 1 / (1-plate.psi) * plate.get_length_red()
+            b_c = plate.get_length_red() #already accounts for that
 
         if sup:
             factor = 0.4 * b_c
         else:
-            factor = (3-plate.psi)/(5-plate.psi)
+            assert sup == True, "should not get to this point: if there is tension it should still be higher"
 
         return factor*b_c
 

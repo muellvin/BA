@@ -27,7 +27,7 @@ cutoffangle = math.pi/3
 
 """substantiate defaults"""
 b_inf_maximal = 500
-b_inf_minimal = 0
+b_inf_minimal = 1
 b_inf_step = 50
 b_sup_maximal = 500
 b_sup_minimal = 50
