@@ -10,18 +10,18 @@ from classes import proposed_stiffener
 from assembly import add_stiffeners
 
 
-
+#function that returns deck stiffeners for a given cross section
 def deck(b_deck, as_prop):
-    #returns the a list of optimal deck stiffeners
+    #get the minimal required inertial moment according to EC 3-2
     min_Iy = min_inertial_mom()
-    #choose correct value according to EC 3-2
+    #choose correct value according to EC 3-2, C.1.2.2. in the defaults
     t_deck = defaults.t_deck
     #set maximum default values and step size for range
     h_max = defaults.h_maximal
     h_step = defaults.h_step
     h_min = defaults.h_minimal
 
-    #must be >6mm according to EC 3-2
+    #must be >6mm according to EC 3-2, C.1.2.2.
     t_range = [8,10,12,15,16,18,20]
 
     #b_sup, b_inf, h, t, mass
@@ -55,6 +55,7 @@ def deck(b_deck, as_prop):
     t = best[3]
     assert best[4] != 10**8, "You are Stupid."
 
+    #For the optimizer: return stiffeners as propositions
     if as_prop == True:
         deck_st_prop = stiffeners_proposition.stiffeners_proposition()
         num_of_plates = round(b_deck / b_sup)
@@ -67,7 +68,7 @@ def deck(b_deck, as_prop):
             deck_st_prop.add(st_prop)
         return deck_st_prop
 
-
+    #For the Analysis Tool: return stiffeners as stiffeners
     elif as_prop == False:
         #create a list of deck stiffeners
         deck_stiffener_list = []
@@ -79,16 +80,13 @@ def deck(b_deck, as_prop):
             deck_stiffener_list.append(stiffener_cs)
         return deck_stiffener_list
 
-
+#returns the minimal required inertial moment of the track plate according to EC-3 2, C.1.2.2.
 def min_inertial_mom():
-    #returns the minimal required inertial moment of the track plate according to EC-3 2
-    #This inertial momenent is calculated with the track plate
-    """Lower Inertial moments for stiffeners in the corners should be considered"""
-    #Minimal value of track plate thickness should be considered somewhere
     a = data.input_data.get("a")/1000
     I = 226410 * a**4.4608
     return I
 
+#function that creates deck stiffeners in the local coordinate system of the stiffener 
 def create_deck_stiffener_local(b_sup, b_inf, h, t, t_deck):
     assert b_sup >= b_inf, "width out of bound or wrong way around"
 
