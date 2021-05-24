@@ -136,7 +136,7 @@ def find_dimensions(stiffener, optimizer):
         stiffener.h = best[2]
         stiffener.t = best[3]
         stiffener.b_inf_corr = False
-        stiffener.b_sup_corr = True #important detail
+        stiffener.b_sup_corr = True
         stiffener.h_corr = False
         stiffener.b_inf_corr_val = False
         stiffener.b_sup_corr_val = False
