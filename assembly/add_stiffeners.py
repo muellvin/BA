@@ -13,18 +13,18 @@ from data_and_defaults import defaults
 
 
 #initial cs is empty (only four lines)
-def add_stiffener_set(initial_cs, propositions, optimizer):
+def add_stiffener_set(initial_cs, proposition, optimizer):
     iterations = 0
     stiffener_list = None
     geometry_ok = False
 
     assert optimizer == "a" or optimizer == "b", "Wrong input for optimizer."
 
-    if propositions.stiffeners == []:
+    if proposition.stiffeners == []:
         return initial_cs
 
     if optimizer == "a":
-        stiffener_list = substantiate.substantiate(initial_cs, propositions, optimizer)
+        stiffener_list = substantiate.substantiate(initial_cs, proposition, optimizer)
         if stiffener_list == False:
             print("\n\n Substantiate finished with FALSE")
             return False
@@ -32,16 +32,16 @@ def add_stiffener_set(initial_cs, propositions, optimizer):
     if optimizer == "b":
         while geometry_ok == False and iterations <= 1:
             iterations += 1
-            stiffener_list = substantiate.substantiate(initial_cs, propositions, optimizer)
+            stiffener_list = substantiate.substantiate(initial_cs, proposition, optimizer)
             if stiffener_list == False:
                 print("\n\n Substantiate finished with FALSE")
                 return False
-            proposition, geometry_ok = check_geometry.check_geometry(initial_cs, stiffener_list, propositions)
+            proposition, geometry_ok = check_geometry.check_geometry(initial_cs, stiffener_list, proposition)
             print(geometry_ok)
+        if geometry_ok == False:
+            return False
 
-    print("\n\n Substantiate finished with success")
-    if geometry_ok == False:
-        return False
+
 
     next_cs = merge.merge(copy.deepcopy(initial_cs), stiffener_list)
     next_cs.st_props = proposition

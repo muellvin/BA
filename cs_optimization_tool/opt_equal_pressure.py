@@ -18,23 +18,20 @@ from deck_and_initial_cs import initial_cs
 
 #an optimizer that puts the stiffeners in place, such that the single plates inbetween each have the same total pressure
 def opt_eqpressure():
-
-    set_defaults_for_opt_eqpressure()
     b_sup = data.input_data["b_sup"]
     b_inf = data.input_data["b_inf"]
     h = data.input_data["h"]
     t_deck = data.input_data["t_deck"]
+    t_values = defaults.t_range
+    i_along_values = defaults.I_range
+    n_st_side_max = defaults.num_side_stiffeners_max
+    n_st_bottom_max = defaults.num_bottom_stiffeners_max
+
     cs_fresh = initial_cs.create_initial_cs(b_sup, b_inf, h, 1, t_deck, 1)
     st_prop_deck = deck.deck(b_sup, True)
     n_st_deck = len(st_prop_deck.stiffeners)
 
-    t_values = [5]
-    i_along_values = [10**7] # range(10**6, 10**8, 10*10**6)
-    #i_along_values = [3*10**7, 6*10**7, 9*10**7]
-    n_st_side_max = 1
-    n_st_bottom_max = 4
 
-    """TILL NOW: ONLY ONE I_ALONG FOR ALL"""
 
     if data.input_data.get("M_Ed") > 1:
         tension_bottom = True
@@ -60,7 +57,7 @@ def opt_eqpressure():
             while n_st_side <= n_st_side_max:
                 print("\n888888888888888888888888888888888  ITERATION SIDE ", n_st_side, "888888888888888888888888888888888")
                 for i_along_side in i_along_values:
-                    print("\n&&&&&&&&&&&&&&&&&&&&&&&&& ITERATION I_ALONG_SIDE ", i_along_side, " &&&&&&&&&&&&&&&&&&&&&&&&&&&")
+                    print("\n&&&&&&&&&&&&&&&&&&&&&&&&& ITERATION I_ALONG_SIDE = ", i_along_side, " &&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
                     if tension_bottom == True:
                         #do it twice; the stresses now are the ones calculated for the same amount of stiffeners (but different place (could do more))
@@ -88,7 +85,7 @@ def opt_eqpressure():
                         while n_st_bottom <= n_st_bottom_max:
                             print("\n888888888888888888888888888888888  ITERATION BOTTOM ", n_st_bottom, "888888888888888888888888888888888")
                             for i_along_bottom in i_along_values:
-                                print("\n&&&&&&&&&&&&&&&&&&&&&&&&& ITERATION I_ALONG_SIDE ", i_along_bottom, " &&&&&&&&&&&&&&&&&&&&&&&&&&&")
+                                print("\n&&&&&&&&&&&&&&&&&&&&&&&&& ITERATION I_ALONG_BOTTOM = ", i_along_bottom, " &&&&&&&&&&&&&&&&&&&&&&&&&&&")
                                 #do it twice; the stresses now are the ones calculated for the same amount of stiffeners (but different place (could do more))
                                 for times in range(2):
                                     st_prop_side = set_stiffeners_side(copy.deepcopy(empty_cs), n_st_deck, n_st_side, n_st_bottom, sigma_top_red, sigma_bottom_red, i_along_side)
@@ -99,6 +96,8 @@ def opt_eqpressure():
 
                                     stiffened_cs = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop, "a")
                                     #geometry_output.print_cs_red(stiffened_cs)
+                                    assert stiffened_cs != True, "cs is bool True"
+                                    assert stiffened_cs != False, "cs is bool False"
                                     stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
 
                                     #stresses at the top and bottom corner
@@ -126,28 +125,6 @@ def opt_eqpressure():
 
 
 
-def set_defaults_for_opt_eqpressure():
-    defaults.b_inf_minimal = 10
-    defaults.b_inf_step = 10
-    defaults.b_inf_maximal = 500
-    defaults.b_sup_minimal = 1
-    defaults.b_sup_step = 50
-    defaults.b_sup_maximal = 500
-    defaults.b_sup_minimal = 50
-    defaults.h_minimal = 50
-    defaults.h_step = 10
-    defaults.h_maximal = 300
-    defaults.t_range = [5,7,9,11,13,15,17,20]
-    defaults.max_angle = math.pi/12*5 #75 grad
-    #check_geometry
-
-    defaults.do_shear_lag_plastically = False
-    defaults.do_shear_lag = True
-    defaults.do_global_plate_buckling = True
-    defaults.do_column_plate_buckling = True
-
-    defaults.do_print = True
-    defaults.do_print_to_txt = False
 
 
 

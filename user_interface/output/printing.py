@@ -7,8 +7,12 @@ from cs_optimization_tool import optimization_value
 from cs_optimization_tool import cs_collector
 from proofs_and_stress_calculation import buckling_proof
 
+do_print_to_pdf = True
+do_print_to_txt = True
+do_print_to_terminal = True
+
 #sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
-sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
+#sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
 
 """
 CONVENTION:
@@ -19,11 +23,11 @@ cs_analysis_tool.pdf and all.pdf in user_interface/static
 
 
 def printing(string, terminal = False):
-    if terminal == True and defaults.do_print_to_txt == True:
+    if terminal == True and do_print_to_txt == True:
         file = open("user_interface\output\cs_analysis.txt", "a+")
         file.write(string)
         file.close()
-    if terminal == True and defaults.do_print_to_terminal == True:
+    if terminal == True and do_print_to_terminal == True:
         print(string, end = "")
 
 
@@ -82,7 +86,7 @@ def print_best_proof():
     #uses the txt_to_pdf function
     file = open("user_interface/output/cs_analysis.txt", "w+")
     file.close()
-    defaults.do_print_to_txt = True
+    do_print_to_txt = True
     i = 1
     for cs in cs_collector.get_best():
         cs.reset()

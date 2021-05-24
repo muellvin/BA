@@ -60,7 +60,3 @@ do_shear_lag_plastically = False
 do_shear_lag = True
 do_global_plate_buckling = True
 do_column_plate_buckling = True
-
-do_print_to_pdf = True
-do_print_to_txt = True
-do_print_to_terminal = True
