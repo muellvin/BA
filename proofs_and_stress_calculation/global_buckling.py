@@ -12,18 +12,19 @@ sys.path.insert(0, './user_interface')
 from output import printing
 
 
-
+#function performing the buckling proof for each plate except the deck plate
 def global_buckling(cs):
     cs = reduction_global_buckling(cs, 2)
     cs = reduction_global_buckling(cs, 3)
     cs = reduction_global_buckling(cs, 4)
     return cs
 
-#create a cs with all plates of this side
+
 def reduction_global_buckling(cs, side):
     string = "\n   Side "+str(side)
     printing.printing(string, terminal = True)
 
+    #extract the respective plate
     plate_glob = crosssection.crosssection(0,0,0)
     line_min = cs.get_line(pl_position = side, pl_type = 0)
     line_max = line_min
@@ -34,6 +35,8 @@ def reduction_global_buckling(cs, side):
                 line_min = plate
             if plate.code.tpl_number != 0 and plate.code.tpl_number > line_max.code.tpl_number:
                 line_max = plate
+
+    #initialize buckling factors
     chi_c = 1
     rho_p = 1
     sigma_cr_c = 1
@@ -41,20 +44,26 @@ def reduction_global_buckling(cs, side):
     all_tension = False
     plate_stiffened = True
 
-    #the whole plate is under tension
+    #case 1: the whole plate is under tension
     if line_min.sigma_a_red < 0 and line_max.sigma_b_red < 0:
         rho_c = 1
         all_tension = True
 
+    #case 2: unstiffened plate
     elif len(plate_glob.lines) == 1:
         rho_c = 1
         plate_stiffened = False
+
+    #case 3: stiffened plate partly compressed
     else:
+        #perform global buckling proof, EC3 1-5, 4.5.2
         if defaults.do_global_plate_buckling == True:
             rho_p, sigma_cr_p = global_plate_buckling.global_plate_buckling(cs, plate_glob)
         else:
             rho_p = 1
             sigma_cr_p = 0
+
+        #perform column buckling proof, EC3 1-5, 4.5.3
         if defaults.do_column_plate_buckling == True:
             height_zero_pressure = cs.get_center_z_red()
             if data.input_data.get("M_Ed") < 0:
@@ -67,7 +76,7 @@ def reduction_global_buckling(cs, side):
             chi_c = 1
             sigma_cr_c = 1
 
-
+        #interaction according to EC3, 1-5, 4.5.4
         if defaults.do_column_plate_buckling == True and defaults.do_column_plate_buckling == True:
             eta = sigma_cr_p/sigma_cr_c -1
             if eta > 1:
@@ -95,6 +104,7 @@ def reduction_global_buckling(cs, side):
     plate_a = cs.get_plate_a(side)
     plate_b = cs.get_plate_b(side)
 
+    #set values to the cross section 
     for plate in cs.lines:
         if plate.code.pl_position == side:
             plate.chi_c = chi_c
