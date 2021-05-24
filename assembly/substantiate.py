@@ -1,10 +1,6 @@
 import math
 from data_and_defaults import defaults
 from assembly import add_stiffeners
-from classes import crosssection
-from classes import plate_code
-from classes import line
-
 
 def substantiate(cs, propositions, optimizer):
     #initialize list for stiffeners
@@ -24,27 +20,20 @@ def substantiate(cs, propositions, optimizer):
             b_sup, b_inf, h, t, success = find_dimensions(stiffener, optimizer)
             side = 2
             angle = math.pi + cs.get_angle(side)
-            #sidplate right side
         elif stiffener.pl_position == 3:
             b_sup, b_inf, h, t, success = find_dimensions(stiffener, optimizer)
             side = 3
             angle = math.pi
-            #bottom plate
-            #make use of symmetry and equal stiffeners
         else:
             assert stiffener.pl_position == 4, "Plate not found."
             b_sup, b_inf, h, t, success = find_dimensions(stiffener, optimizer)
             side = 4
             angle = math.pi - cs.get_angle(side)
-            #make us of symmetry tbd
 
         if success == True:
             y,z = cs.get_coordinates(stiffener.location, side)
             global_st = add_stiffeners.create_stiffener_global(stiffener.pl_position, stiffener.st_number, \
             y, z, angle, b_sup, b_inf, h, t)
-
-            #check if code correct
-            test = global_st.lines[0].code.pl_position
             stiffener_list.append(global_st)
 
         if success == False:
@@ -55,9 +44,9 @@ def substantiate(cs, propositions, optimizer):
     #This function return a list of stiffeners in the global coordinate system
     return stiffener_list
 
-    #check if values are still set to default
-    #idea: always keep one variable free and iterate through the others
 
+#function that returns the optimal geometric values for each stiffener given its location, minimal moment
+#of inertia and geometric corrections
 def find_dimensions(stiffener, optimizer):
     print("------------------- find_dimensions for stiffener ", stiffener.st_number,"------------------------------------------")
 
@@ -82,10 +71,7 @@ def find_dimensions(stiffener, optimizer):
     b_sup_max_geo = defaults.b_sup_maximal
     h_max_geo = defaults.h_maximal
 
-
-
-
-    #set new default values, if corrections need to be made
+    #set new geometrical restrictions, if corrections need to be made
     if stiffener.b_sup_corr == True:
         b_sup_max_geo = stiffener.b_sup
         if b_sup_minimal > b_sup_max_geo:
@@ -96,10 +82,12 @@ def find_dimensions(stiffener, optimizer):
         if h_max_geo < h_step:
             h_max_geo = h_step
 
-
+    #initialize best container
     best = [0,0,0,0,10**10]
     best_default = best
 
+    #case 1: Optimizer A
+    #b_sup is given, b_inf, h and t are free parameters
     if optimizer == "a":
         print("given b_sup, only correcting heights")
         b_sup = stiffener.b_sup
@@ -142,6 +130,8 @@ def find_dimensions(stiffener, optimizer):
         stiffener.b_sup_corr_val = False
         stiffener.h_corr_val = False
 
+    #case 2: Optimizer B
+    #b_sup, b_inf, h, t are free parameters, no given parameters
     else:
         assert optimizer == "b", "Wrong Optimizer Input."
         print("first case in check_geometry")

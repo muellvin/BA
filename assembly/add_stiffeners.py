@@ -9,10 +9,9 @@ from classes import plate_code
 from assembly import substantiate
 from assembly import merge
 from assembly import check_geometry
-from data_and_defaults import defaults
 
 
-#initial cs is empty (only four lines)
+#fuction adding stiffeners to an empty cross section after having checked the geometry
 def add_stiffener_set(initial_cs, proposition, optimizer):
     iterations = 0
     stiffener_list = None

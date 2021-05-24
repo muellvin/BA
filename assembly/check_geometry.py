@@ -9,10 +9,11 @@ from classes import crosssection
 from classes import plate_code
 
 
-#cs ist empty (only 4 lines)
-#stiffeners is a list of crosssections
-#propositions is the only file that is changed and given back
+
 def check_geometry(cs, stiffeners, propositions):
+    #cs ist empty (only 4 lines)
+    #stiffeners is a list of crosssections
+    #propositions is the only file that is changed and given back
     geometry_ok = True
     propositions, ok1 = distances_to_corners(cs, stiffeners, propositions)
     propositions, ok2 = distances_betw_stiffeners(cs, stiffeners, propositions)
@@ -325,89 +326,6 @@ def distances_betw_stiffeners(cs, stiffeners, propositions):
     return propositions, ok2
 
 
-
-
-
-
-def distances_betw_st_inc_top(cs, stiffeners, propositions, do_height):
-    ok3 = True
-    right_top = get_right_top_stiffener(stiffeners)
-    top_right = get_top_right_stiffener(stiffeners)
-    left_top = get_left_top_stiffener(stiffeners)
-
-
-
-    if top_right != None and right_top != None:
-        right_top_4b = right_top.get_line(st_pl_position = 4).b
-        right_top_4a = right_top.get_line(st_pl_position = 4).a
-        st_num_right_top = right_top.get_line(st_pl_position = 4).code.st_number
-        top_right_2b = top_right.get_line(st_pl_position = 2).b
-        st_num_top_right = top_right.get_line(st_pl_position = 2).code.st_number
-        left_top_2b = left_top.get_line(st_pl_position = 2).b
-        left_top_2a = left_top.get_line(st_pl_position = 2).a
-        st_num_left_top = left_top.get_line(st_pl_position = 2).code.st_number
-
-
-
-        st_left_top = propositions.get_proposed_stiffener(4, st_num_left_top)
-        st_right_top = propositions.get_proposed_stiffener(2, st_num_right_top)
-
-        #y z coordinate system with top_right_2a as origin
-        #n t coordinate system showing normal and tangentially away from right_top (n normal)
-        #   with right_top_4a as origin
-        dis_line = line.line([0,0,0,0,0], top_right_2b, right_top_4a, 1)
-        dis = dis_line.get_length_tot()
-        dis_angle_y = dis_line.get_angle_y()
-        dis_dy = dis_line.b.y - dis_line.a.y
-        dis_dz = dis_line.b.z - dis_line.a.z
-
-        #general check weather this might even be a problem
-        if dis > 500 and right_top_4a.z > top_right_2b.z:
-            return propositions, ok3
-
-        st_angle_y = right_top.get_line(st_pl_position = 3).get_angle_y()
-        #n: a line normal to the st bottom line points to positive y and negative z
-        #parallel to height of stiffener right top
-        n_dy = math.cos(st_angle_y)
-        n_dz = - math.sin(st_angle_y)
-        #t: a line tangential shows in the same direction as the stiffener
-        #parallel to width
-        t_dy = -math.sin(st_angle_y)
-        t_dz = -math.cos(st_angle_y)
-
-
-        #dis_line projected onto n t coordinate system
-        dis_n = (n_dy * dis_dy) + (n_dz * dis_dz)
-        dis_t = (t_dy * dis_dy) + (t_dy * dis_dy)
-
-        if dis > defaults.mindis_across_top and dis_n > 0 and dis_t > 0:
-            ok3 = True
-        elif dis_n > defaults.mindis_across_top:
-            ok3 = True
-        elif dis_t > defaults.mindis_across_top:
-            ok3 = True
-        elif do_height == True:
-            ok3 = False
-        #if we get here, changes have to be made
-            h_corr = defaults.mindis_across_top - dis_n
-            st_left_top.h = left_top.h - h_corr
-            st_left_top.h_corr = True
-            st_left_top.h_corr_val = h_corr
-            st_right_top.h = right_top.h - h_corr
-            st_right_top.h_corr = True
-            st_right_top.h_corr_val = h_corr
-        elif do_height == False:
-            ok3 = False
-            """correction for width"""
-            #has to be written: problem correction of b_inf -> maybe already b_sup
-
-    return propositions, ok3
-
-
-
-
-
-
 def get_top_right_corner(cs):
     points = []
     for plate in cs.lines:
@@ -422,21 +340,6 @@ def get_top_right_corner(cs):
 
 def get_bottom_right_corner(cs):
     return cs.get_line(pl_position = 3).a
-    #points = []
-    #for plate in cs.lines:
-    #    points.append(copy.deepcopy(plate.a))
-    #    points.append(copy.deepcopy(plate.b))
-    #y_bottom_min = 0
-    #z_bottom_max = 0
-    #for point in points:
-    #    if point.y <= y_bottom_min and point.z >= z_bottom_max:
-    #        y_bottom_min = point.y
-    #        z_bottom_max = point.z
-    #        bottom_right_corner = point
-    #return bottom_right_corner
-
-
-
 
 def get_top_stiffeners(stiffeners):
     top_stiffeners = []
