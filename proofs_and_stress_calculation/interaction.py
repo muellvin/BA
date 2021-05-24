@@ -114,7 +114,7 @@ def get_m_rd_pl_eff(total_cs):
     z_max = cs.h
     code = plate_code.plate_code(-1,-1,-1,-1,-1)
     counter = 0
-    #interation loop to find position of plastic zero line 
+    #interation loop to find position of plastic zero line
     while abs(area_top - area_btm)>convergence and continue_iteration == True:
         counter += 1
         start = False
@@ -199,5 +199,5 @@ def get_m_rd_pl_eff(total_cs):
             continue_iteration = False
     z_s_top = abs(z-top_part.get_center_z_red())
     z_s_btm = abs(z-bottom_part.get_center_z_red())
-    m_pl_rd_eff = (z_s_top * area_top + z_s_btm * area_btm)*data.constants.get("f_y")
+    m_pl_rd_eff = (z_s_top * area_top + z_s_btm * area_btm)*data.constants.get("f_y")/data.constants.get("gamma_M1")
     return m_pl_rd_eff
