@@ -33,8 +33,8 @@ def index():
 def optimize():
     form_values.values = copy.deepcopy(form_values.default_cs)
     val = form_values.values
-    initial_cs = initial_cs.create_initial_cs(val.get("b_sup"), val.get("b_inf"), val.get("h"), val.get("t_side"), val.get("t_deck"), val.get("t_btm"))
-    image = cs_to_html.print_cs(initial_cs)
+    first_cs = initial_cs.create_initial_cs(val.get("b_sup"), val.get("b_inf"), val.get("h"), val.get("t_side"), val.get("t_deck"), val.get("t_btm"))
+    image = cs_to_html.print_cs(first_cs)
     return render_template('optimize_input.html', image = image, content = val)
 
 #Input Page 1 Optimize

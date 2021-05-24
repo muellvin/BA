@@ -248,7 +248,7 @@ class crosssection():
         return plate.get_angle_y()
 
 
-""" Methods to Calculate the Properties of the Gross Crossection """
+    """ Methods to Calculate the Properties of the Gross Crossection """
 
     #method that returns the z-coordinate of the center of the gross cross section
     def get_center_z_tot(self, stress = False):
@@ -287,7 +287,7 @@ class crosssection():
         return azero
 
 
-"""Methods to Calculate the Properties of the Effective Crossection """
+    """Methods to Calculate the Properties of the Effective Crossection """
 
     #method that returns the z-coordinate of the center of the effective cross section
     def get_center_z_red(self, stress = False):
