@@ -73,6 +73,7 @@ def reduction_shear_lag(cs, flange):
     else:
         string = "\n      alpha_0: "+str(round(10*alpha_0)/10)
         kappa = alpha_0 * b_0 / data.input_data.get("L_e")
+        print(kappa)
 
         beta = beta_from_kappa(kappa)
 
@@ -110,7 +111,8 @@ def beta_from_kappa(kappa):
             beta_1 = 1 / (1 + 6.4 * kappa**2)
             beta = beta_1
         elif data.input_data.get("M_Ed") < 0: #elif data.input_data.get("bending type") == "hogging bending":
-            beta = beta_2 = 1 / (1 + 6.0 * (kappa - 1 / (2500 * kappa) + 1.6 * kappa**2))
+            beta = beta_2 = 1 / (1 + 6.0 * (kappa - 1 / (2500 * kappa)) + 1.6 * kappa**2)
+            print(beta)
         else:
             print("bending type is not defined")
     elif 0.7 < kappa:
