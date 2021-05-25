@@ -180,12 +180,9 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
             column_as_cs.addline(plate_between)
 
 
-            #calculating b_sl_1
+            #calculating stiffener center
             tpl_st_center = point.point(tpl_st_lines_set.get(i).get_center_y_tot(), tpl_st_lines_set.get(i).get_center_z_tot())
-            if sigma_border_before_gross < sigma_border_after_gross:
-                b_sl_1 = dis_points(border_before_gross, tpl_st_center)
-            elif sigma_border_before_gross > sigma_border_after_gross:
-                b_sl_1 = dis_points(border_after_gross, tpl_st_center)
+            height_stiffener_center = tpl_st_center.z
 
             #calculating b_c and sigma_cr_c
             all_tension = False
@@ -194,37 +191,24 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
                 b_c = 0
                 sigma_cr_c = 10**8
                 all_tension = True
-            elif abs(sigma_border_before_gross - sigma_border_before_gross) < 0.5:
+            elif abs(sigma_border_before_gross - sigma_border_after_gross) < 0.5:
                 #same pressure; bottom stiffener; no extrapolation required
                 b_c = b
                 sigma_cr_c = sigma_cr_sl
                 all_tension = False
             #different pressure; side stiffener; extrapolation required
             else:
-                #different pressure; side stiffener; extrapolation required
-                #pressure gradient from border before to border after
-                m = (sigma_border_after_gross - sigma_border_before_gross) / b
-                #distance to zero pressure from border before
-                #0 = sigma_border_before + m * dis_to_zero
-                dis_to_zero = - sigma_border_before / m
-                #negative distance means forward
-                #positive distance means backwards
-                dis_before_max = dis_points(point_max, border_before_gross)
-
-                if point_max.z > border_before_gross.z:
-                        #max pressure is at bottom of cs
-                        if side == 2:
-                            b_c = dis_before_max + dis_to_zero
-                        elif side == 4:
-                            b_c = dis_before_max - dis_to_zero
-                elif point_max.z < border_before_gross.z:
-                        #max pressure is at top of cs
-                        if side == 2:
-                            b_c = dis_before_max - dis_to_zero
-                        elif side == 4:
-                            b_c = dis_before_max + dis_to_zero
-
-                sigma_cr_c = sigma_cr_sl * b_c / b_sl_1
+                b_sl_1 = height_stiffener_center -height_zero_pressure
+                b_c = height_max_pressure-height_zero_pressure
+                factor = b_c/b_sl_1
+                if factor > 0:
+                    #stiffener in compression zone --> extrapolation
+                    sigma_cr_c = sigma_cr_sl * factor
+                else:
+                    #stiffener in tension zone --> no proof required
+                    b_c = 0
+                    sigma_cr_c = 10**8
+                    all_tension = True
 
 
 

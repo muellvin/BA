@@ -333,15 +333,16 @@ def get_beta_ac(plate_glob):
     beta_plate = copy.deepcopy(plate_glob)
     side = beta_plate.lines[0].code.pl_position
     plate_a = beta_plate.get_plate_a(side)
-    plate_a.rho_c_a = 0
     plate_b = beta_plate.get_plate_b(side)
-    plate_b.rho_c_b = 0
     a_c = 0
+    a_c_eff_loc = 0
     for plate in beta_plate.lines:
         if plate != plate_a and plate != plate_b:
-            a_c += plate.get_area_tot()
+            a_c += plate.get_area_tot(stress = True)
+            a_c_eff_loc += plate.get_area_red(stress = True)
         else:
-            a_c += 0.5*plate.get_area_tot()
-    a_c_eff_loc = beta_plate.get_area_red()
+            a_c += 0.5*plate.get_area_tot(stress = True)
+            a_c_eff_loc += 0.5*plate.get_area_red(stress = True)
     beta_a_c = a_c_eff_loc / a_c
+    print(beta_a_c)
     return beta_a_c

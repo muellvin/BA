@@ -65,7 +65,7 @@ def reduction_global_buckling(cs, side):
 
         #perform column buckling proof, EC3 1-5, 4.5.3
         if defaults.do_column_plate_buckling == True:
-            height_zero_pressure = cs.get_center_z_red()
+            height_zero_pressure = cs.get_center_z_red(stress = True)
             if data.input_data.get("M_Ed") < 0:
                 height_max_pressure = data.input_data.get("h")
             else:
@@ -104,7 +104,7 @@ def reduction_global_buckling(cs, side):
     plate_a = cs.get_plate_a(side)
     plate_b = cs.get_plate_b(side)
 
-    #set values to the cross section 
+    #set values to the cross section
     for plate in cs.lines:
         if plate.code.pl_position == side:
             plate.chi_c = chi_c
