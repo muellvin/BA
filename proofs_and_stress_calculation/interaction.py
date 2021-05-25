@@ -104,7 +104,7 @@ def get_m_rd_pl_eff(total_cs):
             pass
         else:
             cs.addline(plate)
-    total_area = cs.get_area_red()
+    total_area = cs.get_area_red(stress = True)
     convergence = defaults.convergence_limit_m_rd_pl_eff* total_area
     continue_iteration = True
     area_top = 10**12
@@ -187,8 +187,8 @@ def get_m_rd_pl_eff(total_cs):
                     top_part.addline(line_b)
                     line_a = line.line(code, plate.p2, plate.a, plate.t)
                     bottom_part.addline(line_a)
-        area_top = top_part.get_area_red()
-        area_btm = bottom_part.get_area_red()
+        area_top = top_part.get_area_red(stress = True)
+        area_btm = bottom_part.get_area_red(stress = True)
         if area_top > area_btm:
             z_max = z
             z = 0.5*(z+z_min)
@@ -198,7 +198,7 @@ def get_m_rd_pl_eff(total_cs):
         counter +=1
         if counter > 10:
             continue_iteration = False
-    z_s_top = abs(z-top_part.get_center_z_red())
-    z_s_btm = abs(z-bottom_part.get_center_z_red())
+    z_s_top = abs(z-top_part.get_center_z_red(stress = True))
+    z_s_btm = abs(z-bottom_part.get_center_z_red(stress = True))
     m_pl_rd_eff = (z_s_top * area_top + z_s_btm * area_btm)*data.constants.get("f_y")/data.constants.get("gamma_M1")
     return m_pl_rd_eff
