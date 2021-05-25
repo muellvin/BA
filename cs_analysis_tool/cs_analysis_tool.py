@@ -46,6 +46,7 @@ def cs_analysis_gui():
 
     #proof block
     cs = buckling_proof.buckling_proof(cs)
+    print(cs)
 
     #user interface preparation
     results = {"eta_1": round(cs.eta_1,2), "eta_3_side_1":round(cs.eta_3_side_1,2), "interaction_1": round(cs.interaction_1,2),  "eta_3_side_2":round(cs.eta_3_side_2,2), \
