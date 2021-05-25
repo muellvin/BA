@@ -197,7 +197,7 @@ Resistance to shear and interaction shear force and bending moment for side 2
    7.1 Interaction between shear force, bending moment and axial force
    Web -> (7.1) without iterating
       eta_3 > 0.5; interaction needed
-      utilisation: 0.3445193014321691
+      utilisation: 0.6724391104922354
 
 Resistance to shear and interaction shear force and bending moment for side 3
    5. Resistance to shear
@@ -243,4 +243,4 @@ Resistance to shear and interaction shear force and bending moment for side 4
    7.1 Interaction between shear force, bending moment and axial force
    Web -> (7.1) without iterating
       eta_3 > 0.5; interaction needed
-      utilisation: 0.3738502166827279
+      utilisation: 0.6928320515539624
