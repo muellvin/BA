@@ -129,7 +129,7 @@ def global_plate_buckling(total_cs, plate_glob):
             plate.p2.z = math.sin(angle)*p2y + math.cos(angle)*p2z
 
         #claculate A of stiffened plate
-        A_tot = stiffened_plate.get_area_tot()
+        A_tot = h*t
 
         #create a list of all stiffeners
         stiffener_list = []
@@ -188,7 +188,7 @@ def global_plate_buckling(total_cs, plate_glob):
             integral = b_sup_st / t + (2*diag + b_inf_st) / t_st
             J_T = 4* A_0**2 / integral
             J_T_ref = 1/3 * h * t**3
-            theta = 0.7 * J_T / J_T_ref
+            theta = J_T / J_T_ref
 
 
             #calculate delta
