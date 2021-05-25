@@ -386,7 +386,7 @@ def figure_Aone(plate, a, gross):
         if gross:
             b_c = 1 / (1-plate.psi) * plate.get_length_tot()
         else:
-            b_c = plate.get_length_red() - (-plate.psi/(1-plate.psi))*plate.get_length_red() #already accounts for that
+            b_c = plate.get_length_red() - (-plate.psi/(1-plate.psi))*plate.get_length_tot() #already accounts for that
 
         if sup:
             factor = 0.4
