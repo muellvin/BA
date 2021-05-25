@@ -1,4 +1,5 @@
 
+moment of inertia gross without shear lag: 131997495506.10445
 
 Buckling Proof according to EC 1993 Part 1-5
 
@@ -14,6 +15,9 @@ Buckling Proof according to EC 1993 Part 1-5
 
 4.4 Plate elements without longitudinal stiffeners
    Iteratively changing the widths until M_Rd_el_eff converges to a limit of 0.02
+moment of inertia gross with shear lag: 60364468595.56615
+moment of inertia eff without shear lag: 114100942203.74236
+moment of inertia eff with shear lag: 54037465137.15008
 
 4.5 Stiffened plate elements with longitudinal stiffeners
    Side 2
@@ -438,7 +442,4 @@ Resistance to shear and interaction shear force and bending moment for side 4
            a=(1456, 1348)    p1=(1551, 1398)    p2=(1551, 1398)    b=(1638, 1445)t=10.0
            sigma_a_red=73.98   sigma_b_red=88.34
 
-moment of inertia gross without shear lag: 131997495506.10445
-moment of inertia gross with shear lag: 60364468595.56615
-moment of inertia eff without shear lag: 114100942203.74236
-moment of inertia eff with shear lag: 54037465137.15008
+moment of inertia including all reductions: 54037465137.15008

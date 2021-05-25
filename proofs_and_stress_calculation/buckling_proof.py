@@ -26,10 +26,18 @@ def buckling_proof(cs):
         if defaults.do_shear_lag == True:
             cs = shear_lag.shear_lag(cs)
 
+
+
         #4.4 plate elements without longitudinal stiffeners
         string = "\n\n4.4 Plate elements without longitudinal stiffeners"
         printing.printing(string, terminal = True)
         cs = local_buckling.local_buckling(cs)
+
+        #for verification
+        string = "\nmoment of inertia gross with shear lag: "+ str(cs.get_i_along_tot(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
+        string += "\nmoment of inertia eff without shear lag: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = False))
+        string += "\nmoment of inertia eff with shear lag: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
+        printing.printing(string, terminal = True)
 
         #4.5 stiffened plate elements with longitudinal stiffeners
         string = "\n\n4.5 Stiffened plate elements with longitudinal stiffeners"
