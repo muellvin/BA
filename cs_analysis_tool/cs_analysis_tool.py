@@ -43,17 +43,22 @@ def cs_analysis_gui():
     stiffener_list = sorted(stiffener_list, key = lambda st: st.lines[0].code.st_number)
     cs = merge.merge(cs, stiffener_list)
 
+    string = "\nmoment of inertia gross without shear lag: "+str(cs.get_i_along_tot(cs.get_line(pl_position = 1, pl_type = 0), stress = False))
+    printing.printing(string, terminal = True)
 
     #proof block
     cs = buckling_proof.buckling_proof(cs)
 
     #block for verification
     printing.printing(str(cs), terminal = True)
-    string = "\nmoment of inertia gross without shear lag: "+str(cs.get_i_along_tot(cs.get_line(pl_position = 0, pl_type = 0), stress = False))
-    string += "\nmoment of inertia gross with shear lag: "+ str(cs.get_i_along_tot(cs.get_line(pl_position = 0, pl_type = 0), stress = True))
-    string += "\nmoment of inertia eff without shear lag: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 0, pl_type = 0), stress = False))
-    string += "\nmoment of inertia eff with shear lag: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 0, pl_type = 0), stress = True))
+    string = "\nmoment of inertia including all reductions: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
     printing.printing(string, terminal = True)
+
+    
+    string = "\nmoment of inertia gross without shear lag: "+str(cs.get_i_along_tot(cs.get_line(pl_position = 1, pl_type = 0), stress = False))
+    string += "\nmoment of inertia gross with shear lag: "+ str(cs.get_i_along_tot(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
+    string += "\nmoment of inertia eff without shear lag: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = False))
+    string += "\nmoment of inertia eff with shear lag: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
 
     #user interface preparation
     results = {"eta_1": round(cs.eta_1,2), "eta_3_side_1":round(cs.eta_3_side_1,2), "interaction_1": round(cs.interaction_1,2),  "eta_3_side_2":round(cs.eta_3_side_2,2), \
