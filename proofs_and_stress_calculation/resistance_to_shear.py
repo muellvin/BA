@@ -35,10 +35,10 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
             else:
                 k_tau_loc = 4.0 + 5.34 * (h_w_i/a)**2
             lambda_w_bar_loc = h_w_i / (37.4*plate.t*math.sqrt(235/f_y)*math.sqrt(k_tau_loc))
-            if plate.code.pl_type = 0:
-                string = "\n         lambda_w_bar_loc of the trapezoid line nr. "+str(plate.code.tpl_number)+": "+str(round(lambda_w_bar_loc*10)/10))
+            if plate.code.pl_type == 0:
+                string = "\n         lambda_w_bar_loc of the trapezoid line nr. "+str(plate.code.tpl_number)+": "+str(math.floor(lambda_w_bar_loc*100)/100)
             else:
-                string = "\n         lambda_w_bar_loc of the stiffener line nr. "+str(plate.code.st_number)+": "+str(round(lambda_w_bar_loc*10)/10))
+                string = "\n         lambda_w_bar_loc of the stiffener line nr. "+str(plate.code.st_number)+": "+str(math.floor(lambda_w_bar_loc*100)/100)
             printing.printing(string, terminal = True)
             if lambda_w_bar_loc > lambda_w_bar_3:
                 lambda_w_bar_3 = lambda_w_bar_loc
@@ -156,6 +156,9 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         string = line1 + line2
         printing.printing(string, terminal = True)
 
+    if side == 2:
+        input1 = input()
+
     #pre_evaluation
     proof_required = True
     if stiffened == False:
@@ -174,13 +177,13 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         sigma_E = 190000*(t/h_w)**2
         tau_cr = k_tau * sigma_E
         lambda_w_bar_1 = 0.76 * math.sqrt(f_y / tau_cr) # formula 5.3
-        string = "\n         (5.3) lambda_w_bar_1= "+str(round(lambda_w_bar_1*10)/10)
+        string = "\n         (5.3) lambda_w_bar_1= "+str(math.floor(lambda_w_bar_1*100)/100)
         lambda_w_bar_2 = h_w /(37.4*t*math.sqrt(235/f_y)*math.sqrt(k_tau)) #formula 5.6
-        string += "\n         (5.6) lambda_w_bar_2= "+str(round(lambda_w_bar_2*10)/10)
-        string += "\n         (5.7) lambda_w_bar_3= "+str(round(lambda_w_bar_3*10)/10)+" max single plate slenderness"
+        string += "\n         (5.6) lambda_w_bar_2= "+str(math.floor(lambda_w_bar_2*100)/100)
+        string += "\n         (5.7) lambda_w_bar_3= "+str(math.floor(lambda_w_bar_3*100)/100)+" max single plate slenderness"
         lambda_w_bar = min(lambda_w_bar_1, lambda_w_bar_2)
         lambda_w_bar = max(lambda_w_bar, lambda_w_bar_3)
-        string += "\n         chosen lambda_w_bar= "+str(round(lambda_w_bar*10)/10)
+        string += "\n         chosen lambda_w_bar= "+str(math.floor(lambda_w_bar*100)/100)
         printing.printing(string, terminal = True)
 
         assert lambda_w_bar > 0, "Strange value for lambda_w_bar"
