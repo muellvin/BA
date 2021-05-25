@@ -156,8 +156,6 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         string = line1 + line2
         printing.printing(string, terminal = True)
 
-    if side == 2:
-        input1 = input()
 
     #pre_evaluation
     proof_required = True
