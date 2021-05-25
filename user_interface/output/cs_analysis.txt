@@ -22,8 +22,8 @@ moment of inertia eff with shear lag: 54037465137.15008
 4.5 Stiffened plate elements with longitudinal stiffeners
    Side 2
       4.5.2 Plate type behaviour
-         sigma_cr = 2555.282079228872
-         Lambda: 0.30051392531926124
+         sigma_cr = 1970.4272484151215
+         Lambda: 0.3422187680746343
          Rho_Global: 1.0
       4.5.3 Column type buckling behaviour
          Column number 9
@@ -44,8 +44,8 @@ moment of inertia eff with shear lag: 54037465137.15008
            rho_c = 1.0
    Side 3
       4.5.2 Plate type behaviour
-         sigma_cr = 763.4573757020646
-         Lambda: 0.5017485584496578
+         sigma_cr = 542.2013129095844
+         Lambda: 0.5953854930112594
          Rho_Global: 1.0
       4.5.3 Column type buckling behaviour
          Column number 10
@@ -76,8 +76,8 @@ moment of inertia eff with shear lag: 54037465137.15008
            rho_c = 1.0
    Side 4
       4.5.2 Plate type behaviour
-         sigma_cr = 2555.282079228872
-         Lambda: 0.30051392531926124
+         sigma_cr = 1970.4272484151215
+         Lambda: 0.3422187680746343
          Rho_Global: 1.0
       4.5.3 Column type buckling behaviour
          Column number 12
@@ -118,6 +118,8 @@ Resistance to shear and interaction shear force and bending moment for side 1
          lambda_w_bar_loc of the trapezoid line nr. 17: 0.19
       stiffened plate; EBPlate
       k_tau: 1571.0214527033982
+      V_Ed_plate: 1823910.23
+      V_Rd: 7236123.37
       eta_3: 0.25205626496949346
    7.1 Interaction between shear force, bending moment and axial force
    Flange -> (7.1), comment (5)
@@ -128,102 +130,136 @@ Resistance to shear and interaction shear force and bending moment for side 1
          lambda_w_bar_loc of the trapezoid line nr. 1: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 66841.19
+      V_Rd: 425654.31
       eta_3: 0.15703164083436558
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 2: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 59536.46
+      V_Rd: 425654.31
       eta_3: 0.13987046328644648
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 3: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 52231.73
+      V_Rd: 425654.31
       eta_3: 0.12270928573852742
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 4: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 44927.0
+      V_Rd: 425654.31
       eta_3: 0.10554810819060838
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 5: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 37622.27
+      V_Rd: 425654.31
       eta_3: 0.0883869306426893
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 6: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 30317.54
+      V_Rd: 425654.31
       eta_3: 0.07122575309477024
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 7: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 23012.81
+      V_Rd: 425654.31
       eta_3: 0.05406457554685117
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 8: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 15708.09
+      V_Rd: 425654.31
       eta_3: 0.03690339799893212
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 9: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 8403.36
+      V_Rd: 425654.31
       eta_3: 0.01974222045101305
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 10: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 15708.09
+      V_Rd: 425654.31
       eta_3: 0.03690339799893209
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 11: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 23012.81
+      V_Rd: 425654.31
       eta_3: 0.05406457554685115
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 12: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 30317.54
+      V_Rd: 425654.31
       eta_3: 0.07122575309477021
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 13: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 37622.27
+      V_Rd: 425654.31
       eta_3: 0.08838693064268928
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 14: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 44927.0
+      V_Rd: 425654.31
       eta_3: 0.10554810819060838
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 15: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 52231.73
+      V_Rd: 425654.31
       eta_3: 0.12270928573852743
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 16: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 59536.46
+      V_Rd: 425654.31
       eta_3: 0.13987046328644648
       eta_3_panel < 1: pass subpanel
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 17: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
+      V_Ed_plate: 66841.19
+      V_Rd: 425654.31
       eta_3: 0.15703164083436558
       eta_3_panel < 1: pass subpanel
 
@@ -234,3 +270,298 @@ Resistance to shear and interaction shear force and bending moment for side 2
          lambda_w_bar_loc of the trapezoid line nr. 20: 0.65
       stiffened plate; EBPlate
       k_tau: 21.01369360902256
+         (5.3) lambda_w_bar_1= 1.2
+         (5.6) lambda_w_bar_2= 1.2
+         (5.7) lambda_w_bar_3= 1.33 max single plate slenderness
+         chosen lambda_w_bar= 1.33
+      V_Ed_plate: 957149.52
+      V_Rd: 1658141.64
+      eta_3: 0.5772423151566441
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 > 0.5; interaction needed
+      utilisation: 0.6145459880467096
+
+Resistance to shear and interaction shear force and bending moment for side 3
+   5. Resistance to shear
+         lambda_w_bar_loc of the trapezoid line nr. 21: 0.93
+         lambda_w_bar_loc of the trapezoid line nr. 22: 0.34
+         lambda_w_bar_loc of the trapezoid line nr. 23: 0.85
+         lambda_w_bar_loc of the trapezoid line nr. 24: 0.34
+         lambda_w_bar_loc of the trapezoid line nr. 25: 0.93
+      stiffened plate; EBPlate
+      k_tau: 94.90997656054232
+      V_Ed_plate: 922663.04
+      V_Rd: 3876494.66
+      eta_3: 0.23801478429570364
+   7.1 Interaction between shear force, bending moment and axial force
+   Flange -> (7.1), comment (5)
+      eta_3 <= 0.5; no interaction needed
+      utilisation: -1
+   Proofing Resistance to shear for each subpanel
+   5. Resistance to shear
+         lambda_w_bar_loc of the trapezoid line nr. 21: 0.93
+      unstiffened plate; (A.5)
+      k_tau: 5.51015625
+         (5.3) lambda_w_bar_1= 0.93
+         (5.6) lambda_w_bar_2= 0.93
+         (5.7) lambda_w_bar_3= 0.93 max single plate slenderness
+         chosen lambda_w_bar= 0.93
+      V_Ed_plate: 172941.13
+      V_Rd: 941563.44
+      eta_3: 0.18367443224609442
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+         lambda_w_bar_loc of the trapezoid line nr. 22: 0.34
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      V_Ed_plate: 35901.44
+      V_Rd: 387649.46
+      eta_3: 0.09261316350554184
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+         lambda_w_bar_loc of the trapezoid line nr. 23: 0.85
+      unstiffened plate; (A.5)
+      k_tau: 5.480625
+         (5.3) lambda_w_bar_1= 0.85
+         (5.6) lambda_w_bar_2= 0.85
+         (5.7) lambda_w_bar_3= 0.85 max single plate slenderness
+         chosen lambda_w_bar= 0.85
+      V_Ed_plate: 49274.24
+      V_Rd: 939036.93
+      eta_3: 0.0524731734960991
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+         lambda_w_bar_loc of the trapezoid line nr. 24: 0.34
+      unstiffened plate; (A.5)
+      k_tau: 5.3625
+      V_Ed_plate: 35901.44
+      V_Rd: 387649.46
+      eta_3: 0.09261316350554184
+      eta_3_panel < 1: pass subpanel
+   5. Resistance to shear
+         lambda_w_bar_loc of the trapezoid line nr. 25: 0.93
+      unstiffened plate; (A.5)
+      k_tau: 5.51015625
+         (5.3) lambda_w_bar_1= 0.93
+         (5.6) lambda_w_bar_2= 0.93
+         (5.7) lambda_w_bar_3= 0.93 max single plate slenderness
+         chosen lambda_w_bar= 0.93
+      V_Ed_plate: 172941.13
+      V_Rd: 941563.44
+      eta_3: 0.18367443224609442
+      eta_3_panel < 1: pass subpanel
+
+Resistance to shear and interaction shear force and bending moment for side 4
+   5. Resistance to shear
+         lambda_w_bar_loc of the trapezoid line nr. 26: 0.65
+         lambda_w_bar_loc of the trapezoid line nr. 27: 0.34
+         lambda_w_bar_loc of the trapezoid line nr. 28: 1.33
+      stiffened plate; EBPlate
+      k_tau: 21.01353383458647
+         (5.3) lambda_w_bar_1= 1.2
+         (5.6) lambda_w_bar_2= 1.2
+         (5.7) lambda_w_bar_3= 1.33 max single plate slenderness
+         chosen lambda_w_bar= 1.33
+      V_Ed_plate: 1104403.29
+      V_Rd: 1658141.64
+      eta_3: 0.6660488251807434
+   7.1 Interaction between shear force, bending moment and axial force
+   Web -> (7.1) without iterating
+      eta_3 > 0.5; interaction needed
+      utilisation: 0.6590458276836744
+ cross-section with b_sup=4000, b_inf=3000, h=2000
+   trapezoid plate on side 1   with the number 1
+           a=(2000, 0)    p1=(1882, 0)    p2=(1882, 0)    b=(1764, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 2
+           a=(1764, 0)    p1=(1647, 0)    p2=(1647, 0)    b=(1529, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 3
+           a=(1529, 0)    p1=(1411, 0)    p2=(1411, 0)    b=(1294, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 4
+           a=(1294, 0)    p1=(1176, 0)    p2=(1176, 0)    b=(1058, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 5
+           a=(1058, 0)    p1=(941, 0)    p2=(941, 0)    b=(823, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 6
+           a=(823, 0)    p1=(705, 0)    p2=(705, 0)    b=(588, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 7
+           a=(588, 0)    p1=(470, 0)    p2=(470, 0)    b=(352, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 8
+           a=(352, 0)    p1=(235, 0)    p2=(235, 0)    b=(117, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 9
+           a=(117, 0)    p1=(0, 0)    p2=(0, 0)    b=(-117, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 10
+           a=(-117, 0)    p1=(-235, 0)    p2=(-235, 0)    b=(-352, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 11
+           a=(-352, 0)    p1=(-470, 0)    p2=(-470, 0)    b=(-588, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 12
+           a=(-588, 0)    p1=(-705, 0)    p2=(-705, 0)    b=(-823, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 13
+           a=(-823, 0)    p1=(-941, 0)    p2=(-941, 0)    b=(-1058, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 14
+           a=(-1058, 0)    p1=(-1176, 0)    p2=(-1176, 0)    b=(-1294, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 15
+           a=(-1294, 0)    p1=(-1411, 0)    p2=(-1411, 0)    b=(-1529, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 16
+           a=(-1529, 0)    p1=(-1647, 0)    p2=(-1647, 0)    b=(-1764, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 1   with the number 17
+           a=(-1764, 0)    p1=(-1882, 0)    p2=(-1882, 0)    b=(-2000, 0)t=14.0length_tot=235
+           sigma_a_red=-125.65   sigma_b_red=-125.65
+   trapezoid plate on side 2   with the number 18
+           a=(-2000, 0)    p1=(-1741, 1032)    p2=(-1741, 1032)    b=(-1711, 1154)t=10.0length_tot=1190
+           sigma_a_red=-125.65   sigma_b_red=45.26
+   trapezoid plate on side 2   with the number 19
+           a=(-1711, 1154)    p1=(-1671, 1315)    p2=(-1671, 1315)    b=(-1638, 1445)t=10.0length_tot=300
+           sigma_a_red=45.26   sigma_b_red=88.34
+   trapezoid plate on side 2   with the number 20
+           a=(-1638, 1445)    p1=(-1570, 1717)    p2=(-1554, 1780)    b=(-1500, 2000)t=10.0length_tot=571
+           sigma_a_red=88.34   sigma_b_red=170.43
+   trapezoid plate on side 3   with the number 21
+           a=(-1500, 2000)    p1=(-1258, 2000)    p2=(-916, 2000)    b=(-675, 2000)t=10.0length_tot=825
+           sigma_a_red=170.43   sigma_b_red=170.43
+   trapezoid plate on side 3   with the number 22
+           a=(-675, 2000)    p1=(-525, 2000)    p2=(-525, 2000)    b=(-375, 2000)t=10.0length_tot=300
+           sigma_a_red=170.43   sigma_b_red=170.43
+   trapezoid plate on side 3   with the number 23
+           a=(-375, 2000)    p1=(-138, 2000)    p2=(138, 2000)    b=(375, 2000)t=10.0length_tot=750
+           sigma_a_red=170.43   sigma_b_red=170.43
+   trapezoid plate on side 3   with the number 24
+           a=(375, 2000)    p1=(525, 2000)    p2=(525, 2000)    b=(675, 2000)t=10.0length_tot=300
+           sigma_a_red=170.43   sigma_b_red=170.43
+   trapezoid plate on side 3   with the number 25
+           a=(675, 2000)    p1=(916, 2000)    p2=(1258, 2000)    b=(1500, 2000)t=10.0length_tot=825
+           sigma_a_red=170.43   sigma_b_red=170.43
+   trapezoid plate on side 4   with the number 26
+           a=(1500, 2000)    p1=(1554, 1780)    p2=(1570, 1717)    b=(1638, 1445)t=10.0length_tot=571
+           sigma_a_red=170.43   sigma_b_red=88.34
+   trapezoid plate on side 4   with the number 27
+           a=(1638, 1445)    p1=(1671, 1315)    p2=(1671, 1315)    b=(1711, 1154)t=10.0length_tot=300
+           sigma_a_red=88.34   sigma_b_red=45.26
+   trapezoid plate on side 4   with the number 28
+           a=(1711, 1154)    p1=(1741, 1032)    p2=(1741, 1032)    b=(2000, 0)t=10.0length_tot=1190
+           sigma_a_red=45.26   sigma_b_red=-125.65
+   stiffener plate on side 1   of stiffener nr 1    on stiffener plate position 2
+           a=(1529, 0)    p1=(1564, 130)    p2=(1564, 130)    b=(1599, 260)t=10.0length_tot=269
+           sigma_a_red=-125.65   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 1    on stiffener plate position 3
+           a=(1599, 260)    p1=(1647, 260)    p2=(1647, 260)    b=(1695, 260)t=10.0length_tot=95
+           sigma_a_red=-87.16   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 1    on stiffener plate position 4
+           a=(1695, 260)    p1=(1729, 130)    p2=(1729, 130)    b=(1764, 0)t=10.0length_tot=269
+           sigma_a_red=-87.16   sigma_b_red=-125.65
+   stiffener plate on side 1   of stiffener nr 2    on stiffener plate position 2
+           a=(1058, 0)    p1=(1093, 130)    p2=(1093, 130)    b=(1128, 260)t=10.0length_tot=269
+           sigma_a_red=-125.65   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 2    on stiffener plate position 3
+           a=(1128, 260)    p1=(1176, 260)    p2=(1176, 260)    b=(1224, 260)t=10.0length_tot=95
+           sigma_a_red=-87.16   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 2    on stiffener plate position 4
+           a=(1224, 260)    p1=(1259, 130)    p2=(1259, 130)    b=(1294, 0)t=10.0length_tot=269
+           sigma_a_red=-87.16   sigma_b_red=-125.65
+   stiffener plate on side 1   of stiffener nr 3    on stiffener plate position 2
+           a=(588, 0)    p1=(623, 130)    p2=(623, 130)    b=(657, 260)t=10.0length_tot=269
+           sigma_a_red=-125.65   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 3    on stiffener plate position 3
+           a=(657, 260)    p1=(705, 260)    p2=(705, 260)    b=(753, 260)t=10.0length_tot=95
+           sigma_a_red=-87.16   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 3    on stiffener plate position 4
+           a=(753, 260)    p1=(788, 130)    p2=(788, 130)    b=(823, 0)t=10.0length_tot=269
+           sigma_a_red=-87.16   sigma_b_red=-125.65
+   stiffener plate on side 1   of stiffener nr 4    on stiffener plate position 2
+           a=(117, 0)    p1=(152, 130)    p2=(152, 130)    b=(187, 260)t=10.0length_tot=269
+           sigma_a_red=-125.65   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 4    on stiffener plate position 3
+           a=(187, 260)    p1=(235, 260)    p2=(235, 260)    b=(283, 260)t=10.0length_tot=95
+           sigma_a_red=-87.16   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 4    on stiffener plate position 4
+           a=(283, 260)    p1=(318, 130)    p2=(318, 130)    b=(352, 0)t=10.0length_tot=269
+           sigma_a_red=-87.16   sigma_b_red=-125.65
+   stiffener plate on side 1   of stiffener nr 5    on stiffener plate position 2
+           a=(-352, 0)    p1=(-318, 130)    p2=(-318, 130)    b=(-283, 260)t=10.0length_tot=269
+           sigma_a_red=-125.65   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 5    on stiffener plate position 3
+           a=(-283, 260)    p1=(-235, 260)    p2=(-235, 260)    b=(-187, 260)t=10.0length_tot=95
+           sigma_a_red=-87.16   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 5    on stiffener plate position 4
+           a=(-187, 260)    p1=(-152, 130)    p2=(-152, 130)    b=(-117, 0)t=10.0length_tot=269
+           sigma_a_red=-87.16   sigma_b_red=-125.65
+   stiffener plate on side 1   of stiffener nr 6    on stiffener plate position 2
+           a=(-823, 0)    p1=(-788, 130)    p2=(-788, 130)    b=(-753, 260)t=10.0length_tot=269
+           sigma_a_red=-125.65   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 6    on stiffener plate position 3
+           a=(-753, 260)    p1=(-705, 260)    p2=(-705, 260)    b=(-657, 260)t=10.0length_tot=95
+           sigma_a_red=-87.16   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 6    on stiffener plate position 4
+           a=(-657, 260)    p1=(-623, 130)    p2=(-623, 130)    b=(-588, 0)t=10.0length_tot=269
+           sigma_a_red=-87.16   sigma_b_red=-125.65
+   stiffener plate on side 1   of stiffener nr 7    on stiffener plate position 2
+           a=(-1294, 0)    p1=(-1259, 130)    p2=(-1259, 130)    b=(-1224, 260)t=10.0length_tot=269
+           sigma_a_red=-125.65   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 7    on stiffener plate position 3
+           a=(-1224, 260)    p1=(-1176, 260)    p2=(-1176, 260)    b=(-1128, 260)t=10.0length_tot=95
+           sigma_a_red=-87.16   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 7    on stiffener plate position 4
+           a=(-1128, 260)    p1=(-1093, 130)    p2=(-1093, 130)    b=(-1058, 0)t=10.0length_tot=269
+           sigma_a_red=-87.16   sigma_b_red=-125.65
+   stiffener plate on side 1   of stiffener nr 8    on stiffener plate position 2
+           a=(-1764, 0)    p1=(-1729, 130)    p2=(-1729, 130)    b=(-1695, 260)t=10.0length_tot=269
+           sigma_a_red=-125.65   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 8    on stiffener plate position 3
+           a=(-1695, 260)    p1=(-1647, 260)    p2=(-1647, 260)    b=(-1599, 260)t=10.0length_tot=95
+           sigma_a_red=-87.16   sigma_b_red=-87.16
+   stiffener plate on side 1   of stiffener nr 8    on stiffener plate position 4
+           a=(-1599, 260)    p1=(-1564, 130)    p2=(-1564, 130)    b=(-1529, 0)t=10.0length_tot=269
+           sigma_a_red=-87.16   sigma_b_red=-125.65
+   stiffener plate on side 2   of stiffener nr 9    on stiffener plate position 2
+           a=(-1638, 1445)    p1=(-1551, 1398)    p2=(-1551, 1398)    b=(-1456, 1348)t=10.0length_tot=206
+           sigma_a_red=88.34   sigma_b_red=73.98
+   stiffener plate on side 2   of stiffener nr 9    on stiffener plate position 3
+           a=(-1456, 1348)    p1=(-1478, 1260)    p2=(-1478, 1260)    b=(-1505, 1154)t=10.0length_tot=200
+           sigma_a_red=73.98   sigma_b_red=45.26
+   stiffener plate on side 2   of stiffener nr 9    on stiffener plate position 4
+           a=(-1505, 1154)    p1=(-1608, 1154)    p2=(-1608, 1154)    b=(-1711, 1154)t=10.0length_tot=206
+           sigma_a_red=45.26   sigma_b_red=45.26
+   stiffener plate on side 3   of stiffener nr 10    on stiffener plate position 2
+           a=(-375, 2000)    p1=(-398, 1904)    p2=(-398, 1904)    b=(-425, 1800)t=10.0length_tot=206
+           sigma_a_red=170.43   sigma_b_red=140.82
+   stiffener plate on side 3   of stiffener nr 10    on stiffener plate position 3
+           a=(-425, 1800)    p1=(-525, 1800)    p2=(-525, 1800)    b=(-625, 1800)t=10.0length_tot=199
+           sigma_a_red=140.82   sigma_b_red=140.82
+   stiffener plate on side 3   of stiffener nr 10    on stiffener plate position 4
+           a=(-625, 1800)    p1=(-651, 1904)    p2=(-651, 1904)    b=(-675, 2000)t=10.0length_tot=206
+           sigma_a_red=140.82   sigma_b_red=170.43
+   stiffener plate on side 3   of stiffener nr 11    on stiffener plate position 2
+           a=(675, 2000)    p1=(651, 1904)    p2=(651, 1904)    b=(625, 1800)t=10.0length_tot=206
+           sigma_a_red=170.43   sigma_b_red=140.82
+   stiffener plate on side 3   of stiffener nr 11    on stiffener plate position 3
+           a=(625, 1800)    p1=(525, 1800)    p2=(525, 1800)    b=(425, 1800)t=10.0length_tot=200
+           sigma_a_red=140.82   sigma_b_red=140.82
+   stiffener plate on side 3   of stiffener nr 11    on stiffener plate position 4
+           a=(425, 1800)    p1=(398, 1904)    p2=(398, 1904)    b=(375, 2000)t=10.0length_tot=206
+           sigma_a_red=140.82   sigma_b_red=170.43
+   stiffener plate on side 4   of stiffener nr 12    on stiffener plate position 2
+           a=(1711, 1154)    p1=(1608, 1154)    p2=(1608, 1154)    b=(1505, 1154)t=10.0length_tot=206
+           sigma_a_red=45.26   sigma_b_red=45.26
+   stiffener plate on side 4   of stiffener nr 12    on stiffener plate position 3
+           a=(1505, 1154)    p1=(1478, 1260)    p2=(1478, 1260)    b=(1456, 1348)t=10.0length_tot=200
+           sigma_a_red=45.26   sigma_b_red=73.98
+   stiffener plate on side 4   of stiffener nr 12    on stiffener plate position 4
+           a=(1456, 1348)    p1=(1551, 1398)    p2=(1551, 1398)    b=(1638, 1445)t=10.0length_tot=206
+           sigma_a_red=73.98   sigma_b_red=88.34
+
+moment of inertia including all reductions: 54037465137.15008

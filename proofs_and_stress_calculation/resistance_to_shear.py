@@ -198,8 +198,9 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         V_Rd = chi_w*f_y*h_w*t/(math.sqrt(3)*gamma_M1)
 
     eta_3 = V_Ed_plate / V_Rd
-
-    string = "\n      eta_3: "+str(eta_3)
+    string = "\n      V_Ed_plate: "+str(math.floor(V_Ed_plate*100)/100)
+    string += "\n      V_Rd: "+str(math.floor(V_Rd*100)/100)
+    string += "\n      eta_3: "+str(eta_3)
     printing.printing(string, terminal = True)
 
     return eta_3
