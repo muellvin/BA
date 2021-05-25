@@ -23,9 +23,20 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
     a = data.input_data.get("a")
 
     #import important geometry parameters
+    #calculate lambda_w_bar for subpanels
     h_w = 0
+    lambda_w_bar_3 = 0
     for plate in plate_glob.lines:
         if plate.code.pl_type == 0:
+            k_tau_loc = 0
+            h_w_i = plate.get_length_tot()
+            if a / h_w_i >= 1:
+                k_tau_loc = 5.34 + 4*(h_w_i/a)**2
+            else:
+                k_tau_loc = 4.0 + 5.34 * (h_w_i/a)**2
+            lambda_w_bar_loc = h_w_i / (37.4*plate.t*math.sqrt(235/f_y)*math.sqrt(k_tau_loc))
+            if lambda_w_bar_loc > lambda_w_bar_3:
+                lambda_w_bar_3 = lambda_w_bar_loc
             h_w += plate.get_length_tot()
     t = plate_glob.get_line(pl_type = 0).t
 
@@ -160,6 +171,7 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         lambda_w_bar_1 = 0.76 * math.sqrt(f_y / tau_cr) # formula 5.3
         lambda_w_bar_2 = h_w /(37.4*t*math.sqrt(235/f_y)*math.sqrt(k_tau)) #formula 5.6
         lambda_w_bar = min(lambda_w_bar_1, lambda_w_bar_2)
+        lambda_w_bal = max(lambda_w_bar, lambda_w_bar_3)
 
         assert lambda_w_bar > 0, "Strange value for lambda_w_bar"
         #assume a deformable support stiffener
