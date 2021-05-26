@@ -102,8 +102,8 @@ area red: 191555.9088395257
 Resistance to shear and interaction shear force and bending moment for side 1
 azero: 7000000.0
 tau_int_t_flange: -142857.15
-tau_int_qy_flange: 527766.69
-tau_int_flange: 670623.83
+tau_int_qy_flange: 263883.34
+tau_int_flange: 406740.48
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 1: 0.19
          lambda_w_bar_loc of the trapezoid line nr. 2: 0.19
@@ -123,10 +123,10 @@ tau_int_flange: 670623.83
          lambda_w_bar_loc of the trapezoid line nr. 16: 0.19
          lambda_w_bar_loc of the trapezoid line nr. 17: 0.19
       stiffened plate; EBPlate
-      k_tau: 1570.9499665031585
-      V_Ed_plate: 670623.83
+      k_tau: 1571.0933364601442
+      V_Ed_plate: 406740.48
       V_Rd: 7236123.37
-      eta_3: 0.0926772250296691
+      eta_3: 0.05620972274034107
    7.1 Interaction between shear force, bending moment and axial force
    Flange -> (7.1), comment (5)
       eta_3 <= 0.5; no interaction needed
@@ -137,72 +137,72 @@ azero: 7000000.0
          lambda_w_bar_loc of the trapezoid line nr. 1: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 76718.07
+      V_Ed_plate: 66841.19
       V_Rd: 425654.31
-      eta_3: 0.18023564303915987
+      eta_3: 0.15703164083436558
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 2: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 68178.73
+      V_Ed_plate: 59536.46
       V_Rd: 425654.31
-      eta_3: 0.16017396521564153
+      eta_3: 0.13987046328644648
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 3: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 59639.39
+      V_Ed_plate: 52231.73
       V_Rd: 425654.31
-      eta_3: 0.14011228739212317
+      eta_3: 0.12270928573852742
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 4: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 51100.06
+      V_Ed_plate: 44927.0
       V_Rd: 425654.31
-      eta_3: 0.12005060956860485
+      eta_3: 0.10554810819060838
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 5: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 42560.72
+      V_Ed_plate: 37622.27
       V_Rd: 425654.31
-      eta_3: 0.09998893174508648
+      eta_3: 0.0883869306426893
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 6: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 34021.38
+      V_Ed_plate: 30317.54
       V_Rd: 425654.31
-      eta_3: 0.07992725392156813
+      eta_3: 0.07122575309477024
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 7: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 25482.04
+      V_Ed_plate: 23012.81
       V_Rd: 425654.31
-      eta_3: 0.059865576098049766
+      eta_3: 0.05406457554685117
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 8: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 16942.7
+      V_Ed_plate: 15708.09
       V_Rd: 425654.31
-      eta_3: 0.0398038982745314
+      eta_3: 0.03690339799893212
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
@@ -211,79 +211,79 @@ azero: 7000000.0
       k_tau: 5.353840830449827
       V_Ed_plate: 8403.36
       V_Rd: 425654.31
-      eta_3: 0.019742220451013055
+      eta_3: 0.01974222045101305
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 10: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 16942.7
+      V_Ed_plate: 15708.09
       V_Rd: 425654.31
-      eta_3: 0.03980389827453138
+      eta_3: 0.03690339799893209
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 11: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 25482.04
+      V_Ed_plate: 23012.81
       V_Rd: 425654.31
-      eta_3: 0.05986557609804973
+      eta_3: 0.05406457554685115
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 12: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 34021.38
+      V_Ed_plate: 30317.54
       V_Rd: 425654.31
-      eta_3: 0.07992725392156808
+      eta_3: 0.07122575309477021
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 13: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 42560.72
+      V_Ed_plate: 37622.27
       V_Rd: 425654.31
-      eta_3: 0.09998893174508645
+      eta_3: 0.08838693064268928
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 14: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 51100.06
+      V_Ed_plate: 44927.0
       V_Rd: 425654.31
-      eta_3: 0.12005060956860485
+      eta_3: 0.10554810819060838
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 15: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 59639.39
+      V_Ed_plate: 52231.73
       V_Rd: 425654.31
-      eta_3: 0.14011228739212322
+      eta_3: 0.12270928573852743
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 16: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 68178.73
+      V_Ed_plate: 59536.46
       V_Rd: 425654.31
-      eta_3: 0.16017396521564153
+      eta_3: 0.13987046328644648
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 17: 0.19
       unstiffened plate; (A.5)
       k_tau: 5.353840830449827
-      V_Ed_plate: 76718.07
+      V_Ed_plate: 66841.19
       V_Rd: 425654.31
-      eta_3: 0.18023564303915993
+      eta_3: 0.15703164083436558
       eta_3_panel < 1: pass subpanel
 
 Resistance to shear and interaction shear force and bending moment for side 2
@@ -312,8 +312,8 @@ azero: 7000000.0
 Resistance to shear and interaction shear force and bending moment for side 3
 azero: 7000000.0
 tau_int_t_flange: -107142.86
-tau_int_qy_flange: 359816.53
-tau_int_flange: 466959.39
+tau_int_qy_flange: 179908.26
+tau_int_flange: 287051.12
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 21: 0.93
          lambda_w_bar_loc of the trapezoid line nr. 22: 0.34
@@ -321,10 +321,10 @@ tau_int_flange: 466959.39
          lambda_w_bar_loc of the trapezoid line nr. 24: 0.34
          lambda_w_bar_loc of the trapezoid line nr. 25: 0.93
       stiffened plate; EBPlate
-      k_tau: 94.91023449900364
-      V_Ed_plate: 466959.39
+      k_tau: 94.91043337562631
+      V_Ed_plate: 287051.12
       V_Rd: 3876494.66
-      eta_3: 0.12045918702302343
+      eta_3: 0.07404914782722083
    7.1 Interaction between shear force, bending moment and axial force
    Flange -> (7.1), comment (5)
       eta_3 <= 0.5; no interaction needed
@@ -339,18 +339,18 @@ azero: 7000000.0
          (5.6) lambda_w_bar_2= 0.93
          (5.7) lambda_w_bar_3= 0.93 max single plate slenderness
          chosen lambda_w_bar= 0.93
-      V_Ed_plate: 202498.84
+      V_Ed_plate: 172941.13
       V_Rd: 941563.44
-      eta_3: 0.21506659845051138
+      eta_3: 0.18367443224609442
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 22: 0.34
       unstiffened plate; (A.5)
       k_tau: 5.3625
-      V_Ed_plate: 41090.25
+      V_Ed_plate: 35901.44
       V_Rd: 387649.46
-      eta_3: 0.10599849175720635
+      eta_3: 0.09261316350554184
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
@@ -361,18 +361,18 @@ azero: 7000000.0
          (5.6) lambda_w_bar_2= 0.85
          (5.7) lambda_w_bar_3= 0.85 max single plate slenderness
          chosen lambda_w_bar= 0.85
-      V_Ed_plate: 53907.11
+      V_Ed_plate: 49274.24
       V_Rd: 939036.93
-      eta_3: 0.05740681421411562
+      eta_3: 0.0524731734960991
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 24: 0.34
       unstiffened plate; (A.5)
       k_tau: 5.3625
-      V_Ed_plate: 41090.25
+      V_Ed_plate: 35901.44
       V_Rd: 387649.46
-      eta_3: 0.10599849175720635
+      eta_3: 0.09261316350554184
       eta_3_panel < 1: pass subpanel
 azero: 7000000.0
    5. Resistance to shear
@@ -383,9 +383,9 @@ azero: 7000000.0
          (5.6) lambda_w_bar_2= 0.93
          (5.7) lambda_w_bar_3= 0.93 max single plate slenderness
          chosen lambda_w_bar= 0.93
-      V_Ed_plate: 202498.84
+      V_Ed_plate: 172941.13
       V_Rd: 941563.44
-      eta_3: 0.21506659845051138
+      eta_3: 0.18367443224609442
       eta_3_panel < 1: pass subpanel
 
 Resistance to shear and interaction shear force and bending moment for side 4
