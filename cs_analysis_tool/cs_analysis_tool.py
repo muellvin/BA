@@ -44,6 +44,7 @@ def cs_analysis_gui():
     cs = merge.merge(cs, stiffener_list)
 
     string = "\nmoment of inertia gross without shear lag: "+str(cs.get_i_along_tot(cs.get_line(pl_position = 1, pl_type = 0), stress = False))
+    string += "\narea gross: "+str(cs.get_area_tot())
     printing.printing(string, terminal = True)
 
     #proof block
@@ -54,6 +55,7 @@ def cs_analysis_gui():
     string = "\nmoment of inertia including all reductions: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
     printing.printing(string, terminal = True)
 
+    printing.printing(cs.print_centers(), terminal = True)
 
 
 

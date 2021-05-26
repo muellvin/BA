@@ -37,6 +37,7 @@ def buckling_proof(cs):
         string = "\nmoment of inertia gross with shear lag: "+ str(cs.get_i_along_tot(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
         string += "\nmoment of inertia eff without shear lag: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = False))
         string += "\nmoment of inertia eff with shear lag: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
+        string += "\narea red: "+str(cs.get_area_red())
         printing.printing(string, terminal = True)
 
         #4.5 stiffened plate elements with longitudinal stiffeners

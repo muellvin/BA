@@ -1,5 +1,8 @@
 #file with functions to calculate stresses
 import math
+import sys
+sys.path.insert(0, './user_interface')
+from output import printing
 
 """Calculate normal stresses for gross cross sections"""
 
@@ -118,9 +121,9 @@ def get_tau_int_qy(cs, side, v_ed):
             tau_int = (-1)*v_ed / (2* math.cos(math.atan(sideplate_slope)))
     return tau_int
 
-#shear stresses positive in counterclokwise direction
+#shear stresses positive in clokwise direction
 def get_tau_int_t(cs, side, t_ed):
-    stress = True
+    stress = False
     azero = cs.get_azero(stress)
     length = 0
     for plate in cs.lines:
@@ -132,9 +135,9 @@ def get_tau_int_t(cs, side, t_ed):
     return tau_int
 
 def get_tau_int_flange(cs, side, v_ed, t_ed):
-    stress = True
+    stress = False
     area = 0
-    t = cs.get_line(pl_position = side, pl_type = 0).t_stress
+    t = cs.get_line(pl_position = side, pl_type = 0).t
     for plate in cs.lines:
         if plate.code.pl_type == 0 and plate.code.pl_position == side:
             area += plate.get_area_tot()
@@ -150,10 +153,15 @@ def get_tau_int_flange(cs, side, v_ed, t_ed):
     tau_q_max_abs = abs(v_ed * S_y_corner /(t * cs.get_i_y_tot(stress)))
     tau_int_qy_flange = tau_q_max_abs * area * 0.5
     tau_int_flange = max(abs(tau_int_t_flange+tau_int_qy_flange), abs(tau_int_t_flange-tau_int_qy_flange))
+
+    string = "\ntau_int_t_flange: "+str(math.floor(tau_int_t_flange*100)/100)
+    string +="\ntau_int_qy_flange: "+str(math.floor(tau_int_qy_flange*100)/100)
+    string +="\ntau_int_flange: "+str(math.floor(tau_int_flange*100)/100)
+    printing.printing(string, terminal = True)
     return tau_int_flange
 
 def get_tau_int_subpanel(cs, panel, v_ed, t_ed):
-    stress = True
+    stress = False
     #check if plate is flange plate
     assert panel.code.pl_position == 1 or panel.code.pl_position == 3, "ERROR!!"
     #calculate tau_mean from q
@@ -163,8 +171,8 @@ def get_tau_int_subpanel(cs, panel, v_ed, t_ed):
         x = panel.get_length_tot(stress)/4
     else:
         x = abs(center_of_panel)
-    S_y_panel = x*panel.t_stress*abs(cs.get_center_z_tot(stress)-panel.a.z)
-    tau_q_panel_abs = abs(v_ed * S_y_panel /(panel.t_stress * cs.get_i_y_tot(stress)))
+    S_y_panel = x*panel.t*abs(cs.get_center_z_tot(stress)-panel.a.z)
+    tau_q_panel_abs = abs(v_ed * S_y_panel /(panel.t * cs.get_i_y_tot(stress)))
     tau_int_qy_panel = panel.get_area_tot(stress)*tau_q_panel_abs
 
     #calculate tau_mean from t

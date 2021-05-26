@@ -35,6 +35,12 @@ class crosssection():
         #container for optimization output
         self.st_props = None
 
+    #for control
+    def print_centers(self):
+        line1 = "\ncenter z gross "+str(self.get_center_z_tot())
+        line2 = "\ncenter z reduced "+str(self.get_center_z_red())
+        return line1 + line2
+
     #method that prints the cross section (simple)
     def __str__(self):
         string = "\n cross-section with b_sup=" + str(self.b_sup) + ", b_inf=" + str(self.b_inf) + ", h=" + str(self.h) + "\n"

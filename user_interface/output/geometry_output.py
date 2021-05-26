@@ -58,35 +58,51 @@ def print_cs_red(crosssection):
     plt.axis('scaled')
     plt.show()
 
-#function that prints the effective cross section to png 
+#function that prints the effective cross section to png
 def print_cs_to_png(crosssection, name, input = True, location = None):
+
 
     figure = plt.figure()
 
-    for i in range(len(crosssection.lines)):
-        line = crosssection.lines[i]
-        y = []
-        z = []
+    if input:
+        for i in range(len(crosssection.lines)):
+            line = crosssection.lines[i]
+            y = []
+            z = []
 
-        y.append(-line.a.y)
-        y.append(-line.p1.y)
-        z.append(-line.a.z)
-        z.append(-line.p1.z)
-        y_list = numpy.array(y)
-        z_list = numpy.array(z)
-        plt.plot(y_list, z_list, 'k')
+            y.append(-line.a.y)
+            y.append(-line.b.y)
+            z.append(-line.a.z)
+            z.append(-line.b.z)
+            y_list = numpy.array(y)
+            z_list = numpy.array(z)
+            plt.plot(y_list, z_list, 'k')
+    else:
 
-    for i in range(len(crosssection.lines)):
-        line = crosssection.lines[i]
-        y = []
-        z = []
-        y.append(-line.p2.y)
-        y.append(-line.b.y)
-        z.append(-line.p2.z)
-        z.append(-line.b.z)
-        y_list = numpy.array(y)
-        z_list = numpy.array(z)
-        plt.plot(y_list, z_list, 'k')
+        for i in range(len(crosssection.lines)):
+            line = crosssection.lines[i]
+            y = []
+            z = []
+
+            y.append(-line.a.y)
+            y.append(-line.p1.y)
+            z.append(-line.a.z)
+            z.append(-line.p1.z)
+            y_list = numpy.array(y)
+            z_list = numpy.array(z)
+            plt.plot(y_list, z_list, 'k')
+
+        for i in range(len(crosssection.lines)):
+            line = crosssection.lines[i]
+            y = []
+            z = []
+            y.append(-line.p2.y)
+            y.append(-line.b.y)
+            z.append(-line.p2.z)
+            z.append(-line.b.z)
+            y_list = numpy.array(y)
+            z_list = numpy.array(z)
+            plt.plot(y_list, z_list, 'k')
 
     plt.axis('scaled')
     if location == None:

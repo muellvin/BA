@@ -1,4 +1,5 @@
 import copy
+import math
 import sys
 from data_and_defaults import data
 from data_and_defaults import defaults
@@ -25,8 +26,9 @@ def interaction_web(total_cs, web_plate, eta_3):
         #what is a reasonable return value, -1?
         utilisation = -1
         line1 = "\n      eta_3 <= 0.5; no interaction needed"
-        line2 = "\n      utilisation: -1"
-        string = line1 + line2
+        line2 = "\n      m_f_rd: "+str(math.floor(100*m_f_rd)/100)
+        line3 = "\n      utilisation: -1"
+        string = line1 + line2 + line3
         printing.printing(string, terminal = True)
 
         return utilisation
@@ -37,8 +39,11 @@ def interaction_web(total_cs, web_plate, eta_3):
         m_pl_rd = get_m_rd_pl_eff(plastic_cs)
         eta_1 = abs(m_ed) / m_pl_rd
         utilisation = eta_1 + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
-        line2 = "\n      utilisation: "+str(utilisation)
-        string = line1 + line2
+        line2 = "\n      m_f_rd: "+str(math.floor(100*m_f_rd)/100)
+        line3 = "\n      m_pl_rd: "+str(math.floor(100*m_pl_rd)/100)
+        line4 = "\n      eta_1: "+str(math.floor(100*eta_1)/100)
+        line5 = "\n      utilisation: "+str(utilisation)
+        string = line1 + line2 + line3 + line4 + line5
         printing.printing(string, terminal = True)
         return utilisation
 
