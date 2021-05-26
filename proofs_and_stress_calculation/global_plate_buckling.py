@@ -45,8 +45,8 @@ def global_plate_buckling(total_cs, plate_glob):
     assert plate_a != None and plate_b != None, "For-Loop failed."
 
     ### Get Stresses ###
-    sigma_a = stress_cal.get_sigma_a(total_cs, plate_a, data.input_data.get("M_Ed"))
-    sigma_b = stress_cal.get_sigma_b(total_cs, plate_b, data.input_data.get("M_Ed"))
+    sigma_a = stress_cal.get_sigma_a_red(total_cs, plate_a, data.input_data.get("M_Ed"))
+    sigma_b = stress_cal.get_sigma_b_red(total_cs, plate_b, data.input_data.get("M_Ed"))
     if abs(sigma_a) <= 0.1:
         sigma_a = sigma_a/abs(sigma_a)*0.1
     if abs(sigma_b) <= 0.1:
