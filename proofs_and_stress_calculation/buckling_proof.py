@@ -27,28 +27,35 @@ def buckling_proof(cs):
             cs = shear_lag.shear_lag(cs)
 
 
+        if data.input_data.get("M_Ed") == 0:
+            string = "\n\n4.6 Verification"
+            printint.printing(string, terminal = True)
+            cs.eta_1 = 0
+            string = "\n         eta_1 = " + str(0)
+            printing.printing(string, terminal = True)
+        else:
+            #4.4 plate elements without longitudinal stiffeners
+            string = "\n\n4.4 Plate elements without longitudinal stiffeners"
+            printing.printing(string, terminal = True)
+            cs = local_buckling.local_buckling(cs)
 
-        #4.4 plate elements without longitudinal stiffeners
-        string = "\n\n4.4 Plate elements without longitudinal stiffeners"
-        printing.printing(string, terminal = True)
-        cs = local_buckling.local_buckling(cs)
+            #for verification
+            string = "\nmoment of inertia gross with shear lag: "+ str(cs.get_i_along_tot(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
+            string += "\nmoment of inertia eff without shear lag: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = False))
+            string += "\nmoment of inertia eff with shear lag: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
+            string += "\narea red: "+str(cs.get_area_red())
+            printing.printing(string, terminal = True)
 
-        #for verification
-        string = "\nmoment of inertia gross with shear lag: "+ str(cs.get_i_along_tot(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
-        string += "\nmoment of inertia eff without shear lag: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = False))
-        string += "\nmoment of inertia eff with shear lag: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
-        string += "\narea red: "+str(cs.get_area_red())
-        printing.printing(string, terminal = True)
+            #4.5 stiffened plate elements with longitudinal stiffeners
+            string = "\n\n4.5 Stiffened plate elements with longitudinal stiffeners"
+            printing.printing(string, terminal = True)
+            cs = global_buckling.global_buckling(cs)
 
-        #4.5 stiffened plate elements with longitudinal stiffeners
-        string = "\n\n4.5 Stiffened plate elements with longitudinal stiffeners"
-        printing.printing(string, terminal = True)
-        cs = global_buckling.global_buckling(cs)
-
-        #4.6 verification
-        string = "\n\n4.6 Verification"
-        m_rd_eff = cs.get_m_rd_el_eff()
-        cs.eta_1 = abs(data.input_data.get("M_Ed")/m_rd_eff)
+            #4.6 verification
+            string = "\n\n4.6 Verification"
+            printint.printing(string, terminal = True)
+            m_rd_eff = cs.get_m_rd_el_eff()
+            cs.eta_1 = abs(data.input_data.get("M_Ed")/m_rd_eff)
 
         for side in range(1,5,1):
             line1 = "\n\nResistance to shear and interaction shear force and bending moment for side "+str(side)
@@ -122,20 +129,28 @@ def buckling_proof(cs):
                     rho_c_b = 1
                 cs = shear_lag.shear_lag(cs)
 
-            #4.4 plate elements without longitudinal stiffeners
-            string = "\n\n4.4 Plate elements without longitudinal stiffeners"
-            printing.printing(string, terminal = True)
-            cs = local_buckling.local_buckling(cs)
+            if data.input_data.get("M_Ed") == 0:
+                string = "\n\n4.6 Verification"
+                printint.printing(string, terminal = True)
+                cs.eta_1 = 0
+                string = "\n         eta_1 = " + str(0)
+                printing.printing(string, terminal = True)
+            else:
+                #4.4 plate elements without longitudinal stiffeners
+                string = "\n\n4.4 Plate elements without longitudinal stiffeners"
+                printing.printing(string, terminal = True)
+                cs = local_buckling.local_buckling(cs)
 
-            #4.5 stiffened plate elements with longitudinal stiffeners
-            string = "\n\n4.5 Stiffened plate elements with longitudinal stiffeners"
-            printing.printing(string, terminal = True)
-            cs = global_buckling.global_buckling(cs)
+                #4.5 stiffened plate elements with longitudinal stiffeners
+                string = "\n\n4.5 Stiffened plate elements with longitudinal stiffeners"
+                printing.printing(string, terminal = True)
+                cs = global_buckling.global_buckling(cs)
 
-            #4.6 verification
-            string = "\n\n4.6 Verification"
-            m_rd_eff = cs.get_m_rd_el_eff()
-            cs.eta_1 = abs(data.input_data.get("M_Ed")/m_rd_eff)
+                #4.6 verification
+                string = "\n\n4.6 Verification"
+                printint.printing(string, terminal = True)
+                m_rd_eff = cs.get_m_rd_el_eff()
+                cs.eta_1 = abs(data.input_data.get("M_Ed")/m_rd_eff)
 
             for side in range(1,5,1):
                 line1 = "\n\nResistance to shear and interaction shear force and bending moment for side "+str(side)

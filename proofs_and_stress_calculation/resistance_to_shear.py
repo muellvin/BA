@@ -150,7 +150,7 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
             line2 = "\n      plate too thin; eta_3: "+ str(eta_3)
             return eta_3
         else:
-            eta_3 = 1
+            eta_3 = -1
             line2 = "\n      tau too small; eta_3: "+ str(1)
             return eta_3
         string = line1 + line2
