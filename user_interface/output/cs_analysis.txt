@@ -102,8 +102,8 @@ area red: 191555.9088395257
 Resistance to shear and interaction shear force and bending moment for side 1
 azero: 7000000.0
 tau_int_t_flange: -142857.15
-tau_int_qy_flange: 1681053.08
-tau_int_flange: 1823910.23
+tau_int_qy_flange: 527766.69
+tau_int_flange: 670623.83
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 1: 0.19
          lambda_w_bar_loc of the trapezoid line nr. 2: 0.19
@@ -123,10 +123,10 @@ tau_int_flange: 1823910.23
          lambda_w_bar_loc of the trapezoid line nr. 16: 0.19
          lambda_w_bar_loc of the trapezoid line nr. 17: 0.19
       stiffened plate; EBPlate
-      k_tau: 1571.0214527033984
-      V_Ed_plate: 1823910.23
+      k_tau: 1570.9499665031585
+      V_Ed_plate: 670623.83
       V_Rd: 7236123.37
-      eta_3: 0.2520562649694935
+      eta_3: 0.0926772250296691
    7.1 Interaction between shear force, bending moment and axial force
    Flange -> (7.1), comment (5)
       eta_3 <= 0.5; no interaction needed
@@ -312,8 +312,8 @@ azero: 7000000.0
 Resistance to shear and interaction shear force and bending moment for side 3
 azero: 7000000.0
 tau_int_t_flange: -107142.86
-tau_int_qy_flange: 815520.18
-tau_int_flange: 922663.04
+tau_int_qy_flange: 359816.53
+tau_int_flange: 466959.39
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 21: 0.93
          lambda_w_bar_loc of the trapezoid line nr. 22: 0.34
@@ -321,10 +321,10 @@ tau_int_flange: 922663.04
          lambda_w_bar_loc of the trapezoid line nr. 24: 0.34
          lambda_w_bar_loc of the trapezoid line nr. 25: 0.93
       stiffened plate; EBPlate
-      k_tau: 94.9099765605423
-      V_Ed_plate: 922663.04
+      k_tau: 94.91023449900364
+      V_Ed_plate: 466959.39
       V_Rd: 3876494.66
-      eta_3: 0.2380147842957036
+      eta_3: 0.12045918702302343
    7.1 Interaction between shear force, bending moment and axial force
    Flange -> (7.1), comment (5)
       eta_3 <= 0.5; no interaction needed

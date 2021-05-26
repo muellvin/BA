@@ -162,27 +162,26 @@ def get_tau_int_flange(cs, side, v_ed, t_ed):
     return tau_int_flange
 
 def get_tau_int_subpanel(cs, panel, v_ed, t_ed):
-    stress = False
     #check if plate is flange plate
     assert panel.code.pl_position == 1 or panel.code.pl_position == 3, "ERROR!!"
     #calculate tau_mean from q
-    center_of_panel = panel.get_center_y_tot(stress)
+    center_of_panel = panel.get_center_y_tot(stress = True)
     if center_of_panel == 0:
         #plate where tau changes sign
-        x = panel.get_length_tot(stress)/4
+        x = panel.get_length_tot(stress = True)/4
     else:
         x = abs(center_of_panel)
-    S_y_panel = x*panel.t*abs(cs.get_center_z_tot(stress)-panel.a.z)
-    tau_q_panel_abs = abs(v_ed * S_y_panel /(panel.t * cs.get_i_y_tot(stress)))
-    tau_int_qy_panel = panel.get_area_tot(stress)*tau_q_panel_abs
+    S_y_panel = x*panel.t_stress*abs(cs.get_center_z_tot(stress = True)-panel.a.z)
+    tau_q_panel_abs = abs(v_ed * S_y_panel /(panel.t_stress * cs.get_i_y_tot(stress = True)))
+    tau_int_qy_panel = panel.get_area_tot(stress = True)*tau_q_panel_abs
 
     #calculate tau_mean from t
     side = panel.code.pl_position
     tau_int_t_flange = get_tau_int_t(cs, side, t_ed)
     tau_int_t_panel = 0
     if panel.code.pl_position == 1:
-        tau_int_t_panel = panel.get_length_tot(stress)/cs.b_sup*tau_int_t_flange
+        tau_int_t_panel = panel.get_length_tot(stress = False)/cs.b_sup*tau_int_t_flange
     else:
-        tau_int_t_panel = panel.get_length_tot(stress)/cs.b_inf*tau_int_t_flange
+        tau_int_t_panel = panel.get_length_tot(stress = False)/cs.b_inf*tau_int_t_flange
     tau_int_panel = max(abs(tau_int_t_panel+tau_int_qy_panel), abs(tau_int_t_panel-tau_int_qy_panel))
     return tau_int_panel
