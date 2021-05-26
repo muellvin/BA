@@ -52,7 +52,7 @@ def get_best_spec_ei():
         return best_cs
     else:
         for cs_fromall in data.cs_collection:
-            if abs(cs_from_all.ei / defaults.input_data.get("ei") - 1) < 0.05:
+            if abs(cs_from_all.ei / data.input_data.get("ei") - 1) < 0.05:
                 add = False
                 if best_cs == []:
                     add = True

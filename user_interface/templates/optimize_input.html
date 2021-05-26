@@ -24,23 +24,23 @@
     <table>
       <tr>
         <td><label for="b_sup">b<sub>sup</sub> [mm]</label></td>
-        <td><input type="number" name="b_sup" value = {{ content["b_sup"] }} form="input_opt" required></td>
+        <td><input type="number" name="b_sup" value = {{ content["b_sup"] }} form="input_opt" min = "600", max="10000" required onchange="sup_inf(this.value)"></td>
       </tr>
       <tr>
         <td><label for="b_inf">b<sub>inf</sub> [mm]</label></td>
-        <td><input type="number" name="b_inf" value = {{ content["b_inf"] }} form="input_opt" required></td>
+        <td><input type="number" name="b_inf" id="b_inf" value = {{ content["b_inf"] }} form="input_opt" min = "600", max={{ content["b_sup"] }} required></td>
       </tr>
       <tr>
         <td><label for="h">h [mm]</label></td>
-        <td><input type="number" name="h" value =  {{ content["h"] }}  form="input_opt" required></td>
+        <td><input type="number" name="h" value =  {{ content["h"] }}  form="input_opt" min = "600", max="5000" required></td>
       </tr>
       <tr>
         <td><label for="a">a</sub> [mm]</label></td>
-        <td><input type="number" name="a" value =  {{ content["a"] }}  form="input_opt" required></td>
+        <td><input type="number" name="a" value =  {{ content["a"] }}  form="input_opt" min = "2000", max="4500" required></td>
       </tr>
       <tr>
         <td><label for="L_e">L<sub>e</sub> [mm]</label></td>
-        <td><input type="number" name="L_e" value =  {{ content["L_e"] }}  form="input_opt" required></td>
+        <td><input type="number" name="L_e" value =  {{ content["L_e"] }}  form="input_opt" min = "2000" max = "70000" required></td>
       </tr>
       <tr>
         <td><input type="submit" name="Draw" value="Draw" form="input_opt" formaction = "optimize_step_1"></td>
@@ -51,6 +51,12 @@
   <div class="main">
     {{ image | safe}}
   </div>
+  <script>
+    function sup_inf(val){
+      b_inf = document.getElementById("b_inf")
+      b_inf.setAttribute("max", val)
+    }
+  </script>
 </div>
 </body>
 </html>

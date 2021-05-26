@@ -26,33 +26,39 @@
     <table>
       <tr>
         <td><label for="b_sup">b<sub>sup</sub> [mm]</label></td>
-        <td><input type="number" name="b_sup" value = {{ content["b_sup"] }} form="step_1" required></td>
+        <td><input type="number" name="b_sup" min = "600", max="10000" value = {{ content["b_sup"] }} form="step_1" onchange="sup_inf(this.value)"required></td>
       </tr>
       <tr>
         <td><label for="b_inf">b<sub>inf</sub> [mm]</label></td>
-        <td><input type="number" name="b_inf" value = {{ content["b_inf"] }} form="step_1"required></td>
+        <td><input type="number" name="b_inf" id ="b_inf" value = {{ content["b_inf"] }} form="step_1" min = "600", max={{ content["b_sup"] }} required></td>
       </tr>
       <tr>
         <td><label for="h">h [mm]</label></td>
-        <td><input type="number" name="h" value =  {{ content["h"] }}  form="step_1" required></td>
+        <td><input type="number" name="h" value =  {{ content["h"] }}  form="step_1" min = "600", max="5000" required></td>
       </tr>
       <tr>
         <td><label for="t_side">t<sub>side</sub> [mm]</label></td>
-        <td><input type="number" name="t_side" min="4" value =  {{ content["t_side"] }}  form="step_1" required></td>
+        <td><input type="number" name="t_side" value =  {{ content["t_side"] }}  form="step_1" min="4" max ="40" required></td>
       </tr>
       <tr>
         <td><label for="t_btm">t<sub>bottom</sub> [mm]</label></td>
-        <td><input type="number" name="t_btm" min="4" value =  {{ content["t_btm"] }}  form="step_1" required></td>
+        <td><input type="number" name="t_btm" value =  {{ content["t_btm"] }}  form="step_1" min="4" max ="40" required></td>
       </tr>
       <tr>
         <td><label for="a">a</sub> [mm]</label></td>
-        <td><input type="number" name="a" value =  {{ content["a"] }}  form="step_1" required></td>
+        <td><input type="number" name="a" value =  {{ content["a"] }}  form="step_1" min = "2000", max="4500" required></td>
       </tr>
       <tr>
         <td><label for="L_e">L<sub>e</sub> [mm]</label></td>
-        <td><input type="number" name="L_e" value =  {{ content["L_e"] }}  form="step_1" required></td>
+        <td><input type="number" name="L_e" value =  {{ content["L_e"] }}  form="step_1" min = "2000" max = "70000" required></td>
       </tr>
     </table>
+    <script>
+      function sup_inf(val){
+        b_inf = document.getElementById("b_inf")
+        b_inf.setAttribute("max", val)
+      }
+    </script>
     <br>
     <div id = "div0">
     </div>
@@ -134,6 +140,14 @@
             box.setAttribute("step", "0.01")
             box.setAttribute("max", "1")
           }
+          if (normal[j] == "t"){
+            box.setAttribute("min", "3")
+            box.setAttribute("max", "20")
+          }
+          if (normal[j] =="b" || normal[j] == "h"){
+            box.setAttribute("min", "50")
+            box.setAttribute("max", "500")
+          }
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i)
           box.setAttribute("form", "step_1")
@@ -194,6 +208,14 @@
             box.setAttribute("min", "0");
             box.setAttribute("step", "0.01");
             box.setAttribute("max", "1");
+          }
+          if (normal[j] == "t"){
+            box.setAttribute("min", "3")
+            box.setAttribute("max", "20")
+          }
+          if (normal[j] =="b" || normal[j] == "h"){
+            box.setAttribute("min", "50")
+            box.setAttribute("max", "500")
           }
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i)
@@ -340,6 +362,14 @@
             box.setAttribute("step", "0.01")
             box.setAttribute("max", "1")
           }
+          if (normal[j] == "t"){
+            box.setAttribute("min", "3")
+            box.setAttribute("max", "20")
+          }
+          if (normal[j] =="b" || normal[j] == "h"){
+            box.setAttribute("min", "50")
+            box.setAttribute("max", "500")
+          }
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i)
           box.setAttribute("form", "step_1")
@@ -416,6 +446,14 @@
             box.setAttribute("min", "0")
             box.setAttribute("step", "0.01")
             box.setAttribute("max", "1")
+          }
+          if (normal[j] == "t"){
+            box.setAttribute("min", "3")
+            box.setAttribute("max", "20")
+          }
+          if (normal[j] =="b" || normal[j] == "h"){
+            box.setAttribute("min", "50")
+            box.setAttribute("max", "500")
           }
           box.setAttribute("name", input_data[j] + i);
           box.setAttribute("id", input_data[j] + i);

@@ -52,6 +52,7 @@ def optimize_input_1():
         val.update({"b_sup":b_sup, "b_inf":b_inf, "h":h, "a":a, "L_e":L_e})
     except KeyError:
         val = form_values.values
+
     first_cs = initial_cs.create_initial_cs(val.get("b_sup"), val.get("b_inf"), val.get("h"), 1,1,1)
     image = cs_to_html.print_cs(first_cs)
     return render_template('optimize_input.html', image = image, content = val)
@@ -92,6 +93,8 @@ def resultpage_optimize():
     data.input_data.update({"welding_cost":welding_cost})
     steel_cost = int(request.form['material_cost'])
     data.input_data.update({"steel_cost":steel_cost})
+    ei = int(request.form['ei'])*10**3
+    data.input_data.update({"ei":ei})
     if optimizer_num == 0:
         opt_equal_pressure.opt_eqpressure()
     else:
@@ -153,10 +156,11 @@ def cs_analysis_input_1():
             cont.update({code[0]:location_st, code[1]:b_sup_st, code[2]:b_inf_st, code[3]:h_st, code[4]:t_st})
     except KeyError:
         cont = form_values.content
+        a = cont.get("a")
     first_cs = initial_cs.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
+    data.input_data.update({"a":a})
     deck_stiffeners = deck.deck(cont.get("b_sup"), False)
     num_top = len(deck_stiffeners)
-    data.input_data.update({"a":a})
     cont.update({"num_top":num_top})
     form_values.stiffeners = []
     form_values.stiffeners += deck_stiffeners
@@ -205,6 +209,7 @@ def cs_analysis_input_2():
         t_st = float(request.form[code[4]])
         cont.update({code[0]:location_st, code[1]:b_sup_st, code[2]:b_inf_st, code[3]:h_st, code[4]:t_st})
     first_cs = initial_cs.create_initial_cs(cont.get("b_sup"), cont.get("b_inf"), cont.get("h"), cont.get("t_side"), cont.get("t_deck"), cont.get("t_btm"))
+    data.input_data.update({"a":cont.get("a")})
     deck_stiffeners = deck.deck(cont.get("b_sup"), False)
     num_top = len(deck_stiffeners)
     cont.update({"num_top":num_top})

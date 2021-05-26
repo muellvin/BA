@@ -53,7 +53,7 @@ def deck(b_deck, as_prop):
     b_inf = best[1]
     h = best[2]
     t = best[3]
-    assert best[4] != 10**8, "You are Stupid."
+    assert best[4] != 10**8, "Value of a too big to find deck stiffeners."
 
     #For the optimizer: return stiffeners as propositions
     if as_prop == True:
@@ -86,7 +86,7 @@ def min_inertial_mom():
     I = 226410 * a**4.4608
     return I
 
-#function that creates deck stiffeners in the local coordinate system of the stiffener 
+#function that creates deck stiffeners in the local coordinate system of the stiffener
 def create_deck_stiffener_local(b_sup, b_inf, h, t, t_deck):
     assert b_sup >= b_inf, "width out of bound or wrong way around"
 
