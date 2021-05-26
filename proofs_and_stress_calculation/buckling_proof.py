@@ -29,7 +29,7 @@ def buckling_proof(cs):
 
         if data.input_data.get("M_Ed") == 0:
             string = "\n\n4.6 Verification"
-            printint.printing(string, terminal = True)
+            printing.printing(string, terminal = True)
             cs.eta_1 = 0
             string = "\n         eta_1 = " + str(0)
             printing.printing(string, terminal = True)
@@ -53,7 +53,7 @@ def buckling_proof(cs):
 
             #4.6 verification
             string = "\n\n4.6 Verification"
-            printint.printing(string, terminal = True)
+            printing.printing(string, terminal = True)
             m_rd_eff = cs.get_m_rd_el_eff()
             cs.eta_1 = abs(data.input_data.get("M_Ed")/m_rd_eff)
 
@@ -131,7 +131,7 @@ def buckling_proof(cs):
 
             if data.input_data.get("M_Ed") == 0:
                 string = "\n\n4.6 Verification"
-                printint.printing(string, terminal = True)
+                printing.printing(string, terminal = True)
                 cs.eta_1 = 0
                 string = "\n         eta_1 = " + str(0)
                 printing.printing(string, terminal = True)
@@ -148,7 +148,7 @@ def buckling_proof(cs):
 
                 #4.6 verification
                 string = "\n\n4.6 Verification"
-                printint.printing(string, terminal = True)
+                printing.printing(string, terminal = True)
                 m_rd_eff = cs.get_m_rd_el_eff()
                 cs.eta_1 = abs(data.input_data.get("M_Ed")/m_rd_eff)
 
