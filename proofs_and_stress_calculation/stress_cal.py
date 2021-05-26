@@ -134,13 +134,14 @@ def get_tau_int_t(cs, side, t_ed):
     tau_int = tau * length
     return tau_int
 
+#for S_y and I_y stress = True, thus area also needs to be with t_stress
+#else total force way too high
 def get_tau_int_flange(cs, side, v_ed, t_ed):
-    stress = False
     area = 0
     t = cs.get_line(pl_position = side, pl_type = 0).t
     for plate in cs.lines:
         if plate.code.pl_type == 0 and plate.code.pl_position == side:
-            area += plate.get_area_tot()
+            area += plate.get_length_tot()*plate.t_stress
     tau_int_t_flange = get_tau_int_t(cs, side, t_ed)
     #calculate exact shear stresses due to shear force
     if side == 1:
