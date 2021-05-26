@@ -24,8 +24,8 @@ area red: 191555.9088395257
 4.5 Stiffened plate elements with longitudinal stiffeners
    Side 2
       4.5.2 Plate type behaviour
-         sigma_cr = 1970.4272484151215
-         Lambda: 0.3422187680746343
+         sigma_cr = 1810.3890028376563
+         Lambda: 0.35702454508416614
          Rho_Global: 1.0
       4.5.3 Column type buckling behaviour
          Column number 9
@@ -46,8 +46,8 @@ area red: 191555.9088395257
            rho_c = 1.0
    Side 3
       4.5.2 Plate type behaviour
-         sigma_cr = 542.2013129095844
-         Lambda: 0.5953854930112594
+         sigma_cr = 542.2082765863094
+         Lambda: 0.5953816696784265
          Rho_Global: 1.0
       4.5.3 Column type buckling behaviour
          Column number 10
@@ -78,8 +78,8 @@ area red: 191555.9088395257
            rho_c = 1.0
    Side 4
       4.5.2 Plate type behaviour
-         sigma_cr = 1970.4272484151215
-         Lambda: 0.3422187680746343
+         sigma_cr = 1810.3890028376563
+         Lambda: 0.35702454508416614
          Rho_Global: 1.0
       4.5.3 Column type buckling behaviour
          Column number 12
@@ -100,9 +100,10 @@ area red: 191555.9088395257
            rho_c = 1.0
 
 Resistance to shear and interaction shear force and bending moment for side 1
+azero: 7000000.0
 tau_int_t_flange: -142857.15
-tau_int_qy_flange: 616967.29
-tau_int_flange: 759824.44
+tau_int_qy_flange: 1681053.08
+tau_int_flange: 1823910.23
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 1: 0.19
          lambda_w_bar_loc of the trapezoid line nr. 2: 0.19
@@ -122,15 +123,16 @@ tau_int_flange: 759824.44
          lambda_w_bar_loc of the trapezoid line nr. 16: 0.19
          lambda_w_bar_loc of the trapezoid line nr. 17: 0.19
       stiffened plate; EBPlate
-      k_tau: 1570.9501463694796
-      V_Ed_plate: 759824.44
+      k_tau: 1571.0214527033984
+      V_Ed_plate: 1823910.23
       V_Rd: 7236123.37
-      eta_3: 0.10500435120096611
+      eta_3: 0.2520562649694935
    7.1 Interaction between shear force, bending moment and axial force
    Flange -> (7.1), comment (5)
       eta_3 <= 0.5; no interaction needed
       utilisation: -1
    Proofing Resistance to shear for each subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 1: 0.19
       unstiffened plate; (A.5)
@@ -139,6 +141,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.18023564303915987
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 2: 0.19
       unstiffened plate; (A.5)
@@ -147,6 +150,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.16017396521564153
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 3: 0.19
       unstiffened plate; (A.5)
@@ -155,6 +159,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.14011228739212317
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 4: 0.19
       unstiffened plate; (A.5)
@@ -163,6 +168,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.12005060956860485
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 5: 0.19
       unstiffened plate; (A.5)
@@ -171,6 +177,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.09998893174508648
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 6: 0.19
       unstiffened plate; (A.5)
@@ -179,6 +186,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.07992725392156813
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 7: 0.19
       unstiffened plate; (A.5)
@@ -187,6 +195,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.059865576098049766
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 8: 0.19
       unstiffened plate; (A.5)
@@ -195,6 +204,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.0398038982745314
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 9: 0.19
       unstiffened plate; (A.5)
@@ -203,6 +213,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.019742220451013055
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 10: 0.19
       unstiffened plate; (A.5)
@@ -211,6 +222,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.03980389827453138
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 11: 0.19
       unstiffened plate; (A.5)
@@ -219,6 +231,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.05986557609804973
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 12: 0.19
       unstiffened plate; (A.5)
@@ -227,6 +240,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.07992725392156808
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 13: 0.19
       unstiffened plate; (A.5)
@@ -235,6 +249,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.09998893174508645
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 14: 0.19
       unstiffened plate; (A.5)
@@ -243,6 +258,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.12005060956860485
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 15: 0.19
       unstiffened plate; (A.5)
@@ -251,6 +267,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.14011228739212322
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 16: 0.19
       unstiffened plate; (A.5)
@@ -259,6 +276,7 @@ tau_int_flange: 759824.44
       V_Rd: 425654.31
       eta_3: 0.16017396521564153
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 17: 0.19
       unstiffened plate; (A.5)
@@ -269,6 +287,7 @@ tau_int_flange: 759824.44
       eta_3_panel < 1: pass subpanel
 
 Resistance to shear and interaction shear force and bending moment for side 2
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 18: 1.33
          lambda_w_bar_loc of the trapezoid line nr. 19: 0.34
@@ -291,9 +310,10 @@ Resistance to shear and interaction shear force and bending moment for side 2
       utilisation: 0.6145459880467096
 
 Resistance to shear and interaction shear force and bending moment for side 3
+azero: 7000000.0
 tau_int_t_flange: -107142.86
-tau_int_qy_flange: 433942.47
-tau_int_flange: 541085.32
+tau_int_qy_flange: 815520.18
+tau_int_flange: 922663.04
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 21: 0.93
          lambda_w_bar_loc of the trapezoid line nr. 22: 0.34
@@ -301,15 +321,16 @@ tau_int_flange: 541085.32
          lambda_w_bar_loc of the trapezoid line nr. 24: 0.34
          lambda_w_bar_loc of the trapezoid line nr. 25: 0.93
       stiffened plate; EBPlate
-      k_tau: 94.91092329112314
-      V_Ed_plate: 541085.32
+      k_tau: 94.9099765605423
+      V_Ed_plate: 922663.04
       V_Rd: 3876494.66
-      eta_3: 0.13958108452540127
+      eta_3: 0.2380147842957036
    7.1 Interaction between shear force, bending moment and axial force
    Flange -> (7.1), comment (5)
       eta_3 <= 0.5; no interaction needed
       utilisation: -1
    Proofing Resistance to shear for each subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 21: 0.93
       unstiffened plate; (A.5)
@@ -322,6 +343,7 @@ tau_int_flange: 541085.32
       V_Rd: 941563.44
       eta_3: 0.21506659845051138
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 22: 0.34
       unstiffened plate; (A.5)
@@ -330,6 +352,7 @@ tau_int_flange: 541085.32
       V_Rd: 387649.46
       eta_3: 0.10599849175720635
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 23: 0.85
       unstiffened plate; (A.5)
@@ -342,6 +365,7 @@ tau_int_flange: 541085.32
       V_Rd: 939036.93
       eta_3: 0.05740681421411562
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 24: 0.34
       unstiffened plate; (A.5)
@@ -350,6 +374,7 @@ tau_int_flange: 541085.32
       V_Rd: 387649.46
       eta_3: 0.10599849175720635
       eta_3_panel < 1: pass subpanel
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 25: 0.93
       unstiffened plate; (A.5)
@@ -364,6 +389,7 @@ tau_int_flange: 541085.32
       eta_3_panel < 1: pass subpanel
 
 Resistance to shear and interaction shear force and bending moment for side 4
+azero: 7000000.0
    5. Resistance to shear
          lambda_w_bar_loc of the trapezoid line nr. 26: 0.65
          lambda_w_bar_loc of the trapezoid line nr. 27: 0.34

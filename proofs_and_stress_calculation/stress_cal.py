@@ -149,8 +149,8 @@ def get_tau_int_flange(cs, side, v_ed, t_ed):
         b = cs.b_inf
     else:
         assert True, "This should never happen!"
-    S_y_corner = b*0.5*t*abs(cs.get_center_z_tot(stress)-cs.get_line(pl_position = side, pl_type = 0).a.z)
-    tau_q_max_abs = abs(v_ed * S_y_corner /(t * cs.get_i_y_tot(stress)))
+    S_y_corner = b*0.5*t*abs(cs.get_center_z_tot(stress = True)-cs.get_line(pl_position = side, pl_type = 0).a.z)
+    tau_q_max_abs = abs(v_ed * S_y_corner /(t * cs.get_i_y_tot(stress = True)))
     tau_int_qy_flange = tau_q_max_abs * area * 0.5
     tau_int_flange = max(abs(tau_int_t_flange+tau_int_qy_flange), abs(tau_int_t_flange-tau_int_qy_flange))
 
