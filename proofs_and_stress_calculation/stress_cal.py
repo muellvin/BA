@@ -180,7 +180,7 @@ def get_tau_int_subpanel(cs, panel, v_ed, t_ed):
     else:
         x = abs(center_of_panel)
     S_y_panel = x*panel.t*abs(cs.get_center_z_tot(stress)-panel.a.z)
-    tau_q_panel_abs = abs(v_ed * S_y_panel /(panel.t * cs.get_i_y_tot(stress)))
+    tau_q_panel_abs = abs(v_ed/2 * S_y_panel /(panel.t * cs.get_i_y_tot(stress)))
     tau_int_qy_panel = panel.get_area_tot(stress)*tau_q_panel_abs
 
     #calculate tau_mean from t
