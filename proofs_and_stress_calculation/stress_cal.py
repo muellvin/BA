@@ -134,29 +134,36 @@ def get_tau_int_t(cs, side, t_ed):
     tau_int = tau * length
     return tau_int
 
-#for S_y and I_y stress = False, come from moment equilibrium
+#for S_y and I_y stress = False; come from moment equilibrium not buckling problem
 def get_tau_int_flange(cs, side, v_ed, t_ed):
     stress = False
     area = 0
     t = cs.get_line(pl_position = side, pl_type = 0).t
     for plate in cs.lines:
         if plate.code.pl_type == 0 and plate.code.pl_position == side:
-            area += plate.get_length_tot()*plate.t
+            area += plate.get_area_tot()
     tau_int_t_flange = get_tau_int_t(cs, side, t_ed)
     #calculate exact shear stresses due to shear force
+    #static moment in corner from middle (one side)
+    #thus also half V_ed taken for stress calculation
     if side == 1:
-        b = cs.b_sup
+        b = cs.b_sup/2
     elif side == 3:
-        b = cs.b_inf
+        b = cs.b_inf/2
     else:
         assert True, "This should never happen!"
-    S_y_corner = 0.5*b*t*abs(cs.get_center_z_tot(stress)-cs.get_line(pl_position = side, pl_type = 0).a.z)
+    S_y_corner = b*t*abs(cs.get_center_z_tot(stress)-cs.get_line(pl_position = side, pl_type = 0).a.z)
     tau_q_max_abs = abs(0.5*v_ed * S_y_corner /(t * cs.get_i_y_tot(stress)))
     tau_int_qy_flange = tau_q_max_abs * area * 0.5
     tau_int_flange = max(abs(tau_int_t_flange+tau_int_qy_flange), abs(tau_int_t_flange-tau_int_qy_flange))
-
-    string = "\ntau_int_t_flange: "+str(math.floor(tau_int_t_flange*100)/100)
+    string ="\nz_s: "+str(cs.get_center_z_tot(stress))
+    string +="\nb: "+str(b)
+    string +="\nt: "+str(t)
+    string +="\nS_y_corner: "+str(math.floor(S_y_corner*100)/100)
+    string +="\nv_ed: "+str(v_ed)
+    string +="\ntau_q_max_abs: "+str(math.floor(tau_q_max_abs*100)/100)
     string +="\ntau_int_qy_flange: "+str(math.floor(tau_int_qy_flange*100)/100)
+    string += "\ntau_int_t_flange: "+str(math.floor(tau_int_t_flange*100)/100)
     string +="\ntau_int_flange: "+str(math.floor(tau_int_flange*100)/100)
     printing.printing(string, terminal = True)
     return tau_int_flange
