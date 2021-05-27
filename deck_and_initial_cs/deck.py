@@ -61,8 +61,8 @@ def deck(b_deck, as_prop):
     assert best[4] != 10**8, "Value of a too big to find deck stiffeners."
 
 
-    string = "\ne: "+str(math.floor(100*b_sup)/100))
-    string += "\nI_y: "+str(math.floor(100*best_i)/100))
+    string = "\ne: "+str(math.floor(100*b_sup)/100)
+    string += "\nI_y: "+str(math.floor(100*best_i)/100)
     printing.printing(string, terminal = True)
 
     #For the optimizer: return stiffeners as propositions
