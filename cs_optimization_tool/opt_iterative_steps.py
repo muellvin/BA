@@ -38,9 +38,7 @@ def optimize():
     num_side_stiffeners = 0
     if num_side_stiffeners <= side_max:
         for t_side in t_range:
-            print("t_side:" + str(t_side))
             for t_bottom in t_range:
-                print("t_bottom:" + str(t_bottom))
                 base_cs = initial_cs.create_initial_cs(b_sup, b_inf, h, t_side, t_deck, t_bottom)
                 for num_btm_stiffeners in range(bottom_max+1):
                     strong_enough = False
@@ -53,6 +51,8 @@ def optimize():
                             counter += 1
                             print("#Side Stiffeners " + str(num_side_stiffeners))
                             print("#Btm Stiffeners " + str(num_btm_stiffeners))
+                            print("t_bottom:" + str(t_bottom))
+                            print("t_side:" + str(t_side))
                             test_cs = copy.deepcopy(base_cs)
                             if test_cs != False:
                                 #proof
