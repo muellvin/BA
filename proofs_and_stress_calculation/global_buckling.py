@@ -14,6 +14,7 @@ from output import printing
 
 #function performing the buckling proof for each plate except the deck plate
 def global_buckling(cs):
+    cs = reduction_global_buckling(cs, 1)
     cs = reduction_global_buckling(cs, 2)
     cs = reduction_global_buckling(cs, 3)
     cs = reduction_global_buckling(cs, 4)

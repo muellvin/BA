@@ -49,7 +49,6 @@ def local_buckling_plate(cs, line_to_do):
             plate = line
 
     only_tension = plate.sigma_a_red < 0 and plate.sigma_b_red < 0
-    deck = plate.code.pl_position == 1
 
     #all plates are supported on both sides (internal compression elements) -> Table 4.1
     #plate buckling coefficient
@@ -71,7 +70,7 @@ def local_buckling_plate(cs, line_to_do):
         #if there is only tension (the only way to have a psi greater than 1) we set psi to 1
         only_tension = True
 
-    if only_tension != True and deck != True:
+    if only_tension != True:
         #EC A.1
         sigma_E_loc = (math.pi**2 * data.constants.get("E") * plate.t**2) / (12 * (1-data.constants.get("nu")**2) * plate.get_length_tot()**2)
         #elastic critical plate buckling stress
