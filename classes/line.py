@@ -232,8 +232,8 @@ class line():
             t_used = self.t_stress
         else:
             t_used = self.t
-        length_red1 = self.rho_c_a * self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used)
-        length_red2 = self.rho_c_b * self.cal_length(self.b.y, self.b.z, self.p2.y, self.p2.z, t_used)
+        length_red1 = self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a * t_used)
+        length_red2 = self.cal_length(self.b.y, self.b.z, self.p2.y, self.p2.z, self.rho_c_b * t_used)
         if length_red1 == 0 and length_red2 == 0:
             return self.cal_center_y(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
             weight_1 = 0
@@ -241,8 +241,8 @@ class line():
         else:
             weight_1 = length_red1/(length_red1+length_red2)
             weight_2 = length_red2 /(length_red1+length_red2)
-            center_y_red1 = self.cal_center_y(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used)
-            center_y_red2 = self.cal_center_y(self.b.y, self.b.z, self.p2.y, self.p2.z, t_used)
+            center_y_red1 = self.cal_center_y(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a * t_used)
+            center_y_red2 = self.cal_center_y(self.b.y, self.b.z, self.p2.y, self.p2.z, self.rho_c_b * t_used)
             center = center_y_red1 * weight_1 + center_y_red2 * weight_2
             return center
     def cal_center_z_red(self, stress = False):
@@ -250,8 +250,8 @@ class line():
             t_used = self.t_stress
         else:
             t_used = self.t
-        length_red1 = self.rho_c_a * self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used)
-        length_red2 = self.rho_c_b * self.cal_length(self.b.y, self.b.z, self.p2.y, self.p2.z, t_used)
+        length_red1 = self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a * t_used)
+        length_red2 = self.cal_length(self.b.y, self.b.z, self.p2.y, self.p2.z, self.rho_c_b * t_used)
         if length_red1 == 0 and length_red2 == 0:
             return self.cal_center_z(self.a.y, self.a.z, self.b.y, self.b.z, self.t)
             weight_1 = 0
@@ -259,8 +259,8 @@ class line():
         else:
             weight_1 = length_red1/(length_red1+length_red2)
             weight_2 = length_red2 /(length_red1+length_red2)
-            center_z_red1 = self.cal_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used)
-            center_z_red2 = self.cal_center_z(self.b.y, self.b.z, self.p2.y, self.p2.z, t_used)
+            center_z_red1 = self.cal_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a * t_used)
+            center_z_red2 = self.cal_center_z(self.b.y, self.b.z, self.p2.y, self.p2.z, self.rho_c_b * t_used)
             center = center_z_red1 * weight_1 + center_z_red2 * weight_2
             return center
     def cal_length_red(self, stress = False):
@@ -268,56 +268,56 @@ class line():
             t_used = self.t_stress
         else:
             t_used = self.t
-        return self.rho_c_a * self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used) + \
-        self.rho_c_b * self.cal_length(self.p2.y, self.p2.z, self.b.y, self.b.z, t_used)
+        return self.cal_length(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a * t_used) + \
+        self.cal_length(self.p2.y, self.p2.z, self.b.y, self.b.z, self.rho_c_b * t_used)
     def cal_area_red(self, stress = False):
         if stress:
             t_used = self.t_stress
         else:
             t_used = self.t
-        return self.rho_c_a * self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used) + \
-        self.rho_c_b * self.cal_area(self.p2.y, self.p2.z, self.b.y, self.b.z, t_used)
+        return self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a * t_used) + \
+        self.cal_area(self.p2.y, self.p2.z, self.b.y, self.b.z, self.rho_c_b * t_used)
     def cal_area_red1(self, stress = False):
         if stress:
             t_used = self.t_stress
         else:
             t_used = self.t
-        return self.rho_c_a * self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used)
+        return self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a * t_used)
     def cal_area_red2(self, stress = False):
         if stress:
             t_used = self.t_stress
         else:
             t_used = self.t
-        return self.rho_c_b * self.cal_area(self.p2.y, self.p2.z, self.b.y, self.b.z, t_used)
+        return self.cal_area(self.p2.y, self.p2.z, self.b.y, self.b.z, self.rho_c_b * t_used)
     def cal_i_along_red(self, stress = False):
         if stress:
             t_used = self.t_stress
         else:
             t_used = self.t
-        return self.cal_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used) + self.cal_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, t_used)
+        return self.cal_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a*t_used) + self.cal_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, self.rho_c_b*t_used)
     def cal_i_along_red1(self, stress = False):
         if stress:
             t_used = self.t_stress
         else:
             t_used = self.t
-        return self.rho_c_a**3 * self.cal_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used)
+        return self.cal_i_along(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a*t_used)
     def cal_i_along_red2(self, stress = False):
         if stress:
             t_used = self.t_stress
         else:
             t_used = self.t
-        return self.rho_c_b**3 * self.cal_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, t_used)
+        return self.cal_i_along(self.b.y, self.b.z, self.p2.y, self.p2.z, self.rho_c_b*t_used)
     def cal_i_perpen_red(self, stress = False):
         if stress:
             t_used = self.t_stress
         else:
             t_used = self.t
-        i_perpen_red1 = self.rho_c_a * self.cal_i_perpen(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used)
-        i_perpen_red2 = self.rho_c_b * self.cal_i_perpen(self.b.y, self.b.z, self.p2.y, self.p2.z, t_used)
-        dis1 = math.sqrt((abs(self.cal_center_y_red()) - abs(self.cal_center_y(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used)))**2 + (abs(self.cal_center_z_red())-abs(self.cal_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used)))**2)
-        dis2 = math.sqrt((abs(self.cal_center_y_red()) - abs(self.cal_center_y(self.b.y, self.b.z, self.p2.y, self.p2.z, t_used)))**2 + (abs(self.cal_center_z_red())-abs(self.cal_center_z(self.b.y, self.b.z, self.p2.y, self.p2.z, t_used)))**2)
-        steiner1 = self.rho_c_a * self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, t_used) * dis1**2
-        steiner2 = self.rho_c_b * self.cal_area(self.b.y, self.b.z, self.p2.y, self.p2.z, t_used) * dis2**2
+        i_perpen_red1 = self.cal_i_perpen(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a * t_used)
+        i_perpen_red2 = self.cal_i_perpen(self.b.y, self.b.z, self.p2.y, self.p2.z, self.rho_c_b * t_used)
+        dis1 = math.sqrt((abs(self.cal_center_y_red()) - abs(self.cal_center_y(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a * t_used)))**2 + (abs(self.cal_center_z_red())-abs(self.cal_center_z(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a * t_used)))**2)
+        dis2 = math.sqrt((abs(self.cal_center_y_red()) - abs(self.cal_center_y(self.b.y, self.b.z, self.p2.y, self.p2.z, self.rho_c_b * t_used)))**2 + (abs(self.cal_center_z_red())-abs(self.cal_center_z(self.b.y, self.b.z, self.p2.y, self.p2.z, self.rho_c_b * t_used)))**2)
+        steiner1 = self.cal_area(self.a.y, self.a.z, self.p1.y, self.p1.z, self.rho_c_a * t_used) * dis1**2
+        steiner2 = self.cal_area(self.b.y, self.b.z, self.p2.y, self.p2.z, self.rho_c_b * t_used) * dis2**2
         i_perpen_red1_withsteiner = i_perpen_red1 + steiner1
         i_perpen_red2_withsteiner = i_perpen_red2 + steiner2
         return i_perpen_red1_withsteiner + i_perpen_red2_withsteiner
