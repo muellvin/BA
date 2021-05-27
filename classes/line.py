@@ -46,9 +46,9 @@ class line():
             line1 = "   stiffener plate on side " + str(self.code.pl_position) + "   of stiffener nr " + str(self.code.st_number) + "    on stiffener plate position " + str(self.code.st_pl_position) + "\n"
         line2 = "           a=" + str(self.a) + "    p1=" + str(self.p1) + "    p2=" + str(self.p2) + "    b=" + str(self.b) + "t=" + str(self.t) + "length_tot="+str(math.floor(self.get_length_tot()))+"\n"
         line3 = "           sigma_a_red=" + str(int(100*self.sigma_a_red)/100) + "   sigma_b_red=" + str(int(100*self.sigma_b_red)/100) + "\n"
-        line3 =  "           rho_c_a=" + str(int(100*self.rho_c_a)/100) + "   rho_c_b=" + str(int(100*self.rho_c_b)/100) + "\n"
+        line4 =  "           rho_c_a=" + str(int(100*self.rho_c_a)/100) + "   rho_c_b=" + str(int(100*self.rho_c_b)/100) + "\n"
 
-        string = line1 + line2 + line3
+        string = line1 + line2 + line3 + line4
         return string
 
 #p1 should be closer to a and p2 closer to b
