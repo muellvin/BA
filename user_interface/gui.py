@@ -93,8 +93,11 @@ def resultpage_optimize():
     data.input_data.update({"welding_cost":welding_cost})
     steel_cost = int(request.form['material_cost'])
     data.input_data.update({"steel_cost":steel_cost})
-    ei = int(request.form['ei'])*10**3
-    data.input_data.update({"ei":ei})
+    try:
+        ei = int(request.form['ei'])*10**3
+        data.input_data.update({"ei":ei})
+    except KeyError:
+        pass 
     if optimizer_num == 0:
         opt_equal_pressure.opt_eqpressure()
     else:
