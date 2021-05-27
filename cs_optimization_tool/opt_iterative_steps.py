@@ -55,6 +55,9 @@ def optimize():
                             print("t_bottom:" + str(t_bottom))
                             print("t_side:" + str(t_side))
                             test_cs = copy.deepcopy(base_cs)
+                            st_prop.stiffeners = st_prop_deck.stiffeners
+                            st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda proposed_stiffener: proposed_stiffener.st_number)
+                            test_cs = add_stiffeners.add_stiffener_set(base_cs, st_prop, "b")
                             if test_cs != False:
                                 #proof
                                 end_cs = buckling_proof.buckling_proof(test_cs)
