@@ -23,7 +23,7 @@ def optimize():
     b_inf = data.input_data["b_inf"]
     h = data.input_data["h"]
     t_deck = data.input_data["t_deck"]
-    t_range = copy.deepcopy(defaults.t_range)
+    t_range = copy.deepcopy(defaults.t_range_opt)
     t_max_min = max(t_range)
     I_range = defaults.I_range
     counter = 1
