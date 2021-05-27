@@ -7,6 +7,8 @@ def into_collector(new_cs):
     optimization_value.set_value(new_cs)
     data.cs_collection.append(new_cs)
 
+def reset():
+    data.cs_collection = []
 
 #function that returns the optimal cross section
 def get_best():

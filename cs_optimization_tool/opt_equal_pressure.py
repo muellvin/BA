@@ -18,6 +18,7 @@ from deck_and_initial_cs import initial_cs
 
 #an optimizer that puts the stiffeners in place, such that the single plates inbetween each have the same total pressure
 def opt_eqpressure():
+    cs_collector.reset()
     b_sup = data.input_data["b_sup"]
     b_inf = data.input_data["b_inf"]
     h = data.input_data["h"]

@@ -19,6 +19,7 @@ from output import printing
 
 #Optimizer Iterative Steps
 def optimize():
+    cs_collector.reset()
     b_sup = data.input_data["b_sup"]
     b_inf = data.input_data["b_inf"]
     h = data.input_data["h"]
