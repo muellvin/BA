@@ -12,7 +12,7 @@ I_range = [10**7]
 #do not set higher than 3
 num_side_stiffeners_max = 0
 #do not set higher than 7
-num_bottom_stiffeners_max = 3
+num_bottom_stiffeners_max = 1
 
 
 """check_geometry defaults"""
