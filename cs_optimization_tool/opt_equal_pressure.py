@@ -22,7 +22,7 @@ def opt_eqpressure():
     b_inf = data.input_data["b_inf"]
     h = data.input_data["h"]
     t_deck = data.input_data["t_deck"]
-    t_values = defaults.t_range
+    t_values = defaults.t_range_opt
     i_along_values = defaults.I_range
     n_st_side_max = defaults.num_side_stiffeners_max
     n_st_bottom_max = defaults.num_bottom_stiffeners_max
