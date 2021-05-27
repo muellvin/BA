@@ -29,7 +29,7 @@ def deck(b_deck, as_prop):
 
     #iterate through all the possible solutions, in order to find viable ones
     for t in t_range:
-        b_sup_theor = min(25*t, 300)
+        b_sup_theor = min(25*t_deck, 300)
         num_of_plates = math.ceil(b_deck / b_sup_theor)
         if num_of_plates % 2 == 0:
             num_of_plates += 1
