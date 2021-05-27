@@ -58,8 +58,8 @@ class crosssection():
         t_sides = self.get_line(pl_position = 2, pl_type = 0).t
         t_bottom = self.get_line(pl_position = 3, pl_type = 0).t
         string += "\n      t_deck: "+str(t_deck)+"   t_sides: "+str(t_sides)+"   t_bottom: "+str(t_bottom)+"\n"
-        self.st_props.stiffeners = sorted(self.st_props.stiffeners, key = lambda st: st.st_number)
         if self.st_props != None:
+            self.st_props.stiffeners = sorted(self.st_props.stiffeners, key = lambda st: st.st_number)
             for st in self.st_props.stiffeners:
                 line1 = "\n Stiffener Number "+str(round(10*st.st_number)/10)+" on side "+str(round(10*st.pl_position)/10)+" with location: "+str(round(10*st.location)/10)
                 line2 = "\n      b_sup: "+str(round(10*st.b_sup)/10)+"   b_inf: "+str(round(10*st.b_inf)/10)+"   h: "+str(round(10*st.h)/10)+"   t: "+str(round(10*st.t)/10)
