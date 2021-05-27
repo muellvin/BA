@@ -7,7 +7,7 @@ t_deck = 14
 
 """optimization defaults"""
 #do not add too many values, otherwise the calculation will take very long
-t_range = [5,10,15]
+t_range = [10,15]
 I_range = [10**6, 10**7]
 #do not set higher than 3
 num_side_stiffeners_max = 2
