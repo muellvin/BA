@@ -98,7 +98,7 @@ def print_best_proof():
         ei = round(cs.get_ei() / 1000 / 1000 / 1000)
         cost = optimization_value.cost(cs)
         line1 = "\n\nResults:"
-        line2 = "\n   EI: "+str(ei)+"Nm^2"
+        line2 = "\n   EI: "+str(ei)+"kNm^2"
         line3 = "\n   interaction side 1: "+str(cs.interaction_1)
         line4 = "\n   interaction side 2: "+str(cs.interaction_2)
         line5 = "\n   interaction side 3: "+str(cs.interaction_3)
@@ -139,7 +139,7 @@ def print_best():
         ei = round(cs.get_ei() / 1000 / 1000 / 1000)
         cost = optimization_value.cost(cs)
         line3 = "\n\nResults:"
-        line4 = "\n   EI: "+str(ei)+"Nm^2"
+        line4 = "\n   EI: "+str(ei)+"kNm^2"
         line5 = "\n   interaction side 1: "+str(cs.interaction_1)
         line6 = "\n   interaction side 2: "+str(cs.interaction_2)
         line7 = "\n   interaction side 3: "+str(cs.interaction_3)
