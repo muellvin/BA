@@ -37,11 +37,14 @@ def interaction_web(total_cs, web_plate, eta_3):
         #interaction required
         plastic_cs = copy.deepcopy(total_cs)
         m_pl_rd = get_m_rd_pl_eff(plastic_cs)
-        eta_1 = abs(m_ed) / m_pl_rd
-        utilisation = eta_1 + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
+        eta_1_bar = abs(m_ed) / m_pl_rd
+        if eta_1_bar >= m_f_rd/m_pl_rd:
+            utilisation = eta_1_bar + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
+        else:
+            utilisation = -1
         line2 = "\n      m_f_rd: "+str(math.floor(100*m_f_rd)/100)
         line3 = "\n      m_pl_rd: "+str(math.floor(100*m_pl_rd)/100)
-        line4 = "\n      eta_1: "+str(math.floor(100*eta_1)/100)
+        line4 = "\n      eta_1_bar: "+str(math.floor(100*eta_1_bar)/100)
         line5 = "\n      utilisation: "+str(utilisation)
         string = line1 + line2 + line3 + line4 + line5
         printing.printing(string, terminal = True)
@@ -69,9 +72,12 @@ def interaction_flange(total_cs, flange_plate, eta_3):
         string = line1 + line2
     else:
         line1 = "\n      eta_3 > 0.5; interaction needed"
-        eta_1 = abs(data.input_data.get("M_Ed") / total_cs.get_m_rd_el_eff())
-        line2 = "\n      eta_1: "+str(eta_1)
-        utilisation = eta_1 + (2*eta_3-1)**2
+        eta_1_bar = abs(data.input_data.get("M_Ed") / total_cs.get_m_rd_el_eff())
+        line2 = "\n      eta_1_bar: "+str(eta_1_bar)
+        if eta_1_bar >= m_f_rd/m_pl_rd:
+            utilisation = eta_1_bar + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
+        else:
+            utilisation = -1
         line3 = "\n      utilisation: "+str(utilisation)
         string = line1 + line2 + line3
     printing.printing(string, terminal = True)
