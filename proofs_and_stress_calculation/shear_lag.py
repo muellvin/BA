@@ -52,34 +52,23 @@ def reduction_shear_lag(cs, flange):
             A_sl += line.get_area_tot()
 
     t_f = t = cs.get_line(pl_position = flange, pl_type = 0).t
-    alpha_0_star = math.sqrt(A_c_eff / (b_0 * t_f))
     alpha_0 = math.sqrt(1 + A_sl / (b_0*t))
 
 
+    kappa = alpha_0 * b_0 / data.input_data.get("L_e")
+    beta = beta_from_kappa(kappa)
+    #follow EC 3.3; ULS
+    #recommended calculation from book design of plated structures (2.8):
+        #also in EC 1993 1-5 3.3 eq 3.5
+        #A_eff = beta**kappa * A_c_eff
+    reduction_factor_shear_lag = beta**kappa
+    reduction_factor_shear_lag = max (beta, reduction_factor_shear_lag)
+    reduction_factor_shear_lag = min(reduction_factor_shear_lag, 1)
 
-    if defaults.do_shear_lag_plastically == True:
-        kappa = alpha_0_star * b_0 / data.input_data.get("L_e")
-
-        beta_ult = beta_from_kappa(kappa)
-        string = "\n      alpha_0_star: "+str(round(10*alpha_0_star)/10)
-        string += "\n      Beta_ult: "+str(beta_ult)
-        printing.printing(string, terminal = True)
-        #follow EC 3.3; plastically
-        #recommended calculation from book design of plated structures (2.8):
-            #also in EC 1993 1-5 3.3 eq 3.5
-            #A_eff = beta**kappa * A_c_eff
-        #here doing 3.3: A_eff = Ac_eff * beta_ult
-        reduction_factor_shear_lag = beta_ult**kappa
-    else:
-        string = "\n      alpha_0: "+str(round(10*alpha_0)/10)
-        kappa = alpha_0 * b_0 / data.input_data.get("L_e")
-
-        beta = beta_from_kappa(kappa)
-
-        string += "\n      Beta: "+str(beta)
-        printing.printing(string, terminal = True)
-        #follow EC 3.2; elastically; conservative, no iterations needed
-        reduction_factor_shear_lag = beta
+    string +="\n      alpha_0: "+str(round(10*alpha_0)/10)
+    string +="\n      Beta**kappa: "+str(beta**kappa)
+    string +="\n      reduction_factor_shear_lag: "+str(reduction_factor_shear_lag)
+    printing.printing(string, terminal = True)
 
 
     #the book recommends to apply this reduction to the thickness of the flange plates

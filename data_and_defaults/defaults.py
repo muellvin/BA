@@ -57,7 +57,6 @@ convergence_limit_local_buckling = 0.02
 convergence_limit_m_rd_pl_eff = 0.05
 
 """do module defaults"""
-do_shear_lag_plastically = False
 do_shear_lag = True
 do_global_plate_buckling = True
 do_column_plate_buckling = True
