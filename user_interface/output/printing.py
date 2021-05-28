@@ -96,17 +96,20 @@ def print_best_proof():
         cs = buckling_proof.buckling_proof(cs)
 
         ei = round(cs.get_ei() / 1000 / 1000 / 1000)
-        interaction_2 = cs.interaction_2
-        interaction_3 = cs.interaction_3
-        interaction_4 = cs.interaction_4
         cost = optimization_value.cost(cs)
         line1 = "\n\nResults:"
         line2 = "\n   EI: "+str(ei)+"Nm^2"
-        line3 = "\n   interaction side 2: "+str(interaction_2)
-        line4 = "\n   interaction side 3: "+str(interaction_3)
-        line5 = "\n   interaction side 4: "+str(interaction_4)
-        line6 = "\n   cost: "+str(cost)+"CHF/m"
-        string = line1 + line2 + line3 + line4 + line5 + line6
+        line3 = "\n   interaction side 1: "+str(cs.interaction_1)
+        line4 = "\n   interaction side 2: "+str(cs.interaction_2)
+        line5 = "\n   interaction side 3: "+str(cs.interaction_3)
+        line6 = "\n   interaction side 4: "+str(cs.interaction_4)
+        line7 = "\n   eta_1: "+str(cs.eta_1)
+        line8 = "\n   eta_3 side 1: "+str(cs.eta_3_side_1)
+        line9 = "\n   eta_3 side 2: "+str(cs.eta_3_side_2)
+        line10 = "\n   eta_3 side 3: "+str(cs.eta_3_side_3)
+        line11 = "\n   eta_3 side 4: "+str(cs.eta_3_side_4)
+        line12 = "\n   cost: "+str(cost)+"CHF/m"
+        string = line1 + line2 + line3 + line4 + line5 + line6 + line7 + line8 + line9 + line10 + line11 + line12
         printing(string, terminal = True)
 
         geometry_output.print_cs_to_png(cs, name, input = False, location = "user_interface/output/best_crosssections/")
@@ -132,13 +135,23 @@ def print_best():
 
         line1 = "\n"+name
         line2 = cs.print_cs_as_list()
+
+        ei = round(cs.get_ei() / 1000 / 1000 / 1000)
+        cost = optimization_value.cost(cs)
         line3 = "\n\nResults:"
-        line4 = "\n   EI: "+str(round(cs.get_ei() / 1000 / 1000 / 1000))+"Nm^2"
-        line5 = "\n   interaction side 2: "+str(cs.interaction_2)
-        line6 = "\n   interaction side 3: "+str(cs.interaction_3)
-        line7 = "\n   interaction side 4: "+str(cs.interaction_4)
-        line8 = "\n   cost: "+str(optimization_value.cost(cs))+"CHF/m"
-        string = line1 + line2 + line3 + line4 + line5 + line6 + line7 + line8
+        line4 = "\n   EI: "+str(ei)+"Nm^2"
+        line5 = "\n   interaction side 1: "+str(cs.interaction_1)
+        line6 = "\n   interaction side 2: "+str(cs.interaction_2)
+        line7 = "\n   interaction side 3: "+str(cs.interaction_3)
+        line8 = "\n   interaction side 4: "+str(cs.interaction_4)
+        line9 = "\n   eta_1: "+str(cs.eta_1)
+        line10 = "\n   eta_3 side 1: "+str(cs.eta_3_side_1)
+        line11 = "\n   eta_3 side 2: "+str(cs.eta_3_side_2)
+        line12 = "\n   eta_3 side 3: "+str(cs.eta_3_side_3)
+        line13 = "\n   eta_3 side 4: "+str(cs.eta_3_side_4)
+        line14 = "\n   cost: "+str(cost)+"CHF/m"
+        string = line1 + line2 + line3 + line4 + line5 + line6 + line7 + line8 + line9 + line10 + line11 + line12 + line13 + line14
+
         file = open("user_interface/output/all.txt", "a+")
         file.write(string)
         file.close()

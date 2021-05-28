@@ -80,7 +80,7 @@ def opt_eqpressure():
                             cs_collector.into_collector(stiffened_cs)
 
                     else:
-                        n_st_bottom = 4
+                        n_st_bottom = 0
                         while n_st_bottom <= n_st_bottom_max:
                             print("\n888888888888888888888888888888888  ITERATION BOTTOM ", n_st_bottom, "888888888888888888888888888888888")
                             for i_along_bottom in i_along_values:
@@ -103,7 +103,7 @@ def opt_eqpressure():
                                     sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
 
                                 if stiffened_cs.proven():
-
+                                    print("\n\n GOT ONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                                     cs_collector.into_collector(stiffened_cs)
 
                             #terminate i_along_bottom
