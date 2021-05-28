@@ -163,8 +163,10 @@ def print_best():
     pdf.set_fill_color(255, 0, 10)
     txt_file = open("user_interface/output/all.txt", "r")
     # insert the texts in pdf
+    i = 1
     for line in txt_file:
         number_of_dots = 0
+        name = "cs_"+str(i)
         for char in line:
             if char == ".":
                 number_of_dots += 1
@@ -180,6 +182,7 @@ def print_best():
             pdf.cell(200, 10, txt = line, border = 0, ln = 1, align = 'L')
         if "cs_" in line:
             pdf.image("user_interface/output/best_crosssections/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
+            i += 1
 
     pdf.output("user_interface/static/all.pdf", "F")
 
