@@ -14,6 +14,9 @@ from output import printing
 
 #function that performs the interaction for web plates according to EC3, 1-5, 7.1
 def interaction_web(total_cs, web_plate, eta_3):
+
+    #eta_3 is equal to eta_3_bar, as we always set V_bf_Rd = 0
+
     line1 = "\n   7.1 Interaction between shear force, bending moment and axial force"
     line2 = "\n   Web -> (7.1) without iterating"
     string = line1 + line2
@@ -24,8 +27,9 @@ def interaction_web(total_cs, web_plate, eta_3):
     if eta_3 <= 0.5 and m_ed < m_f_rd:
         #no interaction needed
         #what is a reasonable return value, -1?
+        #following design of plated structures; doing interaction if one condition is not satisfied
         utilisation = -1
-        line1 = "\n      eta_3 <= 0.5; no interaction needed"
+        line1 = "\n      eta_3 <= 0.5 and m_ed < m_f_rd; no interaction needed"
         line2 = "\n      m_f_rd: "+str(math.floor(100*m_f_rd)/100)
         line3 = "\n      utilisation: -1"
         string = line1 + line2 + line3
@@ -38,10 +42,7 @@ def interaction_web(total_cs, web_plate, eta_3):
         plastic_cs = copy.deepcopy(total_cs)
         m_pl_rd = get_m_rd_pl_eff(plastic_cs)
         eta_1_bar = abs(m_ed) / m_pl_rd
-        if eta_1_bar >= m_f_rd/m_pl_rd:
-            utilisation = eta_1_bar + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
-        else:
-            utilisation = -1
+        utilisation = eta_1_bar + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
         line2 = "\n      m_f_rd: "+str(math.floor(100*m_f_rd)/100)
         line3 = "\n      m_pl_rd: "+str(math.floor(100*m_pl_rd)/100)
         line4 = "\n      eta_1_bar: "+str(math.floor(100*eta_1_bar)/100)
@@ -74,10 +75,7 @@ def interaction_flange(total_cs, flange_plate, eta_3):
         line1 = "\n      eta_3 > 0.5; interaction needed"
         eta_1_bar = abs(data.input_data.get("M_Ed") / total_cs.get_m_rd_el_eff())
         line2 = "\n      eta_1_bar: "+str(eta_1_bar)
-        if eta_1_bar >= m_f_rd/m_pl_rd:
-            utilisation = eta_1_bar + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
-        else:
-            utilisation = -1
+        utilisation = eta_1_bar + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
         line3 = "\n      utilisation: "+str(utilisation)
         string = line1 + line2 + line3
     printing.printing(string, terminal = True)
