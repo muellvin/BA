@@ -333,7 +333,8 @@ class crosssection():
 
     #method that returns the cross sectional value EI of the effective
     def get_ei(self):
-        ei = self.get_i_y_red()*data.constants.get("E")
+        stress = True 
+        ei = self.get_i_y_red(stress)*data.constants.get("E")
         self.ei = ei
         return ei
 
