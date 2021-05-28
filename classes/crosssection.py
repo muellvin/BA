@@ -53,7 +53,8 @@ class crosssection():
 
     #method that priints the cross section (more sophisticated)
     def print_cs_as_list(self):
-        string = "\n\n      b_sup: "+str(self.b_sup)+"   b_inf: "+str(self.b_inf)+"   h: "+str(self.h)
+        string = "\n\n      f_y: "+str(data.constants.get("f_y"))
+        string += "\n      b_sup: "+str(self.b_sup)+"   b_inf: "+str(self.b_inf)+"   h: "+str(self.h)
         t_deck = self.get_line(pl_position =1, pl_type = 0).t
         t_sides = self.get_line(pl_position = 2, pl_type = 0).t
         t_bottom = self.get_line(pl_position = 3, pl_type = 0).t
@@ -333,7 +334,7 @@ class crosssection():
 
     #method that returns the cross sectional value EI of the effective
     def get_ei(self):
-        stress = True 
+        stress = True
         ei = self.get_i_y_red(stress)*data.constants.get("E")
         self.ei = ei
         return ei
