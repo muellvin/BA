@@ -57,7 +57,11 @@ def opt_eqpressure():
             n_st_side = 0
             while n_st_side <= n_st_side_max:
                 print("\n888888888888888888888888888888888  ITERATION SIDE ", n_st_side, "888888888888888888888888888888888")
-                for i_along_side in i_along_values:
+                if n_st_side == 0:
+                    i_along_values_side = [1]
+                else:
+                    i_along_values_side = i_along_values
+                for i_along_side in i_along_values_side:
                     print("\n&&&&&&&&&&&&&&&&&&&&&&&&& ITERATION I_ALONG_SIDE = ", i_along_side, " &&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
                     if tension_bottom == True:
@@ -82,8 +86,12 @@ def opt_eqpressure():
                     else:
                         n_st_bottom = 0
                         while n_st_bottom <= n_st_bottom_max:
+                            if n_st_bottom == 0:
+                                i_along_values_bottom = [1]
+                            else:
+                                i_along_values_bottom = i_along_values
                             print("\n888888888888888888888888888888888  ITERATION BOTTOM ", n_st_bottom, "888888888888888888888888888888888")
-                            for i_along_bottom in i_along_values:
+                            for i_along_bottom in i_along_values_bottom:
                                 print("\n&&&&&&&&&&&&&&&&&&&&&&&&& ITERATION I_ALONG_BOTTOM = ", i_along_bottom, " &&&&&&&&&&&&&&&&&&&&&&&&&&&")
                                 #do it twice; the stresses now are the ones calculated for the same amount of stiffeners (but different place (could do more))
                                 for times in range(2):
