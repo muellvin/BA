@@ -200,6 +200,8 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
             else:
                 b_sl_1 = height_stiffener_center -height_zero_pressure
                 b_c = height_max_pressure-height_zero_pressure
+                if b_sl_1 == 0:
+                    sigma_cr_c = 10**8
                 factor = b_c/b_sl_1
                 if factor > 0:
                     #stiffener in compression zone --> extrapolation
