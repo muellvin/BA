@@ -103,7 +103,6 @@ def opt_eqpressure():
                                     sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
 
                                 if stiffened_cs.proven():
-                                    print("\n\n GOT ONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
                                     cs_collector.into_collector(stiffened_cs)
 
                             #terminate i_along_bottom
