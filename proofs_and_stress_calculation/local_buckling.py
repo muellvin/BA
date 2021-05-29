@@ -95,6 +95,39 @@ def local_buckling_plate(cs, line_to_do):
 
         plate.rho_loc = rho_loc
 
+        #if a/b < 1 column buckling of the plate has to be accounted for
+        if data.input_data.get("a")/plate.get_length_tot() < 1:
+            t_plate = plate.t
+            sigma_cr_c = math.pi**2 * data.constants.get("E") * t_plate**2 / \
+            (12 * (1-data.constants.get("nu")**2)*data.input_data.get("a")**2)
+            lambda_c_bar = math.sqrt(data.constants.get("f_y") / sigma_cr_c)
+            alpha = 0.21
+            Phi_c = 0.5*(1+alpha*(lambda_c_bar - 0.2) + lambda_c_bar**2)
+
+            Chi_c = 1 / (Phi_c + math.sqrt(Phi_c**2 - lambda_c_bar**2))
+            if Chi_c > 1:
+                Chi_c = 1
+
+            #interaction according to EC3, 1-5, 4.5.4
+            eta = sigma_cr_p_loc/sigma_cr_c -1
+            if eta > 1:
+                eta = 1
+            elif eta < 0:
+                eta = 0
+            rho_c = (rho_loc - Chi_c) * eta * (2 - eta) + Chi_c
+            plate.rho_loc = rho_c
+
+
+            #string = "\n         Plate with a/b < 1: column like buckling to be accounted for"
+            #string += "\n            sigma_cr_p_loc: "+str(sigma_cr_p_loc)
+            #string += "\n            rho_loc: "+str(rho_loc)
+            #string += "\n            sigma_cr_c: "+str(sigma_cr_c)
+            #string += "\n            lambda_c_bar ="+str(lambda_c_bar)
+            #string += "\n            Phi_c: "+str(Phi_c)
+            #string += "\n            Chi_c: "+str(Chi_c)
+            #string += "\n            rho_c: "+str(rho_c)
+            #printing.printing(string, terminal = True)
+
         #again in table 4.1 the effective widths
         b_eff = 0
         b_e1 = 0
@@ -127,5 +160,4 @@ def local_buckling_plate(cs, line_to_do):
             plate.p1.z = plate.a.z + b_e2/plate.get_length_tot()*(plate.b.z - plate.a.z)
             plate.p2.y = plate.b.y + b_e1/plate.get_length_tot()*(plate.a.y - plate.b.y)
             plate.p2.z = plate.b.z + b_e1/plate.get_length_tot()*(plate.a.z - plate.b.z)
-
     return cs

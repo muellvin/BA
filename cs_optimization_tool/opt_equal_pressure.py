@@ -34,10 +34,7 @@ def opt_eqpressure():
 
 
 
-    if data.input_data.get("M_Ed") > 1:
-        tension_bottom = True
-    else:
-        tension_bottom = False
+    assert data.input_data.get("M_Ed") < 1, "Optimizer A does not work for positive bending moments"
 
     for t_side in t_values:
         print("888888888888888888888888888888888  SIDE T = ", t_side, "888888888888888888888888888888888")
@@ -57,65 +54,48 @@ def opt_eqpressure():
             n_st_side = 0
             while n_st_side <= n_st_side_max:
                 print("\n888888888888888888888888888888888  ITERATION SIDE ", n_st_side, "888888888888888888888888888888888")
+
                 if n_st_side == 0:
                     i_along_values_side = [1]
                 else:
                     i_along_values_side = i_along_values
                 for i_along_side in i_along_values_side:
-                    print("\n&&&&&&&&&&&&&&&&&&&&&&&&& ITERATION I_ALONG_SIDE = ", i_along_side, " &&&&&&&&&&&&&&&&&&&&&&&&&&&")
+                    print("\n&&&&&&&&&&&&&&&&&&&&&&&&& ITERATION I_ALONG_SIDE = ", str(i_along_side/10**5), " &&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
-                    if tension_bottom == True:
-                        #do it twice; the stresses now are the ones calculated for the same amount of stiffeners (but different place (could do more))
-                        for times in range(2):
-                            n_st_bottom = 0
-                            st_prop_side = set_stiffeners_side(copy.deepcopy(empty_cs), n_st_deck, n_st_side, n_st_bottom, sigma_top_red, sigma_bottom_red, i_along_side)
-                            st_prop = stiffeners_proposition.stiffeners_proposition()
-                            st_prop.stiffeners = copy.deepcopy(st_prop_deck.stiffeners) + copy.deepcopy(st_prop_side.stiffeners)
-                            st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda st: st.st_number)
-                            stiffened_cs = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop, "a")
-                            stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
+                    n_st_bottom = 0
+                    while n_st_bottom <= n_st_bottom_max:
+                        print("\n888888888888888888888888888888888  ITERATION BOTTOM ", n_st_bottom, "888888888888888888888888888888888")
 
-                            #stresses at the top and bottom corner
-                            sigma_top_red = get_sigma_top_red(stiffened_cs)
-                            sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
+                        if n_st_bottom == 0:
+                            i_along_values_bottom = [1]
+                        else:
+                            i_along_values_bottom = i_along_values
+                        for i_along_bottom in i_along_values_bottom:
+                            print("\n&&&&&&&&&&&&&&&&&&&&&&&&& ITERATION I_ALONG_BOTTOM = ", str(i_along_bottom/10**5), " &&&&&&&&&&&&&&&&&&&&&&&&&&&")
 
-                        if stiffened_cs.proven():
-                            print("\n\n GOT ONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-                            cs_collector.into_collector(stiffened_cs)
+                            #do it twice; the stresses now are the ones calculated for the same amount of stiffeners (but different place (could do more))
+                            for times in range(2):
+                                st_prop_side = set_stiffeners_side(copy.deepcopy(empty_cs), n_st_deck, n_st_side, n_st_bottom, sigma_top_red, sigma_bottom_red, i_along_side)
+                                st_prop_bottom = set_stiffeners_bottom(copy.deepcopy(empty_cs), n_st_deck, n_st_side, n_st_bottom, sigma_bottom_red, i_along_bottom)
+                                st_prop = stiffeners_proposition.stiffeners_proposition()
+                                st_prop.stiffeners = copy.deepcopy(st_prop_deck.stiffeners) + copy.deepcopy(st_prop_side.stiffeners) + copy.deepcopy(st_prop_bottom.stiffeners)
+                                st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda st: st.st_number)
 
-                    else:
-                        n_st_bottom = 0
-                        while n_st_bottom <= n_st_bottom_max:
-                            if n_st_bottom == 0:
-                                i_along_values_bottom = [1]
-                            else:
-                                i_along_values_bottom = i_along_values
-                            print("\n888888888888888888888888888888888  ITERATION BOTTOM ", n_st_bottom, "888888888888888888888888888888888")
-                            for i_along_bottom in i_along_values_bottom:
-                                print("\n&&&&&&&&&&&&&&&&&&&&&&&&& ITERATION I_ALONG_BOTTOM = ", i_along_bottom, " &&&&&&&&&&&&&&&&&&&&&&&&&&&")
-                                #do it twice; the stresses now are the ones calculated for the same amount of stiffeners (but different place (could do more))
-                                for times in range(2):
-                                    st_prop_side = set_stiffeners_side(copy.deepcopy(empty_cs), n_st_deck, n_st_side, n_st_bottom, sigma_top_red, sigma_bottom_red, i_along_side)
-                                    st_prop_bottom = set_stiffeners_bottom(copy.deepcopy(empty_cs), n_st_deck, n_st_side, n_st_bottom, sigma_bottom_red, i_along_bottom)
-                                    st_prop = stiffeners_proposition.stiffeners_proposition()
-                                    st_prop.stiffeners = copy.deepcopy(st_prop_deck.stiffeners) + copy.deepcopy(st_prop_side.stiffeners) + copy.deepcopy(st_prop_bottom.stiffeners)
-                                    st_prop.stiffeners = sorted(st_prop.stiffeners, key = lambda st: st.st_number)
+                                stiffened_cs = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop, "a")
+                                assert stiffened_cs != True, "cs is bool True"
+                                assert stiffened_cs != False, "cs is bool False"
+                                stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
 
-                                    stiffened_cs = add_stiffeners.add_stiffener_set(copy.deepcopy(empty_cs), st_prop, "a")
-                                    assert stiffened_cs != True, "cs is bool True"
-                                    assert stiffened_cs != False, "cs is bool False"
-                                    stiffened_cs = buckling_proof.buckling_proof(copy.deepcopy(stiffened_cs))
+                                #stresses at the top and bottom corner
+                                sigma_top_red = get_sigma_top_red(stiffened_cs)
+                                sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
 
-                                    #stresses at the top and bottom corner
-                                    sigma_top_red = get_sigma_top_red(stiffened_cs)
-                                    sigma_bottom_red = get_sigma_bottom_red(stiffened_cs)
+                            if stiffened_cs.proven():
+                                cs_collector.into_collector(stiffened_cs)
 
-                                if stiffened_cs.proven():
-                                    cs_collector.into_collector(stiffened_cs)
-
-                            #terminate i_along_bottom
-                            n_st_bottom += 1
-                        #terminate n_st_bottom
+                        #terminate i_along_bottom
+                        n_st_bottom += 1
+                    #terminate n_st_bottom
                     #terminate else
                 #terminate i_along _side
             #terminate n_st_side
