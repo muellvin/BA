@@ -93,20 +93,23 @@ def beta_from_kappa(kappa):
     #beta_2: hogging bending (and also cantilever at support and at the end)
     beta = 0
     if kappa <= 0.02:
-        beta = 1.0
+        beta = beta_1 = beta_2 = 1.0
     elif 0.02 < kappa <= 0.7:
+        beta_1 = 1 / (1 + 6.4 * kappa**2)
+        beta_2 = 1 / (1 + 6.0 * (kappa - 1 / (2500 * kappa)) + 1.6 * kappa**2)
         if data.input_data.get("M_Ed") >= 0: #if data.input_data.get("bending type") == "sagging bending":
-            beta_1 = 1 / (1 + 6.4 * kappa**2)
             beta = beta_1
         elif data.input_data.get("M_Ed") < 0: #elif data.input_data.get("bending type") == "hogging bending":
-            beta = beta_2 = 1 / (1 + 6.0 * (kappa - 1 / (2500 * kappa)) + 1.6 * kappa**2)
+            beta = beta_2
         else:
             print("bending type is not defined")
     elif 0.7 < kappa:
+        beta_1 = 1 / (5.9 * kappa)
+        beta_2 = 1 / (8.6 * kappa)
         if data.input_data.get("M_Ed") >= 0: #if data.input_data.get("bending type") == "sagging bending":
-            beta = beta_1 = 1 / (5.9 * kappa)
+            beta = beta_1
         elif data.input_data.get("M_Ed") < 0: #elif data.input_data.get("bending type") == "hogging bending":
-            beta = beta_2 = 1 / (8.6 * kappa)
+            beta = beta_2
         else:
             print("bending type is not defined")
 
