@@ -14,7 +14,7 @@ from output import printing
 
 def global_plate_buckling(total_cs, plate_glob):
     string = "\n      4.5.2 Plate type behaviour"
-    printing.printing(string, terminal = True)
+    printing.printing(string)
 
 
     stiffened_plate = copy.deepcopy(plate_glob)
@@ -297,15 +297,15 @@ def global_plate_buckling(total_cs, plate_glob):
             assert True, "Error: Calculation of phi_cr_p not possible."
         sigma_max = max(sigma_a, sigma_b)
         sigma_cr_p = sigma_max * phi_cr_p
-        string = "\n         sigma_cr = " + str(sigma_cr_p)
-        printing.printing(string, terminal = True)
+        string = "\n         sigma_cr_plate = " + str(math.floor(1000*sigma_cr_p)/1000)
+        printing.printing(string)
 
         ### Calculation according to EC3, 1-5, 4.5.2 ###
         #calculating plate slenderness
         beta_a_c = get_beta_ac(plate_glob)
         lambda_p_glob_bar = math.sqrt(beta_a_c * data.constants.get("f_y") / sigma_cr_p)
-        string = "\n         Lambda: " + str(lambda_p_glob_bar)
-        printing.printing(string, terminal = True)
+        string = "\n         Lambda: " + str(math.floor(1000*lambda_p_glob_bar)/1000)
+        printing.printing(string)
 
         #calculate rho_glob for plate buckling
         #assumption: cross section parts always supported on both sides
@@ -319,11 +319,11 @@ def global_plate_buckling(total_cs, plate_glob):
                 rho_glob = 1.0
         else:
             string = "\n         plate slenderness or stress ratio out of range"
-            printing.printing(string, terminal = True)
+            printing.printing(string)
             pass
 
-        string = "\n         Rho_Global: " + str(rho_glob)
-        printing.printing(string, terminal = True)
+        string = "      Rho_Global: " + str(math.floor(1000*rho_glob)/1000)
+        printing.printing(string)
 
 
     return rho_glob, sigma_cr_p

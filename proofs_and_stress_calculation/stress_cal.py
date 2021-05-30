@@ -156,16 +156,16 @@ def get_tau_int_flange(cs, side, v_ed, t_ed):
     tau_q_max_abs = abs(0.5*v_ed * S_y_corner /(t * cs.get_i_y_tot(stress)))
     tau_int_qy_flange = tau_q_max_abs * area * 0.5
     tau_int_flange = max(abs(tau_int_t_flange+tau_int_qy_flange), abs(tau_int_t_flange-tau_int_qy_flange))
-    string ="\nz_s: "+str(cs.get_center_z_tot(stress))
-    string +="\nb: "+str(b)
-    string +="\nt: "+str(t)
-    string +="\nS_y_corner: "+str(math.floor(S_y_corner*100)/100)
-    string +="\nv_ed: "+str(v_ed)
-    string +="\ntau_q_max_abs: "+str(math.floor(tau_q_max_abs*100)/100)
-    string +="\ntau_int_qy_flange: "+str(math.floor(tau_int_qy_flange*100)/100)
-    string += "\ntau_int_t_flange: "+str(math.floor(tau_int_t_flange*100)/100)
-    string +="\ntau_int_flange: "+str(math.floor(tau_int_flange*100)/100)
-    printing.printing(string, terminal = True)
+    #string ="\nz_s: "+str(cs.get_center_z_tot(stress))
+    #string +="\nb: "+str(b)
+    #string +="\nt: "+str(t)
+    #string +="\nS_y_corner: "+str(math.floor(S_y_corner*100)/100)
+    #string +="\nv_ed: "+str(v_ed)
+    #string +="\ntau_q_max_abs: "+str(math.floor(tau_q_max_abs*100)/100)
+    #string +="\ntau_int_qy_flange: "+str(math.floor(tau_int_qy_flange*100)/100)
+    #string += "\ntau_int_t_flange: "+str(math.floor(tau_int_t_flange*100)/100)
+    #string +="\ntau_int_flange: "+str(math.floor(tau_int_flange*100)/100)
+    #printing.printing(string)
     return tau_int_flange
 
 def get_tau_int_subpanel(cs, panel, v_ed, t_ed):

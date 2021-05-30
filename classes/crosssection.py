@@ -1,8 +1,5 @@
 import math
 import copy
-import sys
-sys.path.insert(0, './user_interface')
-from output import printing
 from data_and_defaults import data
 from classes import line
 from classes import plate_code
@@ -294,7 +291,6 @@ class crosssection():
                 width = 1/2 * (abs(l.a.y) + abs(l.b.y))
                 a_line = height * width
                 azero += a_line
-        printing.printing("\nazero: "+str(math.floor(azero*100)/100), terminal = True)
         return azero
 
 

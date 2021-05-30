@@ -8,9 +8,6 @@ from classes import plate_code
 from classes import stiffeners_proposition
 from classes import proposed_stiffener
 from assembly import add_stiffeners
-import sys
-sys.path.insert(0, './user_interface')
-from output import printing
 
 
 #function that returns deck stiffeners for a given cross section
@@ -61,9 +58,6 @@ def deck(b_deck, as_prop):
     assert best[4] != 10**8, "Value of a too big to find deck stiffeners."
 
 
-    string = "\ne: "+str(math.floor(100*b_sup)/100)
-    string += "\nI_y: "+str(math.floor(100*best_i)/100)
-    printing.printing(string, terminal = True)
 
     #For the optimizer: return stiffeners as propositions
     if as_prop == True:

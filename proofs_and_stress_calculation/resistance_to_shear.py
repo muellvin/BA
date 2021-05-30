@@ -13,7 +13,7 @@ from output import printing
 #function that returns the shear resistance of a plate according to EC3, 1-5, 5
 def resistance_to_shear(plate_glob, V_Ed_plate):
     string = "\n   5. Resistance to shear"
-    printing.printing(string, terminal = True)
+    printing.printing(string)
 
     #get values of constants
     f_y = data.constants.get("f_y")
@@ -35,11 +35,11 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
             else:
                 k_tau_loc = 4.0 + 5.34 * (h_w_i/a)**2
             lambda_w_bar_loc = h_w_i / (37.4*plate.t*math.sqrt(235/f_y)*math.sqrt(k_tau_loc))
-            if plate.code.pl_type == 0:
-                string = "\n         lambda_w_bar_loc of the trapezoid line nr. "+str(plate.code.tpl_number)+": "+str(math.floor(lambda_w_bar_loc*100)/100)
-            else:
-                string = "\n         lambda_w_bar_loc of the stiffener line nr. "+str(plate.code.st_number)+": "+str(math.floor(lambda_w_bar_loc*100)/100)
-            printing.printing(string, terminal = True)
+            #if plate.code.pl_type == 0:
+            #    string = "\n         lambda_w_bar_loc of the trapezoid line nr. "+str(plate.code.tpl_number)+": "+str(math.floor(lambda_w_bar_loc*1000)/1000)
+            #else:
+            #    string = "\n         lambda_w_bar_loc of the stiffener line nr. "+str(plate.code.st_number)+": "+str(math.floor(lambda_w_bar_loc*1000)/1000)
+            #printing.printing(string)
             if lambda_w_bar_loc > lambda_w_bar_3:
                 lambda_w_bar_3 = lambda_w_bar_loc
             h_w += plate.get_length_tot()
@@ -53,19 +53,18 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
     #calculate k_tau
     k_tau = 0
     if stiffened == False:
-        line1 = "\n      unstiffened plate; (A.5)"
+        string = "\n      unstiffened plate; (A.5)"
         if a / h_w >= 1:
             k_tau = 5.34 + 4*(h_w/a)**2
 
-            line2 = "\n      k_tau: "+str(k_tau)
+            string  += "      k_tau: "+str(math.floor(1000*k_tau)/1000)
         else:
             k_tau = 4.0 + 5.34 * (h_w/a)**2
-            line2 = "\n      k_tau: "+str(k_tau)
-        string = line1 + line2
-        printing.printing(string, terminal = True)
+            string  += "      k_tau: "+str(math.floor(1000*k_tau)/1000)
+        printing.printing(string)
 
     else:
-        line1 = "\n      stiffened plate; EBPlate"
+        string = "\n      stiffened plate; EBPlate"
         plate_a = None
         plate_b = None
         min_tpl = -1
@@ -143,18 +142,17 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         sigma_E = 190000*(t/h_w)**2
         if abs(tau) > 0.1 and 3 <= t:
             k_tau = ebplate.ebplate_shear(a, h_w, t, tau, stiffeners_ebp) * tau / sigma_E
-            line2 = "\n      k_tau: "+str(k_tau)
+            string += "\n      k_tau: "+str(math.floor(1000*k_tau)/1000)
 
         elif t<3:
             eta_3 = 10**2
-            line2 = "\n      plate too thin; eta_3: "+ str(eta_3)
+            string += "\n      plate too thin; eta_3: "+ str(math.floor(1000*eta_3)/1000)
             return eta_3
         else:
             eta_3 = 0
-            line2 = "\n      tau too small; eta_3: "+ str(0)
+            string += "\n      tau too small; eta_3: "+ str(0)
             return eta_3
-        string = line1 + line2
-        printing.printing(string, terminal = True)
+        printing.printing(string)
 
 
     #pre_evaluation
@@ -175,14 +173,15 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         sigma_E = 190000*(t/h_w)**2
         tau_cr = k_tau * sigma_E
         lambda_w_bar_1 = 0.76 * math.sqrt(f_y / tau_cr) # formula 5.3
-        string = "\n         (5.3) lambda_w_bar_1= "+str(math.floor(lambda_w_bar_1*100)/100)
         lambda_w_bar_2 = h_w /(37.4*t*math.sqrt(235/f_y)*math.sqrt(k_tau)) #formula 5.6
-        string += "\n         (5.6) lambda_w_bar_2= "+str(math.floor(lambda_w_bar_2*100)/100)
-        string += "\n         (5.7) lambda_w_bar_3= "+str(math.floor(lambda_w_bar_3*100)/100)+" max single plate slenderness"
         lambda_w_bar = min(lambda_w_bar_1, lambda_w_bar_2)
         lambda_w_bar = max(lambda_w_bar, lambda_w_bar_3)
-        string += "\n         chosen lambda_w_bar= "+str(math.floor(lambda_w_bar*100)/100)
-        printing.printing(string, terminal = True)
+
+        #string = "\n         (5.3) lambda_w_bar_1= "+str(math.floor(lambda_w_bar_1*1000)/1000)
+        #string += "\n         (5.6) lambda_w_bar_2= "+str(math.floor(lambda_w_bar_2*1000)/1000)
+        #string += "\n         (5.7) lambda_w_bar_3= "+str(math.floor(lambda_w_bar_3*1000)/1000)+" max single plate slenderness"
+        #string = "      lambda_w_bar= "+str(math.floor(lambda_w_bar*1000)/1000)
+        #printing.printing(string)
 
         assert lambda_w_bar > 0, "Strange value for lambda_w_bar"
         #assume a deformable support stiffener
@@ -198,9 +197,9 @@ def resistance_to_shear(plate_glob, V_Ed_plate):
         V_Rd = chi_w*f_y*h_w*t/(math.sqrt(3)*gamma_M1)
 
     eta_3 = V_Ed_plate / V_Rd
-    string = "\n      V_Ed_plate: "+str(math.floor(V_Ed_plate*100)/100)
-    string += "\n      V_Rd: "+str(math.floor(V_Rd*100)/100)
-    string += "\n      eta_3: "+str(eta_3)
-    printing.printing(string, terminal = True)
+    #string = "\n      V_Ed_plate: "+str(math.floor(V_Ed_plate*1000)/1000)
+    #string += "\n      V_Rd: "+str(math.floor(V_Rd*1000)/1000)
+    string = "      eta_3: "+str(math.floor(1000*eta_3)/1000)
+    printing.printing(string)
 
     return eta_3

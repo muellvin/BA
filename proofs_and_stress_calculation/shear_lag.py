@@ -25,7 +25,7 @@ def shear_lag(cs):
 
 def reduction_shear_lag(cs, flange):
     string = "\n   Shear lag reduction for flange "+str(flange)
-    printing.printing(string, terminal = True)
+    printing.printing(string)
 
     if flange == 1:
         b_0 = cs.b_sup / 2 #3.1 (2)
@@ -34,12 +34,12 @@ def reduction_shear_lag(cs, flange):
 
     #check if necessary
     if b_0 < data.input_data.get("L_e")/50:
-        string = "\n      Shear Lag is neglectable"
-        printing.printing(string, terminal = True)
+        string = "\n      Shear Lag is neglectable for side "+str(flange)
+        printing.printing(string)
         return cs
 
-    string = "\n      Shear Lag is not neglectable"
-    printing.printing(string, terminal = True)
+    string = "\n      Shear Lag is  not neglectable for side "+str(flange)
+    printing.printing(string)
 
     A_c_eff = 0
     for line in cs.lines:
@@ -65,10 +65,10 @@ def reduction_shear_lag(cs, flange):
     reduction_factor_shear_lag = max (beta, reduction_factor_shear_lag)
     reduction_factor_shear_lag = min(reduction_factor_shear_lag, 1)
 
-    string +="\n      alpha_0: "+str(round(10*alpha_0)/10)
-    string +="\n      Beta**kappa: "+str(beta**kappa)
-    string +="\n      reduction_factor_shear_lag: "+str(reduction_factor_shear_lag)
-    printing.printing(string, terminal = True)
+    string ="\n      alpha_0: "+str(math.floor(1000*alpha_0)/1000)
+    string +="      Beta**kappa: "+str(math.floor(1000*beta**kappa)/1000)
+    string +="      reduction_factor_shear_lag: "+str(math.floor(1000*reduction_factor_shear_lag)/1000)
+    printing.printing(string)
 
 
     #the book recommends to apply this reduction to the thickness of the flange plates

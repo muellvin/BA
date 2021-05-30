@@ -426,6 +426,7 @@ def optimize():
                                                         else:
                                                             print("FAIL!")
 
+    printing.print_best_proof()
     printing.print_best()
     return
 
