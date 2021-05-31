@@ -299,7 +299,7 @@ def column_buckling_Chi_c(column):
         lambda_c_bar = 0
         Phi_c = 0
         Chi_c = 1
-        string += str(column)
+        string = str(column)
         string += "\n         Buckling Values for column number "+str(column.st_number)
         #string += "\n            beta_A_c =" +str(beta_A_c)
         #string += "\n            lambda_c_bar =" +str(lambda_c_bar)
