@@ -17,10 +17,8 @@ def interaction_web(total_cs, web_plate, eta_3):
 
     #eta_3 is equal to eta_3_bar, as we always set V_bf_Rd = 0
 
-    line1 = "\n   7.1 Interaction between shear force, bending moment and axial force"
-    line2 = "\n   Web -> (7.1) without iterating"
-    string = line1 + line2
-    printing.printing(string, terminal = True)
+    string = "\n   7.1 Interaction between shear force, bending moment and axial force"
+    printing.printing(string)
 
     m_ed = data.input_data.get("M_Ed")
     m_f_rd = total_cs.get_m_f_rd_eff()
@@ -29,26 +27,24 @@ def interaction_web(total_cs, web_plate, eta_3):
         #what is a reasonable return value, -1?
         #following design of plated structures; doing interaction if one condition is not satisfied
         utilisation = -1
-        line1 = "\n      eta_3 <= 0.5 and m_ed < m_f_rd; no interaction needed"
-        line2 = "\n      m_f_rd: "+str(math.floor(100*m_f_rd)/100)
-        line3 = "\n      utilisation: -1"
-        string = line1 + line2 + line3
-        printing.printing(string, terminal = True)
+        string = "\n      eta_3 <= 0.5 and m_ed < m_f_rd; no interaction needed"
+        #string += "\n      m_f_rd: "+str(math.floor(1000*m_f_rd)/1000)
+        string += "\n      utilisation: -1"
+        printing.printing(string)
 
         return utilisation
     else:
-        line1 = "\n      eta_3 > 0.5; interaction needed"
+        string = "\n      eta_3 > 0.5; interaction needed"
         #interaction required
         plastic_cs = copy.deepcopy(total_cs)
         m_pl_rd = get_m_rd_pl_eff(plastic_cs)
         eta_1_bar = abs(m_ed) / m_pl_rd
         utilisation = eta_1_bar + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
-        line2 = "\n      m_f_rd: "+str(math.floor(100*m_f_rd)/100)
-        line3 = "\n      m_pl_rd: "+str(math.floor(100*m_pl_rd)/100)
-        line4 = "\n      eta_1_bar: "+str(math.floor(100*eta_1_bar)/100)
-        line5 = "\n      utilisation: "+str(utilisation)
-        string = line1 + line2 + line3 + line4 + line5
-        printing.printing(string, terminal = True)
+        #string += "\n      m_f_rd: "+str(math.floor(1000*m_f_rd)/1000)
+        #string += "\n      m_pl_rd: "+str(math.floor(1000*m_pl_rd)/1000)
+        string += "\n      eta_1_bar: "+str(math.floor(1000*eta_1_bar)/1000)
+        string += "\n      utilisation: "+str(utilisation)
+        printing.printing(string)
         return utilisation
 
 
@@ -57,32 +53,30 @@ def interaction_web(total_cs, web_plate, eta_3):
 
 #function that performs the interaction for flange plates according to EC 3, 1-5, 7.1
 def interaction_flange(total_cs, flange_plate, eta_3):
-    line1 = "\n   7.1 Interaction between shear force, bending moment and axial force"
-    line2 = "\n   Flange -> (7.1), comment (5)"
-    string = line1 + line2
-    printing.printing(string, terminal = True)
+    string = "\n   7.1 Interaction between shear force, bending moment and axial force"
+    string += "\n   Flange -> comment (5)"
+    printing.printing(string)
 
 
     #choose correct shear stresses for calculation
     if eta_3 <= 0.5:
-        line1 = "\n      eta_3 <= 0.5; no interaction needed"
         #no interaction needed
         #what is a resonable return value, -1?
         utilisation = -1
-        line2 = "\n      utilisation: -1"
-        string = line1 + line2
+        string = "\n      eta_3 <= 0.5; no interaction needed"
+        string += "      utilisation: -1"
+        printing.printing(string)
     else:
-        line1 = "\n      eta_3 > 0.5; interaction needed"
         eta_1_bar = abs(data.input_data.get("M_Ed") / total_cs.get_m_rd_el_eff())
-        line2 = "\n      eta_1_bar: "+str(eta_1_bar)
         utilisation = eta_1_bar + (1-m_f_rd/m_pl_rd)*(2*eta_3-1)**2
-        line3 = "\n      utilisation: "+str(utilisation)
-        string = line1 + line2 + line3
-    printing.printing(string, terminal = True)
+        string = "\n      eta_3 > 0.5; interaction needed"
+        string += "\n      eta_1_bar: "+str(math.floor(1000*eta_1_bar)/1000)
+        string += "      utilisation: "+str(math.floor(1000*utilisation)/1000)
+        printing.printing(string)
 
     #prove shear resistance for each subpanel
     string = "\n   Proofing Resistance to shear for each subpanel"
-    printing.printing(string, terminal = True)
+    printing.printing(string)
     for plate in flange_plate.lines:
         if plate.code.tpl_number != 0:
             v_ed_panel = stress_cal.get_tau_int_subpanel(total_cs, plate, data.input_data.get("V_Ed"),\
@@ -90,14 +84,7 @@ def interaction_flange(total_cs, flange_plate, eta_3):
             panel_cs = crosssection.crosssection(0,0,0)
             panel_cs.addline(plate)
             eta_3_panel = resistance_to_shear.resistance_to_shear(panel_cs, v_ed_panel)
-            if eta_3_panel < 1:
-                string = "\n      eta_3_panel < 1: pass subpanel"
-                printing.printing(string, terminal = True)
-
-            elif eta_3_panel > 1:
-                string = "\n      eta_3_panel > 1: subpanel not passed"
-                string += "\n      utilisation: 10"
-                printing.printing(string, terminal = True)
+            if eta_3_panel > 1:
                 utilisation = 10
             else:
                 assert True, "This is not possible"

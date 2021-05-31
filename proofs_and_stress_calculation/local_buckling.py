@@ -9,7 +9,7 @@ from output import printing
 
 def local_buckling(cs):
     string = "\n   Iteratively changing the widths until M_Rd_el_eff converges to a limit of "+str(defaults.convergence_limit_local_buckling)
-    printing.printing(string, terminal = True)
+    printing.printing(string)
 
     cs = cal_sigma_psi_red(cs)
     change = 1
@@ -126,7 +126,7 @@ def local_buckling_plate(cs, line_to_do):
             #string += "\n            Phi_c: "+str(Phi_c)
             #string += "\n            Chi_c: "+str(Chi_c)
             #string += "\n            rho_c: "+str(rho_c)
-            #printing.printing(string, terminal = True)
+            #printing.printing(string)
 
         #again in table 4.1 the effective widths
         b_eff = 0

@@ -23,7 +23,7 @@ def global_buckling(cs):
 
 def reduction_global_buckling(cs, side):
     string = "\n   Side "+str(side)
-    printing.printing(string, terminal = True)
+    printing.printing(string)
 
     #extract the respective plate
     plate_glob = crosssection.crosssection(0,0,0)
@@ -94,11 +94,10 @@ def reduction_global_buckling(cs, side):
         rho_c = (rho_p - chi_c) * eta * (2 - eta) + chi_c
 
 
-    line1 = "\n      4.5.4 Interaction between plate and column buckling"
-    line2 = "\n           all_tension: " + str(all_tension)
-    line3 = "\n           rho_c = " + str(rho_c)
-    string = line1 + line2 + line3
-    printing.printing(string, terminal = True)
+    string = "\n      4.5.4 Interaction between plate and column buckling"
+    string += "\n           all_tension: " + str(all_tension)
+    string += "     rho_c = " + str(math.floor(100*rho_c)/1000)
+    printing.printing(string)
 
 
     #EC 1-5 (4.5) edge plates not reduced by rho_c

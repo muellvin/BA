@@ -23,7 +23,7 @@ from output import printing
 #does not write attributes thus does not need cs
 def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure):
     string = "\n      4.5.3 Column type buckling behaviour"
-    printing.printing(string, terminal = True)
+    printing.printing(string)
 
 
     #add the lines to the right list
@@ -272,19 +272,17 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
         if Chi_c > 1:
             Chi_c = 1
 
-        line1 = "\n         Unstiffened Plate"
-        line2 = "\n            sigma_cr_c: "+str(sigma_cr_c)
-        line3 = "\n            lambda_c_bar ="+str(lambda_c_bar)
-        line4 = "\n            Phi_c: "+str(Phi_c)
-        line5 = "\n            Chi_c: "+str(Chi_c)
-        string = line1 + line2 + line3 + line4 + line5
-        printing.printing(string, terminal = True)
+        string = "\n         Unstiffened Plate"
+        string += "\n            sigma_cr_c: "+str(math.floor(1000*sigma_cr_c)/1000)
+        #string += "\n            lambda_c_bar ="+str(lambda_c_bar)
+        #string += "\n            Phi_c: "+str(Phi_c)
+        string += "\n            Chi_c: "+str(math.floor(1000*Chi_c)/1000)
+        printing.printing(string)
 
-    line1 = "\n         Critical buckling values"
-    line2 = "\n            Chi_c: "+str(Chi_c)
-    line3 = "\n            sigma_cr_c: "+str(sigma_cr_c)
-    string = line1 + line2 + line3
-    printing.printing(string, terminal = True)
+    string = "\n         Critical buckling values"
+    string += "      sigma_cr_c: "+str(math.floor(1000*sigma_cr_c)/1000)
+    string += "      Chi_c: "+str(math.floor(1000*Chi_c)/1000)
+    printing.printing(string)
 
     return Chi_c, sigma_cr_c
 
@@ -301,14 +299,13 @@ def column_buckling_Chi_c(column):
         lambda_c_bar = 0
         Phi_c = 0
         Chi_c = 1
-        line1 = str(column)
-        line2 = "\n         Buckling Values "+str(column.st_number)
-        line3 = "\n            beta_A_c =" +str(beta_A_c)
-        line4 = "\n            lambda_c_bar =" +str(lambda_c_bar)
-        line5 = "\n            Phi_c ="+ str(Phi_c)
-        line6 = "\n            Chi_c ="+ str(Chi_c)
-        string = line1 + line2 + line3 + line4 + line5 + line6
-        printing.printing(string, terminal = True)
+        string += str(column)
+        string += "\n         Buckling Values for column number "+str(column.st_number)
+        #string += "\n            beta_A_c =" +str(beta_A_c)
+        #string += "\n            lambda_c_bar =" +str(lambda_c_bar)
+        #string += "\n            Phi_c ="+ str(Phi_c)
+        string += "      Chi_c ="+ str(math.floor(1000*Chi_c)/1000)
+        printing.printing(string)
         return 1
     else:
         beta_A_c = column.A_sl_eff / column.A_sl
@@ -324,14 +321,13 @@ def column_buckling_Chi_c(column):
         if Chi_c > 1:
             Chi_c = 1
 
-        line1 = str(column)
-        line2 = "\n         Buckling Values "+str(column.st_number)
-        line3 = "\n            beta_A_c =" +str(beta_A_c)
-        line4 = "\n            lambda_c_bar =" +str(lambda_c_bar)
-        line5 = "\n            Phi_c ="+ str(Phi_c)
-        line6 = "\n            Chi_c ="+ str(Chi_c)
-        string = line1 + line2 + line3 + line4 + line5 + line6
-        printing.printing(string, terminal = True)
+        string = str(column)
+        string += "\n         Buckling Values "+str(column.st_number)
+        #string += "\n            beta_A_c =" +str(beta_A_c)
+        #string += "\n            lambda_c_bar =" +str(lambda_c_bar)
+        #string += "\n            Phi_c ="+ str(Phi_c)
+        string += "      Chi_c ="+ str(math.floor(1000*Chi_c)/1000)
+        printing.printing(string)
 
         return Chi_c
 
@@ -419,12 +415,10 @@ class column_class():
 
     #method to get string output when print()
     def __str__(self):
-        line1 = "\n         Column number "+str(self.st_number)
-        line2 = "\n            A_sl="+str(int(100*self.A_sl)/100)+", A_sl_eff="+str(int(100*self.A_sl_eff)/100)+", I_sl="+str(int(100*self.I_sl)/100)
-        line3 = "\n            sigma_cr_c="+str(int(100*self.sigma_cr_c)/100)
-        line4 = "\n            e1="+str(int(100*self.e1)/100)+", e2="+str(int(100*self.e2)/100)
-        line5 = "\n            All tension ="+str(self.all_tension)
-        #rest = str(self.column_as_cs)
-
-        string = line1 + line2 + line3 + line4 + line5 #+ rest
+        string = ""
+        #string += "\n         Column number "+str(self.st_number)
+        #string += "\n            A_sl="+str(int(1000*self.A_sl)/1000)+", A_sl_eff="+str(int(1000*self.A_sl_eff)/1000)+", I_sl="+str(int(1000*self.I_sl)/1000)
+        #string += "\n            sigma_cr_c="+str(int(1000*self.sigma_cr_c)/1000)
+        #string += "\n            e1="+str(int(1000*self.e1)/1000)+", e2="+str(int(1000*self.e2)/1000)
+        #string += "\n            All tension ="+str(self.all_tension)
         return string

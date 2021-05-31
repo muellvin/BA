@@ -43,27 +43,16 @@ def cs_analysis_gui():
     stiffener_list = sorted(stiffener_list, key = lambda st: st.lines[0].code.st_number)
     cs = merge.merge(cs, stiffener_list)
 
-    string = "\nmoment of inertia gross without shear lag: "+str(cs.get_i_along_tot(cs.get_line(pl_position = 1, pl_type = 0), stress = False))
-    string += "\narea gross: "+str(cs.get_area_tot())
-    printing.printing(string, terminal = True)
-
     #proof block
     cs = buckling_proof.buckling_proof(cs)
-
-    #block for verification
-    printing.printing(str(cs), terminal = True)
-    string = "\nmoment of inertia including all reductions: "+ str(cs.get_i_along_red(cs.get_line(pl_position = 1, pl_type = 0), stress = True))
-    printing.printing(string, terminal = True)
-
-    printing.printing(cs.print_centers(), terminal = True)
-
-
 
     #user interface preparation
     results = {"eta_1": round(cs.eta_1,2), "eta_3_side_1":round(cs.eta_3_side_1,2), "interaction_1": round(cs.interaction_1,2),  "eta_3_side_2":round(cs.eta_3_side_2,2), \
     "interaction_2": round(cs.interaction_2,2), "eta_3_side_3":round(cs.eta_3_side_3,2), "interaction_3": cs.interaction_3, "eta_3_side_4":round(cs.eta_3_side_4,2), "interaction_4": round(cs.interaction_4,2)}
     image = cs_to_html.print_cs_red(cs)
     results.update({"image": image})
+
+    #create the output pdf
     printing.txt_to_pdf(cs, "cs")
 
     return results
