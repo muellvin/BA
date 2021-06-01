@@ -49,7 +49,7 @@ def cs_analysis_gui():
     #user interface preparation
     results = {"eta_1": round(cs.eta_1,2), "eta_3_side_1":round(cs.eta_3_side_1,2), "interaction_1": round(cs.interaction_1,2),  "eta_3_side_2":round(cs.eta_3_side_2,2), \
     "interaction_2": round(cs.interaction_2,2), "eta_3_side_3":round(cs.eta_3_side_3,2), "interaction_3": cs.interaction_3, "eta_3_side_4":round(cs.eta_3_side_4,2), "interaction_4": round(cs.interaction_4,2)}
-    image = cs_to_html.print_cs_red(cs)
+    image = cs_to_html.print_cs(cs)
     results.update({"image": image})
 
     #create the output pdf
