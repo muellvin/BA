@@ -256,7 +256,7 @@ def column_buckling(plate_glob, side, height_zero_pressure, height_max_pressure)
             Chi_c_column = column_buckling_Chi_c(columns.get(key))
             if Chi_c_column < Chi_c:
                 Chi_c = Chi_c_column
-                sigma_cr_c = column.sigma_cr_c
+                sigma_cr_c = columns.get(key).sigma_cr_c
 
 
     #case 2: unstiffened plate
