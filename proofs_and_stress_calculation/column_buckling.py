@@ -322,7 +322,7 @@ def column_buckling_Chi_c(column):
             Chi_c = 1
 
         string = str(column)
-        string += "\n         Buckling Values "+str(column.st_number)
+        string += "\n         Buckling Values for column number "+str(column.st_number)
         #string += "\n            beta_A_c =" +str(beta_A_c)
         #string += "\n            lambda_c_bar =" +str(lambda_c_bar)
         #string += "\n            Phi_c ="+ str(Phi_c)
