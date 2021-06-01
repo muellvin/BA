@@ -3,14 +3,9 @@ from data_and_defaults import data
 
 #function that calculates Cost/EI and stores it in the cross section object
 def set_value(cs):
-    if data.input_data.get("goal") == 0:
-        cs.cost = cost(cs)
-    elif data.input_data.get("goal") == 1:
-        cs.cost = cost(cs)
-        cs.ei = ei(cs)
-    else:
-        assert data.input_data.get("goal") == 2, "Wrong Goal Input."
-        cs.ratio = ratio(cs)
+    cs.cost = cost(cs)
+    cs.ei = ei(cs)
+    cs.ratio = ratio(cs)
 
 
 #function that returns the cost of a given cross section
@@ -36,7 +31,7 @@ def ei(cs):
     ei = cs.get_ei()
     return ei
 
-#function that returns the EI/Cost-Ratio of a cross section 
+#function that returns the EI/Cost-Ratio of a cross section
 def ratio(cs):
     target_value =  ei(cs)/cost(cs)
     return target_value
