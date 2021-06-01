@@ -96,7 +96,7 @@ def reduction_global_buckling(cs, side):
 
     string = "\n      4.5.4 Interaction between plate and column buckling"
     string += "\n           all_tension: " + str(all_tension)
-    string += "     rho_c = " + str(math.floor(100*rho_c)/1000)
+    string += "     rho_c = " + str(math.floor(1000*rho_c)/1000)
     printing.printing(string)
 
 
