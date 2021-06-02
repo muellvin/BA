@@ -66,6 +66,6 @@ def print_cs_red(crosssection):
         z.append(-line.b.z)
         y_list = np.array(y)
         z_list = np.array(z)
-        ax.plot(y_list, z_list, 'r')
+        ax.plot(y_list, z_list, 'k')
 
     return mpld3.fig_to_html(fig)

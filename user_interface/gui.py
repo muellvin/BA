@@ -6,8 +6,6 @@ import sys
 import copy
 
 sys.path.insert(0, './')
-#sys.path.append('C:/Users/Nino/Google Drive/Studium/FS 2021/Bachelorarbeit/BA')
-#sys.path.append('C:/Users/Vinzenz Müller/Dropbox/ETH/6. Semester/BA')
 from user_interface import cs_to_html
 from user_interface import form_values
 from user_interface import stiffener_transform
@@ -94,10 +92,10 @@ def resultpage_optimize():
     steel_cost = int(request.form['material_cost'])
     data.input_data.update({"steel_cost":steel_cost})
     try:
-        ei = int(request.form['ei'])*10**3
+        ei = int(request.form['ei'])*10**9
         data.input_data.update({"ei":ei})
     except KeyError:
-        pass 
+        pass
     if optimizer_num == 0:
         opt_equal_pressure.opt_eqpressure()
     else:
