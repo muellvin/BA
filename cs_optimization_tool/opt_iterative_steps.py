@@ -24,6 +24,7 @@ def optimize():
     b_inf = data.input_data["b_inf"]
     h = data.input_data["h"]
     t_deck = data.input_data["t_deck"]
+    t_range = defaults.t_range_opt
     I_range = defaults.I_range
     counter = 1
     bottom_max = defaults.num_bottom_stiffeners_max
@@ -371,7 +372,6 @@ def optimize():
                                                         print("PASS!")
                                                     else:
                                                         print("FAIL!")
-
     printing.print_best_proof()
     printing.print_best()
     return
