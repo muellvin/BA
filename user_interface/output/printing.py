@@ -221,6 +221,12 @@ def print_best():
             pdf.image("user_interface/output/best_crosssections/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
             i += 1
 
+    pdf.cell(200, 10, txt = " ", border = 0, ln = 1, align = 'L')
+    pdf.cell(200, 10, txt = " ", border = 0, ln = 1, align = 'L')
+    pdf.cell(200, 10, txt = " ", border = 0, ln = 1, align = 'L')
+    pdf.cell(200, 10, txt = "The proofs for each cross-section can be found in the following folder:", border = 0, ln = 1, align = 'L')
+    pdf.cell(200, 10, txt = "BA/user_interface/output/best_crosssections", border = 0, ln = 1, align = 'L')
+
     pdf.output("user_interface/static/all.pdf", "F")
 
 
