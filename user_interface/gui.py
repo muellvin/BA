@@ -92,7 +92,7 @@ def resultpage_optimize():
     steel_cost = int(request.form['material_cost'])
     data.input_data.update({"steel_cost":steel_cost})
     try:
-        ei = int(request.form['ei'])*10**3
+        ei = int(request.form['ei'])*10**9
         data.input_data.update({"ei":ei})
     except KeyError:
         pass
