@@ -344,5 +344,4 @@ def get_beta_ac(plate_glob):
             a_c += 0.5*plate.get_area_tot(stress = True)
             a_c_eff_loc += 0.5*plate.get_area_red(stress = True)
     beta_a_c = a_c_eff_loc / a_c
-    print(beta_a_c)
     return beta_a_c

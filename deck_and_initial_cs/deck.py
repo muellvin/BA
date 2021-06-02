@@ -34,7 +34,7 @@ def deck(b_deck, as_prop):
         num_of_plates = math.ceil(b_deck / b_sup_theor)
         if num_of_plates % 2 == 0:
             num_of_plates += 1
-        assert num_of_plates % 2 == 1, "You are stupid!"
+        assert num_of_plates % 2 == 1, "Number of Deck plates Error!"
         num_of_stiffeners = (num_of_plates-1)/2
         b_sup = b_deck / num_of_plates
 
