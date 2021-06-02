@@ -42,7 +42,7 @@ def printing(string):
 #turn the cs_analysis.txt into a pdf
 def txt_to_pdf(cs, name, location = None):
 
-    #geometry_output.print_cs_to_png(cs, name, input = True, location = "user_interface/output/images/")
+    geometry_output.print_cs_to_png(cs, name, input = True, location = "user_interface/output/images/")
     geometry_output.print_cs_to_png(cs, name, input = False, location = "user_interface/output/images/")
 
     pdf = PDF()
@@ -50,8 +50,8 @@ def txt_to_pdf(cs, name, location = None):
 
     # Title
     pdf.set_font('Arial', 'B', 15)
-    pdf.cell(40) # Move to the right
-    pdf.cell(100, 10, "Cross Section Analysis Tool", border = 0, ln = 1, align = 'C')
+    pdf.cell(45) # Move to the right
+    pdf.cell(100, 10, "Cross-Section Analysis Tool", border = 0, ln = 1, align = 'C')
 
     #cs image
     pdf.image("user_interface/output/images/"+name+"_out.png", x = None, y = None, w = 200, h = 0, type = '', link = '')
@@ -59,9 +59,9 @@ def txt_to_pdf(cs, name, location = None):
     pdf.set_font("Arial", size = 12)
     pdf.set_fill_color(255, 0, 10)
 
-    string = "      Area Moment of Inertia (with reductions): "+str(math.floor(100*cs.get_ei()/1000/1000/1000)/100)+"kNm^2"
+    string = "      EI (with reductions): "+str(math.floor(100*cs.get_ei()/1000/1000/1000)/100)+"kNm^2"
     pdf.cell(190, 10, txt = string, border = 0, ln = 1, fill = False, align = 'L')
-    string = "      Center from top (with reductions): "+str(math.floor(100*cs.get_center_z_red())/100)+"mm"
+    string = "      Center from top (with reductions): "+str(math.floor(100*cs.get_center_z_red(stress = True))/100)+"mm"
     pdf.cell(190, 10, txt = string, border = 0, ln = 1, fill = False, align = 'L')
 
     string = "      eta_1: "+str(math.floor(100*cs.eta_1)/100)
@@ -242,7 +242,7 @@ class PDF(FPDF):
         # Move to the right
         self.cell(80)
         # Title
-        self.cell(30, 10, "cs analysis and optimization program", 0, 0, 'C')
+        self.cell(30, 10, "CS Analysis and Optimization Program", 0, 0, 'C')
         self.cell(45)
         self.set_font('Arial', 'B', 10)
         self.cell(30, 10, 'N. Hasler, V. Müller', 0, 0, 'R')

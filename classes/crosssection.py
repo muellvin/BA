@@ -50,7 +50,16 @@ class crosssection():
 
     #method that priints the cross section (more sophisticated)
     def print_cs_as_list(self):
-        string = "\n\n      f_y: "+str(data.constants.get("f_y"))
+        if data.input_data.get("goal") == 0:
+            optimization_goal = "cost"
+        elif data.input_data.get("goal") == 1:
+            optimization_goal = "specific EI: "+str(math.floor(data.input_data.get("ei")/1000/1000/1000))+"kNm^2"
+        elif data.input_data.get("goal") == 2:
+            optimization_goal = "ratio"
+        else:
+            optimization_goal = "none"
+        string = "\n\n      Optimization Goal: "+optimization_goal
+        string += "\n      f_y: "+str(data.constants.get("f_y"))
         string += "\n      b_sup: "+str(self.b_sup)+"   b_inf: "+str(self.b_inf)+"   h: "+str(self.h)
         t_deck = self.get_line(pl_position =1, pl_type = 0).t
         t_sides = self.get_line(pl_position = 2, pl_type = 0).t

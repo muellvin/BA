@@ -38,7 +38,7 @@ def reduction_shear_lag(cs, flange):
         printing.printing(string)
         return cs
 
-    string = "\n      Shear Lag is  not neglectable for side "+str(flange)
+    string = "\n      Shear Lag is not neglectable for side "+str(flange)
     printing.printing(string)
 
     A_c_eff = 0
@@ -66,7 +66,7 @@ def reduction_shear_lag(cs, flange):
     reduction_factor_shear_lag = min(reduction_factor_shear_lag, 1)
 
     string ="\n      alpha_0: "+str(math.floor(1000*alpha_0)/1000)
-    string +="      Beta**kappa: "+str(math.floor(1000*beta**kappa)/1000)
+    string +="      Beta^kappa: "+str(math.floor(1000*beta**kappa)/1000)
     string +="      reduction_factor_shear_lag: "+str(math.floor(1000*reduction_factor_shear_lag)/1000)
     printing.printing(string)
 

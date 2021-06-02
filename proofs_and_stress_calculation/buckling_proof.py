@@ -16,7 +16,7 @@ from output import printing
 
 
 def buckling_proof(cs):
-    string = "\n\nBuckling Proof according to EC 1993 Part 1-5"
+    string = "\n\nBuckling Proof according to EN1993-1-5"
     printing.printing(string)
 
     #3.3 Shear lag at the ultimate limit state
