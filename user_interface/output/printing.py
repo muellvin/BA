@@ -59,7 +59,7 @@ def txt_to_pdf(cs, name, location = None):
     pdf.set_font("Arial", size = 12)
     pdf.set_fill_color(255, 0, 10)
 
-    string = "      EI (with reductions): "+str(math.floor(100*cs.get_ei()/1000/1000/1000)/100)+"kNm^2"
+    string = "      EI_eff (with reductions): "+str(math.floor(100*cs.get_ei()/1000/1000/1000)/100)+"kNm^2"
     pdf.cell(190, 10, txt = string, border = 0, ln = 1, fill = False, align = 'L')
     string = "      Center from top (with reductions): "+str(math.floor(100*cs.get_center_z_red(stress = True))/100)+"mm"
     pdf.cell(190, 10, txt = string, border = 0, ln = 1, fill = False, align = 'L')
@@ -169,7 +169,7 @@ def print_best():
         string = "\n"+name
         string += cs.print_cs_as_list()
         string += "\n\nResults:"
-        string += "\n   EI: "+str(ei)+"kNm^2"
+        string += "\n   EI_eff: "+str(ei)+"kNm^2"
         string += "\n   interaction side 1: "+str(cs.interaction_1)
         string += "\n   interaction side 2: "+str(cs.interaction_2)
         string += "\n   interaction side 3: "+str(cs.interaction_3)
