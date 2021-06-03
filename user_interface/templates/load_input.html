@@ -87,10 +87,10 @@
         <td><p>Choose the optimization algorithm.</p></td>
       </tr>
       <tr>
-        <td><input type="radio" name ="opt" value="0" form = "opt_step_2" required onchange="restrict()"> Optimizer A </input> </td>
+        <td><input type="radio" name ="opt" value="0" form = "opt_step_2" required onchange="restrict()"> Optimization Algorithm A </input> </td>
       </tr>
       <tr>
-        <td><input type="radio" name ="opt" value="1" form = "opt_step_2" required onchange="unrestrict()"> Optimizer B </input> </td>
+        <td><input type="radio" name ="opt" value="1" form = "opt_step_2" required onchange="unrestrict()"> Optimization Algorithm B </input> </td>
       </tr>
       <tr>
         <td><p>Choose the optimization goal.</p></td>
@@ -99,10 +99,10 @@
         <td><input type="radio" name="goal" value="0" checked form ="opt_step_2" onchange ="grey()">Lowest Price</input></td>
       </tr>
       <tr>
-        <td><input type="radio" name="goal" value="1" form ="opt_step_2" onchange ="white()">Lowest Price for given EI</input></td>
+        <td><input type="radio" name="goal" value="1" form ="opt_step_2" onchange ="white()">Lowest Price for given EI<sub>eff</sub></input></td>
       </tr>
       <tr>
-        <td><input type="radio" name="goal" value="2" form ="opt_step_2" onchange ="grey()">Best Price/EI-Ratio</input></td>
+        <td><input type="radio" name="goal" value="2" form ="opt_step_2" onchange ="grey()">Best Price/EI<sub>eff</sub>-Ratio</input></td>
       </tr>
       <tr>
         <td><p>Enter Values for EI and Prices. </p></td>
@@ -115,7 +115,7 @@
         <td><input type="number" name="welding_cost" min = "0" value = 40 form = "opt_step_2" required></td>
       <tr>
       </tr>
-        <td><label for="EI"> EI [kNm<sup>2</sup>]</label></td>
+        <td><label for="EI"> EI<sub>eff</sub> [kNm<sup>2</sup>]</label></td>
         <td><input type="number" name="ei" id="ei" value = 0 min = "0" form = "opt_step_2" required disabled></td>
       <tr>
         <td><input type="submit" name="Back" value="Back" form = "opt_step_2" formnovalidate></td>
